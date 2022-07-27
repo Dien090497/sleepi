@@ -442,5 +442,6 @@
   "rader": "レーダー",
   "crystals": "水晶",
   "reflection": "放射",
-  "school": "学校"
+  "school": "学校",
+  "password_must_be_at_least_6": "英大文字、数字、特殊文字で1つ以上の組み合わせ6～20字で入力してください"
 }
