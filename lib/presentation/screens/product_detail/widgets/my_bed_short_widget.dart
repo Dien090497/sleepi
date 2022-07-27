@@ -5,17 +5,22 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyBedShortWidget extends StatelessWidget {
   const MyBedShortWidget({
     Key? key,
     required this.bedId,
+    required this.level,
+    required this.mint,
     required this.type,
     required this.image,
   }) : super(key: key);
 
   final BigInt? bedId;
+  final int? level;
+  final int? mint;
   final String? type;
   final String? image;
 
@@ -60,9 +65,12 @@ class MyBedShortWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SFText(keyText: 'Mint3', style: TextStyles.lightGrey11W500),
                     SFText(
-                        keyText: 'Level 15', style: TextStyles.lightGrey11W500),
+                        keyText: '${LocaleKeys.mint} $mint',
+                        style: TextStyles.lightGrey11W500),
+                    SFText(
+                        keyText: '${LocaleKeys.level} $level',
+                        style: TextStyles.lightGrey11W500),
                   ],
                 ),
                 SizedBox(height: 4.h),

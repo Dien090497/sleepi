@@ -163,6 +163,8 @@ class NFTDetailScreen extends StatelessWidget {
 
                               return MyBedShortWidget(
                                 bedId: nft.attribute?.tokenId,
+                                level: nft.attribute?.level,
+                                mint: nft.attribute?.bedMint,
                                 type: nft.attribute?.type,
                                 image: nft.attribute?.image,
                               );
