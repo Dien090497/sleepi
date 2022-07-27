@@ -10,7 +10,8 @@ class IndividualState with _$IndividualState {
   const factory IndividualState(
     BedEntity bed, {
     required List<double> currentPoints,
-    NftFamilyEntity? nftFamily,
+    List<BedEntity>? queryParent,
+    List<BedEntity>? queryChildren,
     @Default(false) bool isRefresh,
     @Default(false) bool isLoading,
     @Default(false) bool isBase,

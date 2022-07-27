@@ -132,7 +132,7 @@ class InfoIndividualScreen extends StatelessWidget {
                                               currentPoints:
                                                   state.currentPoints,
                                             ).then((_) {
-                                              cubit.refresh();
+                                              cubit.refresh(isBase: false);
                                             });
                                           },
                                         ),
@@ -160,11 +160,11 @@ class InfoIndividualScreen extends StatelessWidget {
                                     children: [
                                       MintFromWidget(
                                         title: LocaleKeys.minted_from,
-                                        familyData: state.nftFamily?.parent,
+                                        familyData: state.queryParent,
                                       ),
                                       MintFromWidget(
                                         title: LocaleKeys.mint,
-                                        familyData: state.nftFamily?.children,
+                                        familyData: state.queryChildren,
                                       ),
                                     ],
                                   ),

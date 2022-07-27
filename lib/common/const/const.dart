@@ -103,7 +103,8 @@ class Const {
     },
   ];
 
-  static const String deadAddress = '0x0000000000000000000000000000000000000000';
+  static const String deadAddress =
+      '0x0000000000000000000000000000000000000000';
 
   static const listTypeHistory = [
     'txlist',
@@ -144,6 +145,13 @@ class Const {
     'assets/sounds/iphone_alarm.mp3',
     'assets/sounds/reflection.mp3',
     'assets/sounds/school_alarm.mp3',
+  ];
+  static const nameSoundAlarm = [
+    LocaleKeys.apex,
+    LocaleKeys.rader,
+    LocaleKeys.crystals,
+    LocaleKeys.reflection,
+    LocaleKeys.school,
   ];
 
   Const._();

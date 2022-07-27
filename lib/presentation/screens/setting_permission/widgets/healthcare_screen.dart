@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -6,14 +8,17 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/notification_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/make_first_open_app_usecase.dart';
 
 class HealthcareArg {
   final bool isSignUp;
+  final String email;
 
-  HealthcareArg(this.isSignUp);
+  HealthcareArg(this.isSignUp, this.email);
 }
 
 class HealthcarePermissionScreen extends StatelessWidget {
@@ -61,7 +66,8 @@ class HealthcarePermissionScreen extends StatelessWidget {
                 onPressed: () async {
                   final isGranted = await _requestHealthAuthorization();
                   if (isGranted) {
-                    if (arg?.isSignUp == true) {
+                    getIt<MakeFirstOpenAppUseCase>().call(arg!.email);
+                    if (arg.isSignUp == true) {
                       Navigator.pushNamedAndRemoveUntil(
                           context, R.notificationPermission, (_) => false,
                           arguments: NotificationPermissionArg(true));
@@ -85,14 +91,20 @@ class HealthcarePermissionScreen extends StatelessWidget {
   Future<bool> _requestHealthAuthorization() async {
     final HealthFactory health = HealthFactory();
 
-    final types = [
-      HealthDataType.SLEEP_IN_BED,
-      HealthDataType.SLEEP_ASLEEP,
-      HealthDataType.SLEEP_AWAKE,
-      HealthDataType.SLEEP_DEEP,
-      HealthDataType.SLEEP_REM,
-      HealthDataType.SLEEP_LIGHT,
-    ];
+    final types = Platform.isAndroid
+        ? [
+            HealthDataType.SLEEP_IN_BED,
+            HealthDataType.SLEEP_ASLEEP,
+            HealthDataType.SLEEP_AWAKE,
+            HealthDataType.SLEEP_DEEP,
+            HealthDataType.SLEEP_REM,
+            HealthDataType.SLEEP_LIGHT,
+          ]
+        : [
+            HealthDataType.SLEEP_IN_BED,
+            HealthDataType.SLEEP_ASLEEP,
+            HealthDataType.SLEEP_AWAKE,
+          ];
 
     return await health.requestAuthorization(types);
   }

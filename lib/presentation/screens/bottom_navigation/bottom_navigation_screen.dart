@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_navigator_home.dart';
@@ -22,9 +23,7 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer.periodic(const Duration(seconds: 5), (timer) async {
-      BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
-    });
+    Timer? timer;
 
     context.read<WalletCubit>().checkWallet();
     final app = getIt<AppFlyerCustom>();
@@ -39,32 +38,48 @@ class BottomNavigationScreen extends StatelessWidget {
       MarketPlaceScreen(tabKey: marketTabKey),
     ];
 
-    return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
-      listener: (context, state) {
-        pageController.jumpToPage(state.tabIndex);
-        if (state.tabIndexChild > 0) {
-          Future.delayed(const Duration(milliseconds: 500),
-              () => marketTabKey.currentState?.moveToTab(state.tabIndexChild));
+    return FocusDetector(
+      onFocusGained: () {
+        if (timer == null || !timer!.isActive) {
+          timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+            BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+          });
         }
       },
-      builder: (context, navState) {
-        return BackgroundWidget(
-          extendBody: false,
-          bottomNavigationBar: SFBottomNavigatorHome(
-            onTap: (i) {
-              pageController.jumpToPage(i);
-              app.homeAction(i);
-            },
-            pageController: pageController,
-          ),
-          child: PageView.builder(
-            controller: pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: screens.length,
-            itemBuilder: (_, i) => screens[i],
-          ),
-        );
+      onFocusLost: () {
+        if (timer != null) {
+          timer?.cancel();
+        }
       },
+      child: BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
+        listener: (context, state) {
+          pageController.jumpToPage(state.tabIndex);
+          if (state.tabIndexChild > 0) {
+            Future.delayed(
+                const Duration(milliseconds: 500),
+                () =>
+                    marketTabKey.currentState?.moveToTab(state.tabIndexChild));
+          }
+        },
+        builder: (context, navState) {
+          return BackgroundWidget(
+            extendBody: false,
+            bottomNavigationBar: SFBottomNavigatorHome(
+              onTap: (i) {
+                pageController.jumpToPage(i);
+                app.homeAction(i);
+              },
+              pageController: pageController,
+            ),
+            child: PageView.builder(
+              controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: screens.length,
+              itemBuilder: (_, i) => screens[i],
+            ),
+          );
+        },
+      ),
     );
   }
 }

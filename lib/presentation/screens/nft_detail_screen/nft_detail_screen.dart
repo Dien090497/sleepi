@@ -7,6 +7,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
@@ -163,6 +164,8 @@ class NFTDetailScreen extends StatelessWidget {
 
                               return MyBedShortWidget(
                                 bedId: nft.attribute?.tokenId,
+                                level: nft.attribute?.level,
+                                mint: nft.attribute?.bedMint,
                                 type: nft.attribute?.type,
                                 image: nft.attribute?.image,
                               );
@@ -170,6 +173,7 @@ class NFTDetailScreen extends StatelessWidget {
                             count: state.nftEntities.length,
                           ),
                         ),
+                      if (state is NftDetailInitial) const LoadingIcon(),
                     ];
 
                     return NftDetailRefresher(

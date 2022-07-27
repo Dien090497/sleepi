@@ -12,13 +12,7 @@ class IndividualPointCubit extends Cubit<IndividualPointState> {
       : super(IndividualPointState.initial(
           bed: bed,
           startAttributes: currentPoints,
-          attributesChanged: [
-            bed.efficiency,
-            bed.luck,
-            bed.bonus,
-            bed.special,
-            bed.resilience,
-          ],
+          attributesChanged: currentPoints,
           attributesNames: [
             LocaleKeys.efficiency,
             LocaleKeys.luck,

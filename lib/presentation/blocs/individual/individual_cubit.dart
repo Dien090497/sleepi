@@ -19,27 +19,63 @@ class IndividualCubit extends Cubit<IndividualState> {
   final _getNftFamilyUC = getIt<GetNftFamilyUseCase>();
 
   void fetchFamily() async {
-    final familyRes = await _getNftFamilyUC.call(state.bed.id);
+    final params = ParamsFamily(bedId: state.bed.nftId);
+    final familyRes = await _getNftFamilyUC.call(params);
     familyRes.fold(
       (l) {},
-      (r) {
+      (result) {
         if (isClosed) return;
-        emit(state.copyWith(nftFamily: r));
+        final listQueryChildren = result.queryChildren.map((e) => e.toEntity()).toList();
+        final listQueryParent = result.queryParent.map((e) => e.toEntity()).toList();
+        emit(state.copyWith(queryChildren: listQueryChildren, queryParent: listQueryParent));
       },
     );
   }
 
-  void refresh() async {
+  void refresh({bool? isBase}) async {
     if (state.isRefresh) return;
     emit(state.copyWith(isRefresh: true));
-    final res = await _detailBedUseCase
-        .call(BedDetailParams(bedId: state.bed.nftId, isBase: state.isBase));
+    final res = await _detailBedUseCase.call(BedDetailParams(
+        bedId: state.bed.nftId, isBase: isBase ?? state.isBase));
     res.fold(
       (l) {
         emit(state.copyWith(isRefresh: false, isLoading: false));
       },
-      (r) {
-        emit(state.copyWith(isRefresh: false, isLoading: false, bed: r));
+      (bed) {
+        isBase ?? state.isBase
+            ? emit(
+                state.copyWith(
+                  isRefresh: false,
+                  isLoading: false,
+                  bed: bed,
+                ),
+              )
+            : isBase != null && !isBase && state.isBase
+                ? emit(
+                    state.copyWith(
+                        isRefresh: false,
+                        isLoading: false,
+                        currentPoints: [
+                          bed.efficiency,
+                          bed.luck,
+                          bed.bonus,
+                          bed.special,
+                          bed.resilience,
+                        ]),
+                  )
+                : emit(
+                    state.copyWith(
+                        isRefresh: false,
+                        isLoading: false,
+                        bed: bed,
+                        currentPoints: [
+                          bed.efficiency,
+                          bed.luck,
+                          bed.bonus,
+                          bed.special,
+                          bed.resilience,
+                        ]),
+                  );
       },
     );
   }

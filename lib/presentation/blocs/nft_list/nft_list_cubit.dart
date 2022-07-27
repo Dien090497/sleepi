@@ -52,7 +52,7 @@ class NFTListCubit extends Cubit<NftListState> {
     }
   }
 
-  refreshBedBox() async {
+  void refreshBedBox() async {
     final result = await _fetchListBedUC.call(FetchBedParam(
       1,
       10,

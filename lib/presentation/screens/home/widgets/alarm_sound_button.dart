@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -36,7 +37,9 @@ class _SoundButtonState extends State<SoundButton> {
     return FocusDetector(
         onFocusGained: _loadCurrentSound,
         child: SFButtonOutLined(
-          title: LocaleKeys.alarm_bell.tr(args: [(indexSound + 1).toString()]),
+          title: LocaleKeys.alarm_bell.tr(args: [
+            Const.nameSoundAlarm[indexSound].reCase(StringCase.titleCase)
+          ]),
           onPressed: () {
             Navigator.pushNamed(context, R.alarmSoundEffect);
           },

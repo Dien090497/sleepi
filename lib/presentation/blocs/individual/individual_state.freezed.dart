@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$IndividualState {
   BedEntity get bed => throw _privateConstructorUsedError;
   List<double> get currentPoints => throw _privateConstructorUsedError;
-  NftFamilyEntity? get nftFamily => throw _privateConstructorUsedError;
+  List<BedEntity>? get queryParent => throw _privateConstructorUsedError;
+  List<BedEntity>? get queryChildren => throw _privateConstructorUsedError;
   bool get isRefresh => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isBase => throw _privateConstructorUsedError;
@@ -36,13 +37,13 @@ abstract class $IndividualStateCopyWith<$Res> {
   $Res call(
       {BedEntity bed,
       List<double> currentPoints,
-      NftFamilyEntity? nftFamily,
+      List<BedEntity>? queryParent,
+      List<BedEntity>? queryChildren,
       bool isRefresh,
       bool isLoading,
       bool isBase});
 
   $BedEntityCopyWith<$Res> get bed;
-  $NftFamilyEntityCopyWith<$Res>? get nftFamily;
 }
 
 /// @nodoc
@@ -58,7 +59,8 @@ class _$IndividualStateCopyWithImpl<$Res>
   $Res call({
     Object? bed = freezed,
     Object? currentPoints = freezed,
-    Object? nftFamily = freezed,
+    Object? queryParent = freezed,
+    Object? queryChildren = freezed,
     Object? isRefresh = freezed,
     Object? isLoading = freezed,
     Object? isBase = freezed,
@@ -72,10 +74,14 @@ class _$IndividualStateCopyWithImpl<$Res>
           ? _value.currentPoints
           : currentPoints // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      nftFamily: nftFamily == freezed
-          ? _value.nftFamily
-          : nftFamily // ignore: cast_nullable_to_non_nullable
-              as NftFamilyEntity?,
+      queryParent: queryParent == freezed
+          ? _value.queryParent
+          : queryParent // ignore: cast_nullable_to_non_nullable
+              as List<BedEntity>?,
+      queryChildren: queryChildren == freezed
+          ? _value.queryChildren
+          : queryChildren // ignore: cast_nullable_to_non_nullable
+              as List<BedEntity>?,
       isRefresh: isRefresh == freezed
           ? _value.isRefresh
           : isRefresh // ignore: cast_nullable_to_non_nullable
@@ -97,17 +103,6 @@ class _$IndividualStateCopyWithImpl<$Res>
       return _then(_value.copyWith(bed: value));
     });
   }
-
-  @override
-  $NftFamilyEntityCopyWith<$Res>? get nftFamily {
-    if (_value.nftFamily == null) {
-      return null;
-    }
-
-    return $NftFamilyEntityCopyWith<$Res>(_value.nftFamily!, (value) {
-      return _then(_value.copyWith(nftFamily: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -120,15 +115,14 @@ abstract class _$$_IndividualStateCopyWith<$Res>
   $Res call(
       {BedEntity bed,
       List<double> currentPoints,
-      NftFamilyEntity? nftFamily,
+      List<BedEntity>? queryParent,
+      List<BedEntity>? queryChildren,
       bool isRefresh,
       bool isLoading,
       bool isBase});
 
   @override
   $BedEntityCopyWith<$Res> get bed;
-  @override
-  $NftFamilyEntityCopyWith<$Res>? get nftFamily;
 }
 
 /// @nodoc
@@ -146,7 +140,8 @@ class __$$_IndividualStateCopyWithImpl<$Res>
   $Res call({
     Object? bed = freezed,
     Object? currentPoints = freezed,
-    Object? nftFamily = freezed,
+    Object? queryParent = freezed,
+    Object? queryChildren = freezed,
     Object? isRefresh = freezed,
     Object? isLoading = freezed,
     Object? isBase = freezed,
@@ -160,10 +155,14 @@ class __$$_IndividualStateCopyWithImpl<$Res>
           ? _value._currentPoints
           : currentPoints // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      nftFamily: nftFamily == freezed
-          ? _value.nftFamily
-          : nftFamily // ignore: cast_nullable_to_non_nullable
-              as NftFamilyEntity?,
+      queryParent: queryParent == freezed
+          ? _value._queryParent
+          : queryParent // ignore: cast_nullable_to_non_nullable
+              as List<BedEntity>?,
+      queryChildren: queryChildren == freezed
+          ? _value._queryChildren
+          : queryChildren // ignore: cast_nullable_to_non_nullable
+              as List<BedEntity>?,
       isRefresh: isRefresh == freezed
           ? _value.isRefresh
           : isRefresh // ignore: cast_nullable_to_non_nullable
@@ -187,11 +186,14 @@ class _$_IndividualState
     implements _IndividualState {
   const _$_IndividualState(this.bed,
       {required final List<double> currentPoints,
-      this.nftFamily,
+      final List<BedEntity>? queryParent,
+      final List<BedEntity>? queryChildren,
       this.isRefresh = false,
       this.isLoading = false,
       this.isBase = false})
-      : _currentPoints = currentPoints;
+      : _currentPoints = currentPoints,
+        _queryParent = queryParent,
+        _queryChildren = queryChildren;
 
   @override
   final BedEntity bed;
@@ -202,8 +204,24 @@ class _$_IndividualState
     return EqualUnmodifiableListView(_currentPoints);
   }
 
+  final List<BedEntity>? _queryParent;
   @override
-  final NftFamilyEntity? nftFamily;
+  List<BedEntity>? get queryParent {
+    final value = _queryParent;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<BedEntity>? _queryChildren;
+  @override
+  List<BedEntity>? get queryChildren {
+    final value = _queryChildren;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey()
   final bool isRefresh;
@@ -216,7 +234,7 @@ class _$_IndividualState
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'IndividualState(bed: $bed, currentPoints: $currentPoints, nftFamily: $nftFamily, isRefresh: $isRefresh, isLoading: $isLoading, isBase: $isBase)';
+    return 'IndividualState(bed: $bed, currentPoints: $currentPoints, queryParent: $queryParent, queryChildren: $queryChildren, isRefresh: $isRefresh, isLoading: $isLoading, isBase: $isBase)';
   }
 
   @override
@@ -226,7 +244,8 @@ class _$_IndividualState
       ..add(DiagnosticsProperty('type', 'IndividualState'))
       ..add(DiagnosticsProperty('bed', bed))
       ..add(DiagnosticsProperty('currentPoints', currentPoints))
-      ..add(DiagnosticsProperty('nftFamily', nftFamily))
+      ..add(DiagnosticsProperty('queryParent', queryParent))
+      ..add(DiagnosticsProperty('queryChildren', queryChildren))
       ..add(DiagnosticsProperty('isRefresh', isRefresh))
       ..add(DiagnosticsProperty('isLoading', isLoading))
       ..add(DiagnosticsProperty('isBase', isBase));
@@ -240,7 +259,10 @@ class _$_IndividualState
             const DeepCollectionEquality().equals(other.bed, bed) &&
             const DeepCollectionEquality()
                 .equals(other._currentPoints, _currentPoints) &&
-            const DeepCollectionEquality().equals(other.nftFamily, nftFamily) &&
+            const DeepCollectionEquality()
+                .equals(other._queryParent, _queryParent) &&
+            const DeepCollectionEquality()
+                .equals(other._queryChildren, _queryChildren) &&
             const DeepCollectionEquality().equals(other.isRefresh, isRefresh) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.isBase, isBase));
@@ -251,7 +273,8 @@ class _$_IndividualState
       runtimeType,
       const DeepCollectionEquality().hash(bed),
       const DeepCollectionEquality().hash(_currentPoints),
-      const DeepCollectionEquality().hash(nftFamily),
+      const DeepCollectionEquality().hash(_queryParent),
+      const DeepCollectionEquality().hash(_queryChildren),
       const DeepCollectionEquality().hash(isRefresh),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(isBase));
@@ -265,7 +288,8 @@ class _$_IndividualState
 abstract class _IndividualState implements IndividualState {
   const factory _IndividualState(final BedEntity bed,
       {required final List<double> currentPoints,
-      final NftFamilyEntity? nftFamily,
+      final List<BedEntity>? queryParent,
+      final List<BedEntity>? queryChildren,
       final bool isRefresh,
       final bool isLoading,
       final bool isBase}) = _$_IndividualState;
@@ -275,7 +299,9 @@ abstract class _IndividualState implements IndividualState {
   @override
   List<double> get currentPoints;
   @override
-  NftFamilyEntity? get nftFamily;
+  List<BedEntity>? get queryParent;
+  @override
+  List<BedEntity>? get queryChildren;
   @override
   bool get isRefresh;
   @override

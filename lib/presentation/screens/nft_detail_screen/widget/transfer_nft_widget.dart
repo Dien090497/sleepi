@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -24,7 +23,6 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_approve.dart';
-import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/is_nft_approve_for_all_usecase.dart';
 import 'package:slee_fi/usecase/send_nft_to_spending_usecase.dart';
 import 'package:slee_fi/usecase/set_nft_approval_for_all_usecase.dart';
@@ -87,8 +85,6 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     itemBuilder: (context, index) {
                       final nft = state.nftEntities[index];
-                      final bedType =
-                          BedType.values[index % BedType.values.length];
                       final userState =
                           context.read<UserBloc>().state as UserLoaded;
                       final walletState = context.read<WalletCubit>().state
@@ -165,7 +161,8 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                           }
                         },
                         child: TransferNftWidget(
-                          bedType: bedType,
+                          image: nft.attribute?.image,
+                          name: nft.name,
                           bedId: nft.attribute?.tokenId,
                         ),
                       );
@@ -272,11 +269,13 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
 class TransferNftWidget extends StatelessWidget {
   const TransferNftWidget({
     Key? key,
-    required this.bedType,
+    required this.image,
+    required this.name,
     required this.bedId,
   }) : super(key: key);
 
-  final BedType bedType;
+  final String? image;
+  final String? name;
   final BigInt? bedId;
 
   @override
@@ -289,16 +288,16 @@ class TransferNftWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Row(
         children: [
-          // TODO example data
-          const SFIcon(Imgs.shortBed, width: 70, height: 70),
+          SFIcon(image ?? '', width: 70, height: 70),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('$bedId', style: TextStyles.lightWhite16W700),
               const SizedBox(height: 4),
-              Text(bedType.type.reCase(StringCase.titleCase),
-                  style: TextStyles.lightWhite16W700),
+              if (name != null)
+                Text(name!.reCase(StringCase.titleCase),
+                    style: TextStyles.lightWhite16W700),
             ],
           ),
         ],

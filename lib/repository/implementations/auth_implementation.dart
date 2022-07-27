@@ -105,12 +105,14 @@ class AuthImplementation extends IAuthRepository {
   @override
   Future<Either<Failure, bool>> logOut() async {
     try {
+      final UserInfoModel? userInfoModel = await _secureStorage.readCurrentUser();
+      final bool firstOpen = await _secureStorage.isFirstOpenApp(userInfoModel!.email);
       await Future.wait([
         _secureStorage.clearStorage(),
         _isarDataSource.clearAll(),
         _getStorageDataSource.clearAll(),
       ]);
-      return const Right(true);
+      return Right(firstOpen);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

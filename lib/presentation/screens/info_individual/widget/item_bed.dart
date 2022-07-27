@@ -14,7 +14,7 @@ class ItemBed extends StatelessWidget {
       required this.selected,
       required this.id,
       required this.onTap,
-      this.quality})
+      this.quality, required this.name})
       : super(key: key);
 
   final String bedType;
@@ -22,6 +22,7 @@ class ItemBed extends StatelessWidget {
   final String image;
   final bool selected;
   final String id;
+  final String name;
   final VoidCallback onTap;
 
   @override
@@ -71,7 +72,7 @@ class ItemBed extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     margin: const EdgeInsets.only(bottom: 20),
                     child: SFText(
-                      keyText: id,
+                      keyText: name,
                       style: TextStyles.white1w700size12,
                     ),
                   ),

@@ -75,6 +75,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   void sellNFT({required String amount, required int nftId }) async {
+    emit(const BottomBarInfoIndividualState.loading());
     final params = NFTSellSchema(amount: amount.replaceAll(',', '.'), nftId: nftId);
     final result = await _nftSellUseCase.call(params);
     result.fold((l) {
@@ -83,6 +84,8 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
       final currentState = state;
       if (currentState is BottomBarInfoIndividualLoaded) {
         emit(currentState.copyWith(successTransfer: true));
+      } else {
+        emit(const BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: true, transactionFee: ''));
       }
     });
   }
@@ -130,14 +133,16 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   Future<void> cancelSell({required num nftId}) async {
+    emit(const BottomBarInfoIndividualState.loading());
     final result = await _nftCancelSellUseCase.call(nftId);
     result.fold((error) {
       BottomBarInfoIndividualState.error(message: '$error');
     }, (result) {
       final currentState = state;
-      const BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: false, transactionFee: '');
       if (currentState is BottomBarInfoIndividualLoaded) {
         emit(currentState.copyWith(successTransfer: true));
+      } else {
+        emit(const BottomBarInfoIndividualState.loaded(gasPrice: '', successTransfer: true, transactionFee: ''));
       }
     });
   }
