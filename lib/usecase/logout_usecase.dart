@@ -9,7 +9,7 @@ class LogOutUseCase extends UseCase{
   LogOutUseCase(this._authRepository);
 
   @override
-  Future<Either<Failure, dynamic>> call(params) {
+  Future<Either<Failure, String>> call(params) {
     return _authRepository.logOut();
   }
 }
