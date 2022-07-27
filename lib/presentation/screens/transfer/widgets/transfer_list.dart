@@ -55,6 +55,7 @@ class _TransferListState extends State<TransferList> {
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) {
         if (state is TransferLoaded) {
+          isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
           if (state.needApprove ?? false) {
             showCustomAlertDialog(
@@ -62,11 +63,9 @@ class _TransferListState extends State<TransferList> {
               showClosed: false,
               children: PopUpConfirmApprove(
                 onConfirm: () {
-                  isLoadingNotifier.value = true;
                   cubit
                       .approve(addressContract: widget.tokenEntity.address)
                       .then((str) {
-                    isLoadingNotifier.value = false;
                     Navigator.pop(context);
                     if (str == 'done') {
                       showSuccessfulDialog(context, LocaleKeys.successfull);
@@ -88,14 +87,17 @@ class _TransferListState extends State<TransferList> {
               showClosed: false,
               children: PopUpConfirmTransfer(
                 onConfirm: () {
-                  isLoadingNotifier.value = true;
-                  cubit.transfer(
+                  cubit
+                      .transfer(
                     amount: amount,
                     contractAddress: widget.tokenEntity.address,
                     userId: (userState as UserLoaded).userInfoEntity.id,
                     symbol: widget.tokenEntity.symbol,
                     balance: widget.tokenEntity.balance,
-                  );
+                  )
+                      .then((_) {
+                    Navigator.pop(context);
+                  });
                 },
                 spendingToWallet: widget.spendingToWallet,
                 cubit: cubit,
@@ -105,8 +107,6 @@ class _TransferListState extends State<TransferList> {
                 isLoadingNotifier: isLoadingNotifier,
               ),
             );
-          } else {
-            isLoadingNotifier.value = false;
           }
         }
         if (state is TransferSuccess) {

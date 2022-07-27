@@ -470,7 +470,7 @@ abstract class  LocaleKeys {
   static const consume_and_turn_gacha_time = 'consume_and_turn_gacha_time';
   static const selling = 'selling';
   static const level_is_highest = 'level_is_highest';
-  static const balance_not_enough = 'balance_not_enough';
+  static const balance_not_enough_to_level_up = 'balance_not_enough_to_level_up';
   static const enough_times_mint = 'enough_times_mint';
   static const minting_not_exists = 'minting_not_exists';
   static const mint_success = 'mint_success';

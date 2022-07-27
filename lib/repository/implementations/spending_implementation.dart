@@ -77,7 +77,7 @@ class SpendingImplementation extends ISpendingRepository {
       }
       return Right(hash);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromRPC(e));
     }
   }
 

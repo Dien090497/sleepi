@@ -468,7 +468,7 @@
   "consume_and_turn_gacha_time": "Consume {price} SLFT and turn Gacha {quantity} time",
   "selling": "Selling",
   "level_is_highest": "Level is highest",
-  "balance_not_enough": "Your balance is not enough to level up",
+  "balance_not_enough_to_level_up": "Your balance is not enough to level up",
   "enough_times_mint": "Bed enough times mint",
   "minting_not_exists": "Can't get Minting",
   "mint_success": "Mint Success",
@@ -484,5 +484,4 @@
   "crystals": "Crystals",
   "reflection": "Reflection",
   "school": "School"
-
- }
+}
