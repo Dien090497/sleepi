@@ -11,7 +11,6 @@ import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_b
 import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/wallet_navigation/wallet_navigation_cubit.dart';
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
@@ -28,7 +27,6 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => UserBloc()),
           BlocProvider(create: (_) => WalletCubit()),
           BlocProvider(create: (_) => RefreshCubit()),
-          BlocProvider(create: (_) => WalletNavigationCubit()),
         ],
         child: ScreenUtilInit(
           designSize: const Size(375, 812),

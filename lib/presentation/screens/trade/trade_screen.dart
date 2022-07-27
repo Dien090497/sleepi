@@ -119,7 +119,7 @@ class _TradeScreenState extends State<TradeScreen> {
 
   @override
   void dispose() {
-    if (_debounce != null) _debounce!.cancel();
+    _debounce?.cancel();
     valueController.dispose();
     super.dispose();
   }
@@ -131,13 +131,13 @@ class _TradeScreenState extends State<TradeScreen> {
       final args = ModalRoute.of(context)?.settings.arguments as TradeArguments;
       setState(() {
         indexFrom = getIndexAddress(args.contractAddressFrom!);
-        if(args.contractAddressTo ==null) {
+        if (args.contractAddressTo == null) {
           if (indexFrom != 0) {
             indexTo = 0;
           } else {
             indexTo = Const.tokens.length - 1;
           }
-        }else{
+        } else {
           indexTo = getIndexAddress(args.contractAddressTo!);
         }
       });
@@ -337,12 +337,12 @@ class _TradeScreenState extends State<TradeScreen> {
                                                       borderColor:
                                                           AppColors.blue,
                                                       onPressed: () {
-                                                        valueController.text =
-                                                            (indexFrom == 0
-                                                                    ? balance -
-                                                                        0.01
-                                                                    : balance)
-                                                                .formatBalanceToken;
+                                                        valueController
+                                                            .text = (indexFrom ==
+                                                                    0
+                                                                ? balance - 0.01
+                                                                : balance)
+                                                            .formatBalanceToken;
                                                         Future.delayed(
                                                             const Duration(
                                                                 milliseconds:

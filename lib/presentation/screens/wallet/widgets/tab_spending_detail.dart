@@ -42,98 +42,99 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: FocusDetector(
-        onFocusGained: () async {
-          BlocProvider.of<UserBloc>(context).add(const RefreshBalanceToken());
+      child: SmartRefresher(
+        controller: refreshController,
+        enablePullDown: true,
+        onRefresh: () {
+          context.read<UserBloc>().add(const RefreshBalanceToken());
+          refreshController.refreshCompleted();
         },
-        child: SmartRefresher(
-            controller: refreshController,
-            enablePullDown: true,
-            onRefresh: () async {
-              context.read<UserBloc>().add(const RefreshBalanceToken());
-              refreshController.refreshCompleted();
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 19.0),
-                  const PopupInfoSpending(),
-                  const SizedBox(height: 12.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: BlocBuilder<UserBloc, UserState>(
-                      builder: (context, state) {
-                        final List<TokenEntity> tokenList;
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 19.0),
+              const PopupInfoSpending(),
+              const SizedBox(height: 12.0),
+              FocusDetector(
+                onFocusGained: () {
+                  context.read<UserBloc>().add(const RefreshBalanceToken());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: BlocBuilder<UserBloc, UserState>(
+                    builder: (context, state) {
+                      final List<TokenEntity> tokenList;
 
-                        if (state is UserLoaded) {
-                          tokenList = state.listTokens;
-                        } else {
-                          tokenList = [];
-                        }
-                        return Column(
-                          children: tokenList
-                              .map((e) => SFCard(
-                                    onTap: () => openTransfer(
-                                        e, context.read<WalletCubit>().state),
-                                    margin: const EdgeInsets.only(top: 8),
-                                    padding: const EdgeInsets.all(14),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                            padding: e.symbol.contains('avax')
-                                                ? const EdgeInsets.only(
-                                                    left: 5, top: 7, bottom: 7)
-                                                : EdgeInsets.zero,
-                                            child: SFIcon(
-                                              e.icon,
-                                              width: e.symbol.contains('avax')
-                                                  ? 30
-                                                  : 40,
-                                              height: e.symbol.contains('avax')
-                                                  ? 30
-                                                  : 40,
-                                            )),
-                                        const SizedBox(width: 12),
-                                        Text(
-                                          e.symbol.toUpperCase(),
+                      if (state is UserLoaded) {
+                        tokenList = state.listTokens;
+                      } else {
+                        tokenList = [];
+                      }
+                      return Column(
+                        children: tokenList
+                            .map((e) => SFCard(
+                                  onTap: () => openTransfer(
+                                      e, context.read<WalletCubit>().state),
+                                  margin: const EdgeInsets.only(top: 8),
+                                  padding: const EdgeInsets.all(14),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                          padding: e.symbol.contains('avax')
+                                              ? const EdgeInsets.only(
+                                                  left: 5, top: 7, bottom: 7)
+                                              : EdgeInsets.zero,
+                                          child: SFIcon(
+                                            e.icon,
+                                            width: e.symbol.contains('avax')
+                                                ? 30
+                                                : 40,
+                                            height: e.symbol.contains('avax')
+                                                ? 30
+                                                : 40,
+                                          )),
+                                      const SizedBox(width: 12),
+                                      Text(
+                                        e.symbol.toUpperCase(),
+                                        style: TextStyles.lightWhite16,
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          textAlign: TextAlign.right,
+                                          e.balance.formatBalanceToken,
+                                          maxLines: 2,
                                           style: TextStyles.lightWhite16,
                                         ),
-                                        const SizedBox(width: 12),
-                                        Expanded(
-                                          child: Text(
-                                            textAlign: TextAlign.right,
-                                            e.balance.formatBalanceToken,
-                                            maxLines: 2,
-                                            style: TextStyles.lightWhite16,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ))
-                              .toList(),
-                        );
-                      },
-                    ),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                            .toList(),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 18.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: SizedBox(
-                        height: 48,
-                        child: SFButtonOutLined(
-                          title: LocaleKeys.stake,
-                          textStyle: TextStyles.bold16Blue,
-                          borderColor: AppColors.blue,
-                          onPressed: () {
-                            Navigator.pushNamed(context, R.staking);
-                          },
-                        )),
-                  ),
-                  const SizedBox(height: 25),
-                  const SpendingDetailList(),
-                ],
+                ),
               ),
-            )),
+              const SizedBox(height: 18.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: SizedBox(
+                    height: 48,
+                    child: SFButtonOutLined(
+                      title: LocaleKeys.stake,
+                      textStyle: TextStyles.bold16Blue,
+                      borderColor: AppColors.blue,
+                      onPressed: () {
+                        Navigator.pushNamed(context, R.staking);
+                      },
+                    )),
+              ),
+              const SizedBox(height: 25),
+              const SpendingDetailList(),
+            ],
+          ),
+        ),
       ),
     );
   }

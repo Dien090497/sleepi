@@ -18,11 +18,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(const UserState.initial()) {
     on<UpdateUserOrListToken>(_onUpdateUser);
     on<RefreshUser>(_onRefreshUser);
-    on<StartInterval>(_onStartInterval);
     on<RefreshBalanceToken>(_onRefreshBalance);
-    on<InitialUser>(
-      (event, emit) => emit(const UserState.initial()),
-    );
+
+    if (_timer != null) {
+      _timer?.cancel();
+      _timer = null;
+    }
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      final currentState = state;
+      if (currentState is UserLoaded) {
+        add(const RefreshBalanceToken());
+      }
+    });
   }
 
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
@@ -81,12 +88,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  void _onStartInterval(StartInterval event, emit) {
-    add(const RefreshBalanceToken());
-    _timer ??= Timer.periodic(
-        const Duration(seconds: 10), (timer) => add(const RefreshBalanceToken()));
-  }
-
   void _onUpdateUser(UpdateUserOrListToken event, emit) {
     final currentState = state;
     if (currentState is UserLoaded) {
@@ -126,5 +127,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (symbol == 'slgt' || symbol == 'SLGT') return Ics.icSlgt;
     if (symbol == 'slft' || symbol == 'SLFT') return Ics.icSlft;
     return Ics.icAvax;
+  }
+
+  @override
+  Future<void> close() {
+    _timer?.cancel();
+    return super.close();
   }
 }
