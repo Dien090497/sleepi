@@ -66,6 +66,7 @@ class SFTabBarState extends State<SFTabBar>
             tabs: List.generate(
               widget.texts.length,
               (i) => Container(
+                  height: 40,
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
@@ -74,7 +75,7 @@ class SFTabBarState extends State<SFTabBar>
                         : AppColors.whiteOpacity5,
                   ),
                   padding: widget.padding ??
-                      const EdgeInsets.symmetric(horizontal: 28),
+                      const EdgeInsets.symmetric(horizontal: 18),
                   child: Tab(text: widget.texts[i].tr())),
             ),
             indicator: BoxDecoration(
@@ -83,8 +84,9 @@ class SFTabBarState extends State<SFTabBar>
             ),
             labelPadding: EdgeInsets.zero,
             labelStyle: TextStyles.white1w700size16,
-            unselectedLabelStyle: TextStyles.white1w700size16,
+            unselectedLabelStyle: TextStyles.lightGrey16,
             labelColor: AppColors.light1,
+            unselectedLabelColor: AppColors.lightGrey,
             indicatorSize: TabBarIndicatorSize.label,
           ),
         ),

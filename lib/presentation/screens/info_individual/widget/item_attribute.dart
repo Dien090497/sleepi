@@ -22,7 +22,7 @@ class ItemAttribute extends StatelessWidget {
   final Color colorIcon;
 
   Color checkColor(int i) {
-    double range = (30 + 30 * (totalValue ~/ 30)) / 5;
+    double range = totalValue / 5;
     if (valueActive > 0 && i == 0) {
       return colorIcon.withOpacity(0.5);
     } else if (valueActive > range && i == 1) {
@@ -38,7 +38,7 @@ class ItemAttribute extends StatelessWidget {
   }
 
   Widget itemValueActive(int i) {
-    double range = (30 + 30 * (totalValue ~/ 30)) / 5;
+    double range = totalValue/ 5;
     return Stack(
       children: [
         Container(
