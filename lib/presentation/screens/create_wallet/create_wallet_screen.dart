@@ -21,8 +21,10 @@ class CreateWalletScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String otp = '';
+
     return BlocProvider(
-      create: (_) => CreateWalletCubit()..init(),
+      create: (_) => CreateWalletCubit(),
       child: BlocConsumer<CreateWalletCubit, CreateWalletState>(
         listener: (context, state) {
           if (state is createWalletDone) {
@@ -63,8 +65,7 @@ class CreateWalletScreen extends StatelessWidget {
                                       TextfieldVerificationEmail(
                                           maxLength: 6,
                                           onPressed: () => cubit.sendOtp(),
-                                          valueChanged: (otp) =>
-                                              cubit.otp = otp,
+                                          valueChanged: (v) => otp = v,
                                           errorText: ''),
                                       const SizedBox(height: 16),
                                       SFText(
@@ -84,7 +85,7 @@ class CreateWalletScreen extends StatelessWidget {
                             height: 48,
                             width: double.infinity,
                             color: AppColors.blue,
-                            onPressed: () => cubit.process(),
+                            onPressed: () => cubit.process(otp),
                           ),
                           const SizedBox(height: 24),
                         ],

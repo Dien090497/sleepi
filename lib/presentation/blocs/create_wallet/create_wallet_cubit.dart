@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
+import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/verify_otp_usecase.dart';
@@ -11,16 +12,16 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
   CreateWalletCubit() : super(const CreateWalletState.initial());
 
   String userEmail = '';
-  String otp = '';
+
   final _createWalletUC = getIt<CreateWalletUseCase>();
   final _sendOtpUC = getIt<SendOTPMailUseCase>();
   final _verifyOtpUC = getIt<VerifyOTPUseCase>();
 
-  void process() {
+  void process(String otp) {
     if (otp.isEmpty || otp.length < 6) {
       emit(const CreateWalletState.error('Please input otp code.'));
     } else {
-      _verifyOtp();
+      _verifyOtp(otp);
     }
   }
 
@@ -41,7 +42,15 @@ class CreateWalletCubit extends Cubit<CreateWalletState> {
     }
   }
 
-  void _verifyOtp() async {}
+  void _verifyOtp(String otp) async {
+    emit(const CreateWalletState.initial(isLoading: true));
+    final result = await _verifyOtpUC
+        .call(VerifyOTPSchema(int.parse(otp), userEmail, OTPType.addWallet));
+
+    result.fold((l) {
+      emit(CreateWalletState.error('$l'));
+    }, (r) => createWallet());
+  }
 
   void sendOtp() async {
     final result =

@@ -9,7 +9,8 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
+import 'package:slee_fi/presentation/blocs/wallet_navigation/wallet_navigation_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet_navigation/wallet_navigation_state.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
@@ -40,39 +41,42 @@ class _WalletScreenState extends State<WalletScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 16),
-          child: SFBackButton(),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () async {
-              await _onSettingTap(context);
-            },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 16.0, left: 12),
-              child: SFIcon(Ics.icSetting),
-            ),
+    return BlocListener<WalletNavigationCubit, WalletNavigationState>(
+      listener: (context, state) {},
+      child: BackgroundWidget(
+        appBar: AppBar(
+          toolbarHeight: 80,
+          leading: const Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: SFBackButton(),
           ),
-        ],
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.transparent,
-        leadingWidth: 48,
-        elevation: 0,
-        centerTitle: true,
-        titleSpacing: 14,
-        title: WalletTabBar(controller: controller),
-      ),
-      child: TabBarView(
-        controller: controller,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          TabSpendingDetail(),
-          TabWalletDetail(),
-        ],
+          actions: [
+            GestureDetector(
+              onTap: () async {
+                await _onSettingTap(context);
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 16.0, left: 12),
+                child: SFIcon(Ics.icSetting),
+              ),
+            ),
+          ],
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.transparent,
+          leadingWidth: 48,
+          elevation: 0,
+          centerTitle: true,
+          titleSpacing: 14,
+          title: WalletTabBar(controller: controller),
+        ),
+        child: TabBarView(
+          controller: controller,
+          physics: const NeverScrollableScrollPhysics(),
+          children: const [
+            TabSpendingDetail(),
+            TabWalletDetail(),
+          ],
+        ),
       ),
     );
   }
@@ -82,10 +86,12 @@ class _WalletScreenState extends State<WalletScreen>
     if (state is WalletNotExisted) {
       _showCreateOrImportWallet()
           .then((value) => _showWarningDialog(value, context));
-      return;
     } else if (state is WalletNotOpen) {
-      Navigator.pushNamed(context, R.passcode,
-          arguments: PasscodeArguments(route: R.settingWallet));
+      Navigator.pushNamed(context, R.passcode).then((value) {
+        if (value == true) {
+          Navigator.pushNamed(context, R.settingWallet);
+        }
+      });
     } else if (state is WalletStateLoaded) {
       Navigator.pushNamed(context, R.settingWallet);
     }

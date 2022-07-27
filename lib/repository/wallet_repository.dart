@@ -21,7 +21,8 @@ abstract class IWalletRepository {
   Future<Either<Failure, double>> getAmountOutMin(
       double value, String contractAddressFrom, String contractAddressTo);
 
-  Future<Either<Failure, bool>> checkApproveToken(double value, String contractAddress);
+  Future<Either<Failure, bool>> checkApproveToken(
+      double value, String contractAddress);
 
   Future<Either<Failure, bool>> swapToken(
       double value, String contractAddressFrom, String contractAddressTo);
@@ -33,6 +34,8 @@ abstract class IWalletRepository {
 
   Future<Either<FailureMessage, String>> getCurrentMnemonic();
 
+  Either<Failure, String> createNewMnemonic();
+
   Future<Either<FailureMessage, NetworkIsarModel>> getCurrentNetWork(
       NetWorkEnum? params);
 
@@ -40,6 +43,6 @@ abstract class IWalletRepository {
 
   Future<Either<FailureMessage, bool>> validateMnemonic(String mnemonic);
 
-  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(HistoryTransactionParams params);
-
+  Future<Either<Failure, List<TransactionIsarModel>>> getHistoryTransaction(
+      HistoryTransactionParams params);
 }

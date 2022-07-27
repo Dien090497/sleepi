@@ -17,7 +17,7 @@ class ImportWalletState with _$ImportWalletState {
     List<TokenSpending> listTokens,
   ) = ImportWalletDone;
 
-  const factory ImportWalletState.verifyOtpSuccess() =
+  const factory ImportWalletState.verifyOtpSuccess(String mnemonic) =
       ImportWalletVerifyOtpSuccess;
 
   const factory ImportWalletState.errorOtp(String msg) = ImportWalletErrorOtp;

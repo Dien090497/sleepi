@@ -252,7 +252,8 @@ abstract class AuthDataSource {
   Future<List<LuckyBox>> fetchLuckyBox();
 
   @POST('/lucky_box/open')
-  Future<OpenLuckyBoxResponse> openLuckyBox(@Query('luckyBoxId') int luckyBoxId);
+  Future<OpenLuckyBoxResponse> openLuckyBox(
+      @Query('luckyBoxId') int luckyBoxId);
 
   @POST('/lucky_box')
   Future<dynamic> speedUpLuckyBox(

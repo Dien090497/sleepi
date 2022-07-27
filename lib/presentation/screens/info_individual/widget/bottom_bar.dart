@@ -10,7 +10,6 @@ import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
@@ -85,7 +84,6 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final stateWalletCubit = context.read<WalletCubit>().state;
     return Material(
       color: AppColors.dark,
       child: SafeArea(
@@ -203,32 +201,37 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                         setState(() {});
                       });
                     }),
-                    itemBottomBar(5, context, Ics.transfer, LocaleKeys.transfer,
-                        () async {
-                      index = 5;
-                      if (stateWalletCubit is WalletNotExisted) {
-                        showCreateOrImportWallet().then(
-                            (value) => _showWarningDialog(value, context));
-                      } else {
-                        cubit.estimateGas(contractAddress: bedEntity.contractAddress);
-                        showCustomDialog(
-                          context,
-                          children: [
-                            PopUpTransfer(
-                              onCancel: () {
-                                Navigator.pop(context);
-                              },
-                              valueTransfer: 1,
-                              bedEntity: bedEntity,
-                              cubit: cubit,
-                            )
-                          ],
-                        ).then((value) {
-                          index = -1;
-                          setState(() {});
+                    BlocBuilder<WalletCubit, WalletState>(
+                      builder: (context, walletState) {
+                        return itemBottomBar(
+                            5, context, Ics.transfer, LocaleKeys.transfer,
+                            () async {
+                          index = 5;
+                          if (walletState is WalletNotExisted) {
+                            showCreateOrImportWallet().then((value) {});
+                          } else {
+                            cubit.estimateGas(
+                                contractAddress: bedEntity.contractAddress);
+                            showCustomDialog(
+                              context,
+                              children: [
+                                PopUpTransfer(
+                                  onCancel: () {
+                                    Navigator.pop(context);
+                                  },
+                                  valueTransfer: 1,
+                                  bedEntity: bedEntity,
+                                  cubit: cubit,
+                                )
+                              ],
+                            ).then((value) {
+                              index = -1;
+                              setState(() {});
+                            });
+                          }
                         });
-                      }
-                    }),
+                      },
+                    ),
                   ],
                 );
               },
@@ -239,18 +242,11 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
     );
   }
 
-  showCreateOrImportWallet() async {
+  Future<bool?> showCreateOrImportWallet() async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
-  }
-
-  void _showWarningDialog(dynamic value, BuildContext context) {
-    if (value is PopWithResults) {
-      final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results);
-    }
   }
 }

@@ -37,7 +37,7 @@ class AuthImplementation extends IAuthRepository {
       await _secureStorage.writePassCode(passcode);
       return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -66,7 +66,7 @@ class AuthImplementation extends IAuthRepository {
       log('passcode: $pass');
       return Right(passcode == pass);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -98,23 +98,33 @@ class AuthImplementation extends IAuthRepository {
     try {
       return Right((await _secureStorage.hasPassCode()));
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<Failure, String>> logOut() async {
+  Future<Either<Failure, bool>> logOut() async {
     try {
+      final UserInfoModel? userInfoModel =
+          await _secureStorage.readCurrentUser();
       final String firstOpen = await _secureStorage.checkAccountLoginApp();
-      await Future.wait([
-        _secureStorage.clearStorage(),
-        _isarDataSource.clearAll(),
-        _getStorageDataSource.clearAll(),
-      ]);
-
-      return Right(firstOpen);
+      if (firstOpen == '' || !firstOpen.contains(userInfoModel!.email)) {
+        await Future.wait([
+          _secureStorage.clearStorage(),
+          _isarDataSource.clearAll(),
+          _getStorageDataSource.clearAll(),
+        ]);
+      } else {
+        // await Future.wait([
+        _secureStorage.clearStorage();
+        _isarDataSource.clearAll();
+        _getStorageDataSource.clearAll();
+        _secureStorage.makeFirstOpen(firstOpen);
+        // ]);
+      }
+      return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -173,7 +183,7 @@ class AuthImplementation extends IAuthRepository {
 
       return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -194,7 +204,7 @@ class AuthImplementation extends IAuthRepository {
       await _secureStorage.makeFirstOpen(account);
       return const Right(true);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -204,7 +214,7 @@ class AuthImplementation extends IAuthRepository {
       final result = await _secureStorage.isFirstOpenApp(account);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 
@@ -214,7 +224,7 @@ class AuthImplementation extends IAuthRepository {
       final result = await _authDataSource.getMe();
       return Right(result.data.toEntity());
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

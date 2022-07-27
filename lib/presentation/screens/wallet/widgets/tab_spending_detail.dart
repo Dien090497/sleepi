@@ -152,11 +152,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
       Navigator.pushNamed(context, R.passcode).then((value) {
         if (value == true) {
           Navigator.pushNamed(context, R.transfer,
-              arguments: TransferScreenArg(
-                e,
-                true,
-                TransferType.token,
-              ));
+              arguments: TransferScreenArg(e, true, TransferType.token));
         }
       });
     } else if (walletState is WalletStateLoaded) {
