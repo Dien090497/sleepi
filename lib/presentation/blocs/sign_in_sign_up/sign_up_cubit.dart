@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
@@ -22,9 +21,7 @@ import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/verify_otp_usecase.dart';
 
 class SigInSignUpCubit extends Cubit<SignInSignUpState> {
-  SigInSignUpCubit() : super(const SignInSignUpState.initial()) {
-    _init();
-  }
+  SigInSignUpCubit() : super(const SignInSignUpState.initial());
 
   final _sendOtpUC = getIt<SendOTPMailUseCase>();
   final _signUpUseCase = getIt<SignUpUseCase>();
@@ -33,16 +30,11 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _verifyOTPUC = getIt<VerifyOTPUseCase>();
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
-
-  late final SharedPreferences _preferences;
+  final _secureStorage = getIt<SecureStorage>();
 
   String email = '';
   String _password = '';
   String otp = '';
-
-  _init() async {
-    _preferences = await SharedPreferences.getInstance();
-  }
 
   init() async {
     emit(const SignInSignUpState.initial());
@@ -217,14 +209,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   }
 
   void _saveEmailSuggestion(String email) {
-    final data = _preferences.getStringList(Const.suggestionEmail);
-    if (data == null) {
-      _preferences.setStringList(Const.suggestionEmail, [email]);
-    } else {
-      if (!data.contains(email)) {
-        data.add(email);
-        _preferences.setStringList(Const.suggestionEmail, data);
-      }
-    }
+    _secureStorage.addEmailSuggestion(email);
   }
 }
