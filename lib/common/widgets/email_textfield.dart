@@ -6,6 +6,8 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/lowercase_textfield.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class EmailTextField extends StatefulWidget {
@@ -21,16 +23,11 @@ class EmailTextField extends StatefulWidget {
 class _EmailTextFieldState extends State<EmailTextField> {
   final _textController = TextEditingController();
 
-  late final SharedPreferences _sharePreference;
+  late final SecureStorage _secureStorage = getIt<SecureStorage>();
 
   @override
   void initState() {
-    _init();
     super.initState();
-  }
-
-  void _init() async {
-    _sharePreference = await SharedPreferences.getInstance();
   }
 
   @override
@@ -77,7 +74,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
                   focusedErrorBorder: border,
                   counterText: "")),
           suggestionsCallback: (pattern) async =>
-              _fetchSuggestionEmails(pattern),
+              _secureStorage.getSuggestionEmail(pattern),
           hideOnEmpty: true,
           hideOnLoading: true,
           suggestionsBoxDecoration: SuggestionsBoxDecoration(
@@ -98,18 +95,5 @@ class _EmailTextFieldState extends State<EmailTextField> {
         )
       ],
     );
-  }
-
-  Iterable<String> _fetchSuggestionEmails(String pattern) {
-    var data = _sharePreference.getStringList(Const.suggestionEmail);
-    if (data != null) {
-      if (pattern.isEmpty) {
-        return data;
-      } else {
-        return data.where((element) => element.toLowerCase().contains(pattern));
-      }
-    }
-
-    return [];
   }
 }
