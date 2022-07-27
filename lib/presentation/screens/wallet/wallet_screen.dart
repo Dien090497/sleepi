@@ -50,15 +50,7 @@ class _WalletScreenState extends State<WalletScreen>
         actions: [
           GestureDetector(
             onTap: () async {
-              final state = context.read<WalletCubit>().state;
-              if (state is WalletNotExisted) {
-                _showCreateOrImportWallet()
-                    .then((value) => _showWarningDialog(value, context));
-                return;
-              } else if (state is WalletNotOpen || state is WalletStateLoaded) {
-                Navigator.pushNamed(context, R.passcode,
-                    arguments: PasscodeArguments(route: R.settingWallet));
-              }
+              await _onSettingTap(context);
             },
             child: const Padding(
               padding: EdgeInsets.only(right: 16.0, left: 12),
@@ -83,6 +75,20 @@ class _WalletScreenState extends State<WalletScreen>
         ],
       ),
     );
+  }
+
+  Future<void> _onSettingTap(BuildContext context) async {
+    final state = BlocProvider.of<WalletCubit>(context).state;
+    if (state is WalletNotExisted) {
+      _showCreateOrImportWallet()
+          .then((value) => _showWarningDialog(value, context));
+      return;
+    } else if (state is WalletNotOpen) {
+      Navigator.pushNamed(context, R.passcode,
+          arguments: PasscodeArguments(route: R.settingWallet));
+    } else if (state is WalletStateLoaded) {
+      Navigator.pushNamed(context, R.settingWallet);
+    }
   }
 
   _showCreateOrImportWallet() async {

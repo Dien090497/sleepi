@@ -47,7 +47,7 @@ class SplashCubit extends Cubit<SplashState> {
                 isSafeDevice: kDebugMode ? true : true,
                 userInfoEntity: userInfo,
                 listTokens: tokensSpending,
-                userStatusTrackingModel: r
+                userStatusTrackingModel: r,
               ));
             });
           });

@@ -9,18 +9,25 @@ import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
+import 'package:slee_fi/usecase/get_user_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 part 'user_event.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(const UserState.initial()) {
     on<UpdateUserOrListToken>(_onUpdateUser);
+    on<RefreshUser>(_onRefreshUser);
     on<StartInterval>(_onStartInterval);
     on<RefreshBalanceToken>(_onRefreshBalance);
     on<InitialUser>(
       (event, emit) => emit(const UserState.initial()),
     );
   }
+
+  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
+  final _getUserUC = getIt<GetUserUseCase>();
+  Timer? _timer;
 
   final _defaultTokens = [
     const TokenEntity(
@@ -46,9 +53,22 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         balance: 0),
   ];
 
-  _onRefreshBalance(RefreshBalanceToken event, emit) async {
+  void _onRefreshUser(RefreshUser event, emit) async {
     final currentState = state;
 
+    if (currentState is UserLoaded) {
+      final getUserRes = await _getUserUC.call(NoParams());
+      getUserRes.fold(
+        (l) {},
+        (r) {
+          emit(currentState.copyWith(userInfoEntity: r));
+        },
+      );
+    }
+  }
+
+  void _onRefreshBalance(RefreshBalanceToken event, emit) async {
+    final currentState = state;
     if (currentState is UserLoaded) {
       final balanceUC = await _fetchBalanceSpendingUC
           .call('${currentState.userInfoEntity.id}');
@@ -61,13 +81,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
-  final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
-  Timer? _timer;
-
   void _onStartInterval(StartInterval event, emit) {
-    add(RefreshBalanceToken());
+    add(const RefreshBalanceToken());
     _timer ??= Timer.periodic(
-        const Duration(seconds: 10), (timer) => add(RefreshBalanceToken()));
+        const Duration(seconds: 10), (timer) => add(const RefreshBalanceToken()));
   }
 
   void _onUpdateUser(UpdateUserOrListToken event, emit) {
