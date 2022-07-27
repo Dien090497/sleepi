@@ -156,7 +156,7 @@ flavorizr:
     - assets:extract
     - android:androidManifest
     - android:buildGradle
-    - android:dummyAssets
+#    - android:dummyAssets
     - android:icons
     #    - flutter:flavors
     #    - flutter:app
@@ -186,6 +186,15 @@ flavorizr:
     stg:
       app:
         name: "SleeFi Stg"
+
+      android:
+        applicationId: "com.sotatek.slee_fi"
+      ios:
+        bundleId: "com.sotatek.slee_fi"
+
+    prod:
+      app:
+        name: "SleeFi"
 
       android:
         applicationId: "com.sotatek.slee_fi"
