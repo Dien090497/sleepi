@@ -53,6 +53,7 @@ class SplashScreen extends StatelessWidget {
                                   .userStatusTrackingModel!.tracking!.estEarn!),
                       fromRoute: R.splash,
                       imageBed: state.userStatusTrackingModel?.tracking?.bedImage,
+                      enableAlarm: state.userStatusTrackingModel?.tracking?.alrm ?? true,
                     ),
                   );
                 } else {

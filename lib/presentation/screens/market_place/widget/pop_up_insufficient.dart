@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
@@ -107,7 +109,7 @@ class PopupInsufficient extends StatelessWidget {
                   if (walletState is WalletStateLoaded) {
                     for (final element in walletState.tokenList) {
                       if (element.symbol.toLowerCase() ==
-                          Const.tokens[0]['symbol'].toString().toLowerCase()) {
+                          getIt<List<dynamic>>(instanceName: 'tokens')[0]['symbol'].toString().toLowerCase()) {
                         tokenAvax = element;
                       }
                     }

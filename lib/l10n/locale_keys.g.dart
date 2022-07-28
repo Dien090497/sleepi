@@ -493,6 +493,6 @@ abstract class  LocaleKeys {
   static const please_visit_settings_to_check_your_seed_phrase = 'please_visit_settings_to_check_your_seed_phrase';
   static const click_here_to_check_seed_phrase = 'click_here_to_check_seed_phrase';
   static const repair_bed_balance_not_enough = 'repair_bed_balance_not_enough';
-  static const you_have_been_logged_out = 'you_have_been_logged_out';
+  static const tracking_is_not_opening = 'tracking_is_not_opening';
 
 }

@@ -170,6 +170,12 @@ class IsarDataSource {
 
   Future<void> clearAll() => _isar.writeTxn((isar) => isar.clear());
 
+  Future<void> clearAllNotWallet() => _isar.writeTxn((isar) async {
+        if (isar.name != 'wallets') {
+          await isar.clear();
+        }
+      });
+
   Future<void> clearWallet() => _isar.writeTxn((isar) => isar.wallets.clear());
 
   Future<void> clearTokensDefault() =>

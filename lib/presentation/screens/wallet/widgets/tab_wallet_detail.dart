@@ -15,6 +15,7 @@ import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
@@ -155,7 +156,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 R.trade,
                                 arguments: TradeArguments(
                                   contractAddressFrom:
-                                      Const.tokens[0]['address'].toString(),
+                                  getIt<List<dynamic>>(instanceName: 'tokens')[0]['address'].toString(),
                                 ),
                               );
                             },

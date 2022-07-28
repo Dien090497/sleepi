@@ -25,8 +25,11 @@ mixin _$SignInSignUpState {
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) =>
@@ -40,8 +43,11 @@ mixin _$SignInSignUpState {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) =>
@@ -55,8 +61,11 @@ mixin _$SignInSignUpState {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
@@ -166,8 +175,11 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
@@ -184,8 +196,11 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
@@ -202,8 +217,11 @@ class _$SignInSignUpStateInit implements SignInSignUpStateInit {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
@@ -318,8 +336,11 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
@@ -336,8 +357,11 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
@@ -354,8 +378,11 @@ class _$SignInSignUpStateProcess implements SignInSignUpStateProcess {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
@@ -494,8 +521,11 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
@@ -512,8 +542,11 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
@@ -530,8 +563,11 @@ class _$SignInSignUpStateError implements SignInSignUpStateError {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
@@ -678,8 +714,11 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
@@ -696,8 +735,11 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
@@ -714,8 +756,11 @@ class _$SignInSignUpStateErrorEmail implements SignInSignUpStateErrorEmail {
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
@@ -903,8 +948,11 @@ class _$SignInSignUpStateSignUpSuccess
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
@@ -921,8 +969,11 @@ class _$SignInSignUpStateSignUpSuccess
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
@@ -939,8 +990,11 @@ class _$SignInSignUpStateSignUpSuccess
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
@@ -1024,7 +1078,8 @@ abstract class _$$SignInSignUpStateSignInSuccessCopyWith<$Res> {
   $Res call(
       {bool isFirstOpenApp,
       UserInfoEntity userInfoEntity,
-      List<TokenSpending> listToken});
+      List<TokenSpending> listToken,
+      UserStatusTrackingModel userStatusTrackingModel});
 
   $UserInfoEntityCopyWith<$Res> get userInfoEntity;
 }
@@ -1047,6 +1102,7 @@ class __$$SignInSignUpStateSignInSuccessCopyWithImpl<$Res>
     Object? isFirstOpenApp = freezed,
     Object? userInfoEntity = freezed,
     Object? listToken = freezed,
+    Object? userStatusTrackingModel = freezed,
   }) {
     return _then(_$SignInSignUpStateSignInSuccess(
       isFirstOpenApp == freezed
@@ -1061,6 +1117,10 @@ class __$$SignInSignUpStateSignInSuccessCopyWithImpl<$Res>
           ? _value._listToken
           : listToken // ignore: cast_nullable_to_non_nullable
               as List<TokenSpending>,
+      userStatusTrackingModel == freezed
+          ? _value.userStatusTrackingModel
+          : userStatusTrackingModel // ignore: cast_nullable_to_non_nullable
+              as UserStatusTrackingModel,
     ));
   }
 
@@ -1076,8 +1136,11 @@ class __$$SignInSignUpStateSignInSuccessCopyWithImpl<$Res>
 
 class _$SignInSignUpStateSignInSuccess
     implements SignInSignUpStateSignInSuccess {
-  const _$SignInSignUpStateSignInSuccess(this.isFirstOpenApp,
-      this.userInfoEntity, final List<TokenSpending> listToken)
+  const _$SignInSignUpStateSignInSuccess(
+      this.isFirstOpenApp,
+      this.userInfoEntity,
+      final List<TokenSpending> listToken,
+      this.userStatusTrackingModel)
       : _listToken = listToken;
 
   @override
@@ -1092,8 +1155,11 @@ class _$SignInSignUpStateSignInSuccess
   }
 
   @override
+  final UserStatusTrackingModel userStatusTrackingModel;
+
+  @override
   String toString() {
-    return 'SignInSignUpState.signInSuccess(isFirstOpenApp: $isFirstOpenApp, userInfoEntity: $userInfoEntity, listToken: $listToken)';
+    return 'SignInSignUpState.signInSuccess(isFirstOpenApp: $isFirstOpenApp, userInfoEntity: $userInfoEntity, listToken: $listToken, userStatusTrackingModel: $userStatusTrackingModel)';
   }
 
   @override
@@ -1106,7 +1172,9 @@ class _$SignInSignUpStateSignInSuccess
             const DeepCollectionEquality()
                 .equals(other.userInfoEntity, userInfoEntity) &&
             const DeepCollectionEquality()
-                .equals(other._listToken, _listToken));
+                .equals(other._listToken, _listToken) &&
+            const DeepCollectionEquality().equals(
+                other.userStatusTrackingModel, userStatusTrackingModel));
   }
 
   @override
@@ -1114,7 +1182,8 @@ class _$SignInSignUpStateSignInSuccess
       runtimeType,
       const DeepCollectionEquality().hash(isFirstOpenApp),
       const DeepCollectionEquality().hash(userInfoEntity),
-      const DeepCollectionEquality().hash(_listToken));
+      const DeepCollectionEquality().hash(_listToken),
+      const DeepCollectionEquality().hash(userStatusTrackingModel));
 
   @JsonKey(ignore: true)
   @override
@@ -1132,12 +1201,16 @@ class _$SignInSignUpStateSignInSuccess
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
-    return signInSuccess(isFirstOpenApp, userInfoEntity, listToken);
+    return signInSuccess(
+        isFirstOpenApp, userInfoEntity, listToken, userStatusTrackingModel);
   }
 
   @override
@@ -1150,12 +1223,16 @@ class _$SignInSignUpStateSignInSuccess
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
-    return signInSuccess?.call(isFirstOpenApp, userInfoEntity, listToken);
+    return signInSuccess?.call(
+        isFirstOpenApp, userInfoEntity, listToken, userStatusTrackingModel);
   }
 
   @override
@@ -1168,14 +1245,18 @@ class _$SignInSignUpStateSignInSuccess
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
   }) {
     if (signInSuccess != null) {
-      return signInSuccess(isFirstOpenApp, userInfoEntity, listToken);
+      return signInSuccess(
+          isFirstOpenApp, userInfoEntity, listToken, userStatusTrackingModel);
     }
     return orElse();
   }
@@ -1232,13 +1313,16 @@ class _$SignInSignUpStateSignInSuccess
 
 abstract class SignInSignUpStateSignInSuccess implements SignInSignUpState {
   const factory SignInSignUpStateSignInSuccess(
-      final bool isFirstOpenApp,
-      final UserInfoEntity userInfoEntity,
-      final List<TokenSpending> listToken) = _$SignInSignUpStateSignInSuccess;
+          final bool isFirstOpenApp,
+          final UserInfoEntity userInfoEntity,
+          final List<TokenSpending> listToken,
+          final UserStatusTrackingModel userStatusTrackingModel) =
+      _$SignInSignUpStateSignInSuccess;
 
   bool get isFirstOpenApp;
   UserInfoEntity get userInfoEntity;
   List<TokenSpending> get listToken;
+  UserStatusTrackingModel get userStatusTrackingModel;
   @JsonKey(ignore: true)
   _$$SignInSignUpStateSignInSuccessCopyWith<_$SignInSignUpStateSignInSuccess>
       get copyWith => throw _privateConstructorUsedError;
@@ -1331,8 +1415,11 @@ class _$SignInSignUpStateVerifySuccess
     required TResult Function(bool enableActiveCode,
             UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
         signUpSuccess,
-    required TResult Function(bool isFirstOpenApp,
-            UserInfoEntity userInfoEntity, List<TokenSpending> listToken)
+    required TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)
         signInSuccess,
     required TResult Function(int otp, String email) verifyOTPSuccess,
   }) {
@@ -1349,8 +1436,11 @@ class _$SignInSignUpStateVerifySuccess
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
   }) {
@@ -1367,8 +1457,11 @@ class _$SignInSignUpStateVerifySuccess
     TResult Function(bool enableActiveCode, UserInfoEntity userInfoEntity,
             List<TokenSpending> listToken)?
         signUpSuccess,
-    TResult Function(bool isFirstOpenApp, UserInfoEntity userInfoEntity,
-            List<TokenSpending> listToken)?
+    TResult Function(
+            bool isFirstOpenApp,
+            UserInfoEntity userInfoEntity,
+            List<TokenSpending> listToken,
+            UserStatusTrackingModel userStatusTrackingModel)?
         signInSuccess,
     TResult Function(int otp, String email)? verifyOTPSuccess,
     required TResult orElse(),
