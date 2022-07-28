@@ -163,7 +163,7 @@ flavorizr:
     #    - flutter:flavors
     #    - flutter:app
     #    - flutter:pages
-    - flutter:targets
+#    - flutter:targets
     - ios:xcconfig
     - ios:buildTargets
     - ios:schema
@@ -183,7 +183,7 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee-fi"
+        bundleId: "com.sotatek.slee-fi.dev"
 
     stg:
       app:
