@@ -21,7 +21,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
   }) : super(key: key);
 
   final double amount;
-  final double fee;
+  final String fee;
   final String symbol;
   final String tokenAddress;
   final bool isToSpending;

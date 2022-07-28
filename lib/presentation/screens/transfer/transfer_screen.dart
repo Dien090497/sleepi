@@ -39,22 +39,21 @@ class TransferScreen extends StatelessWidget {
           builder: (context, walletState) {
             if (spendingState is UserLoaded &&
                 walletState is WalletStateLoaded) {
-              /// nếu wallet -> spending thì tokenFrom sẽ lấy từ spendingState
-              final tokenFrom = args.isToSpending
-                  ? walletState.tokenList
-                      .firstWhere((e) => e.address == args.address)
-                  : spendingState.listTokens
-                      .firstWhere((e) => e.address == args.address);
+              final spendingToken = spendingState.listTokens
+                  .firstWhere((e) => e.address == args.address);
+              final walletToken = walletState.tokenList
+                  .firstWhere((e) => e.address == args.address);
 
-              /// nếu wallet -> spending thì tokenTo sẽ lấy từ walletState
-              final tokenTo = args.isToSpending
-                  ? walletState.tokenList
-                      .firstWhere((e) => e.address == args.address)
-                  : spendingState.listTokens
-                      .firstWhere((e) => e.address == args.address);
+              /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
+              final currentToken =
+                  args.isToSpending ? walletToken : spendingToken;
+
+              /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
+              final backupToken =
+                  args.isToSpending ? spendingToken : walletToken;
               return BlocProvider(
                 create: (_) =>
-                    TransferCubit(tokenFrom, tokenTo, args.isToSpending)
+                    TransferCubit(currentToken, backupToken, args.isToSpending)
                       ..getFee(),
                 child: Stack(
                   children: [
@@ -81,7 +80,7 @@ class TransferScreen extends StatelessWidget {
                       ),
                     ),
                     BlocBuilder<TransferCubit, TransferState>(
-                      builder: (context, state) =>
+                      builder: (_, state) =>
                           state is TransferLoaded && state.isLoading
                               ? const LoadingScreen()
                               : const SizedBox(),

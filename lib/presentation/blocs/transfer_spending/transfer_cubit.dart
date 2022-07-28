@@ -29,10 +29,10 @@ class TransferCubit extends Cubit<TransferState> {
   Future<void> getFee() async {
     final currentState = state;
     if (currentState is TransferLoaded) {
-      emit(currentState.copyWith(fee: null));
-      final double? fee;
+      emit(currentState.copyWith(fee: null, isLoading: true));
+      final String? fee;
 
-      if (currentState.isToSpending) {
+      if (!currentState.isToSpending) {
         final feeRes = await getIt<EstimateGasWithdrawUseCase>().call(
             EstimateGasWithdrawParam(
                 type: 'token',
@@ -47,7 +47,7 @@ class TransferCubit extends Cubit<TransferState> {
         ));
         fee = feeRes.foldRight(null, (r, previous) => r);
       }
-      emit(currentState.copyWith(fee: fee));
+      emit(currentState.copyWith(fee: fee, isLoading: false));
     }
   }
 
@@ -82,8 +82,10 @@ class TransferCubit extends Cubit<TransferState> {
           } else {
             final balance = newState.currentToken.balance;
             if (amount >
-                (Decimal.parse('$balance') - Decimal.parse('$fee'))
-                    .toDouble()) {
+                (currentState.isToSpending
+                    ? balance
+                    : (Decimal.parse('$balance') - Decimal.parse(fee))
+                        .toDouble())) {
               emit(newState.copyWith(
                   errorMsg: LocaleKeys.insufficient_balance,
                   typeError: 'invalid_amount'));
@@ -205,6 +207,7 @@ class TransferCubit extends Cubit<TransferState> {
         isToSpending: !currentState.isToSpending,
         currentToken: currentState.backupToken,
         backupToken: currentState.currentToken,
+        amount: null,
       ));
       getFee();
     }

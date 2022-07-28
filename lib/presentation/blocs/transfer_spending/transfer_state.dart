@@ -13,7 +13,7 @@ class TransferState with _$TransferState {
     required bool isToSpending,
     @Default(false) bool isLoading,
     double? amount,
-    double? fee,
+    String? fee,
     bool? isAllowance,
     String? errorMsg,
     String? typeError,

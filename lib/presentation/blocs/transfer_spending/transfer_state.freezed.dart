@@ -25,7 +25,7 @@ mixin _$TransferState {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)
@@ -41,7 +41,7 @@ mixin _$TransferState {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)?
@@ -57,7 +57,7 @@ mixin _$TransferState {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)?
@@ -151,7 +151,7 @@ class _$TransferSuccess implements TransferSuccess {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)
@@ -170,7 +170,7 @@ class _$TransferSuccess implements TransferSuccess {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)?
@@ -189,7 +189,7 @@ class _$TransferSuccess implements TransferSuccess {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)?
@@ -249,7 +249,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       bool isToSpending,
       bool isLoading,
       double? amount,
-      double? fee,
+      String? fee,
       bool? isAllowance,
       String? errorMsg,
       String? typeError});
@@ -305,7 +305,7 @@ class __$$TransferLoadedCopyWithImpl<$Res>
       fee: fee == freezed
           ? _value.fee
           : fee // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       isAllowance: isAllowance == freezed
           ? _value.isAllowance
           : isAllowance // ignore: cast_nullable_to_non_nullable
@@ -362,7 +362,7 @@ class _$TransferLoaded implements TransferLoaded {
   @override
   final double? amount;
   @override
-  final double? fee;
+  final String? fee;
   @override
   final bool? isAllowance;
   @override
@@ -423,7 +423,7 @@ class _$TransferLoaded implements TransferLoaded {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)
@@ -443,7 +443,7 @@ class _$TransferLoaded implements TransferLoaded {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)?
@@ -463,7 +463,7 @@ class _$TransferLoaded implements TransferLoaded {
             bool isToSpending,
             bool isLoading,
             double? amount,
-            double? fee,
+            String? fee,
             bool? isAllowance,
             String? errorMsg,
             String? typeError)?
@@ -516,7 +516,7 @@ abstract class TransferLoaded implements TransferState {
       required final bool isToSpending,
       final bool isLoading,
       final double? amount,
-      final double? fee,
+      final String? fee,
       final bool? isAllowance,
       final String? errorMsg,
       final String? typeError}) = _$TransferLoaded;
@@ -526,7 +526,7 @@ abstract class TransferLoaded implements TransferState {
   bool get isToSpending;
   bool get isLoading;
   double? get amount;
-  double? get fee;
+  String? get fee;
   bool? get isAllowance;
   String? get errorMsg;
   String? get typeError;

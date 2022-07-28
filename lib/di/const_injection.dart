@@ -25,6 +25,7 @@ abstract class ConstInjection {
       ];
 
   @dev
+  @test
   @Named('contractRouter')
   String get contractRouterDev => '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
 
@@ -33,6 +34,7 @@ abstract class ConstInjection {
   String get contractRouterProd => '0x60aE616a2155Ee3d9A68541Ba4544862310933d4';
 
   @dev
+  @test
   @Named('tokens')
   List<dynamic> get tokensDev=>[
     {

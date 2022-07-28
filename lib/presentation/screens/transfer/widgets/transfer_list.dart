@@ -45,6 +45,7 @@ class _TransferListState extends State<TransferList> {
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) {
         if (state is TransferLoaded) {
+          valueController.text = '${state.amount ?? ''}';
           isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
           final isAllowance = state.isAllowance;
@@ -152,13 +153,18 @@ class _TransferListState extends State<TransferList> {
                           if (state.currentToken.symbol.toLowerCase() ==
                               'avax') {
                             if (state.fee != null) {
-                              valueController.text =
+                              final v =
                                   (Decimal.parse('${currentToken.balance}') -
                                           Decimal.parse('${state.fee}'))
+                                      .toDouble()
                                       .toString();
+                              valueController.text = v;
+                              cubit.enterAmount(v);
                             }
                           } else {
-                            valueController.text = '${currentToken.balance}';
+                            final v = '${currentToken.balance}';
+                            valueController.text = v;
+                            cubit.enterAmount(v);
                           }
                         },
                       ),
@@ -169,7 +175,7 @@ class _TransferListState extends State<TransferList> {
                         ),
                       const SizedBox(height: 8.0),
                       Text(
-                        '${state.fee ?? ''}',
+                        'Fee: ${state.fee ?? '----'} AVAX',
                         style: TextStyles.lightGrey14,
                       ),
                       const SizedBox(height: 8.0),
@@ -191,13 +197,9 @@ class _TransferListState extends State<TransferList> {
                   onPressed: () {
                     final walletState = context.read<WalletCubit>().state;
                     if (walletState is WalletStateLoaded) {
-                      if (state.isToSpending) {
-                        cubit.checkAllowance(
-                          ownerAddress: walletState.walletInfoEntity.address,
-                        );
-                      } else {
-                        //
-                      }
+                      cubit.checkAllowance(
+                        ownerAddress: walletState.walletInfoEntity.address,
+                      );
                     }
                   },
                 ),

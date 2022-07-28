@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/access_token_expire_model/access_token_expire_model.dart';
@@ -12,10 +11,9 @@ import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
 class QueueInterceptor extends QueuedInterceptor {
-  final SecureStorage _secureStorage;
   final Dio dio;
 
-  QueueInterceptor(this._secureStorage, this.dio);
+  QueueInterceptor(this.dio);
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
+import 'package:decimal/decimal.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/transaction_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -24,14 +25,15 @@ class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {
     return _iTransactionRepository.sendToExternal(params);
   }
 
-  Future<Either<Failure, double>> calculatorFee(
+  Future<Either<Failure, String>> calculatorFee(
       SendToExternalParams params) async {
     final result = await _iTransactionRepository.calculatorFee(params);
     return result.fold(
       Left.new,
       (gasLimit) {
-        final fee = (gasLimit * 50000000000) / pow(10, 18);
-        return Right(fee);
+        final fee = Decimal.fromInt(gasLimit * 50000000000) /
+            Decimal.parse('${pow(10, 18)}');
+        return Right(fee.toDouble().toString());
       },
     );
   }

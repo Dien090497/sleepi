@@ -41,7 +41,7 @@ class PasscodeScreen extends StatelessWidget {
             final walletCubit = context.read<WalletCubit>();
             walletCubit.getWallet().then((_) => Navigator.pop(context, true));
           }
-          if (state is PasscodeValid || state is PasscodeError) {
+          if (state is PasscodeError) {
             passCodeController.clear();
           }
         },
