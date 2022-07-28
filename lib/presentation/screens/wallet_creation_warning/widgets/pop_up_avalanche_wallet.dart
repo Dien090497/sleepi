@@ -39,7 +39,6 @@ class PopUpAvalancheWallet extends StatelessWidget {
                 textStyle: TextStyles.bold16Blue,
                 borderColor: AppColors.blue,
                 onPressed: () {
-                  Navigator.pop(context);
                   showCustomAlertDialog(
                     context,
                     children: PopUpWalletWarning(
@@ -54,6 +53,7 @@ class PopUpAvalancheWallet extends StatelessWidget {
                             Navigator.pushNamed(context, R.createPasscode,
                                     arguments: r)
                                 .then((value) {
+                              Navigator.pop(context);
                               Navigator.pop(context, value);
                             });
                           },

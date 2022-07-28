@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
-import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/tracking_result_chart/tracking_result_model.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
@@ -18,12 +17,10 @@ abstract class SleepTrackingApi {
   factory SleepTrackingApi(
     Dio dio,
     AuthInterceptor authInterceptor,
-    RefreshTokenInterceptor refreshInterceptor,
     @Named('baseUrl') String baseUrl,
   ) {
     dio.interceptors.addAll([
       authInterceptor,
-      refreshInterceptor,
     ]);
     return _SleepTrackingApi(dio, baseUrl: baseUrl);
   }

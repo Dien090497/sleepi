@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
-import 'package:slee_fi/datasources/remote/auth_datasource/refresh_token_interceptor.dart';
 import 'package:slee_fi/models/activation_code_response/activation_code_response.dart';
 import 'package:slee_fi/models/active_code_response/active_code_response.dart';
 import 'package:slee_fi/models/bed_model/beb_model.dart';
@@ -71,12 +70,10 @@ abstract class AuthDataSource {
   factory AuthDataSource(
     Dio dio,
     AuthInterceptor authInterceptor,
-    RefreshTokenInterceptor refreshInterceptor,
     @Named('baseUrl') String baseUrl,
   ) {
     dio.interceptors.addAll([
       authInterceptor,
-      refreshInterceptor,
     ]);
     return _AuthDataSource(dio, baseUrl: baseUrl);
   }
