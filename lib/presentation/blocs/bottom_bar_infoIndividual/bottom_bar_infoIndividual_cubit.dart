@@ -104,7 +104,6 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   void repairNFT({required int durability, required int bedId }) async {
-    emit(const BottomBarInfoIndividualState.loading());
     final params = RepairSchema(bedId: bedId, durability: durability);
     final result = await _nftRepairUseCase.call(params);
     result.fold((l) {
