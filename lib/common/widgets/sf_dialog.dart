@@ -126,8 +126,7 @@ Future<T?> showWarningDialog<T>(
             const SizedBox(
               height: 24,
             ),
-            SFText(
-                keyText: message.tr(),
+            Text(message.tr(),
                 textAlign: TextAlign.center,
                 style: style ?? TextStyles.bold18White),
             const SizedBox(height: 24),

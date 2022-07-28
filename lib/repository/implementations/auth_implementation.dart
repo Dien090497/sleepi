@@ -111,7 +111,7 @@ class AuthImplementation extends IAuthRepository {
         _isarDataSource.clearAll(),
         _getStorageDataSource.clearAll(),
       ]);
-
+      await _secureStorage.makeFirstOpen(firstOpen);
       return Right(firstOpen);
     } catch (e) {
       return Left(FailureMessage('$e'));
