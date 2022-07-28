@@ -486,5 +486,7 @@
   "reflection": "Reflection",
   "school": "School",
   "coming_soon": "Coming soon",
+  "please_visit_settings_to_check_your_seed_phrase": "Please visit settings to check your seed phrase",
+  "click_here_to_check_seed_phrase": "Click here to check seed phrase",
   "repair_bed_balance_not_enough": "リペアに必要な残高がありません"
  }

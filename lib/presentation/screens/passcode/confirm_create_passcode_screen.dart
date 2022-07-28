@@ -9,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/global_listener/global_listener_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
@@ -18,8 +19,13 @@ import 'package:slee_fi/usecase/wallet/import_wallet_usecase.dart';
 class ConfirmCreatePasscodeArguments {
   final String passcode;
   final String? mnemonic;
+  final bool showSeedPhrasePopUp;
 
-  ConfirmCreatePasscodeArguments(this.passcode, this.mnemonic);
+  ConfirmCreatePasscodeArguments(
+    this.passcode,
+    this.mnemonic,
+    this.showSeedPhrasePopUp,
+  );
 }
 
 class ConfirmCreatePasscodeScreen extends StatelessWidget {
@@ -94,11 +100,14 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                                       showMessageDialog(context, '$l');
                                     },
                                     (r) {
+                                      final listenerCubit =
+                                          context.read<GlobalListenerCubit>();
                                       context
                                           .read<WalletCubit>()
                                           .importWallet(r);
                                       Navigator.pop(context);
                                       Navigator.pop(context, true);
+                                      listenerCubit.newWalletCreated();
                                     },
                                   );
                                 } else {

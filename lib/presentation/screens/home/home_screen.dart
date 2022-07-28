@@ -38,6 +38,7 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: HomeListWidget(
                 child: ListView(
+                  physics: const BouncingScrollPhysics(),
                   children: [
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16.0),

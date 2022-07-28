@@ -5,7 +5,11 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/global_listener/global_listener_cubit.dart';
+import 'package:slee_fi/presentation/blocs/global_listener/global_listener_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
@@ -38,39 +42,53 @@ class _WalletScreenState extends State<WalletScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundWidget(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        leading: const Padding(
-          padding: EdgeInsets.only(left: 16),
-          child: SFBackButton(),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () async {
-              await _onSettingTap(context);
+    return BlocListener<GlobalListenerCubit, GlobalListenerState>(
+      listener: (context, state) {
+        if (state is GlobalListenerNewWalletCreated) {
+          showWarningDialog(
+            context,
+            LocaleKeys.please_visit_settings_to_check_your_seed_phrase,
+            buttonText: LocaleKeys.click_here_to_check_seed_phrase,
+            () {
+              Navigator.popAndPushNamed(context, R.settingWallet);
             },
-            child: const Padding(
-              padding: EdgeInsets.only(right: 16.0, left: 12),
-              child: SFIcon(Ics.icSetting),
-            ),
+          );
+        }
+      },
+      child: BackgroundWidget(
+        appBar: AppBar(
+          toolbarHeight: 80,
+          leading: const Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: SFBackButton(),
           ),
-        ],
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.transparent,
-        leadingWidth: 48,
-        elevation: 0,
-        centerTitle: true,
-        titleSpacing: 14,
-        title: WalletTabBar(controller: controller),
-      ),
-      child: TabBarView(
-        controller: controller,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          TabSpendingDetail(),
-          TabWalletDetail(),
-        ],
+          actions: [
+            GestureDetector(
+              onTap: () async {
+                await _onSettingTap(context);
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 16.0, left: 12),
+                child: SFIcon(Ics.icSetting),
+              ),
+            ),
+          ],
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.transparent,
+          leadingWidth: 48,
+          elevation: 0,
+          centerTitle: true,
+          titleSpacing: 14,
+          title: WalletTabBar(controller: controller),
+        ),
+        child: TabBarView(
+          controller: controller,
+          physics: const NeverScrollableScrollPhysics(),
+          children: const [
+            TabSpendingDetail(),
+            TabWalletDetail(),
+          ],
+        ),
       ),
     );
   }

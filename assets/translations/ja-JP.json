@@ -454,6 +454,8 @@
   "reflection": "放射",
   "school": "学校",
   "coming_soon": "Coming soon",
+  "please_visit_settings_to_check_your_seed_phrase": "設定内でシードフレーズを確認してください",
+  "click_here_to_check_seed_phrase": "シードフレーズを確認するために、ここでクリックしてください",
   "password_must_be_at_least_6": "英大文字、数字、特殊文字で1つ以上の組み合わせ6～20字で入力してください",
   "staking_bonus": "ステーキングボーナス"
 }
