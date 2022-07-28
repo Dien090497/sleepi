@@ -77,11 +77,13 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                       PasscodeNumPad(
                         passcodeController: passcodeController,
                         onCompleted: (String passcode) async {
+                          setState(() {
+                            wrongPassword = false;
+                            isLoading = true;
+                          });
                           if (passcode != args.passcode) {
-                            setState(() => wrongPassword = true);
                             passcodeController.clear();
                           } else if (passcode == args.passcode) {
-                            setState(() => isLoading = true);
                             final createPassCodeUC =
                                 await getIt<CreatePassCodeUseCase>()
                                     .call(passcode);
@@ -111,18 +113,8 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                                     },
                                   );
                                 } else {
-                                  final res =
-                                      await getIt<CreatePassCodeUseCase>()
-                                          .call(passcode);
-                                  res.fold(
-                                    (l) {
-                                      showMessageDialog(context, '$l');
-                                    },
-                                    (r) {
-                                      Navigator.pop(context);
-                                      Navigator.pop(context, true);
-                                    },
-                                  );
+                                  Navigator.pop(context);
+                                  Navigator.pop(context, true);
                                 }
                               },
                             );

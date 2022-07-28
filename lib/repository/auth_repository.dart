@@ -33,7 +33,7 @@ abstract class IAuthRepository {
 
   Future<Either<Failure, bool>> validatePassCode(String passcode);
 
-  Future<Either<Failure, String>> logOut();
+  Future<Either<Failure, bool>> logOut();
 
   Future<Either<Failure, bool>> isPassCodeCreated();
 

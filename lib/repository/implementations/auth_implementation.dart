@@ -103,16 +103,14 @@ class AuthImplementation extends IAuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> logOut() async {
+  Future<Either<Failure, bool>> logOut() async {
     try {
-      final String firstOpen = await _secureStorage.checkAccountLoginApp();
       await Future.wait([
-        _secureStorage.clearStorage(),
-        _isarDataSource.clearAll(),
-        _getStorageDataSource.clearAll(),
+        _secureStorage.logOut(),
+        _getStorageDataSource.deleteCurrentChainId(),
+        _getStorageDataSource.deleteCurrentWalletId(),
       ]);
-      await _secureStorage.makeFirstOpen(firstOpen);
-      return Right(firstOpen);
+      return const Right(true);
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

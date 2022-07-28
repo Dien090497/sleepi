@@ -31,12 +31,7 @@ class SecureStorage {
 
   Future<void> clearStorage() async {
     final suggestionEmail = getSuggestionEmail('');
-
-    await Future.wait([
-      _secureStorage.deleteAll(),
-      _sharedPreferences.clear(),
-    ]);
-    for (var element in suggestionEmail) {
+    for (final element in suggestionEmail) {
       addEmailSuggestion(element);
     }
   }
@@ -161,5 +156,13 @@ class SecureStorage {
       }
     }
     return [];
+  }
+
+  Future<void> logOut() {
+    return Future.wait([
+      _secureStorage.delete(key: StorageKeys.accessTokenKey),
+      _secureStorage.delete(key: StorageKeys.refreshToken),
+      _secureStorage.delete(key: StorageKeys.userKey),
+    ]);
   }
 }
