@@ -124,6 +124,46 @@ extension StringX on String {
     }
   }
 
+  Color get qualityBedTopLeftColor {
+    switch (toLowerCase()) {
+      case 'uncommon':
+        return AppColors.uncommonBedTopLeft;
+      case 'rare':
+        return AppColors.rareBedTopLeft;
+      case 'epic':
+        return AppColors.epicBedTopLeft;
+      case 'legendary':
+        return AppColors.legendaryBedTopLeft;
+      case 'special':
+        return AppColors.white;
+      case 'efficiency':
+        return AppColors.red;
+      case 'luck':
+        return AppColors.blue;
+      case 'resilience':
+        return AppColors.purple;
+      case 'ruby':
+        return AppColors.red;
+      case 'amethyst':
+        return AppColors.purple;
+      case 'sapphire':
+        return AppColors.blue;
+      case 'emerald':
+        return AppColors.green;
+      case 'diamond':
+        return AppColors.white;
+      case 'blue':
+        return AppColors.blue;
+      case 'purple':
+        return AppColors.purple;
+      case 'red':
+        return AppColors.red;
+      case 'white':
+        return AppColors.white;
+    }
+    return AppColors.uncommonBedTopLeft;
+  }
+
   Color get qualityBedColor {
     switch (toLowerCase()) {
       case 'uncommon':

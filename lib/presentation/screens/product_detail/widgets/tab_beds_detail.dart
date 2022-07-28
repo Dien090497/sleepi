@@ -79,6 +79,9 @@ class TabBedsDetail extends StatelessWidget {
                               final qualityColor = bed.quality != null
                                   ? bed.quality!.qualityBedColor
                                   : AppColors.commonBed;
+                              final topLeftColor = bed.quality != null
+                                  ? bed.quality!.qualityBedTopLeftColor
+                                  : AppColors.commonBedTopLeft;
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.pushNamed(context, R.nftInfo,
@@ -97,6 +100,7 @@ class TabBedsDetail extends StatelessWidget {
                                         top: 20,
                                         left: -30,
                                         child: TopLeftBanner(
+                                          backgroundColor: topLeftColor.withOpacity(0.8),
                                           text: bed.nftClass
                                               .reCase(StringCase.camelCase),
                                           textColor: qualityColor,
