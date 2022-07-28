@@ -221,17 +221,4 @@ class AuthImplementation extends IAuthRepository {
       return Left(FailureMessage.fromException(e));
     }
   }
-
-  @override
-  Future clearAll() async {
-    try {
-      await Future.wait([
-        _secureStorage.clearStorage(),
-        _isarDataSource.clearAll(),
-        _getStorageDataSource.clearAll(),
-      ]);
-    } catch (e) {
-      return Left(FailureMessage('$e'));
-    }
-  }
 }

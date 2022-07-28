@@ -8,8 +8,6 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
 import 'package:slee_fi/presentation/screens/login_signup/widgets/account_login_widget.dart';
-import 'package:slee_fi/repository/auth_repository.dart';
-import 'package:slee_fi/repository/implementations/auth_implementation.dart';
 import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
@@ -33,7 +31,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
   final _secureStorage = getIt<SecureStorage>();
-  final _authImplement = getIt<IAuthRepository>();
 
   String email = '';
   String _password = '';
@@ -213,10 +210,6 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
 
   Future<void> _saveEmailSuggestion(String email) async {
     _secureStorage.addEmailSuggestion(email);
-    final lastUser = await _secureStorage.lastUserSignIn();
-    if (lastUser != null && email != lastUser) {
-      await _authImplement.clearAll();
-    }
     _secureStorage.saveLastUserSignIn(email);
   }
 }
