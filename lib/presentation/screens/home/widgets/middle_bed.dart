@@ -124,15 +124,17 @@ class _BuildBedItem extends StatelessWidget {
     return Column(
       children: [
         SFText(keyText: bedEntity.nftClass, style: TextStyles.blue14),
-        GestureDetector(
-          onTap: () async {
-            final result = await Navigator.pushNamed(context, R.nftInfo,
-                arguments: InfoIndividualParams(buy: true, bed: bedEntity));
-            if (result != null && result is BedEntity) {
-              context.read<HomeBloc>().add(ChangeBed(bed: result));
-            }
-          },
-          child: CachedImage(image: bedEntity.image, height: 180.h),
+        Expanded(
+          child: GestureDetector(
+            onTap: () async {
+              final result = await Navigator.pushNamed(context, R.nftInfo,
+                  arguments: InfoIndividualParams(buy: true, bed: bedEntity));
+              if (result != null && result is BedEntity) {
+                context.read<HomeBloc>().add(ChangeBed(bed: result));
+              }
+            },
+            child: CachedImage(image: bedEntity.image, height: 180.h),
+          ),
         ),
       ],
     );
