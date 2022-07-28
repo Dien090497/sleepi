@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -13,7 +10,6 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/screens/result/widgets/chart_statistic_share.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'layout/pre_result_screen.dart';
@@ -75,7 +71,7 @@ class _ResultScreenState extends State<ResultScreen> {
               body: SafeArea(
                 top: false,
                 child: SingleChildScrollView(
-                  physics: const ScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
@@ -96,7 +92,11 @@ class _ResultScreenState extends State<ResultScreen> {
                         const SizedBox(
                           height: 32,
                         ),
-                        Platform.isAndroid
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: SFIcon(Ics.commingSoon),
+                        ),
+                        /*Platform.isAndroid
                             ? ((args.dataChart.isNotEmpty &&
                                     args.dataChart.first.maxX != -1)
                                 ? ChartStatisticShare(
@@ -108,7 +108,7 @@ class _ResultScreenState extends State<ResultScreen> {
                             : const Padding(
                                 padding: EdgeInsets.only(bottom: 10),
                                 child: SFIcon(Ics.commingSoon),
-                              ),
+                              ),*/
                         const SizedBox(
                           height: 24,
                         ),

@@ -73,29 +73,34 @@ class CategoryHeader extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: SFText(
-                              keyText: LocaleKeys.earning,
-                              style: TextStyles.blue14,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: SFText(
+                                  keyText: LocaleKeys.earning,
+                                  style: TextStyles.blue14,
+                                ),
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: SFImageBorder(
+                                icon: Ics.icSlft,
+                                onTap: () {},
+                                radius: 8,
+                                size: const Size(42, 42),
+                              ),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SFImageBorder(
-                            icon: Ics.icSlft,
-                            onTap: () {},
-                            radius: 8,
-                            size: const Size(42, 42),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                     const Spacer(),
                     Padding(
