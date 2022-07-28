@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
-import 'package:slee_fi/common/const/const.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -21,12 +21,15 @@ import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dar
 import 'package:slee_fi/presentation/screens/tracking/widgets/analog_clock.dart';
 import 'package:slee_fi/resources/resources.dart';
 
+import '../../../common/const/const.dart';
+
 class TrackingParams {
   final String fromRoute;
   final int timeStart;
   final int timeWakeUp;
   final double tokenEarn;
   final String? imageBed;
+  final bool enableAlarm;
 
   TrackingParams({
     required this.fromRoute,
@@ -34,6 +37,7 @@ class TrackingParams {
     required this.timeWakeUp,
     required this.tokenEarn,
     this.imageBed,
+    required this.enableAlarm,
   });
 }
 
@@ -46,11 +50,11 @@ class TrackingScreen extends StatefulWidget {
 
 class _TrackingScreenState extends State<TrackingScreen> {
   late Timer _timer;
+  AudioPlayer audioPlayer = AudioPlayer();
   late String timeAlarm = '';
   late double totalEarn = 0;
   late int time = 0;
   late double earn = 0.toDouble();
-  final service = FlutterBackgroundService();
   late DateTime timeStart = DateTime.now();
 
   @override
@@ -70,16 +74,22 @@ class _TrackingScreenState extends State<TrackingScreen> {
           (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
-      double x = totalEarn / time;
+      // double x = totalEarn / time;
       _timer = Timer.periodic(
-        const Duration(minutes: 1),
+        const Duration(seconds: 1),
         (Timer timer) async {
           if (!mounted) return;
-          if (earn < totalEarn) {
-            earn += x;
-            setState(() {});
-          } else {
-            _timer.cancel();
+          if (DateTime.now().isAfter(wakeUp)) {
+            SharedPreferences preferences = await SharedPreferences.getInstance();
+            final int sound = preferences.getInt(Const.sound) ?? 0;
+            if(!audioPlayer.playing){
+              await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
+                await audioPlayer.setVolume(1);
+                await audioPlayer.setLoopMode(LoopMode.all);
+                await audioPlayer.play();
+              });
+              _timer.cancel();
+            }
           }
         },
       );
@@ -90,6 +100,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
   @override
   void dispose() {
+    audioPlayer.dispose();
     _timer.cancel();
     super.dispose();
   }
@@ -124,10 +135,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
             return FocusDetector(
               onFocusGained: () async {
-                init();
+                if(!_timer.isActive) {
+                  init();
+                }
               },
               onFocusLost: () {
-                _timer.cancel();
+                // _timer.cancel();
               },
               child: Stack(
                 children: [
@@ -218,10 +231,12 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             color: AppColors.blue,
                             textStyle: TextStyles.w600WhiteSize16,
                             onPressed: () async {
-                              if ((await service.isRunning())) {
-                                service.invoke(Const.stopService);
+                              if(state is! TrackingStateLoading) {
+                                if (audioPlayer.playing) {
+                                  await audioPlayer.stop();
+                                }
+                                await cubit.fetchData(time, timeStart);
                               }
-                              cubit.fetchData(time, timeStart);
                             },
                           ),
                           const SizedBox(height: 26),

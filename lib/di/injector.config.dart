@@ -177,9 +177,9 @@ import '../usecase/withdraw_nft_usecase.dart' as _i152;
 import 'const_injection.dart' as _i166;
 import 'register_module.dart' as _i165;
 
+const String _dev = 'dev';
 const String _test = 'test';
 const String _prod = 'prod';
-const String _dev = 'dev';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -208,20 +208,28 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => registerModule.isar(get<_i9.Directory>()),
       preResolve: true);
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
+  gh.factory<List<dynamic>>(() => constInjection.tokensDev,
+      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<List<String>>(() => constInjection.listNFTAddressTestNet,
       instanceName: 'nftAddresses', registerFor: {_test});
+  gh.factory<List<dynamic>>(() => constInjection.tokensProd,
+      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.RandomUtils>(() => _i17.RandomUtils());
   await gh.factoryAsync<_i18.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i12.StorageKeys>(() => _i12.StorageKeys());
+  gh.factory<String>(() => constInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_dev});
+  gh.factory<String>(() => constInjection.contractRouterProd,
+      instanceName: 'contractRouter', registerFor: {_prod});
+  gh.factory<String>(() => constInjection.baseUrlStg,
+      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => constInjection.baseUrlProd,
       instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<String>(() => constInjection.baseUrlDev,
       instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => constInjection.baseUrlStg,
-      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<_i19.ToastUtils>(() => _i19.ToastUtils());
   gh.singleton<_i20.Web3Provider>(_i20.Web3Provider(get<_i4.Client>()));
   gh.factory<_i21.HistoryDataSource>(

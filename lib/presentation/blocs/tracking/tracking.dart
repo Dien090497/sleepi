@@ -34,7 +34,6 @@ class TrackingCubit extends Cubit<TrackingState> {
   List<DataXYEntity> listXY = [];
 
   Future<void> wakeUp(DataHealthSchema data) async {
-    emit(const TrackingState.loading());
     final result = await _wakeUpUseCase.call(data);
     result.fold(
       (l) {
@@ -51,6 +50,7 @@ class TrackingCubit extends Cubit<TrackingState> {
   }
 
   Future<void> fetchData(time, timeStart) async {
+    emit(const TrackingState.loading());
     DateTime now = DateTime.now();
     HealthFactory health = HealthFactory();
 
