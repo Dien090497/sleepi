@@ -6,10 +6,8 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_bar.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_spending_detail.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/tab_wallet_detail.dart';
@@ -29,7 +27,7 @@ class _WalletScreenState extends State<WalletScreen>
     vsync: this,
     length: 2,
     initialIndex: 0,
-    animationDuration: const Duration(milliseconds: 50),
+    animationDuration: const Duration(milliseconds: 20),
   );
 
   @override
@@ -50,15 +48,7 @@ class _WalletScreenState extends State<WalletScreen>
         actions: [
           GestureDetector(
             onTap: () async {
-              final state = context.read<WalletCubit>().state;
-              if (state is WalletNotExisted) {
-                _showCreateOrImportWallet()
-                    .then((value) => _showWarningDialog(value, context));
-                return;
-              } else if (state is WalletNotOpen || state is WalletStateLoaded) {
-                Navigator.pushNamed(context, R.passcode,
-                    arguments: PasscodeArguments(route: R.settingWallet));
-              }
+              await _onSettingTap(context);
             },
             child: const Padding(
               padding: EdgeInsets.only(right: 16.0, left: 12),
@@ -85,19 +75,30 @@ class _WalletScreenState extends State<WalletScreen>
     );
   }
 
-  _showCreateOrImportWallet() async {
+  Future<void> _onSettingTap(BuildContext context) async {
+    final state = BlocProvider.of<WalletCubit>(context).state;
+    if (state is WalletNotExisted) {
+      _showCreateOrImportWallet().then((value) {
+        if (value ?? false) {
+          controller.animateTo(1);
+        }
+      });
+    } else if (state is WalletNotOpen) {
+      Navigator.pushNamed(context, R.passcode).then((value) {
+        if (value == true) {
+          Navigator.pushNamed(context, R.settingWallet);
+        }
+      });
+    } else if (state is WalletStateLoaded) {
+      Navigator.pushNamed(context, R.settingWallet);
+    }
+  }
+
+  Future<bool?> _showCreateOrImportWallet() async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
-  }
-
-  void _showWarningDialog(dynamic value, BuildContext context) {
-    if (value is PopWithResults) {
-      controller.animateTo(1);
-      final cubit = context.read<WalletCubit>();
-      cubit.importWallet(value.results);
-    }
   }
 }

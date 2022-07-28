@@ -13,7 +13,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -96,8 +95,9 @@ class PopupInsufficient extends StatelessWidget {
             )),
             const SizedBox(width: 12),
             Expanded(
-              child: BlocBuilder<WalletCubit, WalletState>(
-                builder: (context, state) {
+              child: BlocConsumer<WalletCubit, WalletState>(
+                listener: (context, state) {},
+                builder: (context, walletState) {
                   TokenEntity tokenAvax = const TokenEntity(
                       address: '',
                       displayName: '',
@@ -105,8 +105,8 @@ class PopupInsufficient extends StatelessWidget {
                       symbol: 'AVAX',
                       icon: Ics.icAvax,
                       balance: 0);
-                  if (state is WalletStateLoaded) {
-                    for (final element in state.tokenList) {
+                  if (walletState is WalletStateLoaded) {
+                    for (final element in walletState.tokenList) {
                       if (element.symbol.toLowerCase() ==
                           Const.tokens[0]['symbol'].toString().toLowerCase()) {
                         tokenAvax = element;
@@ -115,14 +115,28 @@ class PopupInsufficient extends StatelessWidget {
                   }
                   return SFButton(
                     text: LocaleKeys.confirm,
-                    onPressed: () {
-                      final walletState = context.read<WalletCubit>().state;
+                    onPressed: () async {
                       if (walletState is WalletNotOpen) {
-                        Navigator.pushReplacementNamed(context, R.passcode,
-                            arguments: PasscodeArguments(
-                                route: R.transfer,
-                                argNewRoute: TransferScreenArg(
-                                    tokenAvax, false, TransferType.nft)));
+                        final success = await Navigator.pushReplacementNamed(
+                            context, R.passcode);
+                        if (success as bool? ?? false) {
+                          final walletCurrentState =
+                              context.read<WalletCubit>().state;
+                          if (walletCurrentState is WalletStateLoaded) {
+                            final transferArgs = TransferScreenArg(
+                                tokenAvax, false, TransferType.nft);
+                            Navigator.pushReplacementNamed(context, R.transfer,
+                                arguments: TransferScreenArg(
+                                    transferArgs.tokenEntity.copyWith(
+                                      balance: walletCurrentState
+                                          .walletInfoEntity
+                                          .nativeCurrency
+                                          .balance,
+                                    ),
+                                    transferArgs.fromSpendingToWallet,
+                                    transferArgs.transferType));
+                          }
+                        }
                       } else {
                         Navigator.pushReplacementNamed(context, R.transfer,
                             arguments: TransferScreenArg(

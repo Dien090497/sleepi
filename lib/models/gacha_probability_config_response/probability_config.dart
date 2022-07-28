@@ -1,25 +1,22 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'config_bed.dart';
-import 'config_items.dart';
-import 'config_jewels.dart';
-import 'config_slft.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/config_info.dart';
 
 part 'probability_config.g.dart';
 
 @JsonSerializable()
 class ProbabilityConfig{
   @JsonKey(name: 'Bed')
-  final ConfigBed bed;
-  final ConfigSlft slft;
+  final List<ConfigInfo> bed;
+  @JsonKey(name: 'Token')
+  final List<ConfigInfo> token;
   @JsonKey(name: 'Items')
-  final ConfigItems items;
+  final List<ConfigInfo> items;
   @JsonKey(name: 'Jewels')
-  final ConfigJewels jewels;
+  final List<ConfigInfo> jewels;
 
   ProbabilityConfig({
     required this.bed,
-    required this.slft,
+    required this.token,
     required this.items,
     required this.jewels,
   });

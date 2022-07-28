@@ -62,14 +62,6 @@ class GridViewBedItem extends StatelessWidget {
             child: Stack(
               clipBehavior: Clip.hardEdge,
               children: [
-                Positioned(
-                  top: 20,
-                  left: -30,
-                  child: TopLeftBanner(
-                    text: bed.classNft == null ? bed.type : bed.classNft!,
-                    textColor: qualityColor,
-                  ),
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Column(
@@ -145,6 +137,14 @@ class GridViewBedItem extends StatelessWidget {
                         ),
                       const SizedBox(height: 12),
                     ],
+                  ),
+                ),
+                Positioned(
+                  top: 20,
+                  left: -30,
+                  child: TopLeftBanner(
+                    text: bed.classNft == null ? bed.type : bed.classNft!,
+                    textColor: qualityColor,
                   ),
                 ),
               ],

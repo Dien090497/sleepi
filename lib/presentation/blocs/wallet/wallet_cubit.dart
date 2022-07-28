@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -19,6 +21,18 @@ import 'wallet_state.dart';
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
 
+  void _startTimer() {
+    if (_timer != null) {
+      _timer = null;
+    }
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      final currentState = state;
+      if (currentState is WalletStateLoaded) {
+        refresh();
+      }
+    });
+  }
+
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
   final _getBalanceForTokensUC = getIt<GetBalanceForTokensUseCase>();
@@ -26,6 +40,8 @@ class WalletCubit extends Cubit<WalletState> {
   final _hasWalletUC = getIt<HasWalletUseCase>();
   final _getNftAddressesUC = getIt<GetNftAddressesUseCase>();
   final _getTokenAddressesUC = getIt<GetTokenAddressesUseCase>();
+
+  Timer? _timer;
 
   Future<void> checkWallet() async {
     final currentState = state;
@@ -84,7 +100,7 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  void loadCurrentWallet(WalletInfoEntity wallet) async {
+  Future<void> loadCurrentWallet(WalletInfoEntity wallet) async {
     final nftAddresses =
         (await _getNftAddressesUC.call(NoParams())).getOrElse(() => []);
     final tokenAddresses =
@@ -156,6 +172,7 @@ class WalletCubit extends Cubit<WalletState> {
         walletInfoEntity: wallet,
         tokenList: tokenList,
       ));
+      _startTimer();
     }
   }
 
@@ -171,5 +188,11 @@ class WalletCubit extends Cubit<WalletState> {
         emit(WalletState.getHistorySuccess(history));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    _timer?.cancel();
+    return super.close();
   }
 }

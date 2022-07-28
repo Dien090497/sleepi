@@ -3,9 +3,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_spin_response.dart';
@@ -37,6 +35,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
   late AnimationController animationController;
   final audioPlayer = AudioPlayer();
   GachaAttributesItem? attributesItem;
+  num? percentEffect;
   dynamic quantitySlft;
   final randomUtils = getIt<RandomUtils>();
   String image = '';
@@ -68,27 +67,36 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
           if (args.spinInfo!.gift.length == Const.one) {
             if(args.spinInfo!.gift.first['type'] == 'slft'){
               setState(() {
-                isShowResult = true;
+                // isShowResult = true;
                 image = Ics.icSlft;
                 quantitySlft = args.spinInfo!.gift.first['amount'];
               });
             }else{
               attributesItem = GachaAttributesItem.fromJson(args.spinInfo!.gift.first as Map<String, dynamic>);
+              percentEffect = args.spinInfo!.gift.first['${args.spinInfo!.gift.first['type']}'];
               setState(() {
-                isShowResult = true;
+                // isShowResult = true;
                 image = attributesItem != null ? attributesItem!.image : '';
               });
             }
 
-            Future.delayed(const Duration(seconds: 3), () async {
-              Navigator.pop(context, true);
-              Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
-                  arguments: args.isGetSpin
-                  ? GachaChance500Arguments(
-                      attributesItem: attributesItem, image: image )
-                  : GachaResultBedArguments(
-                      attributesItem: attributesItem, image: image , quantitySlft : quantitySlft));
-            });
+            Navigator.pop(context, true);
+            Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
+                arguments: args.isGetSpin
+                    ? GachaChance500Arguments(
+                    attributesItem: attributesItem, image: image )
+                    : GachaResultBedArguments(
+                    attributesItem: attributesItem, image: image , quantitySlft : quantitySlft , percentEffect: percentEffect));
+
+            // Future.delayed(const Duration(seconds: 0), () async {
+            //   Navigator.pop(context, true);
+            //   Navigator.pushNamed(context, args.isGetSpin ? R.gacha500TimesChance : R.gachaResultBed,
+            //       arguments: args.isGetSpin
+            //       ? GachaChance500Arguments(
+            //           attributesItem: attributesItem, image: image )
+            //       : GachaResultBedArguments(
+            //           attributesItem: attributesItem, image: image , quantitySlft : quantitySlft , percentEffect: percentEffect));
+            // });
           } else {
             Navigator.pop(context, true);
             Navigator.pushNamed(context, R.allResult,
@@ -147,17 +155,17 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               },
             ),
           ),
-          isShowResult ?  Scaffold(
-            backgroundColor: AppColors.transparent,
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SFIcon(image, width: 150, height: 150,),
-                ],
-              ),
-            ),
-          ) : const SizedBox(),
+          // isShowResult ?  Scaffold(
+          //   backgroundColor: AppColors.transparent,
+          //   body: Center(
+          //     child: Column(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       children: [
+          //         SFIcon(image, width: 150, height: 150,),
+          //       ],
+          //     ),
+          //   ),
+          // ) : const SizedBox(),
         ]
       ),
     );

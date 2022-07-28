@@ -383,6 +383,7 @@ abstract class  LocaleKeys {
   static const registration_means_that_you_agree_to = 'registration_means_that_you_agree_to';
   static const user_agreement = 'user_agreement';
   static const user_privacy = 'user_privacy';
+  static const registration_means_that_you_agree_to_ja = 'registration_means_that_you_agree_to_ja';
   static const create_password = 'create_password';
   static const confirm_password = 'confirm_password';
   static const genesis_beds = 'genesis_beds';
@@ -470,7 +471,7 @@ abstract class  LocaleKeys {
   static const consume_and_turn_gacha_time = 'consume_and_turn_gacha_time';
   static const selling = 'selling';
   static const level_is_highest = 'level_is_highest';
-  static const balance_not_enough = 'balance_not_enough';
+  static const balance_not_enough_to_level_up = 'balance_not_enough_to_level_up';
   static const enough_times_mint = 'enough_times_mint';
   static const minting_not_exists = 'minting_not_exists';
   static const mint_success = 'mint_success';
@@ -486,5 +487,6 @@ abstract class  LocaleKeys {
   static const crystals = 'crystals';
   static const reflection = 'reflection';
   static const school = 'school';
+  static const coming_soon = 'coming_soon';
 
 }

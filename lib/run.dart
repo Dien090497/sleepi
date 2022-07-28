@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +105,6 @@ bool onIosBackground(ServiceInstance service) {
 }
 
 Future<void> onStart(ServiceInstance service) async {
-  DartPluginRegistrant.ensureInitialized();
   final audioPlayer = AudioPlayer();
 
   if (service is AndroidServiceInstance) {
@@ -143,11 +141,10 @@ Future<void> onStart(ServiceInstance service) async {
 
   Timer.periodic(Duration(seconds: time), (timer) async {
     if (!audioPlayer.playing) {
-      await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
-        await audioPlayer.setVolume(1);
-        await audioPlayer.setLoopMode(LoopMode.all);
-        await audioPlayer.play();
-      });
+      await audioPlayer.setAsset(Const.soundAlarm[sound]);
+      await audioPlayer.setVolume(1);
+      await audioPlayer.setLoopMode(LoopMode.all);
+      await audioPlayer.play();
     }
     timer.cancel();
   });

@@ -41,8 +41,8 @@ class TransferList extends StatefulWidget {
 }
 
 class _TransferListState extends State<TransferList> {
-  final TextEditingController controller = TextEditingController();
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
+  final valueController = TextEditingController();
 
   @override
   void dispose() {
@@ -55,6 +55,7 @@ class _TransferListState extends State<TransferList> {
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) {
         if (state is TransferLoaded) {
+          isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
           if (state.needApprove ?? false) {
             showCustomAlertDialog(
@@ -62,11 +63,9 @@ class _TransferListState extends State<TransferList> {
               showClosed: false,
               children: PopUpConfirmApprove(
                 onConfirm: () {
-                  isLoadingNotifier.value = true;
                   cubit
                       .approve(addressContract: widget.tokenEntity.address)
                       .then((str) {
-                    isLoadingNotifier.value = false;
                     Navigator.pop(context);
                     if (str == 'done') {
                       showSuccessfulDialog(context, LocaleKeys.successfull);
@@ -80,7 +79,8 @@ class _TransferListState extends State<TransferList> {
               ),
             );
           } else if (!(state.needApprove ?? true)) {
-            final amount = double.parse(controller.text.replaceAll(',', '.'));
+            final amount =
+                double.parse(valueController.text.replaceAll(',', '.'));
             final userState = context.read<UserBloc>().state;
 
             showCustomAlertDialog(
@@ -88,14 +88,17 @@ class _TransferListState extends State<TransferList> {
               showClosed: false,
               children: PopUpConfirmTransfer(
                 onConfirm: () {
-                  isLoadingNotifier.value = true;
-                  cubit.transfer(
+                  cubit
+                      .transfer(
                     amount: amount,
                     contractAddress: widget.tokenEntity.address,
                     userId: (userState as UserLoaded).userInfoEntity.id,
                     symbol: widget.tokenEntity.symbol,
                     balance: widget.tokenEntity.balance,
-                  );
+                  )
+                      .then((_) {
+                    Navigator.pop(context);
+                  });
                 },
                 spendingToWallet: widget.spendingToWallet,
                 cubit: cubit,
@@ -105,8 +108,6 @@ class _TransferListState extends State<TransferList> {
                 isLoadingNotifier: isLoadingNotifier,
               ),
             );
-          } else {
-            isLoadingNotifier.value = false;
           }
         }
         if (state is TransferSuccess) {
@@ -148,6 +149,7 @@ class _TransferListState extends State<TransferList> {
                     ),
                     const SizedBox(height: 24.0),
                     SFTextFieldTextButton(
+                      controller: valueController,
                       labelText: LocaleKeys.amount,
                       textButton: LocaleKeys.all,
                       textInputType:
@@ -156,12 +158,11 @@ class _TransferListState extends State<TransferList> {
                         FilteringTextInputFormatter.allow(
                             RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                       ],
-                      controller: controller,
                       valueChanged: (v) {
                         cubit.removeError();
                       },
                       onPressed: () {
-                        controller.text =
+                        valueController.text =
                             widget.tokenEntity.balance.formatBalanceToken;
                       },
                     ),
@@ -189,7 +190,7 @@ class _TransferListState extends State<TransferList> {
                   final walletState = context.read<WalletCubit>().state;
                   if (walletState is WalletStateLoaded) {
                     cubit.checkAllowance(
-                      amountStr: controller.text,
+                      amountStr: valueController.text,
                       contractAddress: widget.tokenEntity.address,
                       ownerAddress: walletState.walletInfoEntity.address,
                       balance: widget.tokenEntity.balance,

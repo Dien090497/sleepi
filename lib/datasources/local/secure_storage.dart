@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/models/user/user_info_model.dart';
 
@@ -29,10 +30,15 @@ class SecureStorage {
       await _secureStorage.read(key: StorageKeys.passCodeKey) != null;
 
   Future<void> clearStorage() async {
+    final suggestionEmail = getSuggestionEmail('');
+
     await Future.wait([
       _secureStorage.deleteAll(),
       _sharedPreferences.clear(),
     ]);
+    for (var element in suggestionEmail) {
+      addEmailSuggestion(element);
+    }
   }
 
   Future<void> writeUser(UserInfoModel userInfoModel) async {
@@ -49,11 +55,31 @@ class SecureStorage {
     return UserInfoModel.fromJson(json.decode(value));
   }
 
-  Future<bool> isFirstOpenApp(String account) async =>
-      await _secureStorage.read(key: account) == null;
+  Future<bool> isFirstOpenApp(String account) async {
+    final String? checkFirstOpenApp =
+        await _secureStorage.read(key: StorageKeys.firstOpenKey);
+    if (checkFirstOpenApp == null) {
+      return true;
+    } else {
+      return !checkFirstOpenApp.contains(account);
+    }
+  }
+
+  Future<String> checkAccountLoginApp() async {
+    final String? checkFirstOpenApp =
+        await _secureStorage.read(key: StorageKeys.firstOpenKey);
+    return checkFirstOpenApp ?? '';
+  }
 
   Future<void> makeFirstOpen(String account) async {
-    await _secureStorage.write(key: account, value: 'first');
+    final String? checkFirstOpenApp =
+        await _secureStorage.read(key: StorageKeys.firstOpenKey);
+    if (checkFirstOpenApp == null) {
+      await _secureStorage.write(key: StorageKeys.firstOpenKey, value: account);
+    } else {
+      await _secureStorage.write(
+          key: StorageKeys.firstOpenKey, value: checkFirstOpenApp + account);
+    }
   }
 
   Future<String?> getAccessToken() =>
@@ -111,5 +137,29 @@ class SecureStorage {
   Future<List<String>?> getTokenAddress() async {
     final value = await _secureStorage.read(key: StorageKeys.tokenAddresses);
     return value?.split(',');
+  }
+
+  void addEmailSuggestion(String email) {
+    final data = _sharedPreferences.getStringList(Const.suggestionEmail);
+    if (data == null) {
+      _sharedPreferences.setStringList(Const.suggestionEmail, [email]);
+    } else {
+      if (!data.contains(email)) {
+        data.add(email);
+        _sharedPreferences.setStringList(Const.suggestionEmail, data);
+      }
+    }
+  }
+
+  Iterable<String> getSuggestionEmail(String pattern) {
+    var data = _sharedPreferences.getStringList(Const.suggestionEmail);
+    if (data != null) {
+      if (pattern.isEmpty) {
+        return data;
+      } else {
+        return data.where((element) => element.toLowerCase().contains(pattern));
+      }
+    }
+    return [];
   }
 }

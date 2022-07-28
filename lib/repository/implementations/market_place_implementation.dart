@@ -21,7 +21,7 @@ class TransactionImplementation extends IMarketPlaceRepository {
       final result = await _authDataSource.getMarketPlace(params);
       return Right(result);
     } catch (e) {
-      return Left(FailureMessage('$e'));
+      return Left(FailureMessage.fromException(e));
     }
   }
 

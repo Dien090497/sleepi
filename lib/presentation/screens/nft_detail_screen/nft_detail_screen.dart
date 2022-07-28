@@ -23,7 +23,6 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_detail_refresher.dart';
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/transfer_nft_widget.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_bed_short_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
@@ -67,9 +66,12 @@ class NFTDetailScreen extends StatelessWidget {
                     ),
                     actions: [
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, R.passcode,
-                            arguments:
-                                PasscodeArguments(route: R.settingWallet)),
+                        onTap: () => Navigator.pushNamed(context, R.passcode)
+                            .then((value) {
+                          if (value == true) {
+                            Navigator.pushNamed(context, R.settingWallet);
+                          }
+                        }),
                         child: const Padding(
                           padding: EdgeInsets.only(right: 16.0, left: 12),
                           child: SFIcon(Ics.icSetting),

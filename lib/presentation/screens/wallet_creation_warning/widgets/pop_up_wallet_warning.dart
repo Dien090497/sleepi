@@ -6,8 +6,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class PopUpWalletWarning extends StatelessWidget {
-  final VoidCallback? onPressed;
   const PopUpWalletWarning({this.onPressed, Key? key}) : super(key: key);
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {

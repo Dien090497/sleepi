@@ -24,7 +24,7 @@ class FailureMessage extends Failure {
         final data = e.response?.data;
 
         if (data == null) return FailureMessage('$e');
-        final error = data !is String
+        final error = data! is String
             ? jsonDecode(data)['error']['message']
             : data['error']['message'].toString();
         if (error is String) {
@@ -37,7 +37,17 @@ class FailureMessage extends Failure {
       return FailureMessage('$_');
     }
     return FailureMessage('$e');
-    // throw Exception(e);
+  }
+
+  factory FailureMessage.fromRPC(e) {
+    try {
+      if ('$e'.contains('exceeds allowance')) {
+        return const FailureMessage(LocaleKeys.insufficient_balance);
+      }
+    } catch (_) {
+      return FailureMessage('$_');
+    }
+    return FailureMessage('$e');
   }
 
   @override

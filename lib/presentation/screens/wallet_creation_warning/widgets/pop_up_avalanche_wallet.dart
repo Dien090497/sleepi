@@ -8,107 +8,77 @@ import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
-import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_state.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
+import 'package:slee_fi/usecase/create_new_mnemonic_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
   const PopUpAvalancheWallet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool isLoadingCreateWallet = false;
     return BlocProvider(
-      create: (_) => CreateWalletCubit()..init(),
-      child: BlocConsumer<CreateWalletCubit, CreateWalletState>(
-        listener: (context, state) {
-          if (state is createWalletDone) {
-            context.read<UserBloc>().add(UpdateUserOrListToken(
-                userInfoEntity: state.userInfoEntity!,
-                listTokens: state.listTokens));
-            Navigator.pop(
-                context,
-                PopWithResults(
-                  fromPage: R.createWallet,
-                  toPage: R.wallet,
-                  results: state.entity,
-                ));
-            showSignUpSuccess(context, LocaleKeys.wallet_created_successfully);
-          }
-          if (state is createWalletError) {
-            Navigator.pop(context);
-          }
-        },
-        builder: (context, state) {
-          final cubit = context.read<CreateWalletCubit>();
-          return isLoadingCreateWallet
-              ? const Padding(
-                  padding: EdgeInsets.all(24.0),
-                  child: SizedBox(
-                    height: 100,
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-                )
-              : Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SFText(
-                        keyText: LocaleKeys.avalanche_wallet,
-                        style: TextStyles.bold18LightWhite,
-                      ),
-                      const SizedBox(height: 32),
-                      SizedBox(
-                        height: 48,
-                        child: SFButtonOutLined(
-                          title: LocaleKeys.create_a_new_wallet,
-                          textStyle: TextStyles.bold16Blue,
-                          borderColor: AppColors.blue,
-                          onPressed: () {
-                            showCustomAlertDialog(
-                              context,
-                              children:  PopUpWalletWarning(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, R.createPasscode).then(
-                                        (value) {
-                                          Navigator.pop(context);
-                                      if (value == true) {
-                                        cubit.createWallet();
-                                        isLoadingCreateWallet = true;
-                                      }
-                                    },
-                                  );
-                                },
-                              ),
-                            );
+      create: (_) => CreateWalletCubit(),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SFText(
+              keyText: LocaleKeys.avalanche_wallet,
+              style: TextStyles.bold18LightWhite,
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              height: 48,
+              child: SFButtonOutLined(
+                title: LocaleKeys.create_a_new_wallet,
+                textStyle: TextStyles.bold16Blue,
+                borderColor: AppColors.blue,
+                onPressed: () {
+                  Navigator.pop(context);
+                  showCustomAlertDialog(
+                    context,
+                    children: PopUpWalletWarning(
+                      onPressed: () {
+                        final newSp =
+                            getIt<CreateNewMnemonicUseCase>().call(NoParams());
+                        newSp.fold(
+                          (l) {
+                            showMessageDialog(context, '$l');
                           },
-                        ),
-                      ),
-                      const SizedBox(height: 17),
-                      SFButton(
-                        text: LocaleKeys.import_a_wallet_using_seed_phrase,
-                        textStyle: TextStyles.w600WhiteSize16,
-                        height: 48,
-                        width: double.infinity,
-                        color: AppColors.blue,
-                        onPressed: () async {
-                          Navigator.pushNamed(context, R.importWallet)
-                              .then((value) {
-                            if (value is PopWithResults) {
+                          (r) {
+                            Navigator.pushNamed(context, R.createPasscode,
+                                    arguments: r)
+                                .then((value) {
                               Navigator.pop(context, value);
-                              showSignUpSuccess(context, LocaleKeys.wallet_imported_successfully);
-                            }
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                );
-        },
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 17),
+            SFButton(
+              text: LocaleKeys.import_a_wallet_using_seed_phrase,
+              textStyle: TextStyles.w600WhiteSize16,
+              height: 48,
+              width: double.infinity,
+              color: AppColors.blue,
+              onPressed: () {
+                Navigator.pushNamed(context, R.importWallet).then((value) {
+                  Navigator.pop(context, value);
+                });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

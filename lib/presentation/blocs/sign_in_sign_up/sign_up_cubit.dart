@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/utils/appsflyer_custom.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/sign_in_sign_up/sign_up_state.dart';
@@ -29,6 +30,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _verifyOTPUC = getIt<VerifyOTPUseCase>();
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
+  final _secureStorage = getIt<SecureStorage>();
 
   String email = '';
   String _password = '';
@@ -111,6 +113,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     await result.fold(
       (l) async => emit(SignInSignUpState.error('$l')),
       (r) async {
+        _saveEmailSuggestion(email);
         final balanceRes = await _fetchBalanceSpendingUC.call('${r.id}');
         balanceRes.fold(
           (l) => emit(SignInSignUpState.error('$l')),
@@ -203,5 +206,9 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
       emit(const SignInSignUpState.initial());
     }
     _password = value;
+  }
+
+  void _saveEmailSuggestion(String email) {
+    _secureStorage.addEmailSuggestion(email);
   }
 }

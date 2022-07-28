@@ -43,29 +43,31 @@ class JewelsBuyWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 20.h),
-              CachedNetworkImage(
-                imageUrl: jewel.image,
-                placeholder: (context, url) => const Center(
-                  child: SizedBox(
-                    width: 40.0,
-                    height: 40.0,
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                errorWidget: (context, url, error) => Container(
-                    decoration: const BoxDecoration(
-                      color: AppColors.transparent,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+              Expanded(
+                child: CachedNetworkImage(
+                  imageUrl: jewel.image,
+                  placeholder: (context, url) => const Center(
+                    child: SizedBox(
+                      width: 40.0,
+                      height: 40.0,
+                      child: CircularProgressIndicator(),
                     ),
-                    child: const Icon(Icons.error)),
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
                   ),
+                  errorWidget: (context, url, error) => Container(
+                      decoration: const BoxDecoration(
+                        color: AppColors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                      child: const Icon(Icons.error)),
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover),
+                    ),
+                  ),
+                  width: 100,
+                  height: 100,
                 ),
-                width: 60,
-                height: 60,
               ),
               SizedBox(height: 22.h),
               Row(
@@ -103,7 +105,7 @@ class JewelsBuyWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 8.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Row(
@@ -123,7 +125,7 @@ class JewelsBuyWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 18),
+              const SizedBox(height: 10),
             ],
           ),
         ],

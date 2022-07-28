@@ -11,6 +11,8 @@ HistoryData _$HistoryDataFromJson(Map<String, dynamic> json) => HistoryData(
       userId: json['userId'] as int?,
       specialTimes: json['specialTimes'] as int?,
       commonTimes: json['commonTimes'] as int?,
+      totalCommonTimes: json['totalCommonTimes'] as int?,
+      totalSpecialTimes: json['totalSpecialTimes'] as int?,
       createdAt: json['createdAt'] as String?,
     );
 
@@ -20,5 +22,7 @@ Map<String, dynamic> _$HistoryDataToJson(HistoryData instance) =>
       'userId': instance.userId,
       'specialTimes': instance.specialTimes,
       'commonTimes': instance.commonTimes,
+      'totalCommonTimes': instance.totalCommonTimes,
+      'totalSpecialTimes': instance.totalSpecialTimes,
       'createdAt': instance.createdAt,
     };

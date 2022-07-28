@@ -5,11 +5,11 @@ part 'probability_data.g.dart';
 @JsonSerializable()
 class ProbabilityData{
   final String? key;
-  final dynamic config;
+  final dynamic configs;
 
   ProbabilityData({
     required this.key,
-    required this.config,
+    required this.configs,
   });
   factory ProbabilityData.fromJson(Map<String, dynamic> json) => _$ProbabilityDataFromJson(json);
 

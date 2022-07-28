@@ -15,10 +15,8 @@ import 'package:slee_fi/presentation/blocs/passcode/passcode_cubit.dart';
 import 'package:slee_fi/presentation/blocs/passcode/passcode_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.dart';
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
-import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 
 class PasscodeArguments {
   final String? route;
@@ -33,53 +31,24 @@ class PasscodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as PasscodeArguments?;
     final TextEditingController passCodeController = TextEditingController();
 
     return BlocProvider(
-      create: (BuildContext context) => PasscodeCubit(),
-      child: BlocConsumer<WalletCubit, WalletState>(
+      create: (_) => PasscodeCubit(),
+      child: BlocConsumer<PasscodeCubit, PasscodeState>(
         listener: (context, state) {
-          if (args != null && state is WalletStateLoaded) {
-            if (args.route! == R.transfer) {
-              final transferArgs = args.argNewRoute as TransferScreenArg;
-              Navigator.pushReplacementNamed(context, R.transfer,
-                  arguments: TransferScreenArg(
-                      transferArgs.tokenEntity.copyWith(
-                        balance: state.walletInfoEntity.nativeCurrency.balance,
-                      ),
-                      transferArgs.fromSpendingToWallet,
-                      transferArgs.transferType));
-            }
+          if (state is PasscodeValid) {
+            final walletCubit = context.read<WalletCubit>();
+            walletCubit.getWallet().then((_) => Navigator.pop(context, true));
+          } else {
+            passCodeController.clear();
           }
         },
-        builder: (context, walletState) {
-          return BlocConsumer<PasscodeCubit, PasscodeState>(
-            listener: (context, state) {
-              final walletCubit = context.read<WalletCubit>();
-              final cubit = context.read<PasscodeCubit>();
-              if (state is checkPassCodeValid) {
-                if (args != null) {
-                  if (args.route! == R.transfer) {
-                    walletCubit.refresh();
-                  } else {
-                    Navigator.pushReplacementNamed(context, args.route!,
-                        arguments: CreatePasscodeArguments(
-                            isShowSuccessDialog:
-                                args.isShowSuccessDialog ?? false));
-                  }
-                } else {
-                  walletCubit.getWallet();
-                  Navigator.pop(context, true);
-                }
-              } else {
-                passCodeController.text = '';
-                cubit.init();
-              }
-            },
-            builder: (context, state) {
-              final cubit = context.read<PasscodeCubit>();
+        builder: (context, state) {
+          final cubit = context.read<PasscodeCubit>();
+
+          return BlocBuilder<WalletCubit, WalletState>(
+            builder: (context, walletState) {
               return Stack(
                 children: [
                   BackgroundWidget(
@@ -110,10 +79,9 @@ class PasscodeScreen extends StatelessWidget {
                           Container(
                             alignment: Alignment.center,
                             height: 30,
-                            child: state is checkPassCodeInValid
+                            child: state is PasscodeError
                                 ? SFText(
-                                    keyText: LocaleKeys.incorrect_passcode,
-                                    style: TextStyles.red14)
+                                    keyText: state.msg, style: TextStyles.red14)
                                 : const SizedBox(),
                           ),
                           SizedBox(height: 15.h),
@@ -122,7 +90,7 @@ class PasscodeScreen extends StatelessWidget {
                             onCompleted: (String passcode) async {
                               await Future.delayed(
                                   const Duration(milliseconds: 200));
-                              cubit.checkPassCode(passCodeController.text);
+                              cubit.validate(passCodeController.text);
                             },
                           ),
                           SizedBox(height: 32.h),
@@ -137,7 +105,9 @@ class PasscodeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (walletState is WalletStateLoading) const LoadingScreen(),
+                  if (state is PasscodeLoading ||
+                      walletState is WalletStateLoading)
+                    const LoadingIcon(),
                 ],
               );
             },

@@ -6,6 +6,7 @@ import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/access_token_expire_model/access_token_expire_model.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
+import 'package:slee_fi/usecase/make_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
@@ -21,13 +22,16 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
       final model = AccessTokenExpireModel.fromJson(err.response!.data);
 
       //Token expired
-      if (model.error.message
-              ?.toLowerCase()
-              .contains('jwt'.toLowerCase()) ??
+      if (model.error.message?.toLowerCase().contains('jwt'.toLowerCase()) ??
           false) {
         final context = navKey.currentContext;
         if (context != null) {
-          await getIt<LogOutUseCase>().call(NoParams());
+          final String email = (await secureStorage.readCurrentUser())!.email;
+          await getIt<LogOutUseCase>().call(NoParams()).then((value) {
+            value.fold((l) => null, (r) async {
+              await getIt<MakeFirstOpenAppUseCase>().call(email);
+            });
+          });
           Phoenix.rebirth(context);
           return handler.reject(err);
         }
@@ -94,7 +98,12 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
 
   Future<void> refreshTokenExpire(
       DioError e, ErrorInterceptorHandler handler) async {
-    await getIt<LogOutUseCase>().call(NoParams());
+    final String email = (await secureStorage.readCurrentUser())!.email;
+    await getIt<LogOutUseCase>().call(NoParams()).then((value) {
+      value.fold((l) => null, (r) async {
+        await getIt<MakeFirstOpenAppUseCase>().call(email);
+      });
+    });
     // if (e.response?.data.toString().toLowerCase().contains('refresh') ??
     //     false) {
     // final ctx = navKey.currentContext;

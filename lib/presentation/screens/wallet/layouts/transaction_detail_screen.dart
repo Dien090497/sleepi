@@ -16,7 +16,6 @@ import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/presentation/screens/passcode/passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
@@ -54,135 +53,143 @@ class TransactionDetail extends StatelessWidget {
           addressWallet = state.walletInfoEntity.address;
           networkName = state.walletInfoEntity.networkName;
         }
-    return BackgroundWidget(
-        appBar: AppBar(
-            toolbarHeight: 80,
-            leading: const Padding(
-              padding: EdgeInsets.only(left: 16),
-              child: SFBackButton(),
-            ),
-            actions: [
-              GestureDetector(
-                onTap: () => Navigator.pushNamed(context, R.passcode,
-                    arguments: PasscodeArguments(route: R.settingWallet)),
-                child: const Padding(
-                  padding: EdgeInsets.only(right: 16.0, left: 12),
-                  child: SFIcon(Ics.icSetting),
+        return BackgroundWidget(
+            appBar: AppBar(
+                toolbarHeight: 80,
+                leading: const Padding(
+                  padding: EdgeInsets.only(left: 16),
+                  child: SFBackButton(),
                 ),
-              )
-            ],
-            automaticallyImplyLeading: false,
-            backgroundColor: AppColors.transparent,
-            leadingWidth: 48,
-            elevation: 0,
-            centerTitle: true,
-            titleSpacing: 14,
-            title: SFText(
-              keyText: args.title,
-              style: TextStyles.bold14Blue,
-              stringCase: StringCase.upperCase,
-            )),
-        child: SingleChildScrollView(
-          physics: const ClampingScrollPhysics(),
-          child: Column(
-            children: [
-              SFIcon(
-                args.img,
-                width: args.img == Ics.icAvax ? 32 : 40,
-                height: args.img == Ics.icAvax ? 32 : 40,
-              ),
-              const SizedBox(height: 16.0),
-              SFText(
-                  keyText:
-                      "${args.tokenEntity.balance.formatBalanceToken} ${args.title}",
-                  style: TextStyles.bold30White,
-                  textAlign: TextAlign.center,
-                  stringCase: StringCase.upperCase),
-              const SizedBox(height: 36.0),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 130),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 23),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: BoxButtonWidget(
-                          onTap: () => SFModalBottomSheet.show(
-                            context,
-                            0.7,
-                             ModalReceiveWallet(
-                              address: addressWallet ?? 'input the address',
-                              networkName: networkName ?? LocaleKeys.avalanche_wallet,
+                actions: [
+                  GestureDetector(
+                    onTap: () =>
+                        Navigator.pushNamed(context, R.passcode).then((value) {
+                      if (value == true) {
+                        Navigator.pushNamed(context, R.settingWallet);
+                      }
+                    }),
+                    child: const Padding(
+                      padding: EdgeInsets.only(right: 16.0, left: 12),
+                      child: SFIcon(Ics.icSetting),
+                    ),
+                  )
+                ],
+                automaticallyImplyLeading: false,
+                backgroundColor: AppColors.transparent,
+                leadingWidth: 48,
+                elevation: 0,
+                centerTitle: true,
+                titleSpacing: 14,
+                title: SFText(
+                  keyText: args.title,
+                  style: TextStyles.bold14Blue,
+                  stringCase: StringCase.upperCase,
+                )),
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Column(
+                children: [
+                  SFIcon(
+                    args.img,
+                    width: args.img == Ics.icAvax ? 32 : 40,
+                    height: args.img == Ics.icAvax ? 32 : 40,
+                  ),
+                  const SizedBox(height: 16.0),
+                  SFText(
+                      keyText:
+                          "${args.tokenEntity.balance.formatBalanceToken} ${args.title}",
+                      style: TextStyles.bold30White,
+                      textAlign: TextAlign.center,
+                      stringCase: StringCase.upperCase),
+                  const SizedBox(height: 36.0),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 130),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 23),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () => SFModalBottomSheet.show(
+                                context,
+                                0.7,
+                                ModalReceiveWallet(
+                                  address: addressWallet ?? 'input the address',
+                                  networkName: networkName ??
+                                      LocaleKeys.avalanche_wallet,
+                                ),
+                              ),
+                              text: LocaleKeys.receive,
+                              assetImage: Ics.icDownload,
                             ),
                           ),
-                          text: LocaleKeys.receive,
-                          assetImage: Ics.icDownload,
-                        ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () {
+                                Navigator.pushNamed(context, R.transfer,
+                                    arguments: TransferScreenArg(
+                                        args.tokenEntity,
+                                        false,
+                                        TransferType.token));
+                              },
+                              text: LocaleKeys.to_spending,
+                              assetImage: Ics.icRefresh,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  R.sendToExternal,
+                                  arguments: SendToExternalArguments(
+                                    tokenEntity: args.tokenEntity,
+                                    symbol: args.title,
+                                    icon: args.img,
+                                  ),
+                                );
+                              },
+                              text: LocaleKeys.to_external,
+                              assetImage: Ics.icArrowUpRight,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: BoxButtonWidget(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  R.trade,
+                                  arguments: TradeArguments(
+                                      contractAddressFrom:
+                                          args.tokenEntity.address),
+                                );
+                              },
+                              text: LocaleKeys.trade
+                                  .tr()
+                                  .reCase(StringCase.titleCase),
+                              assetImage: Ics.icTransfer,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: BoxButtonWidget(
-                          onTap: () {
-                            Navigator.pushNamed(context, R.transfer,
-                                arguments: TransferScreenArg(args.tokenEntity,
-                                    false, TransferType.token));
-                          },
-                          text: LocaleKeys.to_spending,
-                          assetImage: Ics.icRefresh,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: BoxButtonWidget(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              R.sendToExternal,
-                              arguments: SendToExternalArguments(
-                                tokenEntity: args.tokenEntity,
-                                symbol: args.title,
-                                icon: args.img,
-                              ),
-                            );
-                          },
-                          text: LocaleKeys.to_external,
-                          assetImage: Ics.icArrowUpRight,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: BoxButtonWidget(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              R.trade,
-                              arguments:
-                                  TradeArguments(contractAddressFrom: args.tokenEntity.address),
-                            );
-                          },
-                          text: LocaleKeys.trade
-                              .tr()
-                              .reCase(StringCase.titleCase),
-                          assetImage: Ics.icTransfer,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  const SizedBox(height: 32.0),
+                  TransactionDetailList(typeHistory: args.typeHistory)
+                ],
               ),
-              const SizedBox(height: 32.0),
-              TransactionDetailList(typeHistory: args.typeHistory)
-            ],
-          ),
-        ));
-  },
-);
+            ));
+      },
+    );
   }
 }

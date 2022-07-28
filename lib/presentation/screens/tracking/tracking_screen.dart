@@ -54,7 +54,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   late int time = 0;
   late double earn = 0.toDouble();
   final service = FlutterBackgroundService();
-  late DateTime timeStart =DateTime.now();
+  late DateTime timeStart = DateTime.now();
 
   @override
   void initState() {
@@ -185,34 +185,27 @@ class _TrackingScreenState extends State<TrackingScreen> {
                           const SizedBox(
                             height: 24,
                           ),
-                          Column(
-                            children: [
-                              SFText(
-                                keyText: LocaleKeys.est_amount_earned,
-                                style: TextStyles.w400lightGrey14,
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const SFIcon(
-                                    Ics.icSlft,
-                                    width: 40,
-                                  ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  SFText(
-                                    keyText:
-                                        "${earn.formatBalance2Digits} SLFT",
-                                    style: TextStyles.bold30White,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                          // Column(
+                          //   children: [
+                          // SFText(
+                          //   keyText: LocaleKeys.est_amount_earned,
+                          //   style: TextStyles.w400lightGrey14,
+                          // ),
+                          // const SizedBox(height: 12),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: [
+                          //     const SFIcon(Ics.icSlft, width: 40),
+                          //     const SizedBox(width: 8),
+                          //     SFText(
+                          //       keyText:
+                          //           "${earn.formatBalance2Digits} SLFT",
+                          //       style: TextStyles.bold30White,
+                          //     ),
+                          //   ],
+                          // )
+                          //   ],
+                          // ),
                           const SizedBox(height: 24),
                           SFLabelValue(
                             label: LocaleKeys.alarm,
@@ -226,9 +219,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             width: double.infinity,
                             color: AppColors.blue,
                             textStyle: TextStyles.w600WhiteSize16,
-                            onPressed: () {
-                              service.invoke(Const.stopService);
-                              cubit.fetchData(time,timeStart);
+                            onPressed: () async {
+                              if ((await service.isRunning())) {
+                                service.invoke(Const.stopService);
+                              }
+                              cubit.fetchData(time, timeStart);
                             },
                           ),
                           const SizedBox(height: 26),

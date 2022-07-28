@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -12,7 +13,6 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
@@ -42,121 +42,111 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: FocusDetector(
-        onFocusGained: () async {
-          BlocProvider.of<UserBloc>(context).add(RefreshBalanceToken());
+      child: SmartRefresher(
+        controller: refreshController,
+        enablePullDown: true,
+        onRefresh: () {
+          context.read<UserBloc>().add(const RefreshBalanceToken());
+          refreshController.refreshCompleted();
         },
-        child: SmartRefresher(
-            controller: refreshController,
-            enablePullDown: true,
-            onRefresh: () async {
-              context.read<UserBloc>().add(RefreshBalanceToken());
-              refreshController.refreshCompleted();
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 19.0),
-                  const PopupInfoSpending(),
-                  const SizedBox(height: 12.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: BlocBuilder<UserBloc, UserState>(
-                      builder: (context, state) {
-                        final List<TokenEntity> tokenList;
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 19.0),
+              const PopupInfoSpending(),
+              const SizedBox(height: 12.0),
+              FocusDetector(
+                onFocusGained: () {
+                  context.read<UserBloc>().add(const RefreshBalanceToken());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: BlocBuilder<UserBloc, UserState>(
+                    builder: (context, state) {
+                      final List<TokenEntity> tokenList;
 
-                        if (state is UserLoaded) {
-                          tokenList = state.listTokens;
-                        } else {
-                          tokenList = [];
-                        }
-                        return Column(
-                          children: tokenList
-                              .map((e) => SFCard(
-                                    onTap: () => openTransfer(e),
-                                    margin: const EdgeInsets.only(top: 8),
-                                    padding: const EdgeInsets.all(14),
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                            padding: e.symbol.contains('avax')
-                                                ? const EdgeInsets.only(
-                                                    left: 5, top: 7, bottom: 7)
-                                                : EdgeInsets.zero,
-                                            child: SFIcon(
-                                              e.icon,
-                                              width: e.symbol.contains('avax')
-                                                  ? 30
-                                                  : 40,
-                                              height: e.symbol.contains('avax')
-                                                  ? 30
-                                                  : 40,
-                                            )),
-                                        const SizedBox(width: 12),
-                                        Text(
-                                          e.symbol.toUpperCase(),
+                      if (state is UserLoaded) {
+                        tokenList = state.listTokens;
+                      } else {
+                        tokenList = [];
+                      }
+                      return Column(
+                        children: tokenList
+                            .map((e) => SFCard(
+                                  onTap: () => openTransfer(
+                                      e, context.read<WalletCubit>().state),
+                                  margin: const EdgeInsets.only(top: 8),
+                                  padding: const EdgeInsets.all(14),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                          padding: e.symbol.contains('avax')
+                                              ? const EdgeInsets.only(
+                                                  left: 5, top: 7, bottom: 7)
+                                              : EdgeInsets.zero,
+                                          child: SFIcon(
+                                            e.icon,
+                                            width: e.symbol.contains('avax')
+                                                ? 30
+                                                : 40,
+                                            height: e.symbol.contains('avax')
+                                                ? 30
+                                                : 40,
+                                          )),
+                                      const SizedBox(width: 12),
+                                      Text(
+                                        e.symbol.toUpperCase(),
+                                        style: TextStyles.lightWhite16,
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Text(
+                                          textAlign: TextAlign.right,
+                                          e.balance.formatBalanceToken,
+                                          maxLines: 2,
                                           style: TextStyles.lightWhite16,
                                         ),
-                                        const SizedBox(width: 12),
-                                        Expanded(
-                                          child: Text(
-                                            textAlign: TextAlign.right,
-                                            e.balance % 1 == 0
-                                                ? '${e.balance.toInt()}'
-                                                : e.balance.toStringAsFixed(2),
-                                            maxLines: 2,
-                                            style: TextStyles.lightWhite16,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ))
-                              .toList(),
-                        );
-                      },
-                    ),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                            .toList(),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 18.0),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: SizedBox(
-                        height: 48,
-                        child: SFButtonOutLined(
-                          title: LocaleKeys.stake,
-                          textStyle: TextStyles.bold16Blue,
-                          borderColor: AppColors.blue,
-                          onPressed: () {
-                            Navigator.pushNamed(context, R.staking);
-                          },
-                        )),
-                  ),
-                  const SizedBox(height: 25),
-                  const SpendingDetailList(),
-                ],
+                ),
               ),
-            )),
+              const SizedBox(height: 18.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: SizedBox(
+                    height: 48,
+                    child: SFButtonOutLined(
+                      title: LocaleKeys.stake,
+                      textStyle: TextStyles.bold16Blue,
+                      borderColor: AppColors.blue,
+                      onPressed: () {
+                        Navigator.pushNamed(context, R.staking);
+                      },
+                    )),
+              ),
+              const SizedBox(height: 25),
+              const SpendingDetailList(),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  void openTransfer(TokenEntity e) {
-    final walletCubit = context.read<WalletCubit>();
-    final walletState = walletCubit.state;
+  void openTransfer(TokenEntity e, WalletState walletState) {
     if (walletState is WalletNotExisted) {
-      _showCreateOrImportWallet(context).then((value) {
-        if (value is PopWithResults) {
-          walletCubit.importWallet(value.results);
-        }
-      });
+      _showCreateOrImportWallet(context);
     } else if (walletState is WalletNotOpen) {
       Navigator.pushNamed(context, R.passcode).then((value) {
         if (value == true) {
           Navigator.pushNamed(context, R.transfer,
-              arguments: TransferScreenArg(
-                e,
-                true,
-                TransferType.token,
-              ));
+              arguments: TransferScreenArg(e, true, TransferType.token));
         }
       });
     } else if (walletState is WalletStateLoaded) {
@@ -169,7 +159,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
     }
   }
 
-  _showCreateOrImportWallet(BuildContext context) async {
+  Future<bool?> _showCreateOrImportWallet(BuildContext context) async {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,

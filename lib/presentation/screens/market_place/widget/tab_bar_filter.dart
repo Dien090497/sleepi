@@ -48,6 +48,7 @@ class TabBarFilter extends StatelessWidget {
           ),
           Expanded(
               child: SFSubTabBar(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             texts: tabTexts,
             isScrollable: false,
           )),

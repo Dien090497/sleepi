@@ -14,50 +14,29 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
 import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/pop_with_result.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_state.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 
-class ImportWalletScreen extends StatefulWidget {
+class ImportWalletScreen extends StatelessWidget {
   const ImportWalletScreen({Key? key}) : super(key: key);
 
   @override
-  State<ImportWalletScreen> createState() => _ImportWalletScreenState();
-}
-
-class _ImportWalletScreenState extends State<ImportWalletScreen> {
-  final TextEditingController controllerMnemonic = TextEditingController();
-  final TextEditingController controllerOTP = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
+    final TextEditingController controllerMnemonic = TextEditingController();
+    final TextEditingController controllerOTP = TextEditingController();
+
     return BlocProvider(
       create: (context) => ImportWalletCubit()..init(),
       child: BlocConsumer<ImportWalletCubit, ImportWalletState>(
         listener: (context, state) {
           if (state is ImportWalletVerifyOtpSuccess) {
-            final cubit = context.read<ImportWalletCubit>();
-            Navigator.pushNamed(context, R.createPasscode).then((value) {
+            Navigator.pushNamed(context, R.createPasscode,
+                    arguments: state.mnemonic)
+                .then((value) {
               if (value == true) {
-                cubit.importWallet(mnemonic: controllerMnemonic.text);
+                Navigator.pop(context, true);
               }
             });
-          }
-          if (state is ImportWalletDone) {
-            context.read<UserBloc>().add(UpdateUserOrListToken(
-                userInfoEntity: state.userInfoEntity!,
-                listTokens: state.listTokens));
-            Future.delayed(
-              const Duration(milliseconds: 200),
-              () => Navigator.pop(
-                  context,
-                  PopWithResults(
-                    fromPage: R.importWallet,
-                    toPage: R.wallet,
-                    results: state.entity,
-                  )),
-            );
           }
         },
         builder: (context, state) {

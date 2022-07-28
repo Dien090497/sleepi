@@ -22,7 +22,7 @@ mixin _$ImportWalletState {
     required TResult Function(WalletInfoEntity entity,
             UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
         success,
-    required TResult Function() verifyOtpSuccess,
+    required TResult Function(String mnemonic) verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) =>
@@ -33,7 +33,7 @@ mixin _$ImportWalletState {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) =>
@@ -44,7 +44,7 @@ mixin _$ImportWalletState {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
@@ -169,7 +169,7 @@ class _$ImportWalletInitial implements ImportWalletInitial {
     required TResult Function(WalletInfoEntity entity,
             UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
         success,
-    required TResult Function() verifyOtpSuccess,
+    required TResult Function(String mnemonic) verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) {
@@ -183,7 +183,7 @@ class _$ImportWalletInitial implements ImportWalletInitial {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) {
@@ -197,7 +197,7 @@ class _$ImportWalletInitial implements ImportWalletInitial {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
@@ -380,7 +380,7 @@ class _$ImportWalletDone implements ImportWalletDone {
     required TResult Function(WalletInfoEntity entity,
             UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
         success,
-    required TResult Function() verifyOtpSuccess,
+    required TResult Function(String mnemonic) verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) {
@@ -394,7 +394,7 @@ class _$ImportWalletDone implements ImportWalletDone {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) {
@@ -408,7 +408,7 @@ class _$ImportWalletDone implements ImportWalletDone {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
@@ -481,6 +481,7 @@ abstract class _$$ImportWalletVerifyOtpSuccessCopyWith<$Res> {
           _$ImportWalletVerifyOtpSuccess value,
           $Res Function(_$ImportWalletVerifyOtpSuccess) then) =
       __$$ImportWalletVerifyOtpSuccessCopyWithImpl<$Res>;
+  $Res call({String mnemonic});
 }
 
 /// @nodoc
@@ -495,27 +496,50 @@ class __$$ImportWalletVerifyOtpSuccessCopyWithImpl<$Res>
   @override
   _$ImportWalletVerifyOtpSuccess get _value =>
       super._value as _$ImportWalletVerifyOtpSuccess;
+
+  @override
+  $Res call({
+    Object? mnemonic = freezed,
+  }) {
+    return _then(_$ImportWalletVerifyOtpSuccess(
+      mnemonic == freezed
+          ? _value.mnemonic
+          : mnemonic // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
-  const _$ImportWalletVerifyOtpSuccess();
+  const _$ImportWalletVerifyOtpSuccess(this.mnemonic);
+
+  @override
+  final String mnemonic;
 
   @override
   String toString() {
-    return 'ImportWalletState.verifyOtpSuccess()';
+    return 'ImportWalletState.verifyOtpSuccess(mnemonic: $mnemonic)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ImportWalletVerifyOtpSuccess);
+            other is _$ImportWalletVerifyOtpSuccess &&
+            const DeepCollectionEquality().equals(other.mnemonic, mnemonic));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(mnemonic));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ImportWalletVerifyOtpSuccessCopyWith<_$ImportWalletVerifyOtpSuccess>
+      get copyWith => __$$ImportWalletVerifyOtpSuccessCopyWithImpl<
+          _$ImportWalletVerifyOtpSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -524,11 +548,11 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
     required TResult Function(WalletInfoEntity entity,
             UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
         success,
-    required TResult Function() verifyOtpSuccess,
+    required TResult Function(String mnemonic) verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) {
-    return verifyOtpSuccess();
+    return verifyOtpSuccess(mnemonic);
   }
 
   @override
@@ -538,11 +562,11 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) {
-    return verifyOtpSuccess?.call();
+    return verifyOtpSuccess?.call(mnemonic);
   }
 
   @override
@@ -552,13 +576,13 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
   }) {
     if (verifyOtpSuccess != null) {
-      return verifyOtpSuccess();
+      return verifyOtpSuccess(mnemonic);
     }
     return orElse();
   }
@@ -606,7 +630,13 @@ class _$ImportWalletVerifyOtpSuccess implements ImportWalletVerifyOtpSuccess {
 }
 
 abstract class ImportWalletVerifyOtpSuccess implements ImportWalletState {
-  const factory ImportWalletVerifyOtpSuccess() = _$ImportWalletVerifyOtpSuccess;
+  const factory ImportWalletVerifyOtpSuccess(final String mnemonic) =
+      _$ImportWalletVerifyOtpSuccess;
+
+  String get mnemonic;
+  @JsonKey(ignore: true)
+  _$$ImportWalletVerifyOtpSuccessCopyWith<_$ImportWalletVerifyOtpSuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -679,7 +709,7 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
     required TResult Function(WalletInfoEntity entity,
             UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
         success,
-    required TResult Function() verifyOtpSuccess,
+    required TResult Function(String mnemonic) verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) {
@@ -693,7 +723,7 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) {
@@ -707,7 +737,7 @@ class _$ImportWalletErrorOtp implements ImportWalletErrorOtp {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
@@ -841,7 +871,7 @@ class _$ImportWalletErrorMnemonic implements ImportWalletErrorMnemonic {
     required TResult Function(WalletInfoEntity entity,
             UserInfoEntity? userInfoEntity, List<TokenSpending> listTokens)
         success,
-    required TResult Function() verifyOtpSuccess,
+    required TResult Function(String mnemonic) verifyOtpSuccess,
     required TResult Function(String msg) errorOtp,
     required TResult Function(String msg) errorMnemonic,
   }) {
@@ -855,7 +885,7 @@ class _$ImportWalletErrorMnemonic implements ImportWalletErrorMnemonic {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
   }) {
@@ -869,7 +899,7 @@ class _$ImportWalletErrorMnemonic implements ImportWalletErrorMnemonic {
     TResult Function(WalletInfoEntity entity, UserInfoEntity? userInfoEntity,
             List<TokenSpending> listTokens)?
         success,
-    TResult Function()? verifyOtpSuccess,
+    TResult Function(String mnemonic)? verifyOtpSuccess,
     TResult Function(String msg)? errorOtp,
     TResult Function(String msg)? errorMnemonic,
     required TResult orElse(),
