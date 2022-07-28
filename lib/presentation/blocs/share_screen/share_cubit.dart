@@ -29,11 +29,11 @@ class ShareCubit extends Cubit<ShareState> {
     const methodChannel = MethodChannel('com.sotatek.sleepfi.sharing');
     controller.captureFromWidget(widget).then((value) async {
       final Directory temp = await getTemporaryDirectory();
-      final File imageFile = await File('${temp.path}/sleefi.jpg').create(recursive: true);
+      final time = DateTime.now().millisecond.toString();
+      final File imageFile = await File('${temp.path}/$time.png').create(recursive: true);
       final res = await imageFile.writeAsBytes(value);
-      final result = await methodChannel.invokeMethod("shareInstagram", res.path);
+      final result = await methodChannel.invokeMethod("shareInstagram", res.uri.path);
       emit(const ShareState.loaded());
     });
   }
-
 }

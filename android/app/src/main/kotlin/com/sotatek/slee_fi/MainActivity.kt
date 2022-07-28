@@ -5,11 +5,9 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import android.content.ActivityNotFoundException
+import android.content.ContentResolver
 import android.content.Intent
 import java.io.File
-import com.facebook.share.model.SharePhotoContent
-import com.facebook.share.model.SharePhoto
-import android.graphics.BitmapFactory
 import android.widget.Toast
 import androidx.core.content.FileProvider
 
@@ -20,48 +18,36 @@ class MainActivity : FlutterActivity() {
         super.configureFlutterEngine(flutterEngine)
         val messenger = flutterEngine.dartExecutor.binaryMessenger
         MethodChannel(messenger, "com.sotatek.sleepfi.sharing")
-            .setMethodCallHandler { call, result ->
-                methodResult = result
-                val path = call.arguments as? String
-                when (call.method) {
-                    "shareFacebook" -> {
-                        path?.let {
-                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                            this.shareImageWithFacebook(it)
+                .setMethodCallHandler { call, result ->
+                    methodResult = result
+                    val path = call.arguments as? String
+                    when (call.method) {
+                        "shareFacebook" -> {
+                            path?.let {
+                                this.shareImageWithFacebook(it)
+                            }
                         }
-                    }
-                    "shareTwitter" -> {
-                        path?.let {
-                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                            this.shareImageWithTwitter(it)
+                        "shareTwitter" -> {
+                            path?.let {
+                                this.shareImageWithTwitter(it)
+                            }
                         }
-                    }
-                    "shareInstagram" -> {
-                        path?.let {
-                            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-                            this.shareImageWithInstagram(it)
+                        "shareInstagram" -> {
+                            path?.let {
+                                this.shareImageWithInstagram(it)
+                            }
                         }
+                        else -> result.success("Error")
                     }
-                    else -> result.success("Error")
                 }
-            }
 
     }
 
     private fun shareImageWithFacebook(imagePath: String) {
-        val imgFile = File(imagePath)
-
-        if (imgFile.exists()) {
-            val myBitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-            val photo: SharePhoto = SharePhoto.Builder()
-                .setBitmap(myBitmap)
-                .build()
-
-            SharePhotoContent
-                .Builder()
-                .addPhoto(photo)
-                .build()
-        } else {
+        try {
+            val intent = getShareIntent(TypeIntent.Facebook, imagePath)
+            startActivity(Intent.createChooser(intent, "Share.."))
+        } catch (e: ActivityNotFoundException) {
             this.methodResult?.apply {
                 this.success("Error")
             }
@@ -70,10 +56,7 @@ class MainActivity : FlutterActivity() {
 
     private fun shareImageWithTwitter(imagePath: String) {
         try {
-            val file = File(imagePath)
-            val uri = getUriWithFile(file)
-            print(" ========> ${uri.path}")
-            val intent = getShareIntent(TypeIntent.Twitter, uri)
+            val intent = getShareIntent(TypeIntent.Twitter, imagePath)
             startActivity(Intent.createChooser(intent, "Share.."))
         } catch (e: ActivityNotFoundException) {
             this.methodResult?.apply {
@@ -85,15 +68,13 @@ class MainActivity : FlutterActivity() {
     private fun getUriWithFile(file: File): Uri {
         return FileProvider.getUriForFile(
                 this,
-                BuildConfig.APPLICATION_ID + "." + localClassName + ".provider",
+                BuildConfig.APPLICATION_ID + ".provider",
                 file)
     }
 
     private fun shareImageWithInstagram(imagePath: String) {
         try {
-            val file = File(imagePath)
-            val uri = getUriWithFile(file)
-            val intent = getShareIntent(TypeIntent.Instagram, uri)
+            val intent = getShareIntent(TypeIntent.Instagram, imagePath)
             startActivity(Intent.createChooser(intent, "Share.."))
         } catch (e: ActivityNotFoundException) {
             print(e.message)
@@ -103,12 +84,16 @@ class MainActivity : FlutterActivity() {
         }
     }
 
-    private fun getShareIntent(type: TypeIntent, uriImage: Uri): Intent {
+    private fun getShareIntent(type: TypeIntent, path: String): Intent {
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        shareIntent.type = "image/*"
-        shareIntent.putExtra(Intent.EXTRA_STREAM, uriImage)
+        val uri = this.getUriWithFile(File(path))
+        shareIntent.type = "image/png"
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         when (type) {
+            TypeIntent.Facebook -> {
+                shareIntent.setPackage("com.facebook.katana") //Facebook App package
+            }
             TypeIntent.Twitter -> {
                 shareIntent.setPackage("com.twitter.android")
             }
@@ -120,7 +105,7 @@ class MainActivity : FlutterActivity() {
     }
 
     enum class TypeIntent {
-        Twitter, Instagram
+        Twitter, Instagram, Facebook
     }
 
 }
