@@ -32,8 +32,7 @@ class ShareCubit extends Cubit<ShareState> {
       final File imageFile = await File('${temp.path}/sleefi.jpg').create(recursive: true);
       final res = await imageFile.writeAsBytes(value);
       final result = await methodChannel.invokeMethod("shareInstagram", res.path);
-        SocialShare.shareOptions('', imagePath: res.path);
-        emit(const ShareState.loaded());
+      emit(const ShareState.loaded());
     });
   }
 
