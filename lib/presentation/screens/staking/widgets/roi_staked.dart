@@ -61,9 +61,9 @@ class SLFTStakedState extends State<SLFTStaked> {
   String calculatorPrice(String value){
     String price = '';
     if(swapText){
-      price = "${double.parse(value)/widget.priceUsd}";
-    }else{
       price = "${double.parse(value)*widget.priceUsd}";
+    }else{
+      price = "${double.parse(value)/widget.priceUsd}";
     }
     return price;
   }
