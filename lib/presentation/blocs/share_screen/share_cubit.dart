@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
@@ -25,10 +26,12 @@ class ShareCubit extends Cubit<ShareState> {
 
   void shareSocial({required Widget widget, required ScreenshotController controller}) async {
     emit(const ShareState.loading());
+    const methodChannel = MethodChannel('com.sotatek.sleepfi.sharing');
     controller.captureFromWidget(widget).then((value) async {
       final Directory temp = await getTemporaryDirectory();
       final File imageFile = await File('${temp.path}/sleefi.jpg').create(recursive: true);
       final res = await imageFile.writeAsBytes(value);
+      final result = await methodChannel.invokeMethod("shareInstagram", res.path);
         SocialShare.shareOptions('', imagePath: res.path);
         emit(const ShareState.loaded());
     });
