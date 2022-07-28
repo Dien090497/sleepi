@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
+import 'package:slee_fi/datasources/remote/auth_datasource/queue_interceptor.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 import 'package:slee_fi/models/minting/info_minting_model.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
@@ -19,10 +20,12 @@ abstract class NftApi {
   factory NftApi(
     Dio dio,
     AuthInterceptor authInterceptor,
+    QueueInterceptor queueInterceptor,
     @Named('baseUrl') String baseUrl,
   ) {
     dio.interceptors.addAll([
       authInterceptor,
+      queueInterceptor,
     ]);
     return _NftApi(dio, baseUrl: '$baseUrl/nft');
   }
