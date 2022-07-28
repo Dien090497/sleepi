@@ -337,36 +337,41 @@ class _TradeScreenState extends State<TradeScreen> {
                                                       borderColor:
                                                           AppColors.blue,
                                                       onPressed: () {
-                                                        valueController
-                                                            .text = (indexFrom ==
-                                                                    0
-                                                                ? balance - 0.01
-                                                                : balance)
-                                                            .formatBalanceToken;
-                                                        Future.delayed(
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    100), () {
-                                                          final result =
-                                                              valueController
-                                                                  .text
-                                                                  .replaceAll(
-                                                                      ',', '.');
-                                                          cubit.getAmountOutMin(
-                                                              Const.tokens[
-                                                                      indexFrom]
-                                                                      [
-                                                                      'address']
-                                                                  .toString(),
-                                                              Const.tokens[
-                                                                      indexTo][
-                                                                      'address']
-                                                                  .toString(),
-                                                              double.parse(
-                                                                  result));
-                                                        });
-                                                        error = '';
-                                                        setState(() {});
+                                                        if (balance > 0) {
+                                                          valueController
+                                                              .text = (indexFrom ==
+                                                                      0
+                                                                  ? balance -
+                                                                      0.01
+                                                                  : balance)
+                                                              .formatBalanceToken;
+                                                          Future.delayed(
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      100), () {
+                                                            final result =
+                                                                valueController
+                                                                    .text
+                                                                    .replaceAll(
+                                                                        ',',
+                                                                        '.');
+                                                            cubit.getAmountOutMin(
+                                                                Const.tokens[
+                                                                        indexFrom]
+                                                                        [
+                                                                        'address']
+                                                                    .toString(),
+                                                                Const.tokens[
+                                                                        indexTo]
+                                                                        [
+                                                                        'address']
+                                                                    .toString(),
+                                                                double.parse(
+                                                                    result));
+                                                          });
+                                                          error = '';
+                                                          setState(() {});
+                                                        }
                                                       }),
                                                 ),
                                               ),

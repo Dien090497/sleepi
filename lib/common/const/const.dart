@@ -142,8 +142,8 @@ class Const {
 
   static const soundAlarm = [
     'assets/sounds/apex.mp3',
-    'assets/sounds/crystals.mp3',
     'assets/sounds/iphone_alarm.mp3',
+    'assets/sounds/crystals.mp3',
     'assets/sounds/reflection.mp3',
     'assets/sounds/school_alarm.mp3',
   ];

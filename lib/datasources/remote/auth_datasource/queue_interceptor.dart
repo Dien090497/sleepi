@@ -26,12 +26,7 @@ class QueueInterceptor extends QueuedInterceptor {
           false) {
         final context = navKey.currentContext;
         if (context != null) {
-          final String email = (await _secureStorage.readCurrentUser())!.email;
-          await getIt<LogOutUseCase>().call(NoParams()).then((value) {
-            value.fold((l) => null, (r) async {
-              await getIt<MakeFirstOpenAppUseCase>().call(email);
-            });
-          });
+          await getIt<LogOutUseCase>().call(NoParams());
           Phoenix.rebirth(context);
           return handler.reject(err);
         }

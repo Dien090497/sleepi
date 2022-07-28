@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:decimal/decimal.dart';
-import 'package:intl/intl.dart';
 import 'package:money_formatter/money_formatter.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -72,14 +71,11 @@ extension NumX on num {
       final balance = toDouble();
 
       int index = balance.toString().indexOf('.');
-      print('index is   $this    $index');
       if (balance.toString().length - index > 7) {
         index += 7;
       } else {
         index = balance.toString().length;
       }
-      print(
-          'length is   ${balance.toString().length - balance.toString().indexOf('.') + 1}');
       MoneyFormatter fmf = MoneyFormatter(
           amount: balance,
           settings: MoneyFormatterSettings(

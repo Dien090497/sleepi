@@ -162,8 +162,7 @@ class _TransferListState extends State<TransferList> {
                         cubit.removeError();
                       },
                       onPressed: () {
-                        valueController.text =
-                            widget.tokenEntity.balance.formatBalanceToken;
+                        valueController.text = '${widget.tokenEntity.balance}';
                       },
                     ),
                     if (state is TransferLoaded && state.errorMsg != null)

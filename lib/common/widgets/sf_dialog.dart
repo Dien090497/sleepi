@@ -100,8 +100,13 @@ Future<T?> showMessageDialog<T>(BuildContext context, String message,
 }
 
 Future<T?> showWarningDialog<T>(
-    BuildContext context, String message, VoidCallback onTap,
-    {EdgeInsets? padding, TextStyle? style}) async {
+  BuildContext context,
+  String message,
+  VoidCallback onTap, {
+  EdgeInsets? padding,
+  TextStyle? style,
+  String? buttonText,
+}) async {
   return showDialog(
       context: context,
       barrierColor: AppColors.backgroundDialog,
@@ -121,17 +126,14 @@ Future<T?> showWarningDialog<T>(
             const SizedBox(
               height: 24,
             ),
-            SFText(
-                keyText: message.tr(),
+            Text(message.tr(),
                 textAlign: TextAlign.center,
                 style: style ?? TextStyles.bold18White),
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24),
             SFButton(
-              width: 180,
+              // width: 180,
               height: 48,
-              text: LocaleKeys.continue_,
+              text: buttonText ?? LocaleKeys.continue_,
               onPressed: onTap,
               textStyle: TextStyles.white16,
               gradient: AppColors.gradientBlueButton,
@@ -317,7 +319,6 @@ Future<T?> showLoadingDialog<T>(
   );
 }
 
-
 Future<T?> showComingSoonDialog<T>(BuildContext context) async {
   return showDialog(
       context: context,
@@ -336,8 +337,7 @@ Future<T?> showComingSoonDialog<T>(BuildContext context) async {
               ),
             ),
             SFText(
-                keyText: LocaleKeys.coming_soon,
-                style: TextStyles.bold18White),
+                keyText: LocaleKeys.coming_soon, style: TextStyles.bold18White),
             const SizedBox(height: 44),
             // const Center(child: SFIcon(Ics.commingSoon)),
             // const SizedBox(height: 50),

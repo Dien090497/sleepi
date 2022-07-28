@@ -20,7 +20,9 @@ mixin _$TrackingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TrackingResultModel resultModel) posted,
+    required TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)
+        posted,
     required TResult Function(String msg) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,9 @@ mixin _$TrackingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +40,9 @@ mixin _$TrackingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) =>
@@ -136,7 +142,9 @@ class _$TrackingStateInitial
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TrackingResultModel resultModel) posted,
+    required TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)
+        posted,
     required TResult Function(String msg) error,
   }) {
     return initial();
@@ -147,7 +155,9 @@ class _$TrackingStateInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
   }) {
     return initial?.call();
@@ -158,7 +168,9 @@ class _$TrackingStateInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -261,7 +273,9 @@ class _$TrackingStateLoading
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TrackingResultModel resultModel) posted,
+    required TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)
+        posted,
     required TResult Function(String msg) error,
   }) {
     return loading();
@@ -272,7 +286,9 @@ class _$TrackingStateLoading
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
   }) {
     return loading?.call();
@@ -283,7 +299,9 @@ class _$TrackingStateLoading
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
@@ -340,7 +358,10 @@ abstract class _$$TrackingStatePostedCopyWith<$Res> {
   factory _$$TrackingStatePostedCopyWith(_$TrackingStatePosted value,
           $Res Function(_$TrackingStatePosted) then) =
       __$$TrackingStatePostedCopyWithImpl<$Res>;
-  $Res call({TrackingResultModel resultModel});
+  $Res call(
+      {TrackingResultModel resultModel,
+      String sfltPrice,
+      List<DrawChartEntity> dataChart});
 }
 
 /// @nodoc
@@ -357,12 +378,22 @@ class __$$TrackingStatePostedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? resultModel = freezed,
+    Object? sfltPrice = freezed,
+    Object? dataChart = freezed,
   }) {
     return _then(_$TrackingStatePosted(
       resultModel == freezed
           ? _value.resultModel
           : resultModel // ignore: cast_nullable_to_non_nullable
               as TrackingResultModel,
+      sfltPrice == freezed
+          ? _value.sfltPrice
+          : sfltPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      dataChart == freezed
+          ? _value._dataChart
+          : dataChart // ignore: cast_nullable_to_non_nullable
+              as List<DrawChartEntity>,
     ));
   }
 }
@@ -372,14 +403,24 @@ class __$$TrackingStatePostedCopyWithImpl<$Res>
 class _$TrackingStatePosted
     with DiagnosticableTreeMixin
     implements TrackingStatePosted {
-  const _$TrackingStatePosted(this.resultModel);
+  const _$TrackingStatePosted(
+      this.resultModel, this.sfltPrice, final List<DrawChartEntity> dataChart)
+      : _dataChart = dataChart;
 
   @override
   final TrackingResultModel resultModel;
+  @override
+  final String sfltPrice;
+  final List<DrawChartEntity> _dataChart;
+  @override
+  List<DrawChartEntity> get dataChart {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dataChart);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TrackingState.posted(resultModel: $resultModel)';
+    return 'TrackingState.posted(resultModel: $resultModel, sfltPrice: $sfltPrice, dataChart: $dataChart)';
   }
 
   @override
@@ -387,7 +428,9 @@ class _$TrackingStatePosted
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TrackingState.posted'))
-      ..add(DiagnosticsProperty('resultModel', resultModel));
+      ..add(DiagnosticsProperty('resultModel', resultModel))
+      ..add(DiagnosticsProperty('sfltPrice', sfltPrice))
+      ..add(DiagnosticsProperty('dataChart', dataChart));
   }
 
   @override
@@ -396,12 +439,18 @@ class _$TrackingStatePosted
         (other.runtimeType == runtimeType &&
             other is _$TrackingStatePosted &&
             const DeepCollectionEquality()
-                .equals(other.resultModel, resultModel));
+                .equals(other.resultModel, resultModel) &&
+            const DeepCollectionEquality().equals(other.sfltPrice, sfltPrice) &&
+            const DeepCollectionEquality()
+                .equals(other._dataChart, _dataChart));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(resultModel));
+      runtimeType,
+      const DeepCollectionEquality().hash(resultModel),
+      const DeepCollectionEquality().hash(sfltPrice),
+      const DeepCollectionEquality().hash(_dataChart));
 
   @JsonKey(ignore: true)
   @override
@@ -414,10 +463,12 @@ class _$TrackingStatePosted
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TrackingResultModel resultModel) posted,
+    required TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)
+        posted,
     required TResult Function(String msg) error,
   }) {
-    return posted(resultModel);
+    return posted(resultModel, sfltPrice, dataChart);
   }
 
   @override
@@ -425,10 +476,12 @@ class _$TrackingStatePosted
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
   }) {
-    return posted?.call(resultModel);
+    return posted?.call(resultModel, sfltPrice, dataChart);
   }
 
   @override
@@ -436,12 +489,14 @@ class _$TrackingStatePosted
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {
     if (posted != null) {
-      return posted(resultModel);
+      return posted(resultModel, sfltPrice, dataChart);
     }
     return orElse();
   }
@@ -485,10 +540,14 @@ class _$TrackingStatePosted
 }
 
 abstract class TrackingStatePosted implements TrackingState {
-  const factory TrackingStatePosted(final TrackingResultModel resultModel) =
-      _$TrackingStatePosted;
+  const factory TrackingStatePosted(
+      final TrackingResultModel resultModel,
+      final String sfltPrice,
+      final List<DrawChartEntity> dataChart) = _$TrackingStatePosted;
 
   TrackingResultModel get resultModel;
+  String get sfltPrice;
+  List<DrawChartEntity> get dataChart;
   @JsonKey(ignore: true)
   _$$TrackingStatePostedCopyWith<_$TrackingStatePosted> get copyWith =>
       throw _privateConstructorUsedError;
@@ -571,7 +630,9 @@ class _$TrackingStateFail
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(TrackingResultModel resultModel) posted,
+    required TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)
+        posted,
     required TResult Function(String msg) error,
   }) {
     return error(msg);
@@ -582,7 +643,9 @@ class _$TrackingStateFail
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
   }) {
     return error?.call(msg);
@@ -593,7 +656,9 @@ class _$TrackingStateFail
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(TrackingResultModel resultModel)? posted,
+    TResult Function(TrackingResultModel resultModel, String sfltPrice,
+            List<DrawChartEntity> dataChart)?
+        posted,
     TResult Function(String msg)? error,
     required TResult orElse(),
   }) {

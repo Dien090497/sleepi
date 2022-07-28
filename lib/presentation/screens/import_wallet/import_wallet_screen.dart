@@ -16,6 +16,7 @@ import 'package:slee_fi/common/widgets/textfield_verification.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/import_wallet/import_wallet_state.dart';
+import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 
 class ImportWalletScreen extends StatelessWidget {
   const ImportWalletScreen({Key? key}) : super(key: key);
@@ -31,7 +32,8 @@ class ImportWalletScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is ImportWalletVerifyOtpSuccess) {
             Navigator.pushNamed(context, R.createPasscode,
-                    arguments: state.mnemonic)
+                    arguments: CreatePasscodeArguments(
+                        mnemonic: state.mnemonic, showSeedPhrasePopUp: false))
                 .then((value) {
               if (value == true) {
                 Navigator.pop(context, true);

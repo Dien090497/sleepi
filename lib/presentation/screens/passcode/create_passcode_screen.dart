@@ -11,12 +11,12 @@ import 'package:slee_fi/presentation/screens/passcode/widgets/passcode_numpad.da
 import 'package:slee_fi/presentation/screens/passcode/widgets/pin_code_widget.dart';
 
 class CreatePasscodeArguments {
-  final String? route;
-  final bool? isShowSuccessDialog;
+  final String? mnemonic;
+  final bool showSeedPhrasePopUp;
 
   CreatePasscodeArguments({
-    this.route,
-    this.isShowSuccessDialog,
+    this.mnemonic,
+    this.showSeedPhrasePopUp = false,
   });
 }
 
@@ -25,7 +25,8 @@ class CreatePasscodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mnemonic = ModalRoute.of(context)?.settings.arguments as String?;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as CreatePasscodeArguments?;
     final TextEditingController passCodeController = TextEditingController();
 
     return BackgroundWidget(
@@ -49,8 +50,8 @@ class CreatePasscodeScreen extends StatelessWidget {
               passcodeController: passCodeController,
               onCompleted: (String passcode) {
                 Navigator.pushNamed(context, R.confirmPasscode,
-                    arguments:
-                        ConfirmCreatePasscodeArguments(passcode, mnemonic));
+                    arguments: ConfirmCreatePasscodeArguments(passcode,
+                        args?.mnemonic, args?.showSeedPhrasePopUp ?? false));
                 passCodeController.clear();
               },
             ),
