@@ -165,7 +165,7 @@ Future<T?> showSignUpSuccess<T>(BuildContext context, String? message) async {
                 style: TextStyles.bold18White),
             const SizedBox(height: 12),
             SFText(
-                keyText: message ?? LocaleKeys.your_account_has_been_create,
+                keyText: message ?? LocaleKeys.your_account_has_been_created,
                 maxLines: 1,
                 style: TextStyles.lightGrey14),
             const SizedBox(height: 44),
