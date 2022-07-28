@@ -36,7 +36,8 @@ class _ShareScreenState extends State<ShareScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final shareArgs = ModalRoute.of(context)?.settings.arguments as PreResultParams;
+    final shareArgs =
+        ModalRoute.of(context)?.settings.arguments as PreResultParams;
     return BlocProvider(
       create: (_) => ShareCubit(),
       child: BlocConsumer<ShareCubit, ShareState>(
@@ -63,10 +64,10 @@ class _ShareScreenState extends State<ShareScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
                         children: [
-                          _bodyShare(imgBed: shareArgs.imageBed ?? '', args: shareArgs),
-                          const SizedBox(
-                            height: 32,
-                          ),
+                          _bodyShare(
+                              imgBed: shareArgs.imageBed ?? '',
+                              args: shareArgs),
+                          const SizedBox(height: 32),
                           SFButton(
                             text: LocaleKeys.return_to_home,
                             textStyle: TextStyles.w600WhiteSize16,
@@ -77,8 +78,10 @@ class _ShareScreenState extends State<ShareScreen> {
                                 Navigator.pushNamedAndRemoveUntil(
                                     context, R.bottomNavigation, (r) => false);
                               } else {
-                                Navigator.popUntil(context,
-                                        (r) => r.settings.name == R.bottomNavigation);
+                                Navigator.popUntil(
+                                    context,
+                                    (r) =>
+                                        r.settings.name == R.bottomNavigation);
                               }
                             },
                           ),
@@ -94,7 +97,8 @@ class _ShareScreenState extends State<ShareScreen> {
                   bottom: 0,
                   child: CommunityShare(
                     controller: screenshotController,
-                    widget: _bodyShare(imgBed: shareArgs.imageBed ?? '', args: shareArgs),
+                    widget: _bodyShare(
+                        imgBed: shareArgs.imageBed ?? '', args: shareArgs),
                     cubit: cubit,
                   ),
                 ),
@@ -106,93 +110,90 @@ class _ShareScreenState extends State<ShareScreen> {
     );
   }
 
-  Widget _bodyShare ({required String imgBed, required PreResultParams args}) {
+  Widget _bodyShare({required String imgBed, required PreResultParams args}) {
     return Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: AppColors.white.withOpacity(0.05),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
-                  ),
+      children: [
+        Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.white.withOpacity(0.05),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
                 ),
-                child: Column(
-                  children: [
-                    ClipPath(
-                      clipper: CurvedBottomClipper(),
-                      child: Container(
-                        padding:
-                        const EdgeInsets.only(bottom: 26),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: AppColors.blue.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          children: [
-                            SFIcon(
-                              imgBed,
-                              height: 160,
+              ),
+              child: Column(
+                children: [
+                  ClipPath(
+                    clipper: CurvedBottomClipper(),
+                    child: Container(
+                      padding: const EdgeInsets.only(bottom: 26),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.blue.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        children: [
+                          SFIcon(
+                            imgBed,
+                            height: 160,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(
+                                  color: AppColors.white.withOpacity(0.1)),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                BorderRadius.circular(50),
-                                border: Border.all(
-                                    color: AppColors.white
-                                        .withOpacity(0.1)),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 16),
-                              child: SFText(
-                                keyText: '${args.resultModel.id ?? ''}',
-                                style: TextStyles.white1w700size12,
-                              ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 16),
+                            child: SFText(
+                              keyText: args.resultModel.bed?.name ?? '',
+                              style: TextStyles.white1w700size12,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CategoryHeaderShare(preResultParams: args,),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Platform.isAndroid
-                        ? ((args.dataChart.isNotEmpty &&
-                        args.dataChart.first.maxX != -1)
-                        ? ChartStatisticShare(
-                      maxValue: 360,
-                      data: args.dataChart.first,
-                      typeTimeChart: TypeTimeChart.chartDay,
-                    )
-                        : const SizedBox())
-                        : const Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: SFIcon(Ics.commingSoon),
-                    ),
-                    const SizedBox(height: 10),
+                  ),
+                  const SizedBox(height: 16),
+                  CategoryHeaderShare(
+                    preResultParams: args,
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Platform.isAndroid
+                      ? ((args.dataChart.isNotEmpty &&
+                              args.dataChart.first.maxX != -1)
+                          ? ChartStatisticShare(
+                              maxValue: 360,
+                              data: args.dataChart.first,
+                              typeTimeChart: TypeTimeChart.chartDay,
+                            )
+                          : const SizedBox())
+                      : const Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: SFIcon(Ics.commingSoon),
+                        ),
+                  const SizedBox(height: 10),
                 ],
-                ),
               ),
-              const Positioned(
-                top: 14,
-                left: -30,
-                child: TopLeftBanner(
-                  text: 'Short',
-                  textColor: AppColors.red,
-                ),
+            ),
+            Positioned(
+              top: 14,
+              left: -30,
+              child: TopLeftBanner(
+                text: args.resultModel.bed?.classNft ?? 'Short',
+                textColor: AppColors.red,
               ),
-            ],
-          ),
-          const SleepFiQrCode(value: 'SLeepFi'),
-        ],
-      );
+            ),
+          ],
+        ),
+        const SleepFiQrCode(value: 'SLeepFi'),
+      ],
+    );
   }
 }
 
