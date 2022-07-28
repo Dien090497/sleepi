@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/create_wallet/create_wallet_cubit.dart';
+import 'package:slee_fi/presentation/screens/passcode/create_passcode_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_wallet_warning.dart';
 import 'package:slee_fi/usecase/create_new_mnemonic_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -51,7 +52,8 @@ class PopUpAvalancheWallet extends StatelessWidget {
                           },
                           (r) {
                             Navigator.pushNamed(context, R.createPasscode,
-                                    arguments: r)
+                                    arguments: CreatePasscodeArguments(
+                                        mnemonic: r, showSeedPhrasePopUp: true))
                                 .then((value) {
                               Navigator.pop(context);
                               Navigator.pop(context, value);
