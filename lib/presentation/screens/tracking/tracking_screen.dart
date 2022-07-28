@@ -5,7 +5,6 @@ import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -14,9 +13,7 @@ import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking.dart';
 import 'package:slee_fi/presentation/blocs/tracking/tracking_state.dart';
@@ -109,10 +106,11 @@ class _TrackingScreenState extends State<TrackingScreen> {
         child: BlocConsumer<TrackingCubit, TrackingState>(
           listener: (context, state) {
             if (state is TrackingStatePosted) {
-              Navigator.pushReplacementNamed(context, R.preResult,
+              Navigator.pushReplacementNamed(context, R.result,
                   arguments: PreResultParams(
                     resultModel: state.resultModel,
-                    dataChart: [],
+                    dataChart: state.dataChart,
+                    slftPrice: state.sfltPrice,
                     imageBed: args.imageBed,
                     fromRoute: args.fromRoute,
                   ));
