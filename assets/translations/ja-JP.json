@@ -127,7 +127,7 @@
   "next": "つぎへ",
   "show_all_result": "全ての結果を表示する",
   "tracking": "トラッキング",
-  "wake_up": "起床時刻",
+  "wake_up": "起床",
   "share": "シェア",
   "sleep_onset_time": "入眠時刻",
   "sleep_duration": "睡眠時間",
@@ -230,7 +230,7 @@
   "rare_bed": "レア",
   "epic_bed": "エピック",
   "legendary_bed": "レジェンダリー",
-  "woke_up": "起床",
+  "woke_up": "起床時刻",
   "token_earned": "稼いだトークン",
   "sleep_score": "睡眠スコア",
   "result": "結果　",
@@ -459,5 +459,6 @@
   "click_here_to_check_seed_phrase": "ここをクリックしてシードフレーズを確認する",
   "password_must_be_at_least_6": "英大文字、数字、特殊文字で1つ以上の組み合わせ6～20字で入力してください",
   "staking_bonus": "ステーキングボーナス",
-  "loading": "ローディング中"
+  "loading": "ローディング中",
+  "levelUp_balance_not_enough": "Your balance is not enough to level up"
 }
