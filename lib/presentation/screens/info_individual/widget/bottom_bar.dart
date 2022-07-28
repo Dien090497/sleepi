@@ -27,7 +27,7 @@ class BottomBarWidget extends StatefulWidget {
       {Key? key, required this.bedEntity, required this.onBackIndividual})
       : super(key: key);
   final BedEntity bedEntity;
-  final VoidCallback onBackIndividual;
+  final Function(bool? successTransfer) onBackIndividual;
 
   @override
   State<BottomBarWidget> createState() => BottomBarWidgetState();
@@ -107,7 +107,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is BottomBarInfoIndividualError) {
                   Navigator.pop(context);
                   showMessageDialog(context, state.message);
-                  widget.onBackIndividual();
+                  widget.onBackIndividual(null);
                   cubit.init();
                 }
 
@@ -115,7 +115,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                   if (state.successTransfer) {
                     Navigator.pop(context);
                     showSuccessfulDialog(context, null);
-                    widget.onBackIndividual();
+                    widget.onBackIndividual( true);
                     cubit.init();
                   }
                 }
@@ -137,7 +137,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                             cubit: cubit,
                           ),
                         ).then((value) {
-                          widget.onBackIndividual();
+                          widget.onBackIndividual(null);
                           index = -1;
                           setState(() {});
                         });
@@ -166,7 +166,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       index = 2;
                       Navigator.pushNamed(context, R.mint, arguments: bedEntity)
                           .then((value) {
-                        widget.onBackIndividual();
+                        widget.onBackIndividual(null);
                         index = -1;
                         setState(() {});
                       });

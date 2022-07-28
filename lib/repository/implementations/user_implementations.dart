@@ -139,7 +139,7 @@ class UserImplementation extends IUserRepository {
           withdrawParam.limit,
           withdrawParam.page);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
@@ -154,7 +154,7 @@ class UserImplementation extends IUserRepository {
       final result = await _authDataSource.estimateGasWithdraw(
           estimateParam.type, contractAddr);
       return Right(result);
-    } on Exception catch (e) {
+    } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
