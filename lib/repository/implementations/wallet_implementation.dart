@@ -102,7 +102,8 @@ class WalletImplementation extends IWalletRepository {
 
   Future<NativeCurrencyIsarModel?> _getNativeCurrency() async {
     final chainId = _getStorageDataSource.getCurrentChainId();
-    return _isarDataSource.getNativeCurrency(chainId!);
+    if (chainId == null) return null;
+    return _isarDataSource.getNativeCurrency(chainId);
   }
 
   Future<NetworkIsarModel> _getCurrentNetwork() async {
@@ -113,10 +114,7 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> importWallet(
       String mnemonic) async {
-    try {
-      // final testNetwork = (await _isarDataSource.getAllNetwork()).last;
-      // _web3DataSource.setCurrentNetwork(testNetwork);
-      // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
+    // try {
       final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0);
       if (_web3DataSource.validateMnemonic(mnemonic)) {
         final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
@@ -140,18 +138,22 @@ class WalletImplementation extends IWalletRepository {
         final nativeCurrency = await _getNativeCurrency();
         final result = await _web3DataSource.getBalance(ethereumAddress.hex);
         final balance = result / BigInt.from(pow(10, 18));
+        if (nativeCurrency == null) {
+          return const Left(FailureMessage(LocaleKeys.some_thing_wrong));
+        }
         return Right(model.toEntity(
           credentials,
           derivedIndex: derivedIndex,
           networkName: network.name,
-          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
+          nativeCurrency: nativeCurrency.toEntity(balance: balance),
           chainId: network.chainId,
         ));
       }
-      return const Left(FailureMessage('Invalid Mnemonic'));
-    } catch (e) {
-      return Left(FailureMessage.fromException(e));
-    }
+      return const Left(
+          FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
+    // } catch (e) {
+    //   return Left(FailureMessage.fromException(e));
+    // }
   }
 
   @override
@@ -387,7 +389,6 @@ class WalletImplementation extends IWalletRepository {
         final credentials =
             _web3DataSource.credentialsFromPrivateKey(privateKey);
         final message = await _secureStorage.readMessage();
-        print('### message $message');
         final ethereumAddress = await credentials.extractAddress();
         final signature = _web3DataSource.generateSignature(
             privateKey: privateKey, message: message ?? 'welcome to sleefi');
