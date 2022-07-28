@@ -105,7 +105,10 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                 BottomBarInfoIndividualState>(
               listener: (context, state) {
                 if (state is BottomBarInfoIndividualError) {
+                  Navigator.pop(context);
                   showMessageDialog(context, state.message);
+                  widget.onBackIndividual();
+                  cubit.init();
                 }
 
                 if (state is BottomBarInfoIndividualLoaded) {
