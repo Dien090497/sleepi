@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -212,51 +213,65 @@ class AlarmBell extends StatelessWidget {
               Platform.isAndroid
                   ? LocaleKeys.please_turn_on_tracking_android
                   : LocaleKeys.please_turn_on_tracking_ios, () async {
-            final isGranted = await _requestHealthAuthorization();
-            if (isGranted) {
-              final homeBloc = BlocProvider.of<HomeBloc>(context);
-              final state = homeBloc.state;
-              if (state is HomeLoaded) {
-                final startRes = await getIt<StartSleepTrackingUseCase>()
-                    .call(StartTrackingSchema(
-                  isEnableInsurance: state.enableInsurance,
-                  bedUsed: state.selectedBed!.id,
-                  wakeUp:
-                      '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
-                  alrm: state.enableAlarm,
-                  itemUsed: state.selectedItem?.id ?? 0,
-                ));
-                Navigator.pop(context);
-                startRes.fold(
-                  (l) {
-                    showMessageDialog(context, '$l');
-                  },
-                  (r) async {
-                    final service = FlutterBackgroundService();
-                    SharedPreferences preferences =
-                        await SharedPreferences.getInstance();
-                    await preferences.setInt(
-                        Const.time, selectedTime.millisecondsSinceEpoch);
-                    if(state.enableAlarm) {
-                      FlutterBackgroundService().invoke(Const.setAsForeground);
-                      service.startService();
-                    }
-                    Navigator.pushNamed(
-                      context,
-                      R.tracking,
-                      arguments: TrackingParams(
-                        timeStart: DateTime.now().millisecondsSinceEpoch,
-                        timeWakeUp: selectedTime.millisecondsSinceEpoch,
-                        tokenEarn: state.tokenEarn,
-                        fromRoute: R.bottomNavigation,
-                        imageBed: bedImage,
-                      ),
-                    );
-                  },
-                );
+            final isAppInstalled = await LaunchApp.isAppInstalled(
+              androidPackageName: 'com.google.android.apps.fitness',
+              iosUrlScheme: 'x-apple-health://',
+            );
+            if (isAppInstalled) {
+              final isGranted = await _requestHealthAuthorization();
+              if (isGranted) {
+                final homeBloc = BlocProvider.of<HomeBloc>(context);
+                final state = homeBloc.state;
+                if (state is HomeLoaded) {
+                  final startRes = await getIt<StartSleepTrackingUseCase>()
+                      .call(StartTrackingSchema(
+                    isEnableInsurance: state.enableInsurance,
+                    bedUsed: state.selectedBed!.id,
+                    wakeUp:
+                    '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
+                    alrm: state.enableAlarm,
+                    itemUsed: state.selectedItem?.id ?? 0,
+                  ));
+                  Navigator.pop(context);
+                  startRes.fold(
+                        (l) {
+                      showMessageDialog(context, '$l');
+                    },
+                        (r) async {
+                      final service = FlutterBackgroundService();
+                      SharedPreferences preferences =
+                      await SharedPreferences.getInstance();
+                      await preferences.setInt(
+                          Const.time, selectedTime.millisecondsSinceEpoch);
+                      if(state.enableAlarm) {
+                        FlutterBackgroundService().invoke(Const.setAsForeground);
+                        service.startService();
+                      }
+                      Navigator.pushNamed(
+                        context,
+                        R.tracking,
+                        arguments: TrackingParams(
+                          timeStart: DateTime.now().millisecondsSinceEpoch,
+                          timeWakeUp: selectedTime.millisecondsSinceEpoch,
+                          tokenEarn: state.tokenEarn,
+                          fromRoute: R.bottomNavigation,
+                          imageBed: bedImage,
+                        ),
+                      );
+                    },
+                  );
+                }
+              } else {
+                showMessageDialog(context, LocaleKeys.not_granted);
               }
             } else {
-              showMessageDialog(context, LocaleKeys.not_granted);
+              await LaunchApp.openApp(
+                androidPackageName: 'com.google.android.apps.fitness',
+                iosUrlScheme: 'x-apple-health://',
+                appStoreLink:
+                'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
+                // openStore: false
+              );
             }
           });
         },
