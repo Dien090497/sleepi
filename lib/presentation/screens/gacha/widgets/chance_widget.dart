@@ -77,7 +77,7 @@ class ChanceWidget extends StatelessWidget {
                 disabled: numberOfSpin >= totalValue ? false : true,
                 onPressed: () {
                   normalGacha  ? cubit.getCommon() : cubit.getSpecial();
-                  showLoadingDialog(context, "Loading");
+                  showLoadingDialog(context);
                   // showCustomAlertDialog(context,
                   //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   //     width: MediaQuery.of(context).size.width * 0.8,

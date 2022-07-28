@@ -5,7 +5,6 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -13,7 +12,6 @@ import 'package:slee_fi/entities/user/user_info_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/gender_tile.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
-import 'package:slee_fi/usecase/make_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 import 'modal_pop_up_birth_year.dart';
@@ -102,18 +100,9 @@ class ProfileWidget extends StatelessWidget {
             title: LocaleKeys.logout,
             textStyle: TextStyles.bold16Blue,
             borderColor: AppColors.blue,
-            onPressed: () {
-              getIt<LogOutUseCase>().call(NoParams()).then((result) {
-                result.fold(
-                  (l) {
-                    showMessageDialog(context, '$l');
-                  },
-                  (r) async {
-                    await getIt<MakeFirstOpenAppUseCase>().call(r);
-                    Phoenix.rebirth(context);
-                  },
-                );
-              });
+            onPressed: () async {
+              await getIt<LogOutUseCase>().call(NoParams());
+              Phoenix.rebirth(context);
             },
           ),
         ),

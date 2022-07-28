@@ -105,7 +105,7 @@ class GachaResultBedScreen extends StatelessWidget {
                                   padding: const EdgeInsets.only(bottom: 12),
                                   child: SFText(
                                     keyText:
-                                    '${type?.tr()} $nftName (Lv.${args?.attributesItem?.level})',
+                                    '${type?.tr()} ${args?.attributesItem?.nftType == 'item' ? '' : nftName} (Lv.${args?.attributesItem?.level.toInt()})',
                                     style: TextStyles.white1w700size16,
                                   ),
                                 ) : const SizedBox(),
@@ -138,10 +138,14 @@ class GachaResultBedScreen extends StatelessWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 28),
-                                SFText(
-                                  keyText: LocaleKeys.attributes,
-                                  style: TextStyles.boldWhite18,
-                                ),
+                                args?.attributesItem?.nftType == 'bed' ? Column(
+                                  children: [
+                                    SFText(
+                                      keyText: LocaleKeys.attributes,
+                                      style: TextStyles.boldWhite18,
+                                    ),
+                                  ],
+                                ) : const SizedBox(),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 24, vertical: 15),
@@ -149,7 +153,7 @@ class GachaResultBedScreen extends StatelessWidget {
                                     children: [
                                       args?.attributesItem?.nftType == 'item' || args?.attributesItem?.nftType == 'jewel' ? Column(
                                         children: [
-                                          SFCard(
+                                          args?.attributesItem?.nftType == 'jewel' ? SFCard(
                                             radius: 8,
                                             margin: EdgeInsets.zero,
                                             padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
@@ -170,7 +174,7 @@ class GachaResultBedScreen extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                          ),
+                                          ) : const SizedBox(),
                                           const SizedBox(height: 12),
                                           SFCard(
                                             radius: 8,
@@ -186,7 +190,11 @@ class GachaResultBedScreen extends StatelessWidget {
                                                 Expanded(
                                                   child: SFText(
                                                     keyText:
-                                                    '+ ${args?.percentEffect ?? 0}%',
+                                                    args?.attributesItem?.nftType == 'item'
+                                                        ?
+                                                    '${args?.percentEffect ?? 0}%'
+                                                        :
+                                                    '+ ${args?.percentEffect ?? 0}% ${LocaleKeys.base.tr()} ${args?.attributesItem?.type.reCase(StringCase.titleCase)}',
                                                     style: TextStyles.blue16,
                                                     textAlign: TextAlign.right,
                                                   ),

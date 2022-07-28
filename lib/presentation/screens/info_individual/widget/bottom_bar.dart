@@ -210,28 +210,31 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                             5, context, Ics.transfer, LocaleKeys.transfer,
                             () async {
                           index = 5;
-                          if (walletState is WalletNotExisted) {
-                            showCreateOrImportWallet().then((value) {});
-                          } else {
-                            cubit.estimateGas(
-                                contractAddress: bedEntity.contractAddress);
-                            showCustomDialog(
-                              context,
-                              children: [
-                                PopUpTransfer(
-                                  onCancel: () {
-                                    Navigator.pop(context);
-                                  },
-                                  valueTransfer: 1,
-                                  bedEntity: bedEntity,
-                                  cubit: cubit,
-                                )
-                              ],
-                            ).then((value) {
-                              index = -1;
-                              setState(() {});
-                            });
-                          }
+                          showComingSoonDialog(context);
+                          /// POP-UP TRANSFER
+                          // if (walletState is WalletNotExisted) {
+                          //   showCreateOrImportWallet().then((value) {});
+                          // } else {
+                          //   cubit.estimateGas(
+                          //       contractAddress: bedEntity.contractAddress);
+                          //   showCustomDialog(
+                          //     context,
+                          //     children: [
+                          //       PopUpTransfer(
+                          //         onCancel: () {
+                          //           Navigator.pop(context);
+                          //         },
+                          //         valueTransfer: 1,
+                          //         bedEntity: bedEntity,
+                          //         cubit: cubit,
+                          //       )
+                          //     ],
+                          //   ).then((value) {
+                          //     index = -1;
+                          //     setState(() {});
+                          //   });
+                          // }
+                              /// ----------------------------------------
                         });
                       },
                     ),

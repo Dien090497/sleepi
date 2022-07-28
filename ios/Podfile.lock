@@ -112,13 +112,13 @@ PODS:
   - safe_device (1.0.0):
     - DTTJailbreakDetection
     - Flutter
-  - Sentry (7.21.0):
-    - Sentry/Core (= 7.21.0)
-  - Sentry/Core (7.21.0)
+  - Sentry (7.22.0):
+    - Sentry/Core (= 7.22.0)
+  - Sentry/Core (7.22.0)
   - sentry_flutter (0.0.1):
     - Flutter
     - FlutterMacOS
-    - Sentry (~> 7.21.0)
+    - Sentry (~> 7.22.0)
   - shared_preferences_ios (0.0.1):
     - Flutter
   - social_share (0.0.1):
@@ -282,8 +282,8 @@ SPEC CHECKSUMS:
   Protobuf: 25e5dd0944f6f05a4db360eed782af5dc9533633
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   safe_device: 4539eb6bdbeb4b61a763a51c4e73e6b37dea4e3d
-  Sentry: 194d0a2d4d6ef92c9c08c98d998340b0a63efd81
-  sentry_flutter: ff28e944a04dd35a90473e143bda9dc61ef1d2b5
+  Sentry: 30b51086ca9aac23337880152e95538f7e177f7f
+  sentry_flutter: eaca55af5c951f4be6c4b1daddce1744c37d8476
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   social_share: 702a5e3842addd22db515aa9e1e00a4b80a0296d
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904

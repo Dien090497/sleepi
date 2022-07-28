@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@Injectable()
+@Singleton()
 class SharedPreferenceDataSource {
   final SharedPreferences _sp;
 

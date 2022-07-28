@@ -7,7 +7,7 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/models/user/user_info_model.dart';
 
-@Injectable()
+@Singleton()
 class SecureStorage {
   final FlutterSecureStorage _secureStorage;
   final SharedPreferences _sharedPreferences;

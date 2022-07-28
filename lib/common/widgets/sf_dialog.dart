@@ -126,8 +126,7 @@ Future<T?> showWarningDialog<T>(
             const SizedBox(
               height: 24,
             ),
-            SFText(
-                keyText: message.tr(),
+            Text(message.tr(),
                 textAlign: TextAlign.center,
                 style: style ?? TextStyles.bold18White),
             const SizedBox(height: 24),
@@ -290,7 +289,8 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
 
 Future<T?> showLoadingDialog<T>(
   BuildContext context,
-  String message, {
+   {
+     String? message,
   bool barrierDismissible = false,
 }) async {
   return showCustomAlertDialog(
@@ -311,7 +311,7 @@ Future<T?> showLoadingDialog<T>(
                       ? const CircularProgressIndicator(strokeWidth: 3)
                       : const CupertinoActivityIndicator())),
           SFText(
-            keyText: message,
+            keyText: message ?? LocaleKeys.loading.tr(),
             style: TextStyles.white16,
             textAlign: TextAlign.center,
           )

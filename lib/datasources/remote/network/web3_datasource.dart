@@ -227,7 +227,6 @@ class Web3DataSource {
       BigInt allow = await allowance(
           EthereumAddress.fromHex(walletAddress), contractAddress);
       if (amountsOut[0] > allow) {
-        approveToken(contractAddress, credentials);
         return false;
       } else {
         final tx = await contract.swapExactTokensForAVAX(
@@ -290,7 +289,6 @@ class Web3DataSource {
       BigInt allow = await allowance(
           EthereumAddress.fromHex(walletAddress), contractAddressFrom);
       if (amounts[0] > allow) {
-        approveToken(contractAddressFrom, credentials);
         return false;
       } else {
         final tx = await contract.swapExactTokensForTokens(

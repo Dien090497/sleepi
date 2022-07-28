@@ -82,7 +82,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                             enableButton ? cubit.gachaSpin(GachaSpinSchema(probability: widget.singleProbability)) : null;
                             setState(() =>  enableButton = false);
                             Navigator.pop(context, true);
-                            showLoadingDialog(context, "Loading", barrierDismissible: false);
+                            showLoadingDialog(context, barrierDismissible: false);
                           },
                         ));
                   },
@@ -117,7 +117,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                             enableButton ? cubit.gachaSpin(GachaSpinSchema(probability: widget.timesProbability)) : null;
                             setState(() =>  enableButton = false);
                             Navigator.pop(context, true);
-                            showLoadingDialog(context, "Loading", barrierDismissible: false);
+                            showLoadingDialog(context, barrierDismissible: false);
                           }
                         )
                     );

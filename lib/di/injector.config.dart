@@ -200,8 +200,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i10.FlutterSecureStorage>(
       () => registerModule.flutterSecureStorage);
   gh.factory<_i11.GetStorage>(() => registerModule.getStorage);
-  gh.factory<_i12.GetStorageDataSource>(
-      () => _i12.GetStorageDataSource(get<_i11.GetStorage>()));
+  gh.singleton<_i12.GetStorageDataSource>(
+      _i12.GetStorageDataSource(get<_i11.GetStorage>()));
   gh.factory<_i13.IsValidWalletAddressUseCase>(
       () => _i13.IsValidWalletAddressUseCase());
   await gh.factoryAsync<_i14.Isar>(
@@ -216,12 +216,12 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i18.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i12.StorageKeys>(() => _i12.StorageKeys());
+  gh.factory<String>(() => constInjection.baseUrlStg,
+      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => constInjection.baseUrlProd,
       instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<String>(() => constInjection.baseUrlDev,
       instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => constInjection.baseUrlStg,
-      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<_i19.ToastUtils>(() => _i19.ToastUtils());
   gh.singleton<_i20.Web3Provider>(_i20.Web3Provider(get<_i4.Client>()));
   gh.factory<_i21.HistoryDataSource>(
@@ -239,10 +239,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i15.IsarDataSource>(),
       get<_i12.GetStorageDataSource>(),
       get<_i3.AppFlyerCustom>()));
-  gh.factory<_i27.SecureStorage>(() => _i27.SecureStorage(
+  gh.singleton<_i27.SecureStorage>(_i27.SecureStorage(
       get<_i10.FlutterSecureStorage>(), get<_i18.SharedPreferences>()));
-  gh.factory<_i28.SharedPreferenceDataSource>(
-      () => _i28.SharedPreferenceDataSource(get<_i18.SharedPreferences>()));
+  gh.singleton<_i28.SharedPreferenceDataSource>(
+      _i28.SharedPreferenceDataSource(get<_i18.SharedPreferences>()));
   gh.factory<_i29.SpendingDataSource>(
       () => _i29.SpendingDataSource(get<_i20.Web3Provider>()));
   gh.factory<_i30.WalletDataSource>(
