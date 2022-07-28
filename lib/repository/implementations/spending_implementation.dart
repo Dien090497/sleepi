@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
+import 'package:decimal/decimal.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -37,7 +38,9 @@ class SpendingImplementation extends ISpendingRepository {
     required String type,
   }) async {
     try {
-      final amountWei = BigInt.from(amount) * BigInt.from(pow(10, 18));
+      final amountWei = (Decimal.parse('$amount') *
+              Decimal.fromBigInt(BigInt.from(pow(10, 18))))
+          .toBigInt();
       if (addressContract == Const.deadAddress) {
         final hash = await _spendingDataSource.toSpendingAvax(
           owner: owner,
