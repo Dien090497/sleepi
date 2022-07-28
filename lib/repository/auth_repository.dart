@@ -11,6 +11,8 @@ import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 
 abstract class IAuthRepository {
+  Future clearAll();
+
   Future<Either<Failure, UserInfoEntity>> getMe();
 
   Future<Either<Failure, UserInfoEntity>> logIn(SignInSchema signInSchema);
