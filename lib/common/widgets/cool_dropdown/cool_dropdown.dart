@@ -2,8 +2,6 @@
 
 library cool_dropdown;
 
-import 'dart:developer';
-
 import 'package:cool_dropdown/drop_down_body.dart';
 import 'package:cool_dropdown/utils/animation_util.dart';
 import 'package:cool_dropdown/utils/extension_util.dart';
@@ -122,7 +120,6 @@ class CoolDropdown extends StatefulWidget {
   }) : super(key: key) {
     // 기본값 셋팅
     if (defaultValue != null) {
-      log('.. $defaultValue');
       this.defaultValue = defaultValue;
     } else {
       this.defaultValue = {};
@@ -130,12 +127,12 @@ class CoolDropdown extends StatefulWidget {
     // label unique 체크
     for (int i = 0; i < dropdownList.length; i++) {
       if (dropdownList[i]['label'] == null) {
-        throw '"label" must be initialized.';
+        // throw '"label" must be initialized.';
       }
       for (int j = 0; j < dropdownList.length; j++) {
         if (i != j) {
           if (dropdownList[i]['label'] == dropdownList[j]['label']) {
-            throw 'label is duplicated. Labels have to be unique.';
+            // throw 'label is duplicated. Labels have to be unique.';
           }
         }
       }

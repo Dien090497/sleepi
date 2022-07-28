@@ -407,7 +407,7 @@ class UserImplementation extends IUserRepository {
 
         return Right(result.list.map((e) => e.toEntity()).toList());
       }
-      throw Exception('please select only jewel or item');
+      return const Left(FailureMessage('please select only jewel or item'));
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
