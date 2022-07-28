@@ -67,9 +67,7 @@ class _ShareScreenState extends State<ShareScreen> {
                           _bodyShare(
                               imgBed: shareArgs.imageBed ?? '',
                               args: shareArgs),
-                          const SizedBox(
-                            height: 32,
-                          ),
+                          const SizedBox(height: 32),
                           SFButton(
                             text: LocaleKeys.return_to_home,
                             textStyle: TextStyles.w600WhiteSize16,
