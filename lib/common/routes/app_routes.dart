@@ -54,7 +54,6 @@ import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/tutorial/tutorial_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/layouts/transaction_detail_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/wallet_screen.dart';
-import 'package:slee_fi/presentation/screens/wallet_creation_warning/wallet_creation_warning_screen.dart';
 import 'package:slee_fi/presentation/screens/web_view/web_view_screen.dart';
 
 class R {
@@ -91,7 +90,8 @@ class R {
   static const String createPassword = '${_}create_password';
   static const String transfer = '${_}transfer';
   static const String tutorial = '${_}tutorial';
-  static const String walletCreationWarning = '${_}wallet_creation_warning';
+
+  // static const String walletCreationWarning = '${_}wallet_creation_warning';
   static const String passcode = '${_}passcode';
   static const String createPasscode = '${_}create_passcode';
   static const String confirmPasscode = '${_}confirm_passcode';
@@ -153,7 +153,7 @@ class AppRoutes {
     R.createPassword: (_) => const CreatePasswordScreen(),
     R.transfer: (_) => const TransferScreen(),
     R.tutorial: (_) => const TutorialScreen(),
-    R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
+    // R.walletCreationWarning: (_) => const WalletCreationWarningScreen(),
     R.createPasscode: (_) => const CreatePasscodeScreen(),
     R.confirmPasscode: (_) => const ConfirmCreatePasscodeScreen(),
     R.itemSelection: (_) => const ItemSelectionScreen(),
