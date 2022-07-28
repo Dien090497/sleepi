@@ -31,6 +31,7 @@ class SecureStorage {
 
   Future<void> clearStorage() async {
     final suggestionEmail = getSuggestionEmail('');
+    final String firstOpen = await checkAccountLoginApp();
 
     await Future.wait([
       _secureStorage.deleteAll(),
@@ -39,6 +40,7 @@ class SecureStorage {
     for (var element in suggestionEmail) {
       addEmailSuggestion(element);
     }
+    await makeFirstOpen(firstOpen);
   }
 
   Future<void> writeUser(UserInfoModel userInfoModel) async {
@@ -161,5 +163,13 @@ class SecureStorage {
       }
     }
     return [];
+  }
+
+  Future<String?> lastUserSignIn() async {
+    return _secureStorage.read(key: StorageKeys.lastUserSignIn);
+  }
+
+  Future<void> saveLastUserSignIn(String email) async {
+    return _secureStorage.write(key: StorageKeys.lastUserSignIn, value: email);
   }
 }

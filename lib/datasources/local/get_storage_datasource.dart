@@ -49,4 +49,5 @@ class StorageKeys {
   static const String signer = 'signer';
   static const String tokenAddresses = 'tokenAddresses';
   static const String nftAddresses = 'nftAddresses';
+  static const String lastUserSignIn = 'last_user_sign_in';
 }

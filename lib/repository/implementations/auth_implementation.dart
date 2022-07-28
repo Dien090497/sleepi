@@ -106,12 +106,29 @@ class AuthImplementation extends IAuthRepository {
   Future<Either<Failure, String>> logOut() async {
     try {
       final String firstOpen = await _secureStorage.checkAccountLoginApp();
+      final signer = await _secureStorage.readSigner();
+      final signature = await _secureStorage.readSignatureMessage();
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final chainID = _getStorageDataSource.getCurrentChainId();
+
       await Future.wait([
         _secureStorage.clearStorage(),
-        _isarDataSource.clearAll(),
+        _isarDataSource.clearAllNotWallet(),
         _getStorageDataSource.clearAll(),
       ]);
-      await _secureStorage.makeFirstOpen(firstOpen);
+
+      if (signer != null) {
+        _secureStorage.saveSigner(signer: signer);
+      }
+      if (signature != null) {
+        _secureStorage.saveSignatureMessage(signatureMessage: signature);
+      }
+      if (chainID != null) {
+        _getStorageDataSource.setCurrentChainId(chainID);
+      }
+
+      _getStorageDataSource.setCurrentWalletId(walletId);
+
       return Right(firstOpen);
     } catch (e) {
       return Left(FailureMessage('$e'));
@@ -215,6 +232,19 @@ class AuthImplementation extends IAuthRepository {
       return Right(result.data.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future clearAll() async {
+    try {
+      await Future.wait([
+        _secureStorage.clearStorage(),
+        _isarDataSource.clearAll(),
+        _getStorageDataSource.clearAll(),
+      ]);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
     }
   }
 }
