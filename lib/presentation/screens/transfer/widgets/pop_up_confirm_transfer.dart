@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -7,36 +6,30 @@ import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
-import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
-import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
-import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer({
     Key? key,
-    required this.cubit,
     required this.amount,
+    required this.fee,
     required this.symbol,
     required this.tokenAddress,
-    required this.spendingToWallet,
+    required this.isToSpending,
     required this.onConfirm,
     required this.isLoadingNotifier,
   }) : super(key: key);
 
-  final TransferCubit cubit;
   final double amount;
+  final double fee;
   final String symbol;
   final String tokenAddress;
-  final bool spendingToWallet;
+  final bool isToSpending;
   final VoidCallback onConfirm;
   final ValueNotifier<bool> isLoadingNotifier;
 
   @override
   Widget build(BuildContext context) {
-    final transferState = cubit.state;
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -60,7 +53,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                       ),
                       const SizedBox(height: 12.0),
                       SFText(
-                        keyText: spendingToWallet
+                        keyText: isToSpending
                             ? LocaleKeys.spending
                             : LocaleKeys.wallet,
                         style: TextStyles.bold18White,
@@ -78,7 +71,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                       ),
                       const SizedBox(height: 12.0),
                       SFText(
-                        keyText: spendingToWallet
+                        keyText: isToSpending
                             ? LocaleKeys.wallet
                             : LocaleKeys.spending,
                         style: TextStyles.bold18White,
@@ -90,43 +83,27 @@ class PopUpConfirmTransfer extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12.0),
-          if (transferState is TransferLoaded)
-            FutureBuilder<Either>(
-                future: transferState.isToSpending
-                    ? getIt<SendToExternalUseCase>().calculatorFee(
-                        SendToExternalParams(
-                            contractAddressTo: '',
-                            valueInEther: amount,
-                            tokenSymbol: symbol))
-                    : getIt<EstimateGasWithdrawUseCase>().call(
-                        EstimateGasWithdrawParam(
-                            type: 'token', contractAddress: tokenAddress)),
-                builder: (context, snapshot) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SFText(
-                        keyText: LocaleKeys.fee,
-                        style: TextStyles.lightGrey14,
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.centerRight,
-                          child: SFText(
-                              keyText:
-                                  "${snapshot.data?.getOrElse(() => '') ?? '--'} AVAX",
-                              style: TextStyles.lightWhite16,
-                              textAlign: TextAlign.end),
-                        ),
-                      ),
-                    ],
-                  );
-                }),
-          const SizedBox(
-            height: 8.0,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SFText(
+                keyText: LocaleKeys.fee,
+                style: TextStyles.lightGrey14,
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerRight,
+                  child: SFText(
+                      keyText: "$fee AVAX",
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end),
+                ),
+              ),
+            ],
           ),
+          const SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

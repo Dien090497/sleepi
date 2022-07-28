@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -130,7 +129,8 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 context,
                                 R.transfer,
                                 arguments: TransferScreenArg(
-                                    tokenList[2], false, TransferType.token),
+                                    address: tokenList[2].address,
+                                    isToSpending: false),
                               );
                             },
                             text: LocaleKeys.to_spending,

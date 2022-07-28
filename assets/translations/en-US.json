@@ -490,5 +490,6 @@
   "loading": "Loading",
   "please_visit_settings_to_check_your_seed_phrase": "Please visit settings to check your seed phrase",
   "click_here_to_check_seed_phrase": "Click here to check seed phrase",
-  "repair_bed_balance_not_enough": "Your balance is not enough to repair"
- }
+  "repair_bed_balance_not_enough": "Your balance is not enough to repair",
+  "you_have_been_logged_out": "You have been logged out"
+}

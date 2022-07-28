@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -120,27 +119,19 @@ class PopupInsufficient extends StatelessWidget {
                         final success = await Navigator.pushReplacementNamed(
                             context, R.passcode);
                         if (success as bool? ?? false) {
-                          final walletCurrentState =
-                              context.read<WalletCubit>().state;
-                          if (walletCurrentState is WalletStateLoaded) {
-                            final transferArgs = TransferScreenArg(
-                                tokenAvax, false, TransferType.nft);
+                          final walletState = context.read<WalletCubit>().state;
+                          if (walletState is WalletStateLoaded) {
                             Navigator.pushReplacementNamed(context, R.transfer,
                                 arguments: TransferScreenArg(
-                                    transferArgs.tokenEntity.copyWith(
-                                      balance: walletCurrentState
-                                          .walletInfoEntity
-                                          .nativeCurrency
-                                          .balance,
-                                    ),
-                                    transferArgs.fromSpendingToWallet,
-                                    transferArgs.transferType));
+                                    isToSpending: true,
+                                    address: tokenAvax.address));
                           }
                         }
                       } else {
                         Navigator.pushReplacementNamed(context, R.transfer,
                             arguments: TransferScreenArg(
-                                tokenAvax, false, TransferType.nft));
+                                isToSpending: true,
+                                address: tokenAvax.address));
                       }
                     },
                     textStyle: TextStyles.white16,

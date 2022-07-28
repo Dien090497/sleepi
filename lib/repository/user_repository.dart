@@ -46,7 +46,7 @@ abstract class IUserRepository {
   Future<Either<FailureMessage, WithdrawHistoryResponse>> withdrawHistory(
       WithdrawParam withdrawParam);
 
-  Future<Either<FailureMessage, String>> estimateGasWithdraw(
+  Future<Either<FailureMessage, double>> estimateGasWithdraw(
       EstimateGasWithdrawParam estimateParam);
 
   Future<Either<FailureMessage, List<BedEntity>>> fetchListBed(

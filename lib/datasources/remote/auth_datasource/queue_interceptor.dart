@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/app.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/access_token_expire_model/access_token_expire_model.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -25,8 +27,20 @@ class QueueInterceptor extends QueuedInterceptor {
           false) {
         final context = navKey.currentContext;
         if (context != null) {
-          await getIt<LogOutUseCase>().call(NoParams());
-          Phoenix.rebirth(context);
+          showWarningDialog(
+            context,
+            LocaleKeys.you_have_been_logged_out,
+            buttonText: LocaleKeys.confirm,
+            barrierDismissible: false,
+            closeTap: () async {
+              await getIt<LogOutUseCase>().call(NoParams());
+              Phoenix.rebirth(context);
+            },
+            () async {
+              await getIt<LogOutUseCase>().call(NoParams());
+              Phoenix.rebirth(context);
+            },
+          );
           return handler.reject(err);
         }
         // return _refreshToken(err, handler);

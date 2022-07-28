@@ -463,5 +463,6 @@
   "levelUp_balance_not_enough": "Your balance is not enough to level up",
   "minting_balance_not_enough": "Your balance is not enough to mint",
   "repair_bed_balance_not_enough": "Your balance is not enough to repair",
-  "minting_not_exists": "Minting not exists"
+  "minting_not_exists": "Minting not exists",
+  "you_have_been_logged_out": "ログアウトしました"
 }

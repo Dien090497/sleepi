@@ -19,24 +19,48 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(bool isToSpending, bool isLoading,
-            String? errorMsg, String? typeError, bool? needApprove)
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -100,20 +124,12 @@ class __$$TransferSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferSuccess
-    with DiagnosticableTreeMixin
-    implements TransferSuccess {
+class _$TransferSuccess implements TransferSuccess {
   const _$TransferSuccess();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TransferState.success()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TransferState.success'));
   }
 
   @override
@@ -129,8 +145,16 @@ class _$TransferSuccess
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(bool isToSpending, bool isLoading,
-            String? errorMsg, String? typeError, bool? needApprove)
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)
         loaded,
   }) {
     return success();
@@ -140,8 +164,16 @@ class _$TransferSuccess
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
   }) {
     return success?.call();
@@ -151,8 +183,16 @@ class _$TransferSuccess
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
     required TResult orElse(),
   }) {
@@ -204,11 +244,18 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
           _$TransferLoaded value, $Res Function(_$TransferLoaded) then) =
       __$$TransferLoadedCopyWithImpl<$Res>;
   $Res call(
-      {bool isToSpending,
+      {TokenEntity currentToken,
+      TokenEntity backupToken,
+      bool isToSpending,
       bool isLoading,
+      double? amount,
+      double? fee,
+      bool? isAllowance,
       String? errorMsg,
-      String? typeError,
-      bool? needApprove});
+      String? typeError});
+
+  $TokenEntityCopyWith<$Res> get currentToken;
+  $TokenEntityCopyWith<$Res> get backupToken;
 }
 
 /// @nodoc
@@ -224,13 +271,25 @@ class __$$TransferLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? currentToken = freezed,
+    Object? backupToken = freezed,
     Object? isToSpending = freezed,
     Object? isLoading = freezed,
+    Object? amount = freezed,
+    Object? fee = freezed,
+    Object? isAllowance = freezed,
     Object? errorMsg = freezed,
     Object? typeError = freezed,
-    Object? needApprove = freezed,
   }) {
     return _then(_$TransferLoaded(
+      currentToken: currentToken == freezed
+          ? _value.currentToken
+          : currentToken // ignore: cast_nullable_to_non_nullable
+              as TokenEntity,
+      backupToken: backupToken == freezed
+          ? _value.backupToken
+          : backupToken // ignore: cast_nullable_to_non_nullable
+              as TokenEntity,
       isToSpending: isToSpending == freezed
           ? _value.isToSpending
           : isToSpending // ignore: cast_nullable_to_non_nullable
@@ -239,6 +298,18 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      amount: amount == freezed
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double?,
+      fee: fee == freezed
+          ? _value.fee
+          : fee // ignore: cast_nullable_to_non_nullable
+              as double?,
+      isAllowance: isAllowance == freezed
+          ? _value.isAllowance
+          : isAllowance // ignore: cast_nullable_to_non_nullable
+              as bool?,
       errorMsg: errorMsg == freezed
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
@@ -247,51 +318,61 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value.typeError
           : typeError // ignore: cast_nullable_to_non_nullable
               as String?,
-      needApprove: needApprove == freezed
-          ? _value.needApprove
-          : needApprove // ignore: cast_nullable_to_non_nullable
-              as bool?,
     ));
+  }
+
+  @override
+  $TokenEntityCopyWith<$Res> get currentToken {
+    return $TokenEntityCopyWith<$Res>(_value.currentToken, (value) {
+      return _then(_value.copyWith(currentToken: value));
+    });
+  }
+
+  @override
+  $TokenEntityCopyWith<$Res> get backupToken {
+    return $TokenEntityCopyWith<$Res>(_value.backupToken, (value) {
+      return _then(_value.copyWith(backupToken: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
+class _$TransferLoaded implements TransferLoaded {
   const _$TransferLoaded(
-      {required this.isToSpending,
+      {required this.currentToken,
+      required this.backupToken,
+      required this.isToSpending,
       this.isLoading = false,
+      this.amount,
+      this.fee,
+      this.isAllowance,
       this.errorMsg,
-      this.typeError,
-      this.needApprove});
+      this.typeError});
 
+  @override
+  final TokenEntity currentToken;
+  @override
+  final TokenEntity backupToken;
   @override
   final bool isToSpending;
   @override
   @JsonKey()
   final bool isLoading;
   @override
+  final double? amount;
+  @override
+  final double? fee;
+  @override
+  final bool? isAllowance;
+  @override
   final String? errorMsg;
   @override
   final String? typeError;
-  @override
-  final bool? needApprove;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TransferState.loaded(isToSpending: $isToSpending, isLoading: $isLoading, errorMsg: $errorMsg, typeError: $typeError, needApprove: $needApprove)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TransferState.loaded'))
-      ..add(DiagnosticsProperty('isToSpending', isToSpending))
-      ..add(DiagnosticsProperty('isLoading', isLoading))
-      ..add(DiagnosticsProperty('errorMsg', errorMsg))
-      ..add(DiagnosticsProperty('typeError', typeError))
-      ..add(DiagnosticsProperty('needApprove', needApprove));
+  String toString() {
+    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg, typeError: $typeError)';
   }
 
   @override
@@ -300,22 +381,32 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
         (other.runtimeType == runtimeType &&
             other is _$TransferLoaded &&
             const DeepCollectionEquality()
+                .equals(other.currentToken, currentToken) &&
+            const DeepCollectionEquality()
+                .equals(other.backupToken, backupToken) &&
+            const DeepCollectionEquality()
                 .equals(other.isToSpending, isToSpending) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
-            const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
-            const DeepCollectionEquality().equals(other.typeError, typeError) &&
+            const DeepCollectionEquality().equals(other.amount, amount) &&
+            const DeepCollectionEquality().equals(other.fee, fee) &&
             const DeepCollectionEquality()
-                .equals(other.needApprove, needApprove));
+                .equals(other.isAllowance, isAllowance) &&
+            const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
+            const DeepCollectionEquality().equals(other.typeError, typeError));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(currentToken),
+      const DeepCollectionEquality().hash(backupToken),
       const DeepCollectionEquality().hash(isToSpending),
       const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(amount),
+      const DeepCollectionEquality().hash(fee),
+      const DeepCollectionEquality().hash(isAllowance),
       const DeepCollectionEquality().hash(errorMsg),
-      const DeepCollectionEquality().hash(typeError),
-      const DeepCollectionEquality().hash(needApprove));
+      const DeepCollectionEquality().hash(typeError));
 
   @JsonKey(ignore: true)
   @override
@@ -326,36 +417,62 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() success,
-    required TResult Function(bool isToSpending, bool isLoading,
-            String? errorMsg, String? typeError, bool? needApprove)
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)
         loaded,
   }) {
-    return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove);
+    return loaded(currentToken, backupToken, isToSpending, isLoading, amount,
+        fee, isAllowance, errorMsg, typeError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
   }) {
-    return loaded?.call(
-        isToSpending, isLoading, errorMsg, typeError, needApprove);
+    return loaded?.call(currentToken, backupToken, isToSpending, isLoading,
+        amount, fee, isAllowance, errorMsg, typeError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            double? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(isToSpending, isLoading, errorMsg, typeError, needApprove);
+      return loaded(currentToken, backupToken, isToSpending, isLoading, amount,
+          fee, isAllowance, errorMsg, typeError);
     }
     return orElse();
   }
@@ -394,17 +511,25 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
 
 abstract class TransferLoaded implements TransferState {
   const factory TransferLoaded(
-      {required final bool isToSpending,
+      {required final TokenEntity currentToken,
+      required final TokenEntity backupToken,
+      required final bool isToSpending,
       final bool isLoading,
+      final double? amount,
+      final double? fee,
+      final bool? isAllowance,
       final String? errorMsg,
-      final String? typeError,
-      final bool? needApprove}) = _$TransferLoaded;
+      final String? typeError}) = _$TransferLoaded;
 
+  TokenEntity get currentToken;
+  TokenEntity get backupToken;
   bool get isToSpending;
   bool get isLoading;
+  double? get amount;
+  double? get fee;
+  bool? get isAllowance;
   String? get errorMsg;
   String? get typeError;
-  bool? get needApprove;
   @JsonKey(ignore: true)
   _$$TransferLoadedCopyWith<_$TransferLoaded> get copyWith =>
       throw _privateConstructorUsedError;
