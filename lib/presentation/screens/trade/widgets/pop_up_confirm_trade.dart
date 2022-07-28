@@ -118,7 +118,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                   textStyle: TextStyles.w600LightGreySize16,
                   width: double.infinity,
                   color: AppColors.light4,
-                  onPressed: () => Navigator.maybePop(context),
+                  onPressed: () => Navigator.pop(context, true),
                 ),
               ),
               const SizedBox(

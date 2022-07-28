@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/phoenix.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
@@ -99,8 +100,9 @@ class ProfileWidget extends StatelessWidget {
             title: LocaleKeys.logout,
             textStyle: TextStyles.bold16Blue,
             borderColor: AppColors.blue,
-            onPressed: () {
-              getIt<LogOutUseCase>().call(NoParams());
+            onPressed: () async {
+              await getIt<LogOutUseCase>().call(NoParams());
+              Phoenix.rebirth(context);
             },
           ),
         ),

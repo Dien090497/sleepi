@@ -6,7 +6,6 @@ import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/access_token_expire_model/access_token_expire_model.dart';
 import 'package:slee_fi/usecase/logout_usecase.dart';
-import 'package:slee_fi/usecase/make_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
@@ -93,12 +92,7 @@ class QueueInterceptor extends QueuedInterceptor {
 
   Future<void> refreshTokenExpire(
       DioError e, ErrorInterceptorHandler handler) async {
-    final String email = (await _secureStorage.readCurrentUser())!.email;
-    getIt<LogOutUseCase>().call(NoParams()).then((value) {
-      value.fold((l) => null, (r) async {
-        await getIt<MakeFirstOpenAppUseCase>().call(email);
-      });
-    });
+    getIt<LogOutUseCase>().call(NoParams());
     // if (e.response?.data.toString().toLowerCase().contains('refresh') ??
     //     false) {
     // final ctx = navKey.currentContext;
