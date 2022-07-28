@@ -43,7 +43,7 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
             refreshController.loadNoData();
           }
 
-          if (state.openBedBoxSuccess != null) {
+          if (state.openBedBoxSuccess != null && !widget.isBed) {
             showSuccessfulDialog(context, null).then((value) =>
                 Navigator.pushNamed(
                     context, R.nftInfo,
@@ -52,7 +52,7 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
             cubit.clearOpenSuccess();
           }
         }
-        if (state is NftListError) {
+        if (state is NftListError && !widget.isBed) {
           showMessageDialog(context, state.msg);
         }
       },

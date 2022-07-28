@@ -50,6 +50,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    constraints: const BoxConstraints(maxWidth: 90),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
@@ -58,6 +59,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
                     alignment: Alignment.center,
                     child: SFText(
+                      textAlign: TextAlign.center,
                       keyText: jewel.nftName,
                       maxLines: 2,
                       style: TextStyles.white1w700size12
