@@ -14,23 +14,15 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/wallet/get_current_mnemonic_usecasse.dart';
 
-class ShowSeedPhraseScreen extends StatefulWidget {
+class ShowSeedPhraseScreen extends StatelessWidget {
   const ShowSeedPhraseScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ShowSeedPhraseScreen> createState() => _ShowSeedPhraseScreenState();
-}
-
-class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
-  bool hide = true;
-
-  List<String> seedPhrase = [];
-
-  late final _currentMnemonic = getIt<GetCurrentMnemonicUsecase>();
 
   @override
   Widget build(BuildContext context) {
     var sizeHeight = MediaQuery.of(context).size.height;
+    final currentMnemonic = getIt<GetCurrentMnemonicUsecase>();
+    bool isHiding = true;
+
     return BackgroundWidget(
       appBar: SFAppBar(
         context: context,
@@ -38,76 +30,67 @@ class _ShowSeedPhraseScreenState extends State<ShowSeedPhraseScreen> {
         textStyle: TextStyles.bold18LightWhite,
       ),
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+        child: StatefulBuilder(builder: (context, setState) {
+          return ListView(
+            padding: const EdgeInsets.all(16.0),
             children: [
               SFCard(
-                // height: sizeHeight * 0.66,
                 child: FutureBuilder<dartz.Either<FailureMessage, String>>(
-              future: _currentMnemonic.call(NoParams()),
-              builder: (context, snapshot) {
-                if (snapshot.hasData && snapshot.data!.isRight()) {
-                  snapshot.data!.foldRight(
-                      String, (r, previous) => seedPhrase = r.split(' '));
-                  return ListView.separated(
-                      shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      separatorBuilder: (context, index) => Divider(
-                            color: AppColors.lightWhite.withOpacity(0.05),
-                            height: 1,
+                  future: currentMnemonic.call(NoParams()),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && snapshot.data!.isRight()) {
+                      final List<String> seedPhrase = snapshot.data!
+                          .foldRight([], (r, previous) => r.split(' '));
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        separatorBuilder: (context, index) => Divider(
+                          color: AppColors.lightWhite.withOpacity(0.05),
+                          height: 1,
+                        ),
+                        itemCount: seedPhrase.length,
+                        itemBuilder: (_, i) => SFListTile(
+                          text: "${i + 1}",
+                          trailing: SFText(
+                            keyText: isHiding ? "-----" : seedPhrase[i],
+                            stringCase: StringCase.lowerCaseCase,
+                            style: TextStyles.lightGrey14,
                           ),
-                      itemCount: seedPhrase.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          SFListTile(
-                            text: "${index + 1}",
-                            trailing: SFText(
-                              keyText: hide ? "-----" : seedPhrase[index],
-                              stringCase: StringCase.lowerCaseCase,
-                              style: TextStyles.lightGrey14,
-                            ),
-                          ));
-                } else if (snapshot.hasData && snapshot.data!.isRight()) {
-                  String messages = '';
-                  snapshot.data!.foldLeft(
-                      FailureMessage, (previous, r) => messages = r);
-                  return Center(
-                      child: SFText(
-                          keyText: messages, style: TextStyles.white12));
-                }
-
-                return const Center(child: CircularProgressIndicator());
-              },
+                        ),
+                      );
+                    } else if (snapshot.hasData && snapshot.data!.isLeft()) {
+                      final String messages =
+                          snapshot.data!.foldLeft('', (previous, r) => r);
+                      return Center(
+                          child: SFText(
+                              keyText: messages, style: TextStyles.white12));
+                    }
+                    return const Center(child: CircularProgressIndicator());
+                  },
                 ),
               ),
-              Expanded(
-                child: Column(
-                  children: [
-                    SizedBox(height: sizeHeight * 0.03),
-                    SFText(
-                      keyText: LocaleKeys.displays_message_show_seed_phrase,
-                      style: TextStyles.lightGrey12,
-                    ),
-                    const SizedBox(height: 16.0),
-                    GestureDetector(
-                      onTapDown: (details) {
-                        setState(() => hide = false);
-                      },
-                      onTapUp: (detail) {
-                        setState(() => hide = true);
-                      },
-                      child: SFText(
-                        keyText: LocaleKeys.press_and_hold_to_reveal,
-                        style: TextStyles.bold18White,
-                      ),
-                    ),
-                  ],
+              SizedBox(height: sizeHeight * 0.03),
+              SFText(
+                keyText: LocaleKeys.displays_message_show_seed_phrase,
+                style: TextStyles.lightGrey12,
+              ),
+              const SizedBox(height: 16.0),
+              GestureDetector(
+                onTapDown: (details) {
+                  setState(() => isHiding = false);
+                },
+                onTapUp: (detail) {
+                  setState(() => isHiding = true);
+                },
+                child: SFText(
+                  keyText: LocaleKeys.press_and_hold_to_reveal,
+                  style: TextStyles.bold18White,
                 ),
               ),
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

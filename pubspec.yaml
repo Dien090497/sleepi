@@ -164,10 +164,10 @@ flavorizr:
     #    - flutter:app
     #    - flutter:pages
     - flutter:targets
-    #    - ios:xcconfig
+    - ios:xcconfig
     - ios:buildTargets
-    #    - ios:schema
-    #    - ios:dummyAssets
+    - ios:schema
+        - ios:dummyAssets
     #    - ios:icons
     - ios:plist
     #    - ios:launchScreen
@@ -183,7 +183,7 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee_fi"
+        bundleId: "com.sotatek.slee-fi"
 
     stg:
       app:
@@ -192,7 +192,7 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee_fi"
+        bundleId: "com.sotatek.slee-fi.stg"
 
     prod:
       app:
@@ -201,4 +201,4 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee_fi"
+        bundleId: "com.sotatek.slee-fi"

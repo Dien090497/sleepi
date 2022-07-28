@@ -66,6 +66,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release-stg"
+      customArchiveName = "SleeFi Stg"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
