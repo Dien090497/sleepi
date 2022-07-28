@@ -66,6 +66,7 @@ class MyJewelsShortWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
+                    constraints: const BoxConstraints(maxWidth: 90),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
