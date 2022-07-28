@@ -472,6 +472,7 @@ abstract class  LocaleKeys {
   static const selling = 'selling';
   static const level_is_highest = 'level_is_highest';
   static const levelUp_balance_not_enough = 'levelUp_balance_not_enough';
+  static const minting_balance_not_enough = 'minting_balance_not_enough';
   static const enough_times_mint = 'enough_times_mint';
   static const minting_not_exists = 'minting_not_exists';
   static const mint_success = 'mint_success';
@@ -483,7 +484,7 @@ abstract class  LocaleKeys {
   static const genenis_common_bed = 'genenis_common_bed';
   static const open = 'open';
   static const apex = 'apex';
-  static const rader = 'rader';
+  static const radar = 'radar';
   static const crystals = 'crystals';
   static const reflection = 'reflection';
   static const school = 'school';

@@ -149,7 +149,7 @@ class Const {
   ];
   static const nameSoundAlarm = [
     LocaleKeys.apex,
-    LocaleKeys.rader,
+    LocaleKeys.radar,
     LocaleKeys.crystals,
     LocaleKeys.reflection,
     LocaleKeys.school,
