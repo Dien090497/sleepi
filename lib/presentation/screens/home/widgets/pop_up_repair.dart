@@ -59,14 +59,11 @@ class PopUpRepair extends StatelessWidget {
                 state is BottomBarInfoIndividualLoaded
                     ? SFText(
                         keyText: LocaleKeys.durability,
-                        suffix: ' : ${state.valueRepair ?? bedEntity.durability.toInt()}/100',
+                        suffix:
+                            ' : ${state.valueRepair ?? bedEntity.durability.toInt()}/100',
                         style: TextStyles.white16,
                       )
-                    : SFText(
-                        keyText: LocaleKeys.durability,
-                        suffix: ' : --/100',
-                        style: TextStyles.white16,
-                      ),
+                    : const Center(child: CircularProgressIndicator()),
                 state is BottomBarInfoIndividualLoaded
                     ? Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),
@@ -97,37 +94,12 @@ class PopUpRepair extends StatelessWidget {
                           },
                         ),
                       )
-                    : Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: SfSlider(
-                          value: 0,
-                          min: 0,
-                          max: 100,
-                          activeColor: AppColors.green,
-                          thumbIcon: Container(
-                            width: 16,
-                            height: 16,
-                            decoration: const BoxDecoration(
-                              color: AppColors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            padding: const EdgeInsets.all(4),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                color: AppColors.green,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          ),
-                          onChanged: (v) {},
-                        ),
-                      ),
+                    : const SizedBox(),
                 const SizedBox(height: 32),
                 state is BottomBarInfoIndividualLoaded
                     ? SFLabelValue(
                         label: LocaleKeys.cost,
-                        value:
-                            '${state.cost?.toStringAsFixed(1) ?? 0.0} SLFT',
+                        value: '${state.cost?.toStringAsFixed(1) ?? 0.0} SLFT',
                         styleValue: TextStyles.white16,
                       )
                     : const SFLabelValue(

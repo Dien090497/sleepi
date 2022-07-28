@@ -177,7 +177,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     }, (success) {
       final currentState = state;
       if (currentState is SocketStateLoaded) {
-        final list = currentState.jewels ?? <JewelEntity>[] + success;
+        final list = (currentState.jewels ?? <JewelEntity>[]) + success;
         emit(currentState.copyWith(
             errorMessage: null,
             jewels: list,
