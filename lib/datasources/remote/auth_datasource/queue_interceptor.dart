@@ -92,7 +92,7 @@ class QueueInterceptor extends QueuedInterceptor {
 
   Future<void> refreshTokenExpire(
       DioError e, ErrorInterceptorHandler handler) async {
-    getIt<LogOutUseCase>().call(NoParams());
+    await getIt<LogOutUseCase>().call(NoParams());
     // if (e.response?.data.toString().toLowerCase().contains('refresh') ??
     //     false) {
     // final ctx = navKey.currentContext;
