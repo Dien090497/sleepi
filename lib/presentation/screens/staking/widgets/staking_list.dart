@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -17,6 +16,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
@@ -456,9 +456,9 @@ class _StakingListState extends State<StakingList> {
                       R.trade,
                       arguments: TradeArguments(
                           contractAddressFrom:
-                              Const.tokens[0]['address'].toString(),
+                              getIt<List<dynamic>>(instanceName: 'tokens')[0]['address'].toString(),
                           contractAddressTo:
-                              Const.tokens[1]['address'].toString()),
+                              getIt<List<dynamic>>(instanceName: 'tokens')[1]['address'].toString()),
                     );
                   },
                 ),
