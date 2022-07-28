@@ -12,6 +12,7 @@ import 'package:slee_fi/schema/sign_in_schema/sign_in_schema.dart';
 import 'package:slee_fi/schema/sign_up_schema/sign_up_schema.dart';
 import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
+import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
 import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
@@ -31,6 +32,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   final _fetchSettingActiveCode = getIt<SettingActiveCodeUseCase>();
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
   final _secureStorage = getIt<SecureStorage>();
+  final _getUserStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
 
   String email = '';
   String _password = '';
@@ -118,13 +120,18 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
         balanceRes.fold(
           (l) => emit(SignInSignUpState.error('$l')),
           (tokensSpending) async {
-            final firstOpen = await _isFirstOpenAppUC.call(email.trim());
-            firstOpen.fold(
-                (l) => emit(
-                    SignInSignUpState.signInSuccess(true, r, tokensSpending)),
-                (isFirstOpen) {
-              emit(SignInSignUpState.signInSuccess(
-                  isFirstOpen, r, tokensSpending));
+            final tracking = await _getUserStatusTrackingUC.call(NoParams());
+            tracking.fold((l) {
+              emit(SignInSignUpState.error('$l'));
+            }, (statusTracking) async {
+              final firstOpen = await _isFirstOpenAppUC.call(email.trim());
+              firstOpen.fold(
+                  (l) => emit(SignInSignUpState.signInSuccess(
+                      true, r, tokensSpending, statusTracking)),
+                  (isFirstOpen) async {
+                emit(SignInSignUpState.signInSuccess(
+                    isFirstOpen, r, tokensSpending, statusTracking));
+              });
             });
           },
         );

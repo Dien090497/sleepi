@@ -11,15 +11,17 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/avax.g.dart';
 import 'package:slee_fi/common/abi/erc721.g.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable()
 class Web3DataSource {
   final Web3Provider _web3provider;
-  final String avaxContractAddress = Const.tokens[0]['address'].toString();
+  final String avaxContractAddress =
+      getIt<List<dynamic>>(instanceName: 'tokens')[0]['address'].toString();
+  final String contractRouter = getIt<String>(instanceName: 'contractRouter');
 
   Web3DataSource(this._web3provider);
 
@@ -115,7 +117,7 @@ class Web3DataSource {
       String contractAddressTo,
       double value) async {
     try {
-      final contract = avaxFrom(Const.contractRouterTestNet);
+      final contract = avaxFrom(contractRouter);
       EthereumAddress from = EthereumAddress.fromHex(contractAddressFrom);
       EthereumAddress to = EthereumAddress.fromHex(contractAddressTo);
       log(" ${from.toString()} ${to.toString()}");
@@ -141,7 +143,7 @@ class Web3DataSource {
   Future<bool> swapExactAVAXForTokens(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
-      final contract = avaxFrom(Const.contractRouterTestNet);
+      final contract = avaxFrom(contractRouter);
       EthereumAddress avax = EthereumAddress.fromHex(avaxContractAddress);
       EthereumAddress token = EthereumAddress.fromHex(contractAddress);
 
@@ -184,28 +186,27 @@ class Web3DataSource {
       String contractAddress, Credentials credentials) async {
     final contract = token(contractAddress);
     double amount = 0;
-    for (final element in Const.tokens) {
+    for (final element in getIt<List<dynamic>>(instanceName: 'tokens')) {
       if (element['address'].toString().toLowerCase() ==
           contractAddress.toLowerCase()) {
         amount = double.parse(element['totalSupply'].toString());
       }
     }
     final decimal = await contract.decimals();
-    await contract.approve(EthereumAddress.fromHex(Const.contractRouterTestNet),
+    await contract.approve(EthereumAddress.fromHex(contractRouter),
         BigInt.from(amount) * BigInt.from(math.pow(10, decimal.toInt())),
         credentials: credentials);
   }
 
   Future<BigInt> allowance(EthereumAddress owner, String contractAddress) {
     final contract = token(contractAddress);
-    return contract.allowance(
-        owner, EthereumAddress.fromHex(Const.contractRouterTestNet));
+    return contract.allowance(owner, EthereumAddress.fromHex(contractRouter));
   }
 
   Future<bool> swapExactTokensForAvax(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
-      final contract = avaxFrom(Const.contractRouterTestNet);
+      final contract = avaxFrom(contractRouter);
       EthereumAddress toToken = EthereumAddress.fromHex(avaxContractAddress);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddress);
 
@@ -260,7 +261,7 @@ class Web3DataSource {
       String contractAddressTo,
       double value) async {
     try {
-      final contract = avaxFrom(Const.contractRouterTestNet);
+      final contract = avaxFrom(contractRouter);
       EthereumAddress toToken = EthereumAddress.fromHex(contractAddressTo);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddressFrom);
 
