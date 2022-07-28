@@ -29,8 +29,7 @@ import '../datasources/local/secure_storage.dart' as _i27;
 import '../datasources/local/shared_preference_datasource.dart' as _i28;
 import '../datasources/remote/auth_datasource/auth_datasource.dart' as _i41;
 import '../datasources/remote/auth_datasource/auth_interceptor.dart' as _i32;
-import '../datasources/remote/auth_datasource/refresh_token_interceptor.dart'
-    as _i36;
+import '../datasources/remote/auth_datasource/queue_interceptor.dart' as _i36;
 import '../datasources/remote/network/nft_datasource.dart' as _i24;
 import '../datasources/remote/network/spending_datasource.dart' as _i29;
 import '../datasources/remote/network/wallet_datasource.dart' as _i30;
@@ -261,8 +260,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i15.IsarDataSource>(),
       get<_i21.HistoryDataSource>(),
       get<_i27.SecureStorage>()));
-  gh.factory<_i36.RefreshTokenInterceptor>(() =>
-      _i36.RefreshTokenInterceptor(get<_i27.SecureStorage>(), get<_i8.Dio>()));
+  gh.factory<_i36.QueueInterceptor>(
+      () => _i36.QueueInterceptor(get<_i27.SecureStorage>(), get<_i8.Dio>()));
   gh.factory<_i37.SendToExternalUseCase>(
       () => _i37.SendToExternalUseCase(get<_i34.ITransactionRepository>()));
   gh.factory<_i38.SendTokenToExternalUseCase>(() =>
@@ -270,7 +269,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i39.SleepTrackingApi>(() => _i39.SleepTrackingApi(
       get<_i8.Dio>(),
       get<_i32.AuthInterceptor>(),
-      get<_i36.RefreshTokenInterceptor>(),
+      get<_i36.QueueInterceptor>(),
       get<String>(instanceName: 'baseUrl')));
   gh.factory<_i40.TransactionRemoteDataSource>(() =>
       _i40.TransactionRemoteDataSource(
@@ -282,7 +281,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i41.AuthDataSource>(() => _i41.AuthDataSource(
       get<_i8.Dio>(),
       get<_i32.AuthInterceptor>(),
-      get<_i36.RefreshTokenInterceptor>(),
+      get<_i36.QueueInterceptor>(),
       get<String>(instanceName: 'baseUrl')));
   gh.factory<_i42.CurrentNetworkExplorerUseCase>(() =>
       _i42.CurrentNetworkExplorerUseCase(get<_i34.ITransactionRepository>()));
@@ -338,7 +337,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i66.NftApi>(() => _i66.NftApi(
       get<_i8.Dio>(),
       get<_i32.AuthInterceptor>(),
-      get<_i36.RefreshTokenInterceptor>(),
+      get<_i36.QueueInterceptor>(),
       get<String>(instanceName: 'baseUrl')));
   gh.factory<_i67.OpenBedBoxUseCase>(
       () => _i67.OpenBedBoxUseCase(get<_i54.IUserRepository>()));

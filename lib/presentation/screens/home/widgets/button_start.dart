@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
@@ -46,21 +45,7 @@ class _ButtonStartState extends State<ButtonStart> {
         disabled: !(widget.enableStart && countDownEnded),
         width: double.infinity,
         onPressed: () async {
-          final isAppInstalled = await LaunchApp.isAppInstalled(
-            androidPackageName: 'com.google.android.apps.fitness',
-            iosUrlScheme: 'x-apple-health://',
-          );
-          if (isAppInstalled) {
-            widget.onStartTracking();
-          } else {
-            await LaunchApp.openApp(
-              androidPackageName: 'com.google.android.apps.fitness',
-              iosUrlScheme: 'x-apple-health://',
-              appStoreLink:
-                  'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
-              // openStore: false
-            );
-          }
+          widget.onStartTracking();
         },
         child: _CountDownText(
           onEnd: () {

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_bloc.dart';
@@ -11,9 +10,8 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_even
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
-import 'package:slee_fi/resources/resources.dart';
-
-import '../../wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 
 class TabJewelsDetail extends StatelessWidget {
   const TabJewelsDetail({Key? key}) : super(key: key);
@@ -70,14 +68,9 @@ class TabJewelsDetail extends StatelessWidget {
                     ),
 
                     /// UPGRADE TAB FUNCTION
-                    // const UpGradeTab(isJewel: true),
+                    const UpGradeTab(isJewel: true),
                     /// ------------------------------
 
-                    Padding(
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.height * 0.3),
-                      child: const Center(child: SFIcon(Ics.commingSoon)),
-                    )
                   ],
                 ),
               ),
@@ -93,7 +86,7 @@ class TabJewelsDetail extends StatelessWidget {
 
   // void _showJewelDialog(
   //   BuildContext context,
-  //   BedEntity jewel,
+  //   JewelEntity jewel,
   // ) {
   //   showCustomDialog(
   //     context,

@@ -2,21 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_image_border.dart';
-import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/entities/socket_entity/socket_entity.dart';
-import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
-import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/modal_jewel_list.dart';
-import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
-
-import 'jewel_dialog_body.dart';
 
 class SocketComponent extends StatelessWidget {
   const SocketComponent({
@@ -65,16 +57,19 @@ class SocketComponent extends StatelessWidget {
                                 : Ics.icSocketEmpty,
                     onTap: () {
                       if (index + 1 > maxSocket) return;
-                      if (sockets[index].socketType == SocketType.block) {
-                        _showDialogConfirmOpenSocket(context, index);
-                      } else if (sockets[index].socketType ==
-                          SocketType.ready) {
-                        _showDialogJewelDetail(
-                            context, sockets[index].jewelEntity!, index);
-                      } else if (sockets[index].socketType ==
-                          SocketType.empty) {
-                        _showModalJewelList(context, index);
-                      }
+                      showComingSoonDialog(context);
+                      /// ADD SOCKET TO BED
+                      // if (sockets[index].socketType == SocketType.block) {
+                      //   _showDialogConfirmOpenSocket(context, index);
+                      // } else if (sockets[index].socketType ==
+                      //     SocketType.ready) {
+                      //   // _showDialogJewelDetail(
+                      //   //     context, sockets[index].jewelEntity!, index);
+                      // } else if (sockets[index].socketType ==
+                      //     SocketType.empty) {
+                      //   _showModalJewelList(context, index);
+                      // }
+                      /// -----------------------------------------
                     },
                     iconColor: index + 1 > maxSocket
                         ? AppColors.borderDarkColor
@@ -90,50 +85,50 @@ class SocketComponent extends StatelessWidget {
     );
   }
 
-  _showDialogConfirmOpenSocket(BuildContext context, int index) {
-    showCustomDialog(context, children: [
-      PopUpStaking(
-          message: LocaleKeys.do_you_want_open_the_socket,
-          onPressed: () {
-            context.read<SocketBloc>().add(OpenSocket(index));
-          })
-    ]);
-  }
+  // _showDialogConfirmOpenSocket(BuildContext context, int index) {
+  //   showCustomDialog(context, children: [
+  //     PopUpStaking(
+  //         message: LocaleKeys.do_you_want_open_the_socket,
+  //         onPressed: () {
+  //           context.read<SocketBloc>().add(OpenSocket(index));
+  //         })
+  //   ]);
+  // }
 
-  void _showDialogConfirmRemoveJewel(BuildContext context, int index) {
-    showCustomDialog(context, children: [
-      PopUpStaking(
-          message: LocaleKeys.taking_off_jewel_with_cost,
-          onPressed: () {
-            context.read<SocketBloc>().add(RemoveJewel(index));
-          })
-    ]);
-  }
+  // void _showDialogConfirmRemoveJewel(BuildContext context, int index) {
+  //   showCustomDialog(context, children: [
+  //     PopUpStaking(
+  //         message: LocaleKeys.taking_off_jewel_with_cost,
+  //         onPressed: () {
+  //           context.read<SocketBloc>().add(RemoveJewel(index));
+  //         })
+  //   ]);
+  // }
 
-  _showDialogJewelDetail(
-      BuildContext context, JewelEntity jewelEntity, int index) {
-    showCustomDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: [
-        JewelDialogBody(
-          jewel: jewelEntity,
-          onSellTap: () {
-            Navigator.pop(context);
-            _showDialogConfirmRemoveJewel(context, index);
-          },
-          onTransferTap: () {
-            Navigator.pop(context);
-          },
-          textOnSell: LocaleKeys.remove,
-          textOnTransfer: LocaleKeys.ok,
-        ),
-      ],
-    );
-  }
+  // _showDialogJewelDetail(
+  //     BuildContext context, JewelEntity jewelEntity, int index) {
+  //   showCustomDialog(
+  //     context,
+  //     padding: const EdgeInsets.all(24),
+  //     children: [
+  //       JewelDialogBody(
+  //         jewel: jewelEntity,
+  //         onSellTap: () {
+  //           Navigator.pop(context);
+  //           _showDialogConfirmRemoveJewel(context, index);
+  //         },
+  //         onTransferTap: () {
+  //           Navigator.pop(context);
+  //         },
+  //         textOnSell: LocaleKeys.remove,
+  //         textOnTransfer: LocaleKeys.ok,
+  //       ),
+  //     ],
+  //   );
+  // }
 
-  _showModalJewelList(BuildContext context, int index) {
-    SFModalBottomSheet.show(
-        context, 0.8, ModalJewelList(socketBloc: context.read<SocketBloc>()));
-  }
+  // _showModalJewelList(BuildContext context, int index) {
+  //   SFModalBottomSheet.show(
+  //       context, 0.8, ModalJewelList(socketBloc: context.read<SocketBloc>()));
+  // }
 }

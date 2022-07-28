@@ -69,6 +69,16 @@ class AppColors {
   static const rank4 = Color(0xFF0092F3);
   static const rank5 = Color(0xFF426BFF);
 
+  static const commonBedTopLeft = Color(0xFF272839);
+
+  static const uncommonBedTopLeft = Color(0xFF172932);
+
+  static const rareBedTopLeft = Color(0xFF18203b);
+
+  static const epicBedTopLeft = Color(0xFF2b1f23);
+
+  static const legendaryBedTopLeft = Color(0xFF221a3c);
+
   static const commonBed = Color(0xFFCBD5E1);
 
   static const uncommonBed = Color(0xFF2ADF9E);

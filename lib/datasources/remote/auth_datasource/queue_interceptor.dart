@@ -10,11 +10,11 @@ import 'package:slee_fi/usecase/make_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 @Injectable()
-class RefreshTokenInterceptor extends QueuedInterceptor {
-  final SecureStorage secureStorage;
+class QueueInterceptor extends QueuedInterceptor {
+  final SecureStorage _secureStorage;
   final Dio dio;
 
-  RefreshTokenInterceptor(this.secureStorage, this.dio);
+  QueueInterceptor(this._secureStorage, this.dio);
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
@@ -26,7 +26,7 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
           false) {
         final context = navKey.currentContext;
         if (context != null) {
-          final String email = (await secureStorage.readCurrentUser())!.email;
+          final String email = (await _secureStorage.readCurrentUser())!.email;
           await getIt<LogOutUseCase>().call(NoParams()).then((value) {
             value.fold((l) => null, (r) async {
               await getIt<MakeFirstOpenAppUseCase>().call(email);
@@ -98,8 +98,8 @@ class RefreshTokenInterceptor extends QueuedInterceptor {
 
   Future<void> refreshTokenExpire(
       DioError e, ErrorInterceptorHandler handler) async {
-    final String email = (await secureStorage.readCurrentUser())!.email;
-    await getIt<LogOutUseCase>().call(NoParams()).then((value) {
+    final String email = (await _secureStorage.readCurrentUser())!.email;
+    getIt<LogOutUseCase>().call(NoParams()).then((value) {
       value.fold((l) => null, (r) async {
         await getIt<MakeFirstOpenAppUseCase>().call(email);
       });

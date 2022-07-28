@@ -36,21 +36,20 @@ Future<void> run() async {
       DeviceOrientation.portraitDown,
     ]),
   ]);
-
-  BlocOverrides.runZoned(
-    () async => await Sentry.init(
-      (options) {
-        options.dsn =
-            'https://9afba6dcc9e742eea36ba51bef7238ad@o1325661.ingest.sentry.io/6584991';
-      },
-      appRunner: () => runApp(EasyLocalization(
+  await Sentry.init(
+    (options) {
+      options.dsn =
+          'https://9afba6dcc9e742eea36ba51bef7238ad@o1325661.ingest.sentry.io/6584991';
+    },
+    appRunner: () => BlocOverrides.runZoned(
+      () => runApp(EasyLocalization(
         supportedLocales: Const.locales,
         path: 'assets/translations',
         fallbackLocale: Const.localeEN,
         child: const MyApp(),
-      )), // Init your App.
+      )),
+      blocObserver: AppBlocObserver(),
     ),
-    blocObserver: AppBlocObserver(),
   );
 }
 
@@ -118,9 +117,7 @@ Future<void> onStart(ServiceInstance service) async {
   }
 
   service.on(Const.stopService).listen((event) async {
-    if (audioPlayer.playing) {
-      await audioPlayer.stop();
-    }
+    await audioPlayer.stop();
     await audioPlayer.dispose();
     service.stopSelf();
   });

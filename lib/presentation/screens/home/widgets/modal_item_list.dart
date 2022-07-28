@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheets.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -17,7 +17,6 @@ import 'package:slee_fi/presentation/blocs/item_list/item_bloc.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_event.dart';
 import 'package:slee_fi/presentation/blocs/item_list/item_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_item.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class ModalItemList extends StatelessWidget {
@@ -86,17 +85,20 @@ class ModalItemList extends StatelessWidget {
                         final item = state.itemList![i];
                         return GestureDetector(
                           onTap: () {
-                            showCustomAlertDialog(context,
-                                children: PopUpItem(
-                                  level: item.level,
-                                  type: item.type,
-                                  id: item.name,
-                                  icon: item.image,
-                                  onConfirm: () {
-                                    homeBloc.add(AddItem(item));
-                                    itemBloc.add(AddItemSuccessEvent(item));
-                                  },
-                                ));
+                            showComingSoonDialog(context);
+                            /// SHOW POP-UP DETAIL ITEM
+                            // showCustomAlertDialog(context,
+                            //     children: PopUpItem(
+                            //       level: item.level,
+                            //       type: item.type,
+                            //       id: item.name,
+                            //       icon: item.image,
+                            //       onConfirm: () {
+                            //         homeBloc.add(AddItem(item));
+                            //         itemBloc.add(AddItemSuccessEvent(item));
+                            //       },
+                            //     ));
+                            /// --------------------------------------------
                           },
                           child: MyItemsShortWidget(
                             level: item.level,
