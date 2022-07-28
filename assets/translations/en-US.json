@@ -486,5 +486,6 @@
   "reflection": "Reflection",
   "school": "School",
   "coming_soon": "Coming soon",
-  "repair_bed_balance_not_enough": "リペアに必要な残高がありません"
+  "repair_bed_balance_not_enough": "リペアに必要な残高がありません",
+  "loading": "Loading"
  }

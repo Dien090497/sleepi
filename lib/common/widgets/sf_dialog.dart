@@ -287,7 +287,8 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
 
 Future<T?> showLoadingDialog<T>(
   BuildContext context,
-  String message, {
+   {
+     String? message,
   bool barrierDismissible = false,
 }) async {
   return showCustomAlertDialog(
@@ -308,7 +309,7 @@ Future<T?> showLoadingDialog<T>(
                       ? const CircularProgressIndicator(strokeWidth: 3)
                       : const CupertinoActivityIndicator())),
           SFText(
-            keyText: message,
+            keyText: message ?? LocaleKeys.loading.tr(),
             style: TextStyles.white16,
             textAlign: TextAlign.center,
           )

@@ -489,5 +489,6 @@ abstract class  LocaleKeys {
   static const school = 'school';
   static const coming_soon = 'coming_soon';
   static const repair_bed_balance_not_enough = 'repair_bed_balance_not_enough';
+  static const loading = 'loading';
 
 }
