@@ -89,7 +89,7 @@ class PasscodeScreen extends StatelessWidget {
                             passcodeController: passCodeController,
                             onCompleted: (String passcode) async {
                               await Future.delayed(
-                                  const Duration(milliseconds: 200));
+                                  const Duration(milliseconds: 300));
                               cubit.validate(passCodeController.text);
                             },
                           ),
