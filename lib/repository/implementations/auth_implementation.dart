@@ -46,9 +46,16 @@ class AuthImplementation extends IAuthRepository {
       SignInSchema signInSchema) async {
     try {
       final result = await _authDataSource.signIn(signInSchema);
+      final lastUser = await _secureStorage.lastUserSignIn();
+
+      if (lastUser != signInSchema.email) {
+        clearAll();
+      }
+
       _secureStorage.writeUser(result.data.user);
       _secureStorage.setAccessToken(result.data.accessToken);
       _secureStorage.setRefreshToken(result.data.refreshToken);
+
       return Right(result.data.user.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -110,6 +117,7 @@ class AuthImplementation extends IAuthRepository {
       final signature = await _secureStorage.readSignatureMessage();
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final chainID = _getStorageDataSource.getCurrentChainId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
 
       await Future.wait([
         _secureStorage.clearStorage(),
@@ -125,6 +133,9 @@ class AuthImplementation extends IAuthRepository {
       }
       if (chainID != null) {
         _getStorageDataSource.setCurrentChainId(chainID);
+      }
+      if(wallet != null){
+        _isarDataSource.putWallet(wallet);
       }
 
       _getStorageDataSource.setCurrentWalletId(walletId);

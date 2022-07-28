@@ -471,7 +471,7 @@ abstract class  LocaleKeys {
   static const consume_and_turn_gacha_time = 'consume_and_turn_gacha_time';
   static const selling = 'selling';
   static const level_is_highest = 'level_is_highest';
-  static const balance_not_enough_to_level_up = 'balance_not_enough_to_level_up';
+  static const levelUp_balance_not_enough = 'levelUp_balance_not_enough';
   static const enough_times_mint = 'enough_times_mint';
   static const minting_not_exists = 'minting_not_exists';
   static const mint_success = 'mint_success';
@@ -488,9 +488,9 @@ abstract class  LocaleKeys {
   static const reflection = 'reflection';
   static const school = 'school';
   static const coming_soon = 'coming_soon';
+  static const loading = 'loading';
   static const please_visit_settings_to_check_your_seed_phrase = 'please_visit_settings_to_check_your_seed_phrase';
   static const click_here_to_check_seed_phrase = 'click_here_to_check_seed_phrase';
   static const repair_bed_balance_not_enough = 'repair_bed_balance_not_enough';
-  static const loading = 'loading';
 
 }

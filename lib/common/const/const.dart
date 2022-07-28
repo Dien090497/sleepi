@@ -74,7 +74,7 @@ class Const {
   static const tokens = [
     {
       // "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",//mainnet
-      "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c", //testnet
+      "address": "0x0000000000000000000000000000000000000000", //testnet
       "symbol": "AVAX",
       "decimal": 18,
       "totalSupply": 858592.343225,

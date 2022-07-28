@@ -32,6 +32,7 @@ class SecureStorage {
   Future<void> clearStorage() async {
     final suggestionEmail = getSuggestionEmail('');
     final String firstOpen = await checkAccountLoginApp();
+    final String? lastUser = await lastUserSignIn();
 
     await Future.wait([
       _secureStorage.deleteAll(),
@@ -39,6 +40,9 @@ class SecureStorage {
     ]);
     for (var element in suggestionEmail) {
       addEmailSuggestion(element);
+    }
+    if (lastUser != null) {
+      await saveLastUserSignIn(lastUser);
     }
     await makeFirstOpen(firstOpen);
   }

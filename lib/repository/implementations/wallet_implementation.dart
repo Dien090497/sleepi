@@ -387,6 +387,7 @@ class WalletImplementation extends IWalletRepository {
         final credentials =
             _web3DataSource.credentialsFromPrivateKey(privateKey);
         final message = await _secureStorage.readMessage();
+        print('### message $message');
         final ethereumAddress = await credentials.extractAddress();
         final signature = _web3DataSource.generateSignature(
             privateKey: privateKey, message: message ?? 'welcome to sleefi');
