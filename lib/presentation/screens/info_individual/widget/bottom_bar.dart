@@ -16,7 +16,6 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_level_up.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
@@ -27,7 +26,7 @@ class BottomBarWidget extends StatefulWidget {
       {Key? key, required this.bedEntity, required this.onBackIndividual})
       : super(key: key);
   final BedEntity bedEntity;
-  final VoidCallback onBackIndividual;
+  final Function(bool? successTransfer) onBackIndividual;
 
   @override
   State<BottomBarWidget> createState() => BottomBarWidgetState();
@@ -107,7 +106,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is BottomBarInfoIndividualError) {
                   Navigator.pop(context);
                   showMessageDialog(context, state.message);
-                  widget.onBackIndividual();
+                  widget.onBackIndividual(null);
                   cubit.init();
                 }
 
@@ -115,7 +114,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                   if (state.successTransfer) {
                     Navigator.pop(context);
                     showSuccessfulDialog(context, null);
-                    widget.onBackIndividual();
+                    widget.onBackIndividual( true);
                     cubit.init();
                   }
                 }
@@ -137,7 +136,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                             cubit: cubit,
                           ),
                         ).then((value) {
-                          widget.onBackIndividual();
+                          widget.onBackIndividual(null);
                           index = -1;
                           setState(() {});
                         });
@@ -166,7 +165,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                       index = 2;
                       Navigator.pushNamed(context, R.mint, arguments: bedEntity)
                           .then((value) {
-                        widget.onBackIndividual();
+                        widget.onBackIndividual(null);
                         index = -1;
                         setState(() {});
                       });

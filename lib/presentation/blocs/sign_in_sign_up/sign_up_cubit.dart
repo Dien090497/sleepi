@@ -113,7 +113,7 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     await result.fold(
       (l) async => emit(SignInSignUpState.error('$l')),
       (r) async {
-        _saveEmailSuggestion(email);
+        await _saveEmailSuggestion(email);
         final balanceRes = await _fetchBalanceSpendingUC.call('${r.id}');
         balanceRes.fold(
           (l) => emit(SignInSignUpState.error('$l')),
@@ -208,7 +208,8 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     _password = value;
   }
 
-  void _saveEmailSuggestion(String email) {
+  Future<void> _saveEmailSuggestion(String email) async {
     _secureStorage.addEmailSuggestion(email);
+    _secureStorage.saveLastUserSignIn(email);
   }
 }

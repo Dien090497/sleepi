@@ -5,7 +5,6 @@ import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
-import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -22,7 +21,6 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog
 import 'package:slee_fi/resources/resources.dart';
 
 import 'jewel_dialog_body.dart';
-import 'modal_jewel_list.dart';
 
 class UpGradeTab extends StatefulWidget {
   const UpGradeTab({Key? key, required this.isJewel}) : super(key: key);

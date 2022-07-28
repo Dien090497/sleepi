@@ -98,7 +98,6 @@ class BedModel {
       this.name);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {
-    print('json bed mode is   $json');
     return _$BedModelFromJson(json);
   }
 
