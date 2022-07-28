@@ -69,10 +69,9 @@ extension NumX on num {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
     } else {
       final balance = toDouble();
-
       int index = balance.toString().indexOf('.');
-      if (balance.toString().length - index > 7) {
-        index += 7;
+      if (balance.toString().length - index > 6) {
+        index += 6;
       } else {
         index = balance.toString().length;
       }
@@ -84,23 +83,20 @@ extension NumX on num {
               fractionDigits: balance % 1 == 0
                   ? 0
                   : math.min(
-                      7,
+                      6,
                       balance.toString().length -
                           balance.toString().indexOf('.') -
                           1),
               compactFormatType: CompactFormatType.long));
-      return fmf.output.nonSymbol;
-      final data = balance
-          .toString()
-          .substring(0, index)
-          .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
-      return balance
-          .toString()
-          .substring(0, index)
-          .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+      final result = fmf.output.nonSymbol;
+      if (double.parse(result.replaceAll(',', '')) > balance) {
+        final decimal = balance.toString().split('.').last;
+        final endData = decimal.substring(0, math.min(6, decimal.length));
+        var first = result.split('.').first;
+        return '$first.$endData';
+      }
 
-      // return noSimbolInUSFormat.format(result);
-
+      return result;
     }
   }
 }

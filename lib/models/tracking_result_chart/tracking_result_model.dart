@@ -24,6 +24,7 @@ class TrackingResultModel {
   int? sleepQuality;
   int? startSleepTime;
   int? id;
+  BedInfo? bed;
 
   factory TrackingResultModel.fromJson(Map<String, dynamic> json) =>
       _$TrackingResultModelFromJson(json);
@@ -48,5 +49,21 @@ class TrackingResultModel {
       this.enableInsurance,
       this.sleepQuality,
       this.startSleepTime,
+      this.bed,
       this.id);
+}
+
+@JsonSerializable()
+class BedInfo {
+  final String name;
+  final String classNft;
+
+  BedInfo(this.name, this.classNft);
+
+  factory BedInfo.fromJson(Map<String, dynamic> json) =>
+      _$BedInfoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BedInfoToJson(this);
+
+
 }
