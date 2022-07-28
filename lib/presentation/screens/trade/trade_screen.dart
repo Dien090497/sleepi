@@ -58,7 +58,7 @@ class _TradeScreenState extends State<TradeScreen> {
   Timer? _debounce;
 
   int getIndexAddress(String address) {
-    int index = -1;
+    int index = 0;
     for (int i = 0; i < Const.tokens.length; i++) {
       if (address.toLowerCase() ==
           Const.tokens[i]['address'].toString().toLowerCase()) {
