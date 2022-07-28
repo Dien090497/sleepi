@@ -109,6 +109,12 @@ class AuthImplementation extends IAuthRepository {
         _secureStorage.logOut(),
         _getStorageDataSource.deleteCurrentChainId(),
         _getStorageDataSource.deleteCurrentWalletId(),
+        _isarDataSource.clearWallet(),
+        _isarDataSource.clearHistory(),
+        _isarDataSource.clearNativeCurrencies(),
+        _isarDataSource.clearTokens(),
+        _isarDataSource.clearTokensDefault(),
+        _isarDataSource.clearTxn(),
       ]);
       return const Right(true);
     } catch (e) {
