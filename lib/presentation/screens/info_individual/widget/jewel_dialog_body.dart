@@ -7,6 +7,7 @@ import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -20,7 +21,7 @@ class JewelDialogBody extends StatelessWidget {
       this.textOnSell})
       : super(key: key);
 
-  final JewelEntity jewel;
+  final BedEntity jewel;
   final VoidCallback onSellTap;
   final VoidCallback onTransferTap;
   final String? textOnTransfer;
@@ -61,7 +62,7 @@ class JewelDialogBody extends StatelessWidget {
             const SizedBox(height: 20),
             SFText(
               keyText:
-                  '${jewel.jewelType.tr()} ${LocaleKeys.jewel.tr()} (${jewel.level})',
+                  '${jewel.jewelType?.tr()} ${LocaleKeys.jewel.tr()} (${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -72,7 +73,7 @@ class JewelDialogBody extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(8),
               child: SFText(
-                keyText: jewel.nftName,
+                keyText: jewel.name,
                 style: TextStyles.blue14.copyWith(color: qualityColor),
               ),
             ),

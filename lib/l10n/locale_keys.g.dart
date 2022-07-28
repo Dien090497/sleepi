@@ -411,7 +411,7 @@ abstract class  LocaleKeys {
   static const warning_bind_wallet = 'warning_bind_wallet';
   static const dont_allow_typing_space = 'dont_allow_typing_space';
   static const you_can_set_your_alarm_here = 'you_can_set_your_alarm_here';
-  static const your_account_has_been_create = 'your_account_has_been_create';
+  static const your_account_has_been_created = 'your_account_has_been_created';
   static const continue_ = 'continue_';
   static const incorrect_email = 'incorrect_email';
   static const email_does_not_exist = 'email_does_not_exist';
@@ -459,7 +459,7 @@ abstract class  LocaleKeys {
   static const wallet_already_mapping = 'wallet_already_mapping';
   static const base_point = 'base_point';
   static const holding_bonus = 'holding_bonus';
-  static const stacking_bonus = 'stacking_bonus';
+  static const staking_bonus = 'staking_bonus';
   static const latest = 'latest';
   static const not_granted = 'not_granted';
   static const required_time = 'required_time';
@@ -488,5 +488,6 @@ abstract class  LocaleKeys {
   static const reflection = 'reflection';
   static const school = 'school';
   static const coming_soon = 'coming_soon';
+  static const repair_bed_balance_not_enough = 'repair_bed_balance_not_enough';
 
 }

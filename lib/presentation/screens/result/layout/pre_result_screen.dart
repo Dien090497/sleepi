@@ -113,7 +113,7 @@ class _PreResultScreenState extends State<PreResultScreen> {
                                 height: 8,
                               ),
                               SFLabelValue(
-                                  label: LocaleKeys.stacking_bonus,
+                                  label: LocaleKeys.staking_bonus,
                                   value: '${resultModel.stakingBonus}'),
                               const SizedBox(
                                 height: 8,

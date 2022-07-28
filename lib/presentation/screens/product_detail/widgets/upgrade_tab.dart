@@ -263,13 +263,16 @@ class JewelSocket extends StatelessWidget {
 
             return;
           }
-          SFModalBottomSheet.show(
-              context,
-              0.8,
-              ModalJewelList(
-                isJewel: isJewel,
-                jewelBloc: context.read<JewelBloc>(),
-              ));
+          showComingSoonDialog(context);
+          /// SHOW MODAL BOTTOM ITEM TO UPGRADE
+          // SFModalBottomSheet.show(
+          //     context,
+          //     0.8,
+          //     ModalJewelList(
+          //       isJewel: isJewel,
+          //       jewelBloc: context.read<JewelBloc>(),
+          //     ));
+          /// --------------------------------------
         },
         child: jewelEntity == null
             ? const SFIcon(Ics.icPlus)

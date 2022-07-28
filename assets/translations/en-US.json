@@ -409,7 +409,7 @@
   "warning_bind_wallet": "Your account will be linked to this wallet forever, please save the seed phrase for later use",
   "dont_allow_typing_space": "Don't allow user typing space in password",
   "you_can_set_your_alarm_here": "You can set your alarm here",
-  "your_account_has_been_create": "Your account has been created",
+  "your_account_has_been_created": "Your account has been created",
   "continue_": "Continue",
   "incorrect_email": "Incorrect email. Please try again",
   "email_does_not_exist": "Your email doesn't exist. Please signup first.",
@@ -457,7 +457,7 @@
   "wallet_already_mapping": "This wallet address has already existed in the system. Please import another address.",
   "base_point": "Base Points",
   "holding_bonus": "Bed NFT Holding Bonus",
-  "stacking_bonus": "Staking Bonus",
+  "staking_bonus": "Staking Bonus",
   "latest": "Latest",
   "not_granted": "Authorization not granted",
   "required_time": "Required Time",
@@ -486,5 +486,5 @@
   "reflection": "Reflection",
   "school": "School",
   "coming_soon": "Coming soon",
-  "repair_bed_balance_not_enough": "Your balance is not enough to repair"
+  "repair_bed_balance_not_enough": "リペアに必要な残高がありません"
  }
