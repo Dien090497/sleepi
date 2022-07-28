@@ -1,7 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable()
+@Singleton()
 class GetStorageDataSource {
   final GetStorage _getStorage;
 
