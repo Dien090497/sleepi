@@ -142,12 +142,13 @@ class _TransferListState extends State<TransferList> {
                         textButton: LocaleKeys.all,
                         textInputType: const TextInputType.numberWithOptions(
                             decimal: true),
+
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                         ],
                         valueChanged: (v) {
-                          cubit.enterAmount(v);
+                          // cubit.enterAmount(v);
                         },
                         onPressed: () {
                           if (state.currentToken.symbol.toLowerCase() ==
@@ -195,6 +196,7 @@ class _TransferListState extends State<TransferList> {
                   gradient: AppColors.gradientBlueButton,
                   disabled: state.fee == null && state.errorMsg != null,
                   onPressed: () {
+                    cubit.enterAmount(valueController.text);
                     final walletState = context.read<WalletCubit>().state;
                     if (walletState is WalletStateLoaded) {
                       cubit.checkAllowance(
