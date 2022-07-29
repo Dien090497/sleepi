@@ -79,10 +79,13 @@ class PopUpConfirmSend extends StatelessWidget {
                             value: valueInEther,
                           )),
                           builder: (context, snapshot) {
-                            return Text(
-                              snapshot.hasData
-                                  ? '${snapshot.data!.getOrElse(() => 0)} ${transferToken ? arg?.symbol : 'AVAX'}'
-                                  : '--.--',
+                            return const Text(
+
+                              /// TODO: remove hardcode fee
+                              // snapshot.hasData
+                              //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
+                              //     : '--.--',
+                              '0.0014733 AVAX',
                               textAlign: TextAlign.right,
                               style: TextStyles.lightWhite16,
                             );
