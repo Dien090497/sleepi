@@ -55,17 +55,20 @@
     <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>FacebookAppID</key>
     <string>1329834907365798</string>
+    <key>FacebookClientToken</key>
+    <string>5d6cce21b7f3b3c5fc77bf9c4e1ab85e</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
-    <key>LSApplicationQueriesSchemes</key>
+  <key>LSApplicationQueriesSchemes</key>
     <array>
-      <string>instagram-stories</string>
-      <string>facebook-stories</string>
-      <string>facebook</string>
-      <string>instagram</string>
-      <string>twitter</string>
-      <string>whatsapp</string>
-      <string>tg</string>
+        <string>fbapi</string>
+        <string>fbauth2</string>
+        <string>fb-messenger-share-api</string>
+        <string>twitter</string>
+        <string>twitterauth</string>
+        <string>twitterkit-bpXejXJ05tlUvogku8ecgAzwn</string>
+        <string>instagram</string>
+        <string>tg</string>
     </array>
     <key>LSRequiresIPhoneOS</key>
     <true/>

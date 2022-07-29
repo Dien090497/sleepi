@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -44,6 +47,15 @@ class _ShareScreenState extends State<ShareScreen> {
         listener: (context, state) {
           if (state is ShareStateLoaded) {
             showSuccessfulDialog(context, null);
+          }
+          if (state is ShareStateError) {
+            final FToast fToast = FToast();
+            fToast.init(context);
+            ToastUtils.showToast(
+              fToast,
+              AppColors.white.withOpacity(0.55),
+              LocaleKeys.some_thing_wrong,
+            );
           }
         },
         builder: (context, state) {
@@ -102,6 +114,8 @@ class _ShareScreenState extends State<ShareScreen> {
                     cubit: cubit,
                   ),
                 ),
+                if (state is ShareStateLoading)
+                  const LoadingScreen()
               ],
             ),
           );
