@@ -40,7 +40,8 @@ class PasscodeScreen extends StatelessWidget {
           if (state is PasscodeValid) {
             final walletCubit = context.read<WalletCubit>();
             walletCubit.getWallet().then((_) => Navigator.pop(context, true));
-          } else {
+          }
+          if (state is PasscodeError) {
             passCodeController.clear();
           }
         },
@@ -87,9 +88,7 @@ class PasscodeScreen extends StatelessWidget {
                           SizedBox(height: 15.h),
                           PasscodeNumPad(
                             passcodeController: passCodeController,
-                            onCompleted: (String passcode) async {
-                              await Future.delayed(
-                                  const Duration(milliseconds: 200));
+                            onCompleted: (String passcode) {
                               cubit.validate(passCodeController.text);
                             },
                           ),

@@ -102,6 +102,26 @@ class NFTDataSource {
     return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
   }
 
+  Future<double> estimateDepositTokenGas({
+    required String spendingAddress,
+    required EthereumAddress ownerAddress,
+    required EtherAmount gasPrice,
+  }) async {
+    final spending = Spending(
+        address: EthereumAddress.fromHex(spendingAddress),
+        client: _web3provider.web3client);
+    final depositTokenFunc = spending.self.function('depositToken');
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: ownerAddress,
+      to: spending.self.address,
+      gasPrice: gasPrice,
+      data: depositTokenFunc.encodeCall([
+        /// Data match như khi call contract thật
+      ]),
+    );
+    return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
+  }
+
   Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
 
   Future<TransactionReceipt?> streamTxHash({

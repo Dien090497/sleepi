@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
@@ -14,15 +13,21 @@ import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 
 class CancelSellBottombar extends StatelessWidget {
-  const CancelSellBottombar({Key? key, required this.beds})
+  const CancelSellBottombar(
+      {Key? key, required this.beds, required this.onCancelSellSuccess})
       : super(key: key);
   final BedEntity beds;
+  final Function onCancelSellSuccess;
 
-    void _showBedDialog(BuildContext context, BedEntity beds, BottomBarInfoIndividualCubit cubit) {
+  void _showBedDialog(BuildContext context, BedEntity beds,
+      BottomBarInfoIndividualCubit cubit) {
     showCustomAlertDialog(
       context,
       padding: const EdgeInsets.all(24),
-      children: CancelSell(bedEntity: beds, cubit: cubit,),
+      children: CancelSell(
+        bedEntity: beds,
+        cubit: cubit,
+      ),
     );
   }
 
@@ -31,7 +36,8 @@ class CancelSellBottombar extends StatelessWidget {
     final cubit = BottomBarInfoIndividualCubit()..init();
     return BlocProvider(
       create: (context) => cubit,
-      child: BlocConsumer<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+      child: BlocConsumer<BottomBarInfoIndividualCubit,
+          BottomBarInfoIndividualState>(
         listener: (context, state) {
           if (state is BottomBarInfoIndividualError) {
             showMessageDialog(context, state.message);
@@ -40,12 +46,10 @@ class CancelSellBottombar extends StatelessWidget {
           if (state is BottomBarInfoIndividualLoaded) {
             if (state.successTransfer) {
               showSuccessfulDialog(context, null, onBackPress: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  R.bottomNavigation,
-                      (r) => false,
-                );
+                Navigator.pop(context);
+                Navigator.pop(context);
               });
+              onCancelSellSuccess();
             }
           }
         },

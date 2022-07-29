@@ -25,6 +25,9 @@ TrackingResultModel _$TrackingResultModelFromJson(Map<String, dynamic> json) =>
       json['enableInsurance'] as bool,
       json['sleepQuality'] as int?,
       json['startSleepTime'] as int?,
+      json['bed'] == null
+          ? null
+          : BedInfo.fromJson(json['bed'] as Map<String, dynamic>),
       json['id'] as int?,
     );
 
@@ -49,4 +52,15 @@ Map<String, dynamic> _$TrackingResultModelToJson(
       'sleepQuality': instance.sleepQuality,
       'startSleepTime': instance.startSleepTime,
       'id': instance.id,
+      'bed': instance.bed?.toJson(),
+    };
+
+BedInfo _$BedInfoFromJson(Map<String, dynamic> json) => BedInfo(
+      json['name'] as String,
+      json['classNft'] as String,
+    );
+
+Map<String, dynamic> _$BedInfoToJson(BedInfo instance) => <String, dynamic>{
+      'name': instance.name,
+      'classNft': instance.classNft,
     };

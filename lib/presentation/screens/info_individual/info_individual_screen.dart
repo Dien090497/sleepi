@@ -181,29 +181,36 @@ class InfoIndividualScreen extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: (args.bed.isLock == 1 && args.bed.statusNftSale == 'ON_SALE')
-                ? CancelSellBottombar(beds: args.bed)
-                : (args.marketPlaceModel != null && (args.buy ?? false)
-                    ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
-                    : BlocBuilder<IndividualCubit, IndividualState>(
-                        builder: (context, state) {
-                          keyBottom.currentState?.updateBed(state.bed);
-                          return BottomBarWidget(
+          BlocBuilder<IndividualCubit, IndividualState>(
+            builder: (context, state) {
+              keyBottom.currentState?.updateBed(state.bed);
+              return Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: (state.bed.isLock == 1 &&
+                        state.bed.statusNftSale == 'ON_SALE')
+                    ? CancelSellBottombar(
+                        beds: args.bed,
+                        onCancelSellSuccess: () {
+                          context.read<IndividualCubit>().refresh();
+                        },
+                      )
+                    : (args.marketPlaceModel != null && (args.buy ?? false)
+                        ? BottomBarMarketPlaceWidget(
+                            bed: args.marketPlaceModel!)
+                        : BottomBarWidget(
                             bedEntity: state.bed,
                             key: keyBottom,
-                            onBackIndividual: () {
+                            onBackIndividual: (value) {
                               context.read<IndividualCubit>().refresh();
                               context
                                   .read<SocketBloc>()
                                   .add(const RefreshSocket());
                             },
-                          );
-                        },
-                      )),
+                          )),
+              );
+            },
           ),
           BlocBuilder<IndividualCubit, IndividualState>(
             builder: (context, state) =>

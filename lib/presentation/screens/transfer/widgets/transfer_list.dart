@@ -1,8 +1,8 @@
+import 'package:decimal/decimal.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -12,7 +12,6 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield_text_button.dart';
-import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
@@ -25,16 +24,7 @@ import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_approve.dar
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_transfer.dart';
 
 class TransferList extends StatefulWidget {
-  const TransferList({
-    Key? key,
-    required this.tokenEntity,
-    required this.spendingToWallet,
-    required this.transferType,
-  }) : super(key: key);
-
-  final TokenEntity tokenEntity;
-  final bool spendingToWallet;
-  final TransferType transferType;
+  const TransferList({Key? key}) : super(key: key);
 
   @override
   State<TransferList> createState() => _TransferListState();
@@ -55,61 +45,52 @@ class _TransferListState extends State<TransferList> {
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) {
         if (state is TransferLoaded) {
+          valueController.text = '${state.amount ?? ''}';
           isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
-          if (state.needApprove ?? false) {
+          final isAllowance = state.isAllowance;
+          if (isAllowance == false) {
             showCustomAlertDialog(
               context,
               showClosed: false,
               children: PopUpConfirmApprove(
                 onConfirm: () {
-                  cubit
-                      .approve(addressContract: widget.tokenEntity.address)
-                      .then((str) {
+                  cubit.approve().then((str) {
                     Navigator.pop(context);
                     if (str == 'done') {
                       showSuccessfulDialog(context, LocaleKeys.successfull);
-                    } else {
+                    } else if (str.isNotEmpty) {
                       showMessageDialog(context, str);
                     }
                   });
                 },
-                tokenName: widget.tokenEntity.symbol.toUpperCase(),
+                tokenName: state.currentToken.symbol.toUpperCase(),
                 isLoadingNotifier: isLoadingNotifier,
               ),
             );
-          } else if (!(state.needApprove ?? true)) {
-            final amount =
-                double.parse(valueController.text.replaceAll(',', '.'));
+          } else if (isAllowance == true) {
             final userState = context.read<UserBloc>().state;
-            final walletState = context.read<WalletCubit>().state;
-            showCustomAlertDialog(
-              context,
-              showClosed: false,
-              children: PopUpConfirmTransfer(
-                onConfirm: () {
-                  cubit
-                      .transfer(
-                    amount: amount,
-                    contractAddress: widget.tokenEntity.address,
-                    userId: (userState as UserLoaded).userInfoEntity.id,
-                    symbol: widget.tokenEntity.symbol,
-                    balance: widget.tokenEntity.balance,
-                  )
-                      .then((_) {
-                    Navigator.pop(context);
-                  });
-                },
-                spendingToWallet: widget.spendingToWallet,
-                cubit: cubit,
-                amount: amount,
-                symbol: widget.tokenEntity.symbol,
-                userId: (userState as UserLoaded).userInfoEntity.id,
-                tokenAddress: widget.tokenEntity.address,
-                isLoadingNotifier: isLoadingNotifier,
-                ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address,
-              ),
-            );
+            if (userState is UserLoaded) {
+              showCustomAlertDialog(
+                context,
+                showClosed: false,
+                children: PopUpConfirmTransfer(
+                  onConfirm: () {
+                    cubit
+                        .transfer(userId: userState.userInfoEntity.id)
+                        .then((_) {
+                      Navigator.pop(context);
+                    });
+                  },
+                  isToSpending: state.isToSpending,
+                  amount: state.amount!,
+                  fee: state.fee!,
+                  symbol: state.currentToken.symbol,
+                  tokenAddress: state.currentToken.address,
+                  isLoadingNotifier: isLoadingNotifier,
+                ),
+              );
+            }
           }
         }
         if(state is TransferEstimateGasFeeSuccess){
@@ -130,6 +111,7 @@ class _TransferListState extends State<TransferList> {
           );
         }
       },
+      buildWhen: (prev, cur) => cur is TransferLoaded,
       builder: (context, state) {
         final cubit = context.read<TransferCubit>();
         final userState = context.read<UserBloc>().state;
@@ -141,80 +123,103 @@ class _TransferListState extends State<TransferList> {
           (userState as UserLoaded).userInfoEntity.id
         ]);
 
-        return Container(
-          decoration: const BoxDecoration(
-            color: AppColors.dark,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40), topRight: Radius.circular(40)),
-          ),
-          padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    SFText(
-                      keyText: LocaleKeys.asset,
-                      style: TextStyles.lightGrey14,
-                    ),
-                    const SizedBox(height: 4.0),
-                    AssetTile(
-                      tokenName: widget.tokenEntity.name.toUpperCase(),
-                      img: widget.tokenEntity.icon,
-                    ),
-                    const SizedBox(height: 24.0),
-                    SFTextFieldTextButton(
-                      controller: valueController,
-                      labelText: LocaleKeys.amount,
-                      textButton: LocaleKeys.all,
-                      textInputType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d{1,}[.,]?\d{0,6}')),
-                      ],
-                      valueChanged: (v) {
-                        cubit.removeError();
-                      },
-                      onPressed: () {
-                        valueController.text = '${widget.tokenEntity.balance - depositTokenGas}';
-                      },
-                    ),
-                    if (state is TransferLoaded && state.errorMsg != null)
+        if (state is TransferLoaded) {
+          final currentToken = state.currentToken;
+
+          return Container(
+            decoration: const BoxDecoration(
+              color: AppColors.dark,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+            ),
+            padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
                       SFText(
-                        keyText: state.errorMsg!,
-                        style: TextStyles.red14,
+                        keyText: LocaleKeys.asset,
+                        style: TextStyles.lightGrey14,
                       ),
-                    const SizedBox(height: 8.0),
-                    SFText(
-                      keyText:
-                          "${LocaleKeys.available.tr()} : ${widget.tokenEntity.balance.formatBalanceToken} ${widget.tokenEntity.name.toUpperCase()}",
-                      style: TextStyles.lightGrey14,
-                    ),
-                    const SizedBox(height: 32.0),
-                  ],
+                      const SizedBox(height: 4.0),
+                      AssetTile(
+                        tokenName: currentToken.name.toUpperCase(),
+                        img: currentToken.icon,
+                      ),
+                      const SizedBox(height: 24.0),
+                      SFTextFieldTextButton(
+                        controller: valueController,
+                        labelText: LocaleKeys.amount,
+                        textButton: LocaleKeys.all,
+                        textInputType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                              RegExp(r'^\d{1,}[.,]?\d{0,6}')),
+                        ],
+                        valueChanged: (v) {
+                          cubit.enterAmount(v);
+                        },
+                        onPressed: () {
+                          if (state.currentToken.symbol.toLowerCase() ==
+                              'avax') {
+                            if (state.fee != null) {
+                              final v =
+                                  (Decimal.parse('${currentToken.balance}') -
+                                          Decimal.parse('${state.fee}'))
+                                      .toDouble()
+                                      .toString();
+                              valueController.text = v;
+                              cubit.enterAmount(v);
+                            }
+                          } else {
+                            final v = '${currentToken.balance}';
+                            valueController.text = v;
+                            cubit.enterAmount(v);
+                          }
+                        },
+                      ),
+                      if (state.errorMsg != null)
+                        SFText(
+                          keyText: state.errorMsg!,
+                          style: TextStyles.red14,
+                        ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        'Fee: ${state.fee ?? '----'} AVAX',
+                        style: TextStyles.lightGrey14,
+                      ),
+                      const SizedBox(height: 8.0),
+                      SFText(
+                        keyText:
+                            "${LocaleKeys.available.tr()} : ${currentToken.balance.formatBalanceToken} ${currentToken.name.toUpperCase()}",
+                        style: TextStyles.lightGrey14,
+                      ),
+                      const SizedBox(height: 32.0),
+                    ],
+                  ),
                 ),
-              ),
-              SFButton(
-                text: LocaleKeys.confirm_transfer,
-                textStyle: TextStyles.w600WhiteSize16,
-                width: double.infinity,
-                gradient: AppColors.gradientBlueButton,
-                onPressed: () {
-                  final walletState = context.read<WalletCubit>().state;
-                  if (walletState is WalletStateLoaded) {
-                    cubit.checkAllowance(
-                      amountStr: valueController.text,
-                      contractAddress: widget.tokenEntity.address,
-                      ownerAddress: walletState.walletInfoEntity.address,
-                      balance: widget.tokenEntity.balance,
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
-        );
+                SFButton(
+                  text: LocaleKeys.confirm_transfer,
+                  textStyle: TextStyles.w600WhiteSize16,
+                  width: double.infinity,
+                  gradient: AppColors.gradientBlueButton,
+                  disabled: state.fee == null && state.errorMsg != null,
+                  onPressed: () {
+                    final walletState = context.read<WalletCubit>().state;
+                    if (walletState is WalletStateLoaded) {
+                      cubit.checkAllowance(
+                        ownerAddress: walletState.walletInfoEntity.address,
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+        return const SizedBox();
       },
     );
   }

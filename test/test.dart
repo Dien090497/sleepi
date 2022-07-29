@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:decimal/decimal.dart';
 import 'package:erc20/erc20.dart';
 import 'package:http/http.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
@@ -7,8 +8,9 @@ import 'package:test/test.dart';
 import 'package:web3dart/web3dart.dart';
 
 void main() {
-  test('Get avax balance', () async {
-    print(BigInt.from(100000000000000.00) * BigInt.from(pow(10, 18)));
+  test('Multiply', () async {
+    print(Decimal.parse('0.00001') * Decimal.parse('${pow(10, 18)}'));
+    // print(BigInt.from(0.00001) * BigInt.from());
   });
 
   test('History Avax', () async {

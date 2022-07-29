@@ -103,12 +103,15 @@ Future<T?> showWarningDialog<T>(
   BuildContext context,
   String message,
   VoidCallback onTap, {
+  VoidCallback? closeTap,
   EdgeInsets? padding,
   TextStyle? style,
   String? buttonText,
+  bool barrierDismissible = true,
 }) async {
   return showDialog(
       context: context,
+      barrierDismissible: barrierDismissible,
       barrierColor: AppColors.backgroundDialog,
       builder: (context) {
         return SFDialog(
@@ -118,7 +121,11 @@ Future<T?> showWarningDialog<T>(
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  if (closeTap != null) {
+                    closeTap();
+                  } else {
+                    Navigator.pop(context);
+                  }
                 },
                 icon: const Icon(Icons.close, color: AppColors.white),
               ),
@@ -288,9 +295,8 @@ Future<T?> showLanguageUpdatedDialog<T>(BuildContext context, Locale locale) {
 }
 
 Future<T?> showLoadingDialog<T>(
-  BuildContext context,
-   {
-     String? message,
+  BuildContext context, {
+  String? message,
   bool barrierDismissible = false,
 }) async {
   return showCustomAlertDialog(

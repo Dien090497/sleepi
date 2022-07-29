@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -16,6 +15,7 @@ import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
@@ -130,7 +130,8 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 context,
                                 R.transfer,
                                 arguments: TransferScreenArg(
-                                    tokenList[2], false, TransferType.token),
+                                    address: tokenList[2].address,
+                                    isToSpending: false),
                               );
                             },
                             text: LocaleKeys.to_spending,
@@ -155,7 +156,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 R.trade,
                                 arguments: TradeArguments(
                                   contractAddressFrom:
-                                      Const.tokens[0]['address'].toString(),
+                                  getIt<List<dynamic>>(instanceName: 'tokens')[0]['address'].toString(),
                                 ),
                               );
                             },

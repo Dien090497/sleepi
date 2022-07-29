@@ -34,7 +34,7 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>$(FLUTTER_BUILD_NAME)</string>
+    <string>$(MARKETING_VERSION)</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleURLTypes</key>
@@ -81,13 +81,13 @@
       <string>_dartobservatory._tcp</string>
     </array>
     <key>NSCameraUsageDescription</key>
-    <string>SleeFi needs camera access to scan QR codes</string>
+    <string>$(APP_DISPLAY_NAME) needs camera access to scan QR codes</string>
     <key>NSHealthShareUsageDescription</key>
     <string>We will sync your data with the Apple Health app to give you better insights</string>
     <key>NSHealthUpdateUsageDescription</key>
     <string>We will sync your data with the Apple Health app to give you better insights</string>
     <key>NSMicrophoneUsageDescription</key>
-    <string>SleeFi need your microphone to use your microphone to play alarm sound</string>
+    <string>$(APP_DISPLAY_NAME) need your microphone to use your microphone to play alarm sound</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>SleeFi needs photo library access to scan QR codes</string>
     <key>NSUserTrackingUsageDescription</key>

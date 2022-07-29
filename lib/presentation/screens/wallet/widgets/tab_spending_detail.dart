@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -146,16 +145,14 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
       Navigator.pushNamed(context, R.passcode).then((value) {
         if (value == true) {
           Navigator.pushNamed(context, R.transfer,
-              arguments: TransferScreenArg(e, true, TransferType.token));
+              arguments:
+                  TransferScreenArg(address: e.address, isToSpending: false));
         }
       });
     } else if (walletState is WalletStateLoaded) {
       Navigator.pushNamed(context, R.transfer,
-          arguments: TransferScreenArg(
-            e,
-            true,
-            TransferType.token,
-          ));
+          arguments:
+              TransferScreenArg(address: e.address, isToSpending: false));
     }
   }
 

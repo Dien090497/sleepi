@@ -4,10 +4,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
+import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/isar_models/native_currency_isar/native_currency_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
 import 'package:slee_fi/models/isar_models/token_default_isar/token_default_model.dart';
 import 'package:slee_fi/models/isar_models/token_isar/token_isar_model.dart';
+import 'package:slee_fi/models/isar_models/transaction_isar/transaction_isar_model.dart';
 import 'package:slee_fi/models/isar_models/wallet_isar/wallet_isar_model.dart';
 import 'package:slee_fi/models/network/network.dart';
 
@@ -168,7 +170,25 @@ class IsarDataSource {
 
   Future<void> clearAll() => _isar.writeTxn((isar) => isar.clear());
 
+  Future<void> clearAllNotWallet() => _isar.writeTxn((isar) async {
+        if (isar.name != 'wallets') {
+          await isar.clear();
+        }
+      });
+
   Future<void> clearWallet() => _isar.writeTxn((isar) => isar.wallets.clear());
+
+  Future<void> clearTokensDefault() =>
+      _isar.writeTxn((isar) => isar.tokenDefault.clear());
+
+  Future<void> clearTokens() => _isar.writeTxn((isar) => isar.tokens.clear());
+
+  Future<void> clearNativeCurrencies() =>
+      _isar.writeTxn((isar) => isar.nativeCurrencies.clear());
+
+  Future<void> clearHistory() => _isar.writeTxn((isar) => isar.history.clear());
+
+  Future<void> clearTxn() => _isar.writeTxn((isar) => isar.transaction.clear());
 
   Future<TokenDefaultModel?> getContractToken(int chainId) async {
     final list = await _isar.tokenDefault.where().findAll();

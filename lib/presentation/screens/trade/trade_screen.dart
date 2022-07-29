@@ -6,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -23,6 +22,7 @@ import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
@@ -46,9 +46,10 @@ class TradeScreen extends StatefulWidget {
 
 class _TradeScreenState extends State<TradeScreen> {
   late double balance = 0;
-  late int indexFrom;
+  late int indexFrom=0;
   late int indexTo;
   String error = '';
+  final listTokens = getIt<List<dynamic>>(instanceName: 'tokens');
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
@@ -58,10 +59,10 @@ class _TradeScreenState extends State<TradeScreen> {
   Timer? _debounce;
 
   int getIndexAddress(String address) {
-    int index = -1;
-    for (int i = 0; i < Const.tokens.length; i++) {
+    int index = 0;
+    for (int i = 0; i < listTokens.length; i++) {
       if (address.toLowerCase() ==
-          Const.tokens[i]['address'].toString().toLowerCase()) {
+          listTokens[i]['address'].toString().toLowerCase()) {
         index = i;
       }
     }
@@ -89,13 +90,13 @@ class _TradeScreenState extends State<TradeScreen> {
       amountOutMin = 0;
       error = '';
       indexFrom = 0;
-      indexTo = Const.tokens.length - 1;
+      indexTo = listTokens.length - 1;
     });
     focusNode.unfocus();
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
-      cubit.getBalanceToken(Const.tokens[indexFrom]['address'].toString());
+      cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
     });
   }
 
@@ -113,7 +114,7 @@ class _TradeScreenState extends State<TradeScreen> {
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
-      cubit.getBalanceToken(Const.tokens[indexFrom]['address'].toString());
+      cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
     });
   }
 
@@ -135,7 +136,7 @@ class _TradeScreenState extends State<TradeScreen> {
           if (indexFrom != 0) {
             indexTo = 0;
           } else {
-            indexTo = Const.tokens.length - 1;
+            indexTo = listTokens.length - 1;
           }
         } else {
           indexTo = getIndexAddress(args.contractAddressTo!);
@@ -167,16 +168,16 @@ class _TradeScreenState extends State<TradeScreen> {
                 if (_debounce?.isActive ?? false) _debounce!.cancel();
                 _debounce = Timer(const Duration(milliseconds: 3000), () async {
                   cubit.getBalanceToken(
-                      Const.tokens[indexFrom]['address'].toString());
+                      listTokens[indexFrom]['address'].toString());
                 });
               });
             } else {
               showCustomAlertDialog(context,
                   children: PopUpConfirmApproveTrade(
-                    tokenName: Const.tokens[indexFrom]['symbol'].toString(),
+                    tokenName: listTokens[indexFrom]['symbol'].toString(),
                     cubit: cubit,
                     contractAddress:
-                        Const.tokens[indexFrom]['address'].toString(),
+                        listTokens[indexFrom]['address'].toString(),
                   ));
             }
           }
@@ -198,8 +199,7 @@ class _TradeScreenState extends State<TradeScreen> {
           }
           final cubit = context.read<TradeCubit>();
           if (state is TradeStateInitial) {
-            cubit
-                .getBalanceToken(Const.tokens[indexFrom]['address'].toString());
+            cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
           }
           return DismissKeyboardWidget(
             child: BackgroundWidget(
@@ -302,11 +302,10 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                   .text
                                                                   .toString();
                                                       cubit.getAmountOutMin(
-                                                          Const
-                                                              .tokens[indexFrom]
+                                                          listTokens[indexFrom]
                                                                   ['address']
                                                               .toString(),
-                                                          Const.tokens[indexTo]
+                                                          listTokens[indexTo]
                                                                   ['address']
                                                               .toString(),
                                                           double.parse(result));
@@ -356,13 +355,11 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                         ',',
                                                                         '.');
                                                             cubit.getAmountOutMin(
-                                                                Const.tokens[
-                                                                        indexFrom]
+                                                                listTokens[indexFrom]
                                                                         [
                                                                         'address']
                                                                     .toString(),
-                                                                Const.tokens[
-                                                                        indexTo]
+                                                                listTokens[indexTo]
                                                                         [
                                                                         'address']
                                                                     .toString(),
@@ -390,21 +387,21 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 backgroundColor:
                                                     AppColors.transparent,
                                                 isResultLabel: true,
-                                                tokens: Const.tokens,
+                                                tokens: listTokens,
                                                 onChange: (selectItem) {
                                                   setState(() {
                                                     if (selectItem["value"] ==
-                                                        Const.tokens[indexTo]
+                                                        listTokens[indexTo]
                                                             ['address']) {
                                                       indexTo = indexFrom;
                                                     }
                                                     indexFrom = getIndexAddress(
                                                         selectItem["value"]
                                                             .toString());
-                                                    cubit.getBalanceToken(Const
-                                                        .tokens[indexFrom]
-                                                            ['address']
-                                                        .toString());
+                                                    cubit.getBalanceToken(
+                                                        listTokens[indexFrom]
+                                                                ['address']
+                                                            .toString());
                                                     valueController.text = '';
                                                     amountOutMin = 0;
                                                     error = '';
@@ -486,11 +483,11 @@ class _TradeScreenState extends State<TradeScreen> {
                                         resultPadding: const EdgeInsets.all(0),
                                         backgroundColor: AppColors.transparent,
                                         isResultLabel: true,
-                                        tokens: Const.tokens,
+                                        tokens: listTokens,
                                         onChange: (selectItem) {
                                           setState(() {
                                             if (selectItem['value'] ==
-                                                Const.tokens[indexFrom]
+                                                listTokens[indexFrom]
                                                     ['address']) {
                                               indexFrom = indexTo;
                                             }
@@ -512,9 +509,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                               : valueController.text.toString();
 
                                           cubit.getAmountOutMin(
-                                              Const.tokens[indexFrom]['address']
+                                              listTokens[indexFrom]['address']
                                                   .toString(),
-                                              Const.tokens[indexTo]['address']
+                                              listTokens[indexTo]['address']
                                                   .toString(),
                                               double.parse(result));
                                           FocusScope.of(context)
@@ -551,21 +548,20 @@ class _TradeScreenState extends State<TradeScreen> {
                             showCustomAlertDialog(context,
                                 children: PopUpConfirmTrade(
                                   value: double.parse(result),
-                                  symbolFrom: Const.tokens[indexFrom]['symbol']
+                                  symbolFrom: listTokens[indexFrom]['symbol']
                                       .toString(),
-                                  symbolTo: Const.tokens[indexTo]['symbol']
+                                  symbolTo:
+                                      listTokens[indexTo]['symbol'].toString(),
+                                  addressFrom: listTokens[indexFrom]['address']
                                       .toString(),
-                                  addressFrom: Const.tokens[indexFrom]
-                                          ['address']
-                                      .toString(),
-                                  addressTo: Const.tokens[indexTo]['address']
-                                      .toString(),
+                                  addressTo:
+                                      listTokens[indexTo]['address'].toString(),
                                   onSwap: () {
                                     cubit.swapToken(
                                         double.parse(result),
-                                        Const.tokens[indexFrom]['address']
+                                        listTokens[indexFrom]['address']
                                             .toString(),
-                                        Const.tokens[indexTo]['address']
+                                        listTokens[indexTo]['address']
                                             .toString());
                                   },
                                   amountOutMin: amountOutMin,

@@ -20,6 +20,7 @@ import 'package:slee_fi/presentation/screens/create_password/create_password_scr
 import 'package:slee_fi/presentation/screens/enter_activation_code/enter_activation_code_screen.dart';
 import 'package:slee_fi/presentation/screens/enter_activation_code/widgets/checkbox_letter_widget.dart';
 import 'package:slee_fi/presentation/screens/setting_permission/widgets/healthcare_screen.dart';
+import 'package:slee_fi/presentation/screens/tracking/tracking_screen.dart';
 
 enum Action { signUp, signIn, forgotPassword }
 
@@ -92,8 +93,32 @@ class _AccountLoginState extends State<AccountLoginWidget> {
               userInfoEntity: state.userInfoEntity,
               listTokens: state.listToken));
           if (!state.isFirstOpenApp) {
-            Navigator.pushNamedAndRemoveUntil(
-                context, R.bottomNavigation, (_) => false);
+            if (state.userStatusTrackingModel.tracking != null) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                R.tracking,
+                (r) => false,
+                arguments: TrackingParams(
+                  timeStart:
+                      state.userStatusTrackingModel.tracking!.startSleep! *
+                          1000,
+                  timeWakeUp:
+                      state.userStatusTrackingModel.tracking!.wakeUp! * 1000,
+                  tokenEarn:
+                      state.userStatusTrackingModel.tracking!.estEarn == null
+                          ? 0
+                          : double.parse(
+                              state.userStatusTrackingModel.tracking!.estEarn!),
+                  fromRoute: R.splash,
+                  imageBed: state.userStatusTrackingModel.tracking?.bedImage,
+                  enableAlarm:
+                      state.userStatusTrackingModel.tracking?.alrm ?? true,
+                ),
+              );
+            }else {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, R.bottomNavigation, (_) => false);
+            }
           } else {
             Navigator.pushNamedAndRemoveUntil(
                 context, R.healthcarePermission, (_) => false,
@@ -101,8 +126,8 @@ class _AccountLoginState extends State<AccountLoginWidget> {
           }
         } else if (state is SignInSignUpStateVerifySuccess) {
           Navigator.pushNamed(context, R.createPassword,
-              arguments: CreatePasswordArg(
-                  '', state.otp, state.email, false, context.locale))
+                  arguments: CreatePasswordArg(
+                      '', state.otp, state.email, false, context.locale))
               .then((value) => _checkChangePasswordSuccess(value));
         }
       },
@@ -129,22 +154,21 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                   child: SFText(
                       keyText: state.message, style: TextStyles.w400Red12)),
             const SizedBox(height: 5),
-
             _isActiveCode
                 ? TextfieldVerificationEmail(
-                maxLength: 6,
-                validate: () => cubit.validateEmail(),
-                onPressed: () => cubit.senOtp(action),
-                errorText:
-                state is SignInSignUpStateError ? state.message : '',
-                valueChanged: (otp) => cubit.onChangeOTP(otp))
+                    maxLength: 6,
+                    validate: () => cubit.validateEmail(),
+                    onPressed: () => cubit.senOtp(action),
+                    errorText:
+                        state is SignInSignUpStateError ? state.message : '',
+                    valueChanged: (otp) => cubit.onChangeOTP(otp))
                 : SFTextFieldPassword(
-              labelText: LocaleKeys.password,
-              valueChanged: (password) =>
-                  cubit.onPasswordChange(password),
-              errorText:
-              state is SignInSignUpStateError ? state.message : '',
-            ),
+                    labelText: LocaleKeys.password,
+                    valueChanged: (password) =>
+                        cubit.onPasswordChange(password),
+                    errorText:
+                        state is SignInSignUpStateError ? state.message : '',
+                  ),
             SizedBox(height: _isActiveCode ? 12 : 0),
             if (action == Action.signUp) const CheckBoxLetterWidget(),
             SizedBox(height: _isActiveCode ? 12 : 0),
@@ -169,15 +193,12 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                 cubit.process(action);
                 FocusScope.of(context).unfocus();
               },
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: MediaQuery.of(context).size.width,
             ),
             const SizedBox(height: 16),
             SFTextButton(
               text:
-              _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
+                  _isActiveCode ? LocaleKeys.account_login : LocaleKeys.signup,
               textStyle: TextStyles.blue14,
               onPressed: () {
                 cubit.init();
@@ -187,65 +208,67 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             const SizedBox(height: 16),
             if (action == Action.signUp)
               Localizations.localeOf(context).toLanguageTag().isJapanese
-               ?
-              Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: LocaleKeys.registration_means_that_you_agree_to.tr(),
-                  style: TextStyles.w400lightGrey12,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      // final url = Uri.parse(Const.sleeFiUrl);
-                      // if (await canLaunchUrl(url)) {
-                      //   launchUrl(url);
-                      // }
-                    },
-                  children: [
-                    const TextSpan(text: ' '),
-                    TextSpan(
-                      text: LocaleKeys.user_agreement.tr(),
-                      style: TextStyles.w400Red12,
-                    ),
-                    TextSpan(text: ' ${"と".tr()} '),
-                    TextSpan(
-                      text: LocaleKeys.user_privacy.tr(),
-                      style: TextStyles.w400Red12,
-                    ),
-                    const TextSpan(text: ' '),
-                    TextSpan(
-                      text: LocaleKeys.registration_means_that_you_agree_to_ja.tr(),
-                      style: TextStyles.w400lightGrey12,
-                    ),
-                  ],
-                ),
-              )
-              :
-              Text.rich(
-                textAlign: TextAlign.center,
-                TextSpan(
-                  text: LocaleKeys.registration_means_that_you_agree_to.tr(),
-                  style: TextStyles.w400lightGrey12,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () async {
-                      // final url = Uri.parse(Const.sleeFiUrl);
-                      // if (await canLaunchUrl(url)) {
-                      //   launchUrl(url);
-                      // }
-                    },
-                  children: [
-                    const TextSpan(text: ' '),
-                    TextSpan(
-                      text: LocaleKeys.user_agreement.tr(),
-                      style: TextStyles.w400Red12,
-                    ),
-                    TextSpan(text: ' ${"&".tr()} '),
-                    TextSpan(
-                      text: LocaleKeys.user_privacy.tr(),
-                      style: TextStyles.w400Red12,
-                    ),
-                  ],
-                ),
-              )
+                  ? Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                        text: LocaleKeys.registration_means_that_you_agree_to
+                            .tr(),
+                        style: TextStyles.w400lightGrey12,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            // final url = Uri.parse(Const.sleeFiUrl);
+                            // if (await canLaunchUrl(url)) {
+                            //   launchUrl(url);
+                            // }
+                          },
+                        children: [
+                          const TextSpan(text: ' '),
+                          TextSpan(
+                            text: LocaleKeys.user_agreement.tr(),
+                            style: TextStyles.w400Red12,
+                          ),
+                          TextSpan(text: ' ${"と".tr()} '),
+                          TextSpan(
+                            text: LocaleKeys.user_privacy.tr(),
+                            style: TextStyles.w400Red12,
+                          ),
+                          const TextSpan(text: ' '),
+                          TextSpan(
+                            text: LocaleKeys
+                                .registration_means_that_you_agree_to_ja
+                                .tr(),
+                            style: TextStyles.w400lightGrey12,
+                          ),
+                        ],
+                      ),
+                    )
+                  : Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                        text: LocaleKeys.registration_means_that_you_agree_to
+                            .tr(),
+                        style: TextStyles.w400lightGrey12,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () async {
+                            // final url = Uri.parse(Const.sleeFiUrl);
+                            // if (await canLaunchUrl(url)) {
+                            //   launchUrl(url);
+                            // }
+                          },
+                        children: [
+                          const TextSpan(text: ' '),
+                          TextSpan(
+                            text: LocaleKeys.user_agreement.tr(),
+                            style: TextStyles.w400Red12,
+                          ),
+                          TextSpan(text: ' ${"&".tr()} '),
+                          TextSpan(
+                            text: LocaleKeys.user_privacy.tr(),
+                            style: TextStyles.w400Red12,
+                          ),
+                        ],
+                      ),
+                    )
           ],
         );
       },

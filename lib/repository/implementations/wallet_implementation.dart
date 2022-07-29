@@ -13,6 +13,7 @@ import 'package:slee_fi/datasources/remote/network/wallet_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:slee_fi/datasources/remote/transaction_datasource/transaction_remote_datasource.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/wallet_info/wallet_info_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -105,7 +106,8 @@ class WalletImplementation extends IWalletRepository {
 
   Future<NativeCurrencyIsarModel?> _getNativeCurrency() async {
     final chainId = _getStorageDataSource.getCurrentChainId();
-    return _isarDataSource.getNativeCurrency(chainId!);
+    if (chainId == null) return null;
+    return _isarDataSource.getNativeCurrency(chainId);
   }
 
   Future<NetworkIsarModel> _getCurrentNetwork() async {
@@ -116,45 +118,45 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> importWallet(
       String mnemonic) async {
-    try {
-      // final testNetwork = (await _isarDataSource.getAllNetwork()).last;
-      // _web3DataSource.setCurrentNetwork(testNetwork);
-      // _getStorageDataSource.setCurrentChainId(testNetwork.chainId);
-      final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0);
-      if (_web3DataSource.validateMnemonic(mnemonic)) {
-        final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
-        final network = await _getCurrentNetwork();
-        final credentials =
-            _web3DataSource.credentialsFromPrivateKey(privateKey);
-        final ethereumAddress = await credentials.extractAddress();
+    // try {
+    final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0);
+    if (_web3DataSource.validateMnemonic(mnemonic)) {
+      final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
+      final network = await _getCurrentNetwork();
+      final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
+      final ethereumAddress = await credentials.extractAddress();
 
-        /// Store Wallet
+      /// Store Wallet
 
-        final model = WalletIsarModel(
-          privateKey: privateKey,
-          name: 'Account $derivedIndex',
-          address: ethereumAddress.hex,
-          derivedIndex: derivedIndex,
-          mnemonic: mnemonic,
-        );
-        final int walletId = await _isarDataSource.putWallet(model);
-        model.id = walletId;
-        await _getStorageDataSource.setCurrentWalletId(walletId);
-        final nativeCurrency = await _getNativeCurrency();
-        final result = await _web3DataSource.getBalance(ethereumAddress.hex);
-        final balance = result / BigInt.from(pow(10, 18));
-        return Right(model.toEntity(
-          credentials,
-          derivedIndex: derivedIndex,
-          networkName: network.name,
-          nativeCurrency: nativeCurrency!.toEntity(balance: balance),
-          chainId: network.chainId,
-        ));
+      final model = WalletIsarModel(
+        privateKey: privateKey,
+        name: 'Account $derivedIndex',
+        address: ethereumAddress.hex,
+        derivedIndex: derivedIndex,
+        mnemonic: mnemonic,
+      );
+      final int walletId = await _isarDataSource.putWallet(model);
+      model.id = walletId;
+      await _getStorageDataSource.setCurrentWalletId(walletId);
+      final nativeCurrency = await _getNativeCurrency();
+      final result = await _web3DataSource.getBalance(ethereumAddress.hex);
+      final balance = result / BigInt.from(pow(10, 18));
+      if (nativeCurrency == null) {
+        return const Left(FailureMessage(LocaleKeys.some_thing_wrong));
       }
-      return const Left(FailureMessage('Invalid Mnemonic'));
-    } catch (e) {
-      return Left(FailureMessage.fromException(e));
+      return Right(model.toEntity(
+        credentials,
+        derivedIndex: derivedIndex,
+        networkName: network.name,
+        nativeCurrency: nativeCurrency.toEntity(balance: balance),
+        chainId: network.chainId,
+      ));
     }
+    return const Left(
+        FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
+    // } catch (e) {
+    //   return Left(FailureMessage.fromException(e));
+    // }
   }
 
   @override
@@ -227,11 +229,7 @@ class WalletImplementation extends IWalletRepository {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
       Credentials credentials = EthPrivateKey.fromHex(wallet!.privateKey);
-      BigInt allow = await _web3DataSource.allowance(
-          EthereumAddress.fromHex(wallet.address), contractAddress);
-      if (value > allow.toDouble()) {
-        _web3DataSource.approveToken(contractAddress, credentials);
-      }
+      _web3DataSource.approveToken(contractAddress, credentials);
       return const Right(true);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
@@ -288,7 +286,8 @@ class WalletImplementation extends IWalletRepository {
       BigInt balance = BigInt.from(0);
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
-      if (contractAddress == Const.tokens[0]['address']) {
+      if (contractAddress ==
+          getIt<List<dynamic>>(instanceName: 'tokens')[0]['address']) {
         balance = await _web3DataSource.getBalance(wallet!.address);
         return Right(balance / BigInt.from(pow(10, 18)));
       } else {
@@ -305,10 +304,12 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, bool>> swapToken(
       double value, String contractAddressFrom, String contractAddressTo) {
-    if (contractAddressFrom == Const.tokens[0]['address']) {
+    if (contractAddressFrom ==
+        getIt<List<dynamic>>(instanceName: 'tokens')[0]['address']) {
       return swapAvaxToken(value, contractAddressTo);
     } else {
-      if (contractAddressTo == Const.tokens[0]['address']) {
+      if (contractAddressTo ==
+          getIt<List<dynamic>>(instanceName: 'tokens')[0]['address']) {
         return swapTokenAvax(value, contractAddressFrom);
       } else {
         return swapTokenForToken(value, contractAddressFrom, contractAddressTo);

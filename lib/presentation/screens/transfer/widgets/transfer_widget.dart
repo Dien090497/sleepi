@@ -68,7 +68,7 @@ class TransferWidget extends StatelessWidget {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      // context.read<TransferCubit>().switchWallet();
+                      context.read<TransferCubit>().switchWallet();
                     },
                     child: const CircleAvatar(
                       backgroundColor: AppColors.blue,

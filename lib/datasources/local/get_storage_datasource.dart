@@ -12,7 +12,7 @@ class GetStorageDataSource {
   }
 
   int getDerivedIndexAndIncrease() {
-    final index = _getStorage.read<int?>(StorageKeys.derivedIndexKey)!;
+    final index = _getStorage.read<int?>(StorageKeys.derivedIndexKey) ?? 0;
     _getStorage.write(StorageKeys.derivedIndexKey, index + 1);
     return 0;
   }
@@ -28,6 +28,14 @@ class GetStorageDataSource {
 
   int? getCurrentChainId() =>
       _getStorage.read<int?>(StorageKeys.currentChainIdKey) ?? 43113;
+
+  Future<void> deleteCurrentWalletId() {
+    return _getStorage.remove(StorageKeys.currentChainIdKey);
+  }
+
+  Future<void> deleteCurrentChainId() {
+    return _getStorage.remove(StorageKeys.currentChainIdKey);
+  }
 
   Future<void> clearAll() => _getStorage.erase();
 }
@@ -49,4 +57,5 @@ class StorageKeys {
   static const String signer = 'signer';
   static const String tokenAddresses = 'tokenAddresses';
   static const String nftAddresses = 'nftAddresses';
+  static const String lastUserSignIn = 'last_user_sign_in';
 }

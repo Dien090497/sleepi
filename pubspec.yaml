@@ -81,8 +81,6 @@ dependencies:
   money_formatter: ^0.0.3
   intl: ^0.17.0
   external_app_launcher: ^3.0.0
-  flutter_background_service: ^2.1.3
-  flutter_foreground_task: ^3.8.1
   screenshot: ^1.2.3
   social_share: ^2.2.1
   just_audio: ^0.9.28
@@ -163,11 +161,11 @@ flavorizr:
     #    - flutter:flavors
     #    - flutter:app
     #    - flutter:pages
-    - flutter:targets
-    #    - ios:xcconfig
+#    - flutter:targets
+    - ios:xcconfig
     - ios:buildTargets
-    #    - ios:schema
-    #    - ios:dummyAssets
+    - ios:schema
+        - ios:dummyAssets
     #    - ios:icons
     - ios:plist
     #    - ios:launchScreen
@@ -183,7 +181,7 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee_fi"
+        bundleId: "com.sotatek.slee-fi.dev"
 
     stg:
       app:
@@ -192,7 +190,7 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee_fi"
+        bundleId: "com.sotatek.slee-fi.stg"
 
     prod:
       app:
@@ -201,4 +199,4 @@ flavorizr:
       android:
         applicationId: "com.sotatek.slee_fi"
       ios:
-        bundleId: "com.sotatek.slee_fi"
+        bundleId: "com.sotatek.slee-fi"

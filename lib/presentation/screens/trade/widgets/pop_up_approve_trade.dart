@@ -105,7 +105,7 @@ class PopUpConfirmApproveTrade extends StatelessWidget {
                   textStyle: TextStyles.w600LightGreySize16,
                   color: AppColors.light4,
                   width: double.infinity,
-                  onPressed: () => Navigator.maybePop(context),
+                  onPressed: () => Navigator.pop(context,true),
                 ),
               ),
               const SizedBox(
@@ -119,7 +119,7 @@ class PopUpConfirmApproveTrade extends StatelessWidget {
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
                     cubit.checkApproveToken( 0, contractAddress);
-                    Navigator.pop(context);
+                    Navigator.pop(context, true);
                   },
                 ),
               ),

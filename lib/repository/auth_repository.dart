@@ -11,6 +11,7 @@ import 'package:slee_fi/schema/verify_schema/verify_schema.dart';
 import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 
 abstract class IAuthRepository {
+
   Future<Either<Failure, UserInfoEntity>> getMe();
 
   Future<Either<Failure, UserInfoEntity>> logIn(SignInSchema signInSchema);
@@ -33,7 +34,7 @@ abstract class IAuthRepository {
 
   Future<Either<Failure, bool>> validatePassCode(String passcode);
 
-  Future<Either<Failure, String>> logOut();
+  Future<Either<Failure, bool>> logOut();
 
   Future<Either<Failure, bool>> isPassCodeCreated();
 
