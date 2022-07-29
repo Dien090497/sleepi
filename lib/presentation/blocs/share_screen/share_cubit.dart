@@ -32,7 +32,9 @@ class ShareCubit extends Cubit<ShareState> {
       final time = DateTime.now().millisecond.toString();
       final File imageFile = await File('${temp.path}/$time.png').create(recursive: true);
       final res = await imageFile.writeAsBytes(value);
-      final result = await methodChannel.invokeMethod("shareInstagram", res.uri.path);
+      final pathInstar = await ImageGallerySaver.saveImage(value, isReturnImagePathOfIOS: true);
+      print(pathInstar);
+      final result = await methodChannel.invokeMethod("shareInstagram", pathInstar['filePath']);
       emit(const ShareState.loaded());
     });
   }
