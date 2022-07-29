@@ -61,6 +61,25 @@ class WalletDataSource {
         credentials: credentials);
   }
 
+  Future<double> estimateDepositTokenGas({
+    required String spendingAddress,
+    required String ownerAddress,
+    required EtherAmount gasPrice,
+    required List<dynamic> data,
+  }) async {
+    final spending = Spending(
+        address: EthereumAddress.fromHex(spendingAddress),
+        client: _web3provider.web3client);
+    final depositTokenFunc = spending.self.function('depositToken');
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: EthereumAddress.fromHex(ownerAddress),
+      to: spending.self.address,
+      gasPrice: gasPrice,
+      data: depositTokenFunc.encodeCall(data),
+    );
+    return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
+  }
+
   Future<String> depositNft({
     required String spendingAddress,
     required String nftAddress,

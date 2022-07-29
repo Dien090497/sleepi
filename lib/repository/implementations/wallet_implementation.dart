@@ -9,6 +9,7 @@ import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
+import 'package:slee_fi/datasources/remote/network/wallet_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
 import 'package:slee_fi/datasources/remote/transaction_datasource/transaction_remote_datasource.dart';
@@ -35,6 +36,7 @@ class WalletImplementation extends IWalletRepository {
   final TransactionRemoteDataSource _transactionRemoteDataSource;
   final SecureStorage _secureStorage;
   final AuthDataSource _authDataSource;
+  final WalletDataSource _walletDataSource;
 
   WalletImplementation(
       this._web3DataSource,
@@ -43,6 +45,7 @@ class WalletImplementation extends IWalletRepository {
       this._isarDataSource,
       this._web3provider,
       this._secureStorage,
+      this._walletDataSource,
       this._authDataSource);
 
   @override
@@ -482,6 +485,33 @@ class WalletImplementation extends IWalletRepository {
       return Right(_web3DataSource.createMnemonic());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, double>> estimateDepositTokenGas({
+    required String ownerAddress,
+    required List<dynamic> data,
+  }) async{
+    final gasPrice = await _walletDataSource.getGasPrice();
+    final spendingAddress = await _secureStorage.readAddressContract();
+    return Right(await _walletDataSource.estimateDepositTokenGas(
+      spendingAddress: spendingAddress!,
+      ownerAddress: ownerAddress,
+      gasPrice: gasPrice,
+      data: data,
+    ));
+    try {
+      final gasPrice = await _walletDataSource.getGasPrice();
+      final spendingAddress = await _secureStorage.readAddressContract();
+    return Right(await _walletDataSource.estimateDepositTokenGas(
+      spendingAddress: spendingAddress!,
+      ownerAddress: ownerAddress,
+      gasPrice: gasPrice,
+      data: data,
+    ));
+    } catch (e) {
+    return Left(FailureMessage.fromException(e));
     }
   }
 }

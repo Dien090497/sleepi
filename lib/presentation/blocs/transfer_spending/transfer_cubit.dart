@@ -4,6 +4,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/approve_usecase.dart';
+import 'package:slee_fi/usecase/estimate_deposit_token_gas_usecase.dart';
 import 'package:slee_fi/usecase/is_token_approved_enough_usecase.dart';
 import 'package:slee_fi/usecase/to_spending_usecase.dart';
 import 'package:slee_fi/usecase/transfer_token_to_main_wallet_usecase.dart';
@@ -16,6 +17,8 @@ class TransferCubit extends Cubit<TransferState> {
   final _approveUseCase = getIt<ApproveUseCase>();
   final _transferToMainWalletUC = getIt<TransferTokenToMainWalletUseCase>();
   final _isTokenApprovedEnoughUC = getIt<IsTokenApprovedEnoughUseCase>();
+  final _estimateDepositTokenGasUC = getIt<EstimateDepositTokenGasUseCase>();
+
 
   Future<void> checkAllowance({
     required String amountStr,
@@ -109,6 +112,23 @@ class TransferCubit extends Cubit<TransferState> {
       );
     }
     return '';
+  }
+
+  Future<void> getEstimateDepositTokenGas(
+  {required String ownerAddress, required List<dynamic> data}
+      ) async{
+    final result = await _estimateDepositTokenGasUC.call(EstimateDepositTokenGasParams(
+       ownerAddress:ownerAddress,
+      data: data
+       ));
+    result.fold(
+          (l) {
+        emit(TransferState.failed('$l'));
+      },
+          (result) {
+        emit(TransferState.getEstimateGasFee(result));
+      },
+    );
   }
 
   Future<void> transfer({

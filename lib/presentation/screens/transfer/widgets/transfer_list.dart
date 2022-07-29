@@ -43,7 +43,7 @@ class TransferList extends StatefulWidget {
 class _TransferListState extends State<TransferList> {
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
   final valueController = TextEditingController();
-
+  double depositTokenGas = 0;
   @override
   void dispose() {
     isLoadingNotifier.dispose();
@@ -82,7 +82,7 @@ class _TransferListState extends State<TransferList> {
             final amount =
                 double.parse(valueController.text.replaceAll(',', '.'));
             final userState = context.read<UserBloc>().state;
-
+            final walletState = context.read<WalletCubit>().state;
             showCustomAlertDialog(
               context,
               showClosed: false,
@@ -104,11 +104,18 @@ class _TransferListState extends State<TransferList> {
                 cubit: cubit,
                 amount: amount,
                 symbol: widget.tokenEntity.symbol,
+                userId: (userState as UserLoaded).userInfoEntity.id,
                 tokenAddress: widget.tokenEntity.address,
                 isLoadingNotifier: isLoadingNotifier,
+                ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address,
               ),
             );
           }
+        }
+        if(state is TransferEstimateGasFeeSuccess){
+          depositTokenGas = state.depositTokenGas + state.depositTokenGas*0.01;
+          print('--------------------DEPOSIT------------------');
+          print("DEPOSIT : ${state.depositTokenGas}");
         }
         if (state is TransferSuccess) {
           isLoadingNotifier.value = false;
@@ -125,6 +132,14 @@ class _TransferListState extends State<TransferList> {
       },
       builder: (context, state) {
         final cubit = context.read<TransferCubit>();
+        final userState = context.read<UserBloc>().state;
+        final walletState = context.read<WalletCubit>().state;
+       cubit.getEstimateDepositTokenGas(ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address, data: [
+          0,
+          widget.tokenEntity.address,
+          valueController.text.isNotEmpty ? double.parse(valueController.text.replaceAll(',', '.')) : 0,
+          (userState as UserLoaded).userInfoEntity.id
+        ]);
 
         return Container(
           decoration: const BoxDecoration(
@@ -162,7 +177,7 @@ class _TransferListState extends State<TransferList> {
                         cubit.removeError();
                       },
                       onPressed: () {
-                        valueController.text = '${widget.tokenEntity.balance}';
+                        valueController.text = '${widget.tokenEntity.balance - depositTokenGas}';
                       },
                     ),
                     if (state is TransferLoaded && state.errorMsg != null)

@@ -11,25 +11,29 @@ import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
+import 'package:slee_fi/usecase/estimate_deposit_token_gas_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
-import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer({
     Key? key,
     required this.cubit,
+    required this.userId,
     required this.amount,
     required this.symbol,
     required this.tokenAddress,
+    required this.ownerAddress,
     required this.spendingToWallet,
     required this.onConfirm,
     required this.isLoadingNotifier,
   }) : super(key: key);
 
   final TransferCubit cubit;
+  final int userId;
   final double amount;
   final String symbol;
   final String tokenAddress;
+  final String ownerAddress;
   final bool spendingToWallet;
   final VoidCallback onConfirm;
   final ValueNotifier<bool> isLoadingNotifier;
@@ -93,11 +97,18 @@ class PopUpConfirmTransfer extends StatelessWidget {
           if (transferState is TransferLoaded)
             FutureBuilder<Either>(
                 future: transferState.isToSpending
-                    ? getIt<SendToExternalUseCase>().calculatorFee(
-                        SendToExternalParams(
-                            contractAddressTo: '',
-                            valueInEther: amount,
-                            tokenSymbol: symbol))
+                    ?
+                        getIt<EstimateDepositTokenGasUseCase>()
+                            .call(EstimateDepositTokenGasParams(
+                          ownerAddress: ownerAddress,
+                          data: [
+                           '',
+                            tokenAddress,
+                            amount,
+                            userId
+                          ] ,
+
+                        ))
                     : getIt<EstimateGasWithdrawUseCase>().call(
                         EstimateGasWithdrawParam(
                             type: 'token', contractAddress: tokenAddress)),
@@ -116,7 +127,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: SFText(
                               keyText:
-                                  "${snapshot.data?.getOrElse(() => '') ?? '--'} AVAX",
+                                  "${snapshot.data?.getOrElse(() => 0.0) ?? '--'} AVAX",
                               style: TextStyles.lightWhite16,
                               textAlign: TextAlign.end),
                         ),

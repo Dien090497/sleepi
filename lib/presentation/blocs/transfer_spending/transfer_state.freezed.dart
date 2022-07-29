@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String msg) failed,
+    required TResult Function(double depositTokenGas) getEstimateGasFee,
     required TResult Function() success,
     required TResult Function(bool isToSpending, bool isLoading,
             String? errorMsg, String? typeError, bool? needApprove)
@@ -26,6 +28,8 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
     TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
             String? typeError, bool? needApprove)?
@@ -34,6 +38,8 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
     TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
             String? typeError, bool? needApprove)?
@@ -43,18 +49,25 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferEstimateGasFeeSuccess value)
+        getEstimateGasFee,
     required TResult Function(TransferSuccess value) success,
     required TResult Function(TransferLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
     TResult Function(TransferSuccess value)? success,
     TResult Function(TransferLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
     TResult Function(TransferSuccess value)? success,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
@@ -77,6 +90,336 @@ class _$TransferStateCopyWithImpl<$Res>
   final TransferState _value;
   // ignore: unused_field
   final $Res Function(TransferState) _then;
+}
+
+/// @nodoc
+abstract class _$$TransferFailedCopyWith<$Res> {
+  factory _$$TransferFailedCopyWith(
+          _$TransferFailed value, $Res Function(_$TransferFailed) then) =
+      __$$TransferFailedCopyWithImpl<$Res>;
+  $Res call({String msg});
+}
+
+/// @nodoc
+class __$$TransferFailedCopyWithImpl<$Res>
+    extends _$TransferStateCopyWithImpl<$Res>
+    implements _$$TransferFailedCopyWith<$Res> {
+  __$$TransferFailedCopyWithImpl(
+      _$TransferFailed _value, $Res Function(_$TransferFailed) _then)
+      : super(_value, (v) => _then(v as _$TransferFailed));
+
+  @override
+  _$TransferFailed get _value => super._value as _$TransferFailed;
+
+  @override
+  $Res call({
+    Object? msg = freezed,
+  }) {
+    return _then(_$TransferFailed(
+      msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransferFailed with DiagnosticableTreeMixin implements TransferFailed {
+  const _$TransferFailed(this.msg);
+
+  @override
+  final String msg;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TransferState.failed(msg: $msg)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TransferState.failed'))
+      ..add(DiagnosticsProperty('msg', msg));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransferFailed &&
+            const DeepCollectionEquality().equals(other.msg, msg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TransferFailedCopyWith<_$TransferFailed> get copyWith =>
+      __$$TransferFailedCopyWithImpl<_$TransferFailed>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String msg) failed,
+    required TResult Function(double depositTokenGas) getEstimateGasFee,
+    required TResult Function() success,
+    required TResult Function(bool isToSpending, bool isLoading,
+            String? errorMsg, String? typeError, bool? needApprove)
+        loaded,
+  }) {
+    return failed(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function()? success,
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
+        loaded,
+  }) {
+    return failed?.call(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function()? success,
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (failed != null) {
+      return failed(msg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferEstimateGasFeeSuccess value)
+        getEstimateGasFee,
+    required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferLoaded value) loaded,
+  }) {
+    return failed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferLoaded value)? loaded,
+  }) {
+    return failed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferLoaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (failed != null) {
+      return failed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransferFailed implements TransferState {
+  const factory TransferFailed(final String msg) = _$TransferFailed;
+
+  String get msg;
+  @JsonKey(ignore: true)
+  _$$TransferFailedCopyWith<_$TransferFailed> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TransferEstimateGasFeeSuccessCopyWith<$Res> {
+  factory _$$TransferEstimateGasFeeSuccessCopyWith(
+          _$TransferEstimateGasFeeSuccess value,
+          $Res Function(_$TransferEstimateGasFeeSuccess) then) =
+      __$$TransferEstimateGasFeeSuccessCopyWithImpl<$Res>;
+  $Res call({double depositTokenGas});
+}
+
+/// @nodoc
+class __$$TransferEstimateGasFeeSuccessCopyWithImpl<$Res>
+    extends _$TransferStateCopyWithImpl<$Res>
+    implements _$$TransferEstimateGasFeeSuccessCopyWith<$Res> {
+  __$$TransferEstimateGasFeeSuccessCopyWithImpl(
+      _$TransferEstimateGasFeeSuccess _value,
+      $Res Function(_$TransferEstimateGasFeeSuccess) _then)
+      : super(_value, (v) => _then(v as _$TransferEstimateGasFeeSuccess));
+
+  @override
+  _$TransferEstimateGasFeeSuccess get _value =>
+      super._value as _$TransferEstimateGasFeeSuccess;
+
+  @override
+  $Res call({
+    Object? depositTokenGas = freezed,
+  }) {
+    return _then(_$TransferEstimateGasFeeSuccess(
+      depositTokenGas == freezed
+          ? _value.depositTokenGas
+          : depositTokenGas // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransferEstimateGasFeeSuccess
+    with DiagnosticableTreeMixin
+    implements TransferEstimateGasFeeSuccess {
+  const _$TransferEstimateGasFeeSuccess(this.depositTokenGas);
+
+  @override
+  final double depositTokenGas;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TransferState.getEstimateGasFee(depositTokenGas: $depositTokenGas)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TransferState.getEstimateGasFee'))
+      ..add(DiagnosticsProperty('depositTokenGas', depositTokenGas));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransferEstimateGasFeeSuccess &&
+            const DeepCollectionEquality()
+                .equals(other.depositTokenGas, depositTokenGas));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(depositTokenGas));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TransferEstimateGasFeeSuccessCopyWith<_$TransferEstimateGasFeeSuccess>
+      get copyWith => __$$TransferEstimateGasFeeSuccessCopyWithImpl<
+          _$TransferEstimateGasFeeSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String msg) failed,
+    required TResult Function(double depositTokenGas) getEstimateGasFee,
+    required TResult Function() success,
+    required TResult Function(bool isToSpending, bool isLoading,
+            String? errorMsg, String? typeError, bool? needApprove)
+        loaded,
+  }) {
+    return getEstimateGasFee(depositTokenGas);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function()? success,
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
+        loaded,
+  }) {
+    return getEstimateGasFee?.call(depositTokenGas);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function()? success,
+    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
+            String? typeError, bool? needApprove)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (getEstimateGasFee != null) {
+      return getEstimateGasFee(depositTokenGas);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferEstimateGasFeeSuccess value)
+        getEstimateGasFee,
+    required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferLoaded value) loaded,
+  }) {
+    return getEstimateGasFee(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferLoaded value)? loaded,
+  }) {
+    return getEstimateGasFee?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferLoaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (getEstimateGasFee != null) {
+      return getEstimateGasFee(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransferEstimateGasFeeSuccess implements TransferState {
+  const factory TransferEstimateGasFeeSuccess(final double depositTokenGas) =
+      _$TransferEstimateGasFeeSuccess;
+
+  double get depositTokenGas;
+  @JsonKey(ignore: true)
+  _$$TransferEstimateGasFeeSuccessCopyWith<_$TransferEstimateGasFeeSuccess>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -128,6 +471,8 @@ class _$TransferSuccess
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String msg) failed,
+    required TResult Function(double depositTokenGas) getEstimateGasFee,
     required TResult Function() success,
     required TResult Function(bool isToSpending, bool isLoading,
             String? errorMsg, String? typeError, bool? needApprove)
@@ -139,6 +484,8 @@ class _$TransferSuccess
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
     TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
             String? typeError, bool? needApprove)?
@@ -150,6 +497,8 @@ class _$TransferSuccess
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
     TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
             String? typeError, bool? needApprove)?
@@ -165,6 +514,9 @@ class _$TransferSuccess
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferEstimateGasFeeSuccess value)
+        getEstimateGasFee,
     required TResult Function(TransferSuccess value) success,
     required TResult Function(TransferLoaded value) loaded,
   }) {
@@ -174,6 +526,8 @@ class _$TransferSuccess
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
     TResult Function(TransferSuccess value)? success,
     TResult Function(TransferLoaded value)? loaded,
   }) {
@@ -183,6 +537,8 @@ class _$TransferSuccess
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
     TResult Function(TransferSuccess value)? success,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
@@ -325,6 +681,8 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String msg) failed,
+    required TResult Function(double depositTokenGas) getEstimateGasFee,
     required TResult Function() success,
     required TResult Function(bool isToSpending, bool isLoading,
             String? errorMsg, String? typeError, bool? needApprove)
@@ -336,6 +694,8 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
     TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
             String? typeError, bool? needApprove)?
@@ -348,6 +708,8 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String msg)? failed,
+    TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
     TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
             String? typeError, bool? needApprove)?
@@ -363,6 +725,9 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferEstimateGasFeeSuccess value)
+        getEstimateGasFee,
     required TResult Function(TransferSuccess value) success,
     required TResult Function(TransferLoaded value) loaded,
   }) {
@@ -372,6 +737,8 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
     TResult Function(TransferSuccess value)? success,
     TResult Function(TransferLoaded value)? loaded,
   }) {
@@ -381,6 +748,8 @@ class _$TransferLoaded with DiagnosticableTreeMixin implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
     TResult Function(TransferSuccess value)? success,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),

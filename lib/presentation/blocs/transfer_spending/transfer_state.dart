@@ -5,6 +5,10 @@ part 'transfer_state.freezed.dart';
 
 @freezed
 class TransferState with _$TransferState {
+  const factory TransferState.failed(String msg) = TransferFailed;
+
+  const factory TransferState.getEstimateGasFee(double depositTokenGas) = TransferEstimateGasFeeSuccess;
+
   const factory TransferState.success() = TransferSuccess;
 
   const factory TransferState.loaded({
