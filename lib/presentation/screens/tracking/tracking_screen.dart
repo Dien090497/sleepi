@@ -53,7 +53,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
   late String timeAlarm = '';
   late double totalEarn = 0;
-  late int time = 0;
+  // late int time = 0;
   late double earn = 0.toDouble();
   late DateTime timeStart = DateTime.now();
 
@@ -69,9 +69,9 @@ class _TrackingScreenState extends State<TrackingScreen> {
       totalEarn = args.tokenEarn;
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
       timeStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
-      time = wakeUp.difference(timeStart).inMinutes;
-      earn =
-          (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
+      // time = wakeUp.difference(timeStart).inMinutes;
+      // earn =
+      //     (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       // double x = totalEarn / time;
@@ -235,7 +235,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 if (audioPlayer.playing) {
                                   await audioPlayer.stop();
                                 }
-                                await cubit.fetchData(time, timeStart);
+                                await cubit.fetchData(timeStart);
                               }
                             },
                           ),

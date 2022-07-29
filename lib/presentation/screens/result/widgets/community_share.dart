@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
@@ -77,13 +78,13 @@ class CommunityShare extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  cubit.shareSocial(widget: widgetCapture, controller: controller);
+                  cubit.shareSocial(widget: widgetCapture, controller: controller, typeShare: ShareSocial.twitter);
                 },
                 child: itemCommunity(context, Ics.twitter, LocaleKeys.twitter),
               ),
               GestureDetector(
                 onTap: () {
-                  cubit.shareSocial(widget: widgetCapture, controller: controller);
+                  cubit.shareSocial(widget: widgetCapture, controller: controller, typeShare: ShareSocial.facebook);
                 },
                 child: itemCommunity(
                   context,
@@ -93,7 +94,7 @@ class CommunityShare extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  cubit.shareSocial(widget: widgetCapture, controller: controller);
+                  cubit.shareSocial(widget: widgetCapture, controller: controller, typeShare: ShareSocial.instagram);
                 },
                 child: itemCommunity(
                   context,

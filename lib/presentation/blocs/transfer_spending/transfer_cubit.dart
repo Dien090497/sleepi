@@ -26,6 +26,7 @@ class TransferCubit extends Cubit<TransferState> {
   final _transferToMainWalletUC = getIt<TransferTokenToMainWalletUseCase>();
   final _isTokenApprovedEnoughUC = getIt<IsTokenApprovedEnoughUseCase>();
 
+
   Future<void> getFee() async {
     final currentState = state;
     if (currentState is TransferLoaded) {

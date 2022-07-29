@@ -1,9 +1,13 @@
 import UIKit
 import Flutter
 import AppsFlyerLib
+import FBSDKCoreKit
+import TwitterKit
+import FBSDKShareKit
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
+    var flutterResults: FlutterResult? = nil
   override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -11,9 +15,13 @@ import AppsFlyerLib
     if #available(iOS 10.0, *) {
         UNUserNotificationCenter.current().delegate = self as UNUserNotificationCenterDelegate
     }
+      self.configureMethodChannel(window: window)
+      ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+      TWTRTwitter.sharedInstance().start(withConsumerKey: "bpXejXJ05tlUvogku8ecgAzwn", consumerSecret: "sWmjd86frAtLitdJD9MzGa3XPPVlXKPWcjz3dII6Wk39B2KB64")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+  
     // Open URI-scheme for iOS 9 and above
  override func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
      NSLog("AppsFlyer [deep link]: Open URI-scheme for iOS 9 and above")
@@ -32,6 +40,9 @@ import AppsFlyerLib
      NSLog("AppsFlyer [deep link]: Open URI-scheme options")
 
      AppsFlyerAttribution.shared()!.handleOpenUrl(url, options: options)
-        return true
+     let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
+     let anotationFB = options[UIApplication.OpenURLOptionsKey.annotation]
+     ApplicationDelegate.shared.application(app, open: url, sourceApplication: sourceApplication, annotation: anotationFB)
+     return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
     }
 }

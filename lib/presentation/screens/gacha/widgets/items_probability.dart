@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/config_info.dart';
 
 class ItemsProbability extends StatelessWidget {
   const ItemsProbability({
     Key? key,
-    this.colorBgIcon,
-    required this.iconPath,
-    required this.title,
+    // this.colorBgIcon,
+    // required this.iconPath,
+    // required this.title,
     required this.configInfo,
     this.width,
-    this.isGradient = false,
-    this.isToken = false,
-    this.style,
+    // this.isGradient = false,
+    // this.isToken = false,
+    // this.style,
     this.height}) : super(key: key);
 
-  final List<Color>? colorBgIcon;
-  final String iconPath;
-  final String title;
-  final TextStyle? style;
+  // final List<Color>? colorBgIcon;
+  // final String iconPath;
+  // final String title;
+  // final TextStyle? style;
   final double? width;
   final double? height;
-  final bool isGradient;
-  final bool isToken;
-  final List<ConfigInfo>? configInfo;
+  // final bool isGradient;
+  // final bool isToken;
+  final List<dynamic>? configInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -43,33 +41,33 @@ class ItemsProbability extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                padding: width == null ? const EdgeInsets.all(15) : null,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    colors: colorBgIcon ?? [AppColors.transparent, AppColors.transparent],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: SFIcon(iconPath, width: width ?? 20, height: height ?? 20,),
-              ),
-              const SizedBox(width: 12),
-              isGradient ? GradientText(title, gradient: const LinearGradient(
-                  colors: [
-                AppColors.blue,
-                AppColors.purple,
-              ],
-                begin: Alignment(-1.0, -1.0),
-                end: Alignment(1.0, 1.0),
-              ),
-              )
-              : SFText(keyText: title, style: style),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Container(
+          //       padding: width == null ? const EdgeInsets.all(15) : null,
+          //       decoration: BoxDecoration(
+          //         shape: BoxShape.circle,
+          //         gradient: LinearGradient(
+          //           colors: colorBgIcon ?? [AppColors.transparent, AppColors.transparent],
+          //           begin: Alignment.centerLeft,
+          //           end: Alignment.centerRight,
+          //         ),
+          //       ),
+          //       child: SFIcon(iconPath, width: width ?? 20, height: height ?? 20,),
+          //     ),
+          //     const SizedBox(width: 12),
+          //     isGradient ? GradientText(title, gradient: const LinearGradient(
+          //         colors: [
+          //       AppColors.blue,
+          //       AppColors.purple,
+          //     ],
+          //       begin: Alignment(-1.0, -1.0),
+          //       end: Alignment(1.0, 1.0),
+          //     ),
+          //     )
+          //     : SFText(keyText: title, style: style),
+          //   ],
+          // ),
           ListView.builder(
              shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -78,7 +76,7 @@ class ItemsProbability extends StatelessWidget {
                 return  Column(
                   children:  [
                     const SizedBox(height: 10),
-                    rowData(title: "${isToken ? configInfo?.elementAt(index).name?.toUpperCase() : configInfo?.elementAt(index).name} ", value: configInfo?.elementAt(index).value),
+                    rowData(title: "${configInfo?.elementAt(index)['name']} ", value: configInfo?.elementAt(index)['value']),
                   ],
                 );
               }
