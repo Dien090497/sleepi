@@ -159,7 +159,7 @@ class TransactionImplementation extends ITransactionRepository {
       final gasPrice = await _web3DataSource.getGasPrice();
       final price = await _web3DataSource.estimateGas(
         value: value,
-        gasPrice: await _web3DataSource.getGasPrice(),
+        gasPrice: gasPrice,
         sender: sender != null ? EthereumAddress.fromHex(sender) : null,
         to: to,
       );

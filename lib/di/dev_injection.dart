@@ -37,7 +37,7 @@ abstract class DevInjection {
           "icon": Ics.icSlgt,
         },
         {
-          "address": "0x6346C85e28b1E3276828E8153aFA21BA8F522A5e", //testnet
+          "address": "0x6346C85e28b1E3276828E8153aFA21BA8F522A5e",
           "symbol": "USDC",
           "decimal": 6,
           "totalSupply": 1000000000000000,
