@@ -210,8 +210,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
   gh.factory<List<dynamic>>(() => constInjection.tokensDev,
       instanceName: 'tokens', registerFor: {_dev, _test});
-  gh.factory<List<String>>(() => constInjection.listNFTAddressTestNet,
-      instanceName: 'nftAddresses', registerFor: {_test});
   gh.factory<List<dynamic>>(() => constInjection.tokensProd,
       instanceName: 'tokens', registerFor: {_prod});
   gh.factory<_i16.NetworkConnectionDataSource>(
