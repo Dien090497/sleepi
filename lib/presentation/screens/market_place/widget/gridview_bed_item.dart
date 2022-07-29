@@ -135,7 +135,7 @@ class GridViewBedItem extends StatelessWidget {
                                   stringCase: StringCase.upperCase,
                                   icon: Ics.icCart,
                                   onPressed: () {
-                                    //onBuyTap!(bed);
+                                    onBuyTap!(bed);
                                   },
                                 )
                                 )

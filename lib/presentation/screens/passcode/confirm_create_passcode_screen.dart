@@ -78,7 +78,7 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                         passcodeController: passcodeController,
                         onCompleted: (String passcode) async {
                           setState(() {
-                            wrongPassword = false;
+                            wrongPassword = passcode != args.passcode;
                             isLoading = true;
                           });
                           if (passcode != args.passcode) {
