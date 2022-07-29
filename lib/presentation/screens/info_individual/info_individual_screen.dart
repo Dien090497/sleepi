@@ -188,18 +188,18 @@ class InfoIndividualScreen extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: ((state.bed.isLock == 1 &&
-                        state.bed.statusNftSale == 'ON_SALE')
-                        || (args.bed.isLock == 1 && args.bed.status == 'ON_SALE'))
-                    ? CancelSellBottombar(
-                        beds: state.bed,
-                        onCancelSellSuccess: () {
-                          context.read<IndividualCubit>().refresh();
-                        },
-                      )
-                    : (args.marketPlaceModel != null && (args.buy ?? false)
-                        ? BottomBarMarketPlaceWidget(
-                            bed: args.marketPlaceModel!)
+                child: (args.marketPlaceModel != null && (args.buy ?? false)
+                    ? BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!)
+                    : ((state.bed.isLock == 1 &&
+                                state.bed.statusNftSale == 'ON_SALE') ||
+                            (args.bed.isLock == 1 &&
+                                args.bed.status == 'ON_SALE'))
+                        ? CancelSellBottombar(
+                            beds: state.bed,
+                            onCancelSellSuccess: () {
+                              context.read<IndividualCubit>().refresh();
+                            },
+                          )
                         : BottomBarWidget(
                             bedEntity: state.bed,
                             key: keyBottom,
