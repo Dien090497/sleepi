@@ -113,7 +113,9 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
                     Navigator.pop(context);
-                    showSuccessfulDialog(context, null);
+                    showSuccessfulDialog(context, null, onBackPress: () {
+                      Navigator.pop(context);
+                    });
                     widget.onBackIndividual( true);
                     cubit.init();
                   }
