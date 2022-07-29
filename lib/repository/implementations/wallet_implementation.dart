@@ -494,14 +494,6 @@ class WalletImplementation extends IWalletRepository {
     required String ownerAddress,
     required List<dynamic> data,
   }) async{
-    final gasPrice = await _walletDataSource.getGasPrice();
-    final spendingAddress = await _secureStorage.readAddressContract();
-    return Right(await _walletDataSource.estimateDepositTokenGas(
-      spendingAddress: spendingAddress!,
-      ownerAddress: ownerAddress,
-      gasPrice: gasPrice,
-      data: data,
-    ));
     try {
       final gasPrice = await _walletDataSource.getGasPrice();
       final spendingAddress = await _secureStorage.readAddressContract();

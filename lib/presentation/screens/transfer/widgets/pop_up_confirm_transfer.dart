@@ -11,7 +11,6 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer({
     Key? key,
-    required this.cubit,
     required this.userId,
     required this.amount,
     required this.fee,
@@ -24,7 +23,6 @@ class PopUpConfirmTransfer extends StatelessWidget {
     required this.isLoadingNotifier,
   }) : super(key: key);
 
-  final TransferCubit cubit;
   final int userId;
   final double amount;
   final String fee;

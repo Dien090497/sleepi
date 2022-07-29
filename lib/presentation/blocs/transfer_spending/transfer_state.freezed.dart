@@ -150,23 +150,15 @@ class __$$TransferFailedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferFailed with DiagnosticableTreeMixin implements TransferFailed {
+class _$TransferFailed implements TransferFailed {
   const _$TransferFailed(this.msg);
 
   @override
   final String msg;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TransferState.failed(msg: $msg)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TransferState.failed'))
-      ..add(DiagnosticsProperty('msg', msg));
   }
 
   @override
@@ -192,8 +184,16 @@ class _$TransferFailed with DiagnosticableTreeMixin implements TransferFailed {
     required TResult Function(String msg) failed,
     required TResult Function(double depositTokenGas) getEstimateGasFee,
     required TResult Function() success,
-    required TResult Function(bool isToSpending, bool isLoading,
-            String? errorMsg, String? typeError, bool? needApprove)
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)
         loaded,
   }) {
     return failed(msg);
@@ -205,8 +205,16 @@ class _$TransferFailed with DiagnosticableTreeMixin implements TransferFailed {
     TResult Function(String msg)? failed,
     TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
   }) {
     return failed?.call(msg);
@@ -218,8 +226,16 @@ class _$TransferFailed with DiagnosticableTreeMixin implements TransferFailed {
     TResult Function(String msg)? failed,
     TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
     required TResult orElse(),
   }) {
@@ -314,25 +330,15 @@ class __$$TransferEstimateGasFeeSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TransferEstimateGasFeeSuccess
-    with DiagnosticableTreeMixin
-    implements TransferEstimateGasFeeSuccess {
+class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
   const _$TransferEstimateGasFeeSuccess(this.depositTokenGas);
 
   @override
   final double depositTokenGas;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TransferState.getEstimateGasFee(depositTokenGas: $depositTokenGas)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TransferState.getEstimateGasFee'))
-      ..add(DiagnosticsProperty('depositTokenGas', depositTokenGas));
   }
 
   @override
@@ -360,8 +366,16 @@ class _$TransferEstimateGasFeeSuccess
     required TResult Function(String msg) failed,
     required TResult Function(double depositTokenGas) getEstimateGasFee,
     required TResult Function() success,
-    required TResult Function(bool isToSpending, bool isLoading,
-            String? errorMsg, String? typeError, bool? needApprove)
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)
         loaded,
   }) {
     return getEstimateGasFee(depositTokenGas);
@@ -373,8 +387,16 @@ class _$TransferEstimateGasFeeSuccess
     TResult Function(String msg)? failed,
     TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
   }) {
     return getEstimateGasFee?.call(depositTokenGas);
@@ -386,8 +408,16 @@ class _$TransferEstimateGasFeeSuccess
     TResult Function(String msg)? failed,
     TResult Function(double depositTokenGas)? getEstimateGasFee,
     TResult Function()? success,
-    TResult Function(bool isToSpending, bool isLoading, String? errorMsg,
-            String? typeError, bool? needApprove)?
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg,
+            String? typeError)?
         loaded,
     required TResult orElse(),
   }) {

@@ -33,7 +33,7 @@ class TransferList extends StatefulWidget {
 class _TransferListState extends State<TransferList> {
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
   final valueController = TextEditingController();
-  double depositTokenGas = 0;
+
   @override
   void dispose() {
     isLoadingNotifier.dispose();
@@ -70,6 +70,7 @@ class _TransferListState extends State<TransferList> {
             );
           } else if (isAllowance == true) {
             final userState = context.read<UserBloc>().state;
+            final walletState = context.read<WalletCubit>().state;
             if (userState is UserLoaded) {
               showCustomAlertDialog(
                 context,
@@ -88,16 +89,14 @@ class _TransferListState extends State<TransferList> {
                   symbol: state.currentToken.symbol,
                   tokenAddress: state.currentToken.address,
                   isLoadingNotifier: isLoadingNotifier,
+                  ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address,
+                  userId: userState.userInfoEntity.id, spendingToWallet: true,
                 ),
               );
             }
           }
         }
-        if(state is TransferEstimateGasFeeSuccess){
-          depositTokenGas = state.depositTokenGas + state.depositTokenGas*0.01;
-          print('--------------------DEPOSIT------------------');
-          print("DEPOSIT : ${state.depositTokenGas}");
-        }
+
         if (state is TransferSuccess) {
           isLoadingNotifier.value = false;
           showSuccessfulDialog(
@@ -114,14 +113,6 @@ class _TransferListState extends State<TransferList> {
       buildWhen: (prev, cur) => cur is TransferLoaded,
       builder: (context, state) {
         final cubit = context.read<TransferCubit>();
-        final userState = context.read<UserBloc>().state;
-        final walletState = context.read<WalletCubit>().state;
-       cubit.getEstimateDepositTokenGas(ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address, data: [
-          0,
-          widget.tokenEntity.address,
-          valueController.text.isNotEmpty ? double.parse(valueController.text.replaceAll(',', '.')) : 0,
-          (userState as UserLoaded).userInfoEntity.id
-        ]);
 
         if (state is TransferLoaded) {
           final currentToken = state.currentToken;

@@ -7,6 +7,7 @@ import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/gacha_history_response/gacha_history_response.dart';
 import 'package:slee_fi/models/gacha_probability_config_response/config_cost.dart';
+import 'package:slee_fi/models/gacha_probability_config_response/config_info.dart';
 import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
@@ -46,16 +47,25 @@ class _GachaScreenState extends State<GachaScreen> {
                   _gachaHistoryResponse = state.response;
                 }
                 if(state is GachaProbabilityConfigSuccess){
+                  print('-----------GachaProbabilityConfigSuccess-----------------');
                   var common = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON").toList().first.configs;
                   commonData = ProbabilityConfig.fromJson(common as Map<String, dynamic>);
+                  print('-----------GachaProbabilityConfigSuccess-----------------');
+                  print(common);
+                  print("COMMON DATA : $commonData");
+
                   var special = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL").toList().first.configs;
                   specialData = ProbabilityConfig.fromJson(special as Map<String, dynamic>);
                   var configCost = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COST_OPEN_GACHA").toList().first.configs;
                   _configCost = ConfigCost.fromJson(configCost as Map<String, dynamic>);
                   var commonTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON_RESET_TIME").toList().first.configs;
                   commonTimes = commonTime['times'];
+                  print('-----------commonTime-----------------');
+                  print(commonTime['times']);
                   var specialTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL_RESET_TIME").toList().first.configs;
                   specialTimes = specialTime['times'];
+                  print('----------------------------');
+                  print(specialTime['times']);
                 }
               },
               builder: (context, state) {
