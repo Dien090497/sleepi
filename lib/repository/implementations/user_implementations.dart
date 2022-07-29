@@ -93,6 +93,7 @@ class UserImplementation extends IUserRepository {
       final ethereumAddress = await credentials.extractAddress();
       final signature = _web3DataSource.generateSignature(
           privateKey: wallet.privateKey, message: message ?? '');
+
       WhitDrawTokenSchema schema = WhitDrawTokenSchema(
         amount: whitDrawTokenSchema.amount,
         tokenAddress: whitDrawTokenSchema.tokenAddress,
