@@ -49,7 +49,7 @@ class TrackingCubit extends Cubit<TrackingState> {
     );
   }
 
-  Future<void> fetchData(time, timeStart) async {
+  Future<void> fetchData(DateTime timeStart) async {
     emit(const TrackingState.loading());
     DateTime now = DateTime.now();
     HealthFactory health = HealthFactory();
@@ -68,11 +68,13 @@ class TrackingCubit extends Cubit<TrackingState> {
     if (accessWasGranted) {
       try {
         List<DataHealth> healthDataList = [];
-        List<HealthDataPoint> healthData =
-            await health.getHealthDataFromTypes(timeStart, now, types);
+        List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
+            now.subtract(const Duration(days: 1)), now, types);
         healthData = HealthFactory.removeDuplicates(healthData);
         for (var element in healthData) {
-          healthDataList.add(convertDataToSchema(element));
+          if(timeStart.isBefore(element.dateTo)) {
+            healthDataList.add(convertDataToSchema(element));
+          }
         }
         log('health data: ${DataHealthSchema(
           datas: healthDataList,

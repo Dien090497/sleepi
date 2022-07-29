@@ -220,8 +220,7 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> checkApproveToken(
-      double value, String contractAddress) async {
+  Future<Either<Failure, bool>> approveToken(String contractAddress) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
@@ -254,6 +253,19 @@ class WalletImplementation extends IWalletRepository {
       bool success = await _web3DataSource.swapExactTokensForAvax(
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, BigInt>> checkAllowance(double value, String contractAddress) async {
+    try {
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
+      BigInt allowanceNumber = await _web3DataSource.allowance(
+          EthereumAddress.fromHex(wallet!.address), contractAddress);
+      return Right(allowanceNumber);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
