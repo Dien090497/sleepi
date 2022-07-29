@@ -7,7 +7,6 @@ import 'package:slee_fi/common/widgets/topbar_common.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/gacha_history_response/gacha_history_response.dart';
 import 'package:slee_fi/models/gacha_probability_config_response/config_cost.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/config_info.dart';
 import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
@@ -26,6 +25,8 @@ class _GachaScreenState extends State<GachaScreen> {
   GachaHistoryResponse? _gachaHistoryResponse;
   ProbabilityConfig? commonData;
   ProbabilityConfig? specialData;
+  List<dynamic>? commonInfo;
+  List<dynamic>? specialInfo;
   ConfigCost? _configCost;
   int commonTimes = 0;
   int specialTimes = 0;
@@ -49,23 +50,21 @@ class _GachaScreenState extends State<GachaScreen> {
                 if(state is GachaProbabilityConfigSuccess){
                   print('-----------GachaProbabilityConfigSuccess-----------------');
                   var common = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON").toList().first.configs;
-                  commonData = ProbabilityConfig.fromJson(common as Map<String, dynamic>);
-                  print('-----------GachaProbabilityConfigSuccess-----------------');
-                  print(common);
-                  print("COMMON DATA : $commonData");
+                  // commonData = ProbabilityConfig.fromJson(common as Map<String, dynamic>);
+                  commonInfo = common;
+
+                  print('-----------COMMON DATA-----------------');
+                  print("COMMON DATA : $commonInfo");
 
                   var special = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL").toList().first.configs;
-                  specialData = ProbabilityConfig.fromJson(special as Map<String, dynamic>);
+                  specialInfo = special;
+                  // specialData = ProbabilityConfig.fromJson(special as Map<String, dynamic>);
                   var configCost = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COST_OPEN_GACHA").toList().first.configs;
                   _configCost = ConfigCost.fromJson(configCost as Map<String, dynamic>);
                   var commonTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON_RESET_TIME").toList().first.configs;
                   commonTimes = commonTime['times'];
-                  print('-----------commonTime-----------------');
-                  print(commonTime['times']);
                   var specialTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL_RESET_TIME").toList().first.configs;
                   specialTimes = specialTime['times'];
-                  print('----------------------------');
-                  print(specialTime['times']);
                 }
               },
               builder: (context, state) {
@@ -78,7 +77,7 @@ class _GachaScreenState extends State<GachaScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         children:  [
                           ItemsGacha(
-                            dialogData: commonData,
+                            dialogData: commonInfo,
                             costSingle: _configCost != null ? _configCost!.normalGachaSingle! : 0,
                             costMultiple: _configCost != null ? _configCost!.normalGachaMultiple! : 0,
                             title: LocaleKeys.normal_gacha,
@@ -94,7 +93,7 @@ class _GachaScreenState extends State<GachaScreen> {
                             onPressed: () => cubit.init(),
                           ),
                           ItemsGacha(
-                            dialogData: specialData,
+                            dialogData: specialInfo,
                             costSingle: _configCost != null ? _configCost!.specialGachaSingle! : 0,
                             costMultiple: _configCost != null ? _configCost!.specialGachaMultiple! : 0,
                             title: LocaleKeys.special_gacha,

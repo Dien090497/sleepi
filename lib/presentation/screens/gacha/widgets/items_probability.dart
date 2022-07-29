@@ -25,7 +25,7 @@ class ItemsProbability extends StatelessWidget {
   final double? height;
   // final bool isGradient;
   // final bool isToken;
-  final List<ConfigInfo>? configInfo;
+  final List<dynamic>? configInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class ItemsProbability extends StatelessWidget {
                 return  Column(
                   children:  [
                     const SizedBox(height: 10),
-                    rowData(title: "${configInfo?.elementAt(index).name} ", value: configInfo?.elementAt(index).value),
+                    rowData(title: "${configInfo?.elementAt(index)['name']} ", value: configInfo?.elementAt(index)['value']),
                   ],
                 );
               }

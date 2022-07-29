@@ -189,8 +189,7 @@ class _$TransferFailed implements TransferFailed {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)
+            String? errorMsg)
         loaded,
   }) {
     return failed(msg);
@@ -210,8 +209,7 @@ class _$TransferFailed implements TransferFailed {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
   }) {
     return failed?.call(msg);
@@ -231,8 +229,7 @@ class _$TransferFailed implements TransferFailed {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
     required TResult orElse(),
   }) {
@@ -371,8 +368,7 @@ class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)
+            String? errorMsg)
         loaded,
   }) {
     return getEstimateGasFee(depositTokenGas);
@@ -392,8 +388,7 @@ class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
   }) {
     return getEstimateGasFee?.call(depositTokenGas);
@@ -413,8 +408,7 @@ class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
     required TResult orElse(),
   }) {

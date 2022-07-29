@@ -8,7 +8,7 @@ class ProbabilityWidget extends StatelessWidget {
 
   final String imagePath;
   final bool normalGacha;
-  final ProbabilityConfig? dialogData;
+  final List<dynamic>? dialogData;
 
   @override
   Widget build(BuildContext context) {

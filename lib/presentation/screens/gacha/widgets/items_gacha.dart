@@ -29,7 +29,7 @@ class ItemsGacha extends StatelessWidget {
   })
       : super(key: key);
 
-  final ProbabilityConfig? dialogData;
+  final List<dynamic>? dialogData;
   final String title;
   final String typeReward;
   final String singleGachaImages;

@@ -9,7 +9,7 @@ import 'package:slee_fi/resources/resources.dart';
 
 class ProbabilityDialog extends StatelessWidget {
   final bool normalGacha;
-  final ProbabilityConfig? dialogData;
+  final List<dynamic>? dialogData;
   const ProbabilityDialog({required this.dialogData,  required this.normalGacha, Key? key})
       : super(key: key);
 
@@ -36,7 +36,7 @@ class ProbabilityDialog extends StatelessWidget {
                 const SizedBox(height: 16),
                 ItemsProbability(
                   // iconPath: Ics.icBedsProbability,
-                  configInfo: dialogData?.configs,
+                  configInfo: dialogData,
                   // title: LocaleKeys.bed,
                   // style: TextStyles.bold14Blue,
                   // colorBgIcon: [
