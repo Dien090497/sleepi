@@ -135,9 +135,11 @@ class UserImplementation extends IUserRepository {
       WithdrawParam withdrawParam) async {
     try {
       final result = await _authDataSource.withdraw(
-          withdrawParam.attributeWithdraw,
-          withdrawParam.limit,
-          withdrawParam.page);
+        withdrawParam.attributeWithdraw,
+        withdrawParam.limit,
+        withdrawParam.page,
+        'token',
+      );
       return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
