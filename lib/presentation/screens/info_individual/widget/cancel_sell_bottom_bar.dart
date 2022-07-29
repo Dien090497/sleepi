@@ -45,9 +45,9 @@ class CancelSellBottombar extends StatelessWidget {
 
           if (state is BottomBarInfoIndividualLoaded) {
             if (state.successTransfer) {
-              showSuccessfulDialog(context, null, onBackPress: () {})
-                  .then((value) {
-                Navigator.pop(context);
+              Navigator.pop(context);
+              showSuccessfulDialog(context, null).then((value) {
+                print('on dis posssss success ');
               });
               onCancelSellSuccess();
             }
