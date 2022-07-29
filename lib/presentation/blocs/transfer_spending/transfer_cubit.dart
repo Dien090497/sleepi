@@ -207,7 +207,7 @@ class TransferCubit extends Cubit<TransferState> {
         );
       } else {
         final result = await _transferToMainWalletUC.call(WhitDrawTokenSchema(
-            type: token.symbol,
+            type: 'token',
             amount: '${currentState.amount}',
             tokenAddress: token.address));
         result.fold(
