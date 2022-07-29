@@ -75,14 +75,14 @@ import '../usecase/buy_nft_usecase.dart' as _i113;
 import '../usecase/cancel_sell_usecase.dart' as _i75;
 import '../usecase/change_password_usecase.dart' as _i114;
 import '../usecase/check_activation_code_usecase.dart' as _i115;
-import '../usecase/check_approve_usecase.dart' as _i116;
-import '../usecase/compound_usecase.dart' as _i118;
-import '../usecase/create_new_mnemonic_usecase.dart' as _i119;
-import '../usecase/create_pass_code_usecase.dart' as _i120;
-import '../usecase/create_password_usecase.dart' as _i121;
+import '../usecase/check_allowance_usecase.dart' as _i116;
+import '../usecase/check_approve_usecase.dart' as _i117;
+import '../usecase/compound_usecase.dart' as _i119;
+import '../usecase/create_new_mnemonic_usecase.dart' as _i120;
+import '../usecase/create_pass_code_usecase.dart' as _i121;
+import '../usecase/create_password_usecase.dart' as _i122;
 import '../usecase/current_network_explorer_usecase.dart' as _i43;
-import '../usecase/current_user_usecase.dart' as _i123;
-import '../usecase/estimate_deposit_token_gas_usecase.dart' as _i125;
+import '../usecase/current_user_usecase.dart' as _i124;
 import '../usecase/estimate_gas_withdraw.dart' as _i126;
 import '../usecase/estimate_nft_function_fee_usecase.dart' as _i127;
 import '../usecase/estimate_token_function_fee_usecase.dart' as _i44;
@@ -168,27 +168,21 @@ import '../usecase/validate_mnemonic.dart' as _i102;
 import '../usecase/validate_passcode_usecase.dart' as _i103;
 import '../usecase/verify_otp_usecase.dart' as _i104;
 import '../usecase/wake_up_usecase.dart' as _i105;
-import '../usecase/wallet/create_wallet_usecase.dart' as _i122;
-import '../usecase/wallet/current_wallet_usecase.dart' as _i124;
-import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i117;
+import '../usecase/wallet/create_wallet_usecase.dart' as _i123;
+import '../usecase/wallet/current_wallet_usecase.dart' as _i125;
+import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i118;
 import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i146;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i61;
 import '../usecase/withdraw_history_usecase.dart' as _i106;
 import '../usecase/withdraw_nft_usecase.dart' as _i107;
-import 'const_injection.dart' as _i167;
-import 'register_module.dart' as _i166;
-
-const String _prod = 'prod';
-const String _dev = 'dev';
-const String _test = 'test';
-import 'dev_injection.dart' as _i167;
+import 'dev_injection.dart' as _i169;
 import 'prod_innjection.dart' as _i168;
-import 'register_module.dart' as _i165;
-import 'stg_injection.dart' as _i166;
+import 'register_module.dart' as _i166;
+import 'stg_injection.dart' as _i167;
 
 const String _test = 'test';
-const String _dev = 'dev';
 const String _prod = 'prod';
+const String _dev = 'dev';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -198,8 +192,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
   final stgInjection = _$StgInjection();
-  final devInjection = _$DevInjection();
   final prodInjection = _$ProdInjection();
+  final devInjection = _$DevInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -219,15 +213,12 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => registerModule.isar(get<_i9.Directory>()),
       preResolve: true);
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
-  gh.factory<List<dynamic>>(() => constInjection.tokensProd,
   gh.factory<List<dynamic>>(() => stgInjection.tokens,
       instanceName: 'tokens', registerFor: {_test});
-  gh.factory<List<dynamic>>(() => devInjection.tokens,
-      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<List<dynamic>>(() => prodInjection.tokens,
       instanceName: 'tokens', registerFor: {_prod});
-  gh.factory<List<dynamic>>(() => constInjection.tokensDev,
-      instanceName: 'tokens', registerFor: {_dev, _test});
+  gh.factory<List<dynamic>>(() => devInjection.tokens,
+      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.QueueInterceptor>(
@@ -236,27 +227,18 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i12.StorageKeys>(() => _i12.StorageKeys());
-  gh.factory<String>(() => constInjection.baseUrlStg,
-      instanceName: 'baseUrl', registerFor: {_test});
-  gh.factory<String>(() => constInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_dev, _test});
-  gh.factory<String>(() => constInjection.baseUrlProd,
-      instanceName: 'baseUrl', registerFor: {_prod});
-  gh.factory<String>(() => constInjection.baseUrlDev,
-      instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => constInjection.contractRouterProd,
-  gh.factory<String>(() => devInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => devInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_dev});
   gh.factory<String>(() => stgInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_test});
-  gh.factory<String>(() => stgInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_test});
-  gh.factory<String>(() => prodInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<String>(() => prodInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_prod});
+  gh.factory<String>(() => prodInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => devInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_dev});
+  gh.factory<String>(() => stgInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_test});
+  gh.factory<String>(() => devInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_dev});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
   gh.factory<_i22.HistoryDataSource>(
@@ -362,7 +344,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       get<_i15.IsarDataSource>(),
       get<_i21.Web3Provider>(),
       get<_i28.SecureStorage>(),
-      get<_i31.WalletDataSource>(),
       get<_i42.AuthDataSource>()));
   gh.factory<_i61.ImportWalletUseCase>(
       () => _i61.ImportWalletUseCase(get<_i59.IWalletRepository>()));
@@ -472,26 +453,26 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i114.ChangePasswordUseCase(get<_i57.IUserRepository>()));
   gh.factory<_i115.CheckActivationCodeUseCase>(
       () => _i115.CheckActivationCodeUseCase(get<_i45.IAuthRepository>()));
-  gh.factory<_i116.CheckApproveUseCase>(
-      () => _i116.CheckApproveUseCase(get<_i59.IWalletRepository>()));
-  gh.factory<_i117.CheckFirstOpenWallet>(
-      () => _i117.CheckFirstOpenWallet(get<_i59.IWalletRepository>()));
-  gh.factory<_i118.CompoundUseCase>(
-      () => _i118.CompoundUseCase(get<_i55.ISpendingRepository>()));
-  gh.factory<_i119.CreateNewMnemonicUseCase>(
-      () => _i119.CreateNewMnemonicUseCase(get<_i59.IWalletRepository>()));
-  gh.factory<_i120.CreatePassCodeUseCase>(
-      () => _i120.CreatePassCodeUseCase(get<_i45.IAuthRepository>()));
-  gh.factory<_i121.CreatePasswordUseCase>(
-      () => _i121.CreatePasswordUseCase(get<_i45.IAuthRepository>()));
-  gh.factory<_i122.CreateWalletUseCase>(
-      () => _i122.CreateWalletUseCase(get<_i59.IWalletRepository>()));
-  gh.factory<_i123.CurrentUserUseCase>(
-      () => _i123.CurrentUserUseCase(get<_i45.IAuthRepository>()));
-  gh.factory<_i124.CurrentWalletUseCase>(
-      () => _i124.CurrentWalletUseCase(get<_i59.IWalletRepository>()));
-  gh.factory<_i125.EstimateDepositTokenGasUseCase>(() =>
-      _i125.EstimateDepositTokenGasUseCase(get<_i59.IWalletRepository>()));
+  gh.factory<_i116.CheckAllowanceUseCase>(
+      () => _i116.CheckAllowanceUseCase(get<_i59.IWalletRepository>()));
+  gh.factory<_i117.CheckApproveUseCase>(
+      () => _i117.CheckApproveUseCase(get<_i59.IWalletRepository>()));
+  gh.factory<_i118.CheckFirstOpenWallet>(
+      () => _i118.CheckFirstOpenWallet(get<_i59.IWalletRepository>()));
+  gh.factory<_i119.CompoundUseCase>(
+      () => _i119.CompoundUseCase(get<_i55.ISpendingRepository>()));
+  gh.factory<_i120.CreateNewMnemonicUseCase>(
+      () => _i120.CreateNewMnemonicUseCase(get<_i59.IWalletRepository>()));
+  gh.factory<_i121.CreatePassCodeUseCase>(
+      () => _i121.CreatePassCodeUseCase(get<_i45.IAuthRepository>()));
+  gh.factory<_i122.CreatePasswordUseCase>(
+      () => _i122.CreatePasswordUseCase(get<_i45.IAuthRepository>()));
+  gh.factory<_i123.CreateWalletUseCase>(
+      () => _i123.CreateWalletUseCase(get<_i59.IWalletRepository>()));
+  gh.factory<_i124.CurrentUserUseCase>(
+      () => _i124.CurrentUserUseCase(get<_i45.IAuthRepository>()));
+  gh.factory<_i125.CurrentWalletUseCase>(
+      () => _i125.CurrentWalletUseCase(get<_i59.IWalletRepository>()));
   gh.factory<_i126.EstimateGasWithdrawUseCase>(
       () => _i126.EstimateGasWithdrawUseCase(get<_i57.IUserRepository>()));
   gh.factory<_i127.EstimateNftFunctionFeeUseCase>(
@@ -579,9 +560,8 @@ class _$RPCModule extends _i32.RPCModule {}
 
 class _$RegisterModule extends _i166.RegisterModule {}
 
-class _$ConstInjection extends _i167.ConstInjection {}
-class _$StgInjection extends _i166.StgInjection {}
-
-class _$DevInjection extends _i167.DevInjection {}
+class _$StgInjection extends _i167.StgInjection {}
 
 class _$ProdInjection extends _i168.ProdInjection {}
+
+class _$DevInjection extends _i169.DevInjection {}
