@@ -495,5 +495,6 @@
   "mint_fail": "ミント失敗",
   "please_turn_on_tracking_android": "睡眠計測を行うにはGoogle Fitでデータ取得をONにする必要があります",
   "please_turn_on_tracking_ios": "睡眠計測を行うにはHealth Appでデータ取得をONにする必要があります",
-  "tracking_is_not_opening": "睡眠開始がオープンされていない"
+  "tracking_is_not_opening": "睡眠開始がオープンされていない",
+  "invalid_bed": "Invalid Bed"
 }
