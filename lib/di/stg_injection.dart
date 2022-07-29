@@ -12,31 +12,31 @@ abstract class StgInjection {
   @Named('tokens')
   List<dynamic> get tokens => [
         {
-          "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c", //testnet
+          "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
           "symbol": "AVAX",
           "decimal": 18,
-          "totalSupply": 858592.343225,
+          "totalSupply": 890917.376875,
           "icon": Ics.icAvax,
         },
         {
-          "address": "0x2bB8Bc1C29F34f3795661452Bf806cB5D65DF8DC",
+          "address": "0x3AFb22cdF460F2299D8b6b4443e1c846882646D9",
           "symbol": "SLFT",
           "decimal": 18,
-          "totalSupply": 6003000000,
+          "totalSupply": 1000000000,
           "icon": Ics.icSlft,
         },
         {
-          "address": "0x41Dd35f9e440ADecB9A04fA839D0be2b19722Ade",
+          "address": "0xf196d851EF318357f9ec69a73EA6EbB2a85E6e1d",
           "symbol": "SLGT",
           "decimal": 18,
           "totalSupply": 12000000000,
           "icon": Ics.icSlgt,
         },
         {
-          "address": "0x950C6F4F97DD62bd3cA76f084663224FD2E6b555", //testnet
+          "address": "0x6346C85e28b1E3276828E8153aFA21BA8F522A5e",
           "symbol": "USDC",
           "decimal": 6,
-          "totalSupply": 10000,
+          "totalSupply": 1000000000000000,
           "icon": Ics.icUsdc,
         },
       ];
