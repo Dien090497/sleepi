@@ -98,7 +98,7 @@ class CommunityShare extends StatelessWidget {
                 },
                 child: itemCommunity(
                   context,
-                  Ics.telegram,
+                  Ics.icInstagram,
                   LocaleKeys.telegram,
                 ),
               ),
