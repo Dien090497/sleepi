@@ -69,7 +69,7 @@ class _TransferListState extends State<TransferList> {
             );
           } else if (isAllowance == true) {
             final userState = context.read<UserBloc>().state;
-
+            final walletState = context.read<WalletCubit>().state;
             if (userState is UserLoaded) {
               showCustomAlertDialog(
                 context,
@@ -88,11 +88,14 @@ class _TransferListState extends State<TransferList> {
                   symbol: state.currentToken.symbol,
                   tokenAddress: state.currentToken.address,
                   isLoadingNotifier: isLoadingNotifier,
+                  ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address,
+                  userId: userState.userInfoEntity.id, spendingToWallet: true,
                 ),
               );
             }
           }
         }
+
         if (state is TransferSuccess) {
           isLoadingNotifier.value = false;
           showSuccessfulDialog(

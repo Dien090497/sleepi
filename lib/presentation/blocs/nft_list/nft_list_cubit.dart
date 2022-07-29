@@ -28,7 +28,8 @@ class NFTListCubit extends Cubit<NftListState> {
         emit(const NftListState.loaded(
             hasMore: false, listBedBox: [], listBed: []));
       }, (entities) {
-        emit(NftListState.loaded(listBed: entities, listBedBox: []));
+        emit(NftListState.loaded(
+            hasMore: entities.length >= 10, listBed: entities, listBedBox: []));
       });
     }
   }
@@ -59,8 +60,7 @@ class NFTListCubit extends Cubit<NftListState> {
       _idCategory,
       bedType: 'bedbox',
     ));
-    result.fold((l) {
-    }, (entities) {
+    result.fold((l) {}, (entities) {
       final currentState = state;
       if (currentState is NftListLoaded) {
         emit(currentState.copyWith(

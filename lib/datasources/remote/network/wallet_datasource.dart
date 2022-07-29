@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:erc20/erc20.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/bed.g.dart';
@@ -57,6 +59,25 @@ class WalletDataSource {
     return _spending(spendingAddress).depositToken(
         EthereumAddress.fromHex(nftAddress), nftId, userId,
         credentials: credentials);
+  }
+
+  Future<double> estimateDepositTokenGas({
+    required String spendingAddress,
+    required String ownerAddress,
+    required EtherAmount gasPrice,
+    required List<dynamic> data,
+  }) async {
+    final spending = Spending(
+        address: EthereumAddress.fromHex(spendingAddress),
+        client: _web3provider.web3client);
+    final depositTokenFunc = spending.self.function('depositToken');
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: EthereumAddress.fromHex(ownerAddress),
+      to: spending.self.address,
+      gasPrice: gasPrice,
+      data: depositTokenFunc.encodeCall(data),
+    );
+    return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
   }
 
   Future<String> depositNft({

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -8,8 +7,6 @@ import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/minting/info_minting_model.dart';
-import 'package:slee_fi/models/minting/percent_minting.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -23,8 +20,8 @@ class MintScreen extends StatefulWidget {
 
 class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
   late AnimationController animationController;
-  InfoMintingModel? _infoMintingModel;
-  PercentMinting? _percentMinting;
+  // InfoMintingModel? _infoMintingModel;
+  // PercentMinting? _percentMinting;
   int percentBedBox = 100;
 
   @override
@@ -51,11 +48,11 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin{
             });
           }
           if (state is MintStateGetInfo) {
-            _infoMintingModel = state.infoMintingModel;
-            _percentMinting = state.infoMintingModel.percentMinting
-                .where((i) => i.value == state.infoMintingModel.randomQuality)
-                .toList()
-                .first;
+            // _infoMintingModel = state.infoMintingModel;
+            // _percentMinting = state.infoMintingModel.percentMinting
+            //     .where((i) => i.value == state.infoMintingModel.randomQuality)
+            //     .toList()
+            //     .first;
           }
         },
         builder: (context, state) {

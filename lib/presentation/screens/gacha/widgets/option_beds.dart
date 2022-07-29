@@ -63,6 +63,7 @@ class Option extends StatelessWidget {
           horizontal: 10),
       child: Container(
         padding: const EdgeInsets.all(8),
+        height: 60,
         decoration: BoxDecoration(
             borderRadius:
             BorderRadius.circular(10),
