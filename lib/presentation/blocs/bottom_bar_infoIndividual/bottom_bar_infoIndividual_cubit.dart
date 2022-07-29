@@ -156,9 +156,11 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
       final currentState = state;
       if (currentState is BottomBarInfoIndividualLoaded) {
         emit(currentState.copyWith(successTransfer: true));
+        print('currentState1 ${state}');
       } else {
         emit(const BottomBarInfoIndividualState.loaded(
             gasPrice: '', successTransfer: true, transactionFee: ''));
+        print('currentState1xx ${state}');
       }
     });
   }
