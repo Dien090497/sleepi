@@ -11,19 +11,25 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer({
     Key? key,
+    required this.userId,
     required this.amount,
     required this.fee,
     required this.symbol,
     required this.tokenAddress,
+    required this.ownerAddress,
+    required this.spendingToWallet,
     required this.isToSpending,
     required this.onConfirm,
     required this.isLoadingNotifier,
   }) : super(key: key);
 
+  final int userId;
   final double amount;
   final String fee;
   final String symbol;
   final String tokenAddress;
+  final String ownerAddress;
+  final bool spendingToWallet;
   final bool isToSpending;
   final VoidCallback onConfirm;
   final ValueNotifier<bool> isLoadingNotifier;
