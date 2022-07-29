@@ -31,11 +31,16 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   convertTimeSpan(String timeSpan) {
-    int time = int.parse(timeSpan);
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
-    int hour = dateTime.hour;
-    int minute = dateTime.minute;
-    return '${hour < 10 ? '0$hour' : hour}:${minute < 10 ? '0$minute' : minute}';
+    if (timeSpan == '0') {
+      return '0';
+    } else {
+
+      int time = int.parse(timeSpan);
+      DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
+      int hour = dateTime.hour;
+      int minute = dateTime.minute;
+      return '${hour < 10 ? '0$hour' : hour}:${minute < 10 ? '0$minute' : minute}';
+    }
   }
 
   @override
