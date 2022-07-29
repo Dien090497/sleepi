@@ -188,8 +188,9 @@ class InfoIndividualScreen extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: (state.bed.isLock == 1 &&
+                child: ((state.bed.isLock == 1 &&
                         state.bed.statusNftSale == 'ON_SALE')
+                        || (args.bed.isLock == 1 && args.bed.status == 'ON_SALE'))
                     ? CancelSellBottombar(
                         beds: state.bed,
                         onCancelSellSuccess: () {
