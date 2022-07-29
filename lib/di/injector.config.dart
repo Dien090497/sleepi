@@ -175,14 +175,14 @@ import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i146;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i61;
 import '../usecase/withdraw_history_usecase.dart' as _i106;
 import '../usecase/withdraw_nft_usecase.dart' as _i107;
-import 'dev_injection.dart' as _i167;
+import 'dev_injection.dart' as _i169;
 import 'prod_innjection.dart' as _i168;
 import 'register_module.dart' as _i166;
-import 'stg_injection.dart' as _i169;
+import 'stg_injection.dart' as _i167;
 
-const String _dev = 'dev';
-const String _prod = 'prod';
 const String _test = 'test';
+const String _prod = 'prod';
+const String _dev = 'dev';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -191,9 +191,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
-  final devInjection = _$DevInjection();
-  final prodInjection = _$ProdInjection();
   final stgInjection = _$StgInjection();
+  final prodInjection = _$ProdInjection();
+  final devInjection = _$DevInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -213,12 +213,12 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => registerModule.isar(get<_i9.Directory>()),
       preResolve: true);
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
-  gh.factory<List<dynamic>>(() => devInjection.tokens,
-      instanceName: 'tokens', registerFor: {_dev});
-  gh.factory<List<dynamic>>(() => prodInjection.tokens,
-      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<List<dynamic>>(() => stgInjection.tokens,
       instanceName: 'tokens', registerFor: {_test});
+  gh.factory<List<dynamic>>(() => prodInjection.tokens,
+      instanceName: 'tokens', registerFor: {_prod});
+  gh.factory<List<dynamic>>(() => devInjection.tokens,
+      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.QueueInterceptor>(
@@ -227,18 +227,18 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i12.StorageKeys>(() => _i12.StorageKeys());
-  gh.factory<String>(() => devInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_dev});
-  gh.factory<String>(() => prodInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_prod});
-  gh.factory<String>(() => prodInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<String>(() => stgInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_test});
-  gh.factory<String>(() => devInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_dev});
+  gh.factory<String>(() => prodInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_prod});
+  gh.factory<String>(() => prodInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => devInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_dev});
   gh.factory<String>(() => stgInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_test});
+  gh.factory<String>(() => devInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_dev});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
   gh.factory<_i22.HistoryDataSource>(
@@ -560,8 +560,8 @@ class _$RPCModule extends _i32.RPCModule {}
 
 class _$RegisterModule extends _i166.RegisterModule {}
 
-class _$DevInjection extends _i167.DevInjection {}
+class _$StgInjection extends _i167.StgInjection {}
 
 class _$ProdInjection extends _i168.ProdInjection {}
 
-class _$StgInjection extends _i169.StgInjection {}
+class _$DevInjection extends _i169.DevInjection {}
