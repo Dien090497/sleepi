@@ -191,7 +191,7 @@ class InfoIndividualScreen extends StatelessWidget {
                 child: (state.bed.isLock == 1 &&
                         state.bed.statusNftSale == 'ON_SALE')
                     ? CancelSellBottombar(
-                        beds: args.bed,
+                        beds: state.bed,
                         onCancelSellSuccess: () {
                           context.read<IndividualCubit>().refresh();
                         },

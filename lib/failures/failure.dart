@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
@@ -28,9 +29,9 @@ class FailureMessage extends Failure {
             ? jsonDecode(data)['error']['message']
             : data['error']['message'].toString();
         if (error is String) {
-          return FailureMessage(error);
+          return FailureMessage(error.tr());
         } else if (error is List<String>) {
-          return FailureMessage(error.first);
+          return FailureMessage(error.first.tr());
         }
       }
     } catch (_) {
