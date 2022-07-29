@@ -337,12 +337,13 @@ class _AuthDataSource implements AuthDataSource {
 
   @override
   Future<WithdrawHistoryResponse> withdraw(
-      attributeWithdraw, limit, page) async {
+      attributeWithdraw, limit, page, type) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'status': attributeWithdraw.toJson(),
       r'limit': limit,
-      r'page': page
+      r'page': page,
+      r'type': type
     };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

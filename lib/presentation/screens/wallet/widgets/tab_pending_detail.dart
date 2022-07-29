@@ -179,7 +179,7 @@ class _BuildItem extends StatelessWidget {
                 const SizedBox(height: 4.0),
                 Text(
                   dateTimeUtils
-                      .ddMMyyyyHHmm(DateTime.parse(withdrawEntity.time)),
+                      .ddMMyyyyHHmm(DateTime.parse(withdrawEntity.time).toLocal()),
                   style: TextStyles.lightGrey14,
                 ),
               ],
