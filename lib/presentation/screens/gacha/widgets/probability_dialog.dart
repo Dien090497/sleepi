@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/items_probability.dart';
-import 'package:slee_fi/resources/resources.dart';
 
 class ProbabilityDialog extends StatelessWidget {
   final bool normalGacha;

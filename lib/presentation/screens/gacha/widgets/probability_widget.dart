@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
-import 'package:slee_fi/models/gacha_probability_config_response/probability_config.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/probability_dialog.dart';
 
 class ProbabilityWidget extends StatelessWidget {

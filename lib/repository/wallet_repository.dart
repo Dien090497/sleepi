@@ -30,11 +30,6 @@ abstract class IWalletRepository {
   Future<Either<Failure, List<double>>> getBalanceOfTokens(
       ParamsBalanceOfToken params);
 
-  Future<Either<Failure, double>> estimateDepositTokenGas({
-    required String ownerAddress,
-    required List<dynamic> data,
-  });
-
   Future<Either<Failure, bool>> checkFirstOpenWallet();
 
   Future<Either<FailureMessage, String>> getCurrentMnemonic();

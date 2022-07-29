@@ -48,14 +48,9 @@ class _GachaScreenState extends State<GachaScreen> {
                   _gachaHistoryResponse = state.response;
                 }
                 if(state is GachaProbabilityConfigSuccess){
-                  print('-----------GachaProbabilityConfigSuccess-----------------');
                   var common = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON").toList().first.configs;
                   // commonData = ProbabilityConfig.fromJson(common as Map<String, dynamic>);
                   commonInfo = common;
-
-                  print('-----------COMMON DATA-----------------');
-                  print("COMMON DATA : $commonInfo");
-
                   var special = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL").toList().first.configs;
                   specialInfo = special;
                   // specialData = ProbabilityConfig.fromJson(special as Map<String, dynamic>);
