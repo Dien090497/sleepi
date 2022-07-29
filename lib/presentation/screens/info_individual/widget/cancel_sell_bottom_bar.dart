@@ -12,12 +12,19 @@ import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_
 import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 
-class CancelSellBottombar extends StatelessWidget {
+class CancelSellBottombar extends StatefulWidget {
   const CancelSellBottombar(
       {Key? key, required this.beds, required this.onCancelSellSuccess})
       : super(key: key);
   final BedEntity beds;
   final Function onCancelSellSuccess;
+
+  @override
+  State<CancelSellBottombar> createState() => _CancelSellBottombarState();
+}
+
+class _CancelSellBottombarState extends State<CancelSellBottombar> {
+  final cubit = BottomBarInfoIndividualCubit()..init();
 
   void _showBedDialog(BuildContext context, BedEntity beds,
       BottomBarInfoIndividualCubit cubit) {
@@ -33,7 +40,6 @@ class CancelSellBottombar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BottomBarInfoIndividualCubit()..init();
     return BlocProvider(
       create: (context) => cubit,
       child: BlocConsumer<BottomBarInfoIndividualCubit,
@@ -47,9 +53,8 @@ class CancelSellBottombar extends StatelessWidget {
             if (state.successTransfer) {
               Navigator.pop(context);
               showSuccessfulDialog(context, null).then((value) {
-                print('on dis posssss success ');
               });
-              onCancelSellSuccess();
+              widget.onCancelSellSuccess();
             }
           }
         },
@@ -88,7 +93,7 @@ class CancelSellBottombar extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: SFText(
-                                keyText: '${beds.price}',
+                                keyText: '${widget.beds.price}',
                                 style: TextStyles.white16,
                               ),
                             ),
@@ -97,7 +102,7 @@ class CancelSellBottombar extends StatelessWidget {
                               textStyle: TextStyles.white14W700,
                               gradient: AppColors.gradientBlueButton,
                               onPressed: () {
-                                _showBedDialog(context, beds, cubit);
+                                _showBedDialog(context, widget.beds, cubit);
                               },
                             ),
                           ],
