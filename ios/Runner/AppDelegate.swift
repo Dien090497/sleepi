@@ -2,8 +2,8 @@ import UIKit
 import Flutter
 import AppsFlyerLib
 import FBSDKCoreKit
-import TwitterKit
 import FBSDKShareKit
+import TwitterKit
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -17,7 +17,7 @@ import FBSDKShareKit
     }
       self.configureMethodChannel(window: window)
       ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-      TWTRTwitter.sharedInstance().start(withConsumerKey: "bpXejXJ05tlUvogku8ecgAzwn", consumerSecret: "sWmjd86frAtLitdJD9MzGa3XPPVlXKPWcjz3dII6Wk39B2KB64")
+
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
@@ -43,6 +43,6 @@ import FBSDKShareKit
      let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String
      let anotationFB = options[UIApplication.OpenURLOptionsKey.annotation]
      ApplicationDelegate.shared.application(app, open: url, sourceApplication: sourceApplication, annotation: anotationFB)
-     return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
+     return true
     }
 }

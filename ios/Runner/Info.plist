@@ -64,9 +64,6 @@
         <string>fbapi</string>
         <string>fbauth2</string>
         <string>fb-messenger-share-api</string>
-        <string>twitter</string>
-        <string>twitterauth</string>
-        <string>twitterkit-bpXejXJ05tlUvogku8ecgAzwn</string>
         <string>instagram</string>
         <string>tg</string>
     </array>
