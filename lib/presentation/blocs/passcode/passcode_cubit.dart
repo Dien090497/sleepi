@@ -11,6 +11,7 @@ class PasscodeCubit extends Cubit<PasscodeState> {
 
   Future<void> validate(String pass) async {
     emit(const PasscodeState.loading());
+    await Future.delayed(const Duration(milliseconds: 200));
     final result = await _validatePasscode.call(pass);
     result.fold(
       (l) {

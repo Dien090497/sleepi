@@ -43,9 +43,8 @@ class _TransferListState extends State<TransferList> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TransferCubit, TransferState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is TransferLoaded) {
-          valueController.text = '${state.amount ?? ''}';
           isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
           final isAllowance = state.isAllowance;
@@ -142,28 +141,24 @@ class _TransferListState extends State<TransferList> {
                         textButton: LocaleKeys.all,
                         textInputType: const TextInputType.numberWithOptions(
                             decimal: true),
-
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                               RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                         ],
                         valueChanged: (v) {
-                          // cubit.enterAmount(v);
+                          cubit.removeError();
                         },
                         onPressed: () {
-                          if (state.currentToken.symbol.toLowerCase() ==
-                              'avax') {
-                            if (state.fee != null) {
-                              final v =
-                                  (Decimal.parse('${currentToken.balance}') -
-                                          Decimal.parse('${state.fee}'))
-                                      .toDouble()
-                                      .toString();
-                              valueController.text = v;
-                              cubit.enterAmount(v);
-                            }
-                          } else {
-                            final v = '${currentToken.balance}';
+                          if (state.fee != null) {
+                            final isAvax =
+                                state.currentToken.symbol.toLowerCase() ==
+                                    'avax';
+                            final v = isAvax
+                                ? (Decimal.parse('${currentToken.balance}') -
+                                        Decimal.parse('${state.fee}'))
+                                    .toDouble()
+                                    .toStringAsFixed(6)
+                                : currentToken.balance.toStringAsFixed(6);
                             valueController.text = v;
                             cubit.enterAmount(v);
                           }
@@ -174,11 +169,11 @@ class _TransferListState extends State<TransferList> {
                           keyText: state.errorMsg!,
                           style: TextStyles.red14,
                         ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        'Fee: ${state.fee ?? '----'} AVAX',
-                        style: TextStyles.lightGrey14,
-                      ),
+                      // const SizedBox(height: 8.0),
+                      // Text(
+                      //   'Fee: ${state.fee ?? '----'} AVAX',
+                      //   style: TextStyles.lightGrey14,
+                      // ),
                       const SizedBox(height: 8.0),
                       SFText(
                         keyText:
@@ -196,11 +191,11 @@ class _TransferListState extends State<TransferList> {
                   gradient: AppColors.gradientBlueButton,
                   disabled: state.fee == null && state.errorMsg != null,
                   onPressed: () {
-                    cubit.enterAmount(valueController.text);
                     final walletState = context.read<WalletCubit>().state;
                     if (walletState is WalletStateLoaded) {
                       cubit.checkAllowance(
                         ownerAddress: walletState.walletInfoEntity.address,
+                        valueStr: valueController.text,
                       );
                     }
                   },
