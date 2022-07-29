@@ -21,6 +21,7 @@ mixin _$BedEntity {
   String get name => throw _privateConstructorUsedError;
   String get nftClass => throw _privateConstructorUsedError;
   double? get percentEffect => throw _privateConstructorUsedError;
+  String? get remainTime => throw _privateConstructorUsedError;
   int get tokenId => throw _privateConstructorUsedError;
   int get level => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
@@ -66,6 +67,7 @@ abstract class $BedEntityCopyWith<$Res> {
       String name,
       String nftClass,
       double? percentEffect,
+      String? remainTime,
       int tokenId,
       int level,
       String image,
@@ -112,6 +114,7 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
     Object? name = freezed,
     Object? nftClass = freezed,
     Object? percentEffect = freezed,
+    Object? remainTime = freezed,
     Object? tokenId = freezed,
     Object? level = freezed,
     Object? image = freezed,
@@ -163,6 +166,10 @@ class _$BedEntityCopyWithImpl<$Res> implements $BedEntityCopyWith<$Res> {
           ? _value.percentEffect
           : percentEffect // ignore: cast_nullable_to_non_nullable
               as double?,
+      remainTime: remainTime == freezed
+          ? _value.remainTime
+          : remainTime // ignore: cast_nullable_to_non_nullable
+              as String?,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -295,6 +302,7 @@ abstract class _$$_BedEntityCopyWith<$Res> implements $BedEntityCopyWith<$Res> {
       String name,
       String nftClass,
       double? percentEffect,
+      String? remainTime,
       int tokenId,
       int level,
       String image,
@@ -343,6 +351,7 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
     Object? name = freezed,
     Object? nftClass = freezed,
     Object? percentEffect = freezed,
+    Object? remainTime = freezed,
     Object? tokenId = freezed,
     Object? level = freezed,
     Object? image = freezed,
@@ -394,6 +403,10 @@ class __$$_BedEntityCopyWithImpl<$Res> extends _$BedEntityCopyWithImpl<$Res>
           ? _value.percentEffect
           : percentEffect // ignore: cast_nullable_to_non_nullable
               as double?,
+      remainTime: remainTime == freezed
+          ? _value.remainTime
+          : remainTime // ignore: cast_nullable_to_non_nullable
+              as String?,
       tokenId: tokenId == freezed
           ? _value.tokenId
           : tokenId // ignore: cast_nullable_to_non_nullable
@@ -523,6 +536,7 @@ class _$_BedEntity implements _BedEntity {
       required this.name,
       required this.nftClass,
       required this.percentEffect,
+      required this.remainTime,
       required this.tokenId,
       required this.level,
       required this.image,
@@ -564,6 +578,8 @@ class _$_BedEntity implements _BedEntity {
   final String nftClass;
   @override
   final double? percentEffect;
+  @override
+  final String? remainTime;
   @override
   final int tokenId;
   @override
@@ -630,7 +646,7 @@ class _$_BedEntity implements _BedEntity {
 
   @override
   String toString() {
-    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, percentEffect: $percentEffect, tokenId: $tokenId, level: $level, image: $image, nftType: $nftType, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, isBurn: $isBurn, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, itemType: $itemType, jewels: $jewels, statusNftSale: $statusNftSale, price: $price)';
+    return 'BedEntity(id: $id, nftId: $nftId, name: $name, nftClass: $nftClass, percentEffect: $percentEffect, remainTime: $remainTime, tokenId: $tokenId, level: $level, image: $image, nftType: $nftType, type: $type, contractAddress: $contractAddress, quality: $quality, owner: $owner, status: $status, durability: $durability, isLock: $isLock, bedMint: $bedMint, efficiency: $efficiency, luck: $luck, bonus: $bonus, isBurn: $isBurn, special: $special, resilience: $resilience, time: $time, isMint: $isMint, socket: $socket, insurancePercent: $insurancePercent, startTime: $startTime, endTime: $endTime, jewelType: $jewelType, itemType: $itemType, jewels: $jewels, statusNftSale: $statusNftSale, price: $price)';
   }
 
   @override
@@ -644,6 +660,8 @@ class _$_BedEntity implements _BedEntity {
             const DeepCollectionEquality().equals(other.nftClass, nftClass) &&
             const DeepCollectionEquality()
                 .equals(other.percentEffect, percentEffect) &&
+            const DeepCollectionEquality()
+                .equals(other.remainTime, remainTime) &&
             const DeepCollectionEquality().equals(other.tokenId, tokenId) &&
             const DeepCollectionEquality().equals(other.level, level) &&
             const DeepCollectionEquality().equals(other.image, image) &&
@@ -689,6 +707,7 @@ class _$_BedEntity implements _BedEntity {
         const DeepCollectionEquality().hash(name),
         const DeepCollectionEquality().hash(nftClass),
         const DeepCollectionEquality().hash(percentEffect),
+        const DeepCollectionEquality().hash(remainTime),
         const DeepCollectionEquality().hash(tokenId),
         const DeepCollectionEquality().hash(level),
         const DeepCollectionEquality().hash(image),
@@ -733,6 +752,7 @@ abstract class _BedEntity implements BedEntity {
       required final String name,
       required final String nftClass,
       required final double? percentEffect,
+      required final String? remainTime,
       required final int tokenId,
       required final int level,
       required final String image,
@@ -773,6 +793,8 @@ abstract class _BedEntity implements BedEntity {
   String get nftClass;
   @override
   double? get percentEffect;
+  @override
+  String? get remainTime;
   @override
   int get tokenId;
   @override

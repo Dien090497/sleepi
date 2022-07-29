@@ -11,6 +11,7 @@ class BedModelHome {
   final double? percentEffect;
   final String nftName;
   final String? name;
+  final String? remainTime;
   final String contractAddress;
   final String owner;
   final String type;
@@ -61,6 +62,7 @@ class BedModelHome {
     this.percentEffect,
     this.itemType,
     this.name,
+    this.remainTime,
   );
 
   factory BedModelHome.fromJson(Map<String, dynamic> json) =>
@@ -69,6 +71,7 @@ class BedModelHome {
   Map<String, dynamic> toJson() => _$BedModelHomeToJson(this);
 
   BedEntity toEntity() => BedEntity(
+        remainTime: remainTime,
         percentEffect: percentEffect,
         type: type,
         itemType: itemType,

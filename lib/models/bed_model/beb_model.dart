@@ -19,6 +19,7 @@ class BedModel {
 
   final String image;
   final String? name;
+  final String? remainTime;
 
   final String contractAddress;
 
@@ -95,7 +96,8 @@ class BedModel {
       this.nftSale,
       this.percentEffect,
       this.type,
-      this.name);
+      this.name,
+      this.remainTime);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {
     return _$BedModelFromJson(json);
@@ -123,6 +125,7 @@ class BedModel {
 
   BedEntity toEntity() {
     return BedEntity(
+      remainTime: remainTime,
       itemType: itemType,
       isBurn: isBurn ?? 0,
       jewelType: jewelType,
