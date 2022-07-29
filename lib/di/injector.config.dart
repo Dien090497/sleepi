@@ -181,6 +181,14 @@ import 'register_module.dart' as _i166;
 const String _prod = 'prod';
 const String _dev = 'dev';
 const String _test = 'test';
+import 'dev_injection.dart' as _i167;
+import 'prod_innjection.dart' as _i168;
+import 'register_module.dart' as _i165;
+import 'stg_injection.dart' as _i166;
+
+const String _test = 'test';
+const String _dev = 'dev';
+const String _prod = 'prod';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -189,7 +197,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
-  final constInjection = _$ConstInjection();
+  final stgInjection = _$StgInjection();
+  final devInjection = _$DevInjection();
+  final prodInjection = _$ProdInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -210,6 +220,11 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       preResolve: true);
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
   gh.factory<List<dynamic>>(() => constInjection.tokensProd,
+  gh.factory<List<dynamic>>(() => stgInjection.tokens,
+      instanceName: 'tokens', registerFor: {_test});
+  gh.factory<List<dynamic>>(() => devInjection.tokens,
+      instanceName: 'tokens', registerFor: {_dev});
+  gh.factory<List<dynamic>>(() => prodInjection.tokens,
       instanceName: 'tokens', registerFor: {_prod});
   gh.factory<List<dynamic>>(() => constInjection.tokensDev,
       instanceName: 'tokens', registerFor: {_dev, _test});
@@ -230,6 +245,17 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<String>(() => constInjection.baseUrlDev,
       instanceName: 'baseUrl', registerFor: {_dev});
   gh.factory<String>(() => constInjection.contractRouterProd,
+  gh.factory<String>(() => devInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_dev});
+  gh.factory<String>(() => devInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_dev});
+  gh.factory<String>(() => stgInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_test});
+  gh.factory<String>(() => stgInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_test});
+  gh.factory<String>(() => prodInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => prodInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
@@ -554,3 +580,8 @@ class _$RPCModule extends _i32.RPCModule {}
 class _$RegisterModule extends _i166.RegisterModule {}
 
 class _$ConstInjection extends _i167.ConstInjection {}
+class _$StgInjection extends _i166.StgInjection {}
+
+class _$DevInjection extends _i167.DevInjection {}
+
+class _$ProdInjection extends _i168.ProdInjection {}
