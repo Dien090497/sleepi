@@ -39,10 +39,10 @@ class TransferScreen extends StatelessWidget {
           builder: (context, walletState) {
             if (spendingState is UserLoaded &&
                 walletState is WalletStateLoaded) {
-              final spendingToken = spendingState.listTokens
-                  .firstWhere((e) => e.address == args.address);
-              final walletToken = walletState.tokenList
-                  .firstWhere((e) => e.address == args.address);
+              final spendingToken = spendingState.listTokens.firstWhere(
+                  (e) => e.address.toLowerCase() == args.address.toLowerCase());
+              final walletToken = walletState.tokenList.firstWhere(
+                  (e) => e.address.toLowerCase() == args.address.toLowerCase());
 
               /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
               final currentToken =
@@ -89,7 +89,7 @@ class TransferScreen extends StatelessWidget {
                 ),
               );
             }
-            return const SizedBox();
+            return const LoadingScreen();
           },
         );
       },

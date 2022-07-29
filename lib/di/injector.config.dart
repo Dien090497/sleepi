@@ -215,6 +215,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       instanceName: 'tokens', registerFor: {_dev, _test});
   gh.factory<List<String>>(() => constInjection.listNFTAddressTestNet,
       instanceName: 'nftAddresses', registerFor: {_test});
+  gh.factory<List<dynamic>>(() => constInjection.tokensProd,
+      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.QueueInterceptor>(

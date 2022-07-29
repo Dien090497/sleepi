@@ -29,8 +29,7 @@ mixin _$TransferState {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)
+            String? errorMsg)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,8 +46,7 @@ mixin _$TransferState {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,8 +63,7 @@ mixin _$TransferState {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -528,8 +525,7 @@ class _$TransferSuccess implements TransferSuccess {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)
+            String? errorMsg)
         loaded,
   }) {
     return success();
@@ -549,8 +545,7 @@ class _$TransferSuccess implements TransferSuccess {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
   }) {
     return success?.call();
@@ -570,8 +565,7 @@ class _$TransferSuccess implements TransferSuccess {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
     required TResult orElse(),
   }) {
@@ -637,8 +631,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       double? amount,
       String? fee,
       bool? isAllowance,
-      String? errorMsg,
-      String? typeError});
+      String? errorMsg});
 
   $TokenEntityCopyWith<$Res> get currentToken;
   $TokenEntityCopyWith<$Res> get backupToken;
@@ -665,7 +658,6 @@ class __$$TransferLoadedCopyWithImpl<$Res>
     Object? fee = freezed,
     Object? isAllowance = freezed,
     Object? errorMsg = freezed,
-    Object? typeError = freezed,
   }) {
     return _then(_$TransferLoaded(
       currentToken: currentToken == freezed
@@ -700,10 +692,6 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
               as String?,
-      typeError: typeError == freezed
-          ? _value.typeError
-          : typeError // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 
@@ -733,8 +721,7 @@ class _$TransferLoaded implements TransferLoaded {
       this.amount,
       this.fee,
       this.isAllowance,
-      this.errorMsg,
-      this.typeError});
+      this.errorMsg});
 
   @override
   final TokenEntity currentToken;
@@ -753,12 +740,10 @@ class _$TransferLoaded implements TransferLoaded {
   final bool? isAllowance;
   @override
   final String? errorMsg;
-  @override
-  final String? typeError;
 
   @override
   String toString() {
-    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg, typeError: $typeError)';
+    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
   }
 
   @override
@@ -777,8 +762,7 @@ class _$TransferLoaded implements TransferLoaded {
             const DeepCollectionEquality().equals(other.fee, fee) &&
             const DeepCollectionEquality()
                 .equals(other.isAllowance, isAllowance) &&
-            const DeepCollectionEquality().equals(other.errorMsg, errorMsg) &&
-            const DeepCollectionEquality().equals(other.typeError, typeError));
+            const DeepCollectionEquality().equals(other.errorMsg, errorMsg));
   }
 
   @override
@@ -791,8 +775,7 @@ class _$TransferLoaded implements TransferLoaded {
       const DeepCollectionEquality().hash(amount),
       const DeepCollectionEquality().hash(fee),
       const DeepCollectionEquality().hash(isAllowance),
-      const DeepCollectionEquality().hash(errorMsg),
-      const DeepCollectionEquality().hash(typeError));
+      const DeepCollectionEquality().hash(errorMsg));
 
   @JsonKey(ignore: true)
   @override
@@ -813,12 +796,11 @@ class _$TransferLoaded implements TransferLoaded {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)
+            String? errorMsg)
         loaded,
   }) {
     return loaded(currentToken, backupToken, isToSpending, isLoading, amount,
-        fee, isAllowance, errorMsg, typeError);
+        fee, isAllowance, errorMsg);
   }
 
   @override
@@ -835,12 +817,11 @@ class _$TransferLoaded implements TransferLoaded {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
   }) {
     return loaded?.call(currentToken, backupToken, isToSpending, isLoading,
-        amount, fee, isAllowance, errorMsg, typeError);
+        amount, fee, isAllowance, errorMsg);
   }
 
   @override
@@ -857,14 +838,13 @@ class _$TransferLoaded implements TransferLoaded {
             double? amount,
             String? fee,
             bool? isAllowance,
-            String? errorMsg,
-            String? typeError)?
+            String? errorMsg)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
       return loaded(currentToken, backupToken, isToSpending, isLoading, amount,
-          fee, isAllowance, errorMsg, typeError);
+          fee, isAllowance, errorMsg);
     }
     return orElse();
   }
@@ -917,8 +897,7 @@ abstract class TransferLoaded implements TransferState {
       final double? amount,
       final String? fee,
       final bool? isAllowance,
-      final String? errorMsg,
-      final String? typeError}) = _$TransferLoaded;
+      final String? errorMsg}) = _$TransferLoaded;
 
   TokenEntity get currentToken;
   TokenEntity get backupToken;
@@ -928,7 +907,6 @@ abstract class TransferLoaded implements TransferState {
   String? get fee;
   bool? get isAllowance;
   String? get errorMsg;
-  String? get typeError;
   @JsonKey(ignore: true)
   _$$TransferLoadedCopyWith<_$TransferLoaded> get copyWith =>
       throw _privateConstructorUsedError;

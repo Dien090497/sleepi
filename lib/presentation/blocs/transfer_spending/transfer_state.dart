@@ -20,6 +20,5 @@ class TransferState with _$TransferState {
     String? fee,
     bool? isAllowance,
     String? errorMsg,
-    String? typeError,
   }) = TransferLoaded;
 }

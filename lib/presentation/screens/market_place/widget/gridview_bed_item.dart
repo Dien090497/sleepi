@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -13,6 +14,8 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/resources/resources.dart';
 
@@ -38,6 +41,7 @@ class GridViewBedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userState = context.read<UserBloc>().state;
     return SFGridView(
       marketPlaceCubit: cubit,
       isLoadMore: isLoadMore,
@@ -122,15 +126,19 @@ class GridViewBedItem extends StatelessWidget {
                                 style: TextStyles.white14W700,
                                 stringCase: StringCase.upperCase,
                               )),
-                              SFIconButton(
-                                text: LocaleKeys.buy,
-                                textStyle: TextStyles.white12,
-                                stringCase: StringCase.upperCase,
-                                icon: Ics.icCart,
-                                onPressed: () {
-                                  onBuyTap!(bed);
-                                },
-                              ),
+                              if (userState is UserLoaded)
+                                (bed.owner == userState.userInfoEntity.wallet ?
+                                const SizedBox() :
+                                SFIconButton(
+                                  text: LocaleKeys.buy,
+                                  textStyle: TextStyles.white12,
+                                  stringCase: StringCase.upperCase,
+                                  icon: Ics.icCart,
+                                  onPressed: () {
+                                    //onBuyTap!(bed);
+                                  },
+                                )
+                                )
                               // SFText(
                               //   keyText: LocaleKeys.buy,
                               //   style: TextStyles.blue14W700,

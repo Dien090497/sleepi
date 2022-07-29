@@ -54,57 +54,63 @@ class TransferCubit extends Cubit<TransferState> {
     }
   }
 
+  void removeError() {
+    final currentState = state;
+    if (currentState is TransferLoaded && currentState.errorMsg != null) {
+      emit(currentState.copyWith(errorMsg: null));
+    }
+  }
+
   void enterAmount(String value) {
     final currentState = state;
     if (currentState is TransferLoaded) {
-      final havingError =
-          currentState.errorMsg != null || currentState.typeError != null;
-      final newState = havingError
-          ? currentState.copyWith(errorMsg: null, typeError: null)
-          : currentState;
-      if (havingError) {
-        emit(newState);
-      }
       final amount = double.tryParse(value.replaceAll(',', '.'));
-      if (amount == null) {
-        emit(newState.copyWith(
-            errorMsg: LocaleKeys.this_field_is_required,
-            typeError: 'invalid_amount'));
+      final errorText = _validateAmount(
+        amount: amount,
+        isToSpending: currentState.isToSpending,
+        fee: currentState.fee,
+        balance: currentState.currentToken.balance,
+        symbol: currentState.currentToken.symbol,
+      );
+      if (errorText != null) {
+        emit(currentState.copyWith(errorMsg: errorText));
       } else {
-        if (amount <= 0) {
-          emit(newState.copyWith(
-              errorMsg: LocaleKeys.amount_input_can_not_be_zero,
-              typeError: 'amount_zero'));
-        } else if (newState.currentToken.symbol.toLowerCase() == 'avax') {
-          /// Case transfer AVAX
-          final fee = newState.fee;
-          if (fee == null) {
-            emit(newState.copyWith(
-                errorMsg: LocaleKeys.amount_input_can_not_be_zero,
-                typeError: 'amount_zero'));
-          } else {
-            final balance = newState.currentToken.balance;
-            if (amount >
-                (currentState.isToSpending
-                    ? balance
-                    : (Decimal.parse('$balance') - Decimal.parse(fee))
-                        .toDouble())) {
-              emit(newState.copyWith(
-                  errorMsg: LocaleKeys.insufficient_balance,
-                  typeError: 'invalid_amount'));
-            } else {
-              emit(newState.copyWith(amount: amount));
-            }
-          }
+        emit(currentState.copyWith(errorMsg: null, amount: amount));
+      }
+    }
+  }
+
+  String? _validateAmount({
+    required double? amount,
+    required String symbol,
+    required String? fee,
+    required double balance,
+    required bool isToSpending,
+  }) {
+    if (amount == null) {
+      return LocaleKeys.this_field_is_required;
+    }
+    if (amount <= 0) {
+      return LocaleKeys.amount_input_can_not_be_zero;
+    } else {
+      if (symbol.toLowerCase() == 'avax') {
+        /// Case transfer AVAX
+        if (fee == null) {
+          return LocaleKeys.amount_input_can_not_be_zero;
         } else {
-          /// Case không phải transfer AVAX
-          if (amount > newState.currentToken.balance) {
-            emit(newState.copyWith(
-                errorMsg: LocaleKeys.insufficient_balance,
-                typeError: 'invalid_amount'));
+          if (amount >
+              (Decimal.parse('$balance') - Decimal.parse(fee)).toDouble()) {
+            return LocaleKeys.insufficient_balance;
           } else {
-            emit(newState.copyWith(amount: amount));
+            return null;
           }
+        }
+      } else {
+        /// Case không phải transfer AVAX
+        if (amount > balance) {
+          return LocaleKeys.insufficient_balance;
+        } else {
+          return null;
         }
       }
     }
@@ -112,34 +118,50 @@ class TransferCubit extends Cubit<TransferState> {
 
   Future<void> checkAllowance({
     required String ownerAddress,
+    required String valueStr,
   }) async {
     final currentState = state;
     if (currentState is TransferLoaded) {
-      if (currentState.isLoading) return;
-      emit(currentState.copyWith(isLoading: true));
+      final amount = double.tryParse(valueStr.replaceAll(',', '.'));
       final isToSpending = currentState.isToSpending;
-      final contractAddress = currentState.currentToken.address;
-      if (isToSpending) {
-        /// Check allowance amount
-        final allowanceRes =
-            await _isTokenApprovedEnoughUC.call(IsTokenApprovedParams(
-          ownerAddress: ownerAddress,
-          tokenAddress: contractAddress,
-          amount: currentState.amount!,
-        ));
-        allowanceRes.fold(
-          (l) {
-            emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
-          },
-          (isEnough) {
-            emit(currentState.copyWith(isAllowance: isEnough));
-            emit(currentState.copyWith(isLoading: false, isAllowance: null));
-          },
-        );
+      final errorText = _validateAmount(
+        amount: amount,
+        isToSpending: isToSpending,
+        fee: currentState.fee,
+        balance: currentState.currentToken.balance,
+        symbol: currentState.currentToken.symbol,
+      );
+      if (errorText != null) {
+        emit(currentState.copyWith(errorMsg: errorText));
       } else {
-        /// To External
-        emit(currentState.copyWith(isAllowance: true));
-        emit(currentState.copyWith(isLoading: false, isAllowance: null));
+        emit(currentState.copyWith(isLoading: true));
+
+        final contractAddress = currentState.currentToken.address;
+        if (isToSpending) {
+          /// Check allowance amount
+          final allowanceRes =
+              await _isTokenApprovedEnoughUC.call(IsTokenApprovedParams(
+            ownerAddress: ownerAddress,
+            tokenAddress: contractAddress,
+            amount: amount!,
+          ));
+          allowanceRes.fold(
+            (l) {
+              emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
+            },
+            (isEnough) {
+              emit(
+                  currentState.copyWith(isAllowance: isEnough, amount: amount));
+              emit(currentState.copyWith(
+                  isLoading: false, isAllowance: null, amount: amount));
+            },
+          );
+        } else {
+          /// To External
+          emit(currentState.copyWith(isAllowance: true, amount: amount));
+          emit(currentState.copyWith(
+              isLoading: false, isAllowance: null, amount: amount));
+        }
       }
     }
   }

@@ -131,7 +131,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 R.transfer,
                                 arguments: TransferScreenArg(
                                     address: tokenList[2].address,
-                                    isToSpending: false),
+                                    isToSpending: true),
                               );
                             },
                             text: LocaleKeys.to_spending,
@@ -155,8 +155,9 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 context,
                                 R.trade,
                                 arguments: TradeArguments(
-                                  contractAddressFrom:
-                                  getIt<List<dynamic>>(instanceName: 'tokens')[0]['address'].toString(),
+                                  contractAddressFrom: getIt<List<dynamic>>(
+                                          instanceName: 'tokens')[0]['address']
+                                      .toString(),
                                 ),
                               );
                             },

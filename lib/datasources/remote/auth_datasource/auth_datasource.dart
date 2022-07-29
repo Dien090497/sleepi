@@ -171,6 +171,7 @@ abstract class AuthDataSource {
     @Query('status') AttributeWithdraw attributeWithdraw,
     @Query('limit') int limit,
     @Query('page') int page,
+    @Query('type') String type,
   );
 
   @GET('/withdraw/estimate-gas')

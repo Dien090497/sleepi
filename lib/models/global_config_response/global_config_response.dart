@@ -4,7 +4,7 @@ part 'global_config_response.g.dart';
 
 @JsonSerializable()
 class GlobalConfigResponse {
-  final String contract;
+  final _Contract contract;
   final bool isEnableActiveCode;
 
   @JsonKey(name: 'message_sign')
@@ -59,4 +59,17 @@ class _NftAddress {
       _$NftAddressFromJson(json);
 
   Map<String, dynamic> toJson() => _$NftAddressToJson(this);
+}
+
+@JsonSerializable()
+class _Contract {
+  final String contractTreasury;
+  final String contractMultisender;
+
+  _Contract(this.contractTreasury, this.contractMultisender);
+
+  factory _Contract.fromJson(Map<String, dynamic> json) =>
+      _$ContractFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ContractToJson(this);
 }

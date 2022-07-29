@@ -10,6 +10,7 @@ class MarketPlaceModel {
   final int nftId;
   @JsonKey(name: 'category_id')
   final int categoryId;
+  @JsonKey(name: 'is_lock')
   final int? isLock;
   final double? percentEffect;
   final int? isBurn;
@@ -122,7 +123,7 @@ class MarketPlaceModel {
       insurancePercent: 0,
       socket: null,
       statusNftSale: '',
-      price: '',
+      price: price,
     );
   }
 

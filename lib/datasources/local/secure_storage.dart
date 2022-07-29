@@ -31,6 +31,7 @@ class SecureStorage {
 
   Future<void> clearStorage() async {
     final suggestionEmail = getSuggestionEmail('');
+    _secureStorage.delete(key: StorageKeys.lastUserSignIn);
     for (final element in suggestionEmail) {
       addEmailSuggestion(element);
     }
