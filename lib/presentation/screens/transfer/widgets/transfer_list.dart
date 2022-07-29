@@ -88,8 +88,11 @@ class _TransferListState extends State<TransferList> {
                   symbol: state.currentToken.symbol,
                   tokenAddress: state.currentToken.address,
                   isLoadingNotifier: isLoadingNotifier,
-                  ownerAddress: (walletState as WalletStateLoaded).walletInfoEntity.address,
-                  userId: userState.userInfoEntity.id, spendingToWallet: true,
+                  ownerAddress: (walletState as WalletStateLoaded)
+                      .walletInfoEntity
+                      .address,
+                  userId: userState.userInfoEntity.id,
+                  spendingToWallet: true,
                 ),
               );
             }
@@ -104,7 +107,11 @@ class _TransferListState extends State<TransferList> {
             barrierDismissible: false,
             onBackPress: () {
               isLoadingNotifier.value = false;
-              Navigator.popUntil(context, (r) => r.settings.name == R.wallet);
+              Navigator.popUntil(
+                  context,
+                  (r) =>
+                      r.settings.name == R.wallet ||
+                      r.settings.name == R.bottomNavigation);
             },
           );
         }
