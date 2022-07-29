@@ -115,42 +115,54 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, WalletInfoEntity>> importWallet(
       String mnemonic) async {
-    // try {
-    final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0);
-    if (_web3DataSource.validateMnemonic(mnemonic)) {
-      final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
-      final network = await _getCurrentNetwork();
-      final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
-      final ethereumAddress = await credentials.extractAddress();
+    try {
+      if (_web3DataSource.validateMnemonic(mnemonic)) {
+        final network = await _getCurrentNetwork();
+        final privateKey = _web3DataSource.mnemonicToPrivateKey(mnemonic, 0, network.slip44);
+        final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
+        final ethereumAddress = await credentials.extractAddress();
+        final message = await _secureStorage.readMessage();
+        final signature = _web3DataSource.generateSignature(
+            privateKey: privateKey, message: message ?? 'welcome to sleefi');
+        VerifyUserSchema schema = VerifyUserSchema(
+          signedMessage: signature,
+          signer: ethereumAddress.hexEip55,
+        );
+        await _authDataSource.verifyUser(schema);
+        final derivedIndex = _getStorageDataSource.getDerivedIndexAndIncrease();
+        /// Store Wallet
+        final model = WalletIsarModel(
+          privateKey: privateKey,
+          name: 'Account $derivedIndex',
+          address: ethereumAddress.hex,
+          derivedIndex: derivedIndex,
+          mnemonic: mnemonic,
+        );
+        final int walletId = await _isarDataSource.putWallet(model);
+        model.id = walletId;
+        await _getStorageDataSource.setCurrentWalletId(walletId);
+        final nativeCurrency = await _getNativeCurrency();
+        final result = await _web3DataSource.getBalance(ethereumAddress.hex);
+        final balance = result / BigInt.from(pow(10, 18));
+        if (nativeCurrency == null) {
+          return const Left(FailureMessage(LocaleKeys.some_thing_wrong));
+        }
 
-      /// Store Wallet
 
-      final model = WalletIsarModel(
-        privateKey: privateKey,
-        name: 'Account $derivedIndex',
-        address: ethereumAddress.hex,
-        derivedIndex: derivedIndex,
-        mnemonic: mnemonic,
-      );
-      final int walletId = await _isarDataSource.putWallet(model);
-      model.id = walletId;
-      await _getStorageDataSource.setCurrentWalletId(walletId);
-      final nativeCurrency = await _getNativeCurrency();
-      final result = await _web3DataSource.getBalance(ethereumAddress.hex);
-      final balance = result / BigInt.from(pow(10, 18));
-      if (nativeCurrency == null) {
-        return const Left(FailureMessage(LocaleKeys.some_thing_wrong));
+        return Right(model.toEntity(
+          credentials,
+          derivedIndex: derivedIndex,
+          networkName: network.name,
+          nativeCurrency: nativeCurrency.toEntity(balance: balance),
+          chainId: network.chainId,
+        ));
       }
-      return Right(model.toEntity(
-        credentials,
-        derivedIndex: derivedIndex,
-        networkName: network.name,
-        nativeCurrency: nativeCurrency.toEntity(balance: balance),
-        chainId: network.chainId,
-      ));
+      return const Left(
+          FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
     }
-    return const Left(
-        FailureMessage(LocaleKeys.invalid_mnemonic_please_try_again));
+
     // } catch (e) {
     //   return Left(FailureMessage.fromException(e));
     // }
