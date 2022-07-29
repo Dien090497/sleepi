@@ -119,7 +119,8 @@ class UserImplementation extends IUserRepository {
         ..add(result.tokens[3].address);
 
       await Future.wait([
-        _secureStorage.saveAddressContract(addressContract: result.contract),
+        _secureStorage.saveAddressContract(
+            addressContract: result.contract.contractTreasury),
         _secureStorage.saveMessage(saveMessage: result.messageSign),
         _secureStorage.setNftAddress(result.nftAddress.toJson()),
         _secureStorage.setTokenAddress(addresses),

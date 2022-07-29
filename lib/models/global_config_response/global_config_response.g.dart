@@ -13,7 +13,7 @@ GlobalConfigResponse _$GlobalConfigResponseFromJson(
           .map((e) => _Token.fromJson(e as Map<String, dynamic>))
           .toList(),
       _NftAddress.fromJson(json['nftAddress'] as Map<String, dynamic>),
-      contract: json['contract'] as String,
+      contract: _Contract.fromJson(json['contract'] as Map<String, dynamic>),
       isEnableActiveCode: json['isEnableActiveCode'] as bool,
       messageSign: json['message_sign'] as String,
     );
@@ -21,7 +21,7 @@ GlobalConfigResponse _$GlobalConfigResponseFromJson(
 Map<String, dynamic> _$GlobalConfigResponseToJson(
         GlobalConfigResponse instance) =>
     <String, dynamic>{
-      'contract': instance.contract,
+      'contract': instance.contract.toJson(),
       'isEnableActiveCode': instance.isEnableActiveCode,
       'message_sign': instance.messageSign,
       'tokenSupport': instance.tokens.map((e) => e.toJson()).toList(),
@@ -51,4 +51,14 @@ Map<String, dynamic> _$NftAddressToJson(_NftAddress instance) =>
       'bedbox': instance.bedBoxAddress,
       'jewel': instance.jewelAddress,
       'item': instance.itemAddress,
+    };
+
+_Contract _$ContractFromJson(Map<String, dynamic> json) => _Contract(
+      json['contractTreasury'] as String,
+      json['contractMultisender'] as String,
+    );
+
+Map<String, dynamic> _$ContractToJson(_Contract instance) => <String, dynamic>{
+      'contractTreasury': instance.contractTreasury,
+      'contractMultisender': instance.contractMultisender,
     };

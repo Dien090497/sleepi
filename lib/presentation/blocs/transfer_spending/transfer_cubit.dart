@@ -96,10 +96,7 @@ class TransferCubit extends Cubit<TransferState> {
           return LocaleKeys.amount_input_can_not_be_zero;
         } else {
           if (amount >
-              (isToSpending
-                  ? balance
-                  : (Decimal.parse('$balance') - Decimal.parse(fee))
-                      .toDouble())) {
+              (Decimal.parse('$balance') - Decimal.parse(fee)).toDouble()) {
             return LocaleKeys.insufficient_balance;
           } else {
             return null;
