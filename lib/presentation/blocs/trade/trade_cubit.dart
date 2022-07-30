@@ -2,13 +2,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 import 'package:slee_fi/usecase/check_allowance_usecase.dart';
+import 'package:slee_fi/usecase/check_approve_usecase.dart';
 import 'package:slee_fi/usecase/get_amount_out_min_usecase.dart';
 import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
 import 'package:slee_fi/usecase/get_list_token_usecase.dart';
 import 'package:slee_fi/usecase/swap_token_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
-
-import '../../../usecase/approve_usecase.dart';
 
 class TradeCubit extends Cubit<TradeState> {
   TradeCubit()
@@ -16,7 +15,7 @@ class TradeCubit extends Cubit<TradeState> {
             listTokens: getIt<List<dynamic>>(instanceName: 'tokens')));
 
   final _swapToken = getIt<SwapTokenUseCase>();
-  final _approveToken = getIt<ApproveUseCase>();
+  final _approveToken = getIt<CheckApproveUseCase>();
   final _checkAllowance = getIt<CheckAllowanceUseCase>();
   final _getBalanceToken = getIt<GetBalanceTokenUseCase>();
   final _getAmountOutMin = getIt<GetAmountOutMinUseCase>();
