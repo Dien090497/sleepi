@@ -6,6 +6,7 @@ part 'trade_state.freezed.dart';
 class TradeState with _$TradeState {
   const factory TradeState.initial({
     @Default(false) bool isLoading,
+    required List<dynamic> listTokens,
   }) = TradeStateInitial;
 
   const factory TradeState.getBalance(double balance) = swapTokenBalance;
