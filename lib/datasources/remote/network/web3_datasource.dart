@@ -15,7 +15,6 @@ import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Singleton()
@@ -200,18 +199,13 @@ class Web3DataSource {
   Future<void> approveToken(
       String contractAddress, Credentials credentials) async {
     final contract = token(contractAddress);
-    double amount = 0;
-    for (final element in getIt<List<dynamic>>(instanceName: 'tokens')) {
-      if (element['address'].toString().toLowerCase() ==
-          contractAddress.toLowerCase()) {
-        amount = double.parse(element['totalSupply'].toString());
-      }
-    }
+
+    BigInt amount = await contract.totalSupply();
     final decimal = await contract.decimals();
     await contract.approve(
         EthereumAddress.fromHex(
             await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe)),
-        BigInt.from(amount) * BigInt.from(math.pow(10, decimal.toInt())),
+        amount * BigInt.from(math.pow(10, decimal.toInt())),
         credentials: credentials);
   }
 
