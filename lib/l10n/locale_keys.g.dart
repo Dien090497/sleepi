@@ -498,6 +498,10 @@ abstract class  LocaleKeys {
   static const invalid_bed = 'invalid_bed';
   static const remaining_time = 'remaining_time';
   static const to_speed_up = 'to_speed_up';
+  static const no_more_data = 'no_more_data';
+  static const release_to_load_more = 'release_to_load_more';
+  static const load_fail_retry = 'load_fail_retry';
+  static const pull_up_load = 'pull_up_load';
   static const jewel_level = 'jewel_level';
   static const item_level = 'item_level';
 
