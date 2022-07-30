@@ -97,7 +97,6 @@ class _TransferListState extends State<TransferList> {
                       .walletInfoEntity
                       .address,
                   userId: userState.userInfoEntity.id,
-                  spendingToWallet: true,
                 ),
               );
             }
