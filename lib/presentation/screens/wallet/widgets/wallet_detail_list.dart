@@ -106,7 +106,7 @@ class WalletDetailList extends StatelessWidget {
                         child: Text(
                           tokenList[index].balance < 0.000001
                               ? '0'
-                              : tokenList[index].balance.formatBalanceToken,
+                              : tokenList[index].balance.formatBalanceWallet,
                           style: TextStyles.lightWhite16,
                           textAlign: TextAlign.end,
                         ),
