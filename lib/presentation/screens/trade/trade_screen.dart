@@ -601,7 +601,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                 .replaceAll(',', '.')
                                 : valueController.text.toString();
                             tradeCubit.checkApproveToken(double.parse(result),
-                                listTokens[indexFrom]['symbol'].toString());
+                                listTokens[indexFrom]['address'].toString());
                           }
                         },
                       ),

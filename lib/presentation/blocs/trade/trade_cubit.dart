@@ -62,12 +62,12 @@ class TradeCubit extends Cubit<TradeState> {
   }
 
   Future<void> checkApproveToken(double value, String contractAddress) async {
-    // print('=--==-=-$contractAddress');
+    print('=--==-=-$contractAddress');
     final result = await _checkAllowance.call(CheckApproveTokenParams(
         value: value, contractAddress: contractAddress));
     result.fold(
       (l) {
-        // print('=--==-=-$l');
+        print('=--==-=-$l');
         emit(TradeState.fail('$l'));
       },
       (success) {
