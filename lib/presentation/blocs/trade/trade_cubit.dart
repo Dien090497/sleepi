@@ -66,6 +66,7 @@ class TradeCubit extends Cubit<TradeState> {
         value: value, contractAddress: contractAddress));
     result.fold(
       (l) {
+
         emit(TradeState.fail('$l'));
       },
       (success) {

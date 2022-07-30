@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:health/health.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
@@ -71,34 +70,20 @@ class HealthcarePermissionScreen extends StatelessWidget {
                         .call(arg!.email)
                         .then((value) {
                       value.fold((l) => null, (r) {
-                        if (arg.isSignUp == true) {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, R.notificationPermission, (_) => false,
-                              arguments: NotificationPermissionArg(true));
-                          return;
-                        }
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          R.motionDataPermission,
-                          (_) => false,
-                        );
                       });
                     });
-                  }else{
-                    final isAppInstalled = await LaunchApp.isAppInstalled(
-                      androidPackageName: 'com.google.android.apps.fitness',
-                      iosUrlScheme: 'x-apple-health://',
-                    );
-                    if (!isAppInstalled) {
-                      await LaunchApp.openApp(
-                        androidPackageName: 'com.google.android.apps.fitness',
-                        iosUrlScheme: 'x-apple-health://',
-                        appStoreLink:
-                        'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
-                        // openStore: false
-                      );
-                    }
                   }
+                  if (arg!.isSignUp == true) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, R.notificationPermission, (_) => false,
+                        arguments: NotificationPermissionArg(true));
+                    return;
+                  }
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    R.motionDataPermission,
+                        (_) => false,
+                  );
                 },
               ),
             ),
