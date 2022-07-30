@@ -12,6 +12,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
@@ -41,6 +42,7 @@ class TabJewelsBuy extends StatelessWidget {
           cubit.refresh();
           if (msg.isEmpty) {
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+            context.read<UserBloc>().add(const RefreshBalanceToken());
           } else {
             showMessageDialog(context, msg);
           }

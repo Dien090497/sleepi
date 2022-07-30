@@ -42,6 +42,7 @@ class TabBedsBuy extends StatelessWidget {
           Navigator.pop(context, true);
           cubit.refresh();
           if (msg.isEmpty) {
+            context.read<UserBloc>().add(const RefreshBalanceToken());
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
           } else {
             showMessageDialog(context, msg);
