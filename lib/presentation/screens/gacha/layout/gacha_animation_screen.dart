@@ -142,7 +142,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
         children : [
           SizedBox(
             height: double.infinity,
-            width: double.infinity,
+            width:  double.infinity,
             child: Lottie.asset(args?.animation ?? Const.normalGachaAnimation,
               controller: animationController,
               fit: BoxFit.cover,

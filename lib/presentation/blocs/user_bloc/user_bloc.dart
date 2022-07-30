@@ -24,12 +24,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       _timer?.cancel();
       _timer = null;
     }
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      final currentState = state;
-      if (currentState is UserLoaded) {
-        add(const RefreshBalanceToken());
-      }
-    });
+    // _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    //   final currentState = state;
+    //   if (currentState is UserLoaded) {
+    //     add(const RefreshBalanceToken());
+    //   }
+    // });
   }
 
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();

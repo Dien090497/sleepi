@@ -162,7 +162,7 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
                                 color: AppColors.blue,
                                 width: double.infinity,
                                 onPressed: () {
-                                  if (widget.transferToken) {
+                                  if (widget.transferToken && widget.arg?.symbol != "AVAX" ) {
                                     cubit.sendTokenExternal(widget.toAddress,
                                         widget.valueInEther, widget.arg);
                                   } else {

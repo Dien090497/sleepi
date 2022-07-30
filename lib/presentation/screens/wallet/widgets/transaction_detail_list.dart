@@ -34,7 +34,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
   final RefreshController _refreshController =
   RefreshController(initialRefresh: false);
   List<TransactionIsarModel> transactionList = [];
-  bool loadMore = false;
+  bool loadMore = true;
   bool isLoading = false;
   String urlDetailTransaction = '';
 
@@ -60,20 +60,20 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
           if(state is HistoryTransactionStateRefreshHistory){
             transactionList = [];
             setState((){
-              isLoading = true;
+              isLoading = false;
             });
           }
           if(state is HistoryTransactionStateSuccess){
-            setState((){
+           _refreshController.loadComplete();
+            if(state.list.isEmpty){
+              setState(() => loadMore = false);
+            }else {
+              setState((){
               transactionList.addAll(state.list);
               loadMore = true;
               isLoading = true;
-            });
-          }
-          if(state is HistoryTransactionStateLoadingHistory){
-            setState((){
-              loadMore = false;
-            });
+              });
+            }
           }
         },
         builder: (context, state) {
@@ -94,7 +94,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
               child: SmartRefresher(
                 controller: _refreshController,
                 enablePullDown: true,
-                enablePullUp: true,
+                enablePullUp: loadMore,
                 onRefresh: () {
                   cubit.refresh(widget.typeHistory!);
                 },

@@ -13,6 +13,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_item.dart';
@@ -40,6 +41,7 @@ class TabBedsBuy extends StatelessWidget {
           Navigator.pop(context, true);
           cubit.refresh();
           if (msg.isEmpty) {
+            context.read<UserBloc>().add(const RefreshBalanceToken());
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
           } else {
             showMessageDialog(context, msg);
