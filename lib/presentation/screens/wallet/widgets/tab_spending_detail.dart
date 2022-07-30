@@ -168,7 +168,6 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
     } else if (walletState is WalletNotOpen) {
       Navigator.pushNamed(context, R.passcode).then((value) {
         if (value == true) {
-          print('start   new transfer ');
           Navigator.pushNamed(context, R.transfer,
               arguments:
                   TransferScreenArg(address: e.address, isToSpending: false));

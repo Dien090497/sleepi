@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:decimal/decimal.dart';
-import 'package:money_formatter/money_formatter.dart';
 import 'package:web3dart/web3dart.dart';
 
 extension NumX on num {

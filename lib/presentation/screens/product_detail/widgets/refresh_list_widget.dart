@@ -37,7 +37,13 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
     return BlocListener<NFTListCubit, NftListState>(
       listener: (context, state) {
         if (state is NftListLoaded) {
-          refreshController.refreshCompleted();
+          if (!state.isLoadMore) {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              refreshController.refreshCompleted();
+              refreshController.loadComplete();
+
+            });
+          }
           if ((!state.hasMore && widget.isBed) ||
               (!state.hasMoreBedBox && !widget.isBed)) {
             refreshController.loadNoData();
