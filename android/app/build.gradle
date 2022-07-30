@@ -77,7 +77,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.sotatek.slee_fi"
-        minSdkVersion 29
+        minSdkVersion 28
         targetSdkVersion flutter.targetSdkVersion
         versionCode 2
         versionName flutterVersionName

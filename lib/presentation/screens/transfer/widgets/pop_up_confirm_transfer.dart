@@ -17,7 +17,6 @@ class PopUpConfirmTransfer extends StatelessWidget {
     required this.symbol,
     required this.tokenAddress,
     required this.ownerAddress,
-    required this.spendingToWallet,
     required this.isToSpending,
     required this.onConfirm,
     required this.isLoadingNotifier,
@@ -29,7 +28,6 @@ class PopUpConfirmTransfer extends StatelessWidget {
   final String symbol;
   final String tokenAddress;
   final String ownerAddress;
-  final bool spendingToWallet;
   final bool isToSpending;
   final VoidCallback onConfirm;
   final ValueNotifier<bool> isLoadingNotifier;
@@ -60,8 +58,8 @@ class PopUpConfirmTransfer extends StatelessWidget {
                       const SizedBox(height: 12.0),
                       SFText(
                         keyText: isToSpending
-                            ? LocaleKeys.spending
-                            : LocaleKeys.wallet,
+                            ? LocaleKeys.wallet
+                            : LocaleKeys.spending,
                         style: TextStyles.bold18White,
                       ),
                     ],
