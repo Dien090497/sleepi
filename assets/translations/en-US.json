@@ -499,7 +499,7 @@
   "jewel_level": "Jewel Level",
   "item_level" : "Item Level",
   "no_more_data": "No more Data",
-  "release_to_load_more": "Release to load more",
   "load_fail_retry":"Load Failed!Click retry!",
-  "pull_up_load":"Pull up load"
+  "pull_up_load":"Pull up load",
+  "release_to_load_more": "Release to load more"
 }
