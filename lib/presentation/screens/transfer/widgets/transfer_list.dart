@@ -173,9 +173,11 @@ class _TransferListState extends State<TransferList> {
                               final v = isAvax
                                   ? (Decimal.parse('${currentToken.balance}') -
                                           Decimal.parse('${state.fee}'))
-                                      .toDouble()
-                                      .toStringAsFixed(6)
-                                  : currentToken.balance.toStringAsFixed(6);
+                                      .floor(scale: 6)
+                                      .toString()
+                                  : Decimal.parse('${currentToken.balance}')
+                                      .floor(scale: 6)
+                                      .toString();
                               valueController.text = v;
                               cubit.setAmount(v);
                             }
