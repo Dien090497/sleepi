@@ -124,6 +124,7 @@ class TransferCubit extends Cubit<TransferState> {
   }) async {
     final currentState = state;
     if (currentState is TransferLoaded) {
+      emit(currentState.copyWith(isLoading: true));
       final amount = double.tryParse(valueStr.replaceAll(',', '.'));
       final isToSpending = currentState.isToSpending;
       final errorText = _validateAmount(
@@ -134,10 +135,8 @@ class TransferCubit extends Cubit<TransferState> {
         symbol: currentState.currentToken.symbol,
       );
       if (errorText != null) {
-        emit(currentState.copyWith(errorMsg: errorText));
+        emit(currentState.copyWith(errorMsg: errorText, isLoading: false));
       } else {
-        emit(currentState.copyWith(isLoading: true));
-
         final contractAddress = currentState.currentToken.address;
         if (isToSpending) {
           /// Check allowance amount
