@@ -185,7 +185,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
     final result = await _postLevelUpUC.call(param);
     result.fold(
           (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
-          (r) => emit(const BottomBarInfoIndividualState.upLevel()),
+          (r) => emit(const BottomBarInfoIndividualState.speedUpSuccess()),
     );
   }
 }
