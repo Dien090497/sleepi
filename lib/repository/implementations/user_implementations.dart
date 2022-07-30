@@ -93,6 +93,7 @@ class UserImplementation extends IUserRepository {
       final ethereumAddress = await credentials.extractAddress();
       final signature = _web3DataSource.generateSignature(
           privateKey: wallet.privateKey, message: message ?? '');
+
       WhitDrawTokenSchema schema = WhitDrawTokenSchema(
         amount: whitDrawTokenSchema.amount,
         tokenAddress: whitDrawTokenSchema.tokenAddress,
@@ -111,19 +112,16 @@ class UserImplementation extends IUserRepository {
   Future<Either<FailureMessage, GlobalConfigResponse>> getGlobalConfig() async {
     try {
       final result = await _authDataSource.getGlobalConfig();
-      final addresses = <String>[];
-      addresses
-        ..add(result.tokens[2].address)
-        ..add(result.tokens[1].address)
-        ..add(result.tokens[0].address)
-        ..add(result.tokens[3].address);
+
+      for (var element in result.tokens) {
+        await _secureStorage.setTokenAddress(element.symbol, element.address);
+      }
 
       await Future.wait([
         _secureStorage.saveAddressContract(
             addressContract: result.contract.contractTreasury),
         _secureStorage.saveMessage(saveMessage: result.messageSign),
         _secureStorage.setNftAddress(result.nftAddress.toJson()),
-        _secureStorage.setTokenAddress(addresses),
       ]);
       return Right(result);
     } catch (e) {

@@ -32,67 +32,60 @@ class TransferScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as TransferScreenArg;
+    final spendingState = context.watch<UserBloc>().state;
+    final walletState = context.watch<WalletCubit>().state;
 
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (context, spendingState) {
-        return BlocBuilder<WalletCubit, WalletState>(
-          builder: (context, walletState) {
-            if (spendingState is UserLoaded &&
-                walletState is WalletStateLoaded) {
-              final spendingToken = spendingState.listTokens.firstWhere(
-                  (e) => e.address.toLowerCase() == args.address.toLowerCase());
-              final walletToken = walletState.tokenList.firstWhere(
-                  (e) => e.address.toLowerCase() == args.address.toLowerCase());
+    if (spendingState is UserLoaded && walletState is WalletStateLoaded) {
+      final spendingToken = spendingState.listTokens.firstWhere(
+          (e) => e.address.toLowerCase() == args.address.toLowerCase());
+      final walletToken = walletState.tokenList.firstWhere(
+          (e) => e.address.toLowerCase() == args.address.toLowerCase());
 
-              /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
-              final currentToken =
-                  args.isToSpending ? walletToken : spendingToken;
+      /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
+      final currentToken = args.isToSpending ? walletToken : spendingToken;
 
-              /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
-              final backupToken =
-                  args.isToSpending ? spendingToken : walletToken;
-              return BlocProvider(
-                create: (_) =>
-                    TransferCubit(currentToken, backupToken, args.isToSpending)
-                      ..getFee(),
-                child: Stack(
-                  children: [
-                    BackgroundWidget(
-                      appBar: SFAppBar(
-                        context: context,
-                        title: LocaleKeys.transfer,
-                        textStyle: TextStyles.bold18LightWhite,
-                      ),
-                      resizeToAvoidBottomInset: false,
-                      child: DismissKeyboardWidget(
-                        child: SafeArea(
-                          bottom: false,
-                          child: Column(
-                            children: const [
-                              TransferWidget(),
-                              SizedBox(height: 24),
-                              Expanded(
-                                child: TransferList(),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    BlocBuilder<TransferCubit, TransferState>(
-                      builder: (_, state) =>
-                          state is TransferLoaded && state.isLoading
-                              ? const LoadingScreen()
-                              : const SizedBox(),
-                    )
-                  ],
+      /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
+      final backupToken = args.isToSpending ? spendingToken : walletToken;
+      return BlocProvider(
+        create: (_) => TransferCubit(args.isToSpending,
+            currentToken: currentToken,
+            backupToken: backupToken,
+            spendingTokens: spendingState.listTokens,
+            walletTokens: walletState.tokenList)
+          ..getFee(),
+        child: Stack(
+          children: [
+            BackgroundWidget(
+              appBar: SFAppBar(
+                context: context,
+                title: LocaleKeys.transfer,
+                textStyle: TextStyles.bold18LightWhite,
+              ),
+              resizeToAvoidBottomInset: false,
+              child: DismissKeyboardWidget(
+                child: SafeArea(
+                  bottom: false,
+                  child: Column(
+                    children: const [
+                      TransferWidget(),
+                      SizedBox(height: 24),
+                      Expanded(child: TransferList()),
+                    ],
+                  ),
                 ),
-              );
-            }
-            return const LoadingScreen();
-          },
-        );
-      },
+              ),
+            ),
+            BlocBuilder<TransferCubit, TransferState>(
+              builder: (_, state) => state is TransferLoaded && state.isLoading
+                  ? const LoadingScreen()
+                  : const SizedBox(),
+            )
+          ],
+        ),
+      );
+    }
+    return const BackgroundWidget(
+      child: LoadingIcon(),
     );
   }
 }

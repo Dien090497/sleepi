@@ -13,6 +13,7 @@ class SFPercentBorderGradient extends StatelessWidget {
     this.progressColor,
     this.lineHeight = 6.0,
     this.barRadius = 3,
+    this.gradient = true,
   }) : super(key: key);
 
   final double valueActive;
@@ -23,6 +24,7 @@ class SFPercentBorderGradient extends StatelessWidget {
   final double lineHeight;
   final double barRadius;
   final LinearGradient? linearGradient;
+  final bool gradient;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class SFPercentBorderGradient extends StatelessWidget {
       padding: EdgeInsets.zero,
       percent: totalValue != 0 ? valueActive / totalValue : 0,
       lineHeight: lineHeight,
-      linearGradient: linearGradient ?? AppColors.gradientBluePurple,
+      linearGradient:
+          gradient ? linearGradient ?? AppColors.gradientBluePurple : null,
       barRadius: Radius.circular(barRadius),
       backgroundColor: backgroundColor ?? AppColors.darkColor1,
       progressColor: linearGradient != null ? null : progressColor,

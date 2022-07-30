@@ -7,8 +7,8 @@
 import UIKit
 import Foundation
 import FBSDKCoreKit
-import TwitterKit
 import FBSDKShareKit
+import TwitterKit
 import Flutter
 
 extension AppDelegate {

@@ -14,6 +14,7 @@ import 'package:slee_fi/models/market_place/market_place_model.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_item.dart';
@@ -127,11 +128,24 @@ class TabBedsBuy extends StatelessWidget {
                                       _showBedDialog(context, bed);
                                     },
                                     onBedTap: (bed) {
-                                      Navigator.pushNamed(context, R.nftInfo,
-                                          arguments: InfoIndividualParams(
-                                              bed: bed.toBedEntity(),
-                                              marketPlaceModel: bed,
-                                              buy: true));
+                                      final userState = context.read<UserBloc>().state;
+                                      if (userState is UserLoaded) {
+                                        if (bed.owner == userState.userInfoEntity.wallet) {
+                                          Navigator.pushNamed(context, R.nftInfo,
+                                              arguments: InfoIndividualParams(
+                                                  bed: bed.toBedEntity(),
+                                                  marketPlaceModel: bed,
+                                                  buy: true,
+                                                  isOwner: true
+                                              ),);
+                                        } else {
+                                          Navigator.pushNamed(context, R.nftInfo,
+                                              arguments: InfoIndividualParams(
+                                                  bed: bed.toBedEntity(),
+                                                  marketPlaceModel: bed,
+                                                  buy: true));
+                                        }
+                                      }
                                     },
                                   ),
                                   Padding(

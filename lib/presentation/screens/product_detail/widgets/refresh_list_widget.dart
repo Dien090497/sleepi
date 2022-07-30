@@ -24,6 +24,8 @@ class RefreshListWidget extends StatefulWidget {
 class _RefreshListWidgetState extends State<RefreshListWidget> {
   final refreshController = RefreshController();
 
+  bool loadMore = true;
+
   @override
   void dispose() {
     super.dispose();
@@ -37,10 +39,16 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
     return BlocListener<NFTListCubit, NftListState>(
       listener: (context, state) {
         if (state is NftListLoaded) {
-          refreshController.refreshCompleted();
+          if (!state.isLoadMore) {
+            Future.delayed(const Duration(milliseconds: 300), () {
+              refreshController.refreshCompleted();
+              refreshController.loadComplete();
+            });
+          }
           if ((!state.hasMore && widget.isBed) ||
               (!state.hasMoreBedBox && !widget.isBed)) {
-            refreshController.loadNoData();
+            loadMore = false;
+            // refreshController.loadFailed();
           }
 
           if (state.openBedBoxSuccess != null && !widget.isBed) {
@@ -58,7 +66,7 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
       },
       child: SmartRefresher(
         controller: refreshController,
-        enablePullUp: true,
+        enablePullUp: loadMore,
         onRefresh: () {
           refreshController.requestRefresh();
           if (widget.isBed) {

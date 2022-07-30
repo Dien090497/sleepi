@@ -495,5 +495,8 @@ abstract class  LocaleKeys {
   static const repair_bed_balance_not_enough = 'repair_bed_balance_not_enough';
   static const you_have_been_logged_out = 'you_have_been_logged_out';
   static const tracking_is_not_opening = 'tracking_is_not_opening';
+  static const invalid_bed = 'invalid_bed';
+  static const remaining_time = 'remaining_time';
+  static const to_speed_up = 'to_speed_up';
 
 }

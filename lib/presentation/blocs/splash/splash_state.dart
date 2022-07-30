@@ -18,4 +18,6 @@ class SplashState with _$SplashState {
   }) = SplashDone;
 
   const factory SplashState.error(String msg) = SplashError;
+
+  const factory SplashState.notSafeDevice() = SplashNotSafeDevice;
 }

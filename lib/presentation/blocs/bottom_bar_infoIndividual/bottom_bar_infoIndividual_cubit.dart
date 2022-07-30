@@ -44,7 +44,10 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
       emit(BottomBarInfoIndividualState.error(message: '$l'));
     }, (gasPrice) {
       emit(BottomBarInfoIndividualState.loaded(
-          gasPrice: '$gasPrice', successTransfer: false, transactionFee: ''));
+        gasPrice: gasPrice,
+        successTransfer: false,
+        transactionFee: '',
+      ));
     });
   }
 
@@ -138,8 +141,10 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
 
   Future<void> postLevelUp(LevelUpSchema param) async {
     final result = await _postLevelUpUC.call(param);
-    result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
-        (r) => emit(const BottomBarInfoIndividualState.upLevel()));
+    result.fold(
+      (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+      (r) => emit(const BottomBarInfoIndividualState.upLevel()),
+    );
   }
 
   Future<void> cancelSell({required num nftId}) async {
@@ -173,5 +178,14 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
         }
       }
     }
+  }
+
+  void speedUpBed(LevelUpSchema param) async {
+    emit(const BottomBarInfoIndividualState.loading());
+    final result = await _postLevelUpUC.call(param);
+    result.fold(
+          (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+          (r) => emit(const BottomBarInfoIndividualState.speedUpSuccess()),
+    );
   }
 }

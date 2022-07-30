@@ -12,10 +12,10 @@ abstract class StgInjection {
   @Named('tokens')
   List<dynamic> get tokens => [
         {
-          "address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+          "address": "0xd00ae08403B9bbb9124bB305C09058E32C39A48c",
           "symbol": "AVAX",
           "decimal": 18,
-          "totalSupply": 858592.343225,
+          "totalSupply": 890917.376875,
           "icon": Ics.icAvax,
         },
         {
@@ -44,4 +44,5 @@ abstract class StgInjection {
   @test
   @Named('contractRouter')
   String get contractRouterDev => '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
+  // String get contractRouterDev => '0x60aE616a2155Ee3d9A68541Ba4544862310933d4'; mainnet
 }

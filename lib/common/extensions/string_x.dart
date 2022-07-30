@@ -202,6 +202,19 @@ extension StringX on String {
     }
     return AppColors.commonBed;
   }
+
+  String get remainingTime {
+    final timeOpen = DateTime.fromMillisecondsSinceEpoch(int.parse(this));
+    if (timeOpen.isBefore(DateTime.now())) {
+      return '';
+    }
+    final duration = timeOpen.difference(DateTime.now());
+    final hour = (duration.inHours).toString().padLeft(2, '0');
+    final minute = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final second = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+
+    return '$hour:$minute:$second';
+  }
 }
 
 enum StringCase {

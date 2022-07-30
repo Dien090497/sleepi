@@ -17,7 +17,7 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/usecase/estimate_token_function_fee_usecase.dart';
 
-class PopUpConfirmSend extends StatefulWidget {
+class PopUpConfirmSend extends StatelessWidget {
   const PopUpConfirmSend({
     required this.toAddress,
     required this.valueInEther,
@@ -31,12 +31,6 @@ class PopUpConfirmSend extends StatefulWidget {
   final bool transferToken;
   final SendToExternalArguments? arg;
 
-  @override
-  State<PopUpConfirmSend> createState() => _PopUpConfirmSendState();
-}
-
-class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
-  String ownerAddress = '';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -56,89 +50,100 @@ class _PopUpConfirmSendState extends State<PopUpConfirmSend> {
           final walletCubit = context.read<WalletCubit>();
           final walletState = walletCubit.state;
 
-          if (walletState is WalletStateLoaded) {
-            ownerAddress = walletState.walletInfoEntity.address;
-          }
-
           if (state is sendToExternalStateInitial) {
             walletCubit.getWallet();
           }
           return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: [
-                      SFText(
-                        keyText: LocaleKeys.send,
-                        style: TextStyles.bold18LightWhite,
-                      ),
-                      const SizedBox(height: 32),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SFText(
-                            keyText: LocaleKeys.fee,
-                            style: TextStyles.lightGrey14,
-                          ),
-                          Expanded(
-                              child: FutureBuilder<dartz.Either<Failure, double>>(
-                                future: getIt<EstimateTokenFunctionFeeUseCase>()
-                                    .call(EstimateGasTokenParams(
-                                  ownerAddress: ownerAddress,
-                                  toAddress: widget.toAddress,
-                                  value: widget.valueInEther,
-                                )),
-                                builder: (context, snapshot) {
-                                  return Text(
-                                    snapshot.hasData
-                                        ? '${snapshot.data!.getOrElse(() => 0)} ${widget.transferToken ? widget.arg?.symbol : 'AVAX'}'
-                                        : '--.--',
-                                    textAlign: TextAlign.right,
-                                    style: TextStyles.lightWhite16,
-                                  );
-                                },
-                              ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 32.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SFText(
-                            keyText: LocaleKeys.you_will_send,
-                            style: TextStyles.lightGrey14,
-                          ),
-                          Expanded(
-                              child: SFText(
-                            keyText:
-                                "${widget.valueInEther} ${widget.transferToken ? widget.arg?.symbol : 'AVAX'}",
-                            style: TextStyles.lightWhite16,
-                            textAlign: TextAlign.end,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: [
+                SFText(
+                  keyText: LocaleKeys.send,
+                  style: TextStyles.bold18LightWhite,
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SFText(
+                      keyText: LocaleKeys.fee,
+                      style: TextStyles.lightGrey14,
+                    ),
+                    if (walletState is WalletStateLoaded)
+                      Expanded(
+                        child: FutureBuilder<dartz.Either<Failure, double>>(
+                          future: getIt<EstimateTokenFunctionFeeUseCase>()
+                              .call(EstimateGasTokenParams(
+                            ownerAddress: walletState.walletInfoEntity.address,
+                            toAddress: toAddress,
+                            value: valueInEther,
                           )),
-                        ],
+                          builder: (context, snapshot) {
+                            return const Text(
+
+                              /// TODO: remove hardcode fee
+                              // snapshot.hasData
+                              //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
+                              //     : '--.--',
+                              '0.0014733 AVAX',
+                              textAlign: TextAlign.right,
+                              style: TextStyles.lightWhite16,
+                            );
+                          },
+                        ),
                       ),
-                      const SizedBox(height: 32.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: SFText(
-                              keyText: LocaleKeys.send_address,
-                              style: TextStyles.lightGrey14,
-                            ),
-                          ),
-                          Expanded(
-                              child: SFText(
-                            keyText: widget.toAddress,
-                            style: TextStyles.lightWhite16,
-                            textAlign: TextAlign.end,
-                          )),
-                        ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 32.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SFText(
+                      keyText: LocaleKeys.you_will_send,
+                      style: TextStyles.lightGrey14,
+                    ),
+                    Expanded(
+                        child: SFText(
+                      keyText:
+                          "$valueInEther ${transferToken ? arg?.symbol : 'AVAX'}",
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end,
+                    )),
+                  ],
+                ),
+                const SizedBox(height: 32.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SFText(
+                        keyText: LocaleKeys.send_address,
+                        style: TextStyles.lightGrey14,
                       ),
-                      const SizedBox(
-                        height: 44.0,
+                    ),
+                    Expanded(
+                        child: SFText(
+                      keyText: toAddress,
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end,
+                    )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 44.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: SFButton(
+                        text: LocaleKeys.cancel,
+                        textStyle: TextStyles.w600LightGreySize16,
+                        color: AppColors.light4,
+                        width: double.infinity,
+                        onPressed: () => Navigator.maybePop(context),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,

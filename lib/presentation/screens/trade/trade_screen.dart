@@ -22,7 +22,6 @@ import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
@@ -45,11 +44,11 @@ class TradeScreen extends StatefulWidget {
 }
 
 class _TradeScreenState extends State<TradeScreen> {
+  late List<dynamic> listTokens = [];
   late double balance = 0;
-  late int indexFrom=0;
-  late int indexTo;
+  late int indexFrom = 0;
+  late int indexTo = 0;
   String error = '';
-  final listTokens = getIt<List<dynamic>>(instanceName: 'tokens');
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
@@ -57,6 +56,8 @@ class _TradeScreenState extends State<TradeScreen> {
   FocusNode focusNode = FocusNode();
   double amountOutMin = 0;
   Timer? _debounce;
+  final tradeCubit = TradeCubit()
+    ..init();
 
   int getIndexAddress(String address) {
     int index = 0;
@@ -114,13 +115,14 @@ class _TradeScreenState extends State<TradeScreen> {
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
-      cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
+      tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
     });
   }
 
   @override
   void dispose() {
     _debounce?.cancel();
+    valueController.clear();
     valueController.dispose();
     super.dispose();
   }
@@ -128,46 +130,96 @@ class _TradeScreenState extends State<TradeScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      final args = ModalRoute.of(context)?.settings.arguments as TradeArguments;
-      setState(() {
-        indexFrom = getIndexAddress(args.contractAddressFrom!);
-        if (args.contractAddressTo == null) {
-          if (indexFrom != 0) {
-            indexTo = 0;
-          } else {
-            indexTo = listTokens.length - 1;
-          }
-        } else {
-          indexTo = getIndexAddress(args.contractAddressTo!);
-        }
-      });
-    });
+  }
+
+  init(BuildContext context) {
+    final args = ModalRoute
+        .of(context)
+        ?.settings
+        .arguments as TradeArguments;
+    indexFrom = getIndexAddress(args.contractAddressFrom!);
+    if (args.contractAddressTo == null) {
+      if (indexFrom != 0) {
+        indexTo = 0;
+      } else {
+        indexTo = listTokens.length - 1;
+      }
+    } else {
+      indexTo = getIndexAddress(args.contractAddressTo!);
+    }
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
+      tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => TradeCubit()..init(),
+      create: (BuildContext context) => tradeCubit,
       child: BlocConsumer<TradeCubit, TradeState>(
         listener: (BuildContext context, state) {
-          final cubit = context.read<TradeCubit>();
           if (state is swapTokenBalance) {
             setState(() {
               balance = state.balance;
             });
           }
+
+          if (state is swapTokenAllowance) {
+            if (state.approve) {
+              showCustomAlertDialog(context,
+                  children: PopUpConfirmApproveTrade(
+                    tokenName: listTokens[indexFrom]['symbol'].toString(),
+                    cubit: tradeCubit,
+                    contractAddress:
+                    listTokens[indexFrom]['address'].toString(),
+                  ));
+            } else {
+              final result =
+              valueController.text.toString().contains(',')
+                  ? valueController.text
+                  .toString()
+                  .replaceAll(',', '.')
+                  : valueController.text.toString();
+              showCustomAlertDialog(context,
+                  children: PopUpConfirmTrade(
+                    value: double.parse(result),
+                    symbolFrom: listTokens[indexFrom]['symbol']
+                        .toString(),
+                    symbolTo:
+                    listTokens[indexTo]['symbol'].toString(),
+                    addressFrom: listTokens[indexFrom]['address']
+                        .toString(),
+                    addressTo:
+                    listTokens[indexTo]['address'].toString(),
+                    onSwap: () {
+                      tradeCubit.swapToken(
+                          double.parse(result),
+                          listTokens[indexFrom]['address']
+                              .toString(),
+                          listTokens[indexTo]['address']
+                              .toString());
+                    },
+                    amountOutMin: amountOutMin,
+                  )).then((value) =>
+              {
+                setState(() {
+                  valueController.text = '';
+                  amountOutMin = 0;
+                  error = '';
+                })
+              });
+            }
+          }
+
           if (state is swapTokenSuccess) {
             Navigator.pop(context);
             if (state.success) {
               showSuccessfulDialog(context, null).then((value) {
                 if (_debounce?.isActive ?? false) _debounce!.cancel();
                 _debounce = Timer(const Duration(milliseconds: 3000), () async {
-                  cubit.getBalanceToken(
+                  tradeCubit.getBalanceToken(
                       listTokens[indexFrom]['address'].toString());
                 });
               });
@@ -175,18 +227,11 @@ class _TradeScreenState extends State<TradeScreen> {
               showCustomAlertDialog(context,
                   children: PopUpConfirmApproveTrade(
                     tokenName: listTokens[indexFrom]['symbol'].toString(),
-                    cubit: cubit,
+                    cubit: tradeCubit,
                     contractAddress:
-                        listTokens[indexFrom]['address'].toString(),
+                    listTokens[indexFrom]['address'].toString(),
                   ));
             }
-          }
-          if (state is TradeStateInitial) {
-            setState(() {
-              valueController.text = '';
-              amountOutMin = 0;
-              error = '';
-            });
           }
         },
         builder: (BuildContext context, state) {
@@ -197,9 +242,9 @@ class _TradeScreenState extends State<TradeScreen> {
               amountOutMin = 0;
             }
           }
-          final cubit = context.read<TradeCubit>();
           if (state is TradeStateInitial) {
-            cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
+            listTokens = state.listTokens;
+            init(context);
           }
           return DismissKeyboardWidget(
             child: BackgroundWidget(
@@ -226,7 +271,7 @@ class _TradeScreenState extends State<TradeScreen> {
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  onReset(cubit);
+                                  onReset(tradeCubit);
                                 },
                                 child: const SFIconBorder(
                                     icon: Icons.refresh, sizeIcon: 28)),
@@ -252,14 +297,15 @@ class _TradeScreenState extends State<TradeScreen> {
                                           style: TextStyles.lightGrey12),
                                       SFText(
                                         keyText:
-                                            ': ${balance > 0 ? balance.formatBalanceToken : 0}',
+                                        ': ${balance > 0 ? balance
+                                            .formatBalanceToken : 0}',
                                         style: TextStyles.lightGrey12,
                                       ),
                                     ],
                                   ),
                                   Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
@@ -274,39 +320,40 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 inputFormatters: [
                                                   FilteringTextInputFormatter
                                                       .allow(RegExp(
-                                                          r'^\d{1,}[.,]?\d{0,6}')),
+                                                      r'^\d{1,}[.,]?\d{0,6}')),
                                                 ],
                                                 textInputType:
-                                                    const TextInputType
-                                                            .numberWithOptions(
-                                                        decimal: true),
+                                                const TextInputType
+                                                    .numberWithOptions(
+                                                    decimal: true),
                                                 hintText: "0.00",
                                                 hintStyle:
-                                                    TextStyles.bold16LightWhite,
+                                                TextStyles.bold16LightWhite,
                                                 onChanged: (value) {
                                                   if (value.isNotEmpty) {
                                                     setState(() {
                                                       onValidValue();
                                                       final result =
-                                                          valueController
-                                                                  .text
-                                                                  .toString()
-                                                                  .contains(',')
-                                                              ? valueController
-                                                                  .text
-                                                                  .toString()
-                                                                  .replaceAll(
-                                                                      ',',
-                                                                      '.')
-                                                              : valueController
-                                                                  .text
-                                                                  .toString();
-                                                      cubit.getAmountOutMin(
+                                                      valueController
+                                                          .text
+                                                          .toString()
+                                                          .contains(',')
+                                                          ? valueController
+                                                          .text
+                                                          .toString()
+                                                          .replaceAll(
+                                                          ',',
+                                                          '.')
+                                                          : valueController
+                                                          .text
+                                                          .toString();
+                                                      tradeCubit
+                                                          .getAmountOutMin(
                                                           listTokens[indexFrom]
-                                                                  ['address']
+                                                          ['address']
                                                               .toString(),
                                                           listTokens[indexTo]
-                                                                  ['address']
+                                                          ['address']
                                                               .toString(),
                                                           double.parse(result));
                                                     });
@@ -329,39 +376,43 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   width: 80,
                                                   child: SFButtonOutLined(
                                                       fixedSize:
-                                                          const Size(34, 21),
+                                                      const Size(34, 21),
                                                       title: LocaleKeys.max,
                                                       textStyle:
-                                                          TextStyles.bold14Blue,
+                                                      TextStyles.bold14Blue,
                                                       borderColor:
-                                                          AppColors.blue,
+                                                      AppColors.blue,
                                                       onPressed: () {
                                                         if (balance > 0) {
                                                           valueController
-                                                              .text = (indexFrom ==
-                                                                      0
+                                                              .text =
+                                                              (indexFrom ==
+                                                                  0
                                                                   ? balance -
-                                                                      0.01
+                                                                  0.01
                                                                   : balance)
-                                                              .formatBalanceToken;
+                                                                  .formatBalanceToken
+                                                                  .replaceAll(
+                                                                  ',', '');
                                                           Future.delayed(
                                                               const Duration(
                                                                   milliseconds:
-                                                                      100), () {
+                                                                  100), () {
                                                             final result =
-                                                                valueController
-                                                                    .text
-                                                                    .replaceAll(
-                                                                        ',',
-                                                                        '.');
-                                                            cubit.getAmountOutMin(
+                                                            valueController
+                                                                .text
+                                                                .replaceAll(
+                                                                ',',
+                                                                '.');
+                                                            tradeCubit
+                                                                .getAmountOutMin(
                                                                 listTokens[indexFrom]
-                                                                        [
-                                                                        'address']
+                                                                [
+                                                                'address']
                                                                     .toString(),
                                                                 listTokens[indexTo]
-                                                                        [
-                                                                        'address']
+                                                                [
+                                                                'address']
                                                                     .toString(),
                                                                 double.parse(
                                                                     result));
@@ -383,36 +434,38 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 height: 36,
                                                 indexInit: indexFrom,
                                                 resultPadding:
-                                                    const EdgeInsets.all(0),
+                                                const EdgeInsets.all(0),
                                                 backgroundColor:
-                                                    AppColors.transparent,
+                                                AppColors.transparent,
                                                 isResultLabel: true,
                                                 tokens: listTokens,
                                                 onChange: (selectItem) {
                                                   setState(() {
                                                     if (selectItem["value"] ==
                                                         listTokens[indexTo]
-                                                            ['address']) {
+                                                        ['address']) {
                                                       indexTo = indexFrom;
                                                     }
                                                     indexFrom = getIndexAddress(
                                                         selectItem["value"]
                                                             .toString());
-                                                    cubit.getBalanceToken(
+                                                    tradeCubit.getBalanceToken(
                                                         listTokens[indexFrom]
-                                                                ['address']
+                                                        ['address']
                                                             .toString());
                                                     valueController.text = '';
                                                     amountOutMin = 0;
                                                     error = '';
-                                                    log("message $indexFrom $indexTo");
+                                                    log(
+                                                        "message $indexFrom $indexTo");
                                                   });
                                                   Future.delayed(
                                                     const Duration(
                                                         milliseconds: 100),
-                                                    () => secondToken
-                                                        .currentState
-                                                        ?.changeSelectedItem(),
+                                                        () =>
+                                                        secondToken
+                                                            .currentState
+                                                            ?.changeSelectedItem(),
                                                   );
                                                   FocusScope.of(context)
                                                       .requestFocus(focusNode);
@@ -434,15 +487,15 @@ class _TradeScreenState extends State<TradeScreen> {
                             const SizedBox(height: 8),
                             Center(
                                 child: GestureDetector(
-                              onTap: () {
-                                onSwapIndex(cubit);
-                              },
-                              child: const Icon(
-                                Icons.swap_vert,
-                                color: AppColors.lightWhite,
-                                size: 32,
-                              ),
-                            )),
+                                  onTap: () {
+                                    onSwapIndex(tradeCubit);
+                                  },
+                                  child: const Icon(
+                                    Icons.swap_vert,
+                                    color: AppColors.lightWhite,
+                                    size: 32,
+                                  ),
+                                )),
                             const SizedBox(height: 8),
                             SFCard(
                               padding: const EdgeInsets.all(16),
@@ -456,21 +509,22 @@ class _TradeScreenState extends State<TradeScreen> {
                                       ),
                                       SFText(
                                           keyText:
-                                              ' (${LocaleKeys.estimate.tr()})',
+                                          ' (${LocaleKeys.estimate.tr()})',
                                           style: TextStyles.lightGrey14),
                                     ],
                                   ),
                                   const SizedBox(height: 12),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: SizedBox(
                                           child: SFText(
                                             maxLines: 1,
                                             keyText:
-                                                "${Decimal.parse(amountOutMin.toString())}",
+                                            "${Decimal.parse(
+                                                amountOutMin.toString())}",
                                             style: TextStyles.bold18White,
                                           ),
                                         ),
@@ -488,7 +542,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                           setState(() {
                                             if (selectItem['value'] ==
                                                 listTokens[indexFrom]
-                                                    ['address']) {
+                                                ['address']) {
                                               indexFrom = indexTo;
                                             }
                                             indexTo = getIndexAddress(
@@ -497,18 +551,19 @@ class _TradeScreenState extends State<TradeScreen> {
                                           });
                                           Future.delayed(
                                             const Duration(milliseconds: 100),
-                                            () => firstToken.currentState
-                                                ?.changeSelectedItem(),
+                                                () =>
+                                                firstToken.currentState
+                                                    ?.changeSelectedItem(),
                                           );
                                           final result = valueController.text
-                                                  .toString()
-                                                  .contains(',')
+                                              .toString()
+                                              .contains(',')
                                               ? valueController.text
-                                                  .toString()
-                                                  .replaceAll(',', '.')
+                                              .toString()
+                                              .replaceAll(',', '.')
                                               : valueController.text.toString();
 
-                                          cubit.getAmountOutMin(
+                                          tradeCubit.getAmountOutMin(
                                               listTokens[indexFrom]['address']
                                                   .toString(),
                                               listTokens[indexTo]['address']
@@ -540,32 +595,44 @@ class _TradeScreenState extends State<TradeScreen> {
                           });
                           if (error == '') {
                             final result =
-                                valueController.text.toString().contains(',')
-                                    ? valueController.text
-                                        .toString()
-                                        .replaceAll(',', '.')
-                                    : valueController.text.toString();
-                            showCustomAlertDialog(context,
-                                children: PopUpConfirmTrade(
-                                  value: double.parse(result),
-                                  symbolFrom: listTokens[indexFrom]['symbol']
-                                      .toString(),
-                                  symbolTo:
-                                      listTokens[indexTo]['symbol'].toString(),
-                                  addressFrom: listTokens[indexFrom]['address']
-                                      .toString(),
-                                  addressTo:
-                                      listTokens[indexTo]['address'].toString(),
-                                  onSwap: () {
-                                    cubit.swapToken(
-                                        double.parse(result),
-                                        listTokens[indexFrom]['address']
-                                            .toString(),
-                                        listTokens[indexTo]['address']
-                                            .toString());
-                                  },
-                                  amountOutMin: amountOutMin,
-                                )).then((value) => cubit.init());
+                            valueController.text.toString().contains(',')
+                                ? valueController.text
+                                .toString()
+                                .replaceAll(',', '.')
+                                : valueController.text.toString();
+                            if(indexFrom != 0) {
+                              tradeCubit.checkApproveToken(double.parse(result),
+                                  listTokens[indexFrom]['address'].toString());
+                            }else{
+                              showCustomAlertDialog(context,
+                                  children: PopUpConfirmTrade(
+                                    value: double.parse(result),
+                                    symbolFrom: listTokens[indexFrom]['symbol']
+                                        .toString(),
+                                    symbolTo:
+                                    listTokens[indexTo]['symbol'].toString(),
+                                    addressFrom: listTokens[indexFrom]['address']
+                                        .toString(),
+                                    addressTo:
+                                    listTokens[indexTo]['address'].toString(),
+                                    onSwap: () {
+                                      tradeCubit.swapToken(
+                                          double.parse(result),
+                                          listTokens[indexFrom]['address']
+                                              .toString(),
+                                          listTokens[indexTo]['address']
+                                              .toString());
+                                    },
+                                    amountOutMin: amountOutMin,
+                                  )).then((value) =>
+                              {
+                                setState(() {
+                                  valueController.text = '';
+                                  amountOutMin = 0;
+                                  error = '';
+                                })
+                              });
+                            }
                           }
                         },
                       ),

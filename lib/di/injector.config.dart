@@ -109,22 +109,23 @@ import '../usecase/get_global_config.dart' as _i148;
 import '../usecase/get_history_transaction_usecase.dart' as _i149;
 import '../usecase/get_level_up_usecase.dart' as _i150;
 import '../usecase/get_list_nft_detail_usecase.dart' as _i151;
+import '../usecase/get_list_token_usecase.dart' as _i152;
 import '../usecase/get_market_place_usecase.dart' as _i71;
-import '../usecase/get_minting_usecase.dart' as _i152;
+import '../usecase/get_minting_usecase.dart' as _i153;
 import '../usecase/get_network_connection_usecase.dart' as _i34;
-import '../usecase/get_nft_addresses_usecase.dart' as _i155;
-import '../usecase/get_nft_family_usecase.dart' as _i156;
-import '../usecase/get_nfts_balance_usecase.dart' as _i153;
-import '../usecase/get_nfts_ids_usecase.dart' as _i154;
-import '../usecase/get_point_of_owner_usecase.dart' as _i157;
-import '../usecase/get_repair_usecase.dart' as _i158;
-import '../usecase/get_sleep_result_usecase.dart' as _i159;
-import '../usecase/get_slft_price_usecase.dart' as _i160;
-import '../usecase/get_token_addresses_usecase.dart' as _i161;
-import '../usecase/get_transaction_fee_usecase.dart' as _i162;
-import '../usecase/get_user_status_tracking_usecase.dart' as _i163;
-import '../usecase/get_user_usecase.dart' as _i164;
-import '../usecase/has_wallet_usecase.dart' as _i165;
+import '../usecase/get_nft_addresses_usecase.dart' as _i156;
+import '../usecase/get_nft_family_usecase.dart' as _i157;
+import '../usecase/get_nfts_balance_usecase.dart' as _i154;
+import '../usecase/get_nfts_ids_usecase.dart' as _i155;
+import '../usecase/get_point_of_owner_usecase.dart' as _i158;
+import '../usecase/get_repair_usecase.dart' as _i159;
+import '../usecase/get_sleep_result_usecase.dart' as _i160;
+import '../usecase/get_slft_price_usecase.dart' as _i161;
+import '../usecase/get_token_addresses_usecase.dart' as _i162;
+import '../usecase/get_transaction_fee_usecase.dart' as _i163;
+import '../usecase/get_user_status_tracking_usecase.dart' as _i164;
+import '../usecase/get_user_usecase.dart' as _i165;
+import '../usecase/has_wallet_usecase.dart' as _i166;
 import '../usecase/is_first_open_app_usecase.dart' as _i62;
 import '../usecase/is_nft_approve_for_all_usecase.dart' as _i63;
 import '../usecase/is_passcode_created_usecase.dart' as _i64;
@@ -176,13 +177,13 @@ import '../usecase/wallet/import_wallet_usecase.dart' as _i61;
 import '../usecase/withdraw_history_usecase.dart' as _i106;
 import '../usecase/withdraw_nft_usecase.dart' as _i107;
 import 'dev_injection.dart' as _i169;
-import 'prod_innjection.dart' as _i168;
-import 'register_module.dart' as _i166;
-import 'stg_injection.dart' as _i167;
+import 'prod_innjection.dart' as _i170;
+import 'register_module.dart' as _i167;
+import 'stg_injection.dart' as _i168;
 
 const String _test = 'test';
-const String _prod = 'prod';
 const String _dev = 'dev';
+const String _prod = 'prod';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -192,8 +193,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
   final stgInjection = _$StgInjection();
-  final prodInjection = _$ProdInjection();
   final devInjection = _$DevInjection();
+  final prodInjection = _$ProdInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -215,10 +216,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
   gh.factory<List<dynamic>>(() => stgInjection.tokens,
       instanceName: 'tokens', registerFor: {_test});
-  gh.factory<List<dynamic>>(() => prodInjection.tokens,
-      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<List<dynamic>>(() => devInjection.tokens,
       instanceName: 'tokens', registerFor: {_dev});
+  gh.factory<List<dynamic>>(() => prodInjection.tokens,
+      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.QueueInterceptor>(
@@ -227,18 +228,18 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i12.StorageKeys>(() => _i12.StorageKeys());
-  gh.factory<String>(() => stgInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => prodInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<String>(() => prodInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => stgInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => devInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_dev});
-  gh.factory<String>(() => stgInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_test});
   gh.factory<String>(() => devInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_dev});
+  gh.factory<String>(() => stgInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_test});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
   gh.factory<_i22.HistoryDataSource>(
@@ -264,10 +265,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i30.SpendingDataSource(get<_i21.Web3Provider>()));
   gh.factory<_i31.WalletDataSource>(
       () => _i31.WalletDataSource(get<_i21.Web3Provider>()));
-  gh.singleton<_i32.Web3DataSource>(_i32.Web3DataSource(
-      get<_i21.Web3Provider>(),
-      get<String>(instanceName: 'contractRouter'),
-      get<List<dynamic>>(instanceName: 'tokens')));
+  gh.singleton<_i32.Web3DataSource>(
+      _i32.Web3DataSource(get<_i21.Web3Provider>(), get<_i28.SecureStorage>()));
   gh.factory<_i33.AuthInterceptor>(() => _i33.AuthInterceptor(
       get<_i28.SecureStorage>(), get<_i8.Dio>(), get<_i7.DeviceInfoPlugin>()));
   gh.factory<_i34.GetNetworkConnectionUseCase>(() =>
@@ -525,43 +524,45 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => _i150.GetLevelUpUseCase(get<_i66.LevelUpRepository>()));
   gh.factory<_i151.GetListNftDetailUseCase>(
       () => _i151.GetListNftDetailUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i152.GetMintingUseCase>(
-      () => _i152.GetMintingUseCase(get<_i72.MintRepository>()));
-  gh.factory<_i153.GetNFTsBalanceUseCase>(
-      () => _i153.GetNFTsBalanceUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i154.GetNFTsIDsUseCase>(
-      () => _i154.GetNFTsIDsUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i155.GetNftAddressesUseCase>(
-      () => _i155.GetNftAddressesUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i156.GetNftFamilyUseCase>(
-      () => _i156.GetNftFamilyUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i157.GetPointOfOwnerUseCase>(
-      () => _i157.GetPointOfOwnerUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i158.GetRepairUseCase>(
-      () => _i158.GetRepairUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i159.GetSleepResultUseCase>(
-      () => _i159.GetSleepResultUseCase(get<_i53.ISleepTrackingRepository>()));
-  gh.factory<_i160.GetSlftPriceUseCase>(
-      () => _i160.GetSlftPriceUseCase(get<_i57.IUserRepository>()));
-  gh.factory<_i161.GetTokenAddressesUseCase>(
-      () => _i161.GetTokenAddressesUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i162.GetTransactionFeeUseCase>(
-      () => _i162.GetTransactionFeeUseCase(get<_i51.INFTRepository>()));
-  gh.factory<_i163.GetUserStatusTrackingUseCase>(() =>
-      _i163.GetUserStatusTrackingUseCase(get<_i53.ISleepTrackingRepository>()));
-  gh.factory<_i164.GetUserUseCase>(
-      () => _i164.GetUserUseCase(get<_i45.IAuthRepository>()));
-  gh.factory<_i165.HasWalletUseCase>(
-      () => _i165.HasWalletUseCase(get<_i59.IWalletRepository>()));
+  gh.factory<_i152.GetListTokenUseCase>(
+      () => _i152.GetListTokenUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i153.GetMintingUseCase>(
+      () => _i153.GetMintingUseCase(get<_i72.MintRepository>()));
+  gh.factory<_i154.GetNFTsBalanceUseCase>(
+      () => _i154.GetNFTsBalanceUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i155.GetNFTsIDsUseCase>(
+      () => _i155.GetNFTsIDsUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i156.GetNftAddressesUseCase>(
+      () => _i156.GetNftAddressesUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i157.GetNftFamilyUseCase>(
+      () => _i157.GetNftFamilyUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i158.GetPointOfOwnerUseCase>(
+      () => _i158.GetPointOfOwnerUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i159.GetRepairUseCase>(
+      () => _i159.GetRepairUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i160.GetSleepResultUseCase>(
+      () => _i160.GetSleepResultUseCase(get<_i53.ISleepTrackingRepository>()));
+  gh.factory<_i161.GetSlftPriceUseCase>(
+      () => _i161.GetSlftPriceUseCase(get<_i57.IUserRepository>()));
+  gh.factory<_i162.GetTokenAddressesUseCase>(
+      () => _i162.GetTokenAddressesUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i163.GetTransactionFeeUseCase>(
+      () => _i163.GetTransactionFeeUseCase(get<_i51.INFTRepository>()));
+  gh.factory<_i164.GetUserStatusTrackingUseCase>(() =>
+      _i164.GetUserStatusTrackingUseCase(get<_i53.ISleepTrackingRepository>()));
+  gh.factory<_i165.GetUserUseCase>(
+      () => _i165.GetUserUseCase(get<_i45.IAuthRepository>()));
+  gh.factory<_i166.HasWalletUseCase>(
+      () => _i166.HasWalletUseCase(get<_i59.IWalletRepository>()));
   return get;
 }
 
 class _$RPCModule extends _i32.RPCModule {}
 
-class _$RegisterModule extends _i166.RegisterModule {}
+class _$RegisterModule extends _i167.RegisterModule {}
 
-class _$StgInjection extends _i167.StgInjection {}
-
-class _$ProdInjection extends _i168.ProdInjection {}
+class _$StgInjection extends _i168.StgInjection {}
 
 class _$DevInjection extends _i169.DevInjection {}
+
+class _$ProdInjection extends _i170.ProdInjection {}

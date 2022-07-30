@@ -24,8 +24,8 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     final result = await _sendToExternalUC.call(SendToExternalParams(
         contractAddressTo: contractAddressTo,
         valueInEther: valueInEther,
-        tokenSymbol: tokenSymbol
-    ));
+        tokenSymbol: tokenSymbol));
+
     result.fold((l) {
       emit(SendToExternalState.fail('$l'));
     }, (success) {
@@ -37,17 +37,19 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   Future<void> getTokenBalance() async {
     final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
-          (l) {
+      (l) {
         emit(SendToExternalState.fail('$l'));
       },
-          (success) {
+      (success) {
         emit(SendToExternalState.getBalance(success));
       },
     );
   }
 
   Future<void> validator(
-      {required String contractAddressTo, required double balanceCurrent, required double amount}) async {
+      {required String contractAddressTo,
+      required double balanceCurrent,
+      required double amount}) async {
     if (contractAddressTo.isEmpty) {
       emit(SendToExternalState.errorToAddress(
           LocaleKeys.this_field_is_required.tr()));

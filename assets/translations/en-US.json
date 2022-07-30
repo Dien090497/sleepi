@@ -306,7 +306,7 @@
   "download": "Download",
   "twitter": "Twitter",
   "facebook": "Facebook",
-  "telegram": "Telegram",
+  "telegram": "Instagram",
   "sell": "Sell",
   "flexible_bed": "Flexible Bed",
   "bed_mint": "Bed Mint",
@@ -492,5 +492,8 @@
   "click_here_to_check_seed_phrase": "Click here to check seed phrase",
   "repair_bed_balance_not_enough": "Your balance is not enough to repair",
   "you_have_been_logged_out": "You have been logged out",
-  "tracking_is_not_opening": "Tracking is not opening"
- }
+  "tracking_is_not_opening": "Tracking is not opening",
+  "invalid_bed": "Invalid Bed",
+  "remaining_time": "Remaining time",
+  "to_speed_up": "To speed up"
+}

@@ -223,11 +223,11 @@ class AlarmBell extends StatelessWidget {
                   final startRes = await getIt<StartSleepTrackingUseCase>()
                       .call(StartTrackingSchema(
                     isEnableInsurance: state.enableInsurance,
-                    bedUsed: state.selectedBed!.id,
+                    bedUsed: state.selectedBed!.nftId,
                     wakeUp:
                     '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
                     alrm: state.enableAlarm,
-                    itemUsed: state.selectedItem?.id ?? 0,
+                    itemUsed: state.selectedItem?.nftId ?? 0,
                   ));
                   Navigator.pop(context);
                   startRes.fold(

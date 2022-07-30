@@ -15,7 +15,6 @@ import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
@@ -79,7 +78,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   const SizedBox(height: 32),
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
-                  Text('${balance.formatBalanceToken} $currencySymbol',
+                  Text('${balance.formatBalanceWallet} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   GestureDetector(
@@ -155,9 +154,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                                 context,
                                 R.trade,
                                 arguments: TradeArguments(
-                                  contractAddressFrom: getIt<List<dynamic>>(
-                                          instanceName: 'tokens')[0]['address']
-                                      .toString(),
+                                  contractAddressFrom: Const.deadAddress,
                                 ),
                               );
                             },

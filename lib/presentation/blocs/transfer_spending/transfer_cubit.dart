@@ -14,10 +14,16 @@ import 'package:slee_fi/usecase/transfer_token_to_main_wallet_usecase.dart';
 
 class TransferCubit extends Cubit<TransferState> {
   TransferCubit(
-      TokenEntity currentToken, TokenEntity backupToken, bool isToSpending)
-      : super(TransferState.loaded(
+    bool isToSpending, {
+    required TokenEntity currentToken,
+    required TokenEntity backupToken,
+    required List<TokenEntity> spendingTokens,
+    required List<TokenEntity> walletTokens,
+  }) : super(TransferState.loaded(
           isToSpending: isToSpending,
           currentToken: currentToken,
+          spendingTokens: spendingTokens,
+          walletTokens: walletTokens,
           backupToken: backupToken,
         ));
 
@@ -25,7 +31,6 @@ class TransferCubit extends Cubit<TransferState> {
   final _approveUseCase = getIt<ApproveUseCase>();
   final _transferToMainWalletUC = getIt<TransferTokenToMainWalletUseCase>();
   final _isTokenApprovedEnoughUC = getIt<IsTokenApprovedEnoughUseCase>();
-
 
   Future<void> getFee() async {
     final currentState = state;
@@ -52,28 +57,27 @@ class TransferCubit extends Cubit<TransferState> {
     }
   }
 
-  void removeError() {
-    final currentState = state;
-    if (currentState is TransferLoaded && currentState.errorMsg != null) {
-      emit(currentState.copyWith(errorMsg: null));
-    }
-  }
-
-  void enterAmount(String value) {
+  void setAmount(String value) {
     final currentState = state;
     if (currentState is TransferLoaded) {
       final amount = double.tryParse(value.replaceAll(',', '.'));
-      final errorText = _validateAmount(
-        amount: amount,
-        isToSpending: currentState.isToSpending,
-        fee: currentState.fee,
-        balance: currentState.currentToken.balance,
-        symbol: currentState.currentToken.symbol,
-      );
-      if (errorText != null) {
-        emit(currentState.copyWith(errorMsg: errorText));
+      if (amount == null) {
+        /// TH xóa hết số
+        emit(currentState.copyWith(errorMsg: null));
       } else {
-        emit(currentState.copyWith(errorMsg: null, amount: amount));
+        /// Khi nhập số mới validate
+        final errorText = _validateAmount(
+          amount: amount,
+          isToSpending: currentState.isToSpending,
+          fee: currentState.fee,
+          balance: currentState.currentToken.balance,
+          symbol: currentState.currentToken.symbol,
+        );
+        if (errorText != null) {
+          emit(currentState.copyWith(errorMsg: errorText, amount: amount));
+        } else {
+          emit(currentState.copyWith(errorMsg: null, amount: amount));
+        }
       }
     }
   }
@@ -120,6 +124,7 @@ class TransferCubit extends Cubit<TransferState> {
   }) async {
     final currentState = state;
     if (currentState is TransferLoaded) {
+      emit(currentState.copyWith(isLoading: true));
       final amount = double.tryParse(valueStr.replaceAll(',', '.'));
       final isToSpending = currentState.isToSpending;
       final errorText = _validateAmount(
@@ -130,10 +135,8 @@ class TransferCubit extends Cubit<TransferState> {
         symbol: currentState.currentToken.symbol,
       );
       if (errorText != null) {
-        emit(currentState.copyWith(errorMsg: errorText));
+        emit(currentState.copyWith(errorMsg: errorText, isLoading: false));
       } else {
-        emit(currentState.copyWith(isLoading: true));
-
         final contractAddress = currentState.currentToken.address;
         if (isToSpending) {
           /// Check allowance amount
@@ -208,7 +211,7 @@ class TransferCubit extends Cubit<TransferState> {
         );
       } else {
         final result = await _transferToMainWalletUC.call(WhitDrawTokenSchema(
-            type: token.symbol,
+            type: 'token',
             amount: '${currentState.amount}',
             tokenAddress: token.address));
         result.fold(
@@ -230,6 +233,24 @@ class TransferCubit extends Cubit<TransferState> {
         isToSpending: !currentState.isToSpending,
         currentToken: currentState.backupToken,
         backupToken: currentState.currentToken,
+        amount: null,
+      ));
+      getFee();
+    }
+  }
+
+  void selectToken(TokenEntity token) {
+    final currentState = state;
+    if (currentState is TransferLoaded) {
+      final isToSpending = currentState.isToSpending;
+      final backupToken = isToSpending
+          ? currentState.walletTokens
+              .firstWhere((e) => e.address == token.address)
+          : currentState.spendingTokens
+              .firstWhere((e) => e.address == token.address);
+      emit(currentState.copyWith(
+        currentToken: token,
+        backupToken: backupToken,
         amount: null,
       ));
       getFee();

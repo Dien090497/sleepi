@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:decimal/decimal.dart';
-import 'package:money_formatter/money_formatter.dart';
 import 'package:web3dart/web3dart.dart';
 
 extension NumX on num {
@@ -75,28 +74,7 @@ extension NumX on num {
       } else {
         index = balance.toString().length;
       }
-      MoneyFormatter fmf = MoneyFormatter(
-          amount: balance,
-          settings: MoneyFormatterSettings(
-              thousandSeparator: ',',
-              decimalSeparator: '.',
-              fractionDigits: balance % 1 == 0
-                  ? 0
-                  : math.min(
-                      6,
-                      balance.toString().length -
-                          balance.toString().indexOf('.') -
-                          1),
-              compactFormatType: CompactFormatType.long));
-      final result = fmf.output.nonSymbol;
-      if (double.parse(result.replaceAll(',', '')) > balance) {
-        final decimal = balance.toString().split('.').last;
-        final endData = decimal.substring(0, math.min(6, decimal.length));
-        var first = result.split('.').first;
-        return '$first.$endData';
-      }
-
-      return result;
+      return balance.toString().substring(0, index);
     }
   }
 }

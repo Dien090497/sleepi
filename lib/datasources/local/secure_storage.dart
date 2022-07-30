@@ -125,14 +125,13 @@ class SecureStorage {
     return res?.split(',');
   }
 
-  Future<void> setTokenAddress(List<String> addresses) {
-    final value = addresses.join(',');
-    return _secureStorage.write(key: StorageKeys.tokenAddresses, value: value);
+  Future<void> setTokenAddress(String symbol, String addresses) {
+    return _secureStorage.write(key: symbol, value: addresses);
   }
 
-  Future<List<String>?> getTokenAddress() async {
-    final value = await _secureStorage.read(key: StorageKeys.tokenAddresses);
-    return value?.split(',');
+  Future<String> getTokenAddress(String symbol) async {
+    final value = await _secureStorage.read(key: symbol);
+    return value ?? '';
   }
 
   void addEmailSuggestion(String email) {

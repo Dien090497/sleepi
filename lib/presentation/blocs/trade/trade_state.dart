@@ -6,6 +6,7 @@ part 'trade_state.freezed.dart';
 class TradeState with _$TradeState {
   const factory TradeState.initial({
     @Default(false) bool isLoading,
+    required List<dynamic> listTokens,
   }) = TradeStateInitial;
 
   const factory TradeState.getBalance(double balance) = swapTokenBalance;
@@ -13,6 +14,8 @@ class TradeState with _$TradeState {
   const factory TradeState.getAmountOutMin(double amountOutMin) = tradeGetAmountOutMin;
 
   const factory TradeState.success(bool success) = swapTokenSuccess;
+
+  const factory TradeState.allowance(bool approve) = swapTokenAllowance;
 
   const factory TradeState.approveSuccess(bool success) = approveTokenSuccess;
 
