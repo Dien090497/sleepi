@@ -18,16 +18,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<RefreshUser>(_onRefreshUser);
     on<RefreshBalanceToken>(_onRefreshBalance);
 
-    // if (_timer != null) {
-    //   _timer?.cancel();
-    //   _timer = null;
-    // }
-    // _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-    //   final currentState = state;
-    //   if (currentState is UserLoaded) {
-    //     add(const RefreshBalanceToken());
-    //   }
-    // });
   }
 
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
