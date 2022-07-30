@@ -263,7 +263,7 @@ class SLFTStakedState extends State<SLFTStaked> {
                   }
                 },
                 child: SFChip(
-                  text: "${days[index]}D",
+                  text: "${days[index]}${LocaleKeys.roi_day.tr()}",
                   textStyle: selectedDurationIndex == index
                       ? TextStyles.white14W700
                       : TextStyles.lightGrey14,
