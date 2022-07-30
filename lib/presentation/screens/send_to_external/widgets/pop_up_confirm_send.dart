@@ -54,133 +54,122 @@ class PopUpConfirmSend extends StatelessWidget {
             walletCubit.getWallet();
           }
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                SFText(
-                  keyText: LocaleKeys.send,
-                  style: TextStyles.bold18LightWhite,
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
                   children: [
                     SFText(
-                      keyText: LocaleKeys.fee,
-                      style: TextStyles.lightGrey14,
+                      keyText: LocaleKeys.send,
+                      style: TextStyles.bold18LightWhite,
                     ),
-                    if (walletState is WalletStateLoaded)
-                      Expanded(
-                        child: FutureBuilder<dartz.Either<Failure, double>>(
-                          future: getIt<EstimateTokenFunctionFeeUseCase>()
-                              .call(EstimateGasTokenParams(
-                            ownerAddress: walletState.walletInfoEntity.address,
-                            toAddress: toAddress,
-                            value: valueInEther,
-                          )),
-                          builder: (context, snapshot) {
-                            return const Text(
-
-                              /// TODO: remove hardcode fee
-                              // snapshot.hasData
-                              //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
-                              //     : '--.--',
-                              '0.0014733 AVAX',
-                              textAlign: TextAlign.right,
-                              style: TextStyles.lightWhite16,
-                            );
-                          },
+                    const SizedBox(height: 32),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SFText(
+                          keyText: LocaleKeys.fee,
+                          style: TextStyles.lightGrey14,
                         ),
-                      ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 32.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SFText(
-                      keyText: LocaleKeys.you_will_send,
-                      style: TextStyles.lightGrey14,
-                    ),
-                    Expanded(
-                        child: SFText(
-                      keyText:
-                          "$valueInEther ${transferToken ? arg?.symbol : 'AVAX'}",
-                      style: TextStyles.lightWhite16,
-                      textAlign: TextAlign.end,
-                    )),
-                  ],
-                ),
-                const SizedBox(height: 32.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: SFText(
-                        keyText: LocaleKeys.send_address,
-                        style: TextStyles.lightGrey14,
-                      ),
-                    ),
-                    Expanded(
-                        child: SFText(
-                      keyText: toAddress,
-                      style: TextStyles.lightWhite16,
-                      textAlign: TextAlign.end,
-                    )),
-                  ],
-                ),
-                const SizedBox(
-                  height: 44.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: SFButton(
-                        text: LocaleKeys.cancel,
-                        textStyle: TextStyles.w600LightGreySize16,
-                        color: AppColors.light4,
-                        width: double.infinity,
-                        onPressed: () => Navigator.maybePop(context),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
+                        if (walletState is WalletStateLoaded)
                           Expanded(
-                            child: SFButton(
-                              text: LocaleKeys.cancel,
-                              textStyle: TextStyles.w600LightGreySize16,
-                              color: AppColors.light4,
-                              width: double.infinity,
-                              onPressed: () => Navigator.maybePop(context),
+                            child: FutureBuilder<dartz.Either<Failure, double>>(
+                              future: getIt<EstimateTokenFunctionFeeUseCase>()
+                                  .call(EstimateGasTokenParams(
+                                ownerAddress: walletState.walletInfoEntity.address,
+                                toAddress: toAddress,
+                                value: valueInEther,
+                              )),
+                              builder: (context, snapshot) {
+                                return const Text(
+
+                                  /// TODO: remove hardcode fee
+                                  // snapshot.hasData
+                                  //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
+                                  //     : '--.--',
+                                  '0.0014733 AVAX',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyles.lightWhite16,
+                                );
+                              },
                             ),
                           ),
-                          const SizedBox(
-                            width: 16.0,
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 32.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SFText(
+                          keyText: LocaleKeys.you_will_send,
+                          style: TextStyles.lightGrey14,
+                        ),
+                        Expanded(
+                            child: SFText(
+                              keyText:
+                              "$valueInEther ${transferToken ? arg?.symbol : 'AVAX'}",
+                              style: TextStyles.lightWhite16,
+                              textAlign: TextAlign.end,
+                            )),
+                      ],
+                    ),
+                    const SizedBox(height: 32.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: SFText(
+                            keyText: LocaleKeys.send_address,
+                            style: TextStyles.lightGrey14,
                           ),
-                          Expanded(
-                            child: SFButton(
-                                text: LocaleKeys.confirm,
-                                textStyle: TextStyles.bold14LightWhite,
-                                color: AppColors.blue,
-                                width: double.infinity,
-                                onPressed: () {
-                                  if (widget.transferToken && widget.arg?.symbol != "AVAX" ) {
-                                    cubit.sendTokenExternal(widget.toAddress,
-                                        widget.valueInEther, widget.arg);
-                                  } else {
-                                    cubit.sendToExternal(widget.toAddress,
-                                        widget.valueInEther, "AVAX");
-                                  }
-                                }),
+                        ),
+                        Expanded(
+                            child: SFText(
+                              keyText: toAddress,
+                              style: TextStyles.lightWhite16,
+                              textAlign: TextAlign.end,
+                            )),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 44.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: SFButton(
+                            text: LocaleKeys.cancel,
+                            textStyle: TextStyles.w600LightGreySize16,
+                            color: AppColors.light4,
+                            width: double.infinity,
+                            onPressed: () => Navigator.maybePop(context),
                           ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
+                        ),
+                        const SizedBox(
+                          width: 16.0,
+                        ),
+                        Expanded(
+                          child: SFButton(
+                              text: LocaleKeys.confirm,
+                              textStyle: TextStyles.bold14LightWhite,
+                              color: AppColors.blue,
+                              width: double.infinity,
+                              onPressed: () {
+                                if (transferToken && arg?.symbol != "AVAX" ) {
+                                  cubit.sendTokenExternal(toAddress,
+                                      valueInEther, arg);
+                                } else {
+                                  cubit.sendToExternal(toAddress,
+                                      valueInEther, "AVAX");
+                                }
+                              }),
+                        ),
+                      ],
+                    ),
+                  ]
+              )
+          );
         },
       ),
     );
