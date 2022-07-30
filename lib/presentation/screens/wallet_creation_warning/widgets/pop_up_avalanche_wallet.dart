@@ -74,10 +74,11 @@ class PopUpAvalancheWallet extends StatelessWidget {
               width: double.infinity,
               color: AppColors.blue,
               onPressed: () {
-                Navigator.pushNamed(context, R.importWallet).then((value) {
-                  Navigator.pop(context);
-                  Navigator.pop(context, value);
-                });
+                showComingSoonDialog(context);
+                // Navigator.pushNamed(context, R.importWallet).then((value) {
+                //   Navigator.pop(context);
+                //   Navigator.pop(context, value);
+                // });
               },
             ),
           ],
