@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -19,22 +17,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UpdateUserOrListToken>(_onUpdateUser);
     on<RefreshUser>(_onRefreshUser);
     on<RefreshBalanceToken>(_onRefreshBalance);
-
-    if (_timer != null) {
-      _timer?.cancel();
-      _timer = null;
-    }
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      final currentState = state;
-      if (currentState is UserLoaded) {
-        add(const RefreshBalanceToken());
-      }
-    });
   }
 
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
   final _getUserUC = getIt<GetUserUseCase>();
-  Timer? _timer;
 
   final _defaultTokens = [
     const TokenEntity(
@@ -127,11 +113,5 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (symbol == 'slgt' || symbol == 'SLGT') return Ics.icSlgt;
     if (symbol == 'slft' || symbol == 'SLFT') return Ics.icSlft;
     return Ics.icAvax;
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
   }
 }

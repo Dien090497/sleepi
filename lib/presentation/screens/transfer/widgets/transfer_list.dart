@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -33,6 +34,7 @@ class TransferList extends StatefulWidget {
 class _TransferListState extends State<TransferList> {
   final ValueNotifier<bool> isLoadingNotifier = ValueNotifier(false);
   final valueController = TextEditingController();
+  final refreshController = RefreshController();
 
   @override
   void dispose() {
@@ -45,6 +47,9 @@ class _TransferListState extends State<TransferList> {
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) async {
         if (state is TransferLoaded) {
+          if (state.amount == null) {
+            valueController.clear();
+          }
           isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
           final isAllowance = state.isAllowance;
@@ -133,65 +138,69 @@ class _TransferListState extends State<TransferList> {
             child: Column(
               children: [
                 Expanded(
-                  child: ListView(
-                    children: [
-                      SFText(
-                        keyText: LocaleKeys.asset,
-                        style: TextStyles.lightGrey14,
-                      ),
-                      const SizedBox(height: 4.0),
-                      AssetTile(
-                        tokenName: currentToken.name.toUpperCase(),
-                        img: currentToken.icon,
-                      ),
-                      const SizedBox(height: 24.0),
-                      SFTextFieldTextButton(
-                        controller: valueController,
-                        labelText: LocaleKeys.amount,
-                        textButton: LocaleKeys.all,
-                        textInputType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(
-                              RegExp(r'^\d{1,}[.,]?\d{0,6}')),
-                        ],
-                        valueChanged: (v) {
-                          cubit.removeError();
-                        },
-                        onPressed: () {
-                          if (state.fee != null) {
-                            final isAvax =
-                                state.currentToken.symbol.toLowerCase() ==
-                                    'avax';
-                            final v = isAvax
-                                ? (Decimal.parse('${currentToken.balance}') -
-                                        Decimal.parse('${state.fee}'))
-                                    .toDouble()
-                                    .toStringAsFixed(6)
-                                : currentToken.balance.toStringAsFixed(6);
-                            valueController.text = v;
-                            cubit.enterAmount(v);
-                          }
-                        },
-                      ),
-                      if (state.errorMsg != null)
+                  child: SmartRefresher(
+                    controller: refreshController,
+                    onRefresh: () {
+                      context.read<UserBloc>().add(const RefreshBalanceToken());
+                      refreshController.refreshCompleted();
+                    },
+                    child: ListView(
+                      children: [
                         SFText(
-                          keyText: state.errorMsg!,
-                          style: TextStyles.red14,
+                          keyText: LocaleKeys.asset,
+                          style: TextStyles.lightGrey14,
                         ),
-                      // const SizedBox(height: 8.0),
-                      // Text(
-                      //   'Fee: ${state.fee ?? '----'} AVAX',
-                      //   style: TextStyles.lightGrey14,
-                      // ),
-                      const SizedBox(height: 8.0),
-                      SFText(
-                        keyText:
-                            "${LocaleKeys.available.tr()} : ${currentToken.balance.formatBalanceToken} ${currentToken.name.toUpperCase()}",
-                        style: TextStyles.lightGrey14,
-                      ),
-                      const SizedBox(height: 32.0),
-                    ],
+                        const SizedBox(height: 4.0),
+                        const AssetTile(),
+                        const SizedBox(height: 24.0),
+                        SFTextFieldTextButton(
+                          controller: valueController,
+                          labelText: LocaleKeys.amount,
+                          textButton: LocaleKeys.all,
+                          textInputType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'^\d{1,}[.,]?\d{0,6}')),
+                          ],
+                          valueChanged: (v) {
+                            cubit.setAmount(v);
+                          },
+                          onPressed: () {
+                            if (state.fee != null) {
+                              final isAvax =
+                                  state.currentToken.symbol.toLowerCase() ==
+                                      'avax';
+                              final v = isAvax
+                                  ? (Decimal.parse('${currentToken.balance}') -
+                                          Decimal.parse('${state.fee}'))
+                                      .toDouble()
+                                      .toStringAsFixed(6)
+                                  : currentToken.balance.toStringAsFixed(6);
+                              valueController.text = v;
+                              cubit.setAmount(v);
+                            }
+                          },
+                        ),
+                        if (state.errorMsg != null)
+                          SFText(
+                            keyText: state.errorMsg!,
+                            style: TextStyles.red14,
+                          ),
+                        // const SizedBox(height: 8.0),
+                        // Text(
+                        //   'Fee: ${state.fee ?? '----'} AVAX',
+                        //   style: TextStyles.lightGrey14,
+                        // ),
+                        const SizedBox(height: 8.0),
+                        SFText(
+                          keyText:
+                              "${LocaleKeys.available.tr()} : ${currentToken.balance.formatBalanceToken} ${currentToken.name.toUpperCase()}",
+                          style: TextStyles.lightGrey14,
+                        ),
+                        const SizedBox(height: 32.0),
+                      ],
+                    ),
                   ),
                 ),
                 SFButton(
