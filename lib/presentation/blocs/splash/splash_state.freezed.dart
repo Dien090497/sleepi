@@ -26,6 +26,7 @@ mixin _$SplashState {
             UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
+    required TResult Function() notSafeDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +39,7 @@ mixin _$SplashState {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +52,7 @@ mixin _$SplashState {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +61,7 @@ mixin _$SplashState {
     required TResult Function(SplashInitial value) initial,
     required TResult Function(SplashDone value) done,
     required TResult Function(SplashError value) error,
+    required TResult Function(SplashNotSafeDevice value) notSafeDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +69,7 @@ mixin _$SplashState {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +77,7 @@ mixin _$SplashState {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,6 +154,7 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
             UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
+    required TResult Function() notSafeDevice,
   }) {
     return initial();
   }
@@ -163,6 +170,7 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
   }) {
     return initial?.call();
   }
@@ -178,6 +186,7 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -192,6 +201,7 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
     required TResult Function(SplashInitial value) initial,
     required TResult Function(SplashDone value) done,
     required TResult Function(SplashError value) error,
+    required TResult Function(SplashNotSafeDevice value) notSafeDevice,
   }) {
     return initial(this);
   }
@@ -202,6 +212,7 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
   }) {
     return initial?.call(this);
   }
@@ -212,6 +223,7 @@ class _$SplashInitial with DiagnosticableTreeMixin implements SplashInitial {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -368,6 +380,7 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
             UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
+    required TResult Function() notSafeDevice,
   }) {
     return done(
         isSafeDevice, userInfoEntity, listTokens, userStatusTrackingModel);
@@ -384,6 +397,7 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
   }) {
     return done?.call(
         isSafeDevice, userInfoEntity, listTokens, userStatusTrackingModel);
@@ -400,6 +414,7 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -415,6 +430,7 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
     required TResult Function(SplashInitial value) initial,
     required TResult Function(SplashDone value) done,
     required TResult Function(SplashError value) error,
+    required TResult Function(SplashNotSafeDevice value) notSafeDevice,
   }) {
     return done(this);
   }
@@ -425,6 +441,7 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
   }) {
     return done?.call(this);
   }
@@ -435,6 +452,7 @@ class _$SplashDone with DiagnosticableTreeMixin implements SplashDone {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
     required TResult orElse(),
   }) {
     if (done != null) {
@@ -541,6 +559,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
             UserStatusTrackingModel? userStatusTrackingModel)
         done,
     required TResult Function(String msg) error,
+    required TResult Function() notSafeDevice,
   }) {
     return error(msg);
   }
@@ -556,6 +575,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
   }) {
     return error?.call(msg);
   }
@@ -571,6 +591,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
             UserStatusTrackingModel? userStatusTrackingModel)?
         done,
     TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -585,6 +606,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
     required TResult Function(SplashInitial value) initial,
     required TResult Function(SplashDone value) done,
     required TResult Function(SplashError value) error,
+    required TResult Function(SplashNotSafeDevice value) notSafeDevice,
   }) {
     return error(this);
   }
@@ -595,6 +617,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
   }) {
     return error?.call(this);
   }
@@ -605,6 +628,7 @@ class _$SplashError with DiagnosticableTreeMixin implements SplashError {
     TResult Function(SplashInitial value)? initial,
     TResult Function(SplashDone value)? done,
     TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -621,4 +645,144 @@ abstract class SplashError implements SplashState {
   @JsonKey(ignore: true)
   _$$SplashErrorCopyWith<_$SplashError> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SplashNotSafeDeviceCopyWith<$Res> {
+  factory _$$SplashNotSafeDeviceCopyWith(_$SplashNotSafeDevice value,
+          $Res Function(_$SplashNotSafeDevice) then) =
+      __$$SplashNotSafeDeviceCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SplashNotSafeDeviceCopyWithImpl<$Res>
+    extends _$SplashStateCopyWithImpl<$Res>
+    implements _$$SplashNotSafeDeviceCopyWith<$Res> {
+  __$$SplashNotSafeDeviceCopyWithImpl(
+      _$SplashNotSafeDevice _value, $Res Function(_$SplashNotSafeDevice) _then)
+      : super(_value, (v) => _then(v as _$SplashNotSafeDevice));
+
+  @override
+  _$SplashNotSafeDevice get _value => super._value as _$SplashNotSafeDevice;
+}
+
+/// @nodoc
+
+class _$SplashNotSafeDevice
+    with DiagnosticableTreeMixin
+    implements SplashNotSafeDevice {
+  const _$SplashNotSafeDevice();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashState.notSafeDevice()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'SplashState.notSafeDevice'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SplashNotSafeDevice);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)
+        done,
+    required TResult Function(String msg) error,
+    required TResult Function() notSafeDevice,
+  }) {
+    return notSafeDevice();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
+        done,
+    TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
+  }) {
+    return notSafeDevice?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            bool isSafeDevice,
+            UserInfoEntity? userInfoEntity,
+            List<TokenSpending> listTokens,
+            UserStatusTrackingModel? userStatusTrackingModel)?
+        done,
+    TResult Function(String msg)? error,
+    TResult Function()? notSafeDevice,
+    required TResult orElse(),
+  }) {
+    if (notSafeDevice != null) {
+      return notSafeDevice();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SplashInitial value) initial,
+    required TResult Function(SplashDone value) done,
+    required TResult Function(SplashError value) error,
+    required TResult Function(SplashNotSafeDevice value) notSafeDevice,
+  }) {
+    return notSafeDevice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SplashInitial value)? initial,
+    TResult Function(SplashDone value)? done,
+    TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
+  }) {
+    return notSafeDevice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SplashInitial value)? initial,
+    TResult Function(SplashDone value)? done,
+    TResult Function(SplashError value)? error,
+    TResult Function(SplashNotSafeDevice value)? notSafeDevice,
+    required TResult orElse(),
+  }) {
+    if (notSafeDevice != null) {
+      return notSafeDevice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SplashNotSafeDevice implements SplashState {
+  const factory SplashNotSafeDevice() = _$SplashNotSafeDevice;
 }

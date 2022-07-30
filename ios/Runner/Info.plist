@@ -64,11 +64,9 @@
         <string>fbapi</string>
         <string>fbauth2</string>
         <string>fb-messenger-share-api</string>
-        <string>twitter</string>
-        <string>twitterauth</string>
-        <string>twitterkit-bpXejXJ05tlUvogku8ecgAzwn</string>
         <string>instagram</string>
         <string>tg</string>
+        <string>twitter</string>
     </array>
     <key>LSRequiresIPhoneOS</key>
     <true/>
@@ -92,7 +90,9 @@
     <key>NSMicrophoneUsageDescription</key>
     <string>$(APP_DISPLAY_NAME) need your microphone to use your microphone to play alarm sound</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>SleeFi needs photo library access to scan QR codes</string>
+    <string>$(APP_DISPLAY_NAME) needs photo library access to scan QR codes</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>$(APP_DISPLAY_NAME) needs location to improve your experience</string>
     <key>NSUserTrackingUsageDescription</key>
     <string>This identifier will be used to deliver personalized ads to you.</string>
     <key>UIBackgroundModes</key>

@@ -75,19 +75,27 @@ Future<T?> showSuccessfulDialog<T>(
       });
 }
 
-Future<T?> showMessageDialog<T>(BuildContext context, String message,
-    {EdgeInsets? padding, TextStyle? style}) async {
+Future<T?> showMessageDialog<T>(
+  BuildContext context,
+  String message, {
+  EdgeInsets? padding,
+  TextStyle? style,
+  bool barrierDismissible = true,
+  bool showIcon = true,
+}) async {
   return showCustomAlertDialog(
     context,
+    barrierDismissible: barrierDismissible,
     padding: padding ?? const EdgeInsets.all(24),
     children: Padding(
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
       child: Column(
         children: [
-          const SFIcon(
-            Imgs.errorNoBed,
-            height: 100,
-          ),
+          if (showIcon)
+            const SFIcon(
+              Imgs.errorNoBed,
+              height: 100,
+            ),
           const SizedBox(height: 32),
           SFText(
               keyText: message.tr(),

@@ -45,11 +45,11 @@ class TradeScreen extends StatefulWidget {
 }
 
 class _TradeScreenState extends State<TradeScreen> {
-  late double balance = 0;
-  late int indexFrom=0;
-  late int indexTo;
-  String error = '';
   final listTokens = getIt<List<dynamic>>(instanceName: 'tokens');
+  late double balance = 0;
+  late int indexFrom = 0;
+  late int indexTo = listTokens.length - 1;
+  String error = '';
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
@@ -121,6 +121,7 @@ class _TradeScreenState extends State<TradeScreen> {
   @override
   void dispose() {
     _debounce?.cancel();
+    valueController.clear();
     valueController.dispose();
     super.dispose();
   }
@@ -343,7 +344,9 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                   ? balance -
                                                                       0.01
                                                                   : balance)
-                                                              .formatBalanceToken;
+                                                              .formatBalanceToken
+                                                              .replaceAll(
+                                                                  ',', '');
                                                           Future.delayed(
                                                               const Duration(
                                                                   milliseconds:

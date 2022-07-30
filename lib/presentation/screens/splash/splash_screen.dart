@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_logo.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_cubit.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
@@ -52,8 +53,10 @@ class SplashScreen extends StatelessWidget {
                               : double.parse(state
                                   .userStatusTrackingModel!.tracking!.estEarn!),
                       fromRoute: R.splash,
-                      imageBed: state.userStatusTrackingModel?.tracking?.bedImage,
-                      enableAlarm: state.userStatusTrackingModel?.tracking?.alrm ?? true,
+                      imageBed:
+                          state.userStatusTrackingModel?.tracking?.bedImage,
+                      enableAlarm:
+                          state.userStatusTrackingModel?.tracking?.alrm ?? true,
                     ),
                   );
                 } else {
@@ -68,6 +71,14 @@ class SplashScreen extends StatelessWidget {
               Navigator.pushNamedAndRemoveUntil(
                   context, R.commingSoon, (r) => false);
             }
+          }
+          if (state is SplashNotSafeDevice) {
+            showMessageDialog(
+              context,
+              'This device is not safe',
+              barrierDismissible: false,
+              showIcon: false,
+            );
           }
         },
         child: const BackgroundWidget(child: Center(child: SFLogo())),
