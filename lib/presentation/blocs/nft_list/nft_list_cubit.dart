@@ -47,6 +47,7 @@ class NFTListCubit extends Cubit<NftListState> {
       }, (entities) {
         emit(currentState.copyWith(
           listBed: entities,
+          currentPage: 1,
           hasMore: entities.length >= currentState.limit,
         ));
       });
