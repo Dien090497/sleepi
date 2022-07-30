@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,8 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/global_listener/global_listener_cubit.dart';
 import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
@@ -35,6 +38,44 @@ class MyApp extends StatelessWidget {
           builder: (_, child) {
             return RefreshConfiguration(
               headerBuilder: () => const WaterDropHeader(),
+              footerBuilder: () => CustomFooter(
+                builder: (BuildContext context, LoadStatus? mode) {
+                  Widget body;
+                  if (mode == LoadStatus.idle) {
+                    body = SFText(keyText: "pull up load");
+                  } else if (mode == LoadStatus.loading) {
+                    body = const CupertinoActivityIndicator();
+                  } else if (mode == LoadStatus.failed) {
+                    body = SFText(keyText: "Load Failed!Click retry!");
+                  } else if (mode == LoadStatus.canLoading) {
+                    body = SFText(keyText: "release to load more");
+                  } else {
+                    body = SFText(keyText: "No more Data");
+                  }
+                  switch (mode) {
+                    case LoadStatus.idle:
+                      body = SFText(keyText: LocaleKeys.bed);
+                      break;
+                    case LoadStatus.canLoading:
+                      body = SFText(keyText: LocaleKeys.bed);
+                      break;
+                    case LoadStatus.loading:
+                      body = SFText(keyText: LocaleKeys.bed);
+                      break;
+                    case LoadStatus.noMore:
+                      body = SFText(keyText: LocaleKeys.bed);
+                      break;
+                    case LoadStatus.failed:
+                      body = SFText(keyText: LocaleKeys.bed);
+                      break;
+                    default:
+                  }
+                  return SizedBox(
+                    height: 55.0,
+                    child: Center(child: body),
+                  );
+                },
+              ),
               child: MaterialApp(
                 // key: Key(context.locale.languageCode),
                 title: 'SleeFi',
