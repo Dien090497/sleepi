@@ -52,9 +52,8 @@ class ShowSeedPhraseScreen extends StatelessWidget {
                         itemCount: seedPhrase.length,
                         itemBuilder: (_, i) => SFListTile(
                           text: "${i + 1}",
-                          trailing: SFText(
-                            keyText: isHiding ? "-----" : seedPhrase[i],
-                            stringCase: StringCase.lowerCaseCase,
+                          trailing: Text(
+                            isHiding ? "-----" : seedPhrase[i].lowerCaseName,
                             style: TextStyles.lightGrey14,
                           ),
                         ),
