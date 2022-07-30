@@ -506,5 +506,6 @@
   "no_more_data": "これ以上データはありません",
   "release_to_load_more": "リリースしてさらに読み込む",
   "load_fail_retry": "読み込みに失敗しました!クリックして再試行してください!",
-  "pull_up_load": "負荷を引き上げる"
+  "pull_up_load": "負荷を引き上げる",
+  "roi_day": "日"
 }

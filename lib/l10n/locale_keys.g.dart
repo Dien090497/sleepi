@@ -505,5 +505,6 @@ abstract class  LocaleKeys {
   static const load_fail_retry = 'load_fail_retry';
   static const pull_up_load = 'pull_up_load';
   static const release_to_load_more = 'release_to_load_more';
+  static const roi_day = 'roi_day';
 
 }
