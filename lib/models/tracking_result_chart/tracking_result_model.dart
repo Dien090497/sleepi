@@ -1,11 +1,9 @@
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tracking_result_model.g.dart';
 
 @JsonSerializable()
 class TrackingResultModel {
-
   String? hashId;
   String? userId;
   int? trackingId;
@@ -64,6 +62,4 @@ class BedInfo {
       _$BedInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$BedInfoToJson(this);
-
-
 }
