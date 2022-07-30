@@ -117,7 +117,7 @@ class PopUpConfirmApproveTrade extends StatelessWidget {
                   width: double.infinity,
                   gradient: AppColors.gradientBlueButton,
                   onPressed: () {
-                    cubit.checkApproveToken( 0, contractAddress);
+                    cubit.approveToken(contractAddress);
                     Navigator.pop(context, true);
                   },
                 ),
