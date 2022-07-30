@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
@@ -77,6 +79,30 @@ class _SFGridViewState extends State<SFGridView> {
         enablePullDown: widget.isScroll,
         enablePullUp: widget.isLoadMore,
         header: const WaterDropHeader(),
+        footer: CustomFooter(
+          builder: (BuildContext context,LoadStatus? mode) {
+            Widget body;
+            if(mode==LoadStatus.idle){
+              body = SFText(keyText: LocaleKeys.pull_up_load,);
+            }
+            else if(mode==LoadStatus.loading){
+              body =  const CupertinoActivityIndicator();
+            }
+            else if(mode == LoadStatus.failed){
+              body = SFText( keyText: LocaleKeys.load_fail_retry,);
+            }
+            else if(mode == LoadStatus.canLoading){
+              body = SFText( keyText: LocaleKeys.release_to_load_more,);
+            }
+            else{
+              body = SFText( keyText: LocaleKeys.no_more_data,);
+            }
+            return SizedBox(
+              height: 55.0,
+              child: Center(child:body),
+            );
+          },
+        ),
         onRefresh: _onRefresh,
         onLoading: _onLoadMore,
         child: widget.count != 0

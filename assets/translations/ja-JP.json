@@ -310,7 +310,7 @@
   "sell": "売却",
   "flexible_bed": "フレキシブル",
   "bed_mint": "ベッドミント",
-  "cost": "費用",
+  "cost": "値段",
   "show_contract_on_avascan": "Avascanでコントラクトを確認する",
   "effect": "効果",
   "matching_bed": "マッチングさせるベッド",
@@ -447,7 +447,7 @@
   "your_account_has_been_created": "アカウントが作成されました",
   "taking_off_jewel_with_cost": "Taking off Jewel cost 100 SLFT. Are you sure?",
   "not_enough_the_same_level_and_type": "Not enough {} in same level and type. Please purchase and try again.",
-  "genenis_common_bed": "ジェネシスコモンベッド",
+  "genenis_common_bed": "ジェネシスベッド",
   "do_you_want_open_the_lucky_box": "{} SLFTを使ってラッキーボックスを開封しますか？",
   "open": "開いた",
   "apex": "Apex",
@@ -498,5 +498,9 @@
   "tracking_is_not_opening": "睡眠開始がオープンされていない",
   "invalid_bed": "Invalid Bed",
   "remaining_time": "Remaining time",
-  "to_speed_up": "To speed up"
+  "to_speed_up": "To speed up",
+  "no_more_data": "これ以上データはありません",
+  "release_to_load_more": "リリースしてさらに読み込む",
+  "load_fail_retry": "読み込みに失敗しました!クリックして再試行してください!",
+  "pull_up_load": "負荷を引き上げる"
 }

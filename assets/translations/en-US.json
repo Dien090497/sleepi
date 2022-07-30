@@ -495,5 +495,9 @@
   "tracking_is_not_opening": "Tracking is not opening",
   "invalid_bed": "Invalid Bed",
   "remaining_time": "Remaining time",
-  "to_speed_up": "To speed up"
+  "to_speed_up": "To speed up",
+  "no_more_data": "No more Data",
+  "release_to_load_more": "Release to load more",
+  "load_fail_retry":"Load Failed!Click retry!",
+  "pull_up_load":"Pull up load"
 }
