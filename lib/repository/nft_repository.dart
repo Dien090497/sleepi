@@ -91,4 +91,6 @@ abstract class INFTRepository {
   Future<Either<Failure, List<String>>> getNftAddresses();
 
   Future<Either<Failure, List<String>>> getTokenAddresses();
+
+  Future<Either<Failure, List<dynamic>>> getMapTokenAddresses();
 }

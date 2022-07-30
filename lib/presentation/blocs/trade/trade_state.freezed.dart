@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TradeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
@@ -28,7 +28,7 @@ mixin _$TradeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -38,7 +38,7 @@ mixin _$TradeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -101,7 +101,7 @@ abstract class _$$TradeStateInitialCopyWith<$Res> {
   factory _$$TradeStateInitialCopyWith(
           _$TradeStateInitial value, $Res Function(_$TradeStateInitial) then) =
       __$$TradeStateInitialCopyWithImpl<$Res>;
-  $Res call({bool isLoading});
+  $Res call({bool isLoading, List<dynamic> listTokens});
 }
 
 /// @nodoc
@@ -118,12 +118,17 @@ class __$$TradeStateInitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoading = freezed,
+    Object? listTokens = freezed,
   }) {
     return _then(_$TradeStateInitial(
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
+      listTokens: listTokens == freezed
+          ? _value._listTokens
+          : listTokens // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -131,15 +136,23 @@ class __$$TradeStateInitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TradeStateInitial implements TradeStateInitial {
-  const _$TradeStateInitial({this.isLoading = false});
+  const _$TradeStateInitial(
+      {this.isLoading = false, required final List<dynamic> listTokens})
+      : _listTokens = listTokens;
 
   @override
   @JsonKey()
   final bool isLoading;
+  final List<dynamic> _listTokens;
+  @override
+  List<dynamic> get listTokens {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listTokens);
+  }
 
   @override
   String toString() {
-    return 'TradeState.initial(isLoading: $isLoading)';
+    return 'TradeState.initial(isLoading: $isLoading, listTokens: $listTokens)';
   }
 
   @override
@@ -147,12 +160,16 @@ class _$TradeStateInitial implements TradeStateInitial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TradeStateInitial &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._listTokens, _listTokens));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(isLoading),
+      const DeepCollectionEquality().hash(_listTokens));
 
   @JsonKey(ignore: true)
   @override
@@ -162,33 +179,33 @@ class _$TradeStateInitial implements TradeStateInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
     required TResult Function(bool success) approveSuccess,
     required TResult Function(String msg) fail,
   }) {
-    return initial(isLoading);
+    return initial(isLoading, listTokens);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
     TResult Function(bool success)? approveSuccess,
     TResult Function(String msg)? fail,
   }) {
-    return initial?.call(isLoading);
+    return initial?.call(isLoading, listTokens);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -197,7 +214,7 @@ class _$TradeStateInitial implements TradeStateInitial {
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(isLoading);
+      return initial(isLoading, listTokens);
     }
     return orElse();
   }
@@ -247,9 +264,12 @@ class _$TradeStateInitial implements TradeStateInitial {
 }
 
 abstract class TradeStateInitial implements TradeState {
-  const factory TradeStateInitial({final bool isLoading}) = _$TradeStateInitial;
+  const factory TradeStateInitial(
+      {final bool isLoading,
+      required final List<dynamic> listTokens}) = _$TradeStateInitial;
 
   bool get isLoading;
+  List<dynamic> get listTokens;
   @JsonKey(ignore: true)
   _$$TradeStateInitialCopyWith<_$TradeStateInitial> get copyWith =>
       throw _privateConstructorUsedError;
@@ -320,7 +340,7 @@ class _$swapTokenBalance implements swapTokenBalance {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
@@ -333,7 +353,7 @@ class _$swapTokenBalance implements swapTokenBalance {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -346,7 +366,7 @@ class _$swapTokenBalance implements swapTokenBalance {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -480,7 +500,7 @@ class _$tradeGetAmountOutMin implements tradeGetAmountOutMin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
@@ -493,7 +513,7 @@ class _$tradeGetAmountOutMin implements tradeGetAmountOutMin {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -506,7 +526,7 @@ class _$tradeGetAmountOutMin implements tradeGetAmountOutMin {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -639,7 +659,7 @@ class _$swapTokenSuccess implements swapTokenSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
@@ -652,7 +672,7 @@ class _$swapTokenSuccess implements swapTokenSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -665,7 +685,7 @@ class _$swapTokenSuccess implements swapTokenSuccess {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -798,7 +818,7 @@ class _$approveTokenSuccess implements approveTokenSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
@@ -811,7 +831,7 @@ class _$approveTokenSuccess implements approveTokenSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -824,7 +844,7 @@ class _$approveTokenSuccess implements approveTokenSuccess {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -955,7 +975,7 @@ class _$swapTokenFail implements swapTokenFail {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool isLoading, List<dynamic> listTokens) initial,
     required TResult Function(double balance) getBalance,
     required TResult Function(double amountOutMin) getAmountOutMin,
     required TResult Function(bool success) success,
@@ -968,7 +988,7 @@ class _$swapTokenFail implements swapTokenFail {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,
@@ -981,7 +1001,7 @@ class _$swapTokenFail implements swapTokenFail {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool isLoading, List<dynamic> listTokens)? initial,
     TResult Function(double balance)? getBalance,
     TResult Function(double amountOutMin)? getAmountOutMin,
     TResult Function(bool success)? success,

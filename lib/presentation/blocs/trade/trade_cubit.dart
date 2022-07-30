@@ -4,10 +4,14 @@ import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 import 'package:slee_fi/usecase/check_approve_usecase.dart';
 import 'package:slee_fi/usecase/get_amount_out_min_usecase.dart';
 import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
+import 'package:slee_fi/usecase/get_list_token_usecase.dart';
 import 'package:slee_fi/usecase/swap_token_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 
 class TradeCubit extends Cubit<TradeState> {
-  TradeCubit() : super(const TradeStateInitial());
+  TradeCubit()
+      : super(TradeStateInitial(
+            listTokens: getIt<List<dynamic>>(instanceName: 'tokens')));
 
   final _swapToken = getIt<SwapTokenUseCase>();
   final _checkApproveToken = getIt<CheckApproveUseCase>();
@@ -15,8 +19,14 @@ class TradeCubit extends Cubit<TradeState> {
   final _getBalanceToken = getIt<GetBalanceTokenUseCase>();
   final _getAmountOutMin = getIt<GetAmountOutMinUseCase>();
 
-  void init() {
-    emit(const TradeState.initial());
+  Future<void> init() async {
+    await getIt<GetListTokenUseCase>().call(NoParams()).then((value) => {
+          value.fold((l) {
+            emit(TradeState.initial(listTokens: getIt<List<dynamic>>(instanceName: 'tokens')));
+          }, (r) {
+            emit(TradeState.initial(listTokens: r));
+          })
+        });
   }
 
   Future<void> swapToken(double value, String contractAddressFrom,

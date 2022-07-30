@@ -43,7 +43,7 @@ class _DropdownSelectTokenState extends State<DropdownSelectToken> {
   @override
   void initState() {
     for (int i = 0; i < widget.tokens.length; i++) {
-      selectedValue = widget.tokens[i]["symbol"].toString();
+      selectedValue = widget.tokens[i].keys.toString();
       dropdownItemList.add(
         {
           'label': widget.tokens[i]["symbol"],

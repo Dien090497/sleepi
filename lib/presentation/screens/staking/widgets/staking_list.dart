@@ -17,7 +17,7 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
-import 'package:slee_fi/di/injector.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
@@ -435,9 +435,9 @@ class _StakingListState extends State<StakingList> {
                         R.trade,
                         arguments: TradeArguments(
                             contractAddressFrom:
-                                getIt<List<dynamic>>(instanceName: 'tokens')[0]['address'].toString(),
+                                StorageKeys.avax,
                             contractAddressTo:
-                                getIt<List<dynamic>>(instanceName: 'tokens')[1]['address'].toString()),
+                                StorageKeys.slft),
                       );
                     },
                   ),
