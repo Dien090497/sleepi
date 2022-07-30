@@ -10,24 +10,22 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/avax.g.dart';
 import 'package:slee_fi/common/abi/erc721.g.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
+import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
+import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
-import 'package:slee_fi/di/injector.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Singleton()
 class Web3DataSource {
   final Web3Provider _web3provider;
-  late final String avaxContractAddress;
-  final String _contractRouter;
+  final SecureStorage _secureStorage;
 
   Web3DataSource(
     this._web3provider,
-    @Named('contractRouter') this._contractRouter,
-    @Named('tokens') List<dynamic> tokens,
-  ) {
-    avaxContractAddress = tokens[0]['address'].toString();
-  }
+    this._secureStorage,
+  );
 
   String mnemonicToPrivateKey(String mnemonic, int derivedIndex,
       [int? slip44]) {
@@ -121,19 +119,36 @@ class Web3DataSource {
       String contractAddressTo,
       double value) async {
     try {
-      final contract = avaxFrom(_contractRouter);
-      EthereumAddress from = EthereumAddress.fromHex(contractAddressFrom);
-      EthereumAddress to = EthereumAddress.fromHex(contractAddressTo);
+      final contract = avaxFrom(
+          await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
+      EthereumAddress from = EthereumAddress.fromHex(
+          contractAddressFrom == Const.deadAddress
+              ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
+              : contractAddressFrom);
+      EthereumAddress to = EthereumAddress.fromHex(
+          contractAddressTo == Const.deadAddress
+              ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
+              : contractAddressTo);
       final List<EthereumAddress> pairAddress =
-          (contractAddressTo != avaxContractAddress &&
-                  contractAddressFrom != avaxContractAddress)
-              ? [from, EthereumAddress.fromHex(avaxContractAddress), to]
+          (contractAddressTo != Const.deadAddress &&
+                  contractAddressFrom != Const.deadAddress)
+              ? [
+                  from,
+                  EthereumAddress.fromHex(
+                      await _secureStorage.getTokenAddress(StorageKeys.wavax)),
+                  to
+                ]
               : [from, to];
-      final decimalFrom = await getDecimals(contractAddressFrom);
+      final decimalFrom = await getDecimals(
+          contractAddressFrom == Const.deadAddress
+              ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
+              : contractAddressFrom);
       final List<BigInt> amounts = await contract.getAmountsOut(
           BigInt.from(value * math.pow(10, decimalFrom.toInt())), pairAddress);
 
-      final decimalTo = await getDecimals(contractAddressTo);
+      final decimalTo = await getDecimals(contractAddressTo == Const.deadAddress
+          ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
+          : contractAddressTo);
       return (amounts[amounts.length - 1] -
               BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
           BigInt.from(math.pow(10, decimalTo.toInt()));
@@ -145,8 +160,10 @@ class Web3DataSource {
   Future<bool> swapExactAVAXForTokens(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
-      final contract = avaxFrom(_contractRouter);
-      EthereumAddress avax = EthereumAddress.fromHex(avaxContractAddress);
+      final contract = avaxFrom(
+          await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
+      EthereumAddress avax = EthereumAddress.fromHex(
+          await _secureStorage.getTokenAddress(StorageKeys.wavax));
       EthereumAddress token = EthereumAddress.fromHex(contractAddress);
 
       final List<EthereumAddress> pairAddress = [avax, token];
@@ -182,29 +199,32 @@ class Web3DataSource {
   Future<void> approveToken(
       String contractAddress, Credentials credentials) async {
     final contract = token(contractAddress);
-    double amount = 0;
-    for (final element in getIt<List<dynamic>>(instanceName: 'tokens')) {
-      if (element['address'].toString().toLowerCase() ==
-          contractAddress.toLowerCase()) {
-        amount = double.parse(element['totalSupply'].toString());
-      }
-    }
+
+    BigInt amount = await contract.totalSupply();
     final decimal = await contract.decimals();
-    await contract.approve(EthereumAddress.fromHex(_contractRouter),
-        BigInt.from(amount) * BigInt.from(math.pow(10, decimal.toInt())),
+    await contract.approve(
+        EthereumAddress.fromHex(
+            await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe)),
+        amount * BigInt.from(math.pow(10, decimal.toInt())),
         credentials: credentials);
   }
 
-  Future<BigInt> allowance(EthereumAddress owner, String contractAddress) {
+  Future<BigInt> allowance(
+      EthereumAddress owner, String contractAddress) async {
     final contract = token(contractAddress);
-    return contract.allowance(owner, EthereumAddress.fromHex(_contractRouter));
+    return contract.allowance(
+        owner,
+        EthereumAddress.fromHex(
+            await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe)));
   }
 
   Future<bool> swapExactTokensForAvax(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
-      final contract = avaxFrom(_contractRouter);
-      EthereumAddress toToken = EthereumAddress.fromHex(avaxContractAddress);
+      final contract = avaxFrom(
+          await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
+      EthereumAddress toToken = EthereumAddress.fromHex(
+          await _secureStorage.getTokenAddress(StorageKeys.wavax));
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddress);
 
       final List<EthereumAddress> pairAddress = [fromToken, toToken];
@@ -254,13 +274,15 @@ class Web3DataSource {
       String contractAddressTo,
       double value) async {
     try {
-      final contract = avaxFrom(_contractRouter);
+      final contract = avaxFrom(
+          await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
       EthereumAddress toToken = EthereumAddress.fromHex(contractAddressTo);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddressFrom);
 
       final List<EthereumAddress> pairAddress = [
         fromToken,
-        EthereumAddress.fromHex(avaxContractAddress),
+        EthereumAddress.fromHex(
+            await _secureStorage.getTokenAddress(StorageKeys.wavax)),
         toToken
       ];
       final decimalFrom = await getDecimals(contractAddressFrom);

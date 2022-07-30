@@ -1,22 +1,35 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
-import 'package:slee_fi/usecase/check_approve_usecase.dart';
+import 'package:slee_fi/usecase/check_allowance_usecase.dart';
 import 'package:slee_fi/usecase/get_amount_out_min_usecase.dart';
 import 'package:slee_fi/usecase/get_balance_token_usecase.dart';
+import 'package:slee_fi/usecase/get_list_token_usecase.dart';
 import 'package:slee_fi/usecase/swap_token_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
+
+import '../../../usecase/approve_usecase.dart';
 
 class TradeCubit extends Cubit<TradeState> {
-  TradeCubit() : super(const TradeStateInitial());
+  TradeCubit()
+      : super(TradeStateInitial(
+            listTokens: getIt<List<dynamic>>(instanceName: 'tokens')));
 
   final _swapToken = getIt<SwapTokenUseCase>();
-  final _checkApproveToken = getIt<CheckApproveUseCase>();
-
+  final _approveToken = getIt<ApproveUseCase>();
+  final _checkAllowance = getIt<CheckAllowanceUseCase>();
   final _getBalanceToken = getIt<GetBalanceTokenUseCase>();
   final _getAmountOutMin = getIt<GetAmountOutMinUseCase>();
 
-  void init() {
-    emit(const TradeState.initial());
+  Future<void> init() async {
+    await getIt<GetListTokenUseCase>().call(NoParams()).then((value) => {
+          value.fold((l) {
+            emit(TradeState.initial(
+                listTokens: getIt<List<dynamic>>(instanceName: 'tokens')));
+          }, (r) {
+            emit(TradeState.initial(listTokens: r));
+          })
+        });
   }
 
   Future<void> swapToken(double value, String contractAddressFrom,
@@ -36,14 +49,29 @@ class TradeCubit extends Cubit<TradeState> {
     );
   }
 
-  Future<void> checkApproveToken(double value, String contractAddress) async {
-    final result = await _checkApproveToken.call(contractAddress);
+  Future<void> approveToken(String contractAddress) async {
+    final result = await _approveToken.call(contractAddress);
     result.fold(
       (l) {
         emit(TradeState.fail('$l'));
       },
       (success) {
         emit(TradeState.approveSuccess(success));
+      },
+    );
+  }
+
+  Future<void> checkApproveToken(double value, String contractAddress) async {
+    // print('=--==-=-$contractAddress');
+    final result = await _checkAllowance.call(CheckApproveTokenParams(
+        value: value, contractAddress: contractAddress));
+    result.fold(
+      (l) {
+        // print('=--==-=-$l');
+        emit(TradeState.fail('$l'));
+      },
+      (success) {
+        emit(TradeState.allowance(success));
       },
     );
   }

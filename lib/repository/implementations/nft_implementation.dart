@@ -12,12 +12,15 @@ import 'package:slee_fi/entities/point_of_owner/point_of_owner_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 import 'package:slee_fi/repository/nft_repository.dart';
+import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/update_point/update_point_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:slee_fi/usecase/get_nft_family_usecase.dart';
 import 'package:web3dart/web3dart.dart';
+
+import '../../datasources/local/get_storage_datasource.dart';
 
 @Injectable(as: INFTRepository)
 class NFTImplementation extends INFTRepository {
@@ -291,19 +294,89 @@ class NFTImplementation extends INFTRepository {
   @override
   Future<Either<Failure, List<String>>> getTokenAddresses() async {
     try {
-      return Right(await _secureStorage.getTokenAddress() ?? []);
+      List<String> listTokens = [];
+      final String slft =
+          (await _secureStorage.getTokenAddress(StorageKeys.slft));
+      if (slft != '') {
+        listTokens.add(slft);
+      }
+      final String slgt =
+          (await _secureStorage.getTokenAddress(StorageKeys.slgt));
+      if (slgt != '') {
+        listTokens.add(slgt);
+      }
+      final String avax =
+          (await _secureStorage.getTokenAddress(StorageKeys.avax));
+      if (avax != '') {
+        listTokens.add(avax);
+      }
+      final String usdc =
+          (await _secureStorage.getTokenAddress(StorageKeys.usdc));
+      if (usdc != '') {
+        listTokens.add(usdc);
+      }
+
+      return Right(listTokens);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<Failure, NftFamilyModel>> fetchFamily({required ParamsFamily params}) async {
+  Future<Either<Failure, List<dynamic>>> getMapTokenAddresses() async {
+    try {
+      List<Map<String, String>> listTokens = [];
+      final String avax =
+          (await _secureStorage.getTokenAddress(StorageKeys.avax));
+      if (avax != '') {
+        listTokens.add({
+          "symbol": StorageKeys.avax.toUpperCase(),
+          "address": avax,
+          "icon": Ics.icAvax
+        });
+      }
+      final String slft =
+          (await _secureStorage.getTokenAddress(StorageKeys.slft));
+      if (slft != '') {
+        listTokens.add({
+          "symbol": StorageKeys.slft.toUpperCase(),
+          "address": slft,
+          "icon": Ics.icSlft
+        });
+      }
+      final String slgt =
+          (await _secureStorage.getTokenAddress(StorageKeys.slgt));
+      if (slgt != '') {
+        listTokens.add({
+          "symbol": StorageKeys.slgt.toUpperCase(),
+          "address": slgt,
+          "icon": Ics.icSlgt
+        });
+      }
+      final String usdc =
+          (await _secureStorage.getTokenAddress(StorageKeys.usdc));
+      if (usdc != '') {
+        listTokens.add({
+          "symbol": StorageKeys.usdc.toUpperCase(),
+          "address": usdc,
+          "icon": Ics.icUsdc
+        });
+      }
+
+      return Right(listTokens);
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, NftFamilyModel>> fetchFamily(
+      {required ParamsFamily params}) async {
     try {
       final result = await _nftApi.family(params.bedId);
       return Right(result);
     } catch (e) {
-    return Left(FailureMessage.fromException(e));
+      return Left(FailureMessage.fromException(e));
     }
   }
 }

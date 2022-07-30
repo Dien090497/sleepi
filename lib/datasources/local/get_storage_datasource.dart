@@ -58,4 +58,10 @@ class StorageKeys {
   static const String tokenAddresses = 'tokenAddresses';
   static const String nftAddresses = 'nftAddresses';
   static const String lastUserSignIn = 'last_user_sign_in';
+  static const String avax = 'avax';
+  static const String slgt = 'slgt';
+  static const String slft = 'slft';
+  static const String usdc = 'usdc';
+  static const String wavax = 'wavax';
+  static const String routerTraderJoe = 'router_trader_joe';
 }
