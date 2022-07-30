@@ -5,6 +5,7 @@ import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
+import 'package:slee_fi/schema/speed_up_lucky_box_schema/speed_up_lucky_box_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
 import 'package:slee_fi/usecase/cancel_sell_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
@@ -14,6 +15,7 @@ import 'package:slee_fi/usecase/get_transaction_fee_usecase.dart';
 import 'package:slee_fi/usecase/nft_repair_usecase.dart';
 import 'package:slee_fi/usecase/nft_sell_usecase.dart';
 import 'package:slee_fi/usecase/post_level_up_usecase.dart';
+import 'package:slee_fi/usecase/speed_up_lucky_box_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 import 'package:slee_fi/usecase/withdraw_nft_usecase.dart';
 
@@ -30,6 +32,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   final _getRepairUseCase = getIt<GetRepairUseCase>();
   final _nftRepairUseCase = getIt<NFTRepairUseCase>();
   final _nftCancelSellUseCase = getIt<NFTCancelSellUseCase>();
+  final _speedUpUC = getIt<SpeedUpLuckyBoxUseCase>();
 
   void init() {
     getTransactionFee();
@@ -180,5 +183,14 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
         }
       }
     }
+  }
+
+  void speedUpBed(LevelUpSchema param) async {
+    emit(const BottomBarInfoIndividualState.loading());
+    final result = await _postLevelUpUC.call(param);
+    result.fold(
+          (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+          (r) => emit(const BottomBarInfoIndividualState.upLevel()),
+    );
   }
 }

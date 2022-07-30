@@ -12,6 +12,7 @@ class BedEntity with _$BedEntity {
     required String nftClass,
     required double? percentEffect,
     required String? remainTime,
+    required String? levelUpTime,
     required int tokenId,
     required int level,
     required String image,

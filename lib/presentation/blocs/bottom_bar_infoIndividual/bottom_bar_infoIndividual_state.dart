@@ -24,4 +24,8 @@ class BottomBarInfoIndividualState with _$BottomBarInfoIndividualState {
   const factory BottomBarInfoIndividualState.error({required String message}) = BottomBarInfoIndividualError;
 
   const factory BottomBarInfoIndividualState.loading() = BottomBarInfoIndividualLoading;
+
+  const factory BottomBarInfoIndividualState.speedUpSuccess() = BottomBarInfoIndividualSpeedUpSuccess;
+
+
 }

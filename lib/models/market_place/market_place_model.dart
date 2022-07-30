@@ -29,6 +29,7 @@ class MarketPlaceModel {
   final double? startTime;
   final double? endTime;
   final String? remainTime;
+  final String? levelUpTime;
   final String price;
   final String symbol;
   final String? status;
@@ -81,7 +82,7 @@ class MarketPlaceModel {
     this.isBurn,
     this.percentEffect,
     this.itemType,
-    this.remainTime,
+    this.remainTime, this.levelUpTime,
   );
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
@@ -91,6 +92,7 @@ class MarketPlaceModel {
 
   BedEntity toBedEntity() {
     return BedEntity(
+      levelUpTime: levelUpTime,
       remainTime: remainTime,
       itemType: itemType,
       type: type,
