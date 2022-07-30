@@ -115,7 +115,7 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                       state.userStatusTrackingModel.tracking?.alrm ?? true,
                 ),
               );
-            }else {
+            } else {
               Navigator.pushNamedAndRemoveUntil(
                   context, R.bottomNavigation, (_) => false);
             }
@@ -148,11 +148,12 @@ class _AccountLoginState extends State<AccountLoginWidget> {
             ),
             const SizedBox(height: 5),
             if (state is SignInSignUpStateErrorEmail)
-              Container(
+              Align(
                   alignment: Alignment.centerLeft,
-                  height: 15,
                   child: SFText(
-                      keyText: state.message, style: TextStyles.w400Red12)),
+                      maxLines: 2,
+                      keyText: state.message,
+                      style: TextStyles.w400Red12)),
             const SizedBox(height: 5),
             _isActiveCode
                 ? TextfieldVerificationEmail(
