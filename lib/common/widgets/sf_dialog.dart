@@ -98,7 +98,7 @@ Future<T?> showMessageDialog<T>(
             ),
           const SizedBox(height: 32),
           SFText(
-              keyText: message.tr(),
+              keyText: message,
               textAlign: TextAlign.center,
               style: style ?? TextStyles.bold18White),
         ],

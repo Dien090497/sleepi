@@ -52,7 +52,7 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
           if ((!state.hasMore && widget.isBed) ||
               (!state.hasMoreBedBox && !widget.isBed)) {
             loadMore = false;
-            // refreshController.loadFailed();
+            refreshController.loadComplete();
           }
 
           if (state.openBedBoxSuccess != null && !widget.isBed) {
@@ -69,7 +69,6 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
         }
       },
       child: SmartRefresher(
-
         controller: refreshController,
         enablePullUp: loadMore,
         onRefresh: () {
@@ -89,26 +88,34 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
           }
         },
         footer: CustomFooter(
-          builder: (BuildContext context,LoadStatus? mode) {
+          builder: (BuildContext context, LoadStatus? mode) {
             Widget body;
-            if(mode==LoadStatus.idle){
-              body = SFText(keyText: LocaleKeys.pull_up_load, style: TextStyles.lightWhite16,);
-            }
-            else if(mode==LoadStatus.loading){
-              body =  const CupertinoActivityIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = SFText( keyText: LocaleKeys.load_fail_retry, style: TextStyles.lightWhite16,);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = SFText( keyText: LocaleKeys.release_to_load_more, style: TextStyles.lightWhite16,);
-            }
-            else{
-              body = SFText( keyText: LocaleKeys.no_more_data, style: TextStyles.lightWhite16,);
+            if (mode == LoadStatus.idle) {
+              body = SFText(
+                keyText: LocaleKeys.pull_up_load,
+                style: TextStyles.lightWhite16,
+              );
+            } else if (mode == LoadStatus.loading) {
+              body = const CupertinoActivityIndicator();
+            } else if (mode == LoadStatus.failed) {
+              body = SFText(
+                keyText: LocaleKeys.load_fail_retry,
+                style: TextStyles.lightWhite16,
+              );
+            } else if (mode == LoadStatus.canLoading) {
+              body = SFText(
+                keyText: LocaleKeys.release_to_load_more,
+                style: TextStyles.lightWhite16,
+              );
+            } else {
+              body = SFText(
+                keyText: LocaleKeys.no_more_data,
+                style: TextStyles.lightWhite16,
+              );
             }
             return SizedBox(
               height: 55.0,
-              child: Center(child:body),
+              child: Center(child: body),
             );
           },
         ),

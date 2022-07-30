@@ -440,6 +440,7 @@
   "wallet_imported_successfully": "Wallet imported successfully",
   "insufficient_amount": "Insufficient amount",
   "you_dont_have_enough_money_to_staking": "You don't have enough money to staking.",
+  "you_dont_have_enough_money": "You don't have enough money",
   "click_here_to_proceed": "Click here to proceed",
   "lucky_box": "Lucky Box",
   "you_can_open_the_luck_box": "You can open the lucky box after {} hours",
@@ -497,9 +498,9 @@
   "remaining_time": "Remaining time",
   "to_speed_up": "To speed up",
   "jewel_level": "Jewel Level",
-  "item_level" : "Item Level",
+  "item_level": "Item Level",
   "no_more_data": "No more Data",
-  "load_fail_retry":"Load Failed!Click retry!",
-  "pull_up_load":"Pull up load",
+  "load_fail_retry": "Load Failed!Click retry!",
+  "pull_up_load": "Pull up load",
   "release_to_load_more": "Release to load more"
 }

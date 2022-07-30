@@ -8,6 +8,7 @@ class BottomNavigationBloc
     on<SelectTab>((event, emit) {
       emit(state.copyWith(
           tabIndex: event.index, tabIndexChild: event.indexTabChild));
+      emit(state.copyWith(tabIndex: null, tabIndexChild: null));
     });
   }
 }

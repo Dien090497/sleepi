@@ -36,10 +36,14 @@ class BottomNavigationScreen extends StatelessWidget {
 
     return BlocConsumer<BottomNavigationBloc, BottomNavigationState>(
       listener: (context, state) {
-        pageController.jumpToPage(state.tabIndex);
-        if (state.tabIndexChild > 0) {
-          Future.delayed(const Duration(milliseconds: 300),
-              () => marketTabKey.currentState?.moveToTab(state.tabIndexChild));
+        if (state.tabIndex != null) {
+          pageController.jumpToPage(state.tabIndex!);
+          if (state.tabIndexChild != null) {
+            Future.delayed(
+                const Duration(milliseconds: 300),
+                () =>
+                    marketTabKey.currentState?.moveToTab(state.tabIndexChild!));
+          }
         }
       },
       builder: (context, navState) {
