@@ -23,7 +23,7 @@ abstract class IWalletRepository {
 
   Future<Either<Failure, bool>> approveToken(String contractAddress);
 
-  Future<Either<Failure, bool>> checkAllowance(
+  Future<Either<Failure, BigInt>> checkAllowance(
       double value, String contractAddress);
 
   Future<Either<Failure, bool>> swapToken(

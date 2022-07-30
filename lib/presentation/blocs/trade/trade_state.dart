@@ -15,8 +15,6 @@ class TradeState with _$TradeState {
 
   const factory TradeState.success(bool success) = swapTokenSuccess;
 
-  const factory TradeState.allowance(bool approve) = swapTokenAllowance;
-
   const factory TradeState.approveSuccess(bool success) = approveTokenSuccess;
 
   const factory TradeState.fail(String msg) = swapTokenFail;

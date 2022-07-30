@@ -272,14 +272,14 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> checkAllowance(
+  Future<Either<Failure, BigInt>> checkAllowance(
       double value, String contractAddress) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
       BigInt allowanceNumber = await _web3DataSource.allowance(
           EthereumAddress.fromHex(wallet!.address), contractAddress);
-      return Right(value > allowanceNumber.toDouble());
+      return Right(allowanceNumber);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
