@@ -75,7 +75,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
                       ),
                       const SizedBox(height: 12.0),
                       SFText(
-                        keyText: isToSpending
+                        keyText: !isToSpending
                             ? LocaleKeys.wallet
                             : LocaleKeys.spending,
                         style: TextStyles.bold18White,
