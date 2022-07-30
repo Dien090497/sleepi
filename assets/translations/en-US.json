@@ -501,5 +501,6 @@
   "no_more_data": "No more Data",
   "load_fail_retry":"Load Failed!Click retry!",
   "pull_up_load":"Pull up load",
-  "release_to_load_more": "Release to load more"
+  "release_to_load_more": "Release to load more",
+  "roi_day": "D"
 }
