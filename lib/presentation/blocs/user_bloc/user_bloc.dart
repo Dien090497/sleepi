@@ -17,6 +17,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UpdateUserOrListToken>(_onUpdateUser);
     on<RefreshUser>(_onRefreshUser);
     on<RefreshBalanceToken>(_onRefreshBalance);
+
   }
 
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
