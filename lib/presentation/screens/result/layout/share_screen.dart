@@ -178,7 +178,8 @@ class _ShareScreenState extends State<ShareScreen> {
                   const SizedBox(
                     height: 12,
                   ),
-                  Platform.isAndroid
+                  const SFIcon(Ics.commingSoon),
+                  /*Platform.isAndroid
                       ? ((args.dataChart.isNotEmpty &&
                               args.dataChart.first.maxX != -1)
                           ? ChartStatisticShare(
@@ -190,7 +191,7 @@ class _ShareScreenState extends State<ShareScreen> {
                       : const Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: SFIcon(Ics.commingSoon),
-                        ),
+                        ),*/
                   const SizedBox(height: 10),
                 ],
               ),
