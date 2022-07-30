@@ -84,8 +84,6 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
         tokenEntity: arg?.tokenEntity,
         toAddress: toAddress);
     final result = await _sendTokenToExternalUseCase.call(params);
-    print("contractAddressTo contractAddressTo: $toAddress");
-    print("result : $result");
     result.fold((l) {
       emit(SendToExternalState.fail('$l'));
     }, (success) {
