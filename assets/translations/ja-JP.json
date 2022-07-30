@@ -381,7 +381,7 @@
   "approve": "承認",
   "registration_means_that_you_agree_to": "登録することでSleeFiの",
   "user_agreement": "利用規約",
-  "user_privacy": "ユーザープライバシー",
+  "user_privacy": "プライバシーポリシー",
   "registration_means_that_you_agree_to_ja": "に同意したことになります。",
   "create_password": "パスワードを作成する",
   "confirm_password": "パスワードを確定する",
@@ -393,11 +393,11 @@
   "reset_passcode_successfully": "パスコードのリセットが完了しました。",
   "reset_password_successfully": "パスワードのリセットが完了しました",
   "incorrect_email_password": "メールまたはパスワードは間違っています。もう1度入力してください。",
-  "email_already_exist": "既に登録されています。",
+  "email_already_exist": "既に登録されています。もう1度行なってください。",
   "otp_expired": "時間切れ。もう1度行なってください。",
   "invalid_code": "有効なコードを入力してください",
   "amount_input_can_not_be_zero": "0は入力不可",
-  "forgot_password": "パスワードを忘れた場合？",
+  "forgot_password": "パスワードを忘れましたか",
   "wallet_already": "既にウォレットがあります。",
   "insufficient_avax": "AVAXが不足しています。",
   "don_worry_transfer": "WalletからSpendingにAVAXを送金することで取引を進めることができます。",
@@ -499,5 +499,7 @@
   "tracking_is_not_opening": "睡眠開始がオープンされていない",
   "invalid_bed": "Invalid Bed",
   "remaining_time": "Remaining time",
-  "to_speed_up": "To speed up"
+  "to_speed_up": "To speed up",
+  "jewel_level": "ジュエルレベル",
+  "item_level" : "アイテムレベル"
 }
