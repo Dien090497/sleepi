@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/nft_list/nft_list_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/info_individual_screen.dart';
@@ -84,6 +88,30 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
             cubit.fetchBedBox();
           }
         },
+        footer: CustomFooter(
+          builder: (BuildContext context,LoadStatus? mode) {
+            Widget body;
+            if(mode==LoadStatus.idle){
+              body = SFText(keyText: LocaleKeys.pull_up_load, style: TextStyles.lightWhite16,);
+            }
+            else if(mode==LoadStatus.loading){
+              body =  const CupertinoActivityIndicator();
+            }
+            else if(mode == LoadStatus.failed){
+              body = SFText( keyText: LocaleKeys.load_fail_retry, style: TextStyles.lightWhite16,);
+            }
+            else if(mode == LoadStatus.canLoading){
+              body = SFText( keyText: LocaleKeys.release_to_load_more, style: TextStyles.lightWhite16,);
+            }
+            else{
+              body = SFText( keyText: LocaleKeys.no_more_data, style: TextStyles.lightWhite16,);
+            }
+            return SizedBox(
+              height: 55.0,
+              child: Center(child:body),
+            );
+          },
+        ),
         child: widget.child,
       ),
     );

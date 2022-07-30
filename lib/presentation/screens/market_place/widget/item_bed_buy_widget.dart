@@ -45,8 +45,8 @@ class ItemBedBuyWidget extends StatelessWidget {
               SizedBox(height: 20.h),
               CachedImage(
                 image: item.image,
-                width: 100,
-                height: 100,
+                width: 80,
+                height: 80,
               ),
               SizedBox(height: 22.h),
               Row(
