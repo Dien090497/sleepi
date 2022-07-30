@@ -65,6 +65,7 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
         }
       },
       child: SmartRefresher(
+
         controller: refreshController,
         enablePullUp: loadMore,
         onRefresh: () {

@@ -176,13 +176,13 @@ import '../usecase/wallet/import_wallet_usecase.dart' as _i61;
 import '../usecase/withdraw_history_usecase.dart' as _i106;
 import '../usecase/withdraw_nft_usecase.dart' as _i107;
 import 'dev_injection.dart' as _i168;
-import 'prod_innjection.dart' as _i167;
+import 'prod_innjection.dart' as _i169;
 import 'register_module.dart' as _i166;
-import 'stg_injection.dart' as _i169;
+import 'stg_injection.dart' as _i167;
 
-const String _prod = 'prod';
-const String _dev = 'dev';
 const String _test = 'test';
+const String _dev = 'dev';
+const String _prod = 'prod';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -191,9 +191,9 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
-  final prodInjection = _$ProdInjection();
-  final devInjection = _$DevInjection();
   final stgInjection = _$StgInjection();
+  final devInjection = _$DevInjection();
+  final prodInjection = _$ProdInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -213,12 +213,12 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => registerModule.isar(get<_i9.Directory>()),
       preResolve: true);
   gh.singleton<_i15.IsarDataSource>(_i15.IsarDataSource(get<_i14.Isar>()));
-  gh.factory<List<dynamic>>(() => prodInjection.tokens,
-      instanceName: 'tokens', registerFor: {_prod});
-  gh.factory<List<dynamic>>(() => devInjection.tokens,
-      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<List<dynamic>>(() => stgInjection.tokens,
       instanceName: 'tokens', registerFor: {_test});
+  gh.factory<List<dynamic>>(() => devInjection.tokens,
+      instanceName: 'tokens', registerFor: {_dev});
+  gh.factory<List<dynamic>>(() => prodInjection.tokens,
+      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.QueueInterceptor>(
@@ -558,8 +558,8 @@ class _$RPCModule extends _i32.RPCModule {}
 
 class _$RegisterModule extends _i166.RegisterModule {}
 
-class _$ProdInjection extends _i167.ProdInjection {}
+class _$StgInjection extends _i167.StgInjection {}
 
 class _$DevInjection extends _i168.DevInjection {}
 
-class _$StgInjection extends _i169.StgInjection {}
+class _$ProdInjection extends _i169.ProdInjection {}
