@@ -22,6 +22,7 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_state.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
@@ -70,9 +71,11 @@ class _StakingListState extends State<StakingList> {
           }
           if (state is StakingStateUnStakingSuccess) {
             showSuccessfulDialog(context, null);
+            context.read<UserBloc>().add(const RefreshBalanceToken());
           }
           if (state is StakingStateCompoundSuccess) {
             showSuccessfulDialog(context, null);
+            context.read<UserBloc>().add(const RefreshBalanceToken());
           }
         },
         builder: (context, state) {
@@ -83,6 +86,7 @@ class _StakingListState extends State<StakingList> {
               controller: refreshController,
               onRefresh: () async {
                 cubit.getStakingInfo();
+                context.read<UserBloc>().add(const RefreshBalanceToken());
                 await Future.delayed(const Duration(milliseconds: 1000));
                 refreshController.loadComplete();
               },

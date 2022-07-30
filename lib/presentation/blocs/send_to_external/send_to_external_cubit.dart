@@ -80,6 +80,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
 
   Future<void> sendTokenExternal(String toAddress, double valueInEther,
       SendToExternalArguments? arg) async {
+
     final params = SendTokenExternalParams(
         valueInEther: valueInEther,
         tokenEntity: arg?.tokenEntity,

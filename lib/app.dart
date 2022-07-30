@@ -8,13 +8,15 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/theme.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/global_listener/global_listener_cubit.dart';
 import 'package:slee_fi/presentation/blocs/refresh_cubit/refresh_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+
+import 'common/style/text_styles.dart';
+import 'common/widgets/sf_text.dart';
 
 final RouteObserver<ModalRoute<void>> routeObserver =
     RouteObserver<ModalRoute<void>>();
@@ -42,33 +44,27 @@ class MyApp extends StatelessWidget {
                 builder: (BuildContext context, LoadStatus? mode) {
                   Widget body;
                   if (mode == LoadStatus.idle) {
-                    body = SFText(keyText: "pull up load");
+                    body = SFText(
+                      keyText: LocaleKeys.pull_up_load,
+                      style: TextStyles.lightWhite16,
+                    );
                   } else if (mode == LoadStatus.loading) {
                     body = const CupertinoActivityIndicator();
                   } else if (mode == LoadStatus.failed) {
-                    body = SFText(keyText: "Load Failed!Click retry!");
+                    body = SFText(
+                      keyText: LocaleKeys.load_fail_retry,
+                      style: TextStyles.lightWhite16,
+                    );
                   } else if (mode == LoadStatus.canLoading) {
-                    body = SFText(keyText: "release to load more");
+                    body = SFText(
+                      keyText: LocaleKeys.release_to_load_more,
+                      style: TextStyles.lightWhite16,
+                    );
                   } else {
-                    body = SFText(keyText: "No more Data");
-                  }
-                  switch (mode) {
-                    case LoadStatus.idle:
-                      body = SFText(keyText: LocaleKeys.bed);
-                      break;
-                    case LoadStatus.canLoading:
-                      body = SFText(keyText: LocaleKeys.bed);
-                      break;
-                    case LoadStatus.loading:
-                      body = SFText(keyText: LocaleKeys.bed);
-                      break;
-                    case LoadStatus.noMore:
-                      body = SFText(keyText: LocaleKeys.bed);
-                      break;
-                    case LoadStatus.failed:
-                      body = SFText(keyText: LocaleKeys.bed);
-                      break;
-                    default:
+                    body = SFText(
+                      keyText: LocaleKeys.no_more_data,
+                      style: TextStyles.lightWhite16,
+                    );
                   }
                   return SizedBox(
                     height: 55.0,
