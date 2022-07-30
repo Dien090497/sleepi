@@ -498,5 +498,7 @@ abstract class  LocaleKeys {
   static const invalid_bed = 'invalid_bed';
   static const remaining_time = 'remaining_time';
   static const to_speed_up = 'to_speed_up';
+  static const jewel_level = 'jewel_level';
+  static const item_level = 'item_level';
 
 }

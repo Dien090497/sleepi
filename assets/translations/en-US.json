@@ -495,5 +495,7 @@
   "tracking_is_not_opening": "Tracking is not opening",
   "invalid_bed": "Invalid Bed",
   "remaining_time": "Remaining time",
-  "to_speed_up": "To speed up"
+  "to_speed_up": "To speed up",
+  "jewel_level": "Jewel Level",
+  "item_level" : "Item Level"
 }

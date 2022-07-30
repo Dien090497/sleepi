@@ -76,7 +76,11 @@ class ItemsProbability extends StatelessWidget {
                 return  Column(
                   children:  [
                     const SizedBox(height: 10),
-                    rowData(title: "${configInfo?.elementAt(index)['name']} ", value: configInfo?.elementAt(index)['value']),
+                    rowData(
+                      key: "${configInfo?.elementAt(index)['name'] ?? ''}",
+                      value: configInfo?.elementAt(index)['value'],
+                      level: configInfo?.elementAt(index)['level'].toString() ?? '',
+                    ),
                   ],
                 );
               }
@@ -86,10 +90,12 @@ class ItemsProbability extends StatelessWidget {
     );
   }
 
-  Widget rowData({required String title, required num? value}){
+  Widget rowData({required String key, required num? value, required String level}){
     return Row(
       children: [
-        SFText(keyText: title, style: TextStyles.lightGrey14,),
+        SFText(keyText: key, style: TextStyles.lightGrey14,),
+        const SizedBox(width: 5,),
+        SFText(keyText: level, style: TextStyles.lightGrey14,),
         const Spacer(),
         SFText(keyText: '${value ?? 0}%', style: TextStyles.lightGrey14,),
       ],

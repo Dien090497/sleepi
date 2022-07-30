@@ -499,5 +499,7 @@
   "tracking_is_not_opening": "睡眠開始がオープンされていない",
   "invalid_bed": "Invalid Bed",
   "remaining_time": "Remaining time",
-  "to_speed_up": "To speed up"
+  "to_speed_up": "To speed up",
+  "jewel_level": "ジュエルレベル",
+  "item_level" : "アイテムレベル"
 }
