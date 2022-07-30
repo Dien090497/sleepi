@@ -6,7 +6,7 @@ abstract class ProdInjection {
   /// SleeFi
   @prod
   @Named('baseUrl')
-  String get baseUrl => 'https://alpha.sleefi.com/api/v1';
+  String get baseUrl => 'https://staging.sleefi.com/api/v1';
 
   @prod
   @Named('contractRouter')

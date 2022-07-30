@@ -12,7 +12,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/toast_utils.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -21,6 +21,7 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/pop_up_info_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/wallet_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -80,24 +81,24 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   Text('${balance.formatBalanceWallet} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     fToast.removeCustomToast();
-                  //     _copyAddress(fToast, context, addressWallet);
-                  //   },
-                  //   child: Container(
-                  //     padding: const EdgeInsets.symmetric(
-                  //         vertical: 6.0, horizontal: 16.0),
-                  //     margin: const EdgeInsets.symmetric(horizontal: 16),
-                  //     decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(20.0),
-                  //       color: AppColors.lightWhite.withOpacity(0.05),
-                  //     ),
-                  //     child: Text(addressWallet.formatAddress,
-                  //         style: TextStyles.lightWhite14),
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 16.0),
+                  GestureDetector(
+                    onTap: () {
+                      fToast.removeCustomToast();
+                      _copyAddress(fToast, context, addressWallet);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6.0, horizontal: 16.0),
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        color: AppColors.lightWhite.withOpacity(0.05),
+                      ),
+                      child: Text(addressWallet.formatAddress,
+                          style: TextStyles.lightWhite14),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
                   Container(
                     constraints: const BoxConstraints(maxHeight: 130),
                     padding: const EdgeInsets.symmetric(horizontal: 23),
@@ -107,14 +108,14 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                         Expanded(
                           child: BoxButtonWidget(
                             onTap: () {
-                              showComingSoonDialog(context);
-                              // SFModalBottomSheet.show(
-                              //     context,
-                              //     0.7,
-                              //     ModalReceiveWallet(
-                              //       networkName: networkName,
-                              //       address: addressWallet,
-                              //     ));
+                              SFModalBottomSheet.show(
+                                context,
+                                0.7,
+                                ModalReceiveWallet(
+                                  networkName: networkName,
+                                  address: addressWallet,
+                                ),
+                              );
                             },
                             text: LocaleKeys.receive,
                             assetImage: Ics.icDownload,

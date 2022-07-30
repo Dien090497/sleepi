@@ -28,12 +28,11 @@ class SettingWalletScreen extends StatelessWidget {
               title: LocaleKeys.backup,
               info: LocaleKeys.your_12_word_seed_phrase,
               onTap: () {
-                showComingSoonDialog(context);
-                // Navigator.pushNamed(context, R.passcode).then((value) {
-                //   if (value == true) {
-                //     Navigator.pushNamed(context, R.showSeedPhrase);
-                //   }
-                // });
+                Navigator.pushNamed(context, R.passcode).then((value) {
+                  if (value == true) {
+                    Navigator.pushNamed(context, R.showSeedPhrase);
+                  }
+                });
               },
             ),
             BoxInfoWidget(
