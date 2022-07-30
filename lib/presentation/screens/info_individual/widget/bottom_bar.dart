@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -17,6 +18,7 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_repair.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_level_up.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_remaning_time_level_up.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/resources/resources.dart';
@@ -100,7 +102,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: BlocProvider(
             create: (_) => cubit,
-            child: BlocConsumer<BottomBarInfoIndividualCubit,
+            child: BlocListener<BottomBarInfoIndividualCubit,
                 BottomBarInfoIndividualState>(
               listener: (context, state) {
                 if (state is BottomBarInfoIndividualError) {
@@ -118,129 +120,115 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                     cubit.init();
                   }
                 }
+                if (state is BottomBarInfoIndividualSpeedUpSuccess) {
+                  Navigator.pop(context);
+                  showSuccessfulDialog(context, null);
+                  widget.onBackIndividual(true);
+                  cubit.init();
+                }
               },
-              builder: (context, state) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
-                        () {
-                      if (bedEntity.level < 30) {
-                        index = 0;
-                        showCustomAlertDialog(
-                          context,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 32),
-                          children: PopUpLevelUp(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  itemBottomBar(0, context, Ics.levelUp, LocaleKeys.level_up,
+                      _onPressLevelUp),
+                  itemBottomBar(1, context, Ics.repair, LocaleKeys.repair, () {
+                    if (bedEntity.durability < 100) {
+                      index = 1;
+                      cubit.getRepair(nftId: bedEntity.nftId);
+                      showCustomDialog(
+                        context,
+                        children: [
+                          PopUpRepair(
                             bedEntity: bedEntity,
                             cubit: cubit,
                           ),
-                        ).then((value) {
-                          widget.onBackIndividual(null);
-                          index = -1;
-                          setState(() {});
-                        });
-                      }
-                    }),
-                    itemBottomBar(1, context, Ics.repair, LocaleKeys.repair,
-                        () {
-                      if (bedEntity.durability < 100) {
-                        index = 1;
-                        cubit.getRepair(nftId: bedEntity.nftId);
-                        showCustomDialog(
-                          context,
-                          children: [
-                            PopUpRepair(
-                              bedEntity: bedEntity,
-                              cubit: cubit,
-                            ),
-                          ],
-                        ).then((value) {
-                          index = -1;
-                          setState(() {});
-                          cubit.init();
-                        });
-                      }
-                    }),
-                    itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
-                      index = 2;
-                      Navigator.pushNamed(context, R.mint, arguments: bedEntity)
-                          .then((value) {
-                        widget.onBackIndividual(null);
+                        ],
+                      ).then((value) {
                         index = -1;
                         setState(() {});
+                        cubit.init();
                       });
-                    }),
-                    itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell,
-                        () {
-                      setState(() {
-                        index = 3;
+                    }
+                  }),
+                  itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
+                    index = 2;
+                    Navigator.pushNamed(context, R.mint, arguments: bedEntity)
+                        .then((value) {
+                      widget.onBackIndividual(null);
+                      index = -1;
+                      setState(() {});
+                    });
+                  }),
+                  itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
+                    setState(() {
+                      index = 3;
+                    });
+                    if (bedEntity.isLock == 1) {
+                      showCustomDialog(context, children: [
+                        CancelSell(
+                          bedEntity: bedEntity,
+                          cubit: cubit,
+                        ),
+                      ]).then((value) => setState(() {
+                            index = -1;
+                          }));
+                    } else {
+                      showCustomDialog(context, children: [
+                        PopUpSell(
+                          bedEntity: bedEntity,
+                          cubit: cubit,
+                        ),
+                      ]).then((value) => setState(() {
+                            index = -1;
+                          }));
+                    }
+                  }),
+                  itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
+                      () {
+                    index = 4;
+                    Navigator.pushNamed(context, R.recycle).then((value) {
+                      index = -1;
+                      setState(() {});
+                    });
+                  }),
+                  BlocBuilder<WalletCubit, WalletState>(
+                    builder: (context, walletState) {
+                      return itemBottomBar(
+                          5, context, Ics.transfer, LocaleKeys.transfer,
+                          () async {
+                        index = 5;
+                        showComingSoonDialog(context);
+
+                        /// POP-UP TRANSFER
+                        // if (walletState is WalletNotExisted) {
+                        //   showCreateOrImportWallet().then((value) {});
+                        // } else {
+                        //   cubit.estimateGas(
+                        //       contractAddress: bedEntity.contractAddress);
+                        //   showCustomDialog(
+                        //     context,
+                        //     children: [
+                        //       PopUpTransfer(
+                        //         onCancel: () {
+                        //           Navigator.pop(context);
+                        //         },
+                        //         valueTransfer: 1,
+                        //         bedEntity: bedEntity,
+                        //         cubit: cubit,
+                        //       )
+                        //     ],
+                        //   ).then((value) {
+                        //     index = -1;
+                        //     setState(() {});
+                        //   });
+                        // }
+                        /// ----------------------------------------
                       });
-                      if (bedEntity.isLock == 1) {
-                        showCustomDialog(context, children: [
-                          CancelSell(
-                            bedEntity: bedEntity,
-                            cubit: cubit,
-                          ),
-                        ]).then((value) => setState(() {
-                              index = -1;
-                            }));
-                      } else {
-                        showCustomDialog(context, children: [
-                          PopUpSell(
-                            bedEntity: bedEntity,
-                            cubit: cubit,
-                          ),
-                        ]).then((value) => setState(() {
-                              index = -1;
-                            }));
-                      }
-                    }),
-                    itemBottomBar(4, context, Ics.recycling, LocaleKeys.recycle,
-                        () {
-                      index = 4;
-                      Navigator.pushNamed(context, R.recycle).then((value) {
-                        index = -1;
-                        setState(() {});
-                      });
-                    }),
-                    BlocBuilder<WalletCubit, WalletState>(
-                      builder: (context, walletState) {
-                        return itemBottomBar(
-                            5, context, Ics.transfer, LocaleKeys.transfer,
-                            () async {
-                          index = 5;
-                          showComingSoonDialog(context);
-                          /// POP-UP TRANSFER
-                          // if (walletState is WalletNotExisted) {
-                          //   showCreateOrImportWallet().then((value) {});
-                          // } else {
-                          //   cubit.estimateGas(
-                          //       contractAddress: bedEntity.contractAddress);
-                          //   showCustomDialog(
-                          //     context,
-                          //     children: [
-                          //       PopUpTransfer(
-                          //         onCancel: () {
-                          //           Navigator.pop(context);
-                          //         },
-                          //         valueTransfer: 1,
-                          //         bedEntity: bedEntity,
-                          //         cubit: cubit,
-                          //       )
-                          //     ],
-                          //   ).then((value) {
-                          //     index = -1;
-                          //     setState(() {});
-                          //   });
-                          // }
-                              /// ----------------------------------------
-                        });
-                      },
-                    ),
-                  ],
-                );
-              },
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -254,5 +242,38 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
+  }
+
+  void _onPressLevelUp() {
+    if (bedEntity.level < 30) {
+      index = 0;
+      if (bedEntity.levelUpTime != null &&
+          bedEntity.remainTime != null &&
+          bedEntity.remainTime!.remainingTime.isNotEmpty) {
+        showCustomAlertDialog(
+          context,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+          children: PopUpRemainingTimeLevelUp(
+            bedEntity: bedEntity,
+            cubit: cubit,
+            onLevelUpSuccess: () => widget.onBackIndividual(null),
+          ),
+        );
+        return;
+      }
+
+      showCustomAlertDialog(
+        context,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+        children: PopUpLevelUp(
+          bedEntity: bedEntity,
+          cubit: cubit,
+        ),
+      ).then((value) {
+        widget.onBackIndividual(null);
+        index = -1;
+        setState(() {});
+      });
+    }
   }
 }

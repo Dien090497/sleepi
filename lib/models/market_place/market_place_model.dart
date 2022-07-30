@@ -28,6 +28,8 @@ class MarketPlaceModel {
   final String? itemType;
   final double? startTime;
   final double? endTime;
+  final String? remainTime;
+  final String? levelUpTime;
   final String price;
   final String symbol;
   final String? status;
@@ -80,6 +82,7 @@ class MarketPlaceModel {
     this.isBurn,
     this.percentEffect,
     this.itemType,
+    this.remainTime, this.levelUpTime,
   );
 
   factory MarketPlaceModel.fromJson(Map<String, dynamic> json) =>
@@ -89,13 +92,15 @@ class MarketPlaceModel {
 
   BedEntity toBedEntity() {
     return BedEntity(
+      levelUpTime: levelUpTime,
+      remainTime: remainTime,
       itemType: itemType,
       type: type,
       percentEffect: percentEffect ??
           (jewelCorrection != null ? double.parse(jewelCorrection!) : 0.0),
       jewelType: jewelType,
       isBurn: isBurn ?? 0,
-      name: name ,
+      name: name,
       nftId: nftId,
       nftClass: classNft ?? '',
       tokenId: tokenId,

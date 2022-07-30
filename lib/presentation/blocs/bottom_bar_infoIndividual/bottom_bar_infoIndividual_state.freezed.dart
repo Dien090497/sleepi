@@ -31,6 +31,7 @@ mixin _$BottomBarInfoIndividualState {
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +49,7 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +67,7 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +79,8 @@ mixin _$BottomBarInfoIndividualState {
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -86,6 +91,8 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,6 +103,8 @@ mixin _$BottomBarInfoIndividualState {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -178,6 +187,7 @@ class _$BottomBarInfoIndividualInitial
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) {
     return initial();
   }
@@ -198,6 +208,7 @@ class _$BottomBarInfoIndividualInitial
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) {
     return initial?.call();
   }
@@ -218,6 +229,7 @@ class _$BottomBarInfoIndividualInitial
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -235,6 +247,8 @@ class _$BottomBarInfoIndividualInitial
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) {
     return initial(this);
   }
@@ -248,6 +262,8 @@ class _$BottomBarInfoIndividualInitial
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) {
     return initial?.call(this);
   }
@@ -261,6 +277,8 @@ class _$BottomBarInfoIndividualInitial
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -432,6 +450,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) {
     return loaded(gasPrice, successTransfer, transactionFee, feeRepair,
         valueRepair, cost);
@@ -453,6 +472,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) {
     return loaded?.call(gasPrice, successTransfer, transactionFee, feeRepair,
         valueRepair, cost);
@@ -474,6 +494,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -492,6 +513,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) {
     return loaded(this);
   }
@@ -505,6 +528,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) {
     return loaded?.call(this);
   }
@@ -518,6 +543,8 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -626,6 +653,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) {
     return getLevel(levelUp);
   }
@@ -646,6 +674,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) {
     return getLevel?.call(levelUp);
   }
@@ -666,6 +695,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) {
     if (getLevel != null) {
@@ -683,6 +713,8 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) {
     return getLevel(this);
   }
@@ -696,6 +728,8 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) {
     return getLevel?.call(this);
   }
@@ -709,6 +743,8 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) {
     if (getLevel != null) {
@@ -781,6 +817,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) {
     return upLevel();
   }
@@ -801,6 +838,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) {
     return upLevel?.call();
   }
@@ -821,6 +859,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) {
     if (upLevel != null) {
@@ -838,6 +877,8 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) {
     return upLevel(this);
   }
@@ -851,6 +892,8 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) {
     return upLevel?.call(this);
   }
@@ -864,6 +907,8 @@ class _$UpLevelSuccess implements UpLevelSuccess {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) {
     if (upLevel != null) {
@@ -959,6 +1004,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) {
     return error(message);
   }
@@ -979,6 +1025,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) {
     return error?.call(message);
   }
@@ -999,6 +1046,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1016,6 +1064,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) {
     return error(this);
   }
@@ -1029,6 +1079,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) {
     return error?.call(this);
   }
@@ -1042,6 +1094,8 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1121,6 +1175,7 @@ class _$BottomBarInfoIndividualLoading
     required TResult Function() upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
   }) {
     return loading();
   }
@@ -1141,6 +1196,7 @@ class _$BottomBarInfoIndividualLoading
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
   }) {
     return loading?.call();
   }
@@ -1161,6 +1217,7 @@ class _$BottomBarInfoIndividualLoading
     TResult Function()? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1178,6 +1235,8 @@ class _$BottomBarInfoIndividualLoading
     required TResult Function(UpLevelSuccess value) upLevel,
     required TResult Function(BottomBarInfoIndividualError value) error,
     required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
   }) {
     return loading(this);
   }
@@ -1191,6 +1250,8 @@ class _$BottomBarInfoIndividualLoading
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
   }) {
     return loading?.call(this);
   }
@@ -1204,6 +1265,8 @@ class _$BottomBarInfoIndividualLoading
     TResult Function(UpLevelSuccess value)? upLevel,
     TResult Function(BottomBarInfoIndividualError value)? error,
     TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1217,4 +1280,171 @@ abstract class BottomBarInfoIndividualLoading
     implements BottomBarInfoIndividualState {
   const factory BottomBarInfoIndividualLoading() =
       _$BottomBarInfoIndividualLoading;
+}
+
+/// @nodoc
+abstract class _$$BottomBarInfoIndividualSpeedUpSuccessCopyWith<$Res> {
+  factory _$$BottomBarInfoIndividualSpeedUpSuccessCopyWith(
+          _$BottomBarInfoIndividualSpeedUpSuccess value,
+          $Res Function(_$BottomBarInfoIndividualSpeedUpSuccess) then) =
+      __$$BottomBarInfoIndividualSpeedUpSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BottomBarInfoIndividualSpeedUpSuccessCopyWithImpl<$Res>
+    extends _$BottomBarInfoIndividualStateCopyWithImpl<$Res>
+    implements _$$BottomBarInfoIndividualSpeedUpSuccessCopyWith<$Res> {
+  __$$BottomBarInfoIndividualSpeedUpSuccessCopyWithImpl(
+      _$BottomBarInfoIndividualSpeedUpSuccess _value,
+      $Res Function(_$BottomBarInfoIndividualSpeedUpSuccess) _then)
+      : super(
+            _value, (v) => _then(v as _$BottomBarInfoIndividualSpeedUpSuccess));
+
+  @override
+  _$BottomBarInfoIndividualSpeedUpSuccess get _value =>
+      super._value as _$BottomBarInfoIndividualSpeedUpSuccess;
+}
+
+/// @nodoc
+
+class _$BottomBarInfoIndividualSpeedUpSuccess
+    implements BottomBarInfoIndividualSpeedUpSuccess {
+  const _$BottomBarInfoIndividualSpeedUpSuccess();
+
+  @override
+  String toString() {
+    return 'BottomBarInfoIndividualState.speedUpSuccess()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BottomBarInfoIndividualSpeedUpSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)
+        loaded,
+    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function() upLevel,
+    required TResult Function(String message) error,
+    required TResult Function() loading,
+    required TResult Function() speedUpSuccess,
+  }) {
+    return speedUpSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
+        loaded,
+    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function()? upLevel,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
+  }) {
+    return speedUpSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            String gasPrice,
+            bool successTransfer,
+            String transactionFee,
+            GetRepairtEntity? feeRepair,
+            num? valueRepair,
+            num? cost)?
+        loaded,
+    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function()? upLevel,
+    TResult Function(String message)? error,
+    TResult Function()? loading,
+    TResult Function()? speedUpSuccess,
+    required TResult orElse(),
+  }) {
+    if (speedUpSuccess != null) {
+      return speedUpSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BottomBarInfoIndividualInitial value) initial,
+    required TResult Function(BottomBarInfoIndividualLoaded value) loaded,
+    required TResult Function(GetLevelSuccess value) getLevel,
+    required TResult Function(UpLevelSuccess value) upLevel,
+    required TResult Function(BottomBarInfoIndividualError value) error,
+    required TResult Function(BottomBarInfoIndividualLoading value) loading,
+    required TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)
+        speedUpSuccess,
+  }) {
+    return speedUpSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(BottomBarInfoIndividualInitial value)? initial,
+    TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
+    TResult Function(BottomBarInfoIndividualError value)? error,
+    TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
+  }) {
+    return speedUpSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BottomBarInfoIndividualInitial value)? initial,
+    TResult Function(BottomBarInfoIndividualLoaded value)? loaded,
+    TResult Function(GetLevelSuccess value)? getLevel,
+    TResult Function(UpLevelSuccess value)? upLevel,
+    TResult Function(BottomBarInfoIndividualError value)? error,
+    TResult Function(BottomBarInfoIndividualLoading value)? loading,
+    TResult Function(BottomBarInfoIndividualSpeedUpSuccess value)?
+        speedUpSuccess,
+    required TResult orElse(),
+  }) {
+    if (speedUpSuccess != null) {
+      return speedUpSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BottomBarInfoIndividualSpeedUpSuccess
+    implements BottomBarInfoIndividualState {
+  const factory BottomBarInfoIndividualSpeedUpSuccess() =
+      _$BottomBarInfoIndividualSpeedUpSuccess;
 }

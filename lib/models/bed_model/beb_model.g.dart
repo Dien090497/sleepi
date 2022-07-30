@@ -47,6 +47,8 @@ BedModel _$BedModelFromJson(Map<String, dynamic> json) => BedModel(
       (json['percentEffect'] as num?)?.toDouble(),
       json['type'] as String,
       json['name'] as String?,
+      json['remainTime'] as String?,
+      json['levelUpTime'] as String?,
     );
 
 Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
@@ -57,6 +59,8 @@ Map<String, dynamic> _$BedModelToJson(BedModel instance) => <String, dynamic>{
       'nftName': instance.nftName,
       'image': instance.image,
       'name': instance.name,
+      'remainTime': instance.remainTime,
+      'levelUpTime': instance.levelUpTime,
       'contractAddress': instance.contractAddress,
       'nftType': instance.nftType,
       'type': instance.type,

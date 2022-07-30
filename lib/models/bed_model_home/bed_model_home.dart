@@ -11,6 +11,8 @@ class BedModelHome {
   final double? percentEffect;
   final String nftName;
   final String? name;
+  final String? remainTime;
+  final String? levelUpTime;
   final String contractAddress;
   final String owner;
   final String type;
@@ -33,42 +35,44 @@ class BedModelHome {
   final Nft? nft;
   final ObjData? objData;
 
-  BedModelHome(
-    this.id,
-    this.nftId,
-    this.nftName,
-    this.contractAddress,
-    this.tokenId,
-    this.owner,
-    this.type,
-    this.classNft,
-    this.quality,
-    this.image,
-    this.time,
-    this.level,
-    this.bedMint,
-    this.isMint,
-    this.isBurn,
-    this.efficiency,
-    this.durability,
-    this.luck,
-    this.bonus,
-    this.special,
-    this.resilience,
-    this.nft,
-    this.objData,
-    this.jewelType,
-    this.percentEffect,
-    this.itemType,
-    this.name,
-  );
+  BedModelHome(this.id,
+      this.nftId,
+      this.nftName,
+      this.contractAddress,
+      this.tokenId,
+      this.owner,
+      this.type,
+      this.classNft,
+      this.quality,
+      this.image,
+      this.time,
+      this.level,
+      this.bedMint,
+      this.isMint,
+      this.isBurn,
+      this.efficiency,
+      this.durability,
+      this.luck,
+      this.bonus,
+      this.special,
+      this.resilience,
+      this.nft,
+      this.objData,
+      this.jewelType,
+      this.percentEffect,
+      this.itemType,
+      this.name,
+      this.remainTime, this.levelUpTime,);
 
   factory BedModelHome.fromJson(Map<String, dynamic> json) =>
       _$BedModelHomeFromJson(json);
 
   Map<String, dynamic> toJson() => _$BedModelHomeToJson(this);
 
-  BedEntity toEntity() => BedEntity(
+  BedEntity toEntity() =>
+      BedEntity(
+        levelUpTime: levelUpTime,
+        remainTime: remainTime,
         percentEffect: percentEffect,
         type: type,
         itemType: itemType,

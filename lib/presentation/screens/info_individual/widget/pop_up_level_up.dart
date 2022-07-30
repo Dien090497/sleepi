@@ -92,16 +92,11 @@ class PopUpLevelUp extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       SFLabelValue(
-                        label: LocaleKeys.required_time,
+                        label: LocaleKeys.time,
                         value: '${state.levelUp.requireTime ?? 0} mins',
                         styleValue: TextStyles.textColorSize16,
                       ),
-                      const SizedBox(height: 8),
-                      SFLabelValue(
-                        label: LocaleKeys.sleep_time,
-                        value: '${state.levelUp.sleepTime ?? 0} mins',
-                        styleValue: TextStyles.textColorSize16,
-                      ),
+
                       const SizedBox(height: 24),
                       Row(
                         children: [
