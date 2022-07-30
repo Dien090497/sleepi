@@ -240,28 +240,22 @@ class Web3DataSource {
       BigInt deadline = BigInt.from(
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
       Credentials credentials = EthPrivateKey.fromHex(privateKey);
-      BigInt allow = await allowance(
-          EthereumAddress.fromHex(walletAddress), contractAddress);
-      if (amountsOut[0] > allow) {
-        return false;
-      } else {
-        await contract.swapExactTokensForAVAX(
-          amountsOut[0],
-          amountOutMin,
-          pairAddress,
-          to,
-          deadline,
-          credentials: credentials,
-          transaction: Transaction(
-            from: to,
-            to: to,
-            value: 0.toWeiEtherAmount,
-            gasPrice: await _web3provider.web3client.getGasPrice(),
-            nonce: await _web3provider.web3client.getTransactionCount(to),
-          ),
-        );
-        return true;
-      }
+      await contract.swapExactTokensForAVAX(
+        amountsOut[0],
+        amountOutMin,
+        pairAddress,
+        to,
+        deadline,
+        credentials: credentials,
+        transaction: Transaction(
+          from: to,
+          to: to,
+          value: 0.toWeiEtherAmount,
+          gasPrice: await _web3provider.web3client.getGasPrice(),
+          nonce: await _web3provider.web3client.getTransactionCount(to),
+        ),
+      );
+      return true;
     } catch (e) {
       return false;
     }
@@ -298,29 +292,22 @@ class Web3DataSource {
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
 
       Credentials credentials = EthPrivateKey.fromHex(privateKey);
-
-      BigInt allow = await allowance(
-          EthereumAddress.fromHex(walletAddress), contractAddressFrom);
-      if (amounts[0] > allow) {
-        return false;
-      } else {
-        await contract.swapExactTokensForTokens(
-          amounts[0],
-          amountOutMin,
-          pairAddress,
-          to,
-          deadline,
-          credentials: credentials,
-          transaction: Transaction(
-            from: to,
-            to: to,
-            value: 0.toWeiEtherAmount,
-            gasPrice: await _web3provider.web3client.getGasPrice(),
-            nonce: await _web3provider.web3client.getTransactionCount(to),
-          ),
-        );
-        return true;
-      }
+      await contract.swapExactTokensForTokens(
+        amounts[0],
+        amountOutMin,
+        pairAddress,
+        to,
+        deadline,
+        credentials: credentials,
+        transaction: Transaction(
+          from: to,
+          to: to,
+          value: 0.toWeiEtherAmount,
+          gasPrice: await _web3provider.web3client.getGasPrice(),
+          nonce: await _web3provider.web3client.getTransactionCount(to),
+        ),
+      );
+      return true;
     } catch (e) {
       return false;
     }
