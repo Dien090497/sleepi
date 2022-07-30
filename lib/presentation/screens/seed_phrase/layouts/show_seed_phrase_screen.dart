@@ -83,9 +83,12 @@ class ShowSeedPhraseScreen extends StatelessWidget {
                 onTapUp: (detail) {
                   setState(() => isHiding = true);
                 },
-                child: SFText(
-                  keyText: LocaleKeys.press_and_hold_to_reveal,
-                  style: TextStyles.bold18White,
+                child: Align(
+                  alignment: Alignment.center ,
+                  child: SFText(
+                    keyText: LocaleKeys.press_and_hold_to_reveal,
+                    style: TextStyles.bold18White,
+                  ),
                 ),
               ),
             ],
