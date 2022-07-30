@@ -600,8 +600,39 @@ class _TradeScreenState extends State<TradeScreen> {
                                 .toString()
                                 .replaceAll(',', '.')
                                 : valueController.text.toString();
-                            tradeCubit.checkApproveToken(double.parse(result),
-                                listTokens[indexFrom]['symbol'].toString());
+                            if(indexFrom != 0) {
+                              tradeCubit.checkApproveToken(double.parse(result),
+                                  listTokens[indexFrom]['address'].toString());
+                            }else{
+                              showCustomAlertDialog(context,
+                                  children: PopUpConfirmTrade(
+                                    value: double.parse(result),
+                                    symbolFrom: listTokens[indexFrom]['symbol']
+                                        .toString(),
+                                    symbolTo:
+                                    listTokens[indexTo]['symbol'].toString(),
+                                    addressFrom: listTokens[indexFrom]['address']
+                                        .toString(),
+                                    addressTo:
+                                    listTokens[indexTo]['address'].toString(),
+                                    onSwap: () {
+                                      tradeCubit.swapToken(
+                                          double.parse(result),
+                                          listTokens[indexFrom]['address']
+                                              .toString(),
+                                          listTokens[indexTo]['address']
+                                              .toString());
+                                    },
+                                    amountOutMin: amountOutMin,
+                                  )).then((value) =>
+                              {
+                                setState(() {
+                                  valueController.text = '';
+                                  amountOutMin = 0;
+                                  error = '';
+                                })
+                              });
+                            }
                           }
                         },
                       ),
