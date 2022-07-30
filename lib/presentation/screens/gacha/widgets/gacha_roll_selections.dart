@@ -51,7 +51,11 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
         listener: (context, state) {
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
-            showMessageDialog(context, "You don't have enough money");
+            showMessageDialog(context, "You don't have enough money").then((value) {
+              final cubit = context.read<GachaSpinCubit>();
+              cubit.init();
+              setState(() => enableButton = true);
+            });
           }
         if(state is GachaSpinSuccess) {
           Navigator.pop(context, true);

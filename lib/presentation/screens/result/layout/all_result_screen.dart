@@ -69,7 +69,7 @@ class AllResultScreen extends StatelessWidget {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index)['image'],  width: 75, height: 75,),
+                                  SFIcon(args?.gachaSpinInfo!.gift.elementAt(index)['image'], width: MediaQuery.of(context).size.width * 0.18, height:  MediaQuery.of(context).size.width * 0.18,),
                                 ],
                               ),
                               onTap: () {
@@ -118,7 +118,7 @@ class AllResultScreen extends StatelessWidget {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'],  width: 75, height: 75,),
+                                    SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'], width: MediaQuery.of(context).size.width * 0.18, height:  MediaQuery.of(context).size.width * 0.18,),
                                   ],
                                 ),
                                 onTap: () {
@@ -169,7 +169,7 @@ class AllResultScreen extends StatelessWidget {
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'],  width: 75, height: 75,),
+                                      SFIcon(args?.gachaSpinInfo!.gift.elementAt(index + at)['image'], width: MediaQuery.of(context).size.width * 0.18, height:  MediaQuery.of(context).size.width * 0.18,),
                                     ],
                                   ),
                                   onTap: () {
