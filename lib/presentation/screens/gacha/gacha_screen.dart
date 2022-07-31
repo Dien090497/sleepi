@@ -86,77 +86,79 @@ class _GachaScreenState extends State<GachaScreen> {
               builder: (context, state) {
                 final cubit = context.read<GachaSpinCubit>();
                 return Expanded(
-                  child: Stack(children: [
-                    ListView(
-                      physics: const ScrollPhysics(),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      children: [
-                        ItemsGacha(
-                          dialogData: commonInfo,
-                          costSingle: _configCost != null
-                              ? _configCost!.normalGachaSingle!
-                              : 0,
-                          costMultiple: _configCost != null
-                              ? _configCost!.normalGachaMultiple!
-                              : 0,
-                          title: LocaleKeys.normal_gacha,
-                          singleGachaImages: Localizations.localeOf(context)
-                                  .toLanguageTag()
-                                  .isJapanese
-                              ? Imgs.timeGachaJa
-                              : Imgs.timeGachaEn,
-                          timesGachaImages: Localizations.localeOf(context)
-                                  .toLanguageTag()
-                                  .isJapanese
-                              ? Imgs.timesNormalGachaJa
-                              : Imgs.timesNormalGachaEn,
-                          singleProbability: Const.one,
-                          timesProbability: Const.two,
-                          numberOfSpin: _gachaHistoryResponse != null &&
-                                  _gachaHistoryResponse!.data != null
-                              ? _gachaHistoryResponse!.data!.commonTimes!
-                              : 0,
-                          typeReward: LocaleKeys.common_bed,
-                          imagePath: Imgs.normalGachaBackground,
-                          totalValue: commonTimes,
-                          normalGacha: true,
-                          onPressed: () => cubit.init(),
-                        ),
-                        ItemsGacha(
-                          dialogData: specialInfo,
-                          costSingle: _configCost != null
-                              ? _configCost!.specialGachaSingle!
-                              : 0,
-                          costMultiple: _configCost != null
-                              ? _configCost!.specialGachaMultiple!
-                              : 0,
-                          title: LocaleKeys.special_gacha,
-                          singleGachaImages: Localizations.localeOf(context)
-                                  .toLanguageTag()
-                                  .isJapanese
-                              ? Imgs.timeGachaJa
-                              : Imgs.timeGachaEn,
-                          timesGachaImages: Localizations.localeOf(context)
-                                  .toLanguageTag()
-                                  .isJapanese
-                              ? Imgs.timesSpecialGachaJa
-                              : Imgs.timesSpecialGachaEn,
-                          singleProbability: Const.three,
-                          timesProbability: Const.four,
-                          numberOfSpin: _gachaHistoryResponse != null &&
-                                  _gachaHistoryResponse!.data != null
-                              ? _gachaHistoryResponse!.data!.specialTimes!
-                              : 0,
-                          typeReward: LocaleKeys.common_bed,
-                          imagePath: Imgs.specialGachaBackground,
-                          totalValue: specialTimes,
-                          normalGacha: false,
-                          onPressed: () => cubit.init(),
-                        ),
-                      ],
-                    ),
-                    if (state is GachaSpinLoading) const LoadingScreen(),
-                  ]),
+                  child: Stack(
+                    children: [
+                      ListView(
+                        physics: const ScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        children: [
+                          ItemsGacha(
+                            dialogData: commonInfo,
+                            costSingle: _configCost != null
+                                ? _configCost!.normalGachaSingle!
+                                : 0,
+                            costMultiple: _configCost != null
+                                ? _configCost!.normalGachaMultiple!
+                                : 0,
+                            title: LocaleKeys.normal_gacha,
+                            singleGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timeGachaJa
+                                : Imgs.timeGachaEn,
+                            timesGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timesNormalGachaJa
+                                : Imgs.timesNormalGachaEn,
+                            singleProbability: Const.one,
+                            timesProbability: Const.two,
+                            numberOfSpin: _gachaHistoryResponse != null &&
+                                    _gachaHistoryResponse!.data != null
+                                ? _gachaHistoryResponse!.data!.commonTimes!
+                                : 0,
+                            typeReward: 'Common Bed',
+                            imagePath: Imgs.normalGachaBackground,
+                            totalValue: commonTimes,
+                            normalGacha: true,
+                            onPressed: () => cubit.init(),
+                          ),
+                          ItemsGacha(
+                            dialogData: specialInfo,
+                            costSingle: _configCost != null
+                                ? _configCost!.specialGachaSingle!
+                                : 0,
+                            costMultiple: _configCost != null
+                                ? _configCost!.specialGachaMultiple!
+                                : 0,
+                            title: LocaleKeys.special_gacha,
+                            singleGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timeGachaJa
+                                : Imgs.timeGachaEn,
+                            timesGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timesSpecialGachaJa
+                                : Imgs.timesSpecialGachaEn,
+                            singleProbability: Const.three,
+                            timesProbability: Const.four,
+                            numberOfSpin: _gachaHistoryResponse != null &&
+                                    _gachaHistoryResponse!.data != null
+                                ? _gachaHistoryResponse!.data!.specialTimes!
+                                : 0,
+                            typeReward: 'Uncommon Bed',
+                            imagePath: Imgs.specialGachaBackground,
+                            totalValue: specialTimes,
+                            normalGacha: false,
+                            onPressed: () => cubit.init(),
+                          ),
+                        ],
+                      ),
+                      if (state is GachaSpinLoading) const LoadingScreen(),
+                    ],
+                  ),
                 );
               },
             ),

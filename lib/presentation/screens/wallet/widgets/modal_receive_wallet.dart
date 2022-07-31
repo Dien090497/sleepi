@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -11,14 +10,14 @@ import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 
 class ModalReceiveWallet extends StatelessWidget {
-  const ModalReceiveWallet({Key? key, required this.address, required this.networkName}) : super(key: key);
+  const ModalReceiveWallet(
+      {Key? key, required this.address, required this.networkName})
+      : super(key: key);
   final String address;
   final String networkName;
 
   @override
   Widget build(BuildContext context) {
-    final FToast fToast = FToast();
-    fToast.init(context);
     return ListView(
       shrinkWrap: true,
       padding: const EdgeInsets.all(24),
@@ -80,19 +79,15 @@ class ModalReceiveWallet extends StatelessWidget {
           width: double.infinity,
           height: 48,
           gradient: AppColors.gradientBlueButton,
-          onPressed: () => _copyAddress(fToast, context),
+          onPressed: () => _copyAddress(context),
         ),
       ],
     );
   }
 
-  _copyAddress(FToast fToast, BuildContext context) {
+  _copyAddress(BuildContext context) {
     Clipboard.setData(ClipboardData(text: address));
-    ToastUtils.showToast(
-      fToast,
-      AppColors.white.withOpacity(0.55),
-      LocaleKeys.successfully_copied,
-    );
+    ToastUtils.showToast(LocaleKeys.successfully_copied);
     Navigator.pop(context);
   }
 }

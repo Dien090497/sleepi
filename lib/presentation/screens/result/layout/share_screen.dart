@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -45,13 +44,7 @@ class _ShareScreenState extends State<ShareScreen> {
             showSuccessfulDialog(context, null);
           }
           if (state is ShareStateError) {
-            final FToast fToast = FToast();
-            fToast.init(context);
-            ToastUtils.showToast(
-              fToast,
-              AppColors.white.withOpacity(0.55),
-              LocaleKeys.some_thing_wrong,
-            );
+            ToastUtils.showToast(LocaleKeys.some_thing_wrong);
           }
         },
         builder: (context, state) {
@@ -110,8 +103,7 @@ class _ShareScreenState extends State<ShareScreen> {
                     cubit: cubit,
                   ),
                 ),
-                if (state is ShareStateLoading)
-                  const LoadingScreen()
+                if (state is ShareStateLoading) const LoadingScreen()
               ],
             ),
           );

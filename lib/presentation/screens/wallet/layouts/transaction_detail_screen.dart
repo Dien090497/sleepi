@@ -43,14 +43,8 @@ class TransactionDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments
         as TransactionDetailArguments;
-    String? addressWallet;
-    String? networkName;
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
-        if (state is WalletStateLoaded) {
-          addressWallet = state.walletInfoEntity.address;
-          networkName = state.walletInfoEntity.networkName;
-        }
         return BackgroundWidget(
             appBar: AppBar(
                 toolbarHeight: 80,

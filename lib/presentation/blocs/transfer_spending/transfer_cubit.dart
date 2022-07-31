@@ -95,9 +95,6 @@ class TransferCubit extends Cubit<TransferState> {
     if (amount == null) {
       return LocaleKeys.this_field_is_required;
     }
-    if (balance == 0) {
-      return LocaleKeys.insufficient_balance;
-    }
     if (amount <= 0) {
       return LocaleKeys.amount_input_can_not_be_zero;
     } else {

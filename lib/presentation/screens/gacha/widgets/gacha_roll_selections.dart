@@ -89,14 +89,22 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                           priceSpin: widget.costSingle,
                           quantity: 1,
                           onConfirmTap: () {
-                            enableButton
-                                ? cubit.gachaSpin(GachaSpinSchema(
-                                    probability: widget.singleProbability))
-                                : null;
-                            setState(() => enableButton = false);
                             Navigator.pop(context, true);
-                            showLoadingDialog(context,
-                                barrierDismissible: false);
+                            showMessageDialog(context,
+                                    LocaleKeys.you_dont_have_enough_money)
+                                .then((value) {
+                              final cubit = context.read<GachaSpinCubit>();
+                              cubit.init();
+                              setState(() => enableButton = true);
+                            });
+                            // enableButton
+                            //     ? cubit.gachaSpin(GachaSpinSchema(
+                            //         probability: widget.singleProbability))
+                            //     : null;
+                            // setState(() => enableButton = false);
+                            // Navigator.pop(context, true);
+                            // showLoadingDialog(context,
+                            //     barrierDismissible: false);
                           },
                         ));
                   },
