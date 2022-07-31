@@ -5,6 +5,7 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
+import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_cubit.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
@@ -14,6 +15,7 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_list.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_widget.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 class TransferScreenArg {
   final String address;
@@ -38,9 +40,18 @@ class TransferScreen extends StatelessWidget {
     if (spendingState is UserLoaded && walletState is WalletStateLoaded) {
       try {
         final spendingToken = spendingState.listTokens.firstWhere(
-            (e) => e.address.toLowerCase() == args.address.toLowerCase());
+          (e) => e.address.toLowerCase() == args.address.toLowerCase(),
+          orElse: () => TokenEntity(
+              address: args.address,
+              displayName: 'USDC',
+              name: 'USDC',
+              symbol: 'USDC',
+              icon: Ics.icUsdc,
+              balance: 0),
+        );
         final walletToken = walletState.tokenList.firstWhere(
-            (e) => e.address.toLowerCase() == args.address.toLowerCase());
+          (e) => e.address.toLowerCase() == args.address.toLowerCase(),
+        );
 
         /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
         final currentToken = args.isToSpending ? walletToken : spendingToken;

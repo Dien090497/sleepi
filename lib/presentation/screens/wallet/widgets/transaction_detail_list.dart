@@ -32,12 +32,11 @@ class TransactionDetailList extends StatefulWidget {
 
 class _TransactionDetailListState extends State<TransactionDetailList> {
   final RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
+      RefreshController(initialRefresh: false);
   List<TransactionIsarModel> transactionList = [];
   bool loadMore = true;
   bool isLoading = false;
   String urlDetailTransaction = '';
-
 
   @override
   void initState() {
@@ -54,24 +53,25 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
     final dateUtils = getIt<DateTimeUtils>();
 
     return BlocProvider(
-      create: (_) => HistoryTransactionCubit()..getHistoryTransaction(widget.typeHistory!),
+      create: (_) =>
+          HistoryTransactionCubit()..getHistoryTransaction(widget.typeHistory!),
       child: BlocConsumer<HistoryTransactionCubit, HistoryTransactionState>(
         listener: (context, state) {
-          if(state is HistoryTransactionStateRefreshHistory){
+          if (state is HistoryTransactionStateRefreshHistory) {
             transactionList = [];
-            setState((){
+            setState(() {
               isLoading = false;
             });
           }
-          if(state is HistoryTransactionStateSuccess){
-           _refreshController.loadComplete();
-            if(state.list.isEmpty){
+          if (state is HistoryTransactionStateSuccess) {
+            _refreshController.loadComplete();
+            if (state.list.isEmpty) {
               setState(() => loadMore = false);
-            }else {
-              setState((){
-              transactionList.addAll(state.list);
-              loadMore = true;
-              isLoading = true;
+            } else {
+              setState(() {
+                transactionList.addAll(state.list);
+                loadMore = true;
+                isLoading = true;
               });
             }
           }
@@ -87,113 +87,124 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
             ),
             height: MediaQuery.of(context).size.height * 0.55,
             padding: const EdgeInsets.only(top: 20),
-            child: isLoading
+            child: !isLoading
                 ? transactionList.isNotEmpty
-                ? SafeArea(
-              top: false,
-              child: SmartRefresher(
-                controller: _refreshController,
-                enablePullDown: true,
-                enablePullUp: loadMore,
-                onRefresh: () {
-                  cubit.refresh(widget.typeHistory!);
-                },
-                onLoading: (){
-                  cubit.loadMoreHistoryTransaction(widget.typeHistory!);
-                },
-                child: ListView.builder(
-                  itemCount: transactionList.length,
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 12.0),
-                  itemBuilder: (BuildContext context, int index) {
-                    // final value = state.list[index].valueInEther;
-                    // double? valueInEther;
-                    // if(value != null) {
-                    //   valueInEther = (value.getInWei / BigInt.from(pow(10, 18)));
-                    // }
-                    return SFCard(
-                      onTap: () async {
-                       cubit.getCurrentNetworkExplorer(transactionList[index].transactionHash ?? '');
-                      },
-                      radius: 8,
-                      margin: EdgeInsets.only(
-                          bottom: transactionList.length == index + 1
-                              ? 100
-                              : 12),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12.0, horizontal: 16.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(right: 8.0),
-                            child: Icon(
-                              CupertinoIcons.cloud_download,
-                              color: AppColors.blue,
-                            ),
+                    ? SafeArea(
+                        top: false,
+                        child: SmartRefresher(
+                          controller: _refreshController,
+                          enablePullDown: true,
+                          enablePullUp: loadMore,
+                          onRefresh: () {
+                            cubit.refresh(widget.typeHistory!);
+                          },
+                          onLoading: () {
+                            cubit.loadMoreHistoryTransaction(
+                                widget.typeHistory!);
+                          },
+                          child: ListView.builder(
+                            itemCount: transactionList.length,
+                            physics: const ClampingScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24.0, vertical: 12.0),
+                            itemBuilder: (BuildContext context, int index) {
+                              // final value = state.list[index].valueInEther;
+                              // double? valueInEther;
+                              // if(value != null) {
+                              //   valueInEther = (value.getInWei / BigInt.from(pow(10, 18)));
+                              // }
+                              return SFCard(
+                                onTap: () async {
+                                  cubit.getCurrentNetworkExplorer(
+                                      transactionList[index].transactionHash ??
+                                          '');
+                                },
+                                radius: 8,
+                                margin: EdgeInsets.only(
+                                    bottom: transactionList.length == index + 1
+                                        ? 100
+                                        : 12),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 12.0, horizontal: 16.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 8.0),
+                                      child: Icon(
+                                        CupertinoIcons.cloud_download,
+                                        color: AppColors.blue,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SFText(
+                                            keyText:
+                                                transactionList[index].status ==
+                                                        1
+                                                    ? "Success"
+                                                    : "Failed",
+                                            style:
+                                                transactionList[index].status ==
+                                                        1
+                                                    ? TextStyles.bold16Blue
+                                                    : TextStyles.red16Italic,
+                                          ),
+                                          const SizedBox(height: 4.0),
+                                          SFText(
+                                            keyText: dateUtils.ddMMyyyyHHmm(
+                                                transactionList[index]
+                                                    .timeStamp),
+                                            style: TextStyles.lightGrey14,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        SFText(
+                                          keyText:
+                                              "${transactionList[index].valueInEther?.formatBalanceToken}",
+                                          style: TextStyles.bold16Blue,
+                                        ),
+                                        const SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        SFText(
+                                          keyText:
+                                              "${transactionList[index].addressTo}"
+                                                  .formatAddress,
+                                          style: TextStyles.lightGrey14,
+                                        ),
+                                      ],
+                                    )),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
-                          Expanded(
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  SFText(
-                                    keyText: transactionList[index].status == 1
-                                        ? "Success"
-                                        : "Failed",
-                                    style: transactionList[index].status == 1
-                                        ? TextStyles.bold16Blue
-                                        : TextStyles.red16Italic,
-                                  ),
-                                  const SizedBox(height: 4.0),
-                                  SFText(
-                                    keyText: dateUtils.ddMMyyyyHHmm(
-                                        transactionList[index].timeStamp),
-                                    style: TextStyles.lightGrey14,
-                                  ),
-                                ],
-                              )),
-                          Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SFText(
-                                    keyText:
-                                    "${transactionList[index].valueInEther?.formatBalanceToken}",
-                                    style: TextStyles.bold16Blue,
-                                  ),
-                                  const SizedBox(
-                                    height: 4.0,
-                                  ),
-                                  SFText(
-                                    keyText:
-                                    "${transactionList[index].addressTo}"
-                                        .formatAddress,
-                                    style: TextStyles.lightGrey14,
-                                  ),
-                                ],
-                              )),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            )
-                : Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SFIcon(Ics.emptyBox),
-                    const SizedBox(height: 24),
-                    SFText(
-                      keyText: LocaleKeys.no_transaction_record,
-                      style: TextStyles.lightGrey14,
-                    )
-                  ],
-                ))
+                        ),
+                      )
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SFIcon(Ics.emptyBox),
+                            const SizedBox(height: 24),
+                            SFText(
+                              keyText: LocaleKeys.no_transaction_record,
+                              style: TextStyles.lightGrey14,
+                            )
+                          ],
+                        ),
+                      )
                 : const Center(child: CircularProgressIndicator()),
           );
         },

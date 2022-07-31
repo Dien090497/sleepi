@@ -22,7 +22,7 @@ class NFTListCubit extends Cubit<NftListState> {
         _idCategory,
         bedType: 'bed',
       ));
-
+      if (isClosed) return;
       result.fold((l) {
         emit(NftListState.error('$l'));
         emit(const NftListState.loaded(
@@ -61,6 +61,7 @@ class NFTListCubit extends Cubit<NftListState> {
       _idCategory,
       bedType: 'bedbox',
     ));
+    if (isClosed) return;
     result.fold((l) {}, (entities) {
       final currentState = state;
       if (currentState is NftListLoaded) {

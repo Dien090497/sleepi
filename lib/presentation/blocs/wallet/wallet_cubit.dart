@@ -21,18 +21,6 @@ import 'wallet_state.dart';
 class WalletCubit extends Cubit<WalletState> {
   WalletCubit() : super(const WalletState.initial());
 
-  void _startTimer() {
-    if (_timer != null) {
-      _timer = null;
-    }
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      final currentState = state;
-      if (currentState is WalletStateLoaded) {
-        refresh();
-      }
-    });
-  }
-
   final _currentWalletUC = getIt<CurrentWalletUseCase>();
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
   final _getBalanceForTokensUC = getIt<GetBalanceForTokensUseCase>();
@@ -40,8 +28,6 @@ class WalletCubit extends Cubit<WalletState> {
   final _hasWalletUC = getIt<HasWalletUseCase>();
   final _getNftAddressesUC = getIt<GetNftAddressesUseCase>();
   final _getTokenAddressesUC = getIt<GetTokenAddressesUseCase>();
-
-  Timer? _timer;
 
   Future<void> checkWallet() async {
     final currentState = state;
@@ -91,13 +77,88 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  void importWallet(WalletInfoEntity walletInfoEntity) {
+  void importWallet(WalletInfoEntity walletInfoEntity) async {
     final currentState = state;
     if (currentState is WalletStateLoaded) {
       emit(currentState.copyWith(walletInfoEntity: walletInfoEntity));
     } else {
+      if (currentState is WalletStateLoaded) {
+        emit(currentState.copyWith(
+          walletInfoEntity: walletInfoEntity,
+          tokenList: await _getListTokens(walletInfoEntity),
+          isLoading: false,
+        ));
+      } else {
+        emit(WalletState.loaded(
+          walletInfoEntity: walletInfoEntity,
+          tokenList: await _getListTokens(walletInfoEntity),
+        ));
+      }
       loadCurrentWallet(walletInfoEntity);
     }
+  }
+
+  Future<List<TokenEntity>> _getListTokens(WalletInfoEntity wallet) async {
+    final nftAddresses =
+        (await _getNftAddressesUC.call(NoParams())).getOrElse(() => []);
+    final tokenAddresses =
+        (await _getTokenAddressesUC.call(NoParams())).getOrElse(() => []);
+    final ParamsBalanceOfToken params = ParamsBalanceOfToken(
+        walletInfoEntity: wallet, addressContract: tokenAddresses);
+    final GetNFTsParams nfTsParams =
+        GetNFTsParams(wallet.address, nftAddresses);
+    final tokenBalanceRes = await _getBalanceForTokensUC.call(params);
+    final nftBalanceRes = await _getNFTsBalanceUC.call(nfTsParams);
+    final List keyList = [
+      "SLFT",
+      "SLGT",
+      "AVAX",
+      "USDC",
+    ];
+    final List nftNames = [
+      LocaleKeys.bed.tr(),
+      LocaleKeys.jewels.tr(),
+      LocaleKeys.bed_boxes.tr(),
+      LocaleKeys.item.tr(),
+    ];
+    final List icons = [
+      Ics.icSlft,
+      Ics.icSlgt,
+      Ics.icAvax,
+      Ics.icUsdc,
+    ];
+    final List nftIcons = [
+      Ics.bed,
+      Ics.jewel,
+      Ics.icBedBoxes,
+      Ics.item,
+    ];
+    final tokenList = <TokenEntity>[];
+    final values = tokenBalanceRes.getOrElse(() => []);
+    final nfts = nftBalanceRes.getOrElse(() => []);
+    for (int i = 0; i < values.length; i++) {
+      final tokenEntity = TokenEntity(
+        address: tokenAddresses[i],
+        displayName: keyList[i],
+        name: keyList[i],
+        symbol: keyList[i],
+        icon: icons[i],
+        balance: values[i],
+      );
+      tokenList.add(tokenEntity);
+    }
+    for (int i = 0; i < nfts.length; i++) {
+      final tokenEntity = TokenEntity(
+        address: nftAddresses[i],
+        displayName: nftNames[i],
+        name: nftNames[i],
+        symbol: nftNames[i],
+        icon: nftIcons[i],
+        balance: nfts[i].toDouble(),
+      );
+      tokenList.add(tokenEntity);
+    }
+    return tokenList;
   }
 
   Future<void> loadCurrentWallet(WalletInfoEntity wallet) async {
@@ -172,7 +233,6 @@ class WalletCubit extends Cubit<WalletState> {
         walletInfoEntity: wallet,
         tokenList: tokenList,
       ));
-      _startTimer();
     }
   }
 
@@ -188,11 +248,5 @@ class WalletCubit extends Cubit<WalletState> {
         emit(WalletState.getHistorySuccess(history));
       },
     );
-  }
-
-  @override
-  Future<void> close() {
-    _timer?.cancel();
-    return super.close();
   }
 }

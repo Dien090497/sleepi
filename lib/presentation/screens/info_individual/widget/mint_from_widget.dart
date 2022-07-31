@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -18,9 +17,6 @@ class MintFromWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FToast fToast = FToast();
-    fToast.init(context);
-
     if (familyData == null) {
       return const SizedBox();
     } else {
@@ -68,6 +64,5 @@ class MintFromWidget extends StatelessWidget {
         );
       }
     }
-
   }
 }
