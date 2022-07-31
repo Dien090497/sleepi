@@ -59,14 +59,14 @@ class Const {
   static const localeZH = Locale('zh', 'Hans');
 
   static const locales = [
-    localeDE,
+    // localeDE,
     localeEN,
-    localeES,
-    localeFR,
+    // localeES,
+    // localeFR,
     localeJA,
-    localePT,
-    localeRU,
-    localeZH,
+    // localePT,
+    // localeRU,
+    // localeZH,
   ];
   static const sortCondition = ["LowPrice", "HighPrice", "Latest"];
 
