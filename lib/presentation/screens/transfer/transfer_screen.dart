@@ -14,7 +14,6 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_list.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/transfer_widget.dart';
-import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 
 class TransferScreenArg {
   final String address;
@@ -93,12 +92,17 @@ class TransferScreen extends StatelessWidget {
             title: LocaleKeys.transfer,
             textStyle: TextStyles.bold18LightWhite,
           ),
-          child: const NoResultWidget(),
+          child: const LoadingIcon(),
         );
       }
     }
-    return const BackgroundWidget(
-      child: LoadingIcon(),
+    return BackgroundWidget(
+      appBar: SFAppBar(
+        context: context,
+        title: LocaleKeys.transfer,
+        textStyle: TextStyles.bold18LightWhite,
+      ),
+      child: const LoadingIcon(),
     );
   }
 }

@@ -170,16 +170,18 @@ class _TransferListState extends State<TransferList> {
                               final isAvax =
                                   state.currentToken.symbol.toLowerCase() ==
                                       'avax';
-                              final v = isAvax
+                              final amount = isAvax
                                   ? (Decimal.parse('${currentToken.balance}') -
                                           Decimal.parse('${state.fee}'))
                                       .floor(scale: 6)
-                                      .toString()
                                   : Decimal.parse('${currentToken.balance}')
-                                      .floor(scale: 6)
-                                      .toString();
-                              valueController.text = v;
-                              cubit.setAmount(v);
+                                      .floor(scale: 6);
+                              if (amount >= Decimal.zero) {
+                                valueController.text = amount.toString();
+                              } else {
+                                valueController.text = '0';
+                              }
+                              cubit.setAmount(amount.toString());
                             }
                           },
                         ),
