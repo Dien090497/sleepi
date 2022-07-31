@@ -75,8 +75,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   const SizedBox(height: 20.0),
                   GestureDetector(
                     onTap: () {
-                      fToast.removeCustomToast();
-                      _copyAddress(fToast, context, addressWallet);
+                      _copyAddress(context, addressWallet);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
