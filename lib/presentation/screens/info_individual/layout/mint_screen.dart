@@ -35,6 +35,12 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   int percentBedBox = 100;
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     animationController = AnimationController(
