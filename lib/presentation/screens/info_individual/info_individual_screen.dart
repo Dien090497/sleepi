@@ -34,7 +34,12 @@ class InfoIndividualParams {
   final MarketPlaceModel? marketPlaceModel;
   final bool isOwner;
 
-  InfoIndividualParams({this.buy, required this.bed, this.marketPlaceModel, this.isOwner = false, });
+  InfoIndividualParams({
+    this.buy,
+    required this.bed,
+    this.marketPlaceModel,
+    this.isOwner = false,
+  });
 }
 
 class InfoIndividualScreen extends StatelessWidget {
@@ -86,6 +91,9 @@ class InfoIndividualScreen extends StatelessWidget {
                                 SocketComponent(
                                   bedId: state.bed.id,
                                   level: state.bed.level,
+                                  updateJewelSuccess: () {
+                                    context.read<IndividualCubit>().refresh();
+                                  },
                                 ),
                                 const SizedBox(height: 16),
                                 BoxInfoWidget(bed: state.bed),
@@ -190,16 +198,19 @@ class InfoIndividualScreen extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: (args.marketPlaceModel != null && (args.buy ?? false)
-                    ? (
-                    (args.bed.isLock == 1 &&
-                    args.bed.status == 'ON_SALE' && args.isOwner == true) ? CancelSellBottombar(
-                      beds: state.bed,
-                      onCancelSellSuccess: () {
-                        context.read<IndividualCubit>().refresh();
-                      },
-                    ) : BottomBarMarketPlaceWidget(bed: args.marketPlaceModel!))
+                    ? ((args.bed.isLock == 1 &&
+                            args.bed.status == 'ON_SALE' &&
+                            args.isOwner == true)
+                        ? CancelSellBottombar(
+                            beds: state.bed,
+                            onCancelSellSuccess: () {
+                              context.read<IndividualCubit>().refresh();
+                            },
+                          )
+                        : BottomBarMarketPlaceWidget(
+                            bed: args.marketPlaceModel!))
                     : ((state.bed.isLock == 1 &&
-                                state.bed.statusNftSale == 'ON_SALE'))
+                            state.bed.statusNftSale == 'ON_SALE'))
                         ? CancelSellBottombar(
                             beds: state.bed,
                             onCancelSellSuccess: () {
