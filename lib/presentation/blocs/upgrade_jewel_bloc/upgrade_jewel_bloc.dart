@@ -138,7 +138,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     ));
     result.fold((l) {
       final currentState = state;
-      if (currentState is JewelStateLoaded && _currentPage != 1) {
+      if (currentState is JewelStateLoaded) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
           loading: false,
