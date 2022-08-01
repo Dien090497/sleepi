@@ -176,7 +176,7 @@ import '../usecase/wallet/import_wallet_usecase.dart' as _i61;
 import '../usecase/withdraw_history_usecase.dart' as _i106;
 import '../usecase/withdraw_nft_usecase.dart' as _i107;
 import 'dev_injection.dart' as _i167;
-import 'prod_innjection.dart' as _i168;
+import 'prod_injection.dart' as _i168;
 import 'register_module.dart' as _i166;
 import 'stg_injection.dart' as _i169;
 

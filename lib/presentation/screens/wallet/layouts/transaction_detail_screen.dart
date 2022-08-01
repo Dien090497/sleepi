@@ -8,6 +8,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -19,6 +20,7 @@ import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_s
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
 import 'package:slee_fi/presentation/screens/transfer/transfer_screen.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/transaction_detail_list.dart';
 import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
@@ -104,16 +106,16 @@ class TransactionDetail extends StatelessWidget {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
-                                showComingSoonDialog(context);
-                                // SFModalBottomSheet.show(
-                                //   context,
-                                //   0.7,
-                                //   ModalReceiveWallet(
-                                //     address: addressWallet ?? 'input the address',
-                                //     networkName: networkName ??
-                                //         LocaleKeys.avalanche_wallet,
-                                //   ),
-                                // );
+                                if (state is WalletStateLoaded) {
+                                  SFModalBottomSheet.show(
+                                    context,
+                                    0.7,
+                                    ModalReceiveWallet(
+                                      address: state.walletInfoEntity.address,
+                                      networkName: state.walletInfoEntity.networkName
+                                    ),
+                                  );
+                                }
                               },
                               text: LocaleKeys.receive,
                               assetImage: Ics.icDownload,
@@ -122,7 +124,7 @@ class TransactionDetail extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Expanded(
+                          args.tokenEntity.symbol != 'USDC' ? Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
                                 Navigator.pushNamed(context, R.transfer,
@@ -133,8 +135,8 @@ class TransactionDetail extends StatelessWidget {
                               text: LocaleKeys.to_spending,
                               assetImage: Ics.icRefresh,
                             ),
-                          ),
-                          const SizedBox(width: 10),
+                          ) : const SizedBox(),
+                          args.tokenEntity.symbol != 'USDC' ? const SizedBox(width: 10,) : const SizedBox(),
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
