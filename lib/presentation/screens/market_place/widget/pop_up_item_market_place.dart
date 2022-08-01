@@ -103,10 +103,7 @@ class PopUpItemMarketPlace extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              child: SFText(
-                keyText: item.name,
-                style: TextStyles.blue14,
-              ),
+              child: SFText(keyText: item.name, style: TextStyles.blue14),
             ),
             const SizedBox(width: 15),
             Container(
