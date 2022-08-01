@@ -221,9 +221,12 @@ Future<T?> showChangeLanguageDialog<T>(BuildContext context,
             ),
             const SFIcon(Ics.warning),
             const SizedBox(height: 20),
-            SFText(
-              keyText: LocaleKeys.do_you_really_want_to_change,
-              style: TextStyles.white1w700size18,
+            Center(
+              child: SFText(
+                textAlign: TextAlign.center,
+                keyText: LocaleKeys.do_you_really_want_to_change,
+                style: TextStyles.white1w700size18,
+              ),
             ),
             const SizedBox(height: 38),
             Row(

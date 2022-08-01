@@ -121,8 +121,6 @@ class _TradeScreenState extends State<TradeScreen> {
   @override
   void dispose() {
     _debounce?.cancel();
-    valueController.clear();
-    valueController.dispose();
     super.dispose();
   }
 
@@ -143,7 +141,7 @@ class _TradeScreenState extends State<TradeScreen> {
     } else {
       indexTo = getIndexAddress(args.contractAddressTo!);
     }
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
       tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
@@ -189,13 +187,10 @@ class _TradeScreenState extends State<TradeScreen> {
                           listTokens[indexTo]['address'].toString());
                     },
                     amountOutMin: amountOutMin,
-                  )).then((value) => {
-                    setState(() {
-                      valueController.text = '';
-                      amountOutMin = 0;
-                      error = '';
-                    })
-                  });
+                  )).then((value) {
+                tradeCubit.getBalanceToken(
+                    listTokens[indexFrom]['address'].toString());
+              });
             }
           }
 
@@ -203,6 +198,11 @@ class _TradeScreenState extends State<TradeScreen> {
             Navigator.pop(context);
             if (state.success) {
               showSuccessfulDialog(context, null).then((value) {
+                setState(() {
+                  valueController.text = '';
+                  amountOutMin = 0;
+                  error = '';
+                });
                 if (_debounce?.isActive ?? false) _debounce!.cancel();
                 _debounce = Timer(const Duration(milliseconds: 3000), () async {
                   tradeCubit.getBalanceToken(
@@ -606,13 +606,11 @@ class _TradeScreenState extends State<TradeScreen> {
                                               .toString());
                                     },
                                     amountOutMin: amountOutMin,
-                                  )).then((value) => {
-                                    setState(() {
-                                      valueController.text = '';
-                                      amountOutMin = 0;
-                                      error = '';
-                                    })
-                                  });
+                                  )).then((value) {
+                                tradeCubit.getBalanceToken(listTokens[indexFrom]
+                                        ['address']
+                                    .toString());
+                              });
                             }
                           }
                         },

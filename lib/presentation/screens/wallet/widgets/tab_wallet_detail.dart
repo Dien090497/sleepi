@@ -70,7 +70,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   const SizedBox(height: 32),
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
-                  Text('${balance.formatBalanceWallet} $currencySymbol',
+                  Text('${balance.formatBalanceToken} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   GestureDetector(

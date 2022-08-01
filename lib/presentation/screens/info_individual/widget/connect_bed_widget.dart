@@ -55,84 +55,81 @@ class _ConnectBedWidgetState extends State<ConnectBedWidget> with TickerProvider
           final cubit = context.read<MintCubit>();
           return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      height: sizeScreen.height * 0.1,
-                      child: OverflowBox(
-                        minHeight: sizeScreen.height * 0.48,
-                        maxHeight: sizeScreen.height * 0.48,
-                        minWidth: sizeScreen.width,
-                        maxWidth: sizeScreen.width,
-                        child: Lottie.asset('assets/json/bed_minting.json',
-                          controller: widget.controller,
-                          fit: BoxFit.cover,
-                          repeat: false,
-                          onLoaded: (composition) {
-                            // Configure the AnimationController with the duration of the
-                            // Lottie file and start the animation.
-                            widget.controller
-                                .duration = composition.duration;
-                          },
-                        ),
+              Stack(
+                children: [
+                  SizedBox(
+                    height: sizeScreen.height * 0.1,
+                    child: OverflowBox(
+                      minHeight: sizeScreen.height * 0.48,
+                      maxHeight: sizeScreen.height * 0.48,
+                      minWidth: sizeScreen.width,
+                      maxWidth: sizeScreen.width,
+                      child: Lottie.asset('assets/json/bed_minting.json',
+                        controller: widget.controller,
+                        fit: BoxFit.cover,
+                        repeat: false,
+                        onLoaded: (composition) {
+                          // Configure the AnimationController with the duration of the
+                          // Lottie file and start the animation.
+                          widget.controller
+                              .duration = composition.duration;
+                        },
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: GestureDetector(
-                              child: CachedImage(
-                                image: widget.bedParent1.image,
-                                height: 80,
-                                width: 80,
-                              ),
-                              onTap: () {},
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            child: CachedImage(
+                              image: widget.bedParent1.image,
+                              height: 80,
+                              width: 80,
                             ),
+                            onTap: () {},
                           ),
                         ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: GestureDetector(
-                              onTap: () {
-                                if (state is MintStateLoaded) {
-                                  if (state.listBed.isEmpty) {
-                                    showCustomDialog(context, children: [
-                                      const PopupNoShoes(),
-                                    ]);
-                                  } else {
-                                    SFModalBottomSheet.show(
-                                      context,
-                                      0.8,
-                                      PopUpSelectBed(
-                                        cubit: cubit,
-                                      ),
-                                    );
-                                  }
+                      ),
+                      Expanded(
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () {
+                              if (state is MintStateLoaded) {
+                                if (state.listBed.isEmpty) {
+                                  showCustomDialog(context, children: [
+                                    const PopupNoShoes(),
+                                  ]);
+                                } else {
+                                  SFModalBottomSheet.show(
+                                    context,
+                                    0.8,
+                                    PopUpSelectBed(
+                                      cubit: cubit,
+                                    ),
+                                  );
                                 }
-                              },
-                              child: state is MintStateLoaded
-                                  ? state.indexSelected == -1
-                                  ? const SFIcon(Ics.addBed)
-                                  : CachedImage(
-                                image: state
-                                    .listBed[state.indexSelected].image,
-                                height: 80,
-                                width: 80,
-                              )
-                                  : const SFIcon(Ics.addBed),
-                            ),
+                              }
+                            },
+                            child: state is MintStateLoaded
+                                ? state.indexSelected == -1
+                                ? const SFIcon(Ics.addBed)
+                                : CachedImage(
+                              image: state
+                                  .listBed[state.indexSelected].image,
+                              height: 80,
+                              width: 80,
+                            )
+                                : const SFIcon(Ics.addBed),
                           ),
                         ),
-                      ],
-                    ),
-                  ]
-                ),
+                      ),
+                    ],
+                  ),
+                ]
               ),
               // const SFIcon(Imgs.connectBorder),
             ],
