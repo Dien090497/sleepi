@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
+import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -18,9 +19,10 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_even
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body_upgrade_success.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_detail.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-import 'jewel_dialog_body.dart';
+import 'modal_jewel_list.dart';
 
 class UpGradeTab extends StatefulWidget {
   const UpGradeTab({Key? key, required this.isJewel}) : super(key: key);
@@ -30,7 +32,7 @@ class UpGradeTab extends StatefulWidget {
   State<UpGradeTab> createState() => _UpGradeTabState();
 }
 
-class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
+class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin {
   late AnimationController animationController;
   bool loading = false;
 
@@ -70,6 +72,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
               backgroundColor: AppColors.transparent,
               children: [
                 JewelDialogBodyUpgradeSuccess(
+
                   jewel: state.upgradeSuccess!,
                   isJewel: widget.isJewel,
                 ),
@@ -108,22 +111,26 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                         child: Stack(
                           children: [
                             Visibility(
-                                visible: loading,
-                                child: Lottie.asset(widget.isJewel ? 'assets/json/jewel_upgrade.json' : 'assets/json/item_upgrade.json',
-                                  controller: animationController,
-                                  // fit: BoxFit.cover,
-                                  width: 238,
-                                  height: 238,
-                                  // repeat: false,
-                                  onLoaded: (composition) {
-                                    // Configure the AnimationController with the duration of the
-                                    // Lottie file and start the animation.
-                                    animationController..duration = composition.duration
-                                      ..forward();
-                                  },
-                                ),
+                              visible: loading,
+                              child: Lottie.asset(
+                                widget.isJewel
+                                    ? 'assets/json/jewel_upgrade.json'
+                                    : 'assets/json/item_upgrade.json',
+                                controller: animationController,
+                                // fit: BoxFit.cover,
+                                width: 238,
+                                height: 238,
+                                // repeat: false,
+                                onLoaded: (composition) {
+                                  // Configure the AnimationController with the duration of the
+                                  // Lottie file and start the animation.
+                                  animationController
+                                    ..duration = composition.duration
+                                    ..forward();
+                                },
+                              ),
                             ),
-                           const SFIcon( Imgs.upgrade, width: 238, height: 238),
+                            const SFIcon(Imgs.upgrade, width: 238, height: 238),
                             JewelSocket(
                                 isJewel: widget.isJewel,
                                 top: 28,
@@ -261,16 +268,13 @@ class JewelSocket extends StatelessWidget {
 
             return;
           }
-          showComingSoonDialog(context);
-          /// SHOW MODAL BOTTOM ITEM TO UPGRADE
-          // SFModalBottomSheet.show(
-          //     context,
-          //     0.8,
-          //     ModalJewelList(
-          //       isJewel: isJewel,
-          //       jewelBloc: context.read<JewelBloc>(),
-          //     ));
-          /// --------------------------------------
+          SFModalBottomSheet.show(
+              context,
+              0.8,
+              ModalJewelList(
+                isJewel: isJewel,
+                jewelBloc: context.read<JewelBloc>(),
+              ));
         },
         child: jewelEntity == null
             ? const SFIcon(Ics.icPlus)
@@ -290,7 +294,7 @@ class JewelSocket extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: [
-        JewelDialogBody(
+        JewelDialogDetail(
           isJewel: isJewel,
           jewel: jewel,
           textOnSell: LocaleKeys.remove,
