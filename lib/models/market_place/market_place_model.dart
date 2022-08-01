@@ -132,17 +132,17 @@ class MarketPlaceModel {
     );
   }
 
-  String get infoBuff {
-    switch (jewelType) {
-      case 'ruby':
-        return efficiency;
-      case 'sapphire':
-        return luck;
-      case 'emerald':
-        return bonus;
-      case 'diamond':
-        return special;
-    }
-    return '';
-  }
+  // String get infoBuff {
+  //   switch (jewelType) {
+  //     case 'ruby':
+  //       return efficiency;
+  //     case 'sapphire':
+  //       return luck;
+  //     case 'emerald':
+  //       return bonus;
+  //     case 'diamond':
+  //       return special;
+  //   }
+  //   return '';
+  // }
 }

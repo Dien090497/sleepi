@@ -50,18 +50,19 @@ class ItemBedBuyWidget extends StatelessWidget {
               ),
               SizedBox(height: 22.h),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                        child: Container(
+                    Container(
+                      constraints: const BoxConstraints(maxWidth: 80),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: qualityColor!.withOpacity(0.1)),
+                        border:
+                            Border.all(color: qualityColor!.withOpacity(0.1)),
                       ),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
                       alignment: Alignment.center,
                       child: SFText(
                         textAlign: TextAlign.center,
@@ -69,17 +70,18 @@ class ItemBedBuyWidget extends StatelessWidget {
                         style: TextStyles.white1w700size12
                             .copyWith(color: qualityColor),
                       ),
-                    )),
+                    ),
                     const SizedBox(width: 6),
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: AppColors.green.withOpacity(0.15)),
-                      padding:
-                          const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
                       alignment: Alignment.center,
                       child: SFText(
-                        keyText: '+ ${item.percentEffect}%',
+                        keyText:
+                            '+ ${item.percentEffect != null && item.percentEffect! % 1 == 0 ? item.percentEffect!.toInt() : item.percentEffect ?? 0}%',
                         style: TextStyles.greenW700size12,
                       ),
                     ),

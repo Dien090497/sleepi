@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
@@ -95,21 +94,30 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           height: 60,
         ),
         const SizedBox(height: 30),
-        // SFText(
-        //   keyText: '${LocaleKeys.luck_jewel.tr()} (${jewel.luck})',
-        //   style: TextStyles.white1w700size16,
-        // ),
-        // const SizedBox(height: 24),
-        Container(
-          decoration: BoxDecoration(
-            color: AppColors.blue.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          padding: const EdgeInsets.all(8),
-          child: SFText(
-            keyText: jewel.name,
-            style: TextStyles.blue14,
-          ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+              child: SFText(keyText: jewel.name, style: TextStyles.blue14),
+            ),
+            const SizedBox(width: 15),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.blue.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+              child: SFText(
+                keyText: 'Lv ${jewel.level}',
+                style: TextStyles.blue14,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 32),
         SFCard(
@@ -117,19 +125,38 @@ class PopUpJewelMarketPlace extends StatelessWidget {
           margin: EdgeInsets.zero,
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SFText(
+                keyText: LocaleKeys.attributes,
+                style: TextStyles.lightGrey16,
+              ),
+              const SizedBox(width: 4),
+              SFText(
+                keyText: jewel.type.reCase(StringCase.titleCase),
+                style: TextStyles.blue16,
+                textAlign: TextAlign.right,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        SFCard(
+          radius: 8,
+          margin: EdgeInsets.zero,
+          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 24),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SFText(
                 keyText: LocaleKeys.effect,
                 style: TextStyles.lightGrey16,
               ),
               const SizedBox(width: 4),
-              Expanded(
-                child: SFText(
-                  keyText:
-                      '+${jewel.jewelCorrection}% ${LocaleKeys.base.tr()} ${jewel.type.reCase(StringCase.titleCase)}',
-                  style: TextStyles.blue16,
-                  textAlign: TextAlign.right,
-                ),
+              SFText(
+                keyText: '+${jewel.percentEffect}%',
+                style: TextStyles.blue16,
+                textAlign: TextAlign.right,
               ),
             ],
           ),
