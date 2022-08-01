@@ -105,6 +105,9 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          const SizedBox(
+                                            height: 42,
+                                          ),
                                           ConnectBedWidget(
                                             bedParent1: args,
                                             controller: animationController,
