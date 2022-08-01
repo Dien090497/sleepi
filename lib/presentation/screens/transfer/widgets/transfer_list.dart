@@ -39,6 +39,8 @@ class _TransferListState extends State<TransferList> {
   @override
   void dispose() {
     isLoadingNotifier.dispose();
+    valueController.dispose();
+    refreshController.dispose();
     super.dispose();
   }
 
