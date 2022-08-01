@@ -223,34 +223,39 @@ class _SFDatePickerState extends State<SFDatePicker> {
           return false;
         }
       },
-      child: CupertinoPicker(
-        looping: true,
-        selectionOverlay: const SizedBox(),
-        offAxisFraction: widget.offAxisFraction,
-        squeeze: 1,
-        scrollController: controller,
-        useMagnifier: widget.useMagnifier,
-        itemExtent: 48.0,
-        backgroundColor: AppColors.dark,
-        onSelectedItemChanged: (int index) {
-          temp = index;
-        },
-        children: List<Widget>.generate(
-          widget.datas.length,
-          (int i) {
-            final value = widget.datas[i];
-            return Container(
-              width: double.infinity,
-              height: 46,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              alignment: widget.alignment,
-              child: Text(
-                value < 10 ? '0$value' : '$value',
-                textAlign: TextAlign.right,
-                style: TextStyles.white1w700size16,
-              ),
-            );
-          },
+      child: CupertinoPageScaffold(
+        backgroundColor: AppColors.transparent,
+        child: CupertinoScrollbar(
+          child: CupertinoPicker(
+            looping: true,
+            selectionOverlay: const SizedBox(),
+            offAxisFraction: widget.offAxisFraction,
+            squeeze: 1,
+            scrollController: controller,
+            useMagnifier: widget.useMagnifier,
+            itemExtent: 48.0,
+            backgroundColor: AppColors.dark,
+            onSelectedItemChanged: (int index) {
+              temp = index;
+            },
+            children: List<Widget>.generate(
+              widget.datas.length,
+              (int i) {
+                final value = widget.datas[i];
+                return Container(
+                  width: double.infinity,
+                  height: 46,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  alignment: widget.alignment,
+                  child: Text(
+                    value < 10 ? '0$value' : '$value',
+                    textAlign: TextAlign.right,
+                    style: TextStyles.white1w700size16,
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ),
     );

@@ -442,6 +442,7 @@ abstract class  LocaleKeys {
   static const wallet_imported_successfully = 'wallet_imported_successfully';
   static const insufficient_amount = 'insufficient_amount';
   static const you_dont_have_enough_money_to_staking = 'you_dont_have_enough_money_to_staking';
+  static const you_dont_have_enough_money = 'you_dont_have_enough_money';
   static const click_here_to_proceed = 'click_here_to_proceed';
   static const lucky_box = 'lucky_box';
   static const you_can_open_the_luck_box = 'you_can_open_the_luck_box';
@@ -498,5 +499,12 @@ abstract class  LocaleKeys {
   static const invalid_bed = 'invalid_bed';
   static const remaining_time = 'remaining_time';
   static const to_speed_up = 'to_speed_up';
+  static const jewel_level = 'jewel_level';
+  static const item_level = 'item_level';
+  static const no_more_data = 'no_more_data';
+  static const load_fail_retry = 'load_fail_retry';
+  static const pull_up_load = 'pull_up_load';
+  static const release_to_load_more = 'release_to_load_more';
+  static const roi_day = 'roi_day';
 
 }

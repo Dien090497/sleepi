@@ -23,7 +23,7 @@ class TransferCubit extends Cubit<TransferState> {
           isToSpending: isToSpending,
           currentToken: currentToken,
           spendingTokens: spendingTokens,
-          walletTokens: walletTokens,
+          walletTokens: List.from(walletTokens)..removeRange(3, walletTokens.length),
           backupToken: backupToken,
         ));
 
@@ -89,6 +89,9 @@ class TransferCubit extends Cubit<TransferState> {
     required double balance,
     required bool isToSpending,
   }) {
+    if (fee == null) {
+      return LocaleKeys.fee;
+    }
     if (amount == null) {
       return LocaleKeys.this_field_is_required;
     }
@@ -97,15 +100,14 @@ class TransferCubit extends Cubit<TransferState> {
     } else {
       if (symbol.toLowerCase() == 'avax') {
         /// Case transfer AVAX
-        if (fee == null) {
-          return LocaleKeys.amount_input_can_not_be_zero;
+        final balDec = Decimal.parse('$balance');
+        final feeDec = Decimal.parse(fee);
+        if (balDec <= feeDec) {
+          return LocaleKeys.insufficient_balance;
+        } else if (amount > (balDec - feeDec).toDouble()) {
+          return LocaleKeys.insufficient_balance;
         } else {
-          if (amount >
-              (Decimal.parse('$balance') - Decimal.parse(fee)).toDouble()) {
-            return LocaleKeys.insufficient_balance;
-          } else {
-            return null;
-          }
+          return null;
         }
       } else {
         /// Case không phải transfer AVAX

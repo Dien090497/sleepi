@@ -7,6 +7,7 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_cubit.dart';
 import 'package:slee_fi/presentation/blocs/gacha/gacha_spin_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/layout/gacha_animation_screen.dart';
@@ -51,23 +52,27 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
         listener: (context, state) {
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
-            showMessageDialog(context, "You don't have enough money").then((value) {
+            showMessageDialog(context, LocaleKeys.you_dont_have_enough_money)
+                .then((value) {
               final cubit = context.read<GachaSpinCubit>();
               cubit.init();
               setState(() => enableButton = true);
             });
           }
-        if(state is GachaSpinSuccess) {
-          Navigator.pop(context, true);
-          Navigator.pushNamed(context, R.gachaAnimation,
-              arguments: GachaAnimationArguments(
+          if (state is GachaSpinSuccess) {
+            Navigator.pop(context, true);
+            Navigator.pushNamed(context, R.gachaAnimation,
+                arguments: GachaAnimationArguments(
                   spinInfo: state.gachaSpinResponse,
-                  animation: widget.normalGacha ? Const.normalGachaAnimation : Const.specialGachaAnimation,
-                  audio: widget.normalGacha ? Const.normalGachaAudio : Const.specialGachaAudio,
-              )
-          ).then((value) => widget.onPressed());
-          setState(() => enableButton = true);
-        }
+                  animation: widget.normalGacha
+                      ? Const.normalGachaAnimation
+                      : Const.specialGachaAnimation,
+                  audio: widget.normalGacha
+                      ? Const.normalGachaAudio
+                      : Const.specialGachaAudio,
+                )).then((value) => widget.onPressed());
+            setState(() => enableButton = true);
+          }
         },
         builder: (context, state) {
           final cubit = context.read<GachaSpinCubit>();
@@ -77,34 +82,50 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                 child: GestureDetector(
                   onTap: () {
                     showCustomAlertDialog(context,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
                         width: MediaQuery.of(context).size.width * 0.9,
-                        children:  PopupGachaConfirm(
+                        children: PopupGachaConfirm(
                           priceSpin: widget.costSingle,
                           quantity: 1,
                           onConfirmTap: () {
-                            enableButton ? cubit.gachaSpin(GachaSpinSchema(probability: widget.singleProbability)) : null;
-                            setState(() =>  enableButton = false);
                             Navigator.pop(context, true);
-                            showLoadingDialog(context, barrierDismissible: false);
+                            showMessageDialog(context,
+                                    LocaleKeys.you_dont_have_enough_money)
+                                .then((value) {
+                              final cubit = context.read<GachaSpinCubit>();
+                              cubit.init();
+                              setState(() => enableButton = true);
+                            });
+                            // enableButton
+                            //     ? cubit.gachaSpin(GachaSpinSchema(
+                            //         probability: widget.singleProbability))
+                            //     : null;
+                            // setState(() => enableButton = false);
+                            // Navigator.pop(context, true);
+                            // showLoadingDialog(context,
+                            //     barrierDismissible: false);
                           },
                         ));
                   },
-                  child: Stack(
-                      children: [
-                        SFIcon(widget.singleGachaImages, fit: BoxFit.fill),
-                        Positioned(
-                            bottom: 10,
-                            right: 20,
-                            child: Row(
-                              children: [
-                                const SFIcon(Ics.icSlft),
-                                const SizedBox(width: 8,),
-                                SFText(keyText: "${widget.costSingle}", style: TextStyles.w600WhiteSize16,),
-                              ],
-                            ))
-                      ]
-                  ),
+                  child: Stack(children: [
+                    SFIcon(widget.singleGachaImages, fit: BoxFit.fill),
+                    Positioned(
+                        bottom: 10,
+                        right: 20,
+                        child: Row(
+                          children: [
+                            const SFIcon(Ics.icSlft),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            SFText(
+                              keyText: "${widget.costSingle}",
+                              style: TextStyles.w600WhiteSize16,
+                            ),
+                          ],
+                        ))
+                  ]),
                 ),
               ),
               const SizedBox(width: 12),
@@ -112,35 +133,41 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                 child: GestureDetector(
                   onTap: () {
                     showCustomAlertDialog(context,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
                         width: MediaQuery.of(context).size.width * 0.9,
-                        children:  PopupGachaConfirm(
-                          priceSpin: widget.costMultiple,
-                          quantity: 10,
-                          onConfirmTap: () {
-                            enableButton ? cubit.gachaSpin(GachaSpinSchema(probability: widget.timesProbability)) : null;
-                            setState(() =>  enableButton = false);
-                            Navigator.pop(context, true);
-                            showLoadingDialog(context, barrierDismissible: false);
-                          }
-                        )
-                    );
+                        children: PopupGachaConfirm(
+                            priceSpin: widget.costMultiple,
+                            quantity: 10,
+                            onConfirmTap: () {
+                              enableButton
+                                  ? cubit.gachaSpin(GachaSpinSchema(
+                                      probability: widget.timesProbability))
+                                  : null;
+                              setState(() => enableButton = false);
+                              Navigator.pop(context, true);
+                              showLoadingDialog(context,
+                                  barrierDismissible: false);
+                            }));
                   },
-                  child: Stack(
-                      children: [
-                        SFIcon(widget.timesGachaImages, fit: BoxFit.fill),
-                        Positioned(
-                          bottom: 10,
-                            right: 20,
-                            child: Row(
-                              children: [
-                                const SFIcon(Ics.icSlft),
-                                const SizedBox(width: 8,),
-                                SFText(keyText: "${widget.costMultiple}", style: TextStyles.w600Light4Size16,),
-                              ],
-                            ))
-                      ]
-                  ),
+                  child: Stack(children: [
+                    SFIcon(widget.timesGachaImages, fit: BoxFit.fill),
+                    Positioned(
+                        bottom: 10,
+                        right: 20,
+                        child: Row(
+                          children: [
+                            const SFIcon(Ics.icSlft),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            SFText(
+                              keyText: "${widget.costMultiple}",
+                              style: TextStyles.w600Light4Size16,
+                            ),
+                          ],
+                        ))
+                  ]),
                 ),
               ),
             ],

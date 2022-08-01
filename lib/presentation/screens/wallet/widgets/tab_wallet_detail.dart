@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
@@ -36,18 +35,11 @@ class TabWalletDetail extends StatefulWidget {
 
 class _TabWalletDetailState extends State<TabWalletDetail> {
   final RefreshController refreshController = RefreshController();
-  final FToast fToast = FToast();
 
   @override
   void dispose() {
     refreshController.dispose();
     super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    fToast.init(context);
-    super.didChangeDependencies();
   }
 
   void _onRefresh(WalletCubit walletCubit) async {
@@ -78,13 +70,12 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                   const SizedBox(height: 32),
                   SFText(keyText: networkName, style: TextStyles.bold12Blue),
                   const SizedBox(height: 4.0),
-                  Text('${balance.formatBalanceWallet} $currencySymbol',
+                  Text('${balance.formatBalanceToken} $currencySymbol',
                       style: TextStyles.bold30White),
                   const SizedBox(height: 20.0),
                   GestureDetector(
                     onTap: () {
-                      fToast.removeCustomToast();
-                      _copyAddress(fToast, context, addressWallet);
+                      _copyAddress(context, addressWallet);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
@@ -107,13 +98,16 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                       children: [
                         Expanded(
                           child: BoxButtonWidget(
-                            onTap: () => SFModalBottomSheet.show(
+                            onTap: () {
+                              SFModalBottomSheet.show(
                                 context,
                                 0.7,
                                 ModalReceiveWallet(
                                   networkName: networkName,
                                   address: addressWallet,
-                                )),
+                                ),
+                              );
+                            },
                             text: LocaleKeys.receive,
                             assetImage: Ics.icDownload,
                           ),
@@ -215,7 +209,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                     ),
                   ),
                   const SizedBox(height: 12.0),
-                  WalletDetailList(tokenList: tokenList)
+                  WalletDetailList(tokenList: tokenList),
                 ],
               ),
             ),
@@ -226,7 +220,7 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
     );
   }
 
-  void _copyAddress(FToast fToast, BuildContext context, String address) async {
+  void _copyAddress(BuildContext context, String address) async {
     ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
     if (data?.text == address) {
       debugPrint(address);
@@ -234,10 +228,6 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
       Clipboard.setData(ClipboardData(text: address));
     }
 
-    ToastUtils.showToast(
-      fToast,
-      AppColors.white.withOpacity(0.55),
-      LocaleKeys.successfully_copied,
-    );
+    ToastUtils.showToast(LocaleKeys.successfully_copied);
   }
 }

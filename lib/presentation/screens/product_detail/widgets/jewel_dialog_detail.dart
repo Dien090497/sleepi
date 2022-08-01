@@ -63,7 +63,7 @@ class JewelDialogDetail extends StatelessWidget {
             const SizedBox(height: 20),
             SFText(
               keyText:
-              '${jewel.jewelType?.tr() ?? jewel.itemType?.tr()} ${isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()} (Lv.${jewel.level})',
+                  '${jewel.jewelType?.tr() ?? jewel.itemType?.tr()} ${isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()} (Lv.${jewel.level})',
               style: TextStyles.white1w700size16,
             ),
             const SizedBox(height: 24),
@@ -123,21 +123,21 @@ class JewelDialogDetail extends StatelessWidget {
               children: [
                 Expanded(
                     child: SFButton(
-                      text: textOnSell,
-                      onPressed: onSellTap,
-                      textStyle: TextStyles.lightGrey16,
-                      color: AppColors.whiteOpacity5,
-                      width: double.infinity,
-                    )),
+                  text: textOnSell,
+                  onPressed: onSellTap,
+                  textStyle: TextStyles.lightGrey16,
+                  color: AppColors.whiteOpacity5,
+                  width: double.infinity,
+                )),
                 const SizedBox(width: 12),
                 Expanded(
                     child: SFButton(
-                      text: textOnTransfer,
-                      onPressed: onTransferTap,
-                      textStyle: TextStyles.white16,
-                      gradient: AppColors.blueGradient,
-                      width: double.infinity,
-                    )),
+                  text: textOnTransfer,
+                  onPressed: onTransferTap,
+                  textStyle: TextStyles.white16,
+                  gradient: AppColors.blueGradient,
+                  width: double.infinity,
+                )),
               ],
             )
           ],

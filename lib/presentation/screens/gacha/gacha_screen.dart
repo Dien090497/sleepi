@@ -43,22 +43,43 @@ class _GachaScreenState extends State<GachaScreen> {
             create: (context) => GachaSpinCubit()..init(),
             child: BlocConsumer<GachaSpinCubit, GachaSpinState>(
               listener: (context, state) {
-                if(state is GachaHistorySuccess){
+                if (state is GachaHistorySuccess) {
                   context.read<UserBloc>().add(const RefreshBalanceToken());
                   _gachaHistoryResponse = state.response;
                 }
-                if(state is GachaProbabilityConfigSuccess){
-                  var common = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON").toList().first.configs;
+                if (state is GachaProbabilityConfigSuccess) {
+                  var common = state.gachaProbabilityConfigResponse.data
+                      .where((i) => i.key == "COMMON")
+                      .toList()
+                      .first
+                      .configs;
                   // commonData = ProbabilityConfig.fromJson(common as Map<String, dynamic>);
                   commonInfo = common;
-                  var special = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL").toList().first.configs;
+                  var special = state.gachaProbabilityConfigResponse.data
+                      .where((i) => i.key == "SPECIAL")
+                      .toList()
+                      .first
+                      .configs;
                   specialInfo = special;
                   // specialData = ProbabilityConfig.fromJson(special as Map<String, dynamic>);
-                  var configCost = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COST_OPEN_GACHA").toList().first.configs;
-                  _configCost = ConfigCost.fromJson(configCost as Map<String, dynamic>);
-                  var commonTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "COMMON_RESET_TIME").toList().first.configs;
+                  var configCost = state.gachaProbabilityConfigResponse.data
+                      .where((i) => i.key == "COST_OPEN_GACHA")
+                      .toList()
+                      .first
+                      .configs;
+                  _configCost =
+                      ConfigCost.fromJson(configCost as Map<String, dynamic>);
+                  var commonTime = state.gachaProbabilityConfigResponse.data
+                      .where((i) => i.key == "COMMON_RESET_TIME")
+                      .toList()
+                      .first
+                      .configs;
                   commonTimes = commonTime['times'];
-                  var specialTime = state.gachaProbabilityConfigResponse.data.where((i) => i.key == "SPECIAL_RESET_TIME").toList().first.configs;
+                  var specialTime = state.gachaProbabilityConfigResponse.data
+                      .where((i) => i.key == "SPECIAL_RESET_TIME")
+                      .toList()
+                      .first
+                      .configs;
                   specialTimes = specialTime['times'];
                 }
               },
@@ -66,22 +87,37 @@ class _GachaScreenState extends State<GachaScreen> {
                 final cubit = context.read<GachaSpinCubit>();
                 return Expanded(
                   child: Stack(
-                    children : [
+                    children: [
                       ListView(
                         physics: const ScrollPhysics(),
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        children:  [
+                        children: [
                           ItemsGacha(
                             dialogData: commonInfo,
-                            costSingle: _configCost != null ? _configCost!.normalGachaSingle! : 0,
-                            costMultiple: _configCost != null ? _configCost!.normalGachaMultiple! : 0,
+                            costSingle: _configCost != null
+                                ? _configCost!.normalGachaSingle!
+                                : 0,
+                            costMultiple: _configCost != null
+                                ? _configCost!.normalGachaMultiple!
+                                : 0,
                             title: LocaleKeys.normal_gacha,
-                            singleGachaImages: Localizations.localeOf(context).toLanguageTag().isJapanese ? Imgs.timeGachaJa :Imgs.timeGachaEn,
-                            timesGachaImages: Localizations.localeOf(context).toLanguageTag().isJapanese ? Imgs.timesNormalGachaJa :Imgs.timesNormalGachaEn,
+                            singleGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timeGachaJa
+                                : Imgs.timeGachaEn,
+                            timesGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timesNormalGachaJa
+                                : Imgs.timesNormalGachaEn,
                             singleProbability: Const.one,
                             timesProbability: Const.two,
-                            numberOfSpin: _gachaHistoryResponse != null &&  _gachaHistoryResponse!.data != null ? _gachaHistoryResponse!.data!.commonTimes! : 0,
-                            typeReward: LocaleKeys.genenis_common_bed,
+                            numberOfSpin: _gachaHistoryResponse != null &&
+                                    _gachaHistoryResponse!.data != null
+                                ? _gachaHistoryResponse!.data!.commonTimes!
+                                : 0,
+                            typeReward: 'Common Bed',
                             imagePath: Imgs.normalGachaBackground,
                             totalValue: commonTimes,
                             normalGacha: true,
@@ -89,15 +125,30 @@ class _GachaScreenState extends State<GachaScreen> {
                           ),
                           ItemsGacha(
                             dialogData: specialInfo,
-                            costSingle: _configCost != null ? _configCost!.specialGachaSingle! : 0,
-                            costMultiple: _configCost != null ? _configCost!.specialGachaMultiple! : 0,
+                            costSingle: _configCost != null
+                                ? _configCost!.specialGachaSingle!
+                                : 0,
+                            costMultiple: _configCost != null
+                                ? _configCost!.specialGachaMultiple!
+                                : 0,
                             title: LocaleKeys.special_gacha,
-                            singleGachaImages: Localizations.localeOf(context).toLanguageTag().isJapanese ? Imgs.timeGachaJa :Imgs.timeGachaEn,
-                            timesGachaImages: Localizations.localeOf(context).toLanguageTag().isJapanese ? Imgs.timesSpecialGachaJa :Imgs.timesSpecialGachaEn,
+                            singleGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timeGachaJa
+                                : Imgs.timeGachaEn,
+                            timesGachaImages: Localizations.localeOf(context)
+                                    .toLanguageTag()
+                                    .isJapanese
+                                ? Imgs.timesSpecialGachaJa
+                                : Imgs.timesSpecialGachaEn,
                             singleProbability: Const.three,
                             timesProbability: Const.four,
-                            numberOfSpin: _gachaHistoryResponse != null && _gachaHistoryResponse!.data != null ? _gachaHistoryResponse!.data!.specialTimes! : 0,
-                            typeReward: LocaleKeys.uncommon_bed,
+                            numberOfSpin: _gachaHistoryResponse != null &&
+                                    _gachaHistoryResponse!.data != null
+                                ? _gachaHistoryResponse!.data!.specialTimes!
+                                : 0,
+                            typeReward: 'Uncommon Bed',
                             imagePath: Imgs.specialGachaBackground,
                             totalValue: specialTimes,
                             normalGacha: false,
@@ -106,7 +157,7 @@ class _GachaScreenState extends State<GachaScreen> {
                         ],
                       ),
                       if (state is GachaSpinLoading) const LoadingScreen(),
-                    ]
+                    ],
                   ),
                 );
               },

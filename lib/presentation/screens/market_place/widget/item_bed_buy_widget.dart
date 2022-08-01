@@ -21,7 +21,7 @@ class ItemBedBuyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qualityColor = item.type.qualityBedColor;
+    final qualityColor = item.itemType?.qualityBedColor;
 
     return Container(
       decoration: BoxDecoration(
@@ -45,43 +45,48 @@ class ItemBedBuyWidget extends StatelessWidget {
               SizedBox(height: 20.h),
               CachedImage(
                 image: item.image,
-                width: 100,
-                height: 100,
+                width: 80,
+                height: 80,
               ),
               SizedBox(height: 22.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                      child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: qualityColor.withOpacity(0.1)),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    alignment: Alignment.center,
-                    child: SFText(
-                      textAlign: TextAlign.center,
-                      keyText: item.name,
-                      style: TextStyles.white1w700size12
-                          .copyWith(color: qualityColor),
-                    ),
-                  )),
-                  const SizedBox(width: 6),
-                  Container(
-                    decoration: BoxDecoration(
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      constraints: const BoxConstraints(maxWidth: 80),
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: AppColors.green.withOpacity(0.15)),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    alignment: Alignment.center,
-                    child: SFText(
-                      keyText: '+ ${item.percentEffect}%',
-                      style: TextStyles.greenW700size12,
+                        border:
+                            Border.all(color: qualityColor!.withOpacity(0.1)),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      alignment: Alignment.center,
+                      child: SFText(
+                        textAlign: TextAlign.center,
+                        keyText: item.name,
+                        style: TextStyles.white1w700size12
+                            .copyWith(color: qualityColor),
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 6),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: AppColors.green.withOpacity(0.15)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
+                      alignment: Alignment.center,
+                      child: SFText(
+                        keyText:
+                            '+ ${item.percentEffect != null && item.percentEffect! % 1 == 0 ? item.percentEffect!.toInt() : item.percentEffect ?? 0}%',
+                        style: TextStyles.greenW700size12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 8.h),
               Padding(

@@ -19,6 +19,7 @@ import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dar
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
