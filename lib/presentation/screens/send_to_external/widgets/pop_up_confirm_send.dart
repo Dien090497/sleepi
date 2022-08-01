@@ -151,6 +151,7 @@ class PopUpConfirmSend extends StatelessWidget {
                         ),
                         Expanded(
                           child: SFButton(
+                              disabled: state is SendToExternalLoading,
                               text: LocaleKeys.confirm,
                               textStyle: TextStyles.bold14LightWhite,
                               color: AppColors.blue,

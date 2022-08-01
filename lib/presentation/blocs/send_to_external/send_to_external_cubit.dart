@@ -21,6 +21,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
 
   Future<void> sendToExternal(
       String contractAddressTo, double valueInEther, String tokenSymbol) async {
+    emit(const SendToExternalState.loading());
     final result = await _sendToExternalUC.call(SendToExternalParams(
         contractAddressTo: contractAddressTo,
         valueInEther: valueInEther,
@@ -81,6 +82,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   Future<void> sendTokenExternal(String toAddress, double valueInEther,
       SendToExternalArguments? arg) async {
 
+    emit(const SendToExternalState.loading());
     final params = SendTokenExternalParams(
         valueInEther: valueInEther,
         tokenEntity: arg?.tokenEntity,
