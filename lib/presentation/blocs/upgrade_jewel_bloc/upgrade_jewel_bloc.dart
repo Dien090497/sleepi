@@ -146,22 +146,21 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
         ));
       }
     }, (r) {
-      if (!r.status || r.nftAttribute == null) {
-
-        return;
-      }
+      final entity = r.nftAttribute?.toEntity();
 
       final List<BedEntity> temp = List.from(currentState.jewelsAvailable);
       for (var element in currentState.jewelsUpgrade) {
         temp.remove(element);
       }
-      temp.add(r.nftAttribute!.toEntity());
+      if (r.status && entity != null) {
+        temp.add(entity);
+      }
       emit(currentState.copyWith(
         loading: false,
         upgradeInfoResponse: null,
         upgradeSuccess: r,
         jewelsUpgrade: [],
-        jewels: currentState.jewels + [r.nftAttribute!.toEntity()],
+        jewels: currentState.jewels + (entity != null ? [entity] : []),
         jewelsAvailable: temp,
       ));
     });

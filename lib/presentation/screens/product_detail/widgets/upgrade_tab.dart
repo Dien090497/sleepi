@@ -67,7 +67,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin {
           }
           if (state.upgradeSuccess != null) {
 
-            if(state.upgradeSuccess!.status) {
+            if(state.upgradeSuccess!.status && state.upgradeSuccess!.nftAttribute != null) {
               /// add animation upgrade success in here
               showCustomDialog(
               context,
@@ -79,12 +79,12 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin {
                   isJewel: widget.isJewel,
                 ),
               ],
-            ).then((_) {
-              context.read<JewelBloc>().add(const ClearJewelSuccess());
-            });
+            );
             }else {
               /// add animation upgrade failed in here
             }
+
+            context.read<JewelBloc>().add(const ClearJewelSuccess());
           }
         }
       },
