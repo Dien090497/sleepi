@@ -34,11 +34,11 @@ class PopUpLevelUp extends StatelessWidget {
     return BlocConsumer<BottomBarInfoIndividualCubit,
         BottomBarInfoIndividualState>(
       listener: (context, state) {
-        if (state is BottomBarInfoIndividualError) {
-          Navigator.pop(context, true);
-          Navigator.pop(context, true);
-          showMessageDialog(context, state.message);
-        }
+        // if (state is BottomBarInfoIndividualError) {
+          // Navigator.pop(context, true);
+          // Navigator.pop(context, true);
+          // showMessageDialog(context, state.message);
+        // }
         if (state is UpLevelSuccess) {
           Navigator.pop(context, true);
           showSuccessfulDialog(context, null).then((value) {
