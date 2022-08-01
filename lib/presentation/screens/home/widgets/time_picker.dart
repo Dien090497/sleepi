@@ -224,6 +224,7 @@ class _SFDatePickerState extends State<SFDatePicker> {
         }
       },
       child: CupertinoPageScaffold(
+        backgroundColor: AppColors.transparent,
         child: CupertinoScrollbar(
           child: CupertinoPicker(
             looping: true,
