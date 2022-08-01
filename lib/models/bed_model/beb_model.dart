@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:core';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -98,9 +99,11 @@ class BedModel {
       this.percentEffect,
       this.type,
       this.name,
-      this.remainTime, this.levelUpTime);
+      this.remainTime,
+      this.levelUpTime);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {
+    print('open beb box result  ${jsonEncode(json)}');
     return _$BedModelFromJson(json);
   }
 

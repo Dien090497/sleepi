@@ -141,6 +141,20 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     page = 1;
     params = params.copyWith(page: page, limit: limit);
     getMarketPlace(params);
+    _resetFilter();
+  }
+
+  void _resetFilter() {
+    params = params.copyWith(
+      page: page,
+      type: [],
+      classNft: [],
+      quality: [],
+      maxLevel: _categoryType == CategoryType.bed ? Const.bedLevelMax : 5,
+      minLevel: _categoryType == CategoryType.bed ? 0 : 1,
+      minBedMint: 0,
+      maxBedMint: 7,
+    );
   }
 
   Future<String> buyNFT(int nftId) async {
