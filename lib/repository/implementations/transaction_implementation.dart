@@ -156,11 +156,15 @@ class TransactionImplementation extends ITransactionRepository {
   Future<Either<Failure, double>> estimateGasFee(
       {String? sender, String? to, double? value}) async {
     try {
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
       final gasPrice = await _web3DataSource.getGasPrice();
       final price = await _web3DataSource.estimateGas(
         value: value,
         gasPrice: gasPrice,
-        sender: sender != null ? EthereumAddress.fromHex(sender) : null,
+        sender: sender != null
+            ? EthereumAddress.fromHex(sender)
+            : EthereumAddress.fromHex(wallet!.address),
         to: to,
       );
       return Right(price * gasPrice.getInWei / BigInt.from(pow(10, 18)));

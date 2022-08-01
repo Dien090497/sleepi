@@ -22,12 +22,14 @@ import 'package:slee_fi/common/widgets/sf_icon_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 import 'package:slee_fi/presentation/blocs/trade/trade_state.dart';
 import 'package:slee_fi/presentation/screens/send_to_external/widgets/dropdown_select_token.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_approve_trade.dart';
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
+import 'package:slee_fi/usecase/estimate_token_function_fee_usecase.dart';
 
 class TradeArguments {
   final String? contractAddressFrom;
@@ -46,6 +48,7 @@ class TradeScreen extends StatefulWidget {
 class _TradeScreenState extends State<TradeScreen> {
   late List<dynamic> listTokens = [];
   late double balance = 0;
+  late double estimate = 0.01;
   late int indexFrom = 0;
   late int indexTo = 0;
   String error = '';
@@ -141,7 +144,7 @@ class _TradeScreenState extends State<TradeScreen> {
     } else {
       indexTo = getIndexAddress(args.contractAddressTo!);
     }
-    Future.delayed(const Duration(milliseconds: 300), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
       tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
@@ -153,8 +156,18 @@ class _TradeScreenState extends State<TradeScreen> {
     return BlocProvider(
       create: (BuildContext context) => tradeCubit,
       child: BlocConsumer<TradeCubit, TradeState>(
-        listener: (BuildContext context, state) {
+        listener: (BuildContext context, state) async {
           if (state is swapTokenBalance) {
+            await getIt<EstimateTokenFunctionFeeUseCase>()
+                .call(EstimateGasTokenParams(
+                    toAddress: "0x7AEC68f23e813a9E7c3d1B9B3fe16c48AF1124ef",
+                    value: balance))
+                .then((value) {
+              value.fold((l) {
+              }, (r) {
+                estimate = r;
+              });
+            });
             setState(() {
               balance = state.balance;
             });
@@ -371,8 +384,12 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           valueController
                                                               .text = (indexFrom ==
                                                                       0
-                                                                  ? balance -
-                                                                      0.01
+                                                                  ? (balance -
+                                                                              estimate) >
+                                                                          0
+                                                                      ? (balance -
+                                                                          estimate)
+                                                                      : 0
                                                                   : balance)
                                                               .formatBalanceToken
                                                               .replaceAll(
