@@ -35,10 +35,13 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
     getTransactionFee();
   }
 
-  void estimateGas({required String contractAddress}) async {
+  ///[type] = 'nft' if transfer beb , jewel , item
+  ///[type] = 'token' if transfer token
+  void estimateGas(
+      {required String contractAddress, String type = 'nft'}) async {
     emit(const BottomBarInfoIndividualState.loading());
-    final params = EstimateGasWithdrawParam(
-        contractAddress: contractAddress, type: TransferType.nft.name);
+    final params =
+        EstimateGasWithdrawParam(contractAddress: contractAddress, type: type);
     final result = await _estimateGasWithdrawUC.call(params);
     result.fold((l) {
       emit(BottomBarInfoIndividualState.error(message: '$l'));
@@ -184,8 +187,8 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
     emit(const BottomBarInfoIndividualState.loading());
     final result = await _postLevelUpUC.call(param);
     result.fold(
-          (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
-          (r) => emit(const BottomBarInfoIndividualState.speedUpSuccess()),
+      (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+      (r) => emit(const BottomBarInfoIndividualState.speedUpSuccess()),
     );
   }
 }
