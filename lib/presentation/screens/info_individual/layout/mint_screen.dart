@@ -37,6 +37,12 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   final cubit = MintCubit();
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     animationController = AnimationController(
