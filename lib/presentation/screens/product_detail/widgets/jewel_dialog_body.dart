@@ -119,8 +119,8 @@ class JewelDialogBody extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            (jewel.isLock != 2 && jewel.statusNftSale != null)
-                ? Row(
+            // (jewel.isLock != 2 && jewel.statusNftSale != null) ?
+            Row(
                     children: [
                       Expanded(
                           child: SFButton(
@@ -141,7 +141,7 @@ class JewelDialogBody extends StatelessWidget {
                       )),
                     ],
                   )
-                : const SizedBox(),
+                // : const SizedBox(),
           ],
         ),
       ],
