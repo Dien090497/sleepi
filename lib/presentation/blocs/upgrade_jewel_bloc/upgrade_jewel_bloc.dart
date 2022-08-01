@@ -138,7 +138,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
     ));
     result.fold((l) {
       final currentState = state;
-      if (currentState is JewelStateLoaded && _currentPage != 1) {
+      if (currentState is JewelStateLoaded) {
         emit(currentState.copyWith(
           errorMessage: l.msg,
           loading: false,
@@ -146,17 +146,21 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
         ));
       }
     }, (r) {
+      final entity = r.nftAttribute?.toEntity();
+
       final List<BedEntity> temp = List.from(currentState.jewelsAvailable);
       for (var element in currentState.jewelsUpgrade) {
         temp.remove(element);
       }
-      temp.add(r);
+      if (r.status && entity != null) {
+        temp.add(entity);
+      }
       emit(currentState.copyWith(
         loading: false,
         upgradeInfoResponse: null,
         upgradeSuccess: r,
         jewelsUpgrade: [],
-        jewels: currentState.jewels + [r],
+        jewels: currentState.jewels + (entity != null ? [entity] : []),
         jewelsAvailable: temp,
       ));
     });
