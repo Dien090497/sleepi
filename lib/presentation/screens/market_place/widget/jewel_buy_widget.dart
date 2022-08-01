@@ -21,7 +21,7 @@ class JewelsBuyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final qualityColor = jewel.type.qualityBedColor;
+   final qualityColor = jewel.jewelType?.qualityBedColor;
 
     return Container(
       decoration: BoxDecoration(
@@ -76,7 +76,7 @@ class JewelsBuyWidget extends StatelessWidget {
                   Flexible(child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: qualityColor.withOpacity(0.1)),
+                      border: Border.all(color: qualityColor!.withOpacity(0.1)),
                     ),
                     padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
