@@ -25,25 +25,6 @@ extension NumX on num {
 
   String get format => Decimal.parse('$this').toString();
 
-  String get formatBalanceWallet {
-    if (this == 0) {
-      return 0.toStringAsFixed(2);
-    } else {
-      final balance = (this / math.pow(10, 18));
-      if (balance % 1 == 0) {
-        return balance.toStringAsFixed(0);
-      } else {
-        int index = balance.toString().indexOf('.');
-        if (balance.toString().length - index > 7) {
-          index += 7;
-        } else {
-          index = balance.toString().length;
-        }
-        return balance.toString().substring(0, index);
-      }
-    }
-  }
-
   String get formatBalance2Digits {
     if (this == 0) {
       return 0.toStringAsFixed(2);
@@ -69,8 +50,8 @@ extension NumX on num {
     } else {
       final balance = toDouble();
       int index = balance.toString().indexOf('.');
-      if (balance.toString().length - index > 6) {
-        index += 6;
+      if (balance.toString().length - index > 7) {
+        index += 7;
       } else {
         index = balance.toString().length;
       }

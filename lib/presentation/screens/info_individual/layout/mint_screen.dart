@@ -37,6 +37,12 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   final cubit = MintCubit();
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     animationController = AnimationController(
@@ -99,6 +105,9 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          const SizedBox(
+                                            height: 42,
+                                          ),
                                           ConnectBedWidget(
                                             bedParent1: args,
                                             controller: animationController,
@@ -110,7 +119,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                                             label:
                                                 LocaleKeys.token_consumptions,
                                             value: _infoMintingModel != null
-                                                ? '${_infoMintingModel!.fee} SLFT'
+                                                ? '${state.enableInsurance ? _infoMintingModel!.fee + _infoMintingModel!.brokenRate.fee : _infoMintingModel!.fee} SLFT'
                                                 : '',
                                             styleValue: TextStyles.lightWhite14,
                                             styleLabel: TextStyles.lightWhite14,
@@ -291,7 +300,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                                 : true,
                             onPressed: () {
                               animationController.forward();
-                              // cubit.mint();
+                              cubit.mint();
                             },
                           ),
                         ),
