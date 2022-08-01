@@ -16,6 +16,7 @@ class UpGradeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     final Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       physics: const ScrollPhysics(),
@@ -23,6 +24,42 @@ class UpGradeTab extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+=======
+    return BlocConsumer<JewelBloc, JewelState>(
+      listener: (context, state) {
+        if (state is JewelStateLoaded) {
+          print(state.jewels.first.nftId);
+          print(state.jewels[2].nftId);
+          print(state.jewels.last.nftId);
+          if (state.errorMessage?.isNotEmpty == true) {
+            showMessageDialog(context, state.errorMessage!).then((value) {
+              context.read<JewelBloc>().add(const ClearJewelSuccess());
+            });
+          }
+          if (state.upgradeSuccess != null) {
+            showCustomDialog(
+              context,
+              padding: const EdgeInsets.all(24),
+              backgroundColor: AppColors.transparent,
+              children: [
+                JewelDialogBodyUpgradeSuccess(
+                  jewel: state.upgradeSuccess!,
+                  isJewel: widget.isJewel,
+                ),
+              ],
+            ).then((_) {
+              context.read<JewelBloc>().add(const ClearJewelSuccess());
+            });
+          }
+        }
+      },
+      builder: (context, state) {
+        final UpgradeInfoResponse? info =
+            state is JewelStateLoaded && state.upgradeInfoResponse != null
+                ? state.upgradeInfoResponse
+                : null;
+        return Stack(
+>>>>>>> Stashed changes
           children: [
             Container(
               alignment: Alignment.center,
@@ -66,6 +103,7 @@ class UpGradeTab extends StatelessWidget {
                         alignment: Alignment.center,
                         child: const SFIcon(Ics.icPlus),
                       ),
+<<<<<<< Updated upstream
                     ),
                   ),
                   Positioned(
@@ -156,6 +194,59 @@ class UpGradeTab extends StatelessWidget {
             ),
             const SizedBox(
               height: 26,
+=======
+                      const SizedBox(height: 24),
+                      SFText(
+                        keyText: LocaleKeys.success_rate,
+                        style: TextStyles.lightWhite14,
+                      ),
+                      const SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.whiteOpacity5,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AttributeProcessWidget(
+                              linkImage: Ics.efficiency,
+                              title:
+                                  '${LocaleKeys.level.tr()} ${info != null ? info.level + 1 : 0} ${widget.isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()}',
+                              totalValue: 100,
+                              valueActive: (info?.percent ?? 0).toDouble(),
+                              isUpGrade: true,
+                            ),
+                            AttributeProcessWidget(
+                              linkImage: Ics.efficiency,
+                              title: LocaleKeys.failure,
+                              totalValue: 100,
+                              valueActive:
+                                  100 - (info?.percent ?? 0).toDouble(),
+                              isUpGrade: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 26),
+                      SFButton(
+                        disabled: !(state is JewelStateLoaded &&
+                            state.jewelsUpgrade.isNotEmpty),
+                        text: LocaleKeys.upgrade,
+                        color: AppColors.blue,
+                        textStyle: TextStyles.w600WhiteSize16,
+                        onPressed: () {
+                          setState(() => loading = true);
+                          // context.read<JewelBloc>().add(const UpgradeJewel());
+                        },
+                        width: MediaQuery.of(context).size.width,
+                      )
+                    ],
+                  )),
+>>>>>>> Stashed changes
             ),
           ],
         ),
