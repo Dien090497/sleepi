@@ -41,6 +41,9 @@ class Const {
   static const String specialGachaAudio = 'assets/sounds/special_gacha.mp3';
   static const String specialGachaAnimation = 'assets/json/special_gacha.json';
   static const String bedBrokenAnimation = 'assets/json/bed_broken_with_text.json';
+  static const String itemBrokenAnimation = 'assets/json/item_broken.json';
+  static const String jewelBrokenAnimation = 'assets/json/jewel_broken_with_text.json';
+
 
   static const String time = 'time';
   static const String sound = 'sound';

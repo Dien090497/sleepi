@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
@@ -20,6 +21,7 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_stat
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body_upgrade_success.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_detail.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_broken_dialog.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 import 'modal_jewel_list.dart';
@@ -82,6 +84,16 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin {
             );
             }else {
               /// add animation upgrade failed in here
+              showCustomDialog(
+                context,
+                padding: const EdgeInsets.all(24),
+                backgroundColor: AppColors.transparent,
+                children: [
+                  UpgradeBrokenDialog(
+                    animation: widget.isJewel ? Const.jewelBrokenAnimation : Const.itemBrokenAnimation,
+                  ),
+                ],
+              );
             }
 
             context.read<JewelBloc>().add(const ClearJewelSuccess());
