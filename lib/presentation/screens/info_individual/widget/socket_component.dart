@@ -81,7 +81,7 @@ class SocketComponent extends StatelessWidget {
                                 : Ics.icSocketEmpty,
                     onTap: () {
                       if (index + 1 > maxSocket) return;
-                      showComingSoonDialog(context);
+                      // showComingSoonDialog(context);
                       if (sockets[index].socketType == SocketType.block) {
                         _showDialogConfirmOpenSocket(context, index);
                       } else if (sockets[index].socketType ==

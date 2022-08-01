@@ -88,13 +88,17 @@ class InfoIndividualScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 24),
                                   child: SFIcon(state.bed.image),
                                 ),
-                                SocketComponent(
-                                  bedId: state.bed.id,
-                                  level: state.bed.level,
-                                  updateJewelSuccess: () {
-                                    context.read<IndividualCubit>().refresh();
-                                  },
-                                ),
+                                IgnorePointer(
+                                    ignoring: false,
+                                    child: SocketComponent(
+                                      bedId: state.bed.id,
+                                      level: state.bed.level,
+                                      updateJewelSuccess: () {
+                                        context
+                                            .read<IndividualCubit>()
+                                            .refresh();
+                                      },
+                                    )),
                                 const SizedBox(height: 16),
                                 BoxInfoWidget(bed: state.bed),
                                 const SizedBox(height: 24),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/jewel_entity/jewel_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:slee_fi/presentation/blocs/bottom_navigation/bottom_navigation_event.dart';
@@ -14,6 +16,7 @@ import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_state.dart';
 
+import 'jewel_dialog_body.dart';
 import 'my_jewel_short_widget.dart';
 
 class ModalJewelList extends StatelessWidget {
@@ -77,12 +80,12 @@ class ModalJewelList extends StatelessWidget {
                         final item = state.jewels![i];
                         return GestureDetector(
                           onTap: () {
-                            // _showDialogJewelDetail(
-                            //   context,
-                            //   item,
-                            //   socketBloc,
-                            // );
-                            showComingSoonDialog(context);
+                            _showDialogJewelDetail(
+                              context,
+                              item,
+                              socketBloc,
+                            );
+                            // showComingSoonDialog(context);
                           },
                           child: MyJewelsShortWidget(
                               jewel: item, color: AppColors.light4),
@@ -128,26 +131,26 @@ class ModalJewelList extends StatelessWidget {
     await Future.delayed(const Duration(milliseconds: 5000));
   }
 
-  // _showDialogJewelDetail(
-  //     BuildContext context, JewelEntity jewelEntity, SocketBloc bloc) {
-  //   showCustomDialog(
-  //     context,
-  //     padding: const EdgeInsets.all(24),
-  //     children: [
-  //       JewelDialogBody(
-  //         jewel: jewelEntity,
-  //         onSellTap: () {
-  //           Navigator.pop(context);
-  //         },
-  //         onTransferTap: () {
-  //           bloc.add(AddJewel(jewelEntity));
-  //           Navigator.pop(context);
-  //           Navigator.pop(context);
-  //         },
-  //         textOnSell: LocaleKeys.cancel,
-  //         textOnTransfer: LocaleKeys.add_jewel.tr(),
-  //       ),
-  //     ],
-  //   );
-  // }
+  _showDialogJewelDetail(
+      BuildContext context, JewelEntity jewelEntity, SocketBloc bloc) {
+    showCustomDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: [
+        JewelDialogBody(
+          jewel: jewelEntity,
+          onSellTap: () {
+            Navigator.pop(context);
+          },
+          onTransferTap: () {
+            bloc.add(AddJewel(jewelEntity));
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
+          textOnSell: LocaleKeys.cancel,
+          textOnTransfer: LocaleKeys.add_jewel.tr(),
+        ),
+      ],
+    );
+  }
 }
