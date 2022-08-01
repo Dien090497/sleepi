@@ -150,7 +150,7 @@ class JewelBloc extends Bloc<JewelEvent, JewelState> {
       for (var element in currentState.jewelsUpgrade) {
         temp.remove(element);
       }
-      temp.add(r);
+      temp.add(r!);
       emit(currentState.copyWith(
         loading: false,
         upgradeInfoResponse: null,

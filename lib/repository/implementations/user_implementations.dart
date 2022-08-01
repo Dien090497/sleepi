@@ -365,11 +365,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, BedEntity>> upgradeJewel(
+  Future<Either<FailureMessage, BedEntity?>> upgradeJewel(
       UpgradeSchema param) async {
     try {
       final result = await _authDataSource.upgradeJewel(param);
-      return Right(result.nftAttribute.toEntity());
+      return Right(result.nftAttribute?.toEntity());
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
