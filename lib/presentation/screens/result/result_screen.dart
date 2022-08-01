@@ -232,38 +232,10 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
                         ),
                       ],
                     ),
-                    const SFLabelValue(
-                        label: LocaleKeys.bed_time, value: '23:30'),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SFLabelValue(
-                        label: LocaleKeys.sleep_onset_time, value: '00:30'),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SFLabelValue(label: LocaleKeys.woke_up, value: '08:30'),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SFLabelValue(
-                        label: LocaleKeys.nocturnal_awakenings, value: '1'),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SFLabelValue(
-                        label: LocaleKeys.sleep_duration, value: '8h45min'),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SFLabelValue(
-                        label: LocaleKeys.sleep_quality, value: '99/100'),
-                    const SizedBox(
-                      height: 92,
-                    ),
-                  ],
+
                 ),
               ),
+            ),
             ),
             Positioned(
               bottom: 0,

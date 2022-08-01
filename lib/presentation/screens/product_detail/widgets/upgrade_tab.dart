@@ -19,9 +19,9 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_even
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/atribute_process.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_body_upgrade_success.dart';
+import 'package:slee_fi/presentation/screens/product_detail/widgets/jewel_dialog_detail.dart';
 import 'package:slee_fi/resources/resources.dart';
 
-import 'jewel_dialog_body.dart';
 import 'modal_jewel_list.dart';
 
 class UpGradeTab extends StatefulWidget {
@@ -32,7 +32,7 @@ class UpGradeTab extends StatefulWidget {
   State<UpGradeTab> createState() => _UpGradeTabState();
 }
 
-class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
+class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin {
   late AnimationController animationController;
   bool loading = false;
 
@@ -60,9 +60,6 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
     return BlocConsumer<JewelBloc, JewelState>(
       listener: (context, state) {
         if (state is JewelStateLoaded) {
-          print(state.jewels.first.nftId);
-          print(state.jewels[2].nftId);
-          print(state.jewels.last.nftId);
           if (state.errorMessage?.isNotEmpty == true) {
             showMessageDialog(context, state.errorMessage!).then((value) {
               context.read<JewelBloc>().add(const ClearJewelSuccess());
@@ -75,6 +72,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
               backgroundColor: AppColors.transparent,
               children: [
                 JewelDialogBodyUpgradeSuccess(
+
                   jewel: state.upgradeSuccess!,
                   isJewel: widget.isJewel,
                 ),
@@ -87,23 +85,9 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
       },
       builder: (context, state) {
         final UpgradeInfoResponse? info =
-            state is JewelStateLoaded && state.upgradeInfoResponse != null
-                ? state.upgradeInfoResponse
-                : null;
-        return Stack(
-                ),
-              ],
-            ).then((_) {
-              context.read<JewelBloc>().add(const ClearJewelSuccess());
-            });
-          }
-        }
-      },
-      builder: (context, state) {
-        final UpgradeInfoResponse? info =
-            state is JewelStateLoaded && state.upgradeInfoResponse != null
-                ? state.upgradeInfoResponse
-                : null;
+        state is JewelStateLoaded && state.upgradeInfoResponse != null
+            ? state.upgradeInfoResponse
+            : null;
         return Stack(
           children: [
             SingleChildScrollView(
@@ -127,29 +111,33 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                         child: Stack(
                           children: [
                             Visibility(
-                                visible: loading,
-                                child: Lottie.asset(widget.isJewel ? 'assets/json/jewel_upgrade.json' : 'assets/json/item_upgrade.json',
-                                  controller: animationController,
-                                  // fit: BoxFit.cover,
-                                  width: 238,
-                                  height: 238,
-                                  // repeat: false,
-                                  onLoaded: (composition) {
-                                    // Configure the AnimationController with the duration of the
-                                    // Lottie file and start the animation.
-                                    animationController..duration = composition.duration
-                                      ..forward();
-                                  },
-                                ),
+                              visible: loading,
+                              child: Lottie.asset(
+                                widget.isJewel
+                                    ? 'assets/json/jewel_upgrade.json'
+                                    : 'assets/json/item_upgrade.json',
+                                controller: animationController,
+                                // fit: BoxFit.cover,
+                                width: 238,
+                                height: 238,
+                                // repeat: false,
+                                onLoaded: (composition) {
+                                  // Configure the AnimationController with the duration of the
+                                  // Lottie file and start the animation.
+                                  animationController
+                                    ..duration = composition.duration
+                                    ..forward();
+                                },
+                              ),
                             ),
-                           const SFIcon( Imgs.upgrade, width: 238, height: 238),
+                            const SFIcon(Imgs.upgrade, width: 238, height: 238),
                             JewelSocket(
                                 isJewel: widget.isJewel,
                                 top: 28,
                                 left: 0,
                                 right: 0,
                                 jewelEntity: state is JewelStateLoaded &&
-                                        state.jewelsUpgrade.isNotEmpty
+                                    state.jewelsUpgrade.isNotEmpty
                                     ? state.jewelsUpgrade.first
                                     : null),
                             JewelSocket(
@@ -157,7 +145,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                                 bottom: 60,
                                 right: 40,
                                 jewelEntity: state is JewelStateLoaded &&
-                                        state.jewelsUpgrade.isNotEmpty
+                                    state.jewelsUpgrade.isNotEmpty
                                     ? state.jewelsUpgrade[1]
                                     : null),
                             JewelSocket(
@@ -165,7 +153,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                                 bottom: 60,
                                 left: 40,
                                 jewelEntity: state is JewelStateLoaded &&
-                                        state.jewelsUpgrade.isNotEmpty
+                                    state.jewelsUpgrade.isNotEmpty
                                     ? state.jewelsUpgrade[2]
                                     : null),
                           ],
@@ -174,100 +162,10 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                       SFLabelValue(
                         label: LocaleKeys.token_consumptions,
                         value:
-                            '${info != null ? info.slft : 0} SLFT ${info != null && info.slgt != null ? ' + ${info.slft} SLGT' : ''} ',
+                        '${info != null ? info.slft : 0} SLFT ${info != null && info.slgt != null ? ' + ${info.slft} SLGT' : ''} ',
                         styleLabel: TextStyles.lightGrey16,
                         styleValue: TextStyles.textColorSize16,
                       ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 60,
-                    right: 40,
-                    child: GestureDetector(
-                      onTap: () {
-                        showCustomDialog(context, children: [
-                          PopUpBedsDetail(
-                              icon: Imgs.jewelPurple,
-                              level: 20,
-                              cost: 1,
-                              time: 2,
-                              onCancel: () {
-                                Navigator.pop(context);
-                              },
-                              onConfirm: () {})
-                        ]);
-                      },
-                      child: const SFIcon(Ics.icPlus),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 60,
-                    left: 40,
-                    child: GestureDetector(
-                      onTap: () {
-                        showCustomDialog(context, children: [
-                          PopUpBedsDetail(
-                              icon: Imgs.jewelSliver,
-                              level: 20,
-                              cost: 1,
-                              time: 2,
-                              onCancel: () {
-                                Navigator.pop(context);
-                              },
-                              onConfirm: () {})
-                        ]);
-                      },
-                      child: const SFIcon(Ics.icPlus),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SFLabelValue(
-              label: LocaleKeys.token_consumptions,
-              value: '0 SLFT + 0 SLGT',
-              styleLabel: TextStyles.lightGrey16,
-              styleValue: TextStyles.textColorSize16,
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            SFText(
-              keyText: LocaleKeys.success_rate,
-              style: TextStyles.lightWhite14,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: AppColors.whiteOpacity5,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AttributeProcessWidget(
-                    linkImage: Ics.efficiency,
-                    title: '${LocaleKeys.level.tr()} 2 Jewel',
-                    totalValue: 10,
-                    valueActive: 3.5,
-                    isUpGrade: true,
-                  ),
-                  const AttributeProcessWidget(
-                    linkImage: Ics.efficiency,
-                    title: LocaleKeys.failure,
-                    totalValue: 10,
-                    valueActive: 6.5,
-                    isUpGrade: true,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 26,
                       const SizedBox(height: 24),
                       SFText(
                         keyText: LocaleKeys.success_rate,
@@ -288,7 +186,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                             AttributeProcessWidget(
                               linkImage: Ics.efficiency,
                               title:
-                                  '${LocaleKeys.level.tr()} ${info != null ? info.level + 1 : 0} ${widget.isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()}',
+                              '${LocaleKeys.level.tr()} ${info != null ? info.level + 1 : 0} ${widget.isJewel ? LocaleKeys.jewel.tr() : LocaleKeys.item.tr()}',
                               totalValue: 100,
                               valueActive: (info?.percent ?? 0).toDouble(),
                               isUpGrade: true,
@@ -298,7 +196,7 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                               title: LocaleKeys.failure,
                               totalValue: 100,
                               valueActive:
-                                  100 - (info?.percent ?? 0).toDouble(),
+                              100 - (info?.percent ?? 0).toDouble(),
                               isUpGrade: true,
                             ),
                           ],
@@ -381,12 +279,12 @@ class JewelSocket extends StatelessWidget {
         child: jewelEntity == null
             ? const SFIcon(Ics.icPlus)
             : Container(
-                decoration: BoxDecoration(
-                    color: AppColors.backgroundDialog,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.borderDarkColor)),
-                child: CachedImage(
-                    image: jewelEntity!.image, width: 35, height: 35)),
+            decoration: BoxDecoration(
+                color: AppColors.backgroundDialog,
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.borderDarkColor)),
+            child: CachedImage(
+                image: jewelEntity!.image, width: 35, height: 35)),
       ),
     );
   }
@@ -396,7 +294,7 @@ class JewelSocket extends StatelessWidget {
       context,
       padding: const EdgeInsets.all(24),
       children: [
-        JewelDialogBody(
+        JewelDialogDetail(
           isJewel: isJewel,
           jewel: jewel,
           textOnSell: LocaleKeys.remove,
