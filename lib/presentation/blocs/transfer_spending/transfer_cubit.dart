@@ -23,7 +23,7 @@ class TransferCubit extends Cubit<TransferState> {
           isToSpending: isToSpending,
           currentToken: currentToken,
           spendingTokens: spendingTokens,
-          walletTokens: walletTokens,
+          walletTokens: List.from(walletTokens)..removeRange(3, walletTokens.length),
           backupToken: backupToken,
         ));
 
