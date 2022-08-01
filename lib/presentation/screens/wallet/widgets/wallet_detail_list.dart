@@ -116,7 +116,7 @@ class WalletDetailList extends StatelessWidget {
                                     : (tokenList[index].symbol == 'AVAX'
                                         ? tokenList[index]
                                             .balance
-                                            .formatBalanceWallet
+                                            .formatBalanceToken
                                         : tokenList[index]
                                             .balance
                                             .formatBalanceToken),
