@@ -19,6 +19,7 @@ class TrackingResultModel {
   String? basePointEff;
   String? insurance;
   bool enableInsurance;
+  bool isBrokenBed;
   int? sleepQuality;
   int? startSleepTime;
   int? id;
@@ -47,6 +48,7 @@ class TrackingResultModel {
       this.enableInsurance,
       this.sleepQuality,
       this.startSleepTime,
+      this.isBrokenBed,
       this.bed,
       this.id);
 }

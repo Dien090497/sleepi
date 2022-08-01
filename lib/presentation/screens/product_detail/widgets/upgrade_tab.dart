@@ -60,6 +60,9 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
     return BlocConsumer<JewelBloc, JewelState>(
       listener: (context, state) {
         if (state is JewelStateLoaded) {
+          print(state.jewels.first.nftId);
+          print(state.jewels[2].nftId);
+          print(state.jewels.last.nftId);
           if (state.errorMessage?.isNotEmpty == true) {
             showMessageDialog(context, state.errorMessage!).then((value) {
               context.read<JewelBloc>().add(const ClearJewelSuccess());
@@ -74,6 +77,20 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                 JewelDialogBodyUpgradeSuccess(
                   jewel: state.upgradeSuccess!,
                   isJewel: widget.isJewel,
+                ),
+              ],
+            ).then((_) {
+              context.read<JewelBloc>().add(const ClearJewelSuccess());
+            });
+          }
+        }
+      },
+      builder: (context, state) {
+        final UpgradeInfoResponse? info =
+            state is JewelStateLoaded && state.upgradeInfoResponse != null
+                ? state.upgradeInfoResponse
+                : null;
+        return Stack(
                 ),
               ],
             ).then((_) {
@@ -161,6 +178,96 @@ class _UpGradeTabState extends State<UpGradeTab> with TickerProviderStateMixin{
                         styleLabel: TextStyles.lightGrey16,
                         styleValue: TextStyles.textColorSize16,
                       ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 60,
+                    right: 40,
+                    child: GestureDetector(
+                      onTap: () {
+                        showCustomDialog(context, children: [
+                          PopUpBedsDetail(
+                              icon: Imgs.jewelPurple,
+                              level: 20,
+                              cost: 1,
+                              time: 2,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onConfirm: () {})
+                        ]);
+                      },
+                      child: const SFIcon(Ics.icPlus),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 60,
+                    left: 40,
+                    child: GestureDetector(
+                      onTap: () {
+                        showCustomDialog(context, children: [
+                          PopUpBedsDetail(
+                              icon: Imgs.jewelSliver,
+                              level: 20,
+                              cost: 1,
+                              time: 2,
+                              onCancel: () {
+                                Navigator.pop(context);
+                              },
+                              onConfirm: () {})
+                        ]);
+                      },
+                      child: const SFIcon(Ics.icPlus),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SFLabelValue(
+              label: LocaleKeys.token_consumptions,
+              value: '0 SLFT + 0 SLGT',
+              styleLabel: TextStyles.lightGrey16,
+              styleValue: TextStyles.textColorSize16,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            SFText(
+              keyText: LocaleKeys.success_rate,
+              style: TextStyles.lightWhite14,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: AppColors.whiteOpacity5,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AttributeProcessWidget(
+                    linkImage: Ics.efficiency,
+                    title: '${LocaleKeys.level.tr()} 2 Jewel',
+                    totalValue: 10,
+                    valueActive: 3.5,
+                    isUpGrade: true,
+                  ),
+                  const AttributeProcessWidget(
+                    linkImage: Ics.efficiency,
+                    title: LocaleKeys.failure,
+                    totalValue: 10,
+                    valueActive: 6.5,
+                    isUpGrade: true,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 26,
                       const SizedBox(height: 24),
                       SFText(
                         keyText: LocaleKeys.success_rate,

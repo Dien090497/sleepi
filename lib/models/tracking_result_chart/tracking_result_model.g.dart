@@ -25,6 +25,7 @@ TrackingResultModel _$TrackingResultModelFromJson(Map<String, dynamic> json) =>
       json['enableInsurance'] as bool,
       json['sleepQuality'] as int?,
       json['startSleepTime'] as int?,
+      json['isBrokenBed'] as bool,
       json['bed'] == null
           ? null
           : BedInfo.fromJson(json['bed'] as Map<String, dynamic>),
@@ -49,6 +50,7 @@ Map<String, dynamic> _$TrackingResultModelToJson(
       'basePointEff': instance.basePointEff,
       'insurance': instance.insurance,
       'enableInsurance': instance.enableInsurance,
+      'isBrokenBed': instance.isBrokenBed,
       'sleepQuality': instance.sleepQuality,
       'startSleepTime': instance.startSleepTime,
       'id': instance.id,

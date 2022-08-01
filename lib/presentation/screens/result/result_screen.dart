@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -7,6 +8,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -22,12 +24,63 @@ class ResultScreen extends StatefulWidget {
   State<ResultScreen> createState() => _ResultScreenState();
 }
 
-class _ResultScreenState extends State<ResultScreen> {
+class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMixin{
+  late AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(vsync: this);
+    animationController.addStatusListener((status) async {
+      if (animationController.isCompleted) {
+        Navigator.pop(context, true);
+        // animationController.reset();
+      }
+    });
+
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // put your logic from initState here
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+  
   convertTime(String time) {
     int minuteDuration = double.parse(time).toInt();
     int hour = minuteDuration ~/ 60;
     int minute = minuteDuration - hour * 60;
     return '${hour}h${minute}min';
+  }
+
+  void showBedBroken(BuildContext context, bool isBroken)  {
+    if (isBroken && mounted) {
+      showCustomDialog(
+        context,
+        padding: const EdgeInsets.all(24),
+        backgroundColor: AppColors.transparent,
+        children: [
+          Lottie.asset('assets/json/bed_broken_with_text.json',
+            controller: animationController,
+            fit: BoxFit.cover,
+            repeat: true,
+            onLoaded: (composition) {
+              // Configure the AnimationController with the duration of the
+              // Lottie file and start the animation.
+              animationController..duration = composition.duration
+                ..forward();
+            },
+          ),
+        ],
+      );
+    }
   }
 
   convertTimeSpan(String timeSpan) {
@@ -46,6 +99,7 @@ class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as PreResultParams;
+    Future.delayed(Duration.zero, () => showBedBroken(context, args.resultModel.isBrokenBed));
     return WillPopScope(
       onWillPop: () async {
         if (args.fromRoute == R.splash) {
@@ -178,7 +232,36 @@ class _ResultScreenState extends State<ResultScreen> {
                         ),
                       ],
                     ),
-                  ),
+                    const SFLabelValue(
+                        label: LocaleKeys.bed_time, value: '23:30'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.sleep_onset_time, value: '00:30'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(label: LocaleKeys.woke_up, value: '08:30'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.nocturnal_awakenings, value: '1'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.sleep_duration, value: '8h45min'),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    const SFLabelValue(
+                        label: LocaleKeys.sleep_quality, value: '99/100'),
+                    const SizedBox(
+                      height: 92,
+                    ),
+                  ],
                 ),
               ),
             ),
