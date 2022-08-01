@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:lottie/lottie.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -67,7 +68,7 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
         padding: const EdgeInsets.all(24),
         backgroundColor: AppColors.transparent,
         children: [
-          Lottie.asset('assets/json/bed_broken_with_text.json',
+          Lottie.asset(Const.bedBrokenAnimation,
             controller: animationController,
             fit: BoxFit.cover,
             repeat: true,
