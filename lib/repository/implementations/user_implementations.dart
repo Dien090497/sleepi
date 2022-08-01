@@ -20,6 +20,7 @@ import 'package:slee_fi/models/response_model/response_model.dart';
 import 'package:slee_fi/models/swap_token_to_wallet_response/swap_token_to_wallet_response.dart';
 import 'package:slee_fi/models/token_spending/token_spending.dart';
 import 'package:slee_fi/models/upgrade_jewel_info_response/upgrade_info_response.dart';
+import 'package:slee_fi/models/upgrade_jewel_response/upgrade_jewel_response.dart';
 import 'package:slee_fi/models/withdraw_history_response/withdraw_history_response.dart';
 import 'package:slee_fi/repository/user_repository.dart';
 import 'package:slee_fi/schema/add_jewel_schema/add_jewel_schema.dart';
@@ -365,11 +366,11 @@ class UserImplementation extends IUserRepository {
   }
 
   @override
-  Future<Either<FailureMessage, BedEntity>> upgradeJewel(
+  Future<Either<FailureMessage, UpgradeJewelResponse>> upgradeJewel(
       UpgradeSchema param) async {
     try {
       final result = await _authDataSource.upgradeJewel(param);
-      return Right(result.nftAttribute.toEntity());
+      return Right(result);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
