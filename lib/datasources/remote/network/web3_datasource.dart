@@ -175,7 +175,7 @@ class Web3DataSource {
       BigInt deadline = BigInt.from(
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
 
-      Credentials credentials = EthPrivateKey.fromHex(privateKey);
+      final Credentials credentials = EthPrivateKey.fromHex(privateKey);
       await contract.swapExactAVAXForTokens(
         amountOutMin,
         pairAddress,
@@ -196,13 +196,13 @@ class Web3DataSource {
     }
   }
 
-  Future<void> approveToken(
+  Future<String> approveToken(
       String contractAddress, Credentials credentials) async {
     final contract = token(contractAddress);
 
     BigInt amount = await contract.totalSupply();
     final decimal = await contract.decimals();
-    await contract.approve(
+    return await contract.approve(
         EthereumAddress.fromHex(
             await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe)),
         amount * BigInt.from(math.pow(10, decimal.toInt())),

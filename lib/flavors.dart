@@ -1,7 +1,7 @@
 enum Flavor {
   PROD,
   DEV,
-  TEST,
+  STG,
 }
 
 class F {
@@ -15,7 +15,7 @@ class F {
         return 'SleeFi';
       case Flavor.DEV:
         return 'SleeFi Dev';
-      case Flavor.TEST:
+      case Flavor.STG:
         return 'SleeFi Stg';
       default:
         return 'title';

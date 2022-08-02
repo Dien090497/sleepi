@@ -3,6 +3,6 @@ import 'package:slee_fi/run.dart';
 import 'flavors.dart';
 
 void main() {
-  F.appFlavor = Flavor.TEST;
+  F.appFlavor = Flavor.STG;
   run();
 }

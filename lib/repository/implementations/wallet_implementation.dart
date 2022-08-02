@@ -233,13 +233,12 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> approveToken(String contractAddress) async {
+  Future<Either<Failure, String>> approveToken(String contractAddress) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
       Credentials credentials = EthPrivateKey.fromHex(wallet!.privateKey);
-      _web3DataSource.approveToken(contractAddress, credentials);
-      return const Right(true);
+      return Right(await _web3DataSource.approveToken(contractAddress, credentials));
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

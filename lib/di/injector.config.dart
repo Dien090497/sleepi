@@ -183,7 +183,7 @@ import 'stg_injection.dart' as _i170;
 
 const String _dev = 'dev';
 const String _prod = 'prod';
-const String _test = 'test';
+const String _stg = 'stg';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -194,7 +194,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final registerModule = _$RegisterModule();
   final devInjection = _$DevInjection();
   final prodInjection = _$ProdInjection();
-  final stgInjection = _$StgInjection();
+  final releaseInjection = _$ReleaseInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -218,8 +218,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       instanceName: 'tokens', registerFor: {_dev});
   gh.factory<List<dynamic>>(() => prodInjection.tokens,
       instanceName: 'tokens', registerFor: {_prod});
-  gh.factory<List<dynamic>>(() => stgInjection.tokens,
-      instanceName: 'tokens', registerFor: {_test});
+  gh.factory<List<dynamic>>(() => releaseInjection.tokens,
+      instanceName: 'tokens', registerFor: {_stg});
   gh.factory<_i16.NetworkConnectionDataSource>(
       () => _i16.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i17.QueueInterceptor>(
@@ -232,6 +232,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       instanceName: 'baseUrl', registerFor: {_test});
   gh.factory<String>(() => prodInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => releaseInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_stg});
+  gh.factory<String>(() => releaseInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_stg});
   gh.factory<String>(() => devInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_dev});
   gh.factory<String>(() => devInjection.baseUrl,
@@ -240,6 +244,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<String>(() => stgInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_test});
+  gh.factory<String>(() => prodInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => prodInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
   gh.factory<_i22.HistoryDataSource>(
@@ -565,4 +573,4 @@ class _$DevInjection extends _i168.DevInjection {}
 
 class _$ProdInjection extends _i169.ProdInjection {}
 
-class _$StgInjection extends _i170.StgInjection {}
+class _$ReleaseInjection extends _i170.ReleaseInjection {}

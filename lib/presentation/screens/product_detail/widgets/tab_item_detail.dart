@@ -25,6 +25,7 @@ import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 import 'jewel_dialog_body.dart';
+import 'my_jewel_short_widget.dart';
 
 class TabItemDetail extends StatelessWidget {
   const TabItemDetail({Key? key}) : super(key: key);
@@ -73,13 +74,9 @@ class TabItemDetail extends StatelessWidget {
                                       _showJewelDialog(
                                           context, state.jewels[i]);
                                     },
-                                    child: MyItemsShortWidget(
-                                      name: state.jewels[i].name,
-                                      image: state.jewels[i].image,
-                                      quality: state.jewels[i].quality,
-                                      level: state.jewels[i].level,
-                                      type: state.jewels[i].type,
-                                      items: state.jewels[i],
+                                    child: MyJewelsShortWidget(
+                                      jewel: state.jewels[i],
+                                      isJewel: false,
                                     ),
                                   );
                                 },

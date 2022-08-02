@@ -33,6 +33,7 @@ class TradeCubit extends Cubit<TradeState> {
 
   Future<void> swapToken(double value, String contractAddressFrom,
       String contractAddressTo) async {
+    emit(const TradeState.loading());
     final result = await _swapToken.call(SwapTokenParams(
         value: value,
         contractAddressFrom: contractAddressFrom,
@@ -49,13 +50,14 @@ class TradeCubit extends Cubit<TradeState> {
   }
 
   Future<void> approveToken(String contractAddress) async {
+    emit(const TradeState.loading());
     final result = await _approveToken.call(contractAddress);
     result.fold(
       (l) {
         emit(TradeState.fail('$l'));
       },
-      (success) {
-        emit(TradeState.approveSuccess(success));
+      (txh) {
+        emit(TradeState.approveSuccess(txh));
       },
     );
   }

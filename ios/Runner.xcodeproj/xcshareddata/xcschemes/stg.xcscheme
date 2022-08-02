@@ -45,7 +45,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Profile-stg"
+      buildConfiguration = "Release-stg"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -62,11 +62,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release-stg">
+      buildConfiguration = "Debug-stg">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release-stg"
-      customArchiveName = "SleeFi Stg"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

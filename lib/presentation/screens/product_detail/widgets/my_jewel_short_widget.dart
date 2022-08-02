@@ -11,15 +11,21 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 
 class MyJewelsShortWidget extends StatelessWidget {
-  const MyJewelsShortWidget({Key? key, required this.jewel, this.color})
+  const MyJewelsShortWidget(
+      {Key? key, required this.jewel, this.color, this.isJewel = true})
       : super(key: key);
 
   final BedEntity jewel;
   final Color? color;
+  final bool isJewel;
 
   @override
   Widget build(BuildContext context) {
-    final qualityColor = jewel.quality?.qualityBedColor ?? AppColors.commonBed;
+    final qualityColor = (!isJewel
+            ? jewel.itemType?.qualityBedColor
+            : jewel.jewelType?.qualityBedColor) ??
+        AppColors.commonBed;
+    print('jewel qquality   ${jewel.quality}   ${jewel.nftType}');
     return Container(
       decoration: BoxDecoration(
         color: color ?? AppColors.lightDark,
@@ -66,13 +72,12 @@ class MyJewelsShortWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    constraints: const BoxConstraints(maxWidth: 90),
+                    constraints: const BoxConstraints(maxWidth: 80),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: qualityColor.withOpacity(0.1)),
                     ),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
+                    padding: const EdgeInsets.all(5),
                     alignment: Alignment.center,
                     child: SFText(
                       keyText: jewel.name,

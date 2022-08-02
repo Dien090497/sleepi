@@ -396,7 +396,7 @@
   "email_already_exist": "既に登録されています。もう1度行なってください。",
   "otp_expired": "時間切れ。もう1度行なってください。",
   "invalid_code": "有効なコードを入力してください",
-  "amount_input_can_not_be_zero": "「０」が入力できない",
+  "amount_input_can_not_be_zero": "「０」は入力できません。",
   "forgot_password": "パスワードを忘れましたか",
   "wallet_already": "既にウォレットがあります。",
   "insufficient_avax": "AVAXが不足しています。",
