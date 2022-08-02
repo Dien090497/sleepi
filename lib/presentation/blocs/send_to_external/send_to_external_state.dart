@@ -16,7 +16,7 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.loading() = SendToExternalLoading;
 
-  const factory SendToExternalState.getBalance(double balance) = GetTokenBalanceSuccess;
+  const factory SendToExternalState.getBalance({required double balance, required double fee}) = GetTokenBalanceSuccess;
 
   const factory SendToExternalState.success() = sendToExternalSuccess;
 
@@ -31,7 +31,7 @@ class SendToExternalState with _$SendToExternalState {
   const factory SendToExternalState.errorValueInEther(String msg) =
   SendToExternalErrorValueInEther;
 
-  const factory SendToExternalState.checkedValidator() = SendToExternalCheckedValidator;
+  const factory SendToExternalState.checkedValidator({required double fee}) = SendToExternalCheckedValidator;
 
   const factory SendToExternalState.validatorSuccess() = SendToExternalValidatorSuccess;
 }
