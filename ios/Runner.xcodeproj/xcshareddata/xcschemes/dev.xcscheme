@@ -45,7 +45,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Profile-dev"
+      buildConfiguration = "Release-dev"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -62,11 +62,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release-dev">
+      buildConfiguration = "Debug-dev">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release-dev"
-      customArchiveName = "SleeFi Dev"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -59,14 +59,14 @@
     <string>5d6cce21b7f3b3c5fc77bf9c4e1ab85e</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
-  <key>LSApplicationQueriesSchemes</key>
+    <key>LSApplicationQueriesSchemes</key>
     <array>
-        <string>fbapi</string>
-        <string>fbauth2</string>
-        <string>fb-messenger-share-api</string>
-        <string>instagram</string>
-        <string>tg</string>
-        <string>twitter</string>
+      <string>fbapi</string>
+      <string>fbauth2</string>
+      <string>fb-messenger-share-api</string>
+      <string>instagram</string>
+      <string>tg</string>
+      <string>twitter</string>
     </array>
     <key>LSRequiresIPhoneOS</key>
     <true/>
@@ -103,7 +103,7 @@
       <string>remote-notification</string>
     </array>
     <key>UILaunchStoryboardName</key>
-    <string>LaunchScreen</string>
+    <string>$(ASSET_PREFIX)LaunchScreen</string>
     <key>UIMainStoryboardFile</key>
     <string>Main</string>
     <key>UIStatusBarHidden</key>

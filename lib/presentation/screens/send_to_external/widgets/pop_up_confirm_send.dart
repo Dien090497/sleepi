@@ -24,12 +24,14 @@ class PopUpConfirmSend extends StatelessWidget {
     this.transferToken = false,
     this.arg,
     Key? key,
+    required this.fee,
   }) : super(key: key);
 
   final String toAddress;
   final double valueInEther;
   final bool transferToken;
   final SendToExternalArguments? arg;
+  final double fee;
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +81,13 @@ class PopUpConfirmSend extends StatelessWidget {
                                 value: valueInEther,
                               )),
                               builder: (context, snapshot) {
-                                return const Text(
+                                return Text(
 
                                   /// TODO: remove hardcode fee
                                   // snapshot.hasData
                                   //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
                                   //     : '--.--',
-                                  '0.0014733 AVAX',
+                                  fee.toString(),
                                   textAlign: TextAlign.right,
                                   style: TextStyles.lightWhite16,
                                 );
