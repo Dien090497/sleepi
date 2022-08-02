@@ -2,4 +2,4 @@
 
 FLUTTER_TARGET=lib/main_stg.dart
 ASSET_PREFIX=stg
-BUNDLE_NAME=SleeFi Stg
+BUNDLE_NAME=SleeFi

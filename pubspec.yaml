@@ -35,7 +35,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   tab_indicator_styler: ^2.0.0
   percent_indicator: ^4.2.2
-  dropdown_button2: ^1.7.0
+  dropdown_button2: ^1.7.1
   qr_flutter: ^4.0.0
   cool_dropdown: ^1.4.2
   url_launcher: ^6.1.5
@@ -51,7 +51,7 @@ dependencies:
   web3dart: 2.3.5
   erc20: ^1.0.0
   eip55: ^1.0.2
-  local_auth: ^2.1.0
+  local_auth: ^2.1.1
   get_storage: ^2.0.3
   isar: ^2.5.0
   image_gallery_saver: ^1.7.1
@@ -72,11 +72,11 @@ dependencies:
   eth_sig_util: ^0.0.9
   top_snackbar_flutter: ^2.1.1
   connectivity_plus: ^2.3.6
-  flutter_native_splash: ^2.2.6
+  flutter_native_splash: ^2.2.7
   webview_flutter: ^3.0.4
   lottie: ^1.4.0
-  sentry: ^6.8.1
-  sentry_flutter: ^6.8.1
+  sentry: ^6.9.0
+  sentry_flutter: ^6.9.0
   device_info_plus: ^4.0.0
   money_formatter: ^0.0.3
   intl: ^0.17.0
@@ -165,10 +165,10 @@ flavorizr:
     - ios:xcconfig
     - ios:buildTargets
     - ios:schema
-        - ios:dummyAssets
+    - ios:dummyAssets
     #    - ios:icons
     - ios:plist
-    #    - ios:launchScreen
+    - ios:launchScreen
     #    - google:firebase
     - assets:clean
     - ide:config
@@ -179,20 +179,11 @@ flavorizr:
         name: "SleeFi Dev"
 
       android:
-        applicationId: "com.sotatek.slee_fi"
+        applicationId: "com.sotatek.slee_fi.dev"
       ios:
         bundleId: "com.sotatek.slee-fi.dev"
 
     stg:
-      app:
-        name: "SleeFi Stg"
-
-      android:
-        applicationId: "com.sotatek.slee_fi"
-      ios:
-        bundleId: "com.sotatek.slee-fi.stg"
-
-    prod:
       app:
         name: "SleeFi"
 
@@ -200,3 +191,12 @@ flavorizr:
         applicationId: "com.sotatek.slee_fi"
       ios:
         bundleId: "com.sotatek.slee-fi"
+
+    prod:
+      app:
+        name: "SleeFi"
+
+      android:
+        applicationId: "com.sleefilab.slee_fi"
+      ios:
+        bundleId: "com.sleefilab.slee_fi"

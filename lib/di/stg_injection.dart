@@ -2,13 +2,13 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 @module
-abstract class StgInjection {
+abstract class ReleaseInjection {
   /// Closed Beta
-  @test
+  @Environment('stg')
   @Named('baseUrl')
   String get baseUrl => 'https://staging.sleefi.com/api/v1';
 
-  @test
+  @Environment('stg')
   @Named('tokens')
   List<dynamic> get tokens => [
         {
@@ -41,8 +41,8 @@ abstract class StgInjection {
         },
       ];
 
-  @test
+  @Environment('stg')
   @Named('contractRouter')
   String get contractRouterDev => '0xd7f655E3376cE2D7A2b08fF01Eb3B1023191A901';
-  // String get contractRouterDev => '0x60aE616a2155Ee3d9A68541Ba4544862310933d4'; mainnet
+// String get contractRouterDev => '0x60aE616a2155Ee3d9A68541Ba4544862310933d4'; mainnet
 }

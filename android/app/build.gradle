@@ -38,17 +38,17 @@ android {
     productFlavors {
         dev {
             dimension "SleeFi"
-            applicationId "com.sotatek.slee_fi"
+            applicationId "com.sotatek.slee_fi.dev"
             resValue "string", "app_name", "SleeFi Dev"
         }
         stg {
             dimension "SleeFi"
             applicationId "com.sotatek.slee_fi"
-            resValue "string", "app_name", "SleeFi Stg"
+            resValue "string", "app_name", "SleeFi"
         }
         prod {
             dimension "SleeFi"
-            applicationId "com.sotatek.slee_fi"
+            applicationId "com.sleefilab.slee_fi"
             resValue "string", "app_name", "SleeFi"
         }
     }
