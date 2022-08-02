@@ -145,7 +145,8 @@ class _PopUpSellState extends State<PopUpSell> {
                                 step++;
                                 break;
                               case 1:
-                                if (controller.text.isNotEmpty) {
+                                final amount = double.tryParse(controller.text);
+                                if (controller.text.isNotEmpty  && amount  != null && amount >0 ) {
                                   setState(() {
                                     amountNotZero = false;
                                   });
