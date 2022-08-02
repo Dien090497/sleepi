@@ -24,6 +24,8 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
+import 'my_jewel_short_widget.dart';
+
 class TabItemDetail extends StatelessWidget {
   const TabItemDetail({Key? key}) : super(key: key);
 
@@ -71,14 +73,8 @@ class TabItemDetail extends StatelessWidget {
                                       _showJewelDialog(
                                           context, state.jewels[i]);
                                     },
-                                    child: MyItemsShortWidget(
-                                      name: state.jewels[i].name,
-                                      image: state.jewels[i].image,
-                                      quality: state.jewels[i].quality,
-                                      level: state.jewels[i].level,
-                                      type: state.jewels[i].type,
-                                      items: state.jewels[i],
-                                    ),
+                                    child: MyJewelsShortWidget(
+                                        jewel: state.jewels[i]),
                                   );
                                 },
                               );

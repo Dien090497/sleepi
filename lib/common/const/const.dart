@@ -16,7 +16,9 @@ class Const {
 
   /// GWei
   static const double gasPrice = 1.5;
+  static const double defaultEstimateGas = 0.000828275;
 
+  static const String txhSnowTrace = 'https://testnet.snowtrace.io/tx/';
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
@@ -68,6 +70,7 @@ class Const {
     localeRU,
     localeZH,
   ];
+
   static const sortCondition = ["LowPrice", "HighPrice", "Latest"];
 
   static const String deadAddress =

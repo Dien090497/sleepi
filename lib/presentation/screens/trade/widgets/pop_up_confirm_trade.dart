@@ -8,6 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/trade/trade_cubit.dart';
 
 class PopUpConfirmTrade extends StatelessWidget {
   const PopUpConfirmTrade({
@@ -17,8 +18,8 @@ class PopUpConfirmTrade extends StatelessWidget {
     required this.symbolTo,
     required this.addressFrom,
     required this.addressTo,
-    required this.onSwap,
     required this.amountOutMin,
+    required this.cubit,
   }) : super(key: key);
 
   final double value;
@@ -26,7 +27,7 @@ class PopUpConfirmTrade extends StatelessWidget {
   final String addressFrom;
   final String symbolTo;
   final String addressTo;
-  final VoidCallback onSwap;
+  final TradeCubit cubit;
   final double amountOutMin;
 
   @override
@@ -130,7 +131,14 @@ class PopUpConfirmTrade extends StatelessWidget {
                   width: double.infinity,
                   textStyle: TextStyles.bold14LightWhite,
                   gradient: AppColors.gradientBlueButton,
-                  onPressed: onSwap,
+                  onPressed: () {
+                    cubit.swapToken(
+                      value,
+                      addressFrom,
+                      addressTo,
+                    );
+                    Navigator.pop(context, true);
+                  },
                 ),
               ),
             ],
