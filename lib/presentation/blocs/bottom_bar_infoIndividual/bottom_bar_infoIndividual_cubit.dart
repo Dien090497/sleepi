@@ -154,7 +154,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
     emit(const BottomBarInfoIndividualState.loading());
     final result = await _nftCancelSellUseCase.call(nftId);
     result.fold((error) {
-      BottomBarInfoIndividualState.error(message: '$error');
+      emit(BottomBarInfoIndividualState.error(message: '$error'));
     }, (result) {
       final currentState = state;
       if (currentState is BottomBarInfoIndividualLoaded) {
