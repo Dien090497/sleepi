@@ -6,7 +6,7 @@ abstract class DevInjection {
   /// Sotatek
   @dev
   @Named('baseUrl')
-  String get baseUrl => 'https://alpha.sleefi.com/api/v1';
+  String get baseUrl => 'https://test.sleefi.com/api/v1';
 
   @dev
   @Named('contractRouter')
