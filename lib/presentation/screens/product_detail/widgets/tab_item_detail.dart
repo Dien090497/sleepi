@@ -74,7 +74,9 @@ class TabItemDetail extends StatelessWidget {
                                           context, state.jewels[i]);
                                     },
                                     child: MyJewelsShortWidget(
-                                        jewel: state.jewels[i]),
+                                      jewel: state.jewels[i],
+                                      isJewel: false,
+                                    ),
                                   );
                                 },
                               );

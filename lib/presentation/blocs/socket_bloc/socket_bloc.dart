@@ -31,7 +31,6 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   }
 
   int bedId = -1;
-  int levelBed = -1;
   final int _limit = 10;
   int _currentPage = 1;
 
@@ -45,22 +44,21 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
     if (state is SocketStateLoaded) {
       return;
     }
-    final maxSocket = _maxSocketOpened(event.level);
+
     bedId = event.nftId;
-    levelBed = event.level;
     _currentPage = 1;
     final result =
         await _detailBedUseCase.call(BedDetailParams(bedId: event.nftId));
     result.fold(
       (l) {
-        final list = List.generate(
-            maxSocket,
-            (index) => const SocketEntity(
-                socketType: SocketType.block, jewelEntity: null));
-        emit(SocketState.loaded(
-            socketEntity: list, maxSocket: maxSocket, socketOpened: 0));
+        emit(const SocketState.loaded(
+          socketEntity: [],
+          maxSocket: 0,
+          socketOpened: 0,
+        ));
       },
       (r) {
+        final maxSocket = _maxSocketOpened(r.level);
         final List<SocketEntity> list = [];
         for (int i = 0; i <= maxSocket; i++) {
           if (i < r.jewels.length) {
@@ -235,7 +233,7 @@ class SocketBloc extends Bloc<SocketEvent, SocketState> {
   FutureOr<void> _refreshSocket(
       RefreshSocket event, Emitter<SocketState> emit) {
     emit(const SocketState.init());
-    add(SocketInit(bedId, levelBed));
+    add(SocketInit(bedId));
   }
 
   FutureOr<void> _onLevelUp(LevelUp event, Emitter<SocketState> emit) {}
