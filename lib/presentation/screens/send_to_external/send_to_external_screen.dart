@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -70,6 +71,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                       double.parse(controllerAmount.text.replaceAll(',', '.')),
                   transferToken: args != null ? true : false,
                   arg: args,
+                  fee: state.fee,
                 ));
           }
         },
@@ -149,8 +151,16 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                               text: LocaleKeys.all,
                                               textStyle: TextStyles.blue12,
                                               onPressed: () {
-                                                controllerAmount.text =
-                                                    balance.formatBalanceToken;
+                                                if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
+                                                  if (state is GetTokenBalanceSuccess) {
+                                                    final result = (Decimal.parse('${state.balance}') -
+                                                        Decimal.parse('${state.fee}'))
+                                                        .floor(scale: 6);
+                                                    controllerAmount.text = result.toString();
+                                                  }
+                                                } else {
+                                                  controllerAmount.text = args?.tokenEntity?.balance.toString() ?? '0';
+                                                }
                                               },
                                               // color: Colors.transparent,
                                             ),
@@ -238,35 +248,39 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         gradient: AppColors.gradientBlueButton,
                         // disabled: isDisabled,
                         onPressed: () {
-                          if (args != null) {
-                            if (controllerAmount.text.isNotEmpty) {
-                              cubit.validator(
-                                  contractAddressTo: contractAddressTo,
-                                  balanceCurrent:
-                                      args.tokenEntity?.balance ?? 0.0,
-                                  amount: double.parse(controllerAmount.text
-                                      .replaceAll(',', '.')));
+                          if (state is GetTokenBalanceSuccess) {
+                            if (args != null) {
+                              if (controllerAmount.text.isNotEmpty) {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent:
+                                    args.tokenEntity?.balance ?? 0.0,
+                                    amount: double.parse(controllerAmount.text
+                                        .replaceAll(',', '.')),
+                                    fee: state.fee);
+                              } else {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent:
+                                    args.tokenEntity?.balance ?? 0.0,
+                                    amount: -1, fee: state.fee);
+                              }
                             } else {
-                              cubit.validator(
-                                  contractAddressTo: contractAddressTo,
-                                  balanceCurrent:
-                                      args.tokenEntity?.balance ?? 0.0,
-                                  amount: -1);
-                            }
-                          } else {
-                            if (controllerAmount.text.isNotEmpty) {
-                              cubit.validator(
-                                  contractAddressTo: contractAddressTo,
-                                  balanceCurrent: balance,
-                                  amount: double.parse(controllerAmount.text
-                                      .replaceAll(',', '.')));
-                            } else {
-                              cubit.validator(
-                                  contractAddressTo: contractAddressTo,
-                                  balanceCurrent: balance,
-                                  amount: -1);
+                              if (controllerAmount.text.isNotEmpty) {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent: balance,
+                                    amount: double.parse(controllerAmount.text
+                                        .replaceAll(',', '.')), fee: state.fee);
+                              } else {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent: balance,
+                                    amount: -1, fee: state.fee);
+                              }
                             }
                           }
+                          
                         },
                       ),
                       const SizedBox(
