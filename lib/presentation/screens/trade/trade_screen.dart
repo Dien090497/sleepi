@@ -48,7 +48,7 @@ class TradeScreen extends StatefulWidget {
 class _TradeScreenState extends State<TradeScreen> {
   late List<dynamic> listTokens = [];
   late double balance = 0;
-  late double estimate = 0.01;
+  late double estimate = 0;
   late int indexFrom = 0;
   late int indexTo = 0;
   String error = '';
@@ -77,7 +77,7 @@ class _TradeScreenState extends State<TradeScreen> {
       final result = valueController.text.toString().contains(',')
           ? valueController.text.toString().replaceAll(',', '.')
           : valueController.text.toString();
-      if (double.parse(result) > balance) {
+      if (double.parse(result) > balance - estimate) {
         error = LocaleKeys.insufficient_balance;
       } else if (double.parse(result) == 0) {
         error = LocaleKeys.amount_input_can_not_be_zero;
