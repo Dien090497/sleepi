@@ -14,7 +14,6 @@ import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_even
 import 'package:slee_fi/presentation/blocs/upgrade_jewel_bloc/upgrade_jewel_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
-import 'package:slee_fi/presentation/screens/home/widgets/my_item_short_widget.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
@@ -24,6 +23,7 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
+import 'jewel_dialog_body.dart';
 import 'my_jewel_short_widget.dart';
 
 class TabItemDetail extends StatelessWidget {

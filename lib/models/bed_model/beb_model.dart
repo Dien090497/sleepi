@@ -64,6 +64,9 @@ class BedModel {
 
   final double? endTime;
 
+  @JsonKey(name: 'bed_box_type')
+  final String? bedBoxType;
+
   BedModel(
       this.id,
       this.nftId,
@@ -100,7 +103,8 @@ class BedModel {
       this.type,
       this.name,
       this.remainTime,
-      this.levelUpTime);
+      this.levelUpTime,
+      this.bedBoxType);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {
     print('open beb box result  ${jsonEncode(json)}');
@@ -165,6 +169,7 @@ class BedModel {
       status: nft?.status ?? '',
       price: nftSale?.price,
       statusNftSale: nftSale?.status,
+      bedBoxType: bedBoxType
     );
   }
 }

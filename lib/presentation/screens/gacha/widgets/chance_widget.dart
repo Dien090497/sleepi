@@ -73,7 +73,7 @@ class ChanceWidget extends StatelessWidget {
                 height: 32,
                 text: LocaleKeys.get,
                 textStyle: TextStyles.boldWhite14,
-                gradient: AppColors.gradientGacha,
+                gradient: numberOfSpin >= totalValue ? AppColors.gradientGacha : AppColors.gradientROI,
                 disabled: numberOfSpin >= totalValue ? false : true,
                 onPressed: () {
                   normalGacha  ? cubit.getCommon() : cubit.getSpecial();

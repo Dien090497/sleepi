@@ -507,5 +507,6 @@
   "release_to_load_more": "リリースしてさらに読み込む",
   "load_fail_retry": "読み込みに失敗しました!クリックして再試行してください!",
   "pull_up_load": "負荷を引き上げる",
-  "roi_day": "日"
+  "roi_day": "日",
+  "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT"
 }
