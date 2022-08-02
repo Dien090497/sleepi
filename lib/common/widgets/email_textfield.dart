@@ -59,7 +59,9 @@ class _EmailTextFieldState extends State<EmailTextField> {
               onChanged: widget.onTextChange,
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
-              inputFormatters: [LowerCaseTextFormatter()],
+              inputFormatters: [
+                LowerCaseTextFormatter(),
+              ],
               controller: _textController,
               decoration: InputDecoration(
                   isDense: true,
@@ -71,8 +73,10 @@ class _EmailTextFieldState extends State<EmailTextField> {
                   errorBorder: border,
                   focusedErrorBorder: border,
                   counterText: "")),
-          suggestionsCallback: (pattern) async =>
-              _secureStorage.getSuggestionEmail(pattern),
+          suggestionsCallback: (pattern) {
+            final res = _secureStorage.getSuggestionEmail(pattern);
+            return res;
+          },
           hideOnEmpty: true,
           hideOnLoading: true,
           suggestionsBoxDecoration: SuggestionsBoxDecoration(
@@ -90,7 +94,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
             _textController.text = suggestion;
             widget.onTextChange(suggestion);
           },
-        )
+        ),
       ],
     );
   }

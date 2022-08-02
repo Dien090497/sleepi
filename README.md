@@ -194,6 +194,8 @@ flutter build apk --release --flavor prod -t lib/main_prod.dart
 flutter build apk --release --flavor stg -t lib/main_stg.dart
 
 flutter build apk --release --flavor dev -t lib/main_dev.dart
+
+flutter build appbundle --release --flavor prod -t lib/main_prod.dart
 ```
 
 ```dart
