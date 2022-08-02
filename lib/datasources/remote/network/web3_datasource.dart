@@ -175,7 +175,7 @@ class Web3DataSource {
       BigInt deadline = BigInt.from(
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
 
-      Credentials credentials = EthPrivateKey.fromHex(privateKey);
+      final Credentials credentials = EthPrivateKey.fromHex(privateKey);
       await contract.swapExactAVAXForTokens(
         amountOutMin,
         pairAddress,
