@@ -500,8 +500,10 @@
   "jewel_level": "Jewel Level",
   "item_level": "Item Level",
   "no_more_data": "No more Data",
-  "load_fail_retry":"Load Failed!Click retry!",
-  "pull_up_load":"Pull up load",
+  "load_fail_retry": "Load Failed!Click retry!",
+  "pull_up_load": "Pull up load",
   "release_to_load_more": "Release to load more",
-  "roi_day": "D"
+  "roi_day": "D",
+  "level_up_balance_not_enough": "Your balance is not enough to level up",
+  "balance_not_enough_to_open_socket": "Your balance is not enough to open socket"
 }
