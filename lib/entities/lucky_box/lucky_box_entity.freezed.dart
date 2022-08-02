@@ -21,6 +21,8 @@ mixin _$LuckyBoxEntity {
   String get speedUpCost => throw _privateConstructorUsedError;
   int get isOpen => throw _privateConstructorUsedError;
   String get waitingTime => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
+  String get luckyBoxType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LuckyBoxEntityCopyWith<LuckyBoxEntity> get copyWith =>
@@ -37,7 +39,9 @@ abstract class $LuckyBoxEntityCopyWith<$Res> {
       String openCost,
       String speedUpCost,
       int isOpen,
-      String waitingTime});
+      String waitingTime,
+      String image,
+      String luckyBoxType});
 }
 
 /// @nodoc
@@ -56,6 +60,8 @@ class _$LuckyBoxEntityCopyWithImpl<$Res>
     Object? speedUpCost = freezed,
     Object? isOpen = freezed,
     Object? waitingTime = freezed,
+    Object? image = freezed,
+    Object? luckyBoxType = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -78,6 +84,14 @@ class _$LuckyBoxEntityCopyWithImpl<$Res>
           ? _value.waitingTime
           : waitingTime // ignore: cast_nullable_to_non_nullable
               as String,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      luckyBoxType: luckyBoxType == freezed
+          ? _value.luckyBoxType
+          : luckyBoxType // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -94,7 +108,9 @@ abstract class _$$_LuckyBoxEntityCopyWith<$Res>
       String openCost,
       String speedUpCost,
       int isOpen,
-      String waitingTime});
+      String waitingTime,
+      String image,
+      String luckyBoxType});
 }
 
 /// @nodoc
@@ -115,6 +131,8 @@ class __$$_LuckyBoxEntityCopyWithImpl<$Res>
     Object? speedUpCost = freezed,
     Object? isOpen = freezed,
     Object? waitingTime = freezed,
+    Object? image = freezed,
+    Object? luckyBoxType = freezed,
   }) {
     return _then(_$_LuckyBoxEntity(
       id: id == freezed
@@ -137,6 +155,14 @@ class __$$_LuckyBoxEntityCopyWithImpl<$Res>
           ? _value.waitingTime
           : waitingTime // ignore: cast_nullable_to_non_nullable
               as String,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      luckyBoxType: luckyBoxType == freezed
+          ? _value.luckyBoxType
+          : luckyBoxType // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -149,7 +175,9 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
       required this.openCost,
       required this.speedUpCost,
       required this.isOpen,
-      required this.waitingTime});
+      required this.waitingTime,
+      required this.image,
+      required this.luckyBoxType});
 
   @override
   final int id;
@@ -161,10 +189,14 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
   final int isOpen;
   @override
   final String waitingTime;
+  @override
+  final String image;
+  @override
+  final String luckyBoxType;
 
   @override
   String toString() {
-    return 'LuckyBoxEntity(id: $id, openCost: $openCost, speedUpCost: $speedUpCost, isOpen: $isOpen, waitingTime: $waitingTime)';
+    return 'LuckyBoxEntity(id: $id, openCost: $openCost, speedUpCost: $speedUpCost, isOpen: $isOpen, waitingTime: $waitingTime, image: $image, luckyBoxType: $luckyBoxType)';
   }
 
   @override
@@ -178,7 +210,10 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
                 .equals(other.speedUpCost, speedUpCost) &&
             const DeepCollectionEquality().equals(other.isOpen, isOpen) &&
             const DeepCollectionEquality()
-                .equals(other.waitingTime, waitingTime));
+                .equals(other.waitingTime, waitingTime) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
+            const DeepCollectionEquality()
+                .equals(other.luckyBoxType, luckyBoxType));
   }
 
   @override
@@ -188,7 +223,9 @@ class _$_LuckyBoxEntity implements _LuckyBoxEntity {
       const DeepCollectionEquality().hash(openCost),
       const DeepCollectionEquality().hash(speedUpCost),
       const DeepCollectionEquality().hash(isOpen),
-      const DeepCollectionEquality().hash(waitingTime));
+      const DeepCollectionEquality().hash(waitingTime),
+      const DeepCollectionEquality().hash(image),
+      const DeepCollectionEquality().hash(luckyBoxType));
 
   @JsonKey(ignore: true)
   @override
@@ -202,7 +239,9 @@ abstract class _LuckyBoxEntity implements LuckyBoxEntity {
       required final String openCost,
       required final String speedUpCost,
       required final int isOpen,
-      required final String waitingTime}) = _$_LuckyBoxEntity;
+      required final String waitingTime,
+      required final String image,
+      required final String luckyBoxType}) = _$_LuckyBoxEntity;
 
   @override
   int get id;
@@ -214,6 +253,10 @@ abstract class _LuckyBoxEntity implements LuckyBoxEntity {
   int get isOpen;
   @override
   String get waitingTime;
+  @override
+  String get image;
+  @override
+  String get luckyBoxType;
   @override
   @JsonKey(ignore: true)
   _$$_LuckyBoxEntityCopyWith<_$_LuckyBoxEntity> get copyWith =>

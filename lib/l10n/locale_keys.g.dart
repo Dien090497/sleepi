@@ -506,5 +506,6 @@ abstract class  LocaleKeys {
   static const pull_up_load = 'pull_up_load';
   static const release_to_load_more = 'release_to_load_more';
   static const roi_day = 'roi_day';
+  static const sleep_time_too_short = 'sleep_time_too_short';
 
 }

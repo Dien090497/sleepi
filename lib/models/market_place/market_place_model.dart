@@ -129,6 +129,7 @@ class MarketPlaceModel {
       socket: null,
       statusNftSale: '',
       price: price,
+      bedBoxType: null
     );
   }
 

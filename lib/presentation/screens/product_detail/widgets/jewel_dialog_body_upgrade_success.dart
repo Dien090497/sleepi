@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -52,12 +54,13 @@ class _JewelDialogBodyUpgradeSuccessState extends State<JewelDialogBodyUpgradeSu
     return Column(
       children: [
         Stack(
+          alignment: Alignment.center,
           children: [
-            Lottie.asset('assets/json/success.json',
+            Lottie.asset(Const.successAnimation,
               controller: animationController,
-              // fit: BoxFit.cover,
-              width: 238,
-              height: 238,
+              fit: BoxFit.cover,
+              // width: 238,
+              // height: 238,
               // repeat: false,
               onLoaded: (composition) {
                 // Configure the AnimationController with the duration of the
@@ -65,6 +68,11 @@ class _JewelDialogBodyUpgradeSuccessState extends State<JewelDialogBodyUpgradeSu
                 animationController..duration = composition.duration
                   ..forward();
               },
+            ),
+            CachedImage(
+              image: widget.jewel.image,
+              width: 150,
+              height: 150,
             ),
           ],
         ),
