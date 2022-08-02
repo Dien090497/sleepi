@@ -107,6 +107,7 @@ class BedModelHome {
         jewels: [],
         price: '',
         statusNftSale: '',
+        bedBoxType: null
       );
 }
 

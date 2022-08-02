@@ -21,6 +21,8 @@ LuckyBox _$LuckyBoxFromJson(Map<String, dynamic> json) => LuckyBox(
       json['isOpen'] as int,
       json['createdAt'] as String,
       json['updatedAt'] as String,
+      json['image'] as String,
+      json['lucky_box_type'] as String,
     );
 
 Map<String, dynamic> _$LuckyBoxToJson(LuckyBox instance) => <String, dynamic>{
@@ -38,4 +40,6 @@ Map<String, dynamic> _$LuckyBoxToJson(LuckyBox instance) => <String, dynamic>{
       'isOpen': instance.isOpen,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
+      'image': instance.image,
+      'lucky_box_type': instance.luckyBoxType,
     };

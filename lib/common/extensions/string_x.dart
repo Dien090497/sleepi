@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -120,6 +121,40 @@ extension StringX on String {
         return toLowerCase();
       case null:
         return this;
+    }
+  }
+
+  String bedBoxAnimation() {
+    switch (this) {
+      case "1":
+        return Const.blackBedBoxAnimation;
+      case "2":
+        return Const.blueBedBoxAnimation;
+      case "3":
+        return Const.greenBedBoxAnimation;
+      case "4":
+        return Const.orangeBedBoxAnimation;
+      case "5":
+        return Const.purpleBedBoxAnimation;
+      default:
+        return Const.greenBedBoxAnimation;
+    }
+  }
+
+  String luckyBoxAnimation() {
+    switch (this) {
+      case "1":
+        return Const.blackLuckyBoxAnimation;
+      case "2":
+        return Const.blueLuckyBoxAnimation;
+      case "3":
+        return Const.greenLuckyBoxAnimation;
+      case "4":
+        return Const.orangeLuckyBoxAnimation;
+      case "5":
+        return Const.purpleLuckyBoxAnimation;
+      default:
+        return Const.greenLuckyBoxAnimation;
     }
   }
 

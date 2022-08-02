@@ -503,5 +503,6 @@
   "load_fail_retry":"Load Failed!Click retry!",
   "pull_up_load":"Pull up load",
   "release_to_load_more": "Release to load more",
-  "roi_day": "D"
+  "roi_day": "D",
+  "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT"
 }

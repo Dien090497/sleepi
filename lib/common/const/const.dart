@@ -43,7 +43,17 @@ class Const {
   static const String bedBrokenAnimation = 'assets/json/bed_broken_with_text.json';
   static const String itemBrokenAnimation = 'assets/json/item_broken.json';
   static const String jewelBrokenAnimation = 'assets/json/jewel_broken_with_text.json';
-
+  static const String purpleBedBoxAnimation = 'assets/json/purple_bedbox.json';
+  static const String blackBedBoxAnimation = 'assets/json/black_bedbox.json';
+  static const String orangeBedBoxAnimation = 'assets/json/orange_bedbox.json';
+  static const String blueBedBoxAnimation = 'assets/json/blue_bedbox.json';
+  static const String greenBedBoxAnimation = 'assets/json/green_bedbox.json';
+  static const String blackLuckyBoxAnimation = 'assets/json/black_lucky_box.json';
+  static const String purpleLuckyBoxAnimation = 'assets/json/purple_lucky_box.json';
+  static const String orangeLuckyBoxAnimation = 'assets/json/orange_lucky_box.json';
+  static const String greenLuckyBoxAnimation = 'assets/json/green_lucky_box.json';
+  static const String blueLuckyBoxAnimation = 'assets/json/blue_lucky_box.json';
+  static const String successAnimation = 'assets/json/success.json';
 
   static const String time = 'time';
   static const String sound = 'sound';
