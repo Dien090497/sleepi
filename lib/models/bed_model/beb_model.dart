@@ -21,6 +21,7 @@ class BedModel {
   final String image;
   final String? name;
   final String? remainTime;
+  final int? remaintingTime;
   final String? levelUpTime;
 
   final String contractAddress;
@@ -100,7 +101,8 @@ class BedModel {
       this.type,
       this.name,
       this.remainTime,
-      this.levelUpTime);
+      this.levelUpTime,
+      this.remaintingTime);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {
     print('open beb box result  ${jsonEncode(json)}');
@@ -130,7 +132,7 @@ class BedModel {
   BedEntity toEntity() {
     return BedEntity(
       levelUpTime: levelUpTime,
-      remainTime: remainTime,
+      remainTime: remainTime ?? remaintingTime?.toString(),
       itemType: itemType,
       isBurn: isBurn ?? 0,
       jewelType: jewelType,

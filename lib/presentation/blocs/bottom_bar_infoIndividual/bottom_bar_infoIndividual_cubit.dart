@@ -6,6 +6,7 @@ import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/schema/nft_sell_schema/nft_sell_schema.dart';
 import 'package:slee_fi/schema/repair_schema/repair_schema.dart';
 import 'package:slee_fi/schema/with_draw_nft_schema/with_draw_nft_schema.dart';
+import 'package:slee_fi/usecase/bed_detail_usecase.dart';
 import 'package:slee_fi/usecase/cancel_sell_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/get_level_up_usecase.dart';
@@ -30,6 +31,7 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   final _getRepairUseCase = getIt<GetRepairUseCase>();
   final _nftRepairUseCase = getIt<NFTRepairUseCase>();
   final _nftCancelSellUseCase = getIt<NFTCancelSellUseCase>();
+  final _bedDetail = getIt<BedDetailUseCase>();
 
   void init() {
     getTransactionFee();
@@ -135,19 +137,42 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
 
   Future<void> getLevelUp(int bedId) async {
     emit(const BottomBarInfoIndividualState.loading());
-    final result = await _getLevelUpUC.call(bedId);
-    result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
-        (r) {
-      emit(BottomBarInfoIndividualState.getLevel(r));
-    });
+
+    final bedDetail = await _bedDetail.call(BedDetailParams(bedId: bedId));
+    await bedDetail.fold(
+      (l) async => emit(BottomBarInfoIndividualState.error(message: '$l')),
+      (bed) async {
+        if (bed.remainTime != null && bed.levelUpTime != null) {
+          emit(BottomBarInfoIndividualState.upLevel(
+            bed.remainTime!,
+            bed.levelUpTime!,
+          ));
+          return;
+        }
+
+        final result = await _getLevelUpUC.call(bedId);
+        result.fold(
+            (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+            (r) {
+          emit(BottomBarInfoIndividualState.getLevel(r));
+        });
+      },
+    );
   }
 
   Future<void> postLevelUp(LevelUpSchema param) async {
     final result = await _postLevelUpUC.call(param);
-    result.fold(
-      (l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
-      (r) => emit(const BottomBarInfoIndividualState.upLevel()),
-    );
+    result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
+        (r) {
+      if (r.remainTime != null && r.levelUpTime != null) {
+        emit(BottomBarInfoIndividualState.upLevel(
+          r.remainTime!,
+          r.levelUpTime!,
+        ));
+      } else {
+        emit(const BottomBarInfoIndividualState.speedUpSuccess());
+      }
+    });
   }
 
   Future<void> cancelSell({required num nftId}) async {

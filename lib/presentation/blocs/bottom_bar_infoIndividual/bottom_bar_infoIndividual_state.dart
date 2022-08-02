@@ -19,7 +19,7 @@ class BottomBarInfoIndividualState with _$BottomBarInfoIndividualState {
 
   const factory BottomBarInfoIndividualState.getLevel(NftLevelUp levelUp) = GetLevelSuccess;
 
-  const factory BottomBarInfoIndividualState.upLevel() = UpLevelSuccess;
+  const factory BottomBarInfoIndividualState.upLevel(String remainTime, String levelUpTime) = UpLevelSuccess;
 
   const factory BottomBarInfoIndividualState.error({required String message}) = BottomBarInfoIndividualError;
 
