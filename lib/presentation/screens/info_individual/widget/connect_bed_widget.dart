@@ -42,7 +42,6 @@ class _ConnectBedWidgetState extends State<ConnectBedWidget> with TickerProvider
   @override
   void dispose() {
     widget.controller.removeListener(() { });
-    widget.controller.dispose();
     super.dispose();
   }
 

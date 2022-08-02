@@ -19,12 +19,12 @@ class EstimateTokenFunctionFeeUseCase extends UseCase<double, EstimateGasTokenPa
 }
 
 class EstimateGasTokenParams {
-  final String ownerAddress;
+  final String? ownerAddress;
   final String toAddress;
   final double? value;
 
   EstimateGasTokenParams({
-    required this.ownerAddress,
+    this.ownerAddress,
     required this.toAddress,
     required this.value,
   });
