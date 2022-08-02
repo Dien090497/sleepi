@@ -34,13 +34,27 @@ class _PopUpSellState extends State<PopUpSell> {
   int step = 0;
   bool amountNotZero = false;
 
-  TextEditingController controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
+  @override
+  void initState() {
+    _controller.addListener(_onTextChange);
+    super.initState();
+  }
 
   @override
   void dispose() {
-    controller.dispose();
+    _controller.removeListener(_onTextChange);
+    _controller.dispose();
     super.dispose();
+  }
+
+  void _onTextChange() {
+    if (amountNotZero) {
+      setState(() {
+        amountNotZero = false;
+      });
+    }
   }
 
   @override
@@ -100,19 +114,25 @@ class _PopUpSellState extends State<PopUpSell> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    _InputPrice(controller: controller,),
-                    amountNotZero ? Align(
-                      alignment: Alignment.centerLeft,
-                      child: SFText(
-                        keyText: LocaleKeys.amount_input_can_not_be_zero,
-                        style: TextStyles.red14,
-                      ),
-                    ) : const SizedBox(),
+                    _InputPrice(
+                      controller: _controller,
+                    ),
+                    amountNotZero
+                        ? Align(
+                            alignment: Alignment.centerLeft,
+                            child: SFText(
+                              keyText: _controller.text.isEmpty
+                                  ? LocaleKeys.field_required
+                                  : LocaleKeys.amount_input_can_not_be_zero,
+                              style: TextStyles.red14,
+                            ),
+                          )
+                        : const SizedBox(),
                   ] else if (state is BottomBarInfoIndividualLoaded) ...[
-                    _Confirm(amount: controller.text, fee: state.transactionFee,),
+                    _Confirm(amount: _controller.text, fee: state.transactionFee,),
                     ]
                     else
-                      _Confirm(amount: controller.text, fee: '--.--',),
+                      _Confirm(amount: _controller.text, fee: '--.--',),
 
                   const SizedBox(height: 24),
                   Row(
@@ -129,44 +149,51 @@ class _PopUpSellState extends State<PopUpSell> {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      state is BottomBarInfoIndividualLoading ?
-                        const Expanded(
-                          child: LoadingIcon(),
-                        )
-                      : Expanded(
-                        child: SFButton(
-                          text: step < 2 ? LocaleKeys.next : LocaleKeys.confirm,
-                          textStyle: TextStyles.white16,
-                          width: double.infinity,
-                          gradient: AppColors.gradientBlueButton,
-                          onPressed: () {
-                            switch (step) {
-                              case 0:
-                                step++;
-                                break;
-                              case 1:
-                                final amount = double.tryParse(controller.text);
-                                if (controller.text.isNotEmpty  && amount  != null && amount >0 ) {
-                                  setState(() {
-                                    amountNotZero = false;
-                                  });
-                                  step++;
-                                } else {
-                                  setState(() {
-                                    amountNotZero = true;
-                                  });
-                                }
-                                break;
-                              case 2:
-                                widget.cubit.sellNFT(amount: controller.text, nftId: widget.bedEntity.nftId);
-                                //Navigator.pop(context);
-                                //showSuccessfulDialog(context, null);
-                                break;
-                            }
-                            setState(() {});
-                          },
-                        ),
-                      ),
+                      state is BottomBarInfoIndividualLoading
+                          ? const Expanded(
+                              child: LoadingIcon(),
+                            )
+                          : Expanded(
+                              child: SFButton(
+                                text: step < 2
+                                    ? LocaleKeys.next
+                                    : LocaleKeys.confirm,
+                                textStyle: TextStyles.white16,
+                                width: double.infinity,
+                                gradient: AppColors.gradientBlueButton,
+                                onPressed: () {
+                                  switch (step) {
+                                    case 0:
+                                      step++;
+                                      break;
+                                    case 1:
+                                      final amount =
+                                          double.tryParse(_controller.text);
+                                      if (_controller.text.isNotEmpty &&
+                                          amount != null &&
+                                          amount > 0) {
+                                        setState(() {
+                                          amountNotZero = false;
+                                        });
+                                        step++;
+                                      } else {
+                                        setState(() {
+                                          amountNotZero = true;
+                                        });
+                                      }
+                                      break;
+                                    case 2:
+                                      widget.cubit.sellNFT(
+                                          amount: _controller.text,
+                                          nftId: widget.bedEntity.nftId);
+                                      //Navigator.pop(context);
+                                      //showSuccessfulDialog(context, null);
+                                      break;
+                                  }
+                                  setState(() {});
+                                },
+                              ),
+                            ),
                     ],
                   ),
                 ],
