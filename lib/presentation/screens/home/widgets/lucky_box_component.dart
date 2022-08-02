@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -14,7 +13,6 @@ import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
 import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_state.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_confirm_speed_up.dart';
 import 'package:slee_fi/presentation/screens/home/widgets/popup_open_lucky_box.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/open_bed_box_animation.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/resources/resources.dart';
 

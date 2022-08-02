@@ -1,24 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
-import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
-import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
-import 'package:slee_fi/common/widgets/sf_label_value.dart';
-import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
-import 'package:slee_fi/models/minting/info_minting_model.dart';
-import 'package:slee_fi/models/minting/percent_minting.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
-import 'package:slee_fi/presentation/screens/info_individual/widget/connect_bed_widget.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MintScreen extends StatefulWidget {
@@ -30,8 +20,8 @@ class MintScreen extends StatefulWidget {
 
 class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   late AnimationController animationController;
-  InfoMintingModel? _infoMintingModel;
-  PercentMinting? _percentMinting;
+  // InfoMintingModel? _infoMintingModel;
+  // PercentMinting? _percentMinting;
   int percentBedBox = 100;
 
   final cubit = MintCubit();
@@ -52,7 +42,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (_) => cubit..init(args.nftId),
       child: BlocConsumer<MintCubit, MintState>(
@@ -69,16 +59,16 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
             });
           }
           if (state is MintStateGetInfo) {
-            _infoMintingModel = state.infoMintingModel;
-            _percentMinting = state.infoMintingModel.percentMinting
-                .where((i) => i.value == state.infoMintingModel.randomQuality)
-                .toList()
-                .first;
+            // _infoMintingModel = state.infoMintingModel;
+            // _percentMinting = state.infoMintingModel.percentMinting
+            //     .where((i) => i.value == state.infoMintingModel.randomQuality)
+            //     .toList()
+            //     .first;
           }
         },
         builder: (context, state) {
-          final cubit = context.read<MintCubit>();
-          var size = MediaQuery.of(context).size;
+          // final cubit = context.read<MintCubit>();
+          // var size = MediaQuery.of(context).size;
           return BackgroundWidget(
             child: Scaffold(
               backgroundColor: Colors.transparent,

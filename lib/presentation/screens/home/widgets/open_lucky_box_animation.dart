@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 
 class OpenLuckyBoxAnimation extends StatefulWidget {
@@ -40,7 +39,6 @@ class _OpenLuckyBoxAnimationState extends State<OpenLuckyBoxAnimation> with Tick
 
   @override
   Widget build(BuildContext context) {
-    print(widget.luckyBoxType + "-----------------------------");
     return Column(
       children: [
         Lottie.asset(widget.luckyBoxType.luckyBoxAnimation(),
