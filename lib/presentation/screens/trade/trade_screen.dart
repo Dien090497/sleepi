@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -13,6 +14,7 @@ import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/cool_dropdown/cool_dropdown.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_button_outlined.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -48,7 +50,7 @@ class TradeScreen extends StatefulWidget {
 class _TradeScreenState extends State<TradeScreen> {
   late List<dynamic> listTokens = [];
   late double balance = 0;
-  late double estimate = 0;
+  late double estimate = Const.defaultEstimateGas;
   late int indexFrom = 0;
   late int indexTo = 0;
   String error = '';
@@ -164,6 +166,7 @@ class _TradeScreenState extends State<TradeScreen> {
                     value: balance))
                 .then((value) {
               value.fold((l) {
+                estimate = Const.defaultEstimateGas;
               }, (r) {
                 estimate = r;
               });
@@ -193,12 +196,7 @@ class _TradeScreenState extends State<TradeScreen> {
                     symbolTo: listTokens[indexTo]['symbol'].toString(),
                     addressFrom: listTokens[indexFrom]['address'].toString(),
                     addressTo: listTokens[indexTo]['address'].toString(),
-                    onSwap: () {
-                      tradeCubit.swapToken(
-                          double.parse(result),
-                          listTokens[indexFrom]['address'].toString(),
-                          listTokens[indexTo]['address'].toString());
-                    },
+                    cubit: tradeCubit,
                     amountOutMin: amountOutMin,
                   )).then((value) {
                 tradeCubit.getBalanceToken(
@@ -208,7 +206,6 @@ class _TradeScreenState extends State<TradeScreen> {
           }
 
           if (state is swapTokenSuccess) {
-            Navigator.pop(context);
             if (state.success) {
               showSuccessfulDialog(context, null).then((value) {
                 setState(() {
@@ -232,6 +229,18 @@ class _TradeScreenState extends State<TradeScreen> {
                   ));
             }
           }
+
+          if (state is swapTokenFail) {
+            showMessageDialog(context, state.msg);
+          }
+
+          // if (state is approveTokenSuccess) {
+          //   showTxhApprove(context, state.txh);
+          // }
+          //
+          // if (state is swapLoading){
+          //
+          // }
         },
         builder: (BuildContext context, state) {
           if (state is tradeGetAmountOutMin) {
@@ -245,94 +254,97 @@ class _TradeScreenState extends State<TradeScreen> {
             listTokens = state.listTokens;
             init(context);
           }
-          return DismissKeyboardWidget(
-            child: BackgroundWidget(
-              resizeToAvoidBottomInset: false,
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 20,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: SFSubAppBar(
-                                title: LocaleKeys.trade
-                                    .reCase(StringCase.titleCase),
-                                textStyle: TextStyles.bold18LightWhite,
-                                stringCase: StringCase.titleCase,
-                              ),
+
+          return Stack(
+            children: [
+              DismissKeyboardWidget(
+                child: BackgroundWidget(
+                  resizeToAvoidBottomInset: false,
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 20,
                             ),
-                            GestureDetector(
-                                onTap: () {
-                                  onReset(tradeCubit);
-                                },
-                                child: const SFIconBorder(
-                                    icon: Icons.refresh, sizeIcon: 28)),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView(
-                          children: [
-                            SFCard(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      SFText(
-                                        keyText: LocaleKeys.from,
-                                        style: TextStyles.lightGrey12,
-                                      ),
-                                      const Spacer(),
-                                      SFText(
-                                          keyText: LocaleKeys.balance,
-                                          style: TextStyles.lightGrey12),
-                                      SFText(
-                                        keyText:
-                                            ': ${balance > 0 ? balance.formatBalanceToken : 0}',
-                                        style: TextStyles.lightGrey12,
-                                      ),
-                                    ],
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: SFSubAppBar(
+                                    title: LocaleKeys.trade
+                                        .reCase(StringCase.titleCase),
+                                    textStyle: TextStyles.bold18LightWhite,
+                                    stringCase: StringCase.titleCase,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                ),
+                                GestureDetector(
+                                    onTap: () {
+                                      onReset(tradeCubit);
+                                    },
+                                    child: const SFIconBorder(
+                                        icon: Icons.refresh, sizeIcon: 28)),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: ListView(
+                              children: [
+                                SFCard(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
                                     children: [
                                       Row(
                                         children: [
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: SFTextField(
-                                                controller: valueController,
-                                                focusNode: focusNode,
-                                                showLabel: false,
-                                                noBorder: true,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .allow(RegExp(
-                                                          r'^\d{1,}[.,]?\d{0,6}')),
-                                                ],
-                                                textInputType:
-                                                    const TextInputType
-                                                            .numberWithOptions(
-                                                        decimal: true),
-                                                hintText: "0.00",
-                                                hintStyle:
-                                                    TextStyles.bold16LightWhite,
-                                                onChanged: (value) {
-                                                  if (value.isNotEmpty) {
-                                                    setState(() {
-                                                      onValidValue();
-                                                      final result =
-                                                          valueController
+                                          SFText(
+                                            keyText: LocaleKeys.from,
+                                            style: TextStyles.lightGrey12,
+                                          ),
+                                          const Spacer(),
+                                          SFText(
+                                              keyText: LocaleKeys.balance,
+                                              style: TextStyles.lightGrey12),
+                                          SFText(
+                                            keyText:
+                                                ': ${balance > 0 ? balance.formatBalanceToken : 0}',
+                                            style: TextStyles.lightGrey12,
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: SFTextField(
+                                                    controller: valueController,
+                                                    focusNode: focusNode,
+                                                    showLabel: false,
+                                                    noBorder: true,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .allow(RegExp(
+                                                              r'^\d{1,}[.,]?\d{0,6}')),
+                                                    ],
+                                                    textInputType:
+                                                        const TextInputType
+                                                                .numberWithOptions(
+                                                            decimal: true),
+                                                    hintText: "0.00",
+                                                    hintStyle: TextStyles
+                                                        .bold16LightWhite,
+                                                    onChanged: (value) {
+                                                      if (value.isNotEmpty) {
+                                                        setState(() {
+                                                          onValidValue();
+                                                          final result = valueController
                                                                   .text
                                                                   .toString()
                                                                   .contains(',')
@@ -340,306 +352,322 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                   .text
                                                                   .toString()
                                                                   .replaceAll(
-                                                                      ',',
-                                                                      '.')
+                                                                      ',', '.')
                                                               : valueController
                                                                   .text
                                                                   .toString();
-                                                      tradeCubit.getAmountOutMin(
-                                                          listTokens[indexFrom]
-                                                                  ['address']
-                                                              .toString(),
-                                                          listTokens[indexTo]
-                                                                  ['address']
-                                                              .toString(),
-                                                          double.parse(result));
-                                                    });
-                                                  } else {
-                                                    setState(() {
-                                                      amountOutMin = 0;
-                                                      error = '';
-                                                    });
-                                                  }
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child: FittedBox(
-                                                fit: BoxFit.fitWidth,
-                                                child: SizedBox(
-                                                  width: 80,
-                                                  child: SFButtonOutLined(
-                                                      fixedSize:
-                                                          const Size(34, 21),
-                                                      title: LocaleKeys.max,
-                                                      textStyle:
-                                                          TextStyles.bold14Blue,
-                                                      borderColor:
-                                                          AppColors.blue,
-                                                      onPressed: () {
-                                                        if (balance > 0) {
-                                                          valueController
-                                                              .text = (indexFrom ==
-                                                                      0
-                                                                  ? (balance -
-                                                                              estimate) >
-                                                                          0
-                                                                      ? (balance -
-                                                                          estimate)
-                                                                      : 0
-                                                                  : balance)
-                                                              .formatBalanceToken
-                                                              .replaceAll(
-                                                                  ',', '');
-                                                          Future.delayed(
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      100), () {
-                                                            final result =
-                                                                valueController
-                                                                    .text
-                                                                    .replaceAll(
-                                                                        ',',
-                                                                        '.');
-                                                            tradeCubit.getAmountOutMin(
-                                                                listTokens[indexFrom]
-                                                                        [
-                                                                        'address']
-                                                                    .toString(),
-                                                                listTokens[indexTo]
-                                                                        [
-                                                                        'address']
-                                                                    .toString(),
-                                                                double.parse(
-                                                                    result));
-                                                          });
+                                                          tradeCubit.getAmountOutMin(
+                                                              listTokens[indexFrom]
+                                                                      [
+                                                                      'address']
+                                                                  .toString(),
+                                                              listTokens[indexTo]
+                                                                      [
+                                                                      'address']
+                                                                  .toString(),
+                                                              double.parse(
+                                                                  result));
+                                                        });
+                                                      } else {
+                                                        setState(() {
+                                                          amountOutMin = 0;
                                                           error = '';
-                                                          setState(() {});
-                                                        } else {
-                                                          valueController.text =
-                                                              '0';
-                                                        }
-                                                      }),
+                                                        });
+                                                      }
+                                                    },
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: DropdownSelectToken(
-                                                globalKey: firstToken,
-                                                width: 110,
-                                                height: 36,
-                                                indexInit: indexFrom,
-                                                resultPadding:
-                                                    const EdgeInsets.all(0),
-                                                backgroundColor:
-                                                    AppColors.transparent,
-                                                isResultLabel: true,
-                                                tokens: listTokens,
-                                                onChange: (selectItem) {
-                                                  setState(() {
-                                                    if (selectItem["value"] ==
-                                                        listTokens[indexTo]
-                                                            ['address']) {
-                                                      indexTo = indexFrom;
-                                                    }
-                                                    indexFrom = getIndexAddress(
-                                                        selectItem["value"]
-                                                            .toString());
-                                                    tradeCubit.getBalanceToken(
-                                                        listTokens[indexFrom]
-                                                                ['address']
-                                                            .toString());
-                                                    valueController.text = '';
-                                                    amountOutMin = 0;
-                                                    error = '';
-                                                    log("message $indexFrom $indexTo");
-                                                  });
-                                                  Future.delayed(
-                                                    const Duration(
-                                                        milliseconds: 100),
-                                                    () => secondToken
-                                                        .currentState
-                                                        ?.changeSelectedItem(),
-                                                  );
-                                                  FocusScope.of(context)
-                                                      .requestFocus(focusNode);
-                                                },
+                                              Expanded(
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child: FittedBox(
+                                                    fit: BoxFit.fitWidth,
+                                                    child: SizedBox(
+                                                      width: 80,
+                                                      child: SFButtonOutLined(
+                                                          fixedSize: const Size(
+                                                              34, 21),
+                                                          title: LocaleKeys.max,
+                                                          textStyle: TextStyles
+                                                              .bold14Blue,
+                                                          borderColor:
+                                                              AppColors.blue,
+                                                          onPressed: () {
+                                                            if (balance > 0) {
+                                                              valueController
+                                                                  .text = (indexFrom ==
+                                                                          0
+                                                                      ? (balance - estimate) >
+                                                                              0
+                                                                          ? (balance -
+                                                                              estimate)
+                                                                          : 0
+                                                                      : balance)
+                                                                  .formatBalanceToken
+                                                                  .replaceAll(
+                                                                      ',', '');
+                                                              Future.delayed(
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          100),
+                                                                  () {
+                                                                final result =
+                                                                    valueController
+                                                                        .text
+                                                                        .replaceAll(
+                                                                            ',',
+                                                                            '.');
+                                                                tradeCubit.getAmountOutMin(
+                                                                    listTokens[indexFrom]
+                                                                            [
+                                                                            'address']
+                                                                        .toString(),
+                                                                    listTokens[indexTo]
+                                                                            [
+                                                                            'address']
+                                                                        .toString(),
+                                                                    double.parse(
+                                                                        result));
+                                                              });
+                                                              error = '';
+                                                              setState(() {});
+                                                            } else {
+                                                              valueController
+                                                                  .text = '0';
+                                                            }
+                                                          }),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
+                                              Expanded(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: DropdownSelectToken(
+                                                    globalKey: firstToken,
+                                                    width: 110,
+                                                    height: 36,
+                                                    indexInit: indexFrom,
+                                                    resultPadding:
+                                                        const EdgeInsets.all(0),
+                                                    backgroundColor:
+                                                        AppColors.transparent,
+                                                    isResultLabel: true,
+                                                    tokens: listTokens,
+                                                    onChange: (selectItem) {
+                                                      setState(() {
+                                                        if (selectItem[
+                                                                "value"] ==
+                                                            listTokens[indexTo]
+                                                                ['address']) {
+                                                          indexTo = indexFrom;
+                                                        }
+                                                        indexFrom =
+                                                            getIndexAddress(
+                                                                selectItem[
+                                                                        "value"]
+                                                                    .toString());
+                                                        tradeCubit.getBalanceToken(
+                                                            listTokens[indexFrom]
+                                                                    ['address']
+                                                                .toString());
+                                                        valueController.text =
+                                                            '';
+                                                        amountOutMin = 0;
+                                                        error = '';
+                                                        log("message $indexFrom $indexTo");
+                                                      });
+                                                      Future.delayed(
+                                                        const Duration(
+                                                            milliseconds: 100),
+                                                        () => secondToken
+                                                            .currentState
+                                                            ?.changeSelectedItem(),
+                                                      );
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              focusNode);
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SFText(
+                                            keyText: error,
+                                            style: TextStyles.red12W700,
                                           ),
                                         ],
                                       ),
-                                      SFText(
-                                        keyText: error,
-                                        style: TextStyles.red12W700,
-                                      ),
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Center(
-                                child: GestureDetector(
-                              onTap: () {
-                                onSwapIndex(tradeCubit);
-                              },
-                              child: const Icon(
-                                Icons.swap_vert,
-                                color: AppColors.lightWhite,
-                                size: 32,
-                              ),
-                            )),
-                            const SizedBox(height: 8),
-                            SFCard(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      SFText(
-                                        keyText: LocaleKeys.to,
-                                        style: TextStyles.lightGrey14,
-                                      ),
-                                      SFText(
-                                          keyText:
-                                              ' (${LocaleKeys.estimate.tr()})',
-                                          style: TextStyles.lightGrey14),
-                                    ],
+                                ),
+                                const SizedBox(height: 8),
+                                Center(
+                                    child: GestureDetector(
+                                  onTap: () {
+                                    onSwapIndex(tradeCubit);
+                                  },
+                                  child: const Icon(
+                                    Icons.swap_vert,
+                                    color: AppColors.lightWhite,
+                                    size: 32,
                                   ),
-                                  const SizedBox(height: 12),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                )),
+                                const SizedBox(height: 8),
+                                SFCard(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: SizedBox(
-                                          child: SFText(
-                                            maxLines: 1,
-                                            keyText:
-                                                "${Decimal.parse(amountOutMin.toString())}",
-                                            style: TextStyles.bold18White,
+                                      Row(
+                                        children: [
+                                          SFText(
+                                            keyText: LocaleKeys.to,
+                                            style: TextStyles.lightGrey14,
                                           ),
-                                        ),
+                                          SFText(
+                                              keyText:
+                                                  ' (${LocaleKeys.estimate.tr()})',
+                                              style: TextStyles.lightGrey14),
+                                        ],
                                       ),
-                                      DropdownSelectToken(
-                                        globalKey: secondToken,
-                                        width: 110,
-                                        height: 36,
-                                        indexInit: indexTo,
-                                        resultPadding: const EdgeInsets.all(0),
-                                        backgroundColor: AppColors.transparent,
-                                        isResultLabel: true,
-                                        tokens: listTokens,
-                                        onChange: (selectItem) {
-                                          setState(() {
-                                            if (selectItem['value'] ==
-                                                listTokens[indexFrom]
-                                                    ['address']) {
-                                              indexFrom = indexTo;
-                                            }
-                                            indexTo = getIndexAddress(
-                                                selectItem['value'].toString());
-                                            log("message $indexFrom $indexTo");
-                                          });
-                                          Future.delayed(
-                                            const Duration(milliseconds: 100),
-                                            () => firstToken.currentState
-                                                ?.changeSelectedItem(),
-                                          );
-                                          final result = valueController.text
-                                                  .toString()
-                                                  .contains(',')
-                                              ? valueController.text
-                                                  .toString()
-                                                  .replaceAll(',', '.')
-                                              : valueController.text.toString();
+                                      const SizedBox(height: 12),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: SizedBox(
+                                              child: SFText(
+                                                maxLines: 1,
+                                                keyText:
+                                                    "${Decimal.parse(amountOutMin.toString())}",
+                                                style: TextStyles.bold18White,
+                                              ),
+                                            ),
+                                          ),
+                                          DropdownSelectToken(
+                                            globalKey: secondToken,
+                                            width: 110,
+                                            height: 36,
+                                            indexInit: indexTo,
+                                            resultPadding:
+                                                const EdgeInsets.all(0),
+                                            backgroundColor:
+                                                AppColors.transparent,
+                                            isResultLabel: true,
+                                            tokens: listTokens,
+                                            onChange: (selectItem) {
+                                              setState(() {
+                                                if (selectItem['value'] ==
+                                                    listTokens[indexFrom]
+                                                        ['address']) {
+                                                  indexFrom = indexTo;
+                                                }
+                                                indexTo = getIndexAddress(
+                                                    selectItem['value']
+                                                        .toString());
+                                                log("message $indexFrom $indexTo");
+                                              });
+                                              Future.delayed(
+                                                const Duration(
+                                                    milliseconds: 100),
+                                                () => firstToken.currentState
+                                                    ?.changeSelectedItem(),
+                                              );
+                                              final result = valueController
+                                                      .text
+                                                      .toString()
+                                                      .contains(',')
+                                                  ? valueController.text
+                                                      .toString()
+                                                      .replaceAll(',', '.')
+                                                  : valueController.text
+                                                      .toString();
 
-                                          tradeCubit.getAmountOutMin(
-                                              listTokens[indexFrom]['address']
-                                                  .toString(),
-                                              listTokens[indexTo]['address']
-                                                  .toString(),
-                                              double.parse(result));
-                                          FocusScope.of(context)
-                                              .requestFocus(focusNode);
-                                        },
+                                              tradeCubit.getAmountOutMin(
+                                                  listTokens[indexFrom]
+                                                          ['address']
+                                                      .toString(),
+                                                  listTokens[indexTo]['address']
+                                                      .toString(),
+                                                  double.parse(result));
+                                              FocusScope.of(context)
+                                                  .requestFocus(focusNode);
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                      SFButton(
-                        width: double.infinity,
-                        text: LocaleKeys.trade.reCase(StringCase.titleCase),
-                        textStyle: TextStyles.w600WhiteSize16,
-                        gradient: AppColors.gradientBlueButton,
-                        onPressed: () {
-                          setState(() {
-                            onValidValue();
-                            if (valueController.text == '') {
-                              error = LocaleKeys.field_required;
-                            }
-                          });
-                          if (error == '') {
-                            final result =
-                                valueController.text.toString().contains(',')
+                          ),
+                          SFButton(
+                            width: double.infinity,
+                            text: LocaleKeys.trade.reCase(StringCase.titleCase),
+                            textStyle: TextStyles.w600WhiteSize16,
+                            gradient: AppColors.gradientBlueButton,
+                            onPressed: () {
+                              setState(() {
+                                onValidValue();
+                                if (valueController.text == '') {
+                                  error = LocaleKeys.field_required;
+                                }
+                              });
+                              if (error == '') {
+                                final result = valueController.text
+                                        .toString()
+                                        .contains(',')
                                     ? valueController.text
                                         .toString()
                                         .replaceAll(',', '.')
                                     : valueController.text.toString();
-                            if (indexFrom != 0) {
-                              tradeCubit.checkApproveToken(double.parse(result),
-                                  listTokens[indexFrom]['address'].toString());
-                            } else {
-                              showCustomAlertDialog(context,
-                                  children: PopUpConfirmTrade(
-                                    value: double.parse(result),
-                                    symbolFrom: listTokens[indexFrom]['symbol']
-                                        .toString(),
-                                    symbolTo: listTokens[indexTo]['symbol']
-                                        .toString(),
-                                    addressFrom: listTokens[indexFrom]
-                                            ['address']
-                                        .toString(),
-                                    addressTo: listTokens[indexTo]['address']
-                                        .toString(),
-                                    onSwap: () {
-                                      tradeCubit.swapToken(
-                                          double.parse(result),
-                                          listTokens[indexFrom]['address']
-                                              .toString(),
-                                          listTokens[indexTo]['address']
-                                              .toString());
-                                    },
-                                    amountOutMin: amountOutMin,
-                                  )).then((value) {
-                                tradeCubit.getBalanceToken(listTokens[indexFrom]
-                                        ['address']
-                                    .toString());
-                              });
-                            }
-                          }
-                        },
+                                if (indexFrom != 0) {
+                                  tradeCubit.checkApproveToken(
+                                      double.parse(result),
+                                      listTokens[indexFrom]['address']
+                                          .toString());
+                                } else {
+                                  showCustomAlertDialog(context,
+                                      children: PopUpConfirmTrade(
+                                        value: double.parse(result),
+                                        symbolFrom: listTokens[indexFrom]
+                                                ['symbol']
+                                            .toString(),
+                                        symbolTo: listTokens[indexTo]['symbol']
+                                            .toString(),
+                                        addressFrom: listTokens[indexFrom]
+                                                ['address']
+                                            .toString(),
+                                        addressTo: listTokens[indexTo]
+                                                ['address']
+                                            .toString(),
+                                        cubit: tradeCubit,
+                                        amountOutMin: amountOutMin,
+                                      )).then((value) {
+                                    tradeCubit.getBalanceToken(
+                                        listTokens[indexFrom]['address']
+                                            .toString());
+                                  });
+                                }
+                              }
+                            },
+                          ),
+                          const SizedBox(
+                            height: 24.0,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 24.0,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+              if (state is swapLoading) const LoadingScreen(),
+            ],
           );
         },
       ),
