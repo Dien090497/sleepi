@@ -228,18 +228,18 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i19.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i12.StorageKeys>(() => _i12.StorageKeys());
-  gh.factory<String>(() => releaseInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_stg});
+  gh.factory<String>(() => prodInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<String>(() => prodInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<String>(() => devInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_dev});
   gh.factory<String>(() => devInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => prodInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<String>(() => releaseInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_stg});
+  gh.factory<String>(() => releaseInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_stg});
   gh.factory<_i20.ToastUtils>(() => _i20.ToastUtils());
   gh.singleton<_i21.Web3Provider>(_i21.Web3Provider(get<_i4.Client>()));
   gh.factory<_i22.HistoryDataSource>(

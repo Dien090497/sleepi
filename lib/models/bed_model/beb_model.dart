@@ -105,8 +105,7 @@ class BedModel {
       this.name,
       this.remainTime,
       this.levelUpTime,
-      this.remaintingTime);
-      this.levelUpTime,
+      this.remaintingTime,
       this.bedBoxType);
 
   factory BedModel.fromJson(Map<String, dynamic> json) {

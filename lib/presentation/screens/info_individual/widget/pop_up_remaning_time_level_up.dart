@@ -185,12 +185,9 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
                 text: _remainTime.isEmpty ? LocaleKeys.ok : LocaleKeys.speed_up,
                 width: double.infinity,
                 onPressed: () {
-                  if (_remainTime.isEmpty) {
-                    Navigator.pop(context);
-                    widget.onLevelUpSuccess();
-                    return;
+                  if (_time.isActive) {
+                    _time.cancel();
                   }
-                  _time.cancel();
                   setState(() => isSpeedUp = true);
                 },
                 textStyle: TextStyles.white16,
