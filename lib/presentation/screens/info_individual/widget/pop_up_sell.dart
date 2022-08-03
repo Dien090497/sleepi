@@ -194,7 +194,7 @@ class _PopUpSellState extends State<PopUpSell> {
                                       break;
                                     case 2:
                                       widget.cubit.sellNFT(
-                                          amount: _controller.text,
+                                          amount: removeLeadingZero(),
                                           nftId: widget.bedEntity.nftId);
                                       //Navigator.pop(context);
                                       //showSuccessfulDialog(context, null);
