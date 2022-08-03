@@ -25,22 +25,22 @@ class Web3DataSource {
   final SecureStorage _secureStorage;
 
   Web3DataSource(
-    this._web3provider,
-    this._secureStorage,
-  );
+      this._web3provider,
+      this._secureStorage,
+      );
 
   String mnemonicToPrivateKey(String mnemonic, int derivedIndex,
       [int? slip44]) {
     final seed = bip39.mnemonicToSeed(mnemonic);
     final rootKey = bip32.BIP32.fromSeed(seed);
     final keyChild =
-        rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
+    rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
     return HEX.encode(keyChild.privateKey!);
   }
 
   Future<BigInt> getBalance(String address) async {
     return (await _web3provider.web3client
-            .getBalance(EthereumAddress.fromHex(address)))
+        .getBalance(EthereumAddress.fromHex(address)))
         .getInWei;
   }
 
@@ -67,7 +67,7 @@ class Web3DataSource {
   String createMnemonic() => bip39.generateMnemonic();
 
   Future<TransactionInformation> getDetailTransaction(
-          String? transactionHash) =>
+      String? transactionHash) =>
       _web3provider.web3client.getTransactionByHash(transactionHash!);
 
   Future<TransactionReceipt?> getTransactionReceipt(String transactionHash) =>
@@ -169,15 +169,15 @@ class Web3DataSource {
               ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
               : contractAddressTo);
       final List<EthereumAddress> pairAddress =
-          (contractAddressTo != Const.deadAddress &&
-                  contractAddressFrom != Const.deadAddress)
-              ? [
-                  from,
-                  EthereumAddress.fromHex(
-                      await _secureStorage.getTokenAddress(StorageKeys.wavax)),
-                  to
-                ]
-              : [from, to];
+      (contractAddressTo != Const.deadAddress &&
+          contractAddressFrom != Const.deadAddress)
+          ? [
+        from,
+        EthereumAddress.fromHex(
+            await _secureStorage.getTokenAddress(StorageKeys.wavax)),
+        to
+      ]
+          : [from, to];
       final decimalFrom = await getDecimals(
           contractAddressFrom == Const.deadAddress
               ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
@@ -189,7 +189,7 @@ class Web3DataSource {
           ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
           : contractAddressTo);
       return (amounts[amounts.length - 1] -
-              BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
+          BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
           BigInt.from(math.pow(10, decimalTo.toInt()));
     } catch (e) {
       return 0;
@@ -292,8 +292,8 @@ class Web3DataSource {
         ]),
       );
       if ((gasFee *
-              (await _web3provider.web3client.getGasPrice()).getInWei /
-              BigInt.from(pow(10, 18))) <
+          (await _web3provider.web3client.getGasPrice()).getInWei /
+          BigInt.from(pow(10, 18))) <
           (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
         await contract.swapExactTokensForAVAX(
           amountsOut[0],
@@ -364,8 +364,8 @@ class Web3DataSource {
         ]),
       );
       if ((gasFee *
-              (await _web3provider.web3client.getGasPrice()).getInWei /
-              BigInt.from(pow(10, 18))) <
+          (await _web3provider.web3client.getGasPrice()).getInWei /
+          BigInt.from(pow(10, 18))) <
           (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
         await contract.swapExactTokensForTokens(
           amounts[0],
