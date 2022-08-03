@@ -218,13 +218,12 @@ class SLFTStakedState extends State<SLFTStaked> {
                     setState(() {
                       selectedIndex = index;
                       if(!swapText){
-                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
+                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+                        _amountEditingController.text = "${checkMyBalance != null ? double.parse(amountPrice)/widget.priceUsd : widget.myBalance.toString() }";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
                       }else{
-                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        amountPrice= "${double.parse(_amountEditingController.text)/widget.priceUsd}";
-
+                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : "${double.parse(amountPrice)/widget.priceUsd}";
+                        amountPrice= "${checkMyBalance != null ? double.parse(_amountEditingController.text)/widget.priceUsd : widget.myBalance.toString() }";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(_amountEditingController.text)));
                       }
                     });
