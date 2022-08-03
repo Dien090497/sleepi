@@ -279,7 +279,7 @@ class Web3DataSource {
       // print('=-=--=-=${(value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt())}');
       final List<BigInt> amountsOut = await contract.getAmountsOut(
           BigInt.from(
-              value * BigInt.from(math.pow(10, decimalFrom.toInt())).toDouble()),
+              value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),
           pairAddress);
       // print('=-=--=-=${amountsOut.toString()}');
       BigInt amountOutMin = amountsOut[1] -
@@ -300,7 +300,6 @@ class Web3DataSource {
           deadline,
         ]),
       );
-      // print('=-=--=-=$gasFee');
       if ((gasFee *
           (await _web3provider.web3client.getGasPrice()).getInWei /
           BigInt.from(pow(10, 18))) <
