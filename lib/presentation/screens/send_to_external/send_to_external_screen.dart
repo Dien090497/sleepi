@@ -79,7 +79,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalStateInitial) {
-            cubit.getTokenBalance();
+            cubit.getTokenBalance(maxValue: args?.tokenEntity?.balance ?? 0);
           }
 
           return DismissKeyboardWidget(

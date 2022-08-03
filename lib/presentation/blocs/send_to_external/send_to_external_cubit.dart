@@ -35,7 +35,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     });
   }
 
-  Future<void> getTokenBalance() async {
+  Future<void> getTokenBalance({required double maxValue}) async {
     final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
       (l) {
@@ -43,9 +43,9 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       },
       (balance) async {
         final feeRes = await getIt<SendToExternalUseCase>()
-            .calculatorFee(const SendToExternalParams(
+            .calculatorFee(SendToExternalParams(
           contractAddressTo: '',
-          valueInEther: 0,
+          valueInEther: maxValue,
         ));
         feeRes.fold((l) {
           emit(SendToExternalState.fail('$l'));

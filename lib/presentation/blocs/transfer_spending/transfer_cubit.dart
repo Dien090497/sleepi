@@ -48,7 +48,7 @@ class TransferCubit extends Cubit<TransferState> {
         final feeRes = await getIt<SendToExternalUseCase>()
             .calculatorFee(SendToExternalParams(
           contractAddressTo: '',
-          valueInEther: 0,
+          valueInEther: currentState.currentToken.balance,
           tokenSymbol: currentState.currentToken.symbol,
         ));
         fee = feeRes.foldRight(null, (r, previous) => r);
