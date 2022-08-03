@@ -179,7 +179,7 @@ flavorizr:
         name: "SleeFi Dev"
 
       android:
-        applicationId: "com.sotatek.slee_fi.dev"
+        applicationId: "com.sotatek.slee_fi"
       ios:
         bundleId: "com.sotatek.slee-fi.dev"
 
