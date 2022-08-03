@@ -507,5 +507,7 @@
   "load_fail_retry": "読み込みに失敗しました!クリックして再試行してください!",
   "pull_up_load": "負荷を引き上げる",
   "roi_day": "日",
+  "level_up_balance_not_enough": "Your balance is not enough to level up",
+  "balance_not_enough_to_open_socket": "Your balance is not enough to open socket",
   "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT"
 }

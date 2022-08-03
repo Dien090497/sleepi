@@ -68,18 +68,19 @@ class _NftApi implements NftApi {
   }
 
   @override
-  Future<dynamic> levelUp(body) async {
+  Future<BedModel> levelUp(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch(_setStreamType<dynamic>(
-        Options(method: 'POST', headers: _headers, extra: _extra)
-            .compose(_dio.options, '/level-up',
-                queryParameters: queryParameters, data: _data)
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = _result.data;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BedModel>(
+            Options(method: 'POST', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/level-up',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = BedModel.fromJson(_result.data!);
     return value;
   }
 

@@ -116,34 +116,36 @@ class GridViewBedItem extends StatelessWidget {
                           valueActive: bed.bedMint.toDouble(),
                           totalValue: Const.bedMintMax),
                       if (bed.price.isNotEmpty)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: SFText(
-                                keyText: '${bed.price} ${bed.symbol}',
-                                style: TextStyles.white14W700,
-                                stringCase: StringCase.upperCase,
-                              )),
-                              if (userState is UserLoaded)
-                                (bed.owner == userState.userInfoEntity.wallet ?
-                                const SizedBox() :
-                                SFIconButton(
-                                  text: LocaleKeys.buy,
-                                  textStyle: TextStyles.white12,
+                        SizedBox(
+                          height: 50,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    child: SFText(
+                                  keyText: '${bed.price} ${bed.symbol}',
+                                  style: TextStyles.white14W700,
                                   stringCase: StringCase.upperCase,
-                                  icon: Ics.icCart,
-                                  onPressed: () {
-                                    onBuyTap!(bed);
-                                  },
-                                )
-                                )
-                              // SFText(
-                              //   keyText: LocaleKeys.buy,
-                              //   style: TextStyles.blue14W700,
-                              // ),
-                            ],
+                                )),
+                                if (userState is UserLoaded)
+                                  (bed.owner == userState.userInfoEntity.wallet
+                                      ? const SizedBox()
+                                      : SFIconButton(
+                                          text: LocaleKeys.buy,
+                                          textStyle: TextStyles.white12,
+                                          stringCase: StringCase.upperCase,
+                                          icon: Ics.icCart,
+                                          onPressed: () {
+                                            onBuyTap!(bed);
+                                          },
+                                        ))
+                                // SFText(
+                                //   keyText: LocaleKeys.buy,
+                                //   style: TextStyles.blue14W700,
+                                // ),
+                              ],
+                            ),
                           ),
                         ),
                       const SizedBox(height: 12),
