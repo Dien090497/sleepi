@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
@@ -99,7 +100,7 @@ class PopUpRepair extends StatelessWidget {
                 state is BottomBarInfoIndividualLoaded
                     ? SFLabelValue(
                         label: LocaleKeys.cost,
-                        value: '${state.cost ?? 0.0} SLFT',
+                        value: '${state.cost?.formatBalanceToken ?? 0.0} SLFT',
                         styleValue: TextStyles.white16,
                       )
                     : const SFLabelValue(

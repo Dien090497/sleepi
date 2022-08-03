@@ -190,6 +190,7 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
                     widget.onLevelUpSuccess();
                     return;
                   }
+                  _time.cancel();
                   setState(() => isSpeedUp = true);
                 },
                 textStyle: TextStyles.white16,
