@@ -87,7 +87,7 @@ class PopUpConfirmSend extends StatelessWidget {
                                   // snapshot.hasData
                                   //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
                                   //     : '--.--',
-                                  fee.toString(),
+                                  '${fee.toString()} AVAX',
                                   textAlign: TextAlign.right,
                                   style: TextStyles.lightWhite16,
                                 );
