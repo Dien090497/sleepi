@@ -508,5 +508,5 @@
   "nft_can_not_sell" : "Cannot sell the NFT",
   "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT",
   "not_enough_to_pay_the_fee": "The amount AVAX in your wallet is not enough to pay the fee",
-  "transaction_submitted" : "Transaction Submitted"
+  "transaction_submitted": "Transaction Submited"
 }
