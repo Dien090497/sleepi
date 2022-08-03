@@ -27,10 +27,14 @@ class PopUpRemainingTimeLevelUp extends StatefulWidget {
     required this.bedEntity,
     required this.cubit,
     required this.onLevelUpSuccess,
+    required this.remainTime,
+    required this.levelUpTime,
   }) : super(key: key);
   final BedEntity bedEntity;
   final BottomBarInfoIndividualCubit cubit;
   final Function() onLevelUpSuccess;
+  final String remainTime;
+  final String levelUpTime;
 
   @override
   State<PopUpRemainingTimeLevelUp> createState() =>
@@ -40,7 +44,7 @@ class PopUpRemainingTimeLevelUp extends StatefulWidget {
 class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
   late final Timer _time;
 
-  late String remainTime = widget.bedEntity.remainTime!.remainingTime;
+  late String _remainTime = widget.remainTime.remainingTime;
   bool isSpeedUp = false;
   final _getLevelUpUC = getIt<GetLevelUpUseCase>();
   double? speedUpCost;
@@ -49,9 +53,9 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
   void initState() {
     _time = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        remainTime = widget.bedEntity.remainTime!.remainingTime;
+        _remainTime = widget.remainTime.remainingTime;
       });
-      if (remainTime.isEmpty) {
+      if (_remainTime.isEmpty) {
         _time.cancel();
       }
     });
@@ -123,7 +127,7 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
               const SizedBox(height: 8),
               SFLabelValue(
                 label: LocaleKeys.remaining_time,
-                value: remainTime.isNotEmpty ? remainTime : '00:00:00',
+                value: _remainTime.isNotEmpty ? _remainTime : '00:00:00',
                 styleValue: TextStyles.textColorSize16,
               ),
             ],
@@ -178,15 +182,14 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
             const SizedBox(height: 24),
             if (!isSpeedUp)
               SFButton(
-                text: remainTime.isEmpty ? LocaleKeys.ok : LocaleKeys.speed_up,
+                text: _remainTime.isEmpty ? LocaleKeys.confirm : LocaleKeys.speed_up,
                 width: double.infinity,
                 onPressed: () {
-                  if (remainTime.isEmpty) {
+                  if (_remainTime.isEmpty) {
                     Navigator.pop(context);
                     widget.onLevelUpSuccess();
                     return;
                   }
-                  _time.cancel();
                   setState(() => isSpeedUp = true);
                 },
                 textStyle: TextStyles.white16,
@@ -243,15 +246,11 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
   }
 
   double _percentTime() {
-    if (widget.bedEntity.remainTime == null ||
-        widget.bedEntity.levelUpTime == null) {
-      return 0;
-    }
-    if (remainTime.isEmpty) {
+    if (_remainTime.isEmpty) {
       return 1;
     }
-    final levelUpTime = int.parse(widget.bedEntity.levelUpTime!);
-    final totalTime = (int.parse(widget.bedEntity.remainTime!) - levelUpTime);
+    final levelUpTime = int.parse(widget.levelUpTime);
+    final totalTime = (int.parse(widget.remainTime) - levelUpTime);
     final currentTime = DateTime.now().millisecondsSinceEpoch - levelUpTime;
     return currentTime / totalTime;
   }

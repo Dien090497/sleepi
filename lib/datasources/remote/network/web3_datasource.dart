@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:bip32/bip32.dart' as bip32;
@@ -15,6 +16,7 @@ import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/network/web3_provider.dart';
+import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Singleton()
@@ -23,22 +25,22 @@ class Web3DataSource {
   final SecureStorage _secureStorage;
 
   Web3DataSource(
-    this._web3provider,
-    this._secureStorage,
-  );
+      this._web3provider,
+      this._secureStorage,
+      );
 
   String mnemonicToPrivateKey(String mnemonic, int derivedIndex,
       [int? slip44]) {
     final seed = bip39.mnemonicToSeed(mnemonic);
     final rootKey = bip32.BIP32.fromSeed(seed);
     final keyChild =
-        rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
+    rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
     return HEX.encode(keyChild.privateKey!);
   }
 
   Future<BigInt> getBalance(String address) async {
     return (await _web3provider.web3client
-            .getBalance(EthereumAddress.fromHex(address)))
+        .getBalance(EthereumAddress.fromHex(address)))
         .getInWei;
   }
 
@@ -65,7 +67,7 @@ class Web3DataSource {
   String createMnemonic() => bip39.generateMnemonic();
 
   Future<TransactionInformation> getDetailTransaction(
-          String? transactionHash) =>
+      String? transactionHash) =>
       _web3provider.web3client.getTransactionByHash(transactionHash!);
 
   Future<TransactionReceipt?> getTransactionReceipt(String transactionHash) =>
@@ -81,13 +83,56 @@ class Web3DataSource {
     String? to,
     double? value,
     EtherAmount? gasPrice,
-  }) async =>
-      (await _web3provider.web3client.estimateGas(
+  }) async {
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: sender,
+      to: to != null ? EthereumAddress.fromHex(to) : null,
+      value: value?.etherToWei.toWeiEtherAmount,
+      gasPrice: gasPrice,
+    );
+    return gasFee;
+  }
+
+  Future<BigInt> estimateGasAvaxTrade({
+    EthereumAddress? sender,
+    EtherAmount? gasPrice,
+  }) async {
+    try {
+      final contract = avaxFrom(
+          await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
+      String wavax = await _secureStorage.getTokenAddress(StorageKeys.wavax);
+      String usdc = await _secureStorage.getTokenAddress(StorageKeys.usdc);
+
+      final tradeFromFunc = contract.self.function('swapExactAVAXForTokens');
+      EthereumAddress from = EthereumAddress.fromHex(wavax);
+      EthereumAddress to = EthereumAddress.fromHex(usdc);
+      final List<EthereumAddress> pairAddress = [from, to];
+      final List<BigInt> amounts = await contract.getAmountsOut(
+          BigInt.from(0.00001.etherToWei), pairAddress);
+      BigInt amountOutMin = amounts[1] -
+          BigInt.from((amounts[1].toInt() * 0.01) / 100); //slippage set here
+      BigInt deadline = BigInt.from(
+          ((DateTime
+              .now()
+              .millisecond / 1000).floor() + 60 * 20) * 1000000000);
+
+      final gasFee = await _web3provider.web3client.estimateGas(
         sender: sender,
-        to: to != null ? EthereumAddress.fromHex(to) : null,
-        value: value?.etherToWei.toWeiEtherAmount,
+        to: contract.self.address,
+        value: 0.00001.etherToWei.toWeiEtherAmount,
         gasPrice: gasPrice,
-      ));
+        data: tradeFromFunc.encodeCall([
+          amountOutMin,
+          pairAddress,
+          sender,
+          deadline,
+        ]),
+      );
+      return gasFee;
+    }catch(e){
+      return BigInt.from(0);
+    }
+  }
 
   Future<String> sendCoinTxn({
     required Credentials credentials,
@@ -130,15 +175,15 @@ class Web3DataSource {
               ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
               : contractAddressTo);
       final List<EthereumAddress> pairAddress =
-          (contractAddressTo != Const.deadAddress &&
-                  contractAddressFrom != Const.deadAddress)
-              ? [
-                  from,
-                  EthereumAddress.fromHex(
-                      await _secureStorage.getTokenAddress(StorageKeys.wavax)),
-                  to
-                ]
-              : [from, to];
+      (contractAddressTo != Const.deadAddress &&
+          contractAddressFrom != Const.deadAddress)
+          ? [
+        from,
+        EthereumAddress.fromHex(
+            await _secureStorage.getTokenAddress(StorageKeys.wavax)),
+        to
+      ]
+          : [from, to];
       final decimalFrom = await getDecimals(
           contractAddressFrom == Const.deadAddress
               ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
@@ -150,14 +195,14 @@ class Web3DataSource {
           ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
           : contractAddressTo);
       return (amounts[amounts.length - 1] -
-              BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
+          BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
           BigInt.from(math.pow(10, decimalTo.toInt()));
     } catch (e) {
       return 0;
     }
   }
 
-  Future<bool> swapExactAVAXForTokens(String privateKey, String walletAddress,
+  Future<String> swapExactAVAXForTokens(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
       final contract = avaxFrom(
@@ -190,9 +235,9 @@ class Web3DataSource {
           nonce: await _web3provider.web3client.getTransactionCount(to),
         ),
       );
-      return true;
+      return '';
     } catch (e) {
-      return false;
+      return e.toString();
     }
   }
 
@@ -200,7 +245,8 @@ class Web3DataSource {
       String contractAddress, Credentials credentials) async {
     final contract = token(contractAddress);
 
-    BigInt amount = await contract.totalSupply();
+    BigInt amount = BigInt.parse("115792089237316195423570985008687907853269984665640564039457584007913129639935");
+    // BigInt amount = await contract.totalSupply();
     final decimal = await contract.decimals();
     return await contract.approve(
         EthereumAddress.fromHex(
@@ -218,21 +264,26 @@ class Web3DataSource {
             await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe)));
   }
 
-  Future<bool> swapExactTokensForAvax(String privateKey, String walletAddress,
+  Future<String> swapExactTokensForAvax(String privateKey, String walletAddress,
       String contractAddress, double value) async {
     try {
       final contract = avaxFrom(
           await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
+      final tradeFromFunc = contract.self.function('swapExactTokensForAVAX');
       EthereumAddress toToken = EthereumAddress.fromHex(
           await _secureStorage.getTokenAddress(StorageKeys.wavax));
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddress);
 
       final List<EthereumAddress> pairAddress = [fromToken, toToken];
       final decimalFrom = await getDecimals(contractAddress);
+      print('=-=--=-=$value');
+      print('=-=--=-=${BigInt.from(
+          value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt())}');
       final List<BigInt> amountsOut = await contract.getAmountsOut(
           BigInt.from(
               value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),
           pairAddress);
+      print('=-=--=-=${amountsOut.toString()}');
       BigInt amountOutMin = amountsOut[1] -
           BigInt.from(
               (amountsOut[1].toInt() * 0.01) / 100); ////slippage set here
@@ -240,28 +291,46 @@ class Web3DataSource {
       BigInt deadline = BigInt.from(
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
       Credentials credentials = EthPrivateKey.fromHex(privateKey);
-      await contract.swapExactTokensForAVAX(
-        amountsOut[0],
-        amountOutMin,
-        pairAddress,
-        to,
-        deadline,
-        credentials: credentials,
-        transaction: Transaction(
-          from: to,
-          to: to,
-          value: 0.toWeiEtherAmount,
-          gasPrice: await _web3provider.web3client.getGasPrice(),
-          nonce: await _web3provider.web3client.getTransactionCount(to),
-        ),
+      final gasFee = await _web3provider.web3client.estimateGas(
+        sender: to,
+        to: contract.self.address,
+        data: tradeFromFunc.encodeCall([
+          amountsOut[0],
+          amountOutMin,
+          pairAddress,
+          to,
+          deadline,
+        ]),
       );
-      return true;
+      if ((gasFee *
+          (await _web3provider.web3client.getGasPrice()).getInWei /
+          BigInt.from(pow(10, 18))) <
+          (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
+        await contract.swapExactTokensForAVAX(
+          amountsOut[0],
+          amountOutMin,
+          pairAddress,
+          to,
+          deadline,
+          credentials: credentials,
+          transaction: Transaction(
+            from: to,
+            to: to,
+            value: 0.toWeiEtherAmount,
+            gasPrice: await _web3provider.web3client.getGasPrice(),
+            nonce: await _web3provider.web3client.getTransactionCount(to),
+          ),
+        );
+        return '';
+      } else {
+        return LocaleKeys.not_enough_to_pay_the_fee;
+      }
     } catch (e) {
-      return false;
+      return e.toString();
     }
   }
 
-  Future<bool> swapExactTokensForTokens(
+  Future<String> swapExactTokensForTokens(
       String privateKey,
       String walletAddress,
       String contractAddressFrom,
@@ -270,6 +339,7 @@ class Web3DataSource {
     try {
       final contract = avaxFrom(
           await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe));
+      final tradeFromFunc = contract.self.function('swapExactTokensForTokens');
       EthereumAddress toToken = EthereumAddress.fromHex(contractAddressTo);
       EthereumAddress fromToken = EthereumAddress.fromHex(contractAddressFrom);
 
@@ -292,24 +362,42 @@ class Web3DataSource {
           ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
 
       Credentials credentials = EthPrivateKey.fromHex(privateKey);
-      await contract.swapExactTokensForTokens(
-        amounts[0],
-        amountOutMin,
-        pairAddress,
-        to,
-        deadline,
-        credentials: credentials,
-        transaction: Transaction(
-          from: to,
-          to: to,
-          value: 0.toWeiEtherAmount,
-          gasPrice: await _web3provider.web3client.getGasPrice(),
-          nonce: await _web3provider.web3client.getTransactionCount(to),
-        ),
+      final gasFee = await _web3provider.web3client.estimateGas(
+        sender: to,
+        to: contract.self.address,
+        data: tradeFromFunc.encodeCall([
+          amounts[0],
+          amountOutMin,
+          pairAddress,
+          to,
+          deadline,
+        ]),
       );
-      return true;
+      if ((gasFee *
+          (await _web3provider.web3client.getGasPrice()).getInWei /
+          BigInt.from(pow(10, 18))) <
+          (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
+        await contract.swapExactTokensForTokens(
+          amounts[0],
+          amountOutMin,
+          pairAddress,
+          to,
+          deadline,
+          credentials: credentials,
+          transaction: Transaction(
+            from: to,
+            to: to,
+            value: 0.toWeiEtherAmount,
+            gasPrice: await _web3provider.web3client.getGasPrice(),
+            nonce: await _web3provider.web3client.getTransactionCount(to),
+          ),
+        );
+        return '';
+      } else {
+        return LocaleKeys.not_enough_to_pay_the_fee;
+      }
     } catch (e) {
-      return false;
+      return e.toString();
     }
   }
 

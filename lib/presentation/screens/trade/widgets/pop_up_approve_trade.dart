@@ -32,49 +32,6 @@ class PopUpConfirmApproveTrade extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          // SFCard(
-          //   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: [
-          //             SFText(
-          //               keyText: LocaleKeys.from,
-          //               style: TextStyles.lightGrey12,
-          //             ),
-          //             const SizedBox(
-          //               height: 12.0,
-          //             ),
-          //             SFText(
-          //               keyText: LocaleKeys.wallet,
-          //               style: TextStyles.bold18White,
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //       Expanded(
-          //         child: Column(
-          //           crossAxisAlignment: CrossAxisAlignment.end,
-          //           children: [
-          //             SFText(
-          //               keyText: LocaleKeys.to,
-          //               style: TextStyles.lightGrey12,
-          //             ),
-          //             const SizedBox(
-          //               height: 12.0,
-          //             ),
-          //             SFText(
-          //               keyText: LocaleKeys.spending,
-          //               style: TextStyles.bold18White,
-          //             ),
-          //           ],
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // ),
           const SizedBox(
             height: 12.0,
           ),

@@ -44,10 +44,11 @@ class TransactionRemoteDataSource{
             wallet.mnemonic, wallet.derivedIndex!, network.slip44);
         final credentials = _web3dataSource.credentialsFromPrivateKey(privateKey);
         final ethereumAddress = await credentials.extractAddress();
-        List transactionByToken = historyTransaction.where((i) => i.tokenSymbol.contains(params.tokenSymbol!)).toList();
+        List transactionByToken = historyTransaction.where((i) {
+          return i.tokenSymbol.contains(params.tokenSymbol!);
+        }).toList();
         int start = 5*(params.page! - 1);
         int end = 5*params.page! > transactionByToken.length ? transactionByToken.length : 5*params.page!;
-
         for(int i = start ; i < end;i++){
           var block = await _web3dataSource.getDetailTransaction(transactionByToken[i].transactionHash);
           final String url = '${network.explorers.first.url}/api?module=account&action=${params.typeHistory}&address=$ethereumAddress&startblock=${block.blockNumber}&endblock=${block.blockNumber}&sort=desc&apikey=$apiKey"';
@@ -55,8 +56,10 @@ class TransactionRemoteDataSource{
           final historyTx = HistoryModel.fromJson(dataResponse.data as Map<String, dynamic>);
           transactionsHistory.addAll(historyTx.result);
         }
-      }
+        return Right(transactionsHistory);
+      } else {
       return Right(transactionsHistory);
+    }
     } catch (e) {
       return Left(FailureMessage('$e'));
     }

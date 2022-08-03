@@ -126,6 +126,21 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                   widget.onBackIndividual(true);
                   cubit.init();
                 }
+                if (state is UpLevelSuccess) {
+                  Navigator.pop(context, true);
+                  showCustomAlertDialog(
+                    context,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 32),
+                    children: PopUpRemainingTimeLevelUp(
+                      bedEntity: bedEntity,
+                      cubit: cubit,
+                      onLevelUpSuccess: () => widget.onBackIndividual(null),
+                      levelUpTime: state.levelUpTime,
+                      remainTime: state.remainTime,
+                    ),
+                  );
+                }
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -262,6 +277,8 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
             bedEntity: bedEntity,
             cubit: cubit,
             onLevelUpSuccess: () => widget.onBackIndividual(null),
+            levelUpTime: bedEntity.levelUpTime!,
+            remainTime: bedEntity.remainTime!,
           ),
         );
         return;

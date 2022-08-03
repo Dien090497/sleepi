@@ -90,7 +90,7 @@ class TransactionDetail extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   SFText(
                       keyText:
-                          "${args.tokenEntity.balance.formatBalanceToken} ${args.title}",
+                          "${args.tokenEntity.balance > 0.000001 ? args.tokenEntity.balance.formatBalanceToken : 0} ${args.title}",
                       style: TextStyles.bold30White,
                       textAlign: TextAlign.center,
                       stringCase: StringCase.upperCase),
@@ -110,9 +110,9 @@ class TransactionDetail extends StatelessWidget {
                                     context,
                                     0.7,
                                     ModalReceiveWallet(
-                                      address: state.walletInfoEntity.address,
-                                      networkName: state.walletInfoEntity.networkName
-                                    ),
+                                        address: state.walletInfoEntity.address,
+                                        networkName:
+                                            state.walletInfoEntity.networkName),
                                   );
                                 }
                               },
@@ -123,19 +123,25 @@ class TransactionDetail extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          args.tokenEntity.symbol != 'USDC' ? Expanded(
-                            child: BoxButtonWidget(
-                              onTap: () {
-                                Navigator.pushNamed(context, R.transfer,
-                                    arguments: TransferScreenArg(
-                                        address: args.tokenEntity.address,
-                                        isToSpending: true));
-                              },
-                              text: LocaleKeys.to_spending,
-                              assetImage: Ics.icRefresh,
-                            ),
-                          ) : const SizedBox(),
-                          args.tokenEntity.symbol != 'USDC' ? const SizedBox(width: 10,) : const SizedBox(),
+                          args.tokenEntity.symbol != 'USDC'
+                              ? Expanded(
+                                  child: BoxButtonWidget(
+                                    onTap: () {
+                                      Navigator.pushNamed(context, R.transfer,
+                                          arguments: TransferScreenArg(
+                                              address: args.tokenEntity.address,
+                                              isToSpending: true));
+                                    },
+                                    text: LocaleKeys.to_spending,
+                                    assetImage: Ics.icRefresh,
+                                  ),
+                                )
+                              : const SizedBox(),
+                          args.tokenEntity.symbol != 'USDC'
+                              ? const SizedBox(
+                                  width: 10,
+                                )
+                              : const SizedBox(),
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
@@ -163,8 +169,8 @@ class TransactionDetail extends StatelessWidget {
                                   context,
                                   R.trade,
                                   arguments: TradeArguments(
-                                      contractAddressFrom:
-                                          args.tokenEntity.address),
+                                      symbolFrom:
+                                          args.tokenEntity.symbol),
                                 );
                               },
                               text: LocaleKeys.trade

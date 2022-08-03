@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -87,7 +88,7 @@ class PopUpConfirmSend extends StatelessWidget {
                                   // snapshot.hasData
                                   //     ? '${snapshot.data!.getOrElse(() => 0)} ${'AVAX'}'
                                   //     : '--.--',
-                                  fee.toString(),
+                                  '${fee.toString()} AVAX',
                                   textAlign: TextAlign.right,
                                   style: TextStyles.lightWhite16,
                                 );
@@ -152,7 +153,7 @@ class PopUpConfirmSend extends StatelessWidget {
                           width: 16.0,
                         ),
                         Expanded(
-                          child: SFButton(
+                          child: state is SendToExternalLoading ? const LoadingIcon() : SFButton(
                               disabled: state is SendToExternalLoading,
                               text: LocaleKeys.confirm,
                               textStyle: TextStyles.bold14LightWhite,

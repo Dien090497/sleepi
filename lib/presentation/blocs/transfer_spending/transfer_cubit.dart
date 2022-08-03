@@ -48,7 +48,7 @@ class TransferCubit extends Cubit<TransferState> {
         final feeRes = await getIt<SendToExternalUseCase>()
             .calculatorFee(SendToExternalParams(
           contractAddressTo: '',
-          valueInEther: 0,
+          valueInEther: currentState.currentToken.balance,
           tokenSymbol: currentState.currentToken.symbol,
         ));
         fee = feeRes.foldRight(null, (r, previous) => r);
@@ -177,12 +177,13 @@ class TransferCubit extends Cubit<TransferState> {
           await _approveUseCase.call(currentState.currentToken.address);
       return result.fold(
         (l) {
-          emit(currentState.copyWith(isLoading: false));
+          emit(TransferState.failed('$l'));
+          //emit(currentState.copyWith(isLoading: false));
           return '$l';
         },
         (result) {
           emit(currentState.copyWith(isLoading: false));
-          return 'done';
+          return result;
         },
       );
     }

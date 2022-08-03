@@ -26,7 +26,7 @@ abstract class IWalletRepository {
   Future<Either<Failure, bool>> checkAllowance(
       double value, String contractAddress);
 
-  Future<Either<Failure, bool>> swapToken(
+  Future<Either<Failure, String>> swapToken(
       double value, String contractAddressFrom, String contractAddressTo);
 
   Future<Either<Failure, List<double>>> getBalanceOfTokens(

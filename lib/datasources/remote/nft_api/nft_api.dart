@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_interceptor.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/queue_interceptor.dart';
+import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 import 'package:slee_fi/models/minting/info_minting_model.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
@@ -45,7 +46,7 @@ abstract class NftApi {
   Future<NftLevelUp> getLevelUp(@Query('bedId') int bedId);
 
   @POST('/level-up')
-  Future<dynamic> levelUp(@Body() LevelUpSchema body);
+  Future<BedModel> levelUp(@Body() LevelUpSchema body);
 
   @GET('/get-minting/{bedIdParent1}/{bedIdParent2}')
   Future<InfoMintingModel> getMinting(@Path('bedIdParent1') int bedIdParent1,

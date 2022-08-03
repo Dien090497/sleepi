@@ -35,7 +35,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
       RefreshController(initialRefresh: false);
   List<TransactionIsarModel> transactionList = [];
   bool loadMore = true;
-  bool isLoading = false;
+  bool isLoading = true;
   String urlDetailTransaction = '';
 
   @override
@@ -66,12 +66,15 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
           if (state is HistoryTransactionStateSuccess) {
             _refreshController.loadComplete();
             if (state.list.isEmpty) {
-              setState(() => loadMore = false);
+              setState(() {
+                loadMore = false;
+                isLoading = false;
+              });
             } else {
               setState(() {
                 transactionList.addAll(state.list);
                 loadMore = true;
-                isLoading = true;
+                isLoading = false;
               });
             }
           }
@@ -171,7 +174,7 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                                       children: [
                                         SFText(
                                           keyText:
-                                              "${transactionList[index].valueInEther?.formatBalanceToken}",
+                                              "${transactionList[index].valueInEther! > 0.000001 ? transactionList[index].valueInEther!.formatBalanceToken : 0}",
                                           style: TextStyles.bold16Blue,
                                         ),
                                         const SizedBox(

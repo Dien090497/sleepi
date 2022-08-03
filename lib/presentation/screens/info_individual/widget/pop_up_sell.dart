@@ -60,7 +60,8 @@ class _PopUpSellState extends State<PopUpSell> {
   @override
   Widget build(BuildContext context) {
     return DismissKeyboardWidget(
-      child: BlocBuilder<BottomBarInfoIndividualCubit, BottomBarInfoIndividualState>(
+      child: BlocBuilder<BottomBarInfoIndividualCubit,
+          BottomBarInfoIndividualState>(
         bloc: widget.cubit,
         builder: (context, state) {
           return Stack(
@@ -77,8 +78,9 @@ class _PopUpSellState extends State<PopUpSell> {
               Column(
                 children: [
                   SFText(
-                      keyText:
-                      step == 2 ? LocaleKeys.confirm_to_sell : LocaleKeys.sell,
+                      keyText: step == 2
+                          ? LocaleKeys.confirm_to_sell
+                          : LocaleKeys.sell,
                       style: TextStyles.white1w700size18),
                   if (step >= 2) const SizedBox(height: 20),
                   if (step < 2)
@@ -93,16 +95,19 @@ class _PopUpSellState extends State<PopUpSell> {
                         color: AppColors.blue.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      child: SFText(keyText: widget.bedEntity.name, style: TextStyles.blue14),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 16),
+                      child: SFText(
+                          keyText: widget.bedEntity.name,
+                          style: TextStyles.blue14),
                     ),
                   if (step < 2) const SizedBox(height: 32),
                   if (step == 0)
                     _Detail(
                       className: widget.bedEntity.nftClass,
                       level: widget.bedEntity.level.toString(),
-                      durability: widget.bedEntity.durability.toInt().toString(),
+                      durability:
+                          widget.bedEntity.durability.toInt().toString(),
                       bedMint: widget.bedEntity.bedMint.toString(),
                     )
                   else if (step == 1) ...[
@@ -129,11 +134,15 @@ class _PopUpSellState extends State<PopUpSell> {
                           )
                         : const SizedBox(),
                   ] else if (state is BottomBarInfoIndividualLoaded) ...[
-                    _Confirm(amount: _controller.text, fee: state.transactionFee,),
-                    ]
-                    else
-                      _Confirm(amount: _controller.text, fee: '--.--',),
-
+                    _Confirm(
+                      amount: removeLeadingZero(),
+                      fee: state.transactionFee,
+                    ),
+                  ] else
+                    _Confirm(
+                      amount: removeLeadingZero(),
+                      fee: '--.--',
+                    ),
                   const SizedBox(height: 24),
                   Row(
                     children: [
@@ -167,8 +176,9 @@ class _PopUpSellState extends State<PopUpSell> {
                                       step++;
                                       break;
                                     case 1:
-                                      final amount =
-                                          double.tryParse(_controller.text);
+                                      final amount = double.tryParse(_controller
+                                          .text
+                                          .replaceAll(',', '.'));
                                       if (_controller.text.isNotEmpty &&
                                           amount != null &&
                                           amount > 0) {
@@ -204,13 +214,21 @@ class _PopUpSellState extends State<PopUpSell> {
       ),
     );
   }
+
+  String removeLeadingZero() {
+    final value = double.parse(_controller.text.replaceAll(',', '.'));
+    if (value % 1 == 0) return '${value.toInt()}';
+    return value.toString();
+  }
 }
 
 class _Confirm extends StatelessWidget {
-  const _Confirm({Key? key, required this.amount, required this.fee}) : super(key: key);
+  const _Confirm({Key? key, required this.amount, required this.fee})
+      : super(key: key);
 
   final String amount;
   final String fee;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -308,11 +326,11 @@ class _InputPrice extends StatelessWidget {
           Expanded(
             child: TextField(
               style: TextStyles.lightWhite14,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
-                FilteringTextInputFormatter
-                    .allow(RegExp(
-                    r'^\d{1,}[.,]?\d{0,6}')),
+                FilteringTextInputFormatter.allow(
+                    RegExp(r'^\d{1,}[.,]?\d{0,6}')),
               ],
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -337,7 +355,13 @@ class _InputPrice extends StatelessWidget {
 }
 
 class _Detail extends StatelessWidget {
-  const _Detail({Key? key, required this.className, required this.durability, required this.level, required this.bedMint}) : super(key: key);
+  const _Detail(
+      {Key? key,
+      required this.className,
+      required this.durability,
+      required this.level,
+      required this.bedMint})
+      : super(key: key);
 
   final String className;
   final String durability;
@@ -362,7 +386,9 @@ class _Detail extends StatelessWidget {
                   keyText: LocaleKeys.durability,
                   style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
-              SFText(keyText: '$durability/100', style: TextStyles.lightWhite16W700),
+              SFText(
+                  keyText: '$durability/100',
+                  style: TextStyles.lightWhite16W700),
             ],
           ),
           const Spacer(),
@@ -379,7 +405,6 @@ class _Detail extends StatelessWidget {
               SFText(
                   keyText: LocaleKeys.bed_mint, style: TextStyles.lightGrey14),
               SizedBox(height: 8.h),
-
               SFText(keyText: '$bedMint/7', style: TextStyles.lightWhite16W700),
             ],
           ),

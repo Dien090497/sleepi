@@ -71,7 +71,10 @@ class TabItemDetail extends StatelessWidget {
                                   return GestureDetector(
                                     onTap: () {
                                       _showJewelDialog(
-                                          context, state.jewels[i]);
+                                        context,
+                                        state.jewels[i],
+                                        cubit,
+                                      );
                                     },
                                     child: MyJewelsShortWidget(
                                       jewel: state.jewels[i],
@@ -99,6 +102,7 @@ class TabItemDetail extends StatelessWidget {
   void _showJewelDialog(
     BuildContext context,
     BedEntity items,
+    JewelBloc jewelBloc,
   ) {
     showCustomDialog(
       context,
@@ -129,14 +133,9 @@ class TabItemDetail extends StatelessWidget {
                         }
                         if (state is BottomBarInfoIndividualLoaded) {
                           if (state.successTransfer) {
-                            showSuccessfulDialog(context, null,
-                                onBackPress: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                R.bottomNavigation,
-                                (r) => false,
-                              );
-                            });
+                            Navigator.pop(context);
+                            showSuccessfulDialog(context, null);
+                            jewelBloc.add(const JewelRefreshList());
                           }
                         }
                       },

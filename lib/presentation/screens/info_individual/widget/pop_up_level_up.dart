@@ -31,21 +31,8 @@ class PopUpLevelUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     cubit.getLevelUp(bedEntity.nftId);
-    return BlocConsumer<BottomBarInfoIndividualCubit,
+    return BlocBuilder<BottomBarInfoIndividualCubit,
         BottomBarInfoIndividualState>(
-      listener: (context, state) {
-        // if (state is BottomBarInfoIndividualError) {
-          // Navigator.pop(context, true);
-          // Navigator.pop(context, true);
-          // showMessageDialog(context, state.message);
-        // }
-        if (state is UpLevelSuccess) {
-          Navigator.pop(context, true);
-          showSuccessfulDialog(context, null).then((value) {
-            cubit.init();
-          });
-        }
-      },
       bloc: cubit,
       builder: (context, state) {
         return state is GetLevelSuccess
@@ -96,7 +83,6 @@ class PopUpLevelUp extends StatelessWidget {
                         value: '${state.levelUp.requireTime ?? 0} mins',
                         styleValue: TextStyles.textColorSize16,
                       ),
-
                       const SizedBox(height: 24),
                       Row(
                         children: [
