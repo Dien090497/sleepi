@@ -129,8 +129,22 @@ class _ViewGif extends StatelessWidget {
               message: LocaleKeys.do_you_want_open_the_lucky_box
                   .tr(args: [entity!.openCost]),
               onPressed: () async {
-                final message = await cubit.openLuckyBox(entity!);
-                showSuccessfulDialog(context, message);
+                showCustomDialog(
+                  context,
+                  padding: const EdgeInsets.all(24),
+                  backgroundColor: AppColors.transparent,
+                  children: [
+                    OpenLuckyBoxAnimation(
+                      luckyBoxType: entity?.luckyBoxType != null ? entity!.luckyBoxType : '1',
+                      isCompletedAnimation: (value) async{
+                        if(value == true) {
+                          final message = await cubit.openLuckyBox(entity!);
+                          showSuccessfulDialog(context, message);
+                        }
+                      },
+                    ),
+                  ],
+                );
               })
         ]);
       } else {
@@ -170,24 +184,9 @@ class _ViewGif extends StatelessWidget {
         children: PupUpConfirmSpeedUp(
           amount: amount,
           onConfirm: () async {
-            showCustomDialog(
-              context,
-              padding: const EdgeInsets.all(24),
-              backgroundColor: AppColors.transparent,
-              children: [
-                OpenLuckyBoxAnimation(
-                  luckyBoxType: entity?.luckyBoxType != null ? entity!.luckyBoxType : '1',
-                  isCompletedAnimation: (value) async{
-                    if(value == true) {
-                      final message =
-                          await context.read<LuckyBoxCubit>().speedUpLuckyBox(index);
-                      showMessageDialog(context, message);
-                    }
-                  },
-                ),
-              ],
-            );
-
+            final message =
+            await context.read<LuckyBoxCubit>().speedUpLuckyBox(index);
+            showMessageDialog(context, message);
           },
         ));
   }
