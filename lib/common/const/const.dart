@@ -16,7 +16,7 @@ class Const {
 
   /// GWei
   static const double gasPrice = 1.5;
-  static const double defaultEstimateGas = 0.000828275;
+  static const double defaultEstimateGas = 0.003156325;
 
   static const String txhSnowTrace = 'https://testnet.snowtrace.io/tx/';
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';

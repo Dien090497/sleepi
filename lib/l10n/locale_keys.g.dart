@@ -398,7 +398,6 @@ abstract class  LocaleKeys {
   static const this_field_is_required = 'this_field_is_required';
   static const please_enter_email = 'please_enter_email';
   static const insufficient_balance = 'insufficient_balance';
-  static const not_be_zero = 'not_be_zero';
   static const field_required = 'field_required';
   static const confirm_approve = 'confirm_approve';
   static const approve = 'approve';
@@ -507,5 +506,6 @@ abstract class  LocaleKeys {
   static const release_to_load_more = 'release_to_load_more';
   static const roi_day = 'roi_day';
   static const sleep_time_too_short = 'sleep_time_too_short';
+  static const not_enough_to_pay_the_fee = 'not_enough_to_pay_the_fee';
 
 }

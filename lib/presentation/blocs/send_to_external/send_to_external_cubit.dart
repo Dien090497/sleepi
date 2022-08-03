@@ -62,6 +62,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       required double amount,
       required double fee,
       }) async {
+    emit(const SendToExternalState.loading());
     if (contractAddressTo.isEmpty) {
       emit(SendToExternalState.errorToAddress(
           LocaleKeys.this_field_is_required.tr()));

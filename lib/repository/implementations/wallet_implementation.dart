@@ -244,12 +244,12 @@ class WalletImplementation extends IWalletRepository {
     }
   }
 
-  Future<Either<Failure, bool>> swapAvaxToken(
+  Future<Either<Failure, String>> swapAvaxToken(
       double value, String contractAddress) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
-      bool success = await _web3DataSource.swapExactAVAXForTokens(
+      String success = await _web3DataSource.swapExactAVAXForTokens(
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
     } catch (e) {
@@ -257,12 +257,12 @@ class WalletImplementation extends IWalletRepository {
     }
   }
 
-  Future<Either<Failure, bool>> swapTokenAvax(
+  Future<Either<Failure, String>> swapTokenAvax(
       double value, String contractAddress) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
-      bool success = await _web3DataSource.swapExactTokensForAvax(
+      String success = await _web3DataSource.swapExactTokensForAvax(
           wallet!.privateKey, wallet.address, contractAddress, value);
       return Right(success);
     } catch (e) {
@@ -284,12 +284,12 @@ class WalletImplementation extends IWalletRepository {
     }
   }
 
-  Future<Either<Failure, bool>> swapTokenForToken(double value,
+  Future<Either<Failure, String>> swapTokenForToken(double value,
       String contractAddressFrom, String contractAddressTo) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
-      bool success = await _web3DataSource.swapExactTokensForTokens(
+      String success = await _web3DataSource.swapExactTokensForTokens(
           wallet!.privateKey,
           wallet.address,
           contractAddressFrom,
@@ -323,7 +323,7 @@ class WalletImplementation extends IWalletRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> swapToken(
+  Future<Either<Failure, String>> swapToken(
       double value, String contractAddressFrom, String contractAddressTo) {
     if (contractAddressFrom == Const.deadAddress) {
       return swapAvaxToken(value, contractAddressTo);

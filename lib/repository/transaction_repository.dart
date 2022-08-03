@@ -16,6 +16,8 @@ abstract class ITransactionRepository {
     double? value,
   });
 
+  Future<Either<Failure, double>> estimateGasFeeTrade();
+
   Future<Either<Failure, int>> calculatorFee(SendToExternalParams params);
 
   Future<Either<FailureMessage, bool>> transferTokenErc20(
