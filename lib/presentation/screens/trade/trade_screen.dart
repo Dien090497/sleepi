@@ -35,10 +35,10 @@ import 'package:slee_fi/usecase/estimate_trade_token_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class TradeArguments {
-  final String? contractAddressFrom;
-  final String? contractAddressTo;
+  final String? symbolFrom;
+  final String? symbolTo;
 
-  TradeArguments({this.contractAddressFrom, this.contractAddressTo});
+  TradeArguments({this.symbolFrom, this.symbolTo});
 }
 
 class TradeScreen extends StatefulWidget {
@@ -69,6 +69,17 @@ class _TradeScreenState extends State<TradeScreen> {
     for (int i = 0; i < listTokens.length; i++) {
       if (address.toLowerCase() ==
           listTokens[i]['address'].toString().toLowerCase()) {
+        index = i;
+      }
+    }
+    return index;
+  }
+
+  int getIndexSymbol(String symbol) {
+    int index = 0;
+    for (int i = 0; i < listTokens.length; i++) {
+      if (symbol.toLowerCase() ==
+          listTokens[i]['symbol'].toString().toLowerCase()) {
         index = i;
       }
     }
@@ -138,15 +149,15 @@ class _TradeScreenState extends State<TradeScreen> {
 
   init(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as TradeArguments;
-    indexFrom = getIndexAddress(args.contractAddressFrom!);
-    if (args.contractAddressTo == null) {
+    indexFrom = getIndexSymbol(args.symbolFrom!);
+    if (args.symbolTo == null) {
       if (indexFrom != 0) {
         indexTo = 0;
       } else {
         indexTo = listTokens.length - 1;
       }
     } else {
-      indexTo = getIndexAddress(args.contractAddressTo!);
+      indexTo = getIndexSymbol(args.symbolTo!);
     }
     Future.delayed(const Duration(milliseconds: 200), () async {
       firstToken.currentState?.changeSelectedItem();

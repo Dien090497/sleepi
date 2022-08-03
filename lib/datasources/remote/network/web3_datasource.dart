@@ -276,12 +276,14 @@ class Web3DataSource {
 
       final List<EthereumAddress> pairAddress = [fromToken, toToken];
       final decimalFrom = await getDecimals(contractAddress);
-      // print('=-=--=-=${(value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt())}');
+      print('=-=--=-=$value');
+      print('=-=--=-=${BigInt.from(
+          value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt())}');
       final List<BigInt> amountsOut = await contract.getAmountsOut(
           BigInt.from(
               value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),
           pairAddress);
-      // print('=-=--=-=${amountsOut.toString()}');
+      print('=-=--=-=${amountsOut.toString()}');
       BigInt amountOutMin = amountsOut[1] -
           BigInt.from(
               (amountsOut[1].toInt() * 0.01) / 100); ////slippage set here
