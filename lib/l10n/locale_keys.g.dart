@@ -507,5 +507,9 @@ abstract class  LocaleKeys {
   static const roi_day = 'roi_day';
   static const sleep_time_too_short = 'sleep_time_too_short';
   static const not_enough_to_pay_the_fee = 'not_enough_to_pay_the_fee';
+  static const level_up_balance_not_enough = 'level_up_balance_not_enough';
+  static const balance_not_enough_to_open_socket = 'balance_not_enough_to_open_socket';
+  static const nft_can_not_sell = 'nft_can_not_sell';
+  static const transaction_submitted = 'transaction_submitted';
 
 }

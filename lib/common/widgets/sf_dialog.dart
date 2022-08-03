@@ -400,3 +400,55 @@ class SFDialog extends StatelessWidget {
     );
   }
 }
+
+Future<T?> showApproveSuccessfulDialog<T>(
+    BuildContext context,
+    String? message, {
+      EdgeInsets? padding,
+      TextStyle? style,
+      TextStyle? txIDStyle,
+      VoidCallback? onBackPress,
+      VoidCallback? showWebView,
+      bool barrierDismissible = true,
+      required String txHash,
+    }) async {
+  return showDialog(
+      context: context,
+      barrierColor: AppColors.backgroundDialog,
+      barrierDismissible: barrierDismissible,
+      builder: (context) {
+        return SFDialog(
+          padding: padding,
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
+                  if (onBackPress != null) {
+                    onBackPress();
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+                icon: const Icon(Icons.close, color: AppColors.white),
+              ),
+            ),
+            const SFIcon(Ics.successful),
+            const SizedBox(height: 36),
+            SFText(
+                textAlign: TextAlign.center,
+                keyText: message ?? LocaleKeys.transaction_submitted,
+                style: style ?? TextStyles.bold18White),
+            const SizedBox(height: 15),
+            GestureDetector(
+              onTap: showWebView,
+              child: SFText(
+                keyText: txHash,
+                style: txIDStyle,
+              ),
+            ),
+            const SizedBox(height: 40),
+          ],
+        );
+      });
+}
