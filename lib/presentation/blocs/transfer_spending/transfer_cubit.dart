@@ -177,12 +177,13 @@ class TransferCubit extends Cubit<TransferState> {
           await _approveUseCase.call(currentState.currentToken.address);
       return result.fold(
         (l) {
-          emit(currentState.copyWith(isLoading: false));
+          emit(TransferState.failed('$l'));
+          //emit(currentState.copyWith(isLoading: false));
           return '$l';
         },
         (result) {
           emit(currentState.copyWith(isLoading: false));
-          return 'done';
+          return result;
         },
       );
     }
