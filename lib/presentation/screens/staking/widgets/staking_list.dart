@@ -23,11 +23,15 @@ import 'package:slee_fi/models/staking_info_response/staking_info_response.dart'
 import 'package:slee_fi/presentation/blocs/staking/staking_cubit.dart';
 import 'package:slee_fi/presentation/blocs/staking/staking_state.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
+import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/staking/layout/deposit_slft_screen.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_calculator.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/pop_up_info_staking.dart';
 import 'package:slee_fi/presentation/screens/staking/widgets/popup_staking.dart';
 import 'package:slee_fi/presentation/screens/trade/trade_screen.dart';
+import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class StakingList extends StatefulWidget {
@@ -57,6 +61,14 @@ class _StakingListState extends State<StakingList> {
   void dispose() {
     refreshController.dispose();
     super.dispose();
+  }
+
+  Future<bool?> _showCreateOrImportWallet(BuildContext context) async {
+    return showCustomAlertDialog(
+      context,
+      barrierDismissible: false,
+      children: const PopUpAvalancheWallet(),
+    );
   }
 
   @override
@@ -425,26 +437,43 @@ class _StakingListState extends State<StakingList> {
                   const SizedBox(
                     height: 48.0,
                   ),
-                  SFButton(
-                    text:
-                        Localizations.localeOf(context).toLanguageTag().isJapanese
-                            ? 'SLFT ${LocaleKeys.buy.tr()}'
-                            : '${LocaleKeys.buy.tr()} SLFT',
-                    textStyle: TextStyles.boldWhite14,
-                    color: AppColors.blue,
-                    width: double.infinity,
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        R.trade,
-                        arguments: TradeArguments(
-                            contractAddressFrom:
-                                StorageKeys.avax,
-                            contractAddressTo:
-                                StorageKeys.slft),
-                      );
-                    },
-                  ),
+                  BlocBuilder<UserBloc, UserState>(
+                      builder: (context, userState) {
+                        return BlocBuilder<WalletCubit, WalletState>(
+                          builder: (context, walletState) {
+                            return SFButton(
+                              text:  Localizations.localeOf(context).toLanguageTag().isJapanese
+                                  ? 'SLFT ${LocaleKeys.buy.tr()}'
+                                  : '${LocaleKeys.buy.tr()} SLFT',
+                              textStyle: TextStyles.boldWhite14,
+                              color: AppColors.blue,
+                              width: double.infinity,
+                              onPressed: () {
+                                Navigator.pop(context);
+                                if (userState is UserLoaded) {
+                                  for (final element in userState.listTokens) {
+                                    if (element.symbol.toLowerCase() == 'avax') {
+                                      if (walletState is WalletNotExisted) {
+                                        _showCreateOrImportWallet(context);
+                                      } else {
+                                        Navigator.pushNamed(
+                                          context,
+                                          R.trade,
+                                          arguments: TradeArguments(
+                                              contractAddressFrom:
+                                              StorageKeys.avax,
+                                              contractAddressTo:
+                                              StorageKeys.slft),
+                                        );
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                            );
+                          },
+                        );
+                      }),
                   const SizedBox(
                     height: 16.0,
                   ),

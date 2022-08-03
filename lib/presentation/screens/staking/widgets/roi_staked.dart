@@ -74,11 +74,23 @@ class SLFTStakedState extends State<SLFTStaked> {
         setState((){
           amountPrice = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
           _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
+          int balanceIndex =  balance.indexWhere((balance) => balance == amountPrice);
+          if (balanceIndex != -1) {
+            selectedIndex = balanceIndex;
+          }else {
+            setState(() =>  selectedIndex = null);
+          }
         });
       }else{
         setState((){
           _amountEditingController.text = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
           amountPrice = "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+          int balanceIndex =  balance.indexWhere((balance) => balance == _amountEditingController.text);
+          if (balanceIndex != -1) {
+            selectedIndex = balanceIndex;
+          }else {
+            setState(() =>  selectedIndex = null);
+          }
         });
       }
     }else {

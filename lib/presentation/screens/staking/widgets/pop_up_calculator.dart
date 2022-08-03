@@ -111,6 +111,9 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                     currentRatesToToken = (currentRate! / widget.priceUsd);
                     amountStaked = staked.amount;
                     percentCurrentRatesToToken = (currentRate!/staked.amount*100);
+                    if(percentCurrentRatesToToken != null && percentCurrentRatesToToken!.isNaN || percentCurrentRatesToToken!.isInfinite) {
+                      percentCurrentRatesToToken = 0;
+                    }
                   });
                 }else {
                   rateEditingController.text = '';
@@ -156,7 +159,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                               if(rateEditingController.text.isNotEmpty){
                                 setState((){
                                   currentRatesToToken = double.parse(rateEditingController.text)/widget.priceUsd;
-                                  percentCurrentRatesToToken = (currentRate!/amountStaked*100);
+                                  percentCurrentRatesToToken = (double.parse(rateEditingController.text)/amountStaked*100);
                                 });
                               }else {
                                 setState((){
