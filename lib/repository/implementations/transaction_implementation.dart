@@ -174,6 +174,22 @@ class TransactionImplementation extends ITransactionRepository {
   }
 
   @override
+  Future<Either<Failure, double>> estimateGasFeeTrade() async {
+    try {
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
+      final gasPrice = await _web3DataSource.getGasPrice();
+      final price = await _web3DataSource.estimateGasAvaxTrade(
+        gasPrice: gasPrice,
+        sender: EthereumAddress.fromHex(wallet!.address),
+      );
+      return Right(price * gasPrice.getInWei / BigInt.from(pow(10, 18)));
+    } catch (e) {
+      return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
   Future<Either<Failure, String>> getCurrentNetworkExplorer(String hash) async {
     try {
       final network = await _getCurrentNetwork();

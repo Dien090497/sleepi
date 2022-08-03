@@ -21,12 +21,13 @@ class TradeCubit extends Cubit<TradeState> {
   final _getAmountOutMin = getIt<GetAmountOutMinUseCase>();
 
   Future<void> init() async {
+
     await getIt<GetListTokenUseCase>().call(NoParams()).then((value) => {
           value.fold((l) {
             emit(TradeState.initial(
-                listTokens: getIt<List<dynamic>>(instanceName: 'tokens')));
+                listTokens: getIt<List<dynamic>>(instanceName: 'tokens'), isLoading: true));
           }, (r) {
-            emit(TradeState.initial(listTokens: r));
+            emit(TradeState.initial(listTokens: r, isLoading: true));
           })
         });
   }
@@ -43,8 +44,12 @@ class TradeCubit extends Cubit<TradeState> {
       (l) {
         emit(TradeState.fail('$l'));
       },
-      (success) {
-        emit(TradeState.success(success));
+      (r) {
+        if(r=='') {
+          emit(const TradeState.success());
+        }else{
+          emit(TradeState.fail('$r'));
+        }
       },
     );
   }
@@ -52,14 +57,16 @@ class TradeCubit extends Cubit<TradeState> {
   Future<void> approveToken(String contractAddress) async {
     emit(const TradeState.loading());
     final result = await _approveToken.call(contractAddress);
-    result.fold(
-      (l) {
-        emit(TradeState.fail('$l'));
-      },
-      (txh) {
-        emit(TradeState.approveSuccess(txh));
-      },
-    );
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      result.fold(
+            (l) {
+          emit(TradeState.fail('$l'));
+        },
+            (txh) {
+          emit(TradeState.approveSuccess(txh));
+        },
+      );
+    });
   }
 
   Future<void> checkApproveToken(double value, String contractAddress) async {

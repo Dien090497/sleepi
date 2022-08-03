@@ -3,13 +3,13 @@ import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/repository/wallet_repository.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
-class SwapTokenUseCase extends UseCase<bool, SwapTokenParams> {
+class SwapTokenUseCase extends UseCase<String, SwapTokenParams> {
   final IWalletRepository _iWalletRepository;
 
   SwapTokenUseCase(this._iWalletRepository);
 
   @override
-  Future<Either<Failure, bool>> call(SwapTokenParams params) {
+  Future<Either<Failure, String>> call(SwapTokenParams params) {
     return _iWalletRepository.swapToken(
         params.value, params.contractAddressFrom, params.contractAddressTo);
   }

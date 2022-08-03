@@ -509,5 +509,6 @@
   "roi_day": "日",
   "level_up_balance_not_enough": "Your balance is not enough to level up",
   "balance_not_enough_to_open_socket": "Your balance is not enough to open socket",
-  "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT"
+  "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT",
+  "not_enough_to_pay_the_fee": "The amount AVAX in your wallet is not enough to pay the fee"
 }
