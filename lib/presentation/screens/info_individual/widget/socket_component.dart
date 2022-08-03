@@ -73,7 +73,7 @@ class SocketComponent extends StatelessWidget {
                 5,
                 (index) => SFImageBorder(
                     icon: index + 1 > maxSocket
-                        ? Ics.icSocketLocked
+                        ? Ics.icSocketWaitingToPay
                         : sockets[index].socketType == SocketType.ready
                             ? sockets[index].jewelEntity!.image
                             : sockets[index].socketType == SocketType.block
