@@ -106,7 +106,8 @@ class _PopUpSellState extends State<PopUpSell> {
                     _Detail(
                       className: widget.bedEntity.nftClass,
                       level: widget.bedEntity.level.toString(),
-                      durability: widget.bedEntity.durability.toInt().toString(),
+                      durability:
+                          widget.bedEntity.durability.toInt().toString(),
                       bedMint: widget.bedEntity.bedMint.toString(),
                     )
                   else if (step == 1) ...[
@@ -215,8 +216,7 @@ class _PopUpSellState extends State<PopUpSell> {
   }
 
   String removeLeadingZero() {
-    final value = double.parse(_controller.text);
-
+    final value = double.parse(_controller.text.replaceAll(',', '.'));
     if (value % 1 == 0) return '${value.toInt()}';
     return value.toString();
   }
