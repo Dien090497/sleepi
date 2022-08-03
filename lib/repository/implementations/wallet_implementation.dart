@@ -356,6 +356,7 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, double>> getAmountOutMin(double value,
       String contractAddressFrom, String contractAddressTo) async {
+
     final walletId = _getStorageDataSource.getCurrentWalletId();
     final wallet = await _isarDataSource.getWalletAt(walletId);
     double amount = await _web3DataSource.getAmountOutMin(
