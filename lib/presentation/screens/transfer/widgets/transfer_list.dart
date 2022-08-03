@@ -42,7 +42,6 @@ class _TransferListState extends State<TransferList> {
   @override
   void dispose() {
     isLoadingNotifier.dispose();
-    valueController.dispose();
     refreshController.dispose();
     super.dispose();
   }
@@ -91,6 +90,7 @@ class _TransferListState extends State<TransferList> {
             final userState = context.read<UserBloc>().state;
             final walletState = context.read<WalletCubit>().state;
             if (userState is UserLoaded) {
+              cubit.getFee(amount: double.parse(valueController.text),);
               showCustomAlertDialog(
                 context,
                 showClosed: false,

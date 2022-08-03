@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:decimal/decimal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -6,11 +8,13 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/transfer_spending/transfer_state.dart';
 import 'package:slee_fi/schema/white_draw_token_schema/whit_draw_token_schema.dart';
 import 'package:slee_fi/usecase/approve_usecase.dart';
+import 'package:slee_fi/usecase/estimate_gas_deposit_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/is_token_approved_enough_usecase.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/to_spending_usecase.dart';
 import 'package:slee_fi/usecase/transfer_token_to_main_wallet_usecase.dart';
+import 'package:web3dart/web3dart.dart';
 
 class TransferCubit extends Cubit<TransferState> {
   TransferCubit(
@@ -19,20 +23,24 @@ class TransferCubit extends Cubit<TransferState> {
     required TokenEntity backupToken,
     required List<TokenEntity> spendingTokens,
     required List<TokenEntity> walletTokens,
+    required int userID,
+    double? amount,
   }) : super(TransferState.loaded(
           isToSpending: isToSpending,
           currentToken: currentToken,
           spendingTokens: spendingTokens,
           walletTokens: List.from(walletTokens)..removeRange(3, walletTokens.length),
           backupToken: backupToken,
+          userId: userID
         ));
 
   final _toSpendingUseCase = getIt<ToSpendingUseCase>();
   final _approveUseCase = getIt<ApproveUseCase>();
   final _transferToMainWalletUC = getIt<TransferTokenToMainWalletUseCase>();
   final _isTokenApprovedEnoughUC = getIt<IsTokenApprovedEnoughUseCase>();
+  final _estGasDepositTokenUC = getIt<EstimateGasDepositUseCase>();
 
-  Future<void> getFee() async {
+  Future<void> getFee({double? amount}) async {
     final currentState = state;
     if (currentState is TransferLoaded) {
       emit(currentState.copyWith(fee: null, isLoading: true));
@@ -45,15 +53,23 @@ class TransferCubit extends Cubit<TransferState> {
                 contractAddress: currentState.currentToken.address));
         fee = feeRes.foldRight(null, (r, previous) => r);
       } else {
-        final feeRes = await getIt<SendToExternalUseCase>()
-            .calculatorFee(SendToExternalParams(
-          contractAddressTo: '',
-          valueInEther: currentState.currentToken.balance,
-          tokenSymbol: currentState.currentToken.symbol,
-        ));
-        fee = feeRes.foldRight(null, (r, previous) => r);
+        if (currentState.currentToken.symbol == 'AVAX') {
+          final feeRes = await getIt<SendToExternalUseCase>()
+              .calculatorFee(SendToExternalParams(
+            contractAddressTo: '',
+            valueInEther: 0,
+            tokenSymbol: currentState.currentToken.symbol,
+          ));
+          fee = feeRes.foldRight(null, (r, previous) => r);
+          emit(currentState.copyWith(fee: fee, isLoading: false));
+        } else {
+          if (amount != null) {
+            getFeeFromSpending(amount: amount,currentState: currentState);
+          } else {
+            getFeeFromSpending(currentState: currentState, amount: 0);
+          }
+        }
       }
-      emit(currentState.copyWith(fee: fee, isLoading: false));
     }
   }
 
@@ -238,7 +254,6 @@ class TransferCubit extends Cubit<TransferState> {
         backupToken: currentState.currentToken,
         amount: null,
       ));
-      getFee();
     }
   }
 
@@ -256,7 +271,24 @@ class TransferCubit extends Cubit<TransferState> {
         backupToken: backupToken,
         amount: null,
       ));
-      getFee();
     }
+  }
+
+  Future<void> getFeeFromSpending ({required TransferLoaded currentState, required double amount}) async {
+    final valueTokenSend = (Decimal.parse(amount.toString()) *
+        Decimal.fromBigInt(BigInt.from(pow(10, 18))))
+        .toBigInt();
+    final currentToken = currentState.currentToken.address;
+    EstimateGasDepositParam params = EstimateGasDepositParam(functionName: 'depositToken', data: [
+      EthereumAddress.fromHex(currentToken),
+      valueTokenSend,
+      BigInt.from(currentState.userId)
+    ]);
+    final result = await _estGasDepositTokenUC.call(params);
+    result.fold((l) {
+      emit(TransferState.failed('$l'));
+    }, (fee) {
+      emit(currentState.copyWith(fee: fee.toString(), isLoading: false));
+    });
   }
 }
