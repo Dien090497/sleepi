@@ -189,7 +189,7 @@ class _TradeScreenState extends State<TradeScreen> {
                           tokenName: listTokens[indexFrom]['symbol'].toString(),
                           cubit: tradeCubit,
                           contractAddress:
-                              listTokens[indexFrom]['address'].toString(),
+                          listTokens[indexFrom]['address'].toString(),
                         ));
                   } else {
                     final result = valueController.text.toString().contains(',')
@@ -199,10 +199,10 @@ class _TradeScreenState extends State<TradeScreen> {
                         children: PopUpConfirmTrade(
                           value: double.parse(result),
                           symbolFrom:
-                              listTokens[indexFrom]['symbol'].toString(),
+                          listTokens[indexFrom]['symbol'].toString(),
                           symbolTo: listTokens[indexTo]['symbol'].toString(),
                           addressFrom:
-                              listTokens[indexFrom]['address'].toString(),
+                          listTokens[indexFrom]['address'].toString(),
                           addressTo: listTokens[indexTo]['address'].toString(),
                           cubit: tradeCubit,
                           amountOutMin: amountOutMin,
@@ -223,9 +223,9 @@ class _TradeScreenState extends State<TradeScreen> {
                     if (_debounce?.isActive ?? false) _debounce!.cancel();
                     _debounce =
                         Timer(const Duration(milliseconds: 1000), () async {
-                      tradeCubit.getBalanceToken(
-                          listTokens[indexFrom]['address'].toString());
-                    });
+                          tradeCubit.getBalanceToken(
+                              listTokens[indexFrom]['address'].toString());
+                        });
                   });
                 }
 
@@ -268,7 +268,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                 ),
                                 child: Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                       child: SFSubAppBar(
@@ -304,39 +304,39 @@ class _TradeScreenState extends State<TradeScreen> {
                                               SFText(
                                                   keyText: LocaleKeys.balance,
                                                   style:
-                                                      TextStyles.lightGrey12),
+                                                  TextStyles.lightGrey12),
                                               SFText(
                                                 keyText:
-                                                    ': ${balance > 0 ? balance.formatBalanceToken : 0}',
+                                                ': ${balance > 0 ? balance.formatBalanceToken : 0}',
                                                 style: TextStyles.lightGrey12,
                                               ),
                                             ],
                                           ),
                                           Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
                                                   Expanded(
                                                     child: Align(
                                                       alignment:
-                                                          Alignment.centerLeft,
+                                                      Alignment.centerLeft,
                                                       child: SFTextField(
                                                         controller:
-                                                            valueController,
+                                                        valueController,
                                                         focusNode: focusNode,
                                                         showLabel: false,
                                                         noBorder: true,
                                                         inputFormatters: [
                                                           FilteringTextInputFormatter
                                                               .allow(RegExp(
-                                                                  r'^\d{1,}[.,]?\d{0,6}')),
+                                                              r'^\d{1,}[.,]?\d{0,6}')),
                                                         ],
                                                         textInputType:
-                                                            const TextInputType
-                                                                    .numberWithOptions(
-                                                                decimal: true),
+                                                        const TextInputType
+                                                            .numberWithOptions(
+                                                            decimal: true),
                                                         hintText: "0.00",
                                                         hintStyle: TextStyles
                                                             .bold16LightWhite,
@@ -346,26 +346,26 @@ class _TradeScreenState extends State<TradeScreen> {
                                                             setState(() {
                                                               onValidValue();
                                                               final result = valueController.text
-                                                                      .toString()
-                                                                      .contains(
-                                                                          ',')
+                                                                  .toString()
+                                                                  .contains(
+                                                                  ',')
                                                                   ? valueController
-                                                                      .text
-                                                                      .toString()
-                                                                      .replaceAll(
-                                                                          ',',
-                                                                          '.')
+                                                                  .text
+                                                                  .toString()
+                                                                  .replaceAll(
+                                                                  ',',
+                                                                  '.')
                                                                   : valueController
-                                                                      .text
-                                                                      .toString();
+                                                                  .text
+                                                                  .toString();
                                                               tradeCubit.getAmountOutMin(
                                                                   listTokens[indexFrom]
-                                                                          [
-                                                                          'address']
+                                                                  [
+                                                                  'address']
                                                                       .toString(),
                                                                   listTokens[indexTo]
-                                                                          [
-                                                                          'address']
+                                                                  [
+                                                                  'address']
                                                                       .toString(),
                                                                   double.parse(
                                                                       result));
@@ -383,41 +383,41 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   Expanded(
                                                     child: Align(
                                                       alignment:
-                                                          Alignment.center,
+                                                      Alignment.center,
                                                       child: FittedBox(
                                                         fit: BoxFit.fitWidth,
                                                         child: SizedBox(
                                                           width: 80,
                                                           child:
-                                                              SFButtonOutLined(
-                                                                  fixedSize:
-                                                                      const Size(
-                                                                          34,
-                                                                          21),
-                                                                  title:
-                                                                      LocaleKeys
-                                                                          .max,
-                                                                  textStyle:
-                                                                      TextStyles
-                                                                          .bold14Blue,
-                                                                  borderColor:
-                                                                      AppColors
-                                                                          .blue,
-                                                                  onPressed:
-                                                                      () {
-                                                                    if (balance >
-                                                                        0) {
-                                                                      valueController
-                                                                          .text = (indexFrom == 0
-                                                                              ? (balance - estimate) > 0
-                                                                                  ? (balance - estimate)
-                                                                                  : 0
-                                                                              : balance)
-                                                                          .formatBalanceToken
-                                                                          .replaceAll(',', '');
-                                                                      Future.delayed(
-                                                                          const Duration(
-                                                                              milliseconds: 100),
+                                                          SFButtonOutLined(
+                                                              fixedSize:
+                                                              const Size(
+                                                                  34,
+                                                                  21),
+                                                              title:
+                                                              LocaleKeys
+                                                                  .max,
+                                                              textStyle:
+                                                              TextStyles
+                                                                  .bold14Blue,
+                                                              borderColor:
+                                                              AppColors
+                                                                  .blue,
+                                                              onPressed:
+                                                                  () {
+                                                                if (balance >
+                                                                    0) {
+                                                                  valueController
+                                                                      .text = (indexFrom == 0
+                                                                      ? (balance - estimate) > 0
+                                                                      ? (balance - estimate)
+                                                                      : 0
+                                                                      : balance)
+                                                                      .formatBalanceToken
+                                                                      .replaceAll(',', '');
+                                                                  Future.delayed(
+                                                                      const Duration(
+                                                                          milliseconds: 100),
                                                                           () {
                                                                         final result = valueController.text.replaceAll(
                                                                             ',',
@@ -427,16 +427,16 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                             listTokens[indexTo]['address'].toString(),
                                                                             double.parse(result));
                                                                       });
-                                                                      error =
-                                                                          '';
-                                                                      setState(
+                                                                  error =
+                                                                  '';
+                                                                  setState(
                                                                           () {});
-                                                                    } else {
-                                                                      valueController
-                                                                              .text =
-                                                                          '0';
-                                                                    }
-                                                                  }),
+                                                                } else {
+                                                                  valueController
+                                                                      .text =
+                                                                  '0';
+                                                                }
+                                                              }),
                                                         ),
                                                       ),
                                                     ),
@@ -444,30 +444,30 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   Expanded(
                                                     child: Align(
                                                       alignment:
-                                                          Alignment.centerRight,
+                                                      Alignment.centerRight,
                                                       child:
-                                                          DropdownSelectToken(
+                                                      DropdownSelectToken(
                                                         globalKey: firstToken,
                                                         width: 110,
                                                         height: 36,
                                                         indexInit: indexFrom,
                                                         resultPadding:
-                                                            const EdgeInsets
-                                                                .all(0),
+                                                        const EdgeInsets
+                                                            .all(0),
                                                         backgroundColor:
-                                                            AppColors
-                                                                .transparent,
+                                                        AppColors
+                                                            .transparent,
                                                         isResultLabel: true,
                                                         tokens: listTokens,
                                                         onChange: (selectItem) {
                                                           setState(() {
                                                             if (selectItem[
-                                                                        "value"]
-                                                                    .toString()
-                                                                    .toLowerCase() ==
+                                                            "value"]
+                                                                .toString()
+                                                                .toLowerCase() ==
                                                                 listTokens[indexTo]
-                                                                        [
-                                                                        'address']
+                                                                [
+                                                                'address']
                                                                     .toString()
                                                                     .toLowerCase()) {
                                                               indexTo =
@@ -475,12 +475,12 @@ class _TradeScreenState extends State<TradeScreen> {
                                                             }
                                                             indexFrom = getIndexAddress(
                                                                 selectItem[
-                                                                        "value"]
+                                                                "value"]
                                                                     .toString());
                                                             tradeCubit.getBalanceToken(
                                                                 listTokens[indexFrom]
-                                                                        [
-                                                                        'address']
+                                                                [
+                                                                'address']
                                                                     .toString());
                                                             valueController
                                                                 .text = '';
@@ -491,14 +491,14 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           Future.delayed(
                                                             const Duration(
                                                                 milliseconds:
-                                                                    100),
-                                                            () => secondToken
+                                                                100),
+                                                                () => secondToken
                                                                 .currentState
                                                                 ?.changeSelectedItem(),
                                                           );
                                                           FocusScope.of(context)
                                                               .requestFocus(
-                                                                  focusNode);
+                                                              focusNode);
                                                         },
                                                       ),
                                                     ),
@@ -517,15 +517,15 @@ class _TradeScreenState extends State<TradeScreen> {
                                     const SizedBox(height: 8),
                                     Center(
                                         child: GestureDetector(
-                                      onTap: () {
-                                        onSwapIndex(tradeCubit);
-                                      },
-                                      child: const Icon(
-                                        Icons.swap_vert,
-                                        color: AppColors.lightWhite,
-                                        size: 32,
-                                      ),
-                                    )),
+                                          onTap: () {
+                                            onSwapIndex(tradeCubit);
+                                          },
+                                          child: const Icon(
+                                            Icons.swap_vert,
+                                            color: AppColors.lightWhite,
+                                            size: 32,
+                                          ),
+                                        )),
                                     const SizedBox(height: 8),
                                     SFCard(
                                       padding: const EdgeInsets.all(16),
@@ -539,24 +539,24 @@ class _TradeScreenState extends State<TradeScreen> {
                                               ),
                                               SFText(
                                                   keyText:
-                                                      ' (${LocaleKeys.estimate.tr()})',
+                                                  ' (${LocaleKeys.estimate.tr()})',
                                                   style:
-                                                      TextStyles.lightGrey14),
+                                                  TextStyles.lightGrey14),
                                             ],
                                           ),
                                           const SizedBox(height: 12),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                             children: [
                                               Expanded(
                                                 child: SizedBox(
                                                   child: SFText(
                                                     maxLines: 1,
                                                     keyText:
-                                                        "${Decimal.parse(amountOutMin.toString())}",
+                                                    "${Decimal.parse(amountOutMin.toString())}",
                                                     style:
-                                                        TextStyles.bold18White,
+                                                    TextStyles.bold18White,
                                                   ),
                                                 ),
                                               ),
@@ -566,18 +566,18 @@ class _TradeScreenState extends State<TradeScreen> {
                                                 height: 36,
                                                 indexInit: indexTo,
                                                 resultPadding:
-                                                    const EdgeInsets.all(0),
+                                                const EdgeInsets.all(0),
                                                 backgroundColor:
-                                                    AppColors.transparent,
+                                                AppColors.transparent,
                                                 isResultLabel: true,
                                                 tokens: listTokens,
                                                 onChange: (selectItem) {
                                                   setState(() {
                                                     if (selectItem['value']
-                                                            .toString()
-                                                            .toLowerCase() ==
+                                                        .toString()
+                                                        .toLowerCase() ==
                                                         listTokens[indexFrom]
-                                                                ['address']
+                                                        ['address']
                                                             .toString()
                                                             .toLowerCase()) {
                                                       indexFrom = indexTo;
@@ -590,26 +590,26 @@ class _TradeScreenState extends State<TradeScreen> {
                                                   Future.delayed(
                                                     const Duration(
                                                         milliseconds: 100),
-                                                    () => firstToken
+                                                        () => firstToken
                                                         .currentState
                                                         ?.changeSelectedItem(),
                                                   );
                                                   final result = valueController
-                                                          .text
-                                                          .toString()
-                                                          .contains(',')
+                                                      .text
+                                                      .toString()
+                                                      .contains(',')
                                                       ? valueController.text
-                                                          .toString()
-                                                          .replaceAll(',', '.')
+                                                      .toString()
+                                                      .replaceAll(',', '.')
                                                       : valueController.text
-                                                          .toString();
+                                                      .toString();
 
                                                   tradeCubit.getAmountOutMin(
                                                       listTokens[indexFrom]
-                                                              ['address']
+                                                      ['address']
                                                           .toString(),
                                                       listTokens[indexTo]
-                                                              ['address']
+                                                      ['address']
                                                           .toString(),
                                                       double.parse(result));
                                                   FocusScope.of(context)
@@ -639,11 +639,11 @@ class _TradeScreenState extends State<TradeScreen> {
                                   });
                                   if (error == '') {
                                     final result = valueController.text
-                                            .toString()
-                                            .contains(',')
+                                        .toString()
+                                        .contains(',')
                                         ? valueController.text
-                                            .toString()
-                                            .replaceAll(',', '.')
+                                        .toString()
+                                        .replaceAll(',', '.')
                                         : valueController.text.toString();
 
                                     if (indexFrom != 0) {
@@ -662,16 +662,16 @@ class _TradeScreenState extends State<TradeScreen> {
                                             children: PopUpConfirmTrade(
                                               value: double.parse(result),
                                               symbolFrom: listTokens[indexFrom]
-                                                      ['symbol']
+                                              ['symbol']
                                                   .toString(),
                                               symbolTo: listTokens[indexTo]
-                                                      ['symbol']
+                                              ['symbol']
                                                   .toString(),
                                               addressFrom: listTokens[indexFrom]
-                                                      ['address']
+                                              ['address']
                                                   .toString(),
                                               addressTo: listTokens[indexTo]
-                                                      ['address']
+                                              ['address']
                                                   .toString(),
                                               cubit: tradeCubit,
                                               amountOutMin: amountOutMin,
