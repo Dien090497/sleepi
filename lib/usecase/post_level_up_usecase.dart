@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
-import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/repository/level_up_repository.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/usecase/usecase.dart';
