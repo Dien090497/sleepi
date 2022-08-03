@@ -460,9 +460,9 @@ class _StakingListState extends State<StakingList> {
                                           context,
                                           R.trade,
                                           arguments: TradeArguments(
-                                              contractAddressFrom:
+                                              symbolFrom:
                                               StorageKeys.avax,
-                                              contractAddressTo:
+                                              symbolTo:
                                               StorageKeys.slft),
                                         );
                                       }
