@@ -65,6 +65,7 @@ class TabJewelsDetail extends StatelessWidget {
                                       _showJewelDialog(
                                         context,
                                         state.jewels[i],
+                                        cubit,
                                       );
                                     },
                                     child: MyJewelsShortWidget(
@@ -95,6 +96,7 @@ class TabJewelsDetail extends StatelessWidget {
   void _showJewelDialog(
     BuildContext context,
     BedEntity jewel,
+    JewelBloc jewelBloc,
   ) {
     showCustomDialog(
       context,
@@ -122,14 +124,9 @@ class TabJewelsDetail extends StatelessWidget {
                         }
                         if (state is BottomBarInfoIndividualLoaded) {
                           if (state.successTransfer) {
-                            showSuccessfulDialog(context, null,
-                                onBackPress: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                R.bottomNavigation,
-                                (r) => false,
-                              );
-                            });
+                            Navigator.pop(context);
+                            showSuccessfulDialog(context, null);
+                            jewelBloc.add(const JewelRefreshList());
                           }
                         }
                       },

@@ -506,5 +506,6 @@
   "roi_day": "D",
   "sleep_time_too_short": "Sleep time is too short. Sleep more to earn SLFT",
   "level_up_balance_not_enough": "Your balance is not enough to level up",
-  "balance_not_enough_to_open_socket": "Your balance is not enough to open socket"
+  "balance_not_enough_to_open_socket": "Your balance is not enough to open socket",
+  "nft_can_not_sell" : "Cannot sell the NFT"
 }
