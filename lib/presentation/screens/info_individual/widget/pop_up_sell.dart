@@ -129,10 +129,13 @@ class _PopUpSellState extends State<PopUpSell> {
                           )
                         : const SizedBox(),
                   ] else if (state is BottomBarInfoIndividualLoaded) ...[
-                    _Confirm(amount: _controller.text, fee: state.transactionFee,),
+                    _Confirm(amount: _controller.text.replaceAll(
+                        RegExp(r'^0+(?=.)'), '0'), fee: state.transactionFee,),
                     ]
+
                     else
-                      _Confirm(amount: _controller.text, fee: '--.--',),
+                      _Confirm(amount: _controller.text.replaceAll(
+                          RegExp(r'^0+(?=.)'), '0'), fee: '--.--',),
 
                   const SizedBox(height: 24),
                   Row(
@@ -168,7 +171,7 @@ class _PopUpSellState extends State<PopUpSell> {
                                       break;
                                     case 1:
                                       final amount =
-                                          double.tryParse(_controller.text);
+                                          double.tryParse(_controller.text.replaceAll(',', '.'));
                                       if (_controller.text.isNotEmpty &&
                                           amount != null &&
                                           amount > 0) {

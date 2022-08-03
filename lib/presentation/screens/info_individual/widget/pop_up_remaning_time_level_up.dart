@@ -182,11 +182,13 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
             const SizedBox(height: 24),
             if (!isSpeedUp)
               SFButton(
-                text: _remainTime.isEmpty ? LocaleKeys.ok : LocaleKeys.speed_up,
+                text: _remainTime.isEmpty ? LocaleKeys.confirm : LocaleKeys.speed_up,
                 width: double.infinity,
                 onPressed: () {
-                  if (_time.isActive) {
-                    _time.cancel();
+                  if (_remainTime.isEmpty) {
+                    Navigator.pop(context);
+                    widget.onLevelUpSuccess();
+                    return;
                   }
                   setState(() => isSpeedUp = true);
                 },
