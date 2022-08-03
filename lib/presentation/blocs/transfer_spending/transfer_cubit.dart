@@ -14,18 +14,18 @@ import 'package:slee_fi/usecase/transfer_token_to_main_wallet_usecase.dart';
 
 class TransferCubit extends Cubit<TransferState> {
   TransferCubit(
-    bool isToSpending, {
-    required TokenEntity currentToken,
-    required TokenEntity backupToken,
-    required List<TokenEntity> spendingTokens,
-    required List<TokenEntity> walletTokens,
-  }) : super(TransferState.loaded(
-          isToSpending: isToSpending,
-          currentToken: currentToken,
-          spendingTokens: spendingTokens,
-          walletTokens: List.from(walletTokens)..removeRange(3, walletTokens.length),
-          backupToken: backupToken,
-        ));
+      bool isToSpending, {
+        required TokenEntity currentToken,
+        required TokenEntity backupToken,
+        required List<TokenEntity> spendingTokens,
+        required List<TokenEntity> walletTokens,
+      }) : super(TransferState.loaded(
+    isToSpending: isToSpending,
+    currentToken: currentToken,
+    spendingTokens: spendingTokens,
+    walletTokens: List.from(walletTokens)..removeRange(3, walletTokens.length),
+    backupToken: backupToken,
+  ));
 
   final _toSpendingUseCase = getIt<ToSpendingUseCase>();
   final _approveUseCase = getIt<ApproveUseCase>();
@@ -48,7 +48,7 @@ class TransferCubit extends Cubit<TransferState> {
         final feeRes = await getIt<SendToExternalUseCase>()
             .calculatorFee(SendToExternalParams(
           contractAddressTo: '',
-          valueInEther: currentState.currentToken.balance,
+          valueInEther: 0,
           tokenSymbol: currentState.currentToken.symbol,
         ));
         fee = feeRes.foldRight(null, (r, previous) => r);
@@ -143,16 +143,16 @@ class TransferCubit extends Cubit<TransferState> {
         if (isToSpending) {
           /// Check allowance amount
           final allowanceRes =
-              await _isTokenApprovedEnoughUC.call(IsTokenApprovedParams(
+          await _isTokenApprovedEnoughUC.call(IsTokenApprovedParams(
             ownerAddress: ownerAddress,
             tokenAddress: contractAddress,
             amount: amount!,
           ));
           allowanceRes.fold(
-            (l) {
+                (l) {
               emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
             },
-            (isEnough) {
+                (isEnough) {
               emit(
                   currentState.copyWith(isAllowance: isEnough, amount: amount));
               emit(currentState.copyWith(
@@ -174,14 +174,14 @@ class TransferCubit extends Cubit<TransferState> {
     if (currentState is TransferLoaded) {
       emit(currentState.copyWith(isLoading: true));
       final result =
-          await _approveUseCase.call(currentState.currentToken.address);
+      await _approveUseCase.call(currentState.currentToken.address);
       return result.fold(
-        (l) {
+            (l) {
           emit(TransferState.failed('$l'));
           //emit(currentState.copyWith(isLoading: false));
           return '$l';
         },
-        (result) {
+            (result) {
           emit(currentState.copyWith(isLoading: false));
           return result;
         },
@@ -205,10 +205,10 @@ class TransferCubit extends Cubit<TransferState> {
             addressContract: token.address,
             userId: userId));
         result.fold(
-          (l) {
+              (l) {
             emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
           },
-          (result) {
+              (result) {
             emit(const TransferState.success());
           },
         );
@@ -218,10 +218,10 @@ class TransferCubit extends Cubit<TransferState> {
             amount: '${currentState.amount}',
             tokenAddress: token.address));
         result.fold(
-          (l) {
+              (l) {
             emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
           },
-          (r) {
+              (r) {
             emit(const TransferState.success());
           },
         );
@@ -248,9 +248,9 @@ class TransferCubit extends Cubit<TransferState> {
       final isToSpending = currentState.isToSpending;
       final backupToken = isToSpending
           ? currentState.walletTokens
-              .firstWhere((e) => e.address == token.address)
+          .firstWhere((e) => e.address == token.address)
           : currentState.spendingTokens
-              .firstWhere((e) => e.address == token.address);
+          .firstWhere((e) => e.address == token.address);
       emit(currentState.copyWith(
         currentToken: token,
         backupToken: backupToken,
