@@ -61,6 +61,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
         listener: (context, state) {
           if (state is GetTokenBalanceSuccess) {
             balance = state.balance;
+            fee = state.fee;
             setState(() {});
           }
           if (state is SendToExternalCheckedValidator) {
@@ -248,7 +249,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         gradient: AppColors.gradientBlueButton,
                         // disabled: isDisabled,
                         onPressed: () {
-                          if (state is GetTokenBalanceSuccess) {
+                          if (fee != 0) {
                             if (args != null) {
                               if (controllerAmount.text.isNotEmpty) {
                                 cubit.validator(
@@ -257,13 +258,13 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                     args.tokenEntity?.balance ?? 0.0,
                                     amount: double.parse(controllerAmount.text
                                         .replaceAll(',', '.')),
-                                    fee: state.fee);
+                                    fee: fee);
                               } else {
                                 cubit.validator(
                                     contractAddressTo: contractAddressTo,
                                     balanceCurrent:
                                     args.tokenEntity?.balance ?? 0.0,
-                                    amount: -1, fee: state.fee);
+                                    amount: -1, fee: fee);
                               }
                             } else {
                               if (controllerAmount.text.isNotEmpty) {
@@ -271,16 +272,15 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                     contractAddressTo: contractAddressTo,
                                     balanceCurrent: balance,
                                     amount: double.parse(controllerAmount.text
-                                        .replaceAll(',', '.')), fee: state.fee);
+                                        .replaceAll(',', '.')), fee: fee);
                               } else {
                                 cubit.validator(
                                     contractAddressTo: contractAddressTo,
                                     balanceCurrent: balance,
-                                    amount: -1, fee: state.fee);
+                                    amount: -1, fee: fee);
                               }
                             }
                           }
-                          
                         },
                       ),
                       const SizedBox(
