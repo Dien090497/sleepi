@@ -74,11 +74,23 @@ class SLFTStakedState extends State<SLFTStaked> {
         setState((){
           amountPrice = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
           _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
+          int balanceIndex =  balance.indexWhere((balance) => balance == amountPrice);
+          if (balanceIndex != -1) {
+            selectedIndex = balanceIndex;
+          }else {
+            setState(() =>  selectedIndex = null);
+          }
         });
       }else{
         setState((){
           _amountEditingController.text = "${double.parse(quantity)/(double.parse(widget.apr!)*double.parse(dayEditingController.text.isNotEmpty ? dayEditingController.text : "0" ))}";
           amountPrice = "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+          int balanceIndex =  balance.indexWhere((balance) => balance == _amountEditingController.text);
+          if (balanceIndex != -1) {
+            selectedIndex = balanceIndex;
+          }else {
+            setState(() =>  selectedIndex = null);
+          }
         });
       }
     }else {
@@ -206,13 +218,12 @@ class SLFTStakedState extends State<SLFTStaked> {
                     setState(() {
                       selectedIndex = index;
                       if(!swapText){
-                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        _amountEditingController.text = "${double.parse(amountPrice)/widget.priceUsd}";
+                        amountPrice = checkMyBalance != null ? balance.elementAt(index) : "${double.parse(_amountEditingController.text)/widget.priceUsd}";
+                        _amountEditingController.text = "${checkMyBalance != null ? double.parse(amountPrice)/widget.priceUsd : widget.myBalance.toString() }";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
                       }else{
-                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : widget.myBalance.toString();
-                        amountPrice= "${double.parse(_amountEditingController.text)/widget.priceUsd}";
-
+                        _amountEditingController.text  = checkMyBalance != null ? balance.elementAt(index) : "${double.parse(amountPrice)/widget.priceUsd}";
+                        amountPrice= "${checkMyBalance != null ? double.parse(_amountEditingController.text)/widget.priceUsd : widget.myBalance.toString() }";
                         widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(_amountEditingController.text)));
                       }
                     });

@@ -21,7 +21,6 @@ class AssetTile extends StatelessWidget {
           final selectedToken = state.currentToken;
           final tokens =
               state.isToSpending ? state.walletTokens : state.spendingTokens;
-          print('### $tokens');
           return SFCard(
             onTap: () {
               final cubit = context.read<TransferCubit>();
