@@ -136,7 +136,7 @@ class PopUpBedMarketPlace extends StatelessWidget {
                   text: LocaleKeys.confirm,
                   onPressed: () {
                     final walletState = context.read<WalletCubit>().state;
-                    Navigator.pop(context);
+
                     if (userState is UserLoaded) {
                       for (final element in userState.listTokens) {
                         if (element.symbol.toLowerCase() == 'avax') {
@@ -144,9 +144,11 @@ class PopUpBedMarketPlace extends StatelessWidget {
                             if (walletState is WalletNotExisted) {
                               _showCreateOrImportWallet(context);
                             } else {
+                              Navigator.pop(context);
                               _showDonWorryDialog(context, bed);
                             }
                           } else {
+                            Navigator.pop(context);
                             _showConfirmDialog(context, bed);
                           }
                         }
