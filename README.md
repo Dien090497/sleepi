@@ -229,7 +229,7 @@ flutter pub run dart_code_metrics:metrics check-unused-code lib
 
 rm -rf ios/Flutter/Flutter.framework
 
-flutter clean;flutter pub get;cd ios;pod deintegrate;pod install
+flutter clean;flutter pub get;cd ios;pod deintegrate;pod install --repo-update
 
 flutter clean;flutter pub get;flutter pub run build_runner build --delete-conflicting-outputs;cd ios;pod deintegrate;pod install
 ```
