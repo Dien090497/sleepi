@@ -181,15 +181,12 @@ import '../usecase/withdraw_history_usecase.dart' as _i108;
 import '../usecase/withdraw_nft_usecase.dart' as _i109;
 import 'dev_injection.dart' as _i173;
 import 'prod_injection.dart' as _i172;
-import 'dev_injection.dart' as _i172;
-import 'prod_injection.dart' as _i173;
 import 'register_module.dart' as _i170;
 import 'stg_injection.dart' as _i171;
 
 const String _stg = 'stg';
 const String _prod = 'prod';
 const String _dev = 'dev';
-const String _prod = 'prod';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -201,7 +198,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final releaseInjection = _$ReleaseInjection();
   final prodInjection = _$ProdInjection();
   final devInjection = _$DevInjection();
-  final prodInjection = _$ProdInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -228,8 +224,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       instanceName: 'tokens', registerFor: {_prod});
   gh.factory<List<dynamic>>(() => devInjection.tokens,
       instanceName: 'tokens', registerFor: {_dev});
-  gh.factory<List<dynamic>>(() => prodInjection.tokens,
-      instanceName: 'tokens', registerFor: {_prod});
   gh.factory<_i17.NetworkConnectionDataSource>(
       () => _i17.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i18.QueueInterceptor>(
@@ -579,6 +573,5 @@ class _$RegisterModule extends _i170.RegisterModule {}
 class _$ReleaseInjection extends _i171.ReleaseInjection {}
 
 class _$ProdInjection extends _i172.ProdInjection {}
-class _$DevInjection extends _i172.DevInjection {}
 
-class _$ProdInjection extends _i173.ProdInjection {}
+class _$DevInjection extends _i173.DevInjection {}
