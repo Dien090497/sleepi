@@ -512,5 +512,6 @@ abstract class  LocaleKeys {
   static const nft_can_not_sell = 'nft_can_not_sell';
   static const not_enough_to_pay_the_fee = 'not_enough_to_pay_the_fee';
   static const transaction_submitted = 'transaction_submitted';
+  static const input_value_so_small = 'input_value_so_small';
 
 }
