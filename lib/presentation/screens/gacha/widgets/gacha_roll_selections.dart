@@ -95,7 +95,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                           priceSpin: widget.costSingle,
                           quantity: 1,
                           onConfirmTap: () {
-                            if(isConnectedNetwork){
+                            if(isConnectedNetwork == true){
                               enableButton
                                   ? cubit.gachaSpin(GachaSpinSchema(
                                   probability: widget.singleProbability))

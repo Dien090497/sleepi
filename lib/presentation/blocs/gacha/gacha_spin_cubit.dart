@@ -35,6 +35,7 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
   }
 
   Future<void> gachaSpin(GachaSpinSchema params) async {
+    emit(const GachaSpinState.loading());
     final checkConnection = getIt<GetNetworkConnectionUseCase>();
     final checkConnectionResult = await checkConnection.call(NoParams());
     checkConnectionResult.fold(
@@ -66,6 +67,7 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
   }
 
   Future<void> getCommon() async {
+    emit(const GachaSpinState.loading());
     final checkConnection = getIt<GetNetworkConnectionUseCase>();
     final checkConnectionResult = await checkConnection.call(NoParams());
     checkConnectionResult.fold(
@@ -88,6 +90,7 @@ class GachaSpinCubit extends Cubit<GachaSpinState> {
   }
 
   Future<void> getSpecial() async {
+    emit(const GachaSpinState.loading());
     final checkConnection = getIt<GetNetworkConnectionUseCase>();
     final checkConnectionResult = await checkConnection.call(NoParams());
     checkConnectionResult.fold(

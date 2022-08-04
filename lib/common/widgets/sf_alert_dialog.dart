@@ -73,9 +73,13 @@ class SFAlertDialog extends StatelessWidget {
                           alignment: Alignment.topRight,
                           child: GestureDetector(
                               onTap: () => Navigator.maybePop(context),
-                              child: const Icon(
-                                Icons.close,
-                                color: AppColors.lightGrey,
+                              child:const SizedBox(
+                                width: 40,
+                                height: 40,
+                                child:  Icon(
+                                  Icons.close,
+                                  color: AppColors.lightGrey,
+                                ),
                               )))
                       : const SizedBox(),
                   children!,
