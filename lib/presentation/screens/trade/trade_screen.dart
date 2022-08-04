@@ -32,7 +32,6 @@ import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_approve_trade.
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
 import 'package:slee_fi/usecase/estimate_trade_token_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TradeArguments {
   final String? symbolFrom;
@@ -86,7 +85,7 @@ class _TradeScreenState extends State<TradeScreen> {
     return index;
   }
 
-  onValidValue() {
+  onValidValue(amountMin) {
     if (valueController.text != '') {
       final result = valueController.text.toString().contains(',')
           ? valueController.text.toString().replaceAll(',', '.')
@@ -96,9 +95,13 @@ class _TradeScreenState extends State<TradeScreen> {
       } else if (indexFrom == 0 && double.parse(result) > balance - estimate ||
           double.parse(result) > balance) {
         error = LocaleKeys.insufficient_balance;
+      } else if (amountMin == 0) {
+        error = LocaleKeys.input_value_so_small;
       } else {
         error = '';
       }
+    }else{
+      error = LocaleKeys.field_required;
     }
   }
 
@@ -140,7 +143,7 @@ class _TradeScreenState extends State<TradeScreen> {
     super.initState();
   }
 
-  init(BuildContext context) {
+  init(BuildContext context) async {
     final args = ModalRoute.of(context)?.settings.arguments as TradeArguments;
     indexFrom = getIndexSymbol(args.symbolFrom!);
     if (args.symbolTo == null) {
@@ -152,18 +155,18 @@ class _TradeScreenState extends State<TradeScreen> {
     } else {
       indexTo = getIndexSymbol(args.symbolTo!);
     }
+    await getIt<EstimateTradeTokenUseCase>().call(NoParams()).then((value) {
+      value.fold((l) {
+        showMessageDialog(context, l.toString())
+            .then((value) => Navigator.pop(context));
+      }, (r) {
+        estimate = r + r * 0.1;
+      });
+    });
     Future.delayed(const Duration(milliseconds: 200), () async {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
       tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
-      await getIt<EstimateTradeTokenUseCase>().call(NoParams()).then((value) {
-        value.fold((l) {
-          showMessageDialog(context, l.toString())
-              .then((value) => Navigator.pop(context));
-        }, (r) {
-          estimate = r + r * 0.01;
-        });
-      });
     });
   }
 
@@ -253,15 +256,9 @@ class _TradeScreenState extends State<TradeScreen> {
 
                 if (state is approveTokenSuccess) {
                   showApproveSuccessfulDialog(
-                      context, LocaleKeys.transaction_submitted,
-                      txHash: state.txh, txIDStyle: TextStyles.lightWhite16,
-                      showWebView: () async {
-                    if (await canLaunchUrl(Uri.parse(
-                        'https://testnet.snowtrace.io/tx/${state.txh}'))) {
-                      await launchUrl(Uri.parse(
-                          'https://testnet.snowtrace.io/tx/${state.txh}'));
-                    }
-                  });
+                    context,
+                    txHash: state.txh,
+                  );
                 }
               },
               builder: (BuildContext context, state) {
@@ -270,8 +267,11 @@ class _TradeScreenState extends State<TradeScreen> {
                     amountOutMin = state.amountOutMin;
                     if (amountOutMin == 0) {
                       error = LocaleKeys.input_value_so_small;
+                    } else {
+                      error = '';
                     }
                   } else {
+                    error = '';
                     amountOutMin = 0;
                   }
                 }
@@ -370,7 +370,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           if (value
                                                               .isNotEmpty) {
                                                             setState(() {
-                                                              onValidValue();
+                                                              onValidValue(amountOutMin);
                                                               final result = valueController.text
                                                                       .toString()
                                                                       .contains(
@@ -657,10 +657,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                 gradient: AppColors.gradientBlueButton,
                                 onPressed: () async {
                                   setState(() {
-                                    onValidValue();
-                                    if (valueController.text == '') {
-                                      error = LocaleKeys.field_required;
-                                    }
+                                    onValidValue(amountOutMin);
                                   });
                                   if (error == '') {
                                     final result = valueController.text
