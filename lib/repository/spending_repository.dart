@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:slee_fi/entities/staking/staking_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
+import 'package:slee_fi/usecase/estimate_gas_deposit_usecase.dart';
 import 'package:web3dart/web3dart.dart';
 
 abstract class ISpendingRepository {
@@ -32,4 +33,7 @@ abstract class ISpendingRepository {
       {required double amount});
 
   Future<Either<FailureMessage, StakingInfoResponse>> getStakingInfo();
+
+  Future<Either<FailureMessage, double>> estimateGas({required EstimateGasDepositParam params});
+
 }

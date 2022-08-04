@@ -58,12 +58,14 @@ class TransferScreen extends StatelessWidget {
 
         /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
         final backupToken = args.isToSpending ? spendingToken : walletToken;
+        final userState = context.read<UserBloc>().state;
         return BlocProvider(
           create: (_) => TransferCubit(args.isToSpending,
               currentToken: currentToken,
               backupToken: backupToken,
               spendingTokens: spendingState.listTokens,
-              walletTokens: walletState.tokenList)
+              walletTokens: walletState.tokenList,
+              userID: userState is UserLoaded ? userState.userInfoEntity.id : -1)
             ..getFee(),
           child: Stack(
             children: [
