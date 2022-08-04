@@ -51,6 +51,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        color: AppColors.transparent,
         alignment: Alignment.center,
         height: 80,
         child: Column(
