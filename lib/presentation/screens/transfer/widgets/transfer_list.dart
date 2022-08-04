@@ -65,9 +65,8 @@ class _TransferListState extends State<TransferList> {
                     if (str.isNotEmpty) {
                       showApproveSuccessfulDialog(context, txHash: str);
                     } else {
-                      if (state is TransferFailed) {
-                        showMessageDialog(context, str);
-                      }
+                      showMessageDialog(
+                          context, LocaleKeys.insufficient_balance.tr());
                     }
                   });
                 },

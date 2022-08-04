@@ -194,9 +194,9 @@ class TransferCubit extends Cubit<TransferState> {
           await _approveUseCase.call(currentState.currentToken.address);
       return result.fold(
         (l) {
-          emit(TransferState.failed('$l'));
-          //emit(currentState.copyWith(isLoading: false));
-          return '$l';
+          // emit(TransferState.failed('$l'));
+          emit(currentState.copyWith(isLoading: false));
+          return '';
         },
         (result) {
           emit(currentState.copyWith(isLoading: false));
@@ -223,7 +223,8 @@ class TransferCubit extends Cubit<TransferState> {
             userId: userId));
         result.fold(
           (l) {
-            emit(currentState.copyWith(isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
+            emit(currentState.copyWith(
+                isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
           },
           (result) {
             emit(const TransferState.success());
