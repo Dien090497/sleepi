@@ -13,11 +13,15 @@ import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_
 import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 
 class CancelSellBottombar extends StatefulWidget {
-  const CancelSellBottombar(
-      {Key? key, required this.beds, required this.onCancelSellSuccess})
-      : super(key: key);
+  const CancelSellBottombar({
+    Key? key,
+    required this.beds,
+    required this.onCancelSellSuccess,
+    this.isBuy = false,
+  }) : super(key: key);
   final BedEntity beds;
   final Function onCancelSellSuccess;
+  final bool isBuy;
 
   @override
   State<CancelSellBottombar> createState() => _CancelSellBottombarState();
@@ -53,6 +57,9 @@ class _CancelSellBottombarState extends State<CancelSellBottombar> {
             if (state.successTransfer) {
               Navigator.pop(context);
               showSuccessfulDialog(context, null).then((value) {
+                if (widget.isBuy) {
+                  Navigator.pop(context, true);
+                }
               });
               widget.onCancelSellSuccess();
             }
