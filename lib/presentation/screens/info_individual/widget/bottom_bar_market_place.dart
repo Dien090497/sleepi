@@ -32,10 +32,15 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
           final msg = await cubit.buyNFT(bed.nftId);
           cubit.refresh();
           if (msg.isEmpty) {
-            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-            context.read<UserBloc>().add(const RefreshBalanceToken());
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully)
+                .then((value) {
+              Navigator.pop(context);
+              context.read<UserBloc>().add(const RefreshBalanceToken());
+            });
           } else {
-            showMessageDialog(context, msg);
+            showMessageDialog(context, msg).then((value) {
+              Navigator.pop(context);
+            });
           }
         },
       ),

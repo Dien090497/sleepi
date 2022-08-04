@@ -18,6 +18,7 @@ import 'package:slee_fi/presentation/blocs/individual/individual_cubit.dart';
 import 'package:slee_fi/presentation/blocs/individual/individual_state.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_bloc.dart';
 import 'package:slee_fi/presentation/blocs/socket_bloc/socket_event.dart';
+import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/screens/gacha/widgets/attributes_widget.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/bottom_bar_market_place.dart';
@@ -200,11 +201,12 @@ class InfoIndividualScreen extends StatelessWidget {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                child: (args.marketPlaceModel != null && (args.buy ?? false)
+                child: args.marketPlaceModel != null && (args.buy ?? false)
                     ? ((args.bed.isLock == 1 &&
                             args.bed.status == 'ON_SALE' &&
                             args.isOwner == true)
                         ? CancelSellBottombar(
+                            isBuy: true,
                             beds: state.bed,
                             onCancelSellSuccess: () {
                               context.read<IndividualCubit>().refresh();
@@ -228,8 +230,11 @@ class InfoIndividualScreen extends StatelessWidget {
                               context
                                   .read<SocketBloc>()
                                   .add(const RefreshSocket());
+                              context
+                                  .read<UserBloc>()
+                                  .add(const RefreshBalanceToken());
                             },
-                          )),
+                          ),
               );
             },
           ),
