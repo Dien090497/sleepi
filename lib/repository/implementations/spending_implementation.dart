@@ -93,7 +93,7 @@ class SpendingImplementation extends ISpendingRepository {
     try {
       final token = _spendingDataSource.token(addressContract);
       final result = BigInt.parse(
-          "9999999999999999999999999999999999999999999999999999999");
+          "999999999999999999999999999999999999999");
       final spendingAddress = await _secureStorage.readAddressContract() ?? '';
       final txHash = await _spendingDataSource.approve(
           spendingAddress, owner, result, token);
