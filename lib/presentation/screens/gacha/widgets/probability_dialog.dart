@@ -24,64 +24,13 @@ class ProbabilityDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SFText(keyText: LocaleKeys.product_line_up,
-                  style: TextStyles.bold14LightWhiteWithOpacity,),
-                const SizedBox(height: 16),
-                ItemsProbability(
-                  // iconPath: Ics.icBedsProbability,
-                  configInfo: dialogData,
-                  // title: LocaleKeys.bed,
-                  // style: TextStyles.bold14Blue,
-                  // colorBgIcon: [
-                  //   AppColors.blue.withOpacity(0.1),
-                  //   AppColors.blue.withOpacity(0.1)
-                  // ],
-                ),
-                const SizedBox(height: 12),
-                // ItemsProbability(
-                //   iconPath: Ics.icPillows,
-                //   configInfo: dialogData?.jewels,
-                //   title: LocaleKeys.jewels,
-                //   style: TextStyles.bold14Green,
-                //   colorBgIcon: [
-                //     AppColors.green.withOpacity(0.1),
-                //     AppColors.blue.withOpacity(0.1)
-                //   ],
-                // ),
-                // const SizedBox(height: 12),
-                // ItemsProbability(
-                //   iconPath: Ics.jewel,
-                //   configInfo: dialogData?.items,
-                //   title: LocaleKeys.item,
-                //   isGradient: true,
-                //   colorBgIcon: [
-                //     AppColors.blue.withOpacity(0.1),
-                //     AppColors.purple.withOpacity(0.1)
-                //   ],
-                //   width: 45,
-                //   height: 45,
-                // ),
-                // const SizedBox(height: 12),
-                // ItemsProbability(
-                //   iconPath: Imgs.doubleIcon,
-                //   configInfo: dialogData?.token,
-                //   title: LocaleKeys.token,
-                //   isToken: true,
-                //   style: TextStyles.bold14White,
-                //   colorBgIcon: [
-                //     AppColors.blue.withOpacity(0.1),
-                //     AppColors.purple.withOpacity(0.1)
-                //   ],
-                //   width: 45,
-                //   height: 45,
-                // ),
-              ],
-            ),
+          SFText(keyText: LocaleKeys.product_line_up,
+            style: TextStyles.bold14LightWhiteWithOpacity,),
+          const SizedBox(height: 16),
+          ItemsProbability(
+            configInfo: dialogData,
           ),
+          const SizedBox(height: 12),
         ],
       ),
     );

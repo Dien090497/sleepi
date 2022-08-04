@@ -157,11 +157,14 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                             showLabel: false,
                             noBorder: true,
                             readonly: isChangedRates,
+                            maxLength: 15,
                             onChanged: (rates){
                               if(rateEditingController.text.isNotEmpty){
                                 setState((){
                                   currentRatesToToken = double.parse(rateEditingController.text)/widget.priceUsd;
-                                  percentCurrentRatesToToken = (double.parse(rateEditingController.text)/(double.parse(widget.aprInDay!)*(dayStaked != null ? dayStaked! : 1)*100));
+                                  amountStaked = double.parse(rateEditingController.text)/(double.parse(widget.aprInDay!)*(dayStaked != null ? dayStaked! : 1));
+                                  currentRate = double.parse(widget.aprInDay!) * (dayStaked != null ? dayStaked! : 1) * amountStaked;
+                                  percentCurrentRatesToToken = (currentRate!/amountStaked*100);
                                 });
                               }else {
                                 setState((){
