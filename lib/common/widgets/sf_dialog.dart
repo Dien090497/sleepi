@@ -418,7 +418,6 @@ Future<T?> showApproveSuccessfulDialog<T>(
   final explorerRes =
       await getIt<CurrentNetworkExplorerUseCase>().call(NoParams());
   final explorer = explorerRes.getOrElse(() => '');
-  print('### explorer $explorer/tx/$txHash');
   return showDialog(
     context: context,
     barrierColor: AppColors.backgroundDialog,
