@@ -329,7 +329,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                       TextStyles.lightGrey12),
                                               SFText(
                                                 keyText:
-                                                    ': ${balance > 0.000001 ? balance.formatBalanceToken : 0}',
+                                                    ': ${balance >= 0.000001 ? balance.formatBalanceToken : 0}',
                                                 style: TextStyles.lightGrey12,
                                               ),
                                             ],
@@ -426,8 +426,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                           .blue,
                                                                   onPressed:
                                                                       () {
-                                                                    if (balance >
-                                                                        0.000001) {
+                                                                    if (balance >= 0.000001) {
                                                                       valueController
                                                                           .text = (indexFrom == 0
                                                                               ? (balance - estimate) > 0
