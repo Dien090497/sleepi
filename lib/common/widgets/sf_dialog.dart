@@ -439,13 +439,20 @@ Future<T?> showApproveSuccessfulDialog<T>(
                 textAlign: TextAlign.center,
                 keyText: message ?? LocaleKeys.transaction_submitted,
                 style: style ?? TextStyles.bold18White),
-            const SizedBox(height: 15),
+            const SizedBox(height: 16),
             GestureDetector(
               onTap: showWebView,
               child: SFText(
-                keyText: txHash,
+                textAlign: TextAlign.center,
+                keyText:'Txh: ${txHash.tr()}',
                 style: txIDStyle,
               ),
+            ),
+            const SizedBox(height: 16),
+            SFText(
+              textAlign: TextAlign.center,
+              keyText: LocaleKeys.click_here_to_open_txh,
+              style: TextStyles.lightGrey12,
             ),
             const SizedBox(height: 40),
           ],
