@@ -53,7 +53,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
   @override
   Widget build(BuildContext context) {
     final args =
-        ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
+    ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
 
     return BlocProvider(
       create: (context) => SendToExternalCubit()..init(),
@@ -69,7 +69,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                 children: PopUpConfirmSend(
                   toAddress: contractAddressTo,
                   valueInEther:
-                      double.parse(controllerAmount.text.replaceAll(',', '.')),
+                  double.parse(controllerAmount.text.replaceAll(',', '.')),
                   transferToken: args != null ? true : false,
                   arg: args,
                   fee: state.fee,
@@ -79,7 +79,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalStateInitial) {
-            cubit.getTokenBalance(maxValue: args?.tokenEntity?.balance ?? 0);
+            cubit.getTokenBalance();
           }
 
           return DismissKeyboardWidget(
@@ -100,10 +100,10 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                           children: [
                             args != null
                                 ? SFIcon(
-                                    args.icon,
-                                    width: 60,
-                                    height: 60,
-                                  )
+                              args.icon,
+                              width: 60,
+                              height: 60,
+                            )
                                 : Image.asset(Imgs.sendToExternal),
                             SizedBox(
                               height: args != null ? 32 : 0,
@@ -138,14 +138,14 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                                     ],
                                     textInputType:
-                                        const TextInputType.numberWithOptions(
-                                            decimal: true),
+                                    const TextInputType.numberWithOptions(
+                                        decimal: true),
                                     suffixIcon: Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 8),
+                                        const EdgeInsets.only(right: 8),
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                          MainAxisAlignment.end,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             SFTextButton(
@@ -184,7 +184,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
                                       suffix:
-                                          ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
+                                      ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -224,7 +224,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           .the_network_you_have_selected_5
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                              Const.localeJA.languageCode
+                                          Const.localeJA.languageCode
                                           ? null
                                           : TextStyles.w400Red12),
                                   const TextSpan(text: ' '),
@@ -233,7 +233,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           .the_network_you_have_selected_6
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                              Const.localeJA.languageCode
+                                          Const.localeJA.languageCode
                                           ? TextStyles.w400Red12
                                           : null),
                                 ],
