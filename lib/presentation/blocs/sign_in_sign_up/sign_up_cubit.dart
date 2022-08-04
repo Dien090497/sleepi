@@ -15,7 +15,6 @@ import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
 import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
 import 'package:slee_fi/usecase/is_first_open_app_usecase.dart';
 import 'package:slee_fi/usecase/login_usecase.dart';
-import 'package:slee_fi/usecase/send_otp_mail_usecase.dart';
 import 'package:slee_fi/usecase/setting_active_code_usecase.dart';
 import 'package:slee_fi/usecase/sign_up_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
@@ -24,7 +23,7 @@ import 'package:slee_fi/usecase/verify_otp_usecase.dart';
 class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   SigInSignUpCubit() : super(const SignInSignUpState.initial());
 
-  final _sendOtpUC = getIt<SendOTPMailUseCase>();
+  // final _sendOtpUC = getIt<SendOTPMailUseCase>();
   final _signUpUseCase = getIt<SignUpUseCase>();
   final _logInUseCase = getIt<LogInUseCase>();
   final _isFirstOpenAppUC = getIt<IsFirstOpenAppUseCase>();
@@ -59,20 +58,20 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
     }
   }
 
-  senOtp(Action action) async {
-    if (!validateEmail()) {
-      return;
-    }
-    emit(const SignInSignUpState.process());
-
-    final type = action == Action.signUp ? OTPType.signUp : OTPType.changePass;
-
-    final result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
-    result.fold(
-      (l) => emit(SignInSignUpState.errorEmail('$l')),
-      (r) => emit(const SignInSignUpState.initial()),
-    );
-  }
+  // senOtp(Action action) async {
+  //   if (!validateEmail()) {
+  //     return;
+  //   }
+  //   emit(const SignInSignUpState.process());
+  //
+  //   final type = action == Action.signUp ? OTPType.signUp : OTPType.changePass;
+  //
+  //   final result = await _sendOtpUC.call(SendOTPParam(email.trim(), type));
+  //   result.fold(
+  //     (l) => emit(SignInSignUpState.errorEmail('$l')),
+  //     (r) => emit(const SignInSignUpState.initial()),
+  //   );
+  // }
 
   _signUp() async {
     final result =
@@ -218,5 +217,13 @@ class SigInSignUpCubit extends Cubit<SignInSignUpState> {
   Future<void> _saveEmailSuggestion(String email) async {
     _secureStorage.addEmailSuggestion(email);
     _secureStorage.saveLastUserSignIn(email);
+  }
+
+  void onSendOtpError(String message) {
+    if (message.isEmpty) {
+      emit(const SignInSignUpState.initial());
+      return;
+    }
+    emit(SignInSignUpState.errorEmail(message));
   }
 }

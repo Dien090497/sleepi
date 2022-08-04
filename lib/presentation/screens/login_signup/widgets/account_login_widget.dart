@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -156,13 +157,19 @@ class _AccountLoginState extends State<AccountLoginWidget> {
                       style: TextStyles.w400Red12)),
             const SizedBox(height: 5),
             _isActiveCode
-                ? TextfieldVerificationEmail(
+                ? TextfieldVerifiEmail(
                     maxLength: 6,
-                    validate: () => cubit.validateEmail(),
-                    onPressed: () => cubit.senOtp(action),
+                    // validate: () => cubit.validateEmail(),
+                    // onPressed: () => cubit.senOtp(action),
                     errorText:
                         state is SignInSignUpStateError ? state.message : '',
-                    valueChanged: (otp) => cubit.onChangeOTP(otp))
+                    valueChanged: (otp) => cubit.onChangeOTP(otp),
+                    getEmail: () => cubit.email,
+                    otpType: action == Action.signUp
+                        ? OTPType.signUp
+                        : OTPType.changePass,
+                    onError: cubit.onSendOtpError,
+                  )
                 : SFTextFieldPassword(
                     labelText: LocaleKeys.password,
                     valueChanged: (password) =>
