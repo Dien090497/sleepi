@@ -222,7 +222,7 @@ class TransferCubit extends Cubit<TransferState> {
             userId: userId));
         result.fold(
           (l) {
-            emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
+            emit(currentState.copyWith(isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
           },
           (result) {
             emit(const TransferState.success());
