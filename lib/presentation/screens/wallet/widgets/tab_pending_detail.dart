@@ -109,7 +109,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                     : ListView.builder(
                         itemCount: state.list.length + 1,
                         controller: _scrollController,
-                        physics: const BouncingScrollPhysics(),
+                        physics: const ClampingScrollPhysics(),
                         shrinkWrap: true,
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         itemBuilder: (BuildContext context, int index) =>

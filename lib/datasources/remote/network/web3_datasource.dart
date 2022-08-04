@@ -25,22 +25,22 @@ class Web3DataSource {
   final SecureStorage _secureStorage;
 
   Web3DataSource(
-      this._web3provider,
-      this._secureStorage,
-      );
+    this._web3provider,
+    this._secureStorage,
+  );
 
   String mnemonicToPrivateKey(String mnemonic, int derivedIndex,
       [int? slip44]) {
     final seed = bip39.mnemonicToSeed(mnemonic);
     final rootKey = bip32.BIP32.fromSeed(seed);
     final keyChild =
-    rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
+        rootKey.derivePath("m/44'/${slip44 ?? 60}'/0'/0/$derivedIndex");
     return HEX.encode(keyChild.privateKey!);
   }
 
   Future<BigInt> getBalance(String address) async {
     return (await _web3provider.web3client
-        .getBalance(EthereumAddress.fromHex(address)))
+            .getBalance(EthereumAddress.fromHex(address)))
         .getInWei;
   }
 
@@ -67,7 +67,7 @@ class Web3DataSource {
   String createMnemonic() => bip39.generateMnemonic();
 
   Future<TransactionInformation> getDetailTransaction(
-      String? transactionHash) =>
+          String? transactionHash) =>
       _web3provider.web3client.getTransactionByHash(transactionHash!);
 
   Future<TransactionReceipt?> getTransactionReceipt(String transactionHash) =>
@@ -112,9 +112,7 @@ class Web3DataSource {
       BigInt amountOutMin = amounts[1] -
           BigInt.from((amounts[1].toInt() * 0.01) / 100); //slippage set here
       BigInt deadline = BigInt.from(
-          ((DateTime
-              .now()
-              .millisecond / 1000).floor() + 60 * 20) * 1000000000);
+          ((DateTime.now().millisecond / 1000).floor() + 60 * 20) * 1000000000);
 
       final gasFee = await _web3provider.web3client.estimateGas(
         sender: sender,
@@ -129,7 +127,7 @@ class Web3DataSource {
         ]),
       );
       return gasFee;
-    }catch(e){
+    } catch (e) {
       return BigInt.from(0);
     }
   }
@@ -175,15 +173,15 @@ class Web3DataSource {
               ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
               : contractAddressTo);
       final List<EthereumAddress> pairAddress =
-      (contractAddressTo != Const.deadAddress &&
-          contractAddressFrom != Const.deadAddress)
-          ? [
-        from,
-        EthereumAddress.fromHex(
-            await _secureStorage.getTokenAddress(StorageKeys.wavax)),
-        to
-      ]
-          : [from, to];
+          (contractAddressTo != Const.deadAddress &&
+                  contractAddressFrom != Const.deadAddress)
+              ? [
+                  from,
+                  EthereumAddress.fromHex(
+                      await _secureStorage.getTokenAddress(StorageKeys.wavax)),
+                  to
+                ]
+              : [from, to];
       final decimalFrom = await getDecimals(
           contractAddressFrom == Const.deadAddress
               ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
@@ -195,7 +193,7 @@ class Web3DataSource {
           ? (await _secureStorage.getTokenAddress(StorageKeys.wavax))
           : contractAddressTo);
       return (amounts[amounts.length - 1] -
-          BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
+              BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) / 100)) /
           BigInt.from(math.pow(10, decimalTo.toInt()));
     } catch (e) {
       return 0;
@@ -241,18 +239,33 @@ class Web3DataSource {
     }
   }
 
-  Future<String> approveToken(
-      String contractAddress, Credentials credentials) async {
+  Future<String> approveToken(String walletAddress, String contractAddress,
+      Credentials credentials) async {
     final contract = token(contractAddress);
-
-    BigInt amount = BigInt.parse("115792089237316195423570985008687907853269984665640564039457584007913129639935");
-    // BigInt amount = await contract.totalSupply();
-    final decimal = await contract.decimals();
-    return await contract.approve(
+    BigInt amount = BigInt.parse(
+        "115792089237316195423570985008687907853269984665640564039457584007913129639935");
+    final tradeFromFunc = contract.self.function('approve');
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: EthereumAddress.fromHex(walletAddress),
+      to: contract.self.address,
+      data: tradeFromFunc.encodeCall([
         EthereumAddress.fromHex(
             await _secureStorage.getTokenAddress(StorageKeys.routerTraderJoe)),
-        amount * BigInt.from(math.pow(10, decimal.toInt())),
-        credentials: credentials);
+        amount,
+      ]),
+    );
+    if ((gasFee *
+            (await _web3provider.web3client.getGasPrice()).getInWei /
+            BigInt.from(pow(10, 18))) <
+        (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
+      return await contract.approve(
+          EthereumAddress.fromHex(await _secureStorage
+              .getTokenAddress(StorageKeys.routerTraderJoe)),
+          amount,
+          credentials: credentials);
+    } else {
+      return LocaleKeys.not_enough_to_pay_the_fee;
+    }
   }
 
   Future<BigInt> allowance(
@@ -276,12 +289,10 @@ class Web3DataSource {
 
       final List<EthereumAddress> pairAddress = [fromToken, toToken];
       final decimalFrom = await getDecimals(contractAddress);
-      // print('=-=--=-=${(value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt())}');
       final List<BigInt> amountsOut = await contract.getAmountsOut(
-          BigInt.from(
-              value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),
+          BigInt.from(value * 1000000) *
+              BigInt.from(math.pow(10, decimalFrom.toInt()) / 1000000),
           pairAddress);
-      // print('=-=--=-=${amountsOut.toString()}');
       BigInt amountOutMin = amountsOut[1] -
           BigInt.from(
               (amountsOut[1].toInt() * 0.01) / 100); ////slippage set here
@@ -301,8 +312,8 @@ class Web3DataSource {
         ]),
       );
       if ((gasFee *
-          (await _web3provider.web3client.getGasPrice()).getInWei /
-          BigInt.from(pow(10, 18))) <
+              (await _web3provider.web3client.getGasPrice()).getInWei /
+              BigInt.from(pow(10, 18))) <
           (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
         await contract.swapExactTokensForAVAX(
           amountsOut[0],
@@ -313,10 +324,9 @@ class Web3DataSource {
           credentials: credentials,
           transaction: Transaction(
             from: to,
-            to: to,
-            value: 0.toWeiEtherAmount,
+            to: contract.self.address,
+            value: 0.etherToWei.toWeiEtherAmount,
             gasPrice: await _web3provider.web3client.getGasPrice(),
-            nonce: await _web3provider.web3client.getTransactionCount(to),
           ),
         );
         return '';
@@ -349,8 +359,8 @@ class Web3DataSource {
       ];
       final decimalFrom = await getDecimals(contractAddressFrom);
       final List<BigInt> amounts = await contract.getAmountsOut(
-          BigInt.from(
-              value * BigInt.from(math.pow(10, decimalFrom.toInt())).toInt()),
+          BigInt.from(value * 1000000) *
+              BigInt.from(math.pow(10, decimalFrom.toInt()) / 1000000),
           pairAddress);
       BigInt amountOutMin = amounts[amounts.length - 1] -
           BigInt.from((amounts[amounts.length - 1].toInt() * 0.01) /
@@ -372,8 +382,8 @@ class Web3DataSource {
         ]),
       );
       if ((gasFee *
-          (await _web3provider.web3client.getGasPrice()).getInWei /
-          BigInt.from(pow(10, 18))) <
+              (await _web3provider.web3client.getGasPrice()).getInWei /
+              BigInt.from(pow(10, 18))) <
           (await getBalance(walletAddress) / BigInt.from(pow(10, 18)))) {
         await contract.swapExactTokensForTokens(
           amounts[0],

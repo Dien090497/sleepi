@@ -17,6 +17,7 @@ class TransferState with _$TransferState {
     required bool isToSpending,
     required List<TokenEntity> spendingTokens,
     required List<TokenEntity> walletTokens,
+    required int userId,
     @Default(false) bool isLoading,
     double? amount,
     String? fee,

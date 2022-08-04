@@ -27,6 +27,7 @@ mixin _$TransferState {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -46,6 +47,7 @@ mixin _$TransferState {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -65,6 +67,7 @@ mixin _$TransferState {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -193,6 +196,7 @@ class _$TransferFailed implements TransferFailed {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -215,6 +219,7 @@ class _$TransferFailed implements TransferFailed {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -237,6 +242,7 @@ class _$TransferFailed implements TransferFailed {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -378,6 +384,7 @@ class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -400,6 +407,7 @@ class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -422,6 +430,7 @@ class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -535,6 +544,7 @@ class _$TransferSuccess implements TransferSuccess {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -557,6 +567,7 @@ class _$TransferSuccess implements TransferSuccess {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -579,6 +590,7 @@ class _$TransferSuccess implements TransferSuccess {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -647,6 +659,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       bool isToSpending,
       List<TokenEntity> spendingTokens,
       List<TokenEntity> walletTokens,
+      int userId,
       bool isLoading,
       double? amount,
       String? fee,
@@ -675,6 +688,7 @@ class __$$TransferLoadedCopyWithImpl<$Res>
     Object? isToSpending = freezed,
     Object? spendingTokens = freezed,
     Object? walletTokens = freezed,
+    Object? userId = freezed,
     Object? isLoading = freezed,
     Object? amount = freezed,
     Object? fee = freezed,
@@ -702,6 +716,10 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value._walletTokens
           : walletTokens // ignore: cast_nullable_to_non_nullable
               as List<TokenEntity>,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -749,6 +767,7 @@ class _$TransferLoaded implements TransferLoaded {
       required this.isToSpending,
       required final List<TokenEntity> spendingTokens,
       required final List<TokenEntity> walletTokens,
+      required this.userId,
       this.isLoading = false,
       this.amount,
       this.fee,
@@ -778,6 +797,8 @@ class _$TransferLoaded implements TransferLoaded {
   }
 
   @override
+  final int userId;
+  @override
   @JsonKey()
   final bool isLoading;
   @override
@@ -791,7 +812,7 @@ class _$TransferLoaded implements TransferLoaded {
 
   @override
   String toString() {
-    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, spendingTokens: $spendingTokens, walletTokens: $walletTokens, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
+    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, spendingTokens: $spendingTokens, walletTokens: $walletTokens, userId: $userId, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
   }
 
   @override
@@ -809,6 +830,7 @@ class _$TransferLoaded implements TransferLoaded {
                 .equals(other._spendingTokens, _spendingTokens) &&
             const DeepCollectionEquality()
                 .equals(other._walletTokens, _walletTokens) &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.amount, amount) &&
             const DeepCollectionEquality().equals(other.fee, fee) &&
@@ -825,6 +847,7 @@ class _$TransferLoaded implements TransferLoaded {
       const DeepCollectionEquality().hash(isToSpending),
       const DeepCollectionEquality().hash(_spendingTokens),
       const DeepCollectionEquality().hash(_walletTokens),
+      const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(amount),
       const DeepCollectionEquality().hash(fee),
@@ -848,6 +871,7 @@ class _$TransferLoaded implements TransferLoaded {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -856,7 +880,7 @@ class _$TransferLoaded implements TransferLoaded {
         loaded,
   }) {
     return loaded(currentToken, backupToken, isToSpending, spendingTokens,
-        walletTokens, isLoading, amount, fee, isAllowance, errorMsg);
+        walletTokens, userId, isLoading, amount, fee, isAllowance, errorMsg);
   }
 
   @override
@@ -871,6 +895,7 @@ class _$TransferLoaded implements TransferLoaded {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -879,7 +904,7 @@ class _$TransferLoaded implements TransferLoaded {
         loaded,
   }) {
     return loaded?.call(currentToken, backupToken, isToSpending, spendingTokens,
-        walletTokens, isLoading, amount, fee, isAllowance, errorMsg);
+        walletTokens, userId, isLoading, amount, fee, isAllowance, errorMsg);
   }
 
   @override
@@ -894,6 +919,7 @@ class _$TransferLoaded implements TransferLoaded {
             bool isToSpending,
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
+            int userId,
             bool isLoading,
             double? amount,
             String? fee,
@@ -904,7 +930,7 @@ class _$TransferLoaded implements TransferLoaded {
   }) {
     if (loaded != null) {
       return loaded(currentToken, backupToken, isToSpending, spendingTokens,
-          walletTokens, isLoading, amount, fee, isAllowance, errorMsg);
+          walletTokens, userId, isLoading, amount, fee, isAllowance, errorMsg);
     }
     return orElse();
   }
@@ -955,6 +981,7 @@ abstract class TransferLoaded implements TransferState {
       required final bool isToSpending,
       required final List<TokenEntity> spendingTokens,
       required final List<TokenEntity> walletTokens,
+      required final int userId,
       final bool isLoading,
       final double? amount,
       final String? fee,
@@ -966,6 +993,7 @@ abstract class TransferLoaded implements TransferState {
   bool get isToSpending;
   List<TokenEntity> get spendingTokens;
   List<TokenEntity> get walletTokens;
+  int get userId;
   bool get isLoading;
   double? get amount;
   String? get fee;

@@ -35,17 +35,17 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     });
   }
 
-  Future<void> getTokenBalance({required double maxValue}) async {
+  Future<void> getTokenBalance() async {
     final result = await _sendToExternalUC.getTokenBalance(NoParams());
     result.fold(
-      (l) {
+          (l) {
         emit(SendToExternalState.fail('$l'));
       },
-      (balance) async {
+          (balance) async {
         final feeRes = await getIt<SendToExternalUseCase>()
-            .calculatorFee(SendToExternalParams(
+            .calculatorFee(const SendToExternalParams(
           contractAddressTo: '',
-          valueInEther: maxValue,
+          valueInEther: 0,
         ));
         feeRes.fold((l) {
           emit(SendToExternalState.fail('$l'));
@@ -58,9 +58,9 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
 
   Future<void> validator(
       {required String contractAddressTo,
-      required double balanceCurrent,
-      required double amount,
-      required double fee,
+        required double balanceCurrent,
+        required double amount,
+        required double fee,
       }) async {
     emit(const SendToExternalState.loading());
     if (contractAddressTo.isEmpty) {

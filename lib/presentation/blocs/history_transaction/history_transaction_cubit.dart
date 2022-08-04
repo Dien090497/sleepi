@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/usecase/current_network_explorer_usecase.dart';
 import 'package:slee_fi/usecase/get_history_transaction_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'history_transaction_state.dart';
@@ -16,24 +17,22 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
   final _networkExplorerUC = getIt<CurrentNetworkExplorerUseCase>();
   final _getHistoryTransactionUC = getIt<GetHistoryTransactionUseCase>();
 
-
   refresh(HistoryTransactionParams params) {
     emit(const HistoryTransactionState.refreshHistory());
     page = 1;
     loadMore = false;
     getHistoryTransaction(HistoryTransactionParams(
-      tokenSymbol: params.tokenSymbol,
-      typeHistory: params.typeHistory,
-      page: page
-    ));
+        tokenSymbol: params.tokenSymbol,
+        typeHistory: params.typeHistory,
+        page: page));
   }
 
-  Future<void> loadMoreHistoryTransaction(HistoryTransactionParams params) async {
+  Future<void> loadMoreHistoryTransaction(
+      HistoryTransactionParams params) async {
     getHistoryTransaction(HistoryTransactionParams(
         tokenSymbol: params.tokenSymbol,
         typeHistory: params.typeHistory,
-        page: page
-    ));
+        page: page));
   }
 
   Future<void> getHistoryTransaction(HistoryTransactionParams params) async {
@@ -41,30 +40,30 @@ class HistoryTransactionCubit extends Cubit<HistoryTransactionState> {
     final result = await _getHistoryTransactionUC.call(params);
 
     result.fold(
-          (l) {
+      (l) {
         emit(HistoryTransactionState.error('$l'));
-      },(history) {
+      },
+      (history) {
         page++;
         emit(HistoryTransactionState.getHistorySuccess(history));
       },
     );
   }
 
-
   Future<void> getCurrentNetworkExplorer(String hash) async {
-    final result = await _networkExplorerUC.call(hash);
+    final result = await _networkExplorerUC.call(NoParams());
     result.fold(
-          (l) {
+      (l) {
         emit(HistoryTransactionState.error('$l'));
       },
-          (success) async{
-            final url = Uri.parse(success);
-            if (await canLaunchUrl(url)) {
-            launchUrl(url);
-            }
-        emit(HistoryTransactionState.getUrlDetailTransactionSuccess(success));
+      (s) async {
+        final path = '$s/tx/$hash';
+        final url = Uri.parse(path);
+        if (await canLaunchUrl(url)) {
+          launchUrl(url);
+        }
+        emit(HistoryTransactionState.getUrlDetailTransactionSuccess(path));
       },
     );
   }
-
 }

@@ -29,6 +29,7 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
   bool isChangedRates = true;
   double currentRatesChange = 0;
   double amountStaked = 0;
+  int? dayStaked;
   double? currentRate;
   double? currentRatesToToken;
   double? percentCurrentRatesToToken;
@@ -110,7 +111,11 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                     rateEditingController.text = currentRate!.formatBalanceToken;
                     currentRatesToToken = (currentRate! / widget.priceUsd);
                     amountStaked = staked.amount;
+                    dayStaked = staked.day;
                     percentCurrentRatesToToken = (currentRate!/staked.amount*100);
+                    if(percentCurrentRatesToToken != null && percentCurrentRatesToToken!.isNaN || percentCurrentRatesToToken!.isInfinite) {
+                      percentCurrentRatesToToken = 0;
+                    }
                   });
                 }else {
                   rateEditingController.text = '';
@@ -152,10 +157,13 @@ class _PopUpCalculatorState extends State<PopUpCalculator> {
                             showLabel: false,
                             noBorder: true,
                             readonly: isChangedRates,
+                            maxLength: 15,
                             onChanged: (rates){
                               if(rateEditingController.text.isNotEmpty){
                                 setState((){
                                   currentRatesToToken = double.parse(rateEditingController.text)/widget.priceUsd;
+                                  amountStaked = double.parse(rateEditingController.text)/(double.parse(widget.aprInDay!)*(dayStaked != null ? dayStaked! : 1));
+                                  currentRate = double.parse(widget.aprInDay!) * (dayStaked != null ? dayStaked! : 1) * amountStaked;
                                   percentCurrentRatesToToken = (currentRate!/amountStaked*100);
                                 });
                               }else {

@@ -169,12 +169,17 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                   }),
                   itemBottomBar(2, context, Ics.heart, LocaleKeys.mint, () {
                     index = 2;
-                    Navigator.pushNamed(context, R.mint, arguments: bedEntity)
-                        .then((value) {
-                      widget.onBackIndividual(null);
-                      index = -1;
-                      setState(() {});
-                    });
+                    if(bedEntity.bedMint < 7){
+                      Navigator.pushNamed(context, R.mint, arguments: bedEntity)
+                          .then((value) {
+                        widget.onBackIndividual(null);
+                        index = -1;
+                        setState(() {});
+                      });
+                    }else {
+                      null;
+                    }
+
                   }),
                   itemBottomBar(3, context, Ics.shopping, LocaleKeys.sell, () {
                     setState(() {

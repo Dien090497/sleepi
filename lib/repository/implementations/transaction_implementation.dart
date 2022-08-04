@@ -190,11 +190,11 @@ class TransactionImplementation extends ITransactionRepository {
   }
 
   @override
-  Future<Either<Failure, String>> getCurrentNetworkExplorer(String hash) async {
+  Future<Either<Failure, String>> getCurrentNetworkExplorer() async {
     try {
       final network = await _getCurrentNetwork();
-      String urlDetail = '${network.explorers.first.url}/tx/$hash';
-      return Right(urlDetail);
+      // String urlDetail = '${network.explorers.first.url}/tx/$hash';
+      return Right(network.explorers.first.url);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

@@ -42,7 +42,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
-    // final size = MediaQuery.of(context).size;
+
     return BlocProvider(
       create: (_) => cubit..init(args.nftId),
       child: BlocConsumer<MintCubit, MintState>(
@@ -56,6 +56,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
             showMessageDialog(context, state.msg).then((value) {
               animationController.reset();
               cubit.refresh();
+              Navigator.pop(context, true);
             });
           }
           if (state is MintStateGetInfo) {
@@ -69,6 +70,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
         builder: (context, state) {
           // final cubit = context.read<MintCubit>();
           // var size = MediaQuery.of(context).size;
+
           return BackgroundWidget(
             child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -81,7 +83,6 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
                 child: const Center(child: SFIcon(Ics.commingSoon)),
               ),
-
               // Stack(
               //   children: [
               //     SafeArea(
