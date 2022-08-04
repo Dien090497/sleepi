@@ -18,8 +18,10 @@ class BottomBarInfoIndividualState with _$BottomBarInfoIndividualState {
     num? cost,
   }) = BottomBarInfoIndividualLoaded;
 
-  const factory BottomBarInfoIndividualState.getLevel(NftLevelUp levelUp) =
-      GetLevelSuccess;
+  const factory BottomBarInfoIndividualState.getLevel(
+    NftLevelUp levelUp, {
+    @Default(false) bool isLoading,
+  }) = GetLevelSuccess;
 
   const factory BottomBarInfoIndividualState.upLevel(
       String remainTime, String levelUpTime) = UpLevelSuccess;

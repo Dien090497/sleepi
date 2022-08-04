@@ -27,7 +27,7 @@ mixin _$BottomBarInfoIndividualState {
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -45,7 +45,7 @@ mixin _$BottomBarInfoIndividualState {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -63,7 +63,7 @@ mixin _$BottomBarInfoIndividualState {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -183,7 +183,7 @@ class _$BottomBarInfoIndividualInitial
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -204,7 +204,7 @@ class _$BottomBarInfoIndividualInitial
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -225,7 +225,7 @@ class _$BottomBarInfoIndividualInitial
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -446,7 +446,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -468,7 +468,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -490,7 +490,7 @@ class _$BottomBarInfoIndividualLoaded implements BottomBarInfoIndividualLoaded {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -580,7 +580,7 @@ abstract class _$$GetLevelSuccessCopyWith<$Res> {
   factory _$$GetLevelSuccessCopyWith(
           _$GetLevelSuccess value, $Res Function(_$GetLevelSuccess) then) =
       __$$GetLevelSuccessCopyWithImpl<$Res>;
-  $Res call({NftLevelUp levelUp});
+  $Res call({NftLevelUp levelUp, bool isLoading});
 }
 
 /// @nodoc
@@ -597,12 +597,17 @@ class __$$GetLevelSuccessCopyWithImpl<$Res>
   @override
   $Res call({
     Object? levelUp = freezed,
+    Object? isLoading = freezed,
   }) {
     return _then(_$GetLevelSuccess(
       levelUp == freezed
           ? _value.levelUp
           : levelUp // ignore: cast_nullable_to_non_nullable
               as NftLevelUp,
+      isLoading: isLoading == freezed
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -610,14 +615,17 @@ class __$$GetLevelSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class _$GetLevelSuccess implements GetLevelSuccess {
-  const _$GetLevelSuccess(this.levelUp);
+  const _$GetLevelSuccess(this.levelUp, {this.isLoading = false});
 
   @override
   final NftLevelUp levelUp;
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'BottomBarInfoIndividualState.getLevel(levelUp: $levelUp)';
+    return 'BottomBarInfoIndividualState.getLevel(levelUp: $levelUp, isLoading: $isLoading)';
   }
 
   @override
@@ -625,12 +633,15 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetLevelSuccess &&
-            const DeepCollectionEquality().equals(other.levelUp, levelUp));
+            const DeepCollectionEquality().equals(other.levelUp, levelUp) &&
+            const DeepCollectionEquality().equals(other.isLoading, isLoading));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(levelUp));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(levelUp),
+      const DeepCollectionEquality().hash(isLoading));
 
   @JsonKey(ignore: true)
   @override
@@ -649,13 +660,13 @@ class _$GetLevelSuccess implements GetLevelSuccess {
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
     required TResult Function() speedUpSuccess,
   }) {
-    return getLevel(levelUp);
+    return getLevel(levelUp, isLoading);
   }
 
   @override
@@ -670,13 +681,13 @@ class _$GetLevelSuccess implements GetLevelSuccess {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
     TResult Function()? speedUpSuccess,
   }) {
-    return getLevel?.call(levelUp);
+    return getLevel?.call(levelUp, isLoading);
   }
 
   @override
@@ -691,7 +702,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -699,7 +710,7 @@ class _$GetLevelSuccess implements GetLevelSuccess {
     required TResult orElse(),
   }) {
     if (getLevel != null) {
-      return getLevel(levelUp);
+      return getLevel(levelUp, isLoading);
     }
     return orElse();
   }
@@ -755,9 +766,11 @@ class _$GetLevelSuccess implements GetLevelSuccess {
 }
 
 abstract class GetLevelSuccess implements BottomBarInfoIndividualState {
-  const factory GetLevelSuccess(final NftLevelUp levelUp) = _$GetLevelSuccess;
+  const factory GetLevelSuccess(final NftLevelUp levelUp,
+      {final bool isLoading}) = _$GetLevelSuccess;
 
   NftLevelUp get levelUp;
+  bool get isLoading;
   @JsonKey(ignore: true)
   _$$GetLevelSuccessCopyWith<_$GetLevelSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -849,7 +862,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -870,7 +883,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -891,7 +904,7 @@ class _$UpLevelSuccess implements UpLevelSuccess {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1043,7 +1056,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -1064,7 +1077,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1085,7 +1098,7 @@ class _$BottomBarInfoIndividualError implements BottomBarInfoIndividualError {
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1214,7 +1227,7 @@ class _$BottomBarInfoIndividualLoading
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -1235,7 +1248,7 @@ class _$BottomBarInfoIndividualLoading
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1256,7 +1269,7 @@ class _$BottomBarInfoIndividualLoading
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1381,7 +1394,7 @@ class _$BottomBarInfoIndividualSpeedUpSuccess
             num? valueRepair,
             num? cost)
         loaded,
-    required TResult Function(NftLevelUp levelUp) getLevel,
+    required TResult Function(NftLevelUp levelUp, bool isLoading) getLevel,
     required TResult Function(String remainTime, String levelUpTime) upLevel,
     required TResult Function(String message) error,
     required TResult Function() loading,
@@ -1402,7 +1415,7 @@ class _$BottomBarInfoIndividualSpeedUpSuccess
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,
@@ -1423,7 +1436,7 @@ class _$BottomBarInfoIndividualSpeedUpSuccess
             num? valueRepair,
             num? cost)?
         loaded,
-    TResult Function(NftLevelUp levelUp)? getLevel,
+    TResult Function(NftLevelUp levelUp, bool isLoading)? getLevel,
     TResult Function(String remainTime, String levelUpTime)? upLevel,
     TResult Function(String message)? error,
     TResult Function()? loading,

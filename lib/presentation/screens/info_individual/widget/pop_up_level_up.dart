@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_label_value.dart';
@@ -99,20 +100,22 @@ class PopUpLevelUp extends StatelessWidget {
                           ),
                           const SizedBox(width: 12),
                           Expanded(
-                            child: SFButton(
-                              text: LocaleKeys.confirm,
-                              width: double.infinity,
-                              onPressed: () {
-                                cubit.postLevelUp(
-                                  LevelUpSchema(
-                                    bedId: bedEntity.nftId,
-                                    cost: state.levelUp.cost!,
+                            child: state.isLoading
+                                ? const LoadingIcon()
+                                : SFButton(
+                                    text: LocaleKeys.confirm,
+                                    width: double.infinity,
+                                    onPressed: () {
+                                      cubit.postLevelUp(
+                                        LevelUpSchema(
+                                          bedId: bedEntity.nftId,
+                                          cost: state.levelUp.cost!,
+                                        ),
+                                      );
+                                    },
+                                    textStyle: TextStyles.white16,
+                                    gradient: AppColors.gradientBlueButton,
                                   ),
-                                );
-                              },
-                              textStyle: TextStyles.white16,
-                              gradient: AppColors.gradientBlueButton,
-                            ),
                           ),
                         ],
                       ),

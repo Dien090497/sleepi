@@ -6,6 +6,7 @@ part 'nft_level_up_response.g.dart';
 @JsonSerializable()
 class NftLevelUp {
   final double? cost;
+  final double? costSpeedUp;
   @JsonKey(name: 'require_time')
   final int? requireTime;
   @JsonKey(name: 'sleep_time')
@@ -13,6 +14,7 @@ class NftLevelUp {
 
   NftLevelUp({
     this.cost,
+    this.costSpeedUp,
     this.requireTime,
     this.sleepTime,
   });

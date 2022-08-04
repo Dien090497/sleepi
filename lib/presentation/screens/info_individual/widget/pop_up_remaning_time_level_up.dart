@@ -158,7 +158,7 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
                         if (snapshot.hasData) {
                           final data = snapshot.data!
                               .getOrElse(() => NftLevelUp(cost: null));
-                          speedUpCost = data.cost;
+                          speedUpCost = data.costSpeedUp;
                           return SFText(
                             keyText:
                                 '${speedUpCost == null ? 0 : (speedUpCost! * pow(10, 6)).toInt() / pow(10, 6)} SLFT',
