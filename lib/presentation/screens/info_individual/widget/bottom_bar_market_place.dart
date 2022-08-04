@@ -34,7 +34,7 @@ class BottomBarMarketPlaceWidget extends StatelessWidget {
           if (msg.isEmpty) {
             showSuccessfulDialog(context, LocaleKeys.purchased_successfully)
                 .then((value) {
-              Navigator.pop(context);
+              Navigator.pop(context, true);
               context.read<UserBloc>().add(const RefreshBalanceToken());
             });
           } else {
