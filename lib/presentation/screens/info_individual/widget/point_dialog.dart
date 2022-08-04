@@ -113,6 +113,8 @@ class PointDialog extends StatelessWidget {
                               textStyle: TextStyles.white16,
                               gradient: AppColors.gradientBlue,
                               text: LocaleKeys.confirm,
+                              disabled: state.startAttributes.reduce((value, element) => value + element) ==
+                                  state.attributesChanged.reduce((value, element) => value + element),
                               onPressed: () {
                                 cubit.updateAttribute();
                               },
@@ -158,9 +160,8 @@ class _IncreasePoint extends StatelessWidget {
               showLabel: false,
               enabled: false,
               initialText: point.formatBalanceToken,
-              textStyle: startPoint != point
-                      ? TextStyles.blue16
-                      : TextStyles.white16,
+              textStyle:
+                  startPoint != point ? TextStyles.blue16 : TextStyles.white16,
             )),
             const SizedBox(width: 16),
             _Button(icon: Icons.remove, onTap: minusTap),

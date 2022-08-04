@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:external_app_launcher/external_app_launcher.dart';
@@ -6,15 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health/health.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/date_time_utils.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
@@ -141,25 +145,28 @@ class AlarmBell extends StatelessWidget {
                 Expanded(
                   child: BlocBuilder<HomeBloc, HomeState>(
                     builder: (context, state) {
-                      final double value =
-                          state is HomeLoaded ? state.tokenEarn : 0;
-                      // final double totalValue = value + Random().nextInt(1000);
+                      final EstimateSleepResponse? value =
+                          state is HomeLoaded ? state.tokenEarn : null;
+                      final double totalValue =
+                          value?.maxEarnPerDay ?? Const.tokenEarnMaxPerDay;
+                      final double currentToken = value?.todayEarn ?? 0;
                       return Stack(
                         alignment: Alignment.centerLeft,
                         children: [
-                          // SFPercentBorderGradient(
-                          //   valueActive: value,
-                          //   totalValue: totalValue,
-                          //   linearGradient: AppColors.gradientBluePurple,
-                          //   lineHeight: 18,
-                          //   barRadius: 20,
-                          //   backgroundColor: Colors.white.withOpacity(0.05),
-                          // ),
+                          SFPercentBorderGradient(
+                            valueActive: min(totalValue, currentToken),
+                            totalValue: totalValue,
+                            linearGradient: AppColors.gradientBluePurple,
+                            lineHeight: 18,
+                            barRadius: 20,
+                            backgroundColor: Colors.white.withOpacity(0.05),
+                          ),
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 16.0),
                             child: SFText(
-                              keyText: '${value.toStringAsFixed(2)} SLFT',
+                              keyText:
+                                  '${currentToken.toStringAsFixed(2)}/${totalValue.toInt()}  SLFT',
                               style: TextStyles.white10,
                             ),
                           )
@@ -225,27 +232,26 @@ class AlarmBell extends StatelessWidget {
                     isEnableInsurance: state.enableInsurance,
                     bedUsed: state.selectedBed!.nftId,
                     wakeUp:
-                    '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
+                        '${selectedTime.toUtc().millisecondsSinceEpoch ~/ 1000}',
                     alrm: state.enableAlarm,
                     itemUsed: state.selectedItem?.nftId ?? 0,
                   ));
                   Navigator.pop(context);
                   startRes.fold(
-                        (l) {
+                    (l) {
                       showMessageDialog(context, '$l');
                     },
-                        (r) async {
+                    (r) async {
                       Navigator.pushNamed(
                         context,
                         R.tracking,
                         arguments: TrackingParams(
-                          timeStart: DateTime.now().millisecondsSinceEpoch,
-                          timeWakeUp: selectedTime.millisecondsSinceEpoch,
-                          tokenEarn: state.tokenEarn,
-                          fromRoute: R.bottomNavigation,
-                          imageBed: bedImage,
-                          enableAlarm: state.enableAlarm
-                        ),
+                            timeStart: DateTime.now().millisecondsSinceEpoch,
+                            timeWakeUp: selectedTime.millisecondsSinceEpoch,
+                            tokenEarn: state.tokenEarn?.todayEarn ?? 0,
+                            fromRoute: R.bottomNavigation,
+                            imageBed: bedImage,
+                            enableAlarm: state.enableAlarm),
                       );
                     },
                   );
@@ -258,7 +264,7 @@ class AlarmBell extends StatelessWidget {
                 androidPackageName: 'com.google.android.apps.fitness',
                 iosUrlScheme: 'x-apple-health://',
                 appStoreLink:
-                'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
+                    'itms-apps://itunes.apple.com/us/app/apple-health/id1242545199',
                 // openStore: false
               );
             }

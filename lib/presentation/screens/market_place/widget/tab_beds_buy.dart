@@ -137,7 +137,11 @@ class TabBedsBuy extends StatelessWidget {
                                           marketPlaceModel: bed,
                                           buy: true,
                                           isOwner: true
-                                      ),);
+                                      ),).then((value) {
+                                        if(value ==true) {
+                                          cubit.refresh();
+                                        }
+                                    });
                                   } else {
                                     Navigator.pushNamed(context, R.nftInfo,
                                         arguments: InfoIndividualParams(

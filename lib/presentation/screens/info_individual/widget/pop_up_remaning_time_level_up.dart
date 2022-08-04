@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/nft_level_up_response/nft_level_up_response.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_cubit.dart';
-import 'package:slee_fi/presentation/blocs/bottom_bar_infoIndividual/bottom_bar_infoIndividual_state.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_info_individual/bottom_bar_info_individual_cubit.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_info_individual/bottom_bar_info_individual_state.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
 import 'package:slee_fi/usecase/get_level_up_usecase.dart';
 
@@ -159,7 +160,8 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
                               .getOrElse(() => NftLevelUp(cost: null));
                           speedUpCost = data.cost;
                           return SFText(
-                            keyText: '${speedUpCost ?? ''} SLFT',
+                            keyText:
+                                '${speedUpCost == null ? 0 : (speedUpCost! * pow(10, 6)).toInt() / pow(10, 6)} SLFT',
                             style: TextStyles.textColorSize16,
                           );
                         }
@@ -182,7 +184,9 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
             const SizedBox(height: 24),
             if (!isSpeedUp)
               SFButton(
-                text: _remainTime.isEmpty ? LocaleKeys.confirm : LocaleKeys.speed_up,
+                text: _remainTime.isEmpty
+                    ? LocaleKeys.confirm
+                    : LocaleKeys.speed_up,
                 width: double.infinity,
                 onPressed: () {
                   if (_remainTime.isEmpty) {
@@ -253,6 +257,7 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
     final levelUpTime = int.parse(widget.levelUpTime);
     final totalTime = (int.parse(widget.remainTime) - levelUpTime);
     final currentTime = DateTime.now().millisecondsSinceEpoch - levelUpTime;
+    if (currentTime < 0) return 0;
     return currentTime / totalTime;
   }
 }

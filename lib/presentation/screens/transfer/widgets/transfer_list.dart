@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
-import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -25,7 +23,6 @@ import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/asset_tile.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_approve.dart';
 import 'package:slee_fi/presentation/screens/transfer/widgets/pop_up_confirm_transfer.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TransferList extends StatefulWidget {
   const TransferList({Key? key}) : super(key: key);
@@ -66,19 +63,10 @@ class _TransferListState extends State<TransferList> {
                   cubit.approve().then((str) {
                     Navigator.pop(context);
                     if (str.isNotEmpty) {
-                      showApproveSuccessfulDialog(context, LocaleKeys.transaction_submitted,
-                          txHash: 'TXID: ${str.formatAddress}',
-                          txIDStyle: const TextStyle(
-                            color: AppColors.white,
-                          decoration: TextDecoration.underline,),
-                        showWebView: () {
-                        launchUrl(Uri.parse('${Const.txhSnowTrace}$str'));
-                        }
-                      );
+                      showApproveSuccessfulDialog(context, txHash: str);
                     } else {
-                      if (state is TransferFailed) {
-                        showMessageDialog(context, str);
-                      }
+                      showMessageDialog(
+                          context, LocaleKeys.insufficient_balance.tr());
                     }
                   });
                 },
@@ -90,7 +78,6 @@ class _TransferListState extends State<TransferList> {
             final userState = context.read<UserBloc>().state;
             final walletState = context.read<WalletCubit>().state;
             if (userState is UserLoaded) {
-              cubit.getFee(amount: double.parse(valueController.text),);
               showCustomAlertDialog(
                 context,
                 showClosed: false,

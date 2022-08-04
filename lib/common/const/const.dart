@@ -14,11 +14,12 @@ class Const {
   static const double bedMintMax = 7;
   static const double bedLevelMax = 30;
 
+  static const double tokenEarnMaxPerDay = 800;
+
   /// GWei
   static const double gasPrice = 1.5;
   static const double defaultEstimateGas = 0.003156325;
 
-  static const String txhSnowTrace = 'https://testnet.snowtrace.io/tx/';
   static const String howToPlayUrl = 'https://sleefi.com/how-to-play';
   static const String linkTreeUrl = 'https://linktr.ee/sleefi';
   static const String litePaperUrl = 'https://sleefi.com/litepaper';
