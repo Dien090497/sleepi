@@ -235,17 +235,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                 if (audioPlayer.playing) {
                                   await audioPlayer.stop();
                                 }
-                                if(earn == 0) {
-                                  showWarningDialog(
-                                  context,
-                                  LocaleKeys.sleep_time_too_short,
-                                      () async {
-                                        await cubit.fetchData(timeStart);
-                                  },
-                                );
-                                }else{
-                                  await cubit.fetchData(timeStart);
-                                }
+                                await cubit.fetchData(timeStart);
                               }
                             },
                           ),
