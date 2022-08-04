@@ -444,7 +444,7 @@ Future<T?> showApproveSuccessfulDialog<T>(
               onTap: showWebView,
               child: SFText(
                 textAlign: TextAlign.center,
-                keyText:'Txh: ${txHash.tr()}',
+                keyText:'Txh: $txHash',
                 style: txIDStyle,
               ),
             ),
