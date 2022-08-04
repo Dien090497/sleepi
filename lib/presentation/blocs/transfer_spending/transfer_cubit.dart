@@ -26,13 +26,13 @@ class TransferCubit extends Cubit<TransferState> {
     required int userID,
     double? amount,
   }) : super(TransferState.loaded(
-          isToSpending: isToSpending,
-          currentToken: currentToken,
-          spendingTokens: spendingTokens,
-          walletTokens: List.from(walletTokens)..removeRange(3, walletTokens.length),
-          backupToken: backupToken,
-          userId: userID
-        ));
+            isToSpending: isToSpending,
+            currentToken: currentToken,
+            spendingTokens: spendingTokens,
+            walletTokens: List.from(walletTokens)
+              ..removeRange(3, walletTokens.length),
+            backupToken: backupToken,
+            userId: userID));
 
   final _toSpendingUseCase = getIt<ToSpendingUseCase>();
   final _approveUseCase = getIt<ApproveUseCase>();
@@ -52,6 +52,7 @@ class TransferCubit extends Cubit<TransferState> {
                 type: 'token',
                 contractAddress: currentState.currentToken.address));
         fee = feeRes.foldRight(null, (r, previous) => r);
+        emit(currentState.copyWith(fee: null, isLoading: false));
       } else {
         if (currentState.currentToken.symbol == 'AVAX') {
           final feeRes = await getIt<SendToExternalUseCase>()
@@ -64,7 +65,7 @@ class TransferCubit extends Cubit<TransferState> {
           emit(currentState.copyWith(fee: fee, isLoading: false));
         } else {
           if (amount != null) {
-            getFeeFromSpending(amount: amount,currentState: currentState);
+            getFeeFromSpending(amount: amount, currentState: currentState);
           } else {
             getFeeFromSpending(currentState: currentState, amount: 0);
           }
@@ -274,12 +275,14 @@ class TransferCubit extends Cubit<TransferState> {
     }
   }
 
-  Future<void> getFeeFromSpending ({required TransferLoaded currentState, required double amount}) async {
+  Future<void> getFeeFromSpending(
+      {required TransferLoaded currentState, required double amount}) async {
     final valueTokenSend = (Decimal.parse(amount.toString()) *
-        Decimal.fromBigInt(BigInt.from(pow(10, 18))))
+            Decimal.fromBigInt(BigInt.from(pow(10, 18))))
         .toBigInt();
     final currentToken = currentState.currentToken.address;
-    EstimateGasDepositParam params = EstimateGasDepositParam(functionName: 'depositToken', data: [
+    EstimateGasDepositParam params =
+        EstimateGasDepositParam(functionName: 'depositToken', data: [
       EthereumAddress.fromHex(currentToken),
       valueTokenSend,
       BigInt.from(currentState.userId)
@@ -287,6 +290,7 @@ class TransferCubit extends Cubit<TransferState> {
     final result = await _estGasDepositTokenUC.call(params);
     result.fold((l) {
       emit(TransferState.failed('$l'));
+      emit(currentState.copyWith(isLoading: false));
     }, (fee) {
       emit(currentState.copyWith(fee: fee.toString(), isLoading: false));
     });
