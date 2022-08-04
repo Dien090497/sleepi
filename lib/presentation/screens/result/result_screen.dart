@@ -256,7 +256,7 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
                       width: double.infinity,
                       height: 48,
                       onPressed: () async {
-                        Map<Permission, PermissionStatus> statuses = await [
+                        await [
                           Permission.storage,
                         ].request();
                         Navigator.pushNamed(context, R.share, arguments: args);

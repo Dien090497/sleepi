@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:safe_device/safe_device.dart';
+// import 'package:safe_device/safe_device.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
 import 'package:slee_fi/usecase/fetch_balance_spending_usecase.dart';
@@ -18,9 +18,9 @@ class SplashCubit extends Cubit<SplashState> {
   final _getUserStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
 
   void init() async {
-    final isJailBroken = await SafeDevice.isJailBroken;
-    final isRealDevice = await SafeDevice.isRealDevice;
-    final isSafeDevice = !isJailBroken && isRealDevice;
+    // final isJailBroken = await SafeDevice.isJailBroken;
+    // final isRealDevice = await SafeDevice.isRealDevice;
+    // final isSafeDevice = !isJailBroken && isRealDevice;
     final result = await _getGlobalConfigUseCase.call(NoParams());
     await result.fold((l) async {
       emit(SplashState.error('$l'));
