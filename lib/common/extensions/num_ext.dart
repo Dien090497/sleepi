@@ -47,7 +47,7 @@ extension NumX on num {
   String get formatBalanceToken {
     if (this == 0) {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
-    } else if(this >= 0.000001){
+    } else if(this > 0.000001){
       final balance = toDouble();
       int index = balance.toString().indexOf('.');
       if (balance.toString().length - index > 7) {
