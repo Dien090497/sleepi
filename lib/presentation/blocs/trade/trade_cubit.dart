@@ -85,6 +85,7 @@ class TradeCubit extends Cubit<TradeState> {
   }
 
   Future<void> getBalanceToken(String contractAddress) async {
+    emit(const TradeState.loading());
     final result = await _getBalanceToken.call(contractAddress);
     result.fold(
       (l) {
