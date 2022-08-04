@@ -100,7 +100,7 @@ class PopUpRepair extends StatelessWidget {
                 state is BottomBarInfoIndividualLoaded
                     ? SFLabelValue(
                         label: LocaleKeys.cost,
-                        value: '${state.cost?.formatBalanceToken ?? 0.0} SLFT',
+                        value: '${state.cost ?? 0.0} SLFT',
                         styleValue: TextStyles.white16,
                       )
                     : const SFLabelValue(
