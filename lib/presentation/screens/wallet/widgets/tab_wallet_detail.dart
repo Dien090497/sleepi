@@ -61,13 +61,13 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
           final currencySymbol = state.walletInfoEntity.nativeCurrency.symbol;
           final networkName = state.walletInfoEntity.networkName;
           final tokenList = state.tokenList;
-          return SmartRefresher(
-            controller: refreshController,
-            onRefresh: () {
+          return FocusDetector(
+            onFocusGained: (){
               _onRefresh(walletCubit);
             },
-            child: FocusDetector(
-              onFocusGained: (){
+            child: SmartRefresher(
+              controller: refreshController,
+              onRefresh: () {
                 _onRefresh(walletCubit);
               },
               child: SingleChildScrollView(

@@ -53,7 +53,7 @@ class _TradeScreenState extends State<TradeScreen> {
   late double estimate = 0;
   late int indexFrom = 0;
   late int indexTo = 0;
-  String error = '';
+  late String error = '';
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
@@ -86,7 +86,7 @@ class _TradeScreenState extends State<TradeScreen> {
   }
 
   onValidValue(amountMin) {
-    if (valueController.text != '') {
+    if (valueController.text.trim() != '') {
       final result = valueController.text.toString().contains(',')
           ? valueController.text.toString().replaceAll(',', '.')
           : valueController.text.toString();
