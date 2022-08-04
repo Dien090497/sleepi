@@ -97,14 +97,14 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                                   final importRes =
                                       await getIt<ImportWalletUseCase>()
                                           .call(mnemonic);
-                                  importRes.fold(
-                                    (l) {
+                                  await importRes.fold(
+                                    (l) async {
                                       showMessageDialog(context, '$l');
                                     },
-                                    (r) {
+                                    (r) async {
                                       final listenerCubit =
                                           context.read<GlobalListenerCubit>();
-                                      context
+                                      await context
                                           .read<WalletCubit>()
                                           .importWallet(r);
                                       Navigator.pop(context);
