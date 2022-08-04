@@ -132,17 +132,17 @@ class SLFTStakedState extends State<SLFTStaked> {
                               textAlign: TextAlign.end,
                               onChanged: (value){
                                 int balanceIndex =  balance.indexWhere((balance) => balance == value);
-                                if (swapText == true && balanceIndex != -1) {
-                                  setState(() {
-                                    selectedIndex = balanceIndex;
-                                  });
-                                }else {
-                                  setState(() =>  selectedIndex = null);
-                                }
+
                                 if(value.isNotEmpty){
+
                                   setState((){
+                                    if (swapText == true && balanceIndex != -1) {
+                                      selectedIndex = balanceIndex;
+                                    }else {
+                                      selectedIndex = null;
+                                    }
                                     amountPrice = calculatorPrice(value);
-                                    widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice)));
+                                    widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(!swapText ? amountPrice.isNotEmpty ? amountPrice : "0" : _amountEditingController.text)));
                                   });
                                 }else {
                                   setState((){
@@ -269,7 +269,7 @@ class SLFTStakedState extends State<SLFTStaked> {
                     setState(() {
                       selectedDurationIndex = index;
                       dayEditingController.text = days[index];
-                      widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(amountPrice.isNotEmpty ? amountPrice : "0")));
+                      widget.staked(StakedArguments(day: int.parse(dayEditingController.text), amount: double.parse(!swapText ? amountPrice.isNotEmpty ? amountPrice : "0" : _amountEditingController.text)));
                     });
                   }
                 },
