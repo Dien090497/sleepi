@@ -238,7 +238,11 @@ class WalletImplementation extends IWalletRepository {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
       Credentials credentials = EthPrivateKey.fromHex(wallet!.privateKey);
-      return Right(await _web3DataSource.approveToken(contractAddress, credentials));
+      String txh = await _web3DataSource.approveToken(wallet.address, contractAddress, credentials);
+      if(txh == LocaleKeys.not_enough_to_pay_the_fee) {
+        return Left(FailureMessage.fromException(LocaleKeys.not_enough_to_pay_the_fee));
+      }
+      return Right(txh);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

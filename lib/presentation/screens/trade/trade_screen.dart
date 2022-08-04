@@ -33,6 +33,7 @@ import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_approve_trade.
 import 'package:slee_fi/presentation/screens/trade/widgets/pop_up_confirm_trade.dart';
 import 'package:slee_fi/usecase/estimate_trade_token_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TradeArguments {
   final String? symbolFrom;
@@ -51,7 +52,8 @@ class TradeScreen extends StatefulWidget {
 class _TradeScreenState extends State<TradeScreen> {
   late List<dynamic> listTokens = [];
   late double balance = 0;
-  late double estimate = Const.defaultEstimateGas * 2;
+  late double estimate =
+      Const.defaultEstimateGas + Const.defaultEstimateGas * 0.01;
   late int indexFrom = 0;
   late int indexTo = 0;
   String error = '';
@@ -107,15 +109,9 @@ class _TradeScreenState extends State<TradeScreen> {
       valueController.text = '';
       amountOutMin = 0;
       error = '';
-      indexFrom = 0;
-      indexTo = listTokens.length - 1;
     });
     focusNode.unfocus();
-    Future.delayed(const Duration(milliseconds: 100), () {
-      firstToken.currentState?.changeSelectedItem();
-      secondToken.currentState?.changeSelectedItem();
-      cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
-    });
+    cubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
   }
 
   onSwapIndex(cubit) {
@@ -128,11 +124,10 @@ class _TradeScreenState extends State<TradeScreen> {
       indexFrom = swap;
     });
     focusNode.unfocus();
-
+    tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
     Future.delayed(const Duration(milliseconds: 100), () {
       firstToken.currentState?.changeSelectedItem();
       secondToken.currentState?.changeSelectedItem();
-      tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
     });
   }
 
@@ -165,9 +160,10 @@ class _TradeScreenState extends State<TradeScreen> {
       tradeCubit.getBalanceToken(listTokens[indexFrom]['address'].toString());
       await getIt<EstimateTradeTokenUseCase>().call(NoParams()).then((value) {
         value.fold((l) {
-          estimate = Const.defaultEstimateGas * 2;
+          showMessageDialog(context, l.toString())
+              .then((value) => Navigator.pop(context));
         }, (r) {
-          estimate = r * 2;
+          estimate = r + r * 0.01;
         });
       });
     });
@@ -243,16 +239,31 @@ class _TradeScreenState extends State<TradeScreen> {
                 }
 
                 if (state is swapTokenFail) {
-                  showMessageDialog(context, state.msg);
+                  if (state.msg == LocaleKeys.not_enough_to_pay_the_fee) {
+                    showMessageDialog(context, state.msg);
+                  } else {
+                    showCustomAlertDialog(context,
+                        children: PopUpConfirmApproveTrade(
+                          tokenName: listTokens[indexFrom]['symbol'].toString(),
+                          cubit: tradeCubit,
+                          contractAddress:
+                              listTokens[indexFrom]['address'].toString(),
+                        ));
+                  }
                 }
 
-                // if (state is approveTokenSuccess) {
-                //   showTxhApprove(context, state.txh);
-                // }
-                //
-                // if (state is swapLoading){
-                //
-                // }
+                if (state is approveTokenSuccess) {
+                  showApproveSuccessfulDialog(
+                      context, LocaleKeys.transaction_submitted,
+                      txHash: state.txh, txIDStyle: TextStyles.lightWhite16,
+                      showWebView: () async {
+                    if (await canLaunchUrl(Uri.parse(
+                        'https://testnet.snowtrace.io/tx/${state.txh}'))) {
+                      await launchUrl(Uri.parse(
+                          'https://testnet.snowtrace.io/tx/${state.txh}'));
+                    }
+                  });
+                }
               },
               builder: (BuildContext context, state) {
                 if (state is tradeGetAmountOutMin) {
@@ -425,7 +436,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                               ? (balance - estimate) > 0
                                                                                   ? (balance - estimate)
                                                                                   : 0
-                                                                              : balance).formatBalanceToken;
+                                                                              : balance)
+                                                                          .formatBalanceToken;
                                                                       Future.delayed(
                                                                           const Duration(
                                                                               milliseconds: 100),
