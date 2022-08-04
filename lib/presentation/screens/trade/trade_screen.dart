@@ -95,7 +95,7 @@ class _TradeScreenState extends State<TradeScreen> {
       } else if (indexFrom == 0 && double.parse(result) > balance - estimate ||
           double.parse(result) > balance) {
         error = LocaleKeys.insufficient_balance;
-      } else if (amountMin == 0) {
+      } else if (amountMin == 0 && double.parse(result) != 0) {
         error = LocaleKeys.input_value_so_small;
       } else {
         error = '';
@@ -265,11 +265,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 if (state is tradeGetAmountOutMin) {
                   if (valueController.text != '') {
                     amountOutMin = state.amountOutMin;
-                    if (amountOutMin == 0) {
-                      error = LocaleKeys.input_value_so_small;
-                    } else {
-                      error = '';
-                    }
+                    onValidValue(amountOutMin);
                   } else {
                     error = '';
                     amountOutMin = 0;
@@ -370,7 +366,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           if (value
                                                               .isNotEmpty) {
                                                             setState(() {
-                                                              onValidValue(amountOutMin);
                                                               final result = valueController.text
                                                                       .toString()
                                                                       .contains(
