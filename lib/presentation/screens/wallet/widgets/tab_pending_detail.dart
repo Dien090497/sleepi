@@ -114,7 +114,10 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         itemBuilder: (BuildContext context, int index) =>
                             index < state.list.length
-                                ? _BuildItem(withdrawEntity: state.list[index])
+                                ? _BuildItem(
+                                    withdrawEntity: state.list[index],
+                                    isPending: widget.attributeWithdraw ==
+                                        AttributeWithdraw.pending)
                                 : Container(
                                     height: 60,
                                     alignment: Alignment.center,
@@ -142,16 +145,22 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
 }
 
 class _BuildItem extends StatelessWidget {
-  const _BuildItem({Key? key, required this.withdrawEntity}) : super(key: key);
+  const _BuildItem(
+      {Key? key, required this.withdrawEntity, required this.isPending})
+      : super(key: key);
 
   final WithdrawEntity withdrawEntity;
+  final bool isPending;
 
   @override
   Widget build(BuildContext context) {
     final dateTimeUtils = getIt<DateTimeUtils>();
 
     return SFCard(
-      onTap: () async {
+      onTap: () {
+        if (isPending) {
+          return;
+        }
         context
             .read<PendingBloc>()
             .add(OpenDetailTransaction(withdrawEntity.txHash));
