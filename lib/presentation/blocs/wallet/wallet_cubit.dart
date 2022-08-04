@@ -77,25 +77,21 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  void importWallet(WalletInfoEntity walletInfoEntity) async {
+  Future<void> importWallet(WalletInfoEntity walletInfoEntity) async {
     final currentState = state;
     if (currentState is WalletStateLoaded) {
-      emit(currentState.copyWith(walletInfoEntity: walletInfoEntity));
+      emit(currentState.copyWith(
+        walletInfoEntity: walletInfoEntity,
+        tokenList: await _getListTokens(walletInfoEntity),
+        isLoading: false,
+      ));
     } else {
-      if (currentState is WalletStateLoaded) {
-        emit(currentState.copyWith(
-          walletInfoEntity: walletInfoEntity,
-          tokenList: await _getListTokens(walletInfoEntity),
-          isLoading: false,
-        ));
-      } else {
-        emit(WalletState.loaded(
-          walletInfoEntity: walletInfoEntity,
-          tokenList: await _getListTokens(walletInfoEntity),
-        ));
-      }
-      loadCurrentWallet(walletInfoEntity);
+      emit(WalletState.loaded(
+        walletInfoEntity: walletInfoEntity,
+        tokenList: await _getListTokens(walletInfoEntity),
+      ));
     }
+    loadCurrentWallet(walletInfoEntity);
   }
 
   Future<List<TokenEntity>> _getListTokens(WalletInfoEntity wallet) async {

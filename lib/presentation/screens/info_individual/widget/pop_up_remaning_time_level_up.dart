@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
@@ -159,7 +160,8 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
                               .getOrElse(() => NftLevelUp(cost: null));
                           speedUpCost = data.cost;
                           return SFText(
-                            keyText: '${speedUpCost ?? ''} SLFT',
+                            keyText:
+                                '${speedUpCost == null ? 0 : (speedUpCost! * pow(10, 6)).toInt() / pow(10, 6)} SLFT',
                             style: TextStyles.textColorSize16,
                           );
                         }
@@ -182,7 +184,9 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
             const SizedBox(height: 24),
             if (!isSpeedUp)
               SFButton(
-                text: _remainTime.isEmpty ? LocaleKeys.confirm : LocaleKeys.speed_up,
+                text: _remainTime.isEmpty
+                    ? LocaleKeys.confirm
+                    : LocaleKeys.speed_up,
                 width: double.infinity,
                 onPressed: () {
                   if (_remainTime.isEmpty) {

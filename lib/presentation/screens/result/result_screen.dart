@@ -25,13 +25,23 @@ class ResultScreen extends StatefulWidget {
   State<ResultScreen> createState() => _ResultScreenState();
 }
 
-class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMixin{
+class _ResultScreenState extends State<ResultScreen>
+    with TickerProviderStateMixin {
   late AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
-
+    Future.delayed(Duration.zero, () {
+      final args =
+          ModalRoute.of(context)?.settings.arguments as PreResultParams;
+      if (double.parse(args.slftPrice!).toInt() == 0) {
+        showMessageDialog(
+          context,
+          LocaleKeys.sleep_time_too_short,
+        );
+      }
+    });
     animationController = AnimationController(vsync: this);
     animationController.addStatusListener((status) async {
       if (animationController.isCompleted) {
@@ -39,7 +49,6 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
         // animationController.reset();
       }
     });
-
   }
 
   @override
@@ -53,7 +62,7 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
     animationController.dispose();
     super.dispose();
   }
-  
+
   convertTime(String time) {
     int minuteDuration = double.parse(time).toInt();
     int hour = minuteDuration ~/ 60;
@@ -61,21 +70,23 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
     return '${hour}h${minute}min';
   }
 
-  void showBedBroken(BuildContext context, bool isBroken)  {
+  void showBedBroken(BuildContext context, bool isBroken) {
     if (isBroken && mounted) {
       showCustomDialog(
         context,
         padding: const EdgeInsets.all(24),
         backgroundColor: AppColors.transparent,
         children: [
-          Lottie.asset(Const.bedBrokenAnimation,
+          Lottie.asset(
+            Const.bedBrokenAnimation,
             controller: animationController,
             fit: BoxFit.cover,
             repeat: true,
             onLoaded: (composition) {
               // Configure the AnimationController with the duration of the
               // Lottie file and start the animation.
-              animationController..duration = composition.duration
+              animationController
+                ..duration = composition.duration
                 ..forward();
             },
           ),
@@ -88,7 +99,6 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
     if (timeSpan == '0') {
       return '0';
     } else {
-
       int time = int.parse(timeSpan);
       DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
       int hour = dateTime.hour;
@@ -100,7 +110,8 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as PreResultParams;
-    Future.delayed(Duration.zero, () => showBedBroken(context, args.resultModel.isBrokenBed));
+    Future.delayed(Duration.zero,
+        () => showBedBroken(context, args.resultModel.isBrokenBed));
     return WillPopScope(
       onWillPop: () async {
         if (args.fromRoute == R.splash) {
@@ -233,10 +244,9 @@ class _ResultScreenState extends State<ResultScreen> with TickerProviderStateMix
                         ),
                       ],
                     ),
-
+                  ),
                 ),
               ),
-            ),
             ),
             Positioned(
               bottom: 0,
