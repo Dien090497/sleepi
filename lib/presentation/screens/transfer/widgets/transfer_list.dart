@@ -68,9 +68,6 @@ class _TransferListState extends State<TransferList> {
                     if (str.isNotEmpty) {
                       showApproveSuccessfulDialog(context, LocaleKeys.transaction_submitted,
                           txHash: 'TXID: ${str.formatAddress}',
-                          txIDStyle: const TextStyle(
-                            color: AppColors.white,
-                          decoration: TextDecoration.underline,),
                         showWebView: () {
                         launchUrl(Uri.parse('${Const.txhSnowTrace}$str'));
                         }
