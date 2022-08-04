@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 import 'package:slee_fi/presentation/blocs/home/home_state.dart';
 import 'package:slee_fi/usecase/bed_detail_usecase.dart';
@@ -12,6 +13,8 @@ import 'package:slee_fi/usecase/estimate_tracking_usecase.dart';
 import 'package:slee_fi/usecase/fetch_home_bed_usecase.dart';
 import 'package:slee_fi/usecase/get_user_status_tracking_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
+
+import '../../../common/const/const.dart';
 
 part 'home_event.dart';
 
@@ -70,7 +73,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           selectedBed: bed,
           loadMoreBed: r.length >= _limitItemPage,
           tokenEarn:
-              bed != null ? await _estimateTracking(r.first, true, null) : 0,
+              bed != null ? await _estimateTracking(r.first, true, null) : null,
           userStatusTracking: await _getStatusTracking(),
         ));
       },
@@ -126,7 +129,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       (r) async {
         _currentPageBed++;
-        double amount = 0;
+        EstimateSleepResponse? amount;
         if (currentState is HomeLoaded) {
           if (r.isNotEmpty) {
             amount = await _estimateTracking(
@@ -142,7 +145,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             bedList: r,
             selectedBed: r.isNotEmpty ? r.first : null,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: r.isNotEmpty ? amount : 0,
+            tokenEarn: r.isNotEmpty ? amount : null,
             userStatusTracking: await _getStatusTracking(),
           ));
         } else {
@@ -156,8 +159,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             bedList: r,
             selectedBed: bed,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn:
-                bed != null ? await _estimateTracking(r.first, true, null) : 0,
+            tokenEarn: bed != null
+                ? await _estimateTracking(r.first, true, null)
+                : null,
             userStatusTracking: await _getStatusTracking(),
           ));
         }
@@ -184,7 +188,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       },
       (r) async {
         _currentPageBed++;
-        double amount = 0;
+        EstimateSleepResponse? amount;
         if (currentState is HomeLoaded) {
           if (r.isNotEmpty) {
             amount = await _estimateTracking(
@@ -199,7 +203,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             errorMessage: '',
             bedList: r,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: r.isNotEmpty ? amount : 0,
+            tokenEarn: r.isNotEmpty ? amount : null,
             userStatusTracking: await _getStatusTracking(),
           ));
         } else {
@@ -213,8 +217,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             bedList: r,
             selectedBed: bed,
             loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn:
-                bed != null ? await _estimateTracking(r.first, true, null) : 0,
+            tokenEarn: bed != null
+                ? await _estimateTracking(r.first, true, null)
+                : null,
             userStatusTracking: await _getStatusTracking(),
           ));
         }
@@ -269,14 +274,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future<double> _estimateTracking(
+  Future<EstimateSleepResponse> _estimateTracking(
       BedEntity bed, bool insuranceEnabled, BedEntity? itemEntity) async {
     final result = await _estimateTrackingUC.call(EstimateTrackingParam(
         bedId: bed.id,
         itemId: itemEntity?.id,
         isEnableInsurance: insuranceEnabled));
-    return double.parse(
-        result.foldRight('0', (r, previous) => r.estimateSlftEarn));
+    return result.foldRight(
+        EstimateSleepResponse(0, Const.tokenEarnMaxPerDay), (r, previous) => r);
   }
 
   void _changeInsurance(ChangeInsurance event, Emitter<HomeState> emit) async {

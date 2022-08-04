@@ -257,6 +257,7 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
     final levelUpTime = int.parse(widget.levelUpTime);
     final totalTime = (int.parse(widget.remainTime) - levelUpTime);
     final currentTime = DateTime.now().millisecondsSinceEpoch - levelUpTime;
+    if (currentTime < 0) return 0;
     return currentTime / totalTime;
   }
 }

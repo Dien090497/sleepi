@@ -56,20 +56,21 @@ class BoxInfoWidget extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                   child: Text(
                     '${bed.quality}'.reCase(StringCase.titleCase),
-                    style: TextStyles.blue14,
+                    style: TextStyles.blue14
+                        .copyWith(color: bed.quality!.qualityBedColor),
                   ),
                 ),
               SizedBox(width: 8.w),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: AppColors.green.withOpacity(0.05),
+                  color: AppColors.blue.withOpacity(0.05),
                 ),
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                 child: SFText(
                   keyText: bed.nftClass,
-                  style: TextStyles.green14,
+                  style: TextStyles.blue14,
                 ),
               ),
               SizedBox(width: 8.w),
@@ -81,7 +82,7 @@ class BoxInfoWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                 child: Text(
-                  '${bed.durability.formatBalanceToken}/100',
+                  '${bed.durability.toInt()}/100',
                   style: TextStyles.yellow14,
                 ),
               ),
