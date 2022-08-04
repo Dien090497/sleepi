@@ -237,7 +237,8 @@ class _TradeScreenState extends State<TradeScreen> {
                 }
 
                 if (state is swapTokenFail) {
-                  if (state.msg == LocaleKeys.not_enough_to_pay_the_fee) {
+                  if (state.msg == LocaleKeys.not_enough_to_pay_the_fee ||
+                      indexFrom == 0) {
                     showMessageDialog(context, state.msg);
                   } else {
                     showCustomAlertDialog(context,
@@ -267,6 +268,9 @@ class _TradeScreenState extends State<TradeScreen> {
                 if (state is tradeGetAmountOutMin) {
                   if (valueController.text != '') {
                     amountOutMin = state.amountOutMin;
+                    if (amountOutMin == 0) {
+                      error = LocaleKeys.input_value_so_small;
+                    }
                   } else {
                     amountOutMin = 0;
                   }
