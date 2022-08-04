@@ -124,6 +124,7 @@ class SLFTStakedState extends State<SLFTStaked> {
                               showLabel: false,
                               noBorder: true,
                               readonly: widget.readonly,
+                              maxLength: 15,
                               inputFormatters: [
                                 FilteringTextInputFormatter
                                     .allow(RegExp(
@@ -132,9 +133,11 @@ class SLFTStakedState extends State<SLFTStaked> {
                               textAlign: TextAlign.end,
                               onChanged: (value){
                                 int balanceIndex =  balance.indexWhere((balance) => balance == value);
+                                if(value.isEmpty){
+                                  setState(() => selectedIndex = null);
+                                }
 
                                 if(value.isNotEmpty){
-
                                   setState((){
                                     if (swapText == true && balanceIndex != -1) {
                                       selectedIndex = balanceIndex;
