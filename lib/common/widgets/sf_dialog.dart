@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/phoenix.dart';
@@ -11,8 +12,12 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:slee_fi/usecase/current_network_explorer_usecase.dart';
+import 'package:slee_fi/usecase/usecase.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<T?> showCustomDialog<T>(
   BuildContext context, {
@@ -402,16 +407,18 @@ class SFDialog extends StatelessWidget {
 }
 
 Future<T?> showApproveSuccessfulDialog<T>(
-  BuildContext context,
-  String? message, {
+  BuildContext context, {
+  String? message,
   EdgeInsets? padding,
   TextStyle? style,
-  TextStyle? txIDStyle,
   VoidCallback? onBackPress,
-  VoidCallback? showWebView,
   bool barrierDismissible = true,
   required String txHash,
 }) async {
+  final explorerRes =
+      await getIt<CurrentNetworkExplorerUseCase>().call(NoParams());
+  final explorer = explorerRes.getOrElse(() => '');
+  print('### explorer $explorer/tx/$txHash');
   return showDialog(
     context: context,
     barrierColor: AppColors.backgroundDialog,
@@ -441,9 +448,16 @@ Future<T?> showApproveSuccessfulDialog<T>(
               style: style ?? TextStyles.bold18White),
           const SizedBox(height: 15),
           GestureDetector(
-            onTap: showWebView,
+            onTap: () async {
+              if (explorer.isNotEmpty) {
+                final uri = Uri.parse('$explorer/tx/$txHash');
+                if (await canLaunchUrl(uri)) {
+                  launchUrl(uri);
+                }
+              }
+            },
             child: SFText(
-              keyText: txHash,
+              keyText: 'TXID: ${txHash.formatAddress}',
               style: const TextStyle(
                 color: AppColors.blue,
                 decoration: TextDecoration.underline,
