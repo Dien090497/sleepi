@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:erc20/erc20.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/abi/spending.g.dart';
@@ -52,4 +54,24 @@ class SpendingDataSource {
   ERC20 token(String address) => ERC20(
       address: EthereumAddress.fromHex(address),
       client: _web3provider.web3client);
+
+  Future<double> estimateGasFee({
+    required String spendingAddress,
+    required EthereumAddress ownerAddress,
+    required EtherAmount gasPrice,
+    required String functionName,
+    required List<dynamic> data,
+  }) async {
+    final Spending spending = spendingContract(spendingAddress);
+    final transferFromFunc = spending.self.function(functionName);
+    final gasFee = await _web3provider.web3client.estimateGas(
+      sender: ownerAddress,
+      to: spending.self.address,
+      gasPrice: gasPrice,
+      data: transferFromFunc.encodeCall(data),
+    );
+    return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
+  }
+
+  Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();
 }

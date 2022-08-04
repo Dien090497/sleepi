@@ -199,8 +199,9 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
         if (valueRepair < durability) {
           emit(currentState.copyWith(valueRepair: durability, cost: 0));
         } else {
-          final cost =
-              currentState.feeRepair!.fee! * (valueRepair.toInt() - durability);
+          final cost = ((currentState.feeRepair!.fee! * 100000).toInt() *
+                  (valueRepair.toInt() - durability)) /
+              100000;
           emit(currentState.copyWith(
               valueRepair: valueRepair.toInt(), cost: cost));
         }

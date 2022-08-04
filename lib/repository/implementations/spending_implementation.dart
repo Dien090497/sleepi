@@ -7,6 +7,7 @@ import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/history_datasource.dart';
+import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
 import 'package:slee_fi/datasources/remote/auth_datasource/auth_datasource.dart';
 import 'package:slee_fi/datasources/remote/network/spending_datasource.dart';
@@ -16,6 +17,7 @@ import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart'
 import 'package:slee_fi/models/staking_info_response/staking_info_response.dart';
 import 'package:slee_fi/repository/spending_repository.dart';
 import 'package:slee_fi/schema/stacking_schema/stacking_schema.dart';
+import 'package:slee_fi/usecase/estimate_gas_deposit_usecase.dart';
 import 'package:web3dart/web3dart.dart';
 
 @Injectable(as: ISpendingRepository)
@@ -25,9 +27,10 @@ class SpendingImplementation extends ISpendingRepository {
   final SecureStorage _secureStorage;
   final GetStorageDataSource _getStorageDataSource;
   final HistoryDataSource _historyDataSource;
+  final IsarDataSource _isarDataSource;
 
   SpendingImplementation(this._spendingDataSource, this._authDataSource,
-      this._secureStorage, this._getStorageDataSource, this._historyDataSource);
+      this._secureStorage, this._getStorageDataSource, this._historyDataSource, this._isarDataSource);
 
   @override
   Future<Either<Failure, String>> depositToken({
@@ -162,6 +165,26 @@ class SpendingImplementation extends ISpendingRepository {
       return Right(result > BigInt.from(amount.etherToWei));
     } on Exception catch (e) {
       return Left(FailureMessage.fromException(e));
+    }
+  }
+
+  @override
+  Future<Either<FailureMessage, double>> estimateGas({required EstimateGasDepositParam params}) async {
+    try {
+      final walletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(walletId);
+      final gasPrice = await _spendingDataSource.getGasPrice();
+      final spendingAddress = await _secureStorage.readAddressContract();
+      final gasFee = await _spendingDataSource.estimateGasFee(
+        spendingAddress: spendingAddress ?? '',
+        ownerAddress: EthereumAddress.fromHex(wallet?.address ?? ''),
+        gasPrice: gasPrice,
+        functionName: params.functionName,
+        data: params.data,
+      );
+      return Right(gasFee);
+    } catch (e) {
+      return Left(FailureMessage('$e'));
     }
   }
 }

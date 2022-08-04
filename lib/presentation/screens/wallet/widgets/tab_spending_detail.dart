@@ -53,7 +53,6 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     const SizedBox(height: 19.0),
