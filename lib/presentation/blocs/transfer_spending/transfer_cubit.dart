@@ -106,9 +106,6 @@ class TransferCubit extends Cubit<TransferState> {
     required double balance,
     required bool isToSpending,
   }) {
-    if (fee == null) {
-      return LocaleKeys.fee;
-    }
     if (amount == null) {
       return LocaleKeys.this_field_is_required;
     }
@@ -118,7 +115,7 @@ class TransferCubit extends Cubit<TransferState> {
       if (symbol.toLowerCase() == 'avax') {
         /// Case transfer AVAX
         final balDec = Decimal.parse('$balance');
-        final feeDec = Decimal.parse(fee);
+        final feeDec = Decimal.parse(fee ?? '0');
         if (balDec <= feeDec) {
           return LocaleKeys.insufficient_balance;
         } else if (amount > (balDec - feeDec).toDouble()) {
