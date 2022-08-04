@@ -25,7 +25,6 @@ class MyJewelsShortWidget extends StatelessWidget {
             ? jewel.itemType?.qualityBedColor
             : jewel.jewelType?.qualityBedColor) ??
         AppColors.commonBed;
-    print('jewel qquality   ${jewel.quality}   ${jewel.nftType}');
     return Container(
       decoration: BoxDecoration(
         color: color ?? AppColors.lightDark,

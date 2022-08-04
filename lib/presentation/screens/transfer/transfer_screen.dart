@@ -65,7 +65,8 @@ class TransferScreen extends StatelessWidget {
               backupToken: backupToken,
               spendingTokens: spendingState.listTokens,
               walletTokens: walletState.tokenList,
-              userID: userState is UserLoaded ? userState.userInfoEntity.id : -1)
+              userID:
+                  userState is UserLoaded ? userState.userInfoEntity.id : -1)
             ..getFee(),
           child: Stack(
             children: [

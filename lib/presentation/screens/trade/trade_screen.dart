@@ -53,7 +53,7 @@ class _TradeScreenState extends State<TradeScreen> {
   late double estimate = 0;
   late int indexFrom = 0;
   late int indexTo = 0;
-  String error = '';
+  late String error = '';
 
   final GlobalKey<CoolDropdownState> firstToken = GlobalKey();
   final GlobalKey<CoolDropdownState> secondToken = GlobalKey();
@@ -86,7 +86,7 @@ class _TradeScreenState extends State<TradeScreen> {
   }
 
   onValidValue(amountMin) {
-    if (valueController.text != '') {
+    if (valueController.text.trim() != '') {
       final result = valueController.text.toString().contains(',')
           ? valueController.text.toString().replaceAll(',', '.')
           : valueController.text.toString();
@@ -95,7 +95,7 @@ class _TradeScreenState extends State<TradeScreen> {
       } else if (indexFrom == 0 && double.parse(result) > balance - estimate ||
           double.parse(result) > balance) {
         error = LocaleKeys.insufficient_balance;
-      } else if (amountMin == 0) {
+      } else if (amountMin == 0 && double.parse(result) != 0) {
         error = LocaleKeys.input_value_so_small;
       } else {
         error = '';
@@ -265,11 +265,7 @@ class _TradeScreenState extends State<TradeScreen> {
                 if (state is tradeGetAmountOutMin) {
                   if (valueController.text != '') {
                     amountOutMin = state.amountOutMin;
-                    if (amountOutMin == 0) {
-                      error = LocaleKeys.input_value_so_small;
-                    } else {
-                      error = '';
-                    }
+                    onValidValue(amountOutMin);
                   } else {
                     error = '';
                     amountOutMin = 0;
@@ -333,7 +329,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                       TextStyles.lightGrey12),
                                               SFText(
                                                 keyText:
-                                                    ': ${balance > 0.000001 ? balance.formatBalanceToken : 0}',
+                                                    ': ${balance >= 0.000001 ? balance.formatBalanceToken : 0}',
                                                 style: TextStyles.lightGrey12,
                                               ),
                                             ],
@@ -370,7 +366,6 @@ class _TradeScreenState extends State<TradeScreen> {
                                                           if (value
                                                               .isNotEmpty) {
                                                             setState(() {
-                                                              onValidValue(amountOutMin);
                                                               final result = valueController.text
                                                                       .toString()
                                                                       .contains(
@@ -431,8 +426,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                           .blue,
                                                                   onPressed:
                                                                       () {
-                                                                    if (balance >
-                                                                        0.000001) {
+                                                                    if (balance >= 0.000001) {
                                                                       valueController
                                                                           .text = (indexFrom == 0
                                                                               ? (balance - estimate) > 0

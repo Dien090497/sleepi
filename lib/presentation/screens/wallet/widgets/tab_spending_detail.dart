@@ -147,12 +147,13 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                     textStyle: TextStyles.bold16Blue,
                     borderColor: AppColors.blue,
                     onPressed: () {
-                      tokenList.forEach((token) {
+                      for (final token in tokenList) {
                         if (token.symbol == 'avax') {
-                          openTransfer(token, context.read<WalletCubit>().state);
+                          openTransfer(
+                              token, context.read<WalletCubit>().state);
                           return;
                         }
-                      });
+                      }
                     },
                   )),
             ),

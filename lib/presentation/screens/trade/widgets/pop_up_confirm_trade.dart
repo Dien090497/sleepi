@@ -102,7 +102,7 @@ class PopUpConfirmTrade extends StatelessWidget {
               Expanded(
                   child: SFText(
                       keyText:
-                          "${amountOutMin < 0.000001 ? Decimal.parse(amountOutMin.toString()) : amountOutMin.formatBalanceToken} $symbolTo",
+                          "${amountOutMin <= 0.000001 ? Decimal.parse(amountOutMin.toString()) : amountOutMin.formatBalanceToken} $symbolTo",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],
