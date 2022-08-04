@@ -14,9 +14,9 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 class FilterSheet extends StatefulWidget {
   const FilterSheet(
       {Key? key,
-        required this.sections,
-        required this.sliders,
-        required this.cubit})
+      required this.sections,
+      required this.sliders,
+      required this.cubit})
       : super(key: key);
 
   final Map<String, FilterSliderValues> sliders;
@@ -63,7 +63,9 @@ class _FilterSheetState extends State<FilterSheet> {
     });
   }
 
-  clear() {
+  void clear() {
+    selectedSections.clear();
+    selectedSliders.clear();
     widget.sections.forEach((key, value) {
       selectedSections[key] = [];
     });
@@ -88,15 +90,13 @@ class _FilterSheetState extends State<FilterSheet> {
               SFText(
                 keyText: LocaleKeys.filter,
                 suffix:
-                ' (${selectedSections.values.reduce((value, element) => value + element).length})',
+                    ' (${selectedSections.values.reduce((value, element) => value + element).length})',
                 style: TextStyles.white18W700,
               ),
               const Spacer(),
               TextButton(
                   onPressed: () {
                     setState(() {
-                      selectedSections.clear();
-                      selectedSliders.clear();
                       clear();
                     });
                     widget.cubit.filter(selectedSections, selectedSliders);
@@ -116,13 +116,13 @@ class _FilterSheetState extends State<FilterSheet> {
               children: [
                 ...List<Widget>.generate(
                   widget.sections.length,
-                      (i) => TypeSelectionWidget(
+                  (i) => TypeSelectionWidget(
                     name: widget.sections.keys.elementAt(i),
                     types: widget.sections.values.elementAt(i),
                     lengthSelect: selectedSections.length,
                     listSelected:
-                    selectedSections[widget.sections.keys.elementAt(i)] ??
-                        [],
+                        selectedSections[widget.sections.keys.elementAt(i)] ??
+                            [],
                     onSelect: (List<String> value) {
                       selectedSections[widget.sections.keys.elementAt(i)] =
                           value;
@@ -132,7 +132,7 @@ class _FilterSheetState extends State<FilterSheet> {
                 ),
                 ...List<Widget>.generate(
                   widget.sliders.length,
-                      (i) => _Slider(
+                  (i) => _Slider(
                     key: _key[widget.sliders.keys.elementAt(i)],
                     label: widget.sliders.keys.elementAt(i),
                     sliders: widget.sliders.values.elementAt(i),
@@ -140,7 +140,7 @@ class _FilterSheetState extends State<FilterSheet> {
                     //     selectedSliders[widget.sliders.keys.elementAt(i)] ?? 0,
                     onSelect: (SfRangeValues v) {
                       selectedSliders[widget.sliders.keys.elementAt(i)] = v;
-                      setState(() {});
+                      // setState(() {});
                     },
                   ),
                 ),
@@ -235,11 +235,11 @@ class ThumbIcon extends StatelessWidget {
       width: 16,
       height: 16,
       decoration:
-      const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+          const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
       padding: const EdgeInsets.all(4),
       child: const DecoratedBox(
         decoration:
-        BoxDecoration(color: AppColors.blue, shape: BoxShape.circle),
+            BoxDecoration(color: AppColors.blue, shape: BoxShape.circle),
       ),
     );
   }
@@ -248,11 +248,11 @@ class ThumbIcon extends StatelessWidget {
 class TypeSelectionWidget extends StatelessWidget {
   const TypeSelectionWidget(
       {Key? key,
-        required this.name,
-        required this.types,
-        required this.onSelect,
-        required this.listSelected,
-        required this.lengthSelect})
+      required this.name,
+      required this.types,
+      required this.onSelect,
+      required this.listSelected,
+      required this.lengthSelect})
       : super(key: key);
 
   final String name;
@@ -290,29 +290,29 @@ class TypeSelectionWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: _Container(
-                          qualitySelect:
+                      qualitySelect:
                           name == LocaleKeys.quality.tr() || lengthSelect == 1,
-                          text: types[firstIdx],
-                          isSelected:
+                      text: types[firstIdx],
+                      isSelected:
                           listSelected.contains(types[firstIdx].toLowerCase()),
-                          onTap: () {
-                            _onTap(types[firstIdx].toLowerCase());
-                          },
-                        )),
+                      onTap: () {
+                        _onTap(types[firstIdx].toLowerCase());
+                      },
+                    )),
                     const SizedBox(width: 16),
                     Expanded(
                         child: (secondIdx < types.length)
                             ? _Container(
-                          qualitySelect:
-                          name == LocaleKeys.quality.tr() ||
-                              lengthSelect == 1,
-                          text: types[secondIdx],
-                          isSelected: listSelected
-                              .contains(types[secondIdx].toLowerCase()),
-                          onTap: () {
-                            _onTap(types[secondIdx].toLowerCase());
-                          },
-                        )
+                                qualitySelect:
+                                    name == LocaleKeys.quality.tr() ||
+                                        lengthSelect == 1,
+                                text: types[secondIdx],
+                                isSelected: listSelected
+                                    .contains(types[secondIdx].toLowerCase()),
+                                onTap: () {
+                                  _onTap(types[secondIdx].toLowerCase());
+                                },
+                              )
                             : const SizedBox.shrink()),
                   ],
                 ),
@@ -329,10 +329,10 @@ class TypeSelectionWidget extends StatelessWidget {
 class _Container extends StatelessWidget {
   const _Container(
       {Key? key,
-        required this.text,
-        required this.isSelected,
-        required this.onTap,
-        required this.qualitySelect})
+      required this.text,
+      required this.isSelected,
+      required this.onTap,
+      required this.qualitySelect})
       : super(key: key);
 
   final String text;
@@ -356,8 +356,8 @@ class _Container extends StatelessWidget {
           color: isSelected
               ? null
               : qualitySelect
-              ? AppColors.transparent
-              : AppColors.whiteOpacity5,
+                  ? AppColors.transparent
+                  : AppColors.whiteOpacity5,
         ),
         alignment: Alignment.center,
         child: SFText(
@@ -365,9 +365,9 @@ class _Container extends StatelessWidget {
           style: isSelected
               ? TextStyles.w700WhiteSize16
               : TextStyles.lightGrey16.copyWith(
-              color: qualitySelect
-                  ? text.toLowerCase().qualityBedColor
-                  : null),
+                  color: qualitySelect
+                      ? text.toLowerCase().qualityBedColor
+                      : null),
         ),
       ),
     );
