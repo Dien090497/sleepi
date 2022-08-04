@@ -30,7 +30,7 @@ mixin _$HomeState {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)
         loaded,
@@ -52,7 +52,7 @@ mixin _$HomeState {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -74,7 +74,7 @@ mixin _$HomeState {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -186,7 +186,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)
         loaded,
@@ -211,7 +211,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -236,7 +236,7 @@ class _$HomeInitial with DiagnosticableTreeMixin implements HomeInitial {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -353,7 +353,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)
         loaded,
@@ -378,7 +378,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -403,7 +403,7 @@ class _$HomeLoading with DiagnosticableTreeMixin implements HomeLoading {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -477,7 +477,7 @@ abstract class _$$HomeLoadedCopyWith<$Res> {
       bool loading,
       bool enableInsurance,
       bool enableAlarm,
-      double tokenEarn,
+      EstimateSleepResponse? tokenEarn,
       bool startTracking,
       UserStatusTrackingModel? userStatusTracking});
 
@@ -550,7 +550,7 @@ class __$$HomeLoadedCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
       tokenEarn: tokenEarn == freezed
           ? _value.tokenEarn
           : tokenEarn // ignore: cast_nullable_to_non_nullable
-              as double,
+              as EstimateSleepResponse?,
       startTracking: startTracking == freezed
           ? _value.startTracking
           : startTracking // ignore: cast_nullable_to_non_nullable
@@ -598,7 +598,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
       this.loading = false,
       this.enableInsurance = true,
       this.enableAlarm = true,
-      this.tokenEarn = 0.0,
+      this.tokenEarn,
       this.startTracking = false,
       this.userStatusTracking})
       : _bedList = bedList;
@@ -633,8 +633,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
   @JsonKey()
   final bool enableAlarm;
   @override
-  @JsonKey()
-  final double tokenEarn;
+  final EstimateSleepResponse? tokenEarn;
   @override
   @JsonKey()
   final bool startTracking;
@@ -728,7 +727,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)
         loaded,
@@ -765,7 +764,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -802,7 +801,7 @@ class _$HomeLoaded with DiagnosticableTreeMixin implements HomeLoaded {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -880,7 +879,7 @@ abstract class HomeLoaded implements HomeState {
       final bool loading,
       final bool enableInsurance,
       final bool enableAlarm,
-      final double tokenEarn,
+      final EstimateSleepResponse? tokenEarn,
       final bool startTracking,
       final UserStatusTrackingModel? userStatusTracking}) = _$HomeLoaded;
 
@@ -893,7 +892,7 @@ abstract class HomeLoaded implements HomeState {
   bool get loading;
   bool get enableInsurance;
   bool get enableAlarm;
-  double get tokenEarn;
+  EstimateSleepResponse? get tokenEarn;
   bool get startTracking;
   UserStatusTrackingModel? get userStatusTracking;
   @JsonKey(ignore: true)
@@ -985,7 +984,7 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)
         loaded,
@@ -1010,7 +1009,7 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -1035,7 +1034,7 @@ class _$HomeStartError with DiagnosticableTreeMixin implements HomeStartError {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -1183,7 +1182,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)
         loaded,
@@ -1208,7 +1207,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,
@@ -1233,7 +1232,7 @@ class _$HomeError with DiagnosticableTreeMixin implements HomeError {
             bool loading,
             bool enableInsurance,
             bool enableAlarm,
-            double tokenEarn,
+            EstimateSleepResponse? tokenEarn,
             bool startTracking,
             UserStatusTrackingModel? userStatusTracking)?
         loaded,

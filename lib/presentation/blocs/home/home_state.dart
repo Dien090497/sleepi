@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
+import 'package:slee_fi/models/estimate_sleep_response/estimate_sleep_response.dart';
 import 'package:slee_fi/models/user_status_tracking_model/user_status_tracking_model.dart';
 
 part 'home_state.freezed.dart';
@@ -22,7 +23,7 @@ class HomeState with _$HomeState {
     @Default(false) bool loading,
     @Default(true) bool enableInsurance,
     @Default(true) bool enableAlarm,
-    @Default(0.0) double tokenEarn,
+    EstimateSleepResponse? tokenEarn,
     @Default(false) bool startTracking,
     UserStatusTrackingModel? userStatusTracking,
   }) = HomeLoaded;
