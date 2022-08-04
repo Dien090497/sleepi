@@ -4,6 +4,7 @@ import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -19,8 +20,8 @@ import 'package:slee_fi/presentation/screens/home/widgets/pop_up_transfer.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_sell.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/auto_reset_tab_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_jewel_short_widget.dart';
-import 'package:slee_fi/presentation/screens/product_detail/widgets/upgrade_tab.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
+import 'package:slee_fi/resources/resources.dart';
 
 import 'jewel_dialog_body.dart';
 
@@ -75,9 +76,12 @@ class TabJewelsDetail extends StatelessWidget {
                               );
                       },
                     ),
-
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                      child: const Center(child: SFIcon(Ics.commingSoon)),
+                    )
                     /// UPGRADE TAB FUNCTION
-                    const UpGradeTab(isJewel: true),
+                    // const UpGradeTab(isJewel: true),
 
                     /// ------------------------------
                   ],
