@@ -452,6 +452,7 @@ class WalletImplementation extends IWalletRepository {
       List<TransactionHistoryModel> transactionHistoryList = [];
       final result =
           await _transactionRemoteDataSource.getHistoryTransaction(params);
+      int decimal = 18;
       result.fold(
         (l) {},
         (history) {
@@ -466,6 +467,11 @@ class WalletImplementation extends IWalletRepository {
           }
         },
       );
+      if (transactionHistoryList.isNotEmpty) {
+        final erc20 = _web3DataSource.token(transactionHistoryList.first.contractAddress);
+        final decimalToken = await erc20.decimals();
+        decimal = decimalToken.toInt();
+      }
       List<TransactionIsarModel> transactionList = [];
       for (int i = 0; i < transactionHistoryList.length; i++) {
         // final transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
@@ -475,7 +481,7 @@ class WalletImplementation extends IWalletRepository {
             transactionHash: transactionHistoryList.elementAt(i).hash,
             valueInEther:
                 BigInt.parse(transactionHistoryList.elementAt(i).value) /
-                    BigInt.from(pow(10, 18)),
+                    BigInt.from(pow(10, decimal)),
             timeStamp: DateTime.fromMillisecondsSinceEpoch(
                 int.parse(transactionHistoryList.elementAt(i).timeStamp) *
                     1000),
