@@ -161,6 +161,10 @@ class BottomBarInfoIndividualCubit extends Cubit<BottomBarInfoIndividualState> {
   }
 
   Future<void> postLevelUp(LevelUpSchema param) async {
+    final currentState = state;
+    if (currentState is GetLevelSuccess) {
+      emit(currentState.copyWith(isLoading: true));
+    }
     final result = await _postLevelUpUC.call(param);
     result.fold((l) => emit(BottomBarInfoIndividualState.error(message: '$l')),
         (r) {
