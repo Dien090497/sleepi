@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
+import 'package:decimal/decimal.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/history_datasource.dart';
@@ -10,6 +11,7 @@ import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
+import 'package:slee_fi/models/isar_models/token_isar/token_isar_model.dart';
 import 'package:slee_fi/repository/transaction_repository.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/send_token_to_external.dart';
@@ -105,7 +107,7 @@ class TransactionImplementation extends ITransactionRepository {
       double balance = 0;
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
-      if (params.contractAddressTo.isEmpty) {
+      if (params.tokenSymbol != null && params.tokenSymbol == 'AVAX') {
         final result = await _web3DataSource.getBalance(wallet!.address);
         balance = result / BigInt.from(pow(10, 18));
         return Right(balance);
@@ -140,12 +142,10 @@ class TransactionImplementation extends ITransactionRepository {
       final erc20 = _web3DataSource.token(params.tokenEntity?.address ?? '');
       final recipient = EthereumAddress.fromHex(params.toAddress);
       final decimal = await erc20.decimals();
-      final amount = EtherAmount.fromUnitAndValue(
-              EtherUnit.wei, BigInt.from(params.valueInEther * pow(10, decimal.toInt())))
-          .getValueInUnitBI(EtherUnit.wei);
+      final amount = Decimal.parse('${params.valueInEther}') * Decimal.fromBigInt(BigInt.from(pow(10, decimal.toInt())));
       final result = await erc20.transfer(
         recipient,
-        amount,
+        Decimal.parse(amount.toString()).toBigInt(),
         credentials: credentials,
       );
       if (result.isNotEmpty) {
