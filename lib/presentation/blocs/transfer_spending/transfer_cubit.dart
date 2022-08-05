@@ -258,7 +258,8 @@ class TransferCubit extends Cubit<TransferState> {
             tokenAddress: token.address));
         result.fold(
           (l) {
-            emit(const TransferState.failed(LocaleKeys.insufficient_avax));
+            emit(const TransferState.failed(
+                LocaleKeys.not_enough_to_pay_the_fee));
             emit(currentState.copyWith(isLoading: false));
           },
           (r) {
