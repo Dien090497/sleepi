@@ -18,7 +18,7 @@ class PopupGachaConfirm extends StatelessWidget {
     return Column(
       children: [
         SFText(
-          keyText: LocaleKeys.confirm,
+          keyText: LocaleKeys.gacha_confirm,
           style: TextStyles.white1w700size16,
         ),
         const SizedBox(height: 24),

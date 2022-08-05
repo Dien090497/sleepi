@@ -514,5 +514,7 @@ abstract class  LocaleKeys {
   static const transaction_submitted = 'transaction_submitted';
   static const input_value_so_small = 'input_value_so_small';
   static const you_need_to_connect_wifi_or_mobile_data = 'you_need_to_connect_wifi_or_mobile_data';
+  static const gacha_confirm = 'gacha_confirm';
+  static const balance_is_insufficient = 'balance_is_insufficient';
 
 }

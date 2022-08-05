@@ -53,7 +53,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
         listener: (context, state) {
           if (state is GachaCheckConnection) {
             Navigator.pop(context, true);
-            showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+            showMessageDialog(context, LocaleKeys.balance_is_insufficient);
             setState(() {
              enableButton = true;
              isConnectedNetwork = false;
@@ -112,7 +112,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                                   barrierDismissible: false);
                             }else{
                               Navigator.pop(context, true);
-                              showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+                              showMessageDialog(context, LocaleKeys.balance_is_insufficient);
                             }
                           },
                         ));
@@ -160,7 +160,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                                     barrierDismissible: false);
                               }else{
                                 Navigator.pop(context, true);
-                                showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+                                showMessageDialog(context, LocaleKeys.balance_is_insufficient);
                               }
                             }
                             )
