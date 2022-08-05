@@ -7,7 +7,6 @@ import 'package:slee_fi/presentation/blocs/send_to_external/send_to_external_sta
 import 'package:slee_fi/presentation/screens/send_to_external/send_to_external_screen.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/send_token_to_external.dart';
-import 'package:slee_fi/usecase/usecase.dart';
 
 class SendToExternalCubit extends Cubit<SendToExternalState> {
   SendToExternalCubit() : super(const SendToExternalState.initial());

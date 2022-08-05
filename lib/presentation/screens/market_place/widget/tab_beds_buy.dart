@@ -21,7 +21,6 @@ import 'package:slee_fi/presentation/screens/market_place/widget/gridview_bed_it
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_bed_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class TabBedsBuy extends StatelessWidget {
   const TabBedsBuy({Key? key, required this.cubit}) : super(key: key);
@@ -91,7 +90,7 @@ class TabBedsBuy extends StatelessWidget {
                     },
                     sliders: {
                       LocaleKeys.level.tr(): FilterSliderValues(
-                          value: SfRangeValues(
+                          value: RangeValues(
                             cubit.params.minLevel,
                             cubit.params.maxLevel,
                           ),
@@ -100,7 +99,7 @@ class TabBedsBuy extends StatelessWidget {
                       LocaleKeys.mint.tr(): FilterSliderValues(
                           max: Const.bedMintMax,
                           min: 0,
-                          value: SfRangeValues(cubit.params.minBedMint,
+                          value: RangeValues(cubit.params.minBedMint,
                               cubit.params.maxBedMint)),
                     },
                   );
