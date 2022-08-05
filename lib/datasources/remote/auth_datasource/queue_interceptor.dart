@@ -27,7 +27,7 @@ class QueueInterceptor extends QueuedInterceptor {
             (l) => debugPrint("$l"),
             (r) {
           if(context != null && r != ConnectivityResult.mobile && r != ConnectivityResult.wifi)  {
-            showMessageDialog(context, "You need to connect Wifi or Mobile Data");
+            showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
             return handler.reject(err);
           }
         });

@@ -53,16 +53,20 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
         listener: (context, state) {
           if (state is GachaCheckConnection) {
             Navigator.pop(context, true);
-            showMessageDialog(context, "You need to connect Wifi or Mobile Data");
-            setState(() => enableButton = true);
-            setState(() => isConnectedNetwork = false);
+            showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+            setState(() {
+             enableButton = true;
+             isConnectedNetwork = false;
+            });
           }
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
             showMessageDialog(context, LocaleKeys.you_dont_have_enough_money)
                 .then((value) => widget.onPressed());
-            setState(() => enableButton = true);
-            setState(() => isConnectedNetwork = true);
+            setState(() {
+              enableButton = true;
+              isConnectedNetwork = true;
+            });
           }
           if (state is GachaSpinSuccess) {
             Navigator.pop(context, true);
@@ -76,8 +80,10 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                       ? Const.normalGachaAudio
                       : Const.specialGachaAudio,
                 )).then((value) => widget.onPressed());
-            setState(() => enableButton = true);
-            setState(() => isConnectedNetwork = true);
+            setState(() {
+              enableButton = true;
+              isConnectedNetwork = true;
+            });
           }
         },
         builder: (context, state) {
@@ -106,7 +112,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                                   barrierDismissible: false);
                             }else{
                               Navigator.pop(context, true);
-                              showMessageDialog(context, "You need to connect Wifi or Mobile Data");
+                              showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
                             }
                           },
                         ));
@@ -154,7 +160,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                                     barrierDismissible: false);
                               }else{
                                 Navigator.pop(context, true);
-                                showMessageDialog(context, "You need to connect Wifi or Mobile Data");
+                                showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
                               }
                             }
                             )
