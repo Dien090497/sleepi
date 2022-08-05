@@ -69,11 +69,11 @@ class TabJewelsBuy extends StatelessWidget {
                     context,
                     sections: {
                       LocaleKeys.type.tr(): [
-                        LocaleKeys.ruby.tr(),
-                        LocaleKeys.sapphire.tr(),
-                        LocaleKeys.emerald.tr(),
-                        LocaleKeys.diamond.tr(),
-                        LocaleKeys.amethyst.tr(),
+                        LocaleKeys.ruby,
+                        LocaleKeys.sapphire,
+                        LocaleKeys.emerald,
+                        LocaleKeys.diamond,
+                        LocaleKeys.amethyst,
                       ],
                     },
                     sliders: {
