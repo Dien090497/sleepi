@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/presentation/blocs/home/home_bloc.dart';
 import 'package:slee_fi/presentation/blocs/lucky_box/lucky_box_cubit.dart';
@@ -32,13 +33,18 @@ class _HomeListWidgetState extends State<HomeListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SmartRefresher(
-      controller: refreshController,
-      enablePullDown: true,
-      onRefresh: () {
-        _onRefresh();
+    return FocusDetector(
+      onFocusGained: (){
+        context.read<HomeBloc>().add(const FetchBedDetail());
       },
-      child: widget.child,
+      child: SmartRefresher(
+        controller: refreshController,
+        enablePullDown: true,
+        onRefresh: () {
+          _onRefresh();
+        },
+        child: widget.child,
+      ),
     );
   }
 }

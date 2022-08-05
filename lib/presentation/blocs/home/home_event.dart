@@ -50,16 +50,6 @@ class RefreshBed extends HomeEvent {
   List<Object?> get props => [];
 }
 
-
-class RefreshStartButton extends HomeEvent {
-  const RefreshStartButton();
-
-  @override
-  List<Object?> get props => [];
-}
-
-
-
 class LoadMoreBed extends HomeEvent {
   const LoadMoreBed();
 

@@ -265,11 +265,10 @@ class _TradeScreenState extends State<TradeScreen> {
                 if (state is tradeGetAmountOutMin) {
                   if (valueController.text != '') {
                     amountOutMin = state.amountOutMin;
-                    onValidValue(amountOutMin);
                   } else {
-                    error = '';
                     amountOutMin = 0;
                   }
+                  onValidValue(amountOutMin);
                 }
                 if (state is TradeStateInitial && state.isLoading) {
                   listTokens = state.listTokens;
