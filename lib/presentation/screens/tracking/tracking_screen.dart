@@ -53,7 +53,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
   late String timeAlarm = '';
   late double totalEarn = 0;
-  // late int time = 0;
+  late int time = 0;
   late double earn = 0.toDouble();
   late DateTime timeStart = DateTime.now();
   GlobalKey<AnalogClockState> globalKey = GlobalKey();
@@ -70,27 +70,27 @@ class _TrackingScreenState extends State<TrackingScreen> {
       totalEarn = args.tokenEarn;
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
       timeStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
-      // time = wakeUp.difference(timeStart).inMinutes;
+      time = wakeUp.difference(DateTime.now()).inSeconds;
       // earn =
       //     (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       // double x = totalEarn / time;
-      _timer = Timer.periodic(
-        const Duration(seconds: 1),
-        (Timer timer) async {
-          if (DateTime.now().isAfter(wakeUp)) {
-            SharedPreferences preferences = await SharedPreferences.getInstance();
-            final int sound = preferences.getInt(Const.sound) ?? 0;
-            if(!audioPlayer.playing){
-              await audioPlayer.setAsset(Const.soundAlarm[sound]).then((value) async {
-                await audioPlayer.setVolume(1);
-                await audioPlayer.setLoopMode(LoopMode.all);
-                await audioPlayer.play();
-              });
-              _timer.cancel();
-            }
+      _timer = Timer(
+        Duration(seconds: time),
+        () async {
+          SharedPreferences preferences = await SharedPreferences.getInstance();
+          final int sound = preferences.getInt(Const.sound) ?? 0;
+          if (!audioPlayer.playing) {
+            await audioPlayer
+                .setAsset(Const.soundAlarm[sound])
+                .then((value) async {
+              await audioPlayer.setVolume(1);
+              await audioPlayer.setLoopMode(LoopMode.all);
+              await audioPlayer.play();
+            });
           }
+          _timer.cancel();
         },
       );
       setState(() {});
@@ -135,7 +135,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
             return FocusDetector(
               onFocusGained: () async {
                 globalKey.currentState?.updateDateTime();
-                if(!_timer.isActive) {
+                if (!_timer.isActive) {
                   init();
                 }
               },
@@ -233,7 +233,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
                             color: AppColors.blue,
                             textStyle: TextStyles.w600WhiteSize16,
                             onPressed: () async {
-                              if(state is! TrackingStateLoading) {
+                              if (state is! TrackingStateLoading) {
                                 if (audioPlayer.playing) {
                                   await audioPlayer.stop();
                                 }
