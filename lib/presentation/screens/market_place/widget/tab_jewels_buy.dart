@@ -17,6 +17,7 @@ import 'package:slee_fi/presentation/screens/market_place/widget/filter_sheet.da
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_jewel_market_place.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/tab_bar_filter.dart';
 import 'package:slee_fi/resources/resources.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'jewel_buy_widget.dart';
 
@@ -80,7 +81,7 @@ class TabJewelsBuy extends StatelessWidget {
                       LocaleKeys.level.tr(): FilterSliderValues(
                           max: 5,
                           min: 1,
-                          value: RangeValues(
+                          value: SfRangeValues(
                             cubit.params.minLevel,
                             cubit.params.maxLevel,
                           )),

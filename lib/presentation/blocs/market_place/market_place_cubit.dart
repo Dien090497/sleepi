@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
@@ -9,6 +8,7 @@ import 'package:slee_fi/schema/market/market_schema.dart';
 import 'package:slee_fi/usecase/buy_nft_usecase.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 import 'package:slee_fi/usecase/get_market_place_usecase.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'market_place_state.dart';
 
@@ -117,7 +117,7 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
   }
 
   Future<void> filter(Map<String, List<String>> listSelected,
-      Map<String, RangeValues> listSlider) async {
+      Map<String, SfRangeValues> listSlider) async {
     listSelected.forEach((key, value) {
       if (key == LocaleKeys.type.tr()) {
         params = params.copyWith(type: value);
@@ -131,11 +131,11 @@ class MarketPlaceCubit extends Cubit<MarketPlaceState> {
     });
     listSlider.forEach((key, value) {
       if (key == LocaleKeys.level.tr()) {
-        params = params.copyWith(minLevel: value.start, maxLevel: value.end);
+        params = params.copyWith(minLevel: value.start.floorToDouble(), maxLevel: value.end.floorToDouble());
       }
       if (key == LocaleKeys.mint.tr()) {
         params =
-            params.copyWith(minBedMint: value.start, maxBedMint: value.end);
+            params.copyWith(minBedMint: value.start.floorToDouble(), maxBedMint: value.end.floorToDouble());
       }
     });
     page = 1;
