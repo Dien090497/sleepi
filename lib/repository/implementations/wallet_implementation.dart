@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
+import 'package:decimal/decimal.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
@@ -477,11 +478,11 @@ class WalletImplementation extends IWalletRepository {
         // final transactionInfo = await _web3DataSource.getDetailTransaction(historyList.elementAt(i).transactionHash);
         // final transactionReceipt = await _web3DataSource.getTransactionReceipt(historyList.elementAt(i).transactionHash);
         // final getTimeStamp = await _web3DataSource.getDetailBlock(transactionInfo.blockNumber.toBlockParam());
+
         final model = TransactionIsarModel(
             transactionHash: transactionHistoryList.elementAt(i).hash,
-            valueInEther:
-                BigInt.parse(transactionHistoryList.elementAt(i).value) /
-                    BigInt.from(pow(10, decimal)),
+            valueInEther: (Decimal.parse(transactionHistoryList.elementAt(i).value) / Decimal.fromBigInt(BigInt.from(pow(10, decimal)))).toDouble(),
+
             timeStamp: DateTime.fromMillisecondsSinceEpoch(
                 int.parse(transactionHistoryList.elementAt(i).timeStamp) *
                     1000),
