@@ -100,14 +100,23 @@ class TransactionImplementation extends ITransactionRepository {
   }
 
   @override
-  Future<Either<Failure, double>> getTokenBalance() async {
+  Future<Either<Failure, double>> getTokenBalance(SendToExternalParams params) async {
     try {
       double balance = 0;
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
-      final result = await _web3DataSource.getBalance(wallet!.address);
-      balance = result / BigInt.from(pow(10, 18));
-      return Right(balance);
+      if (params.contractAddressTo.isEmpty) {
+        final result = await _web3DataSource.getBalance(wallet!.address);
+        balance = result / BigInt.from(pow(10, 18));
+        return Right(balance);
+      } else {
+        final balanceOfToken = (await _web3DataSource.getBalanceOf(
+          wallet!.address, params.contractAddressTo));
+        final decimals = await _web3DataSource.getDecimals(params.contractAddressTo);
+        balance =  balanceOfToken / BigInt.from(pow(10, decimals.toInt()));
+        return Right(balance);
+      }
+
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

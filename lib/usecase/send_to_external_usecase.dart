@@ -38,7 +38,7 @@ class SendToExternalUseCase extends UseCase<bool, SendToExternalParams> {
     );
   }
 
-  Future<Either<Failure, double>> getTokenBalance(NoParams params) {
-    return _iTransactionRepository.getTokenBalance();
+  Future<Either<Failure, double>> getTokenBalance(SendToExternalParams params) {
+    return _iTransactionRepository.getTokenBalance(params);
   }
 }

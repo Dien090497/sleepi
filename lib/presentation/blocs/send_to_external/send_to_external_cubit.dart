@@ -15,8 +15,8 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
   final _sendToExternalUC = getIt<SendToExternalUseCase>();
   final _sendTokenToExternalUseCase = getIt<SendTokenToExternalUseCase>();
 
-  void init() {
-    emit(const SendToExternalState.initial());
+  void init({bool? isLoadBalance}) {
+    emit(SendToExternalState.initial(isLoadBalance: isLoadBalance));
   }
 
   Future<void> sendToExternal(
@@ -35,8 +35,10 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     });
   }
 
-  Future<void> getTokenBalance() async {
-    final result = await _sendToExternalUC.getTokenBalance(NoParams());
+  Future<void> getTokenBalance({required String contractAddress, String? tokenSymbol}) async {
+    emit(const SendToExternalState.loading());
+    final params = SendToExternalParams(contractAddressTo: contractAddress, tokenSymbol: tokenSymbol);
+    final result = await _sendToExternalUC.getTokenBalance(params);
     result.fold(
           (l) {
         emit(SendToExternalState.fail('$l'));
@@ -106,4 +108,5 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
       emit(const SendToExternalState.success());
     });
   }
+
 }

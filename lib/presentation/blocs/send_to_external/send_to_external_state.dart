@@ -8,7 +8,7 @@ part 'send_to_external_state.freezed.dart';
 class SendToExternalState with _$SendToExternalState {
   const factory SendToExternalState.initial(
       {
-        @Default(false) bool isLoading,
+        @Default(false) bool? isLoadBalance,
       }) = sendToExternalStateInitial;
 
   const factory SendToExternalState.done(SendToExternalEntity entity) =

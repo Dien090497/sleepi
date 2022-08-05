@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SendToExternalState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -34,7 +34,7 @@ mixin _$SendToExternalState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -50,7 +50,7 @@ mixin _$SendToExternalState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -146,7 +146,7 @@ abstract class _$$sendToExternalStateInitialCopyWith<$Res> {
           _$sendToExternalStateInitial value,
           $Res Function(_$sendToExternalStateInitial) then) =
       __$$sendToExternalStateInitialCopyWithImpl<$Res>;
-  $Res call({bool isLoading});
+  $Res call({bool? isLoadBalance});
 }
 
 /// @nodoc
@@ -164,13 +164,13 @@ class __$$sendToExternalStateInitialCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoadBalance = freezed,
   }) {
     return _then(_$sendToExternalStateInitial(
-      isLoading: isLoading == freezed
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
+      isLoadBalance: isLoadBalance == freezed
+          ? _value.isLoadBalance
+          : isLoadBalance // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -180,15 +180,15 @@ class __$$sendToExternalStateInitialCopyWithImpl<$Res>
 class _$sendToExternalStateInitial
     with DiagnosticableTreeMixin
     implements sendToExternalStateInitial {
-  const _$sendToExternalStateInitial({this.isLoading = false});
+  const _$sendToExternalStateInitial({this.isLoadBalance = false});
 
   @override
   @JsonKey()
-  final bool isLoading;
+  final bool? isLoadBalance;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SendToExternalState.initial(isLoading: $isLoading)';
+    return 'SendToExternalState.initial(isLoadBalance: $isLoadBalance)';
   }
 
   @override
@@ -196,7 +196,7 @@ class _$sendToExternalStateInitial
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SendToExternalState.initial'))
-      ..add(DiagnosticsProperty('isLoading', isLoading));
+      ..add(DiagnosticsProperty('isLoadBalance', isLoadBalance));
   }
 
   @override
@@ -204,12 +204,13 @@ class _$sendToExternalStateInitial
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$sendToExternalStateInitial &&
-            const DeepCollectionEquality().equals(other.isLoading, isLoading));
+            const DeepCollectionEquality()
+                .equals(other.isLoadBalance, isLoadBalance));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(isLoading));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(isLoadBalance));
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +221,7 @@ class _$sendToExternalStateInitial
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -233,13 +234,13 @@ class _$sendToExternalStateInitial
     required TResult Function(double fee) checkedValidator,
     required TResult Function() validatorSuccess,
   }) {
-    return initial(isLoading);
+    return initial(isLoadBalance);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -252,13 +253,13 @@ class _$sendToExternalStateInitial
     TResult Function(double fee)? checkedValidator,
     TResult Function()? validatorSuccess,
   }) {
-    return initial?.call(isLoading);
+    return initial?.call(isLoadBalance);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -273,7 +274,7 @@ class _$sendToExternalStateInitial
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(isLoading);
+      return initial(isLoadBalance);
     }
     return orElse();
   }
@@ -348,10 +349,10 @@ class _$sendToExternalStateInitial
 }
 
 abstract class sendToExternalStateInitial implements SendToExternalState {
-  const factory sendToExternalStateInitial({final bool isLoading}) =
+  const factory sendToExternalStateInitial({final bool? isLoadBalance}) =
       _$sendToExternalStateInitial;
 
-  bool get isLoading;
+  bool? get isLoadBalance;
   @JsonKey(ignore: true)
   _$$sendToExternalStateInitialCopyWith<_$sendToExternalStateInitial>
       get copyWith => throw _privateConstructorUsedError;
@@ -442,7 +443,7 @@ class _$sendToExternalDone
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -461,7 +462,7 @@ class _$sendToExternalDone
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -480,7 +481,7 @@ class _$sendToExternalDone
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -628,7 +629,7 @@ class _$SendToExternalLoading
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -647,7 +648,7 @@ class _$SendToExternalLoading
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -666,7 +667,7 @@ class _$SendToExternalLoading
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -847,7 +848,7 @@ class _$GetTokenBalanceSuccess
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -866,7 +867,7 @@ class _$GetTokenBalanceSuccess
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -885,7 +886,7 @@ class _$GetTokenBalanceSuccess
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1035,7 +1036,7 @@ class _$sendToExternalSuccess
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -1054,7 +1055,7 @@ class _$sendToExternalSuccess
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1073,7 +1074,7 @@ class _$sendToExternalSuccess
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1242,7 +1243,7 @@ class _$SendToExternalFailed
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -1261,7 +1262,7 @@ class _$SendToExternalFailed
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1280,7 +1281,7 @@ class _$SendToExternalFailed
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1457,7 +1458,7 @@ class _$SendToExternalCalculatorFee
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -1476,7 +1477,7 @@ class _$SendToExternalCalculatorFee
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1495,7 +1496,7 @@ class _$SendToExternalCalculatorFee
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1648,7 +1649,7 @@ class _$SendToExternalCalculatorFeeSuccess
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -1667,7 +1668,7 @@ class _$SendToExternalCalculatorFeeSuccess
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1686,7 +1687,7 @@ class _$SendToExternalCalculatorFeeSuccess
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1860,7 +1861,7 @@ class _$SendToExternalErrorToAddress
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -1879,7 +1880,7 @@ class _$SendToExternalErrorToAddress
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -1898,7 +1899,7 @@ class _$SendToExternalErrorToAddress
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -2077,7 +2078,7 @@ class _$SendToExternalErrorValueInEther
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -2096,7 +2097,7 @@ class _$SendToExternalErrorValueInEther
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -2115,7 +2116,7 @@ class _$SendToExternalErrorValueInEther
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -2293,7 +2294,7 @@ class _$SendToExternalCheckedValidator
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -2312,7 +2313,7 @@ class _$SendToExternalCheckedValidator
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -2331,7 +2332,7 @@ class _$SendToExternalCheckedValidator
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -2484,7 +2485,7 @@ class _$SendToExternalValidatorSuccess
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLoading) initial,
+    required TResult Function(bool? isLoadBalance) initial,
     required TResult Function(SendToExternalEntity entity) done,
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
@@ -2503,7 +2504,7 @@ class _$SendToExternalValidatorSuccess
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
@@ -2522,7 +2523,7 @@ class _$SendToExternalValidatorSuccess
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLoading)? initial,
+    TResult Function(bool? isLoadBalance)? initial,
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
