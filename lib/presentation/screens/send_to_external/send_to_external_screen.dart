@@ -42,27 +42,26 @@ class SendToExternalScreen extends StatefulWidget {
 }
 
 class _SendToExternalScreenState extends State<SendToExternalScreen> {
-  late double balance = 0;
   double fee = 0;
   String contractAddressTo = '';
   String ownerAddress = '';
   double valueInEther = 0;
 
   TextEditingController controllerAmount = TextEditingController();
-
+  double balance = 0;
   @override
   Widget build(BuildContext context) {
     final args =
     ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
-
     return BlocProvider(
-      create: (context) => SendToExternalCubit()..init(),
+      create: (context) => SendToExternalCubit()..init(isLoadBalance: true),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
           if (state is GetTokenBalanceSuccess) {
-            balance = state.balance;
-            fee = state.fee;
-            setState(() {});
+            setState(() {
+              balance = state.balance;
+              fee = state.fee;
+            });
           }
           if (state is SendToExternalCheckedValidator) {
             showCustomAlertDialog(context,
@@ -79,7 +78,9 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
         builder: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalStateInitial) {
-            cubit.getTokenBalance();
+            if (state.isLoadBalance != null && state.isLoadBalance == true) {
+              getBalance(cubit: cubit, args: args);
+            }
           }
 
           return DismissKeyboardWidget(
@@ -152,15 +153,14 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                               text: LocaleKeys.all,
                                               textStyle: TextStyles.blue12,
                                               onPressed: () {
+                                                getBalance(cubit: cubit, args: args);
                                                 if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
-                                                  if (state is GetTokenBalanceSuccess) {
-                                                    final result = (Decimal.parse('${state.balance}') -
-                                                        Decimal.parse('${state.fee}'))
+                                                    final result = (Decimal.parse('${balance}') -
+                                                        Decimal.parse('${fee}'))
                                                         .floor(scale: 6);
                                                     controllerAmount.text = result.toString();
-                                                  }
                                                 } else {
-                                                  controllerAmount.text = args?.tokenEntity?.balance.toString() ?? '0';
+                                                  controllerAmount.text = balance.toString();
                                                 }
                                               },
                                               // color: Colors.transparent,
@@ -184,7 +184,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
                                       suffix:
-                                      ': ${args != null ? args.tokenEntity?.balance.formatBalanceToken : balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
+                                      ': ${balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -249,38 +249,36 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         gradient: AppColors.gradientBlueButton,
                         // disabled: isDisabled,
                         onPressed: () {
-                          if (fee != 0) {
-                            if (args != null) {
-                              if (controllerAmount.text.isNotEmpty) {
-                                cubit.validator(
-                                    contractAddressTo: contractAddressTo,
-                                    balanceCurrent:
-                                    args.tokenEntity?.balance ?? 0.0,
-                                    amount: double.parse(controllerAmount.text
-                                        .replaceAll(',', '.')),
-                                    fee: fee);
+                            if (fee != 0) {
+                              if (args != null) {
+                                if (controllerAmount.text.isNotEmpty) {
+                                  cubit.validator(
+                                      contractAddressTo: contractAddressTo,
+                                      balanceCurrent: balance,
+                                      amount: double.parse(controllerAmount.text
+                                          .replaceAll(',', '.')),
+                                      fee: fee);
+                                } else {
+                                  cubit.validator(
+                                      contractAddressTo: contractAddressTo,
+                                      balanceCurrent: balance,
+                                      amount: -1, fee: fee);
+                                }
                               } else {
-                                cubit.validator(
-                                    contractAddressTo: contractAddressTo,
-                                    balanceCurrent:
-                                    args.tokenEntity?.balance ?? 0.0,
-                                    amount: -1, fee: fee);
-                              }
-                            } else {
-                              if (controllerAmount.text.isNotEmpty) {
-                                cubit.validator(
-                                    contractAddressTo: contractAddressTo,
-                                    balanceCurrent: balance,
-                                    amount: double.parse(controllerAmount.text
-                                        .replaceAll(',', '.')), fee: fee);
-                              } else {
-                                cubit.validator(
-                                    contractAddressTo: contractAddressTo,
-                                    balanceCurrent: balance,
-                                    amount: -1, fee: fee);
+                                if (controllerAmount.text.isNotEmpty) {
+                                  cubit.validator(
+                                      contractAddressTo: contractAddressTo,
+                                      balanceCurrent: balance,
+                                      amount: double.parse(controllerAmount.text
+                                          .replaceAll(',', '.')), fee: fee);
+                                } else {
+                                  cubit.validator(
+                                      contractAddressTo: contractAddressTo,
+                                      balanceCurrent: balance,
+                                      amount: -1, fee: fee);
+                                }
                               }
                             }
-                          }
                         },
                       ),
                       const SizedBox(
@@ -295,5 +293,12 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
         },
       ),
     );
+  }
+  void getBalance ({SendToExternalArguments? args, required SendToExternalCubit cubit}) {
+    if (args != null) {
+      cubit.getTokenBalance(contractAddress: args.tokenEntity?.address ?? 'token', tokenSymbol: args.symbol);
+    } else {
+      cubit.getTokenBalance(contractAddress: '', tokenSymbol: 'AVAX');
+    }
   }
 }
