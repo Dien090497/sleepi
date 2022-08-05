@@ -125,7 +125,9 @@ class TransactionDetail extends StatelessWidget {
                               assetImage: Ics.icDownload,
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           args.tokenEntity.symbol != 'USDC'
                               ? Expanded(
                                   child: BoxButtonWidget(
@@ -141,7 +143,9 @@ class TransactionDetail extends StatelessWidget {
                                 )
                               : const SizedBox(),
                           args.tokenEntity.symbol != 'USDC'
-                              ? const SizedBox(width: 10)
+                              ? const SizedBox(
+                                  width: 10,
+                                )
                               : const SizedBox(),
                           Expanded(
                             child: BoxButtonWidget(
