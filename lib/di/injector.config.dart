@@ -179,14 +179,14 @@ import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i149;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i63;
 import '../usecase/withdraw_history_usecase.dart' as _i108;
 import '../usecase/withdraw_nft_usecase.dart' as _i109;
-import 'dev_injection.dart' as _i172;
-import 'prod_injection.dart' as _i173;
+import 'dev_injection.dart' as _i173;
+import 'prod_injection.dart' as _i172;
 import 'register_module.dart' as _i170;
 import 'stg_injection.dart' as _i171;
 
 const String _stg = 'stg';
-const String _dev = 'dev';
 const String _prod = 'prod';
+const String _dev = 'dev';
 // ignore_for_file: unnecessary_lambdas
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -196,8 +196,8 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
   final releaseInjection = _$ReleaseInjection();
-  final devInjection = _$DevInjection();
   final prodInjection = _$ProdInjection();
+  final devInjection = _$DevInjection();
   gh.singleton<_i3.AppFlyerCustom>(_i3.AppFlyerCustom());
   gh.factory<_i4.Client>(() => rPCModule.httpClient);
   gh.factory<_i5.Connectivity>(() => registerModule.connectivity);
@@ -220,10 +220,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.singleton<_i16.IsarDataSource>(_i16.IsarDataSource(get<_i15.Isar>()));
   gh.factory<List<dynamic>>(() => releaseInjection.tokens,
       instanceName: 'tokens', registerFor: {_stg});
-  gh.factory<List<dynamic>>(() => devInjection.tokens,
-      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<List<dynamic>>(() => prodInjection.tokens,
       instanceName: 'tokens', registerFor: {_prod});
+  gh.factory<List<dynamic>>(() => devInjection.tokens,
+      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<_i17.NetworkConnectionDataSource>(
       () => _i17.NetworkConnectionDataSource(get<_i5.Connectivity>()));
   gh.factory<_i18.QueueInterceptor>(
@@ -232,18 +232,18 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i20.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i13.StorageKeys>(() => _i13.StorageKeys());
-  gh.factory<String>(() => devInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_dev});
   gh.factory<String>(() => devInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => prodInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_prod});
-  gh.factory<String>(() => releaseInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_stg});
-  gh.factory<String>(() => prodInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<String>(() => releaseInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_stg});
+  gh.factory<String>(() => releaseInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_stg});
+  gh.factory<String>(() => devInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_dev});
+  gh.factory<String>(() => prodInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_prod});
+  gh.factory<String>(() => prodInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_prod});
   gh.factory<_i21.ToastUtils>(() => _i21.ToastUtils());
   gh.singleton<_i22.Web3Provider>(_i22.Web3Provider(get<_i4.Client>()));
   gh.factory<_i23.HistoryDataSource>(
@@ -572,6 +572,6 @@ class _$RegisterModule extends _i170.RegisterModule {}
 
 class _$ReleaseInjection extends _i171.ReleaseInjection {}
 
-class _$DevInjection extends _i172.DevInjection {}
+class _$ProdInjection extends _i172.ProdInjection {}
 
-class _$ProdInjection extends _i173.ProdInjection {}
+class _$DevInjection extends _i173.DevInjection {}
