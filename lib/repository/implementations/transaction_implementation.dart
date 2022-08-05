@@ -139,8 +139,9 @@ class TransactionImplementation extends ITransactionRepository {
       final credentials = _web3DataSource.credentialsFromPrivateKey(privateKey);
       final erc20 = _web3DataSource.token(params.tokenEntity?.address ?? '');
       final recipient = EthereumAddress.fromHex(params.toAddress);
+      final decimal = await erc20.decimals();
       final amount = EtherAmount.fromUnitAndValue(
-              EtherUnit.wei, BigInt.from(params.valueInEther * pow(10, 18)))
+              EtherUnit.wei, BigInt.from(params.valueInEther * pow(10, decimal.toInt())))
           .getValueInUnitBI(EtherUnit.wei);
       final result = await erc20.transfer(
         recipient,
