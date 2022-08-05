@@ -19,10 +19,11 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -40,10 +41,11 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -61,10 +63,11 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -201,10 +204,11 @@ class _$TransferInitial implements TransferInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -225,10 +229,11 @@ class _$TransferInitial implements TransferInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -249,10 +254,11 @@ class _$TransferInitial implements TransferInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -328,6 +334,7 @@ abstract class _$$TransferSuccessCopyWith<$Res> {
   factory _$$TransferSuccessCopyWith(
           _$TransferSuccess value, $Res Function(_$TransferSuccess) then) =
       __$$TransferSuccessCopyWithImpl<$Res>;
+  $Res call({String txHash});
 }
 
 /// @nodoc
@@ -340,35 +347,59 @@ class __$$TransferSuccessCopyWithImpl<$Res>
 
   @override
   _$TransferSuccess get _value => super._value as _$TransferSuccess;
+
+  @override
+  $Res call({
+    Object? txHash = freezed,
+  }) {
+    return _then(_$TransferSuccess(
+      txHash == freezed
+          ? _value.txHash
+          : txHash // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$TransferSuccess implements TransferSuccess {
-  const _$TransferSuccess();
+  const _$TransferSuccess(this.txHash);
+
+  @override
+  final String txHash;
 
   @override
   String toString() {
-    return 'TransferState.success()';
+    return 'TransferState.success(txHash: $txHash)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TransferSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _$TransferSuccess &&
+            const DeepCollectionEquality().equals(other.txHash, txHash));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(txHash));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TransferSuccessCopyWith<_$TransferSuccess> get copyWith =>
+      __$$TransferSuccessCopyWithImpl<_$TransferSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -382,17 +413,18 @@ class _$TransferSuccess implements TransferSuccess {
             String? errorMsg)
         loaded,
   }) {
-    return success();
+    return success(txHash);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -406,17 +438,18 @@ class _$TransferSuccess implements TransferSuccess {
             String? errorMsg)?
         loaded,
   }) {
-    return success?.call();
+    return success?.call(txHash);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -432,7 +465,7 @@ class _$TransferSuccess implements TransferSuccess {
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(txHash);
     }
     return orElse();
   }
@@ -476,7 +509,12 @@ class _$TransferSuccess implements TransferSuccess {
 }
 
 abstract class TransferSuccess implements TransferState {
-  const factory TransferSuccess() = _$TransferSuccess;
+  const factory TransferSuccess(final String txHash) = _$TransferSuccess;
+
+  String get txHash;
+  @JsonKey(ignore: true)
+  _$$TransferSuccessCopyWith<_$TransferSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -545,10 +583,11 @@ class _$TransferFailed implements TransferFailed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -569,10 +608,11 @@ class _$TransferFailed implements TransferFailed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -593,10 +633,11 @@ class _$TransferFailed implements TransferFailed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -671,6 +712,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       __$$TransferLoadedCopyWithImpl<$Res>;
   $Res call(
       {TokenEntity currentToken,
+      TokenEntity nativeCurrency,
       TokenEntity backupToken,
       bool isToSpending,
       List<TokenEntity> spendingTokens,
@@ -684,6 +726,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       String? errorMsg});
 
   $TokenEntityCopyWith<$Res> get currentToken;
+  $TokenEntityCopyWith<$Res> get nativeCurrency;
   $TokenEntityCopyWith<$Res> get backupToken;
 }
 
@@ -701,6 +744,7 @@ class __$$TransferLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentToken = freezed,
+    Object? nativeCurrency = freezed,
     Object? backupToken = freezed,
     Object? isToSpending = freezed,
     Object? spendingTokens = freezed,
@@ -717,6 +761,10 @@ class __$$TransferLoadedCopyWithImpl<$Res>
       currentToken: currentToken == freezed
           ? _value.currentToken
           : currentToken // ignore: cast_nullable_to_non_nullable
+              as TokenEntity,
+      nativeCurrency: nativeCurrency == freezed
+          ? _value.nativeCurrency
+          : nativeCurrency // ignore: cast_nullable_to_non_nullable
               as TokenEntity,
       backupToken: backupToken == freezed
           ? _value.backupToken
@@ -773,6 +821,13 @@ class __$$TransferLoadedCopyWithImpl<$Res>
   }
 
   @override
+  $TokenEntityCopyWith<$Res> get nativeCurrency {
+    return $TokenEntityCopyWith<$Res>(_value.nativeCurrency, (value) {
+      return _then(_value.copyWith(nativeCurrency: value));
+    });
+  }
+
+  @override
   $TokenEntityCopyWith<$Res> get backupToken {
     return $TokenEntityCopyWith<$Res>(_value.backupToken, (value) {
       return _then(_value.copyWith(backupToken: value));
@@ -785,6 +840,7 @@ class __$$TransferLoadedCopyWithImpl<$Res>
 class _$TransferLoaded implements TransferLoaded {
   const _$TransferLoaded(
       {required this.currentToken,
+      required this.nativeCurrency,
       required this.backupToken,
       required this.isToSpending,
       required final List<TokenEntity> spendingTokens,
@@ -801,6 +857,8 @@ class _$TransferLoaded implements TransferLoaded {
 
   @override
   final TokenEntity currentToken;
+  @override
+  final TokenEntity nativeCurrency;
   @override
   final TokenEntity backupToken;
   @override
@@ -837,7 +895,7 @@ class _$TransferLoaded implements TransferLoaded {
 
   @override
   String toString() {
-    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, spendingTokens: $spendingTokens, walletTokens: $walletTokens, userId: $userId, ownerAddress: $ownerAddress, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
+    return 'TransferState.loaded(currentToken: $currentToken, nativeCurrency: $nativeCurrency, backupToken: $backupToken, isToSpending: $isToSpending, spendingTokens: $spendingTokens, walletTokens: $walletTokens, userId: $userId, ownerAddress: $ownerAddress, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
   }
 
   @override
@@ -847,6 +905,8 @@ class _$TransferLoaded implements TransferLoaded {
             other is _$TransferLoaded &&
             const DeepCollectionEquality()
                 .equals(other.currentToken, currentToken) &&
+            const DeepCollectionEquality()
+                .equals(other.nativeCurrency, nativeCurrency) &&
             const DeepCollectionEquality()
                 .equals(other.backupToken, backupToken) &&
             const DeepCollectionEquality()
@@ -870,6 +930,7 @@ class _$TransferLoaded implements TransferLoaded {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(currentToken),
+      const DeepCollectionEquality().hash(nativeCurrency),
       const DeepCollectionEquality().hash(backupToken),
       const DeepCollectionEquality().hash(isToSpending),
       const DeepCollectionEquality().hash(_spendingTokens),
@@ -891,10 +952,11 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -910,6 +972,7 @@ class _$TransferLoaded implements TransferLoaded {
   }) {
     return loaded(
         currentToken,
+        nativeCurrency,
         backupToken,
         isToSpending,
         spendingTokens,
@@ -927,10 +990,11 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -946,6 +1010,7 @@ class _$TransferLoaded implements TransferLoaded {
   }) {
     return loaded?.call(
         currentToken,
+        nativeCurrency,
         backupToken,
         isToSpending,
         spendingTokens,
@@ -963,10 +1028,11 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
+            TokenEntity nativeCurrency,
             TokenEntity backupToken,
             bool isToSpending,
             List<TokenEntity> spendingTokens,
@@ -984,6 +1050,7 @@ class _$TransferLoaded implements TransferLoaded {
     if (loaded != null) {
       return loaded(
           currentToken,
+          nativeCurrency,
           backupToken,
           isToSpending,
           spendingTokens,
@@ -1040,6 +1107,7 @@ class _$TransferLoaded implements TransferLoaded {
 abstract class TransferLoaded implements TransferState {
   const factory TransferLoaded(
       {required final TokenEntity currentToken,
+      required final TokenEntity nativeCurrency,
       required final TokenEntity backupToken,
       required final bool isToSpending,
       required final List<TokenEntity> spendingTokens,
@@ -1053,6 +1121,7 @@ abstract class TransferLoaded implements TransferState {
       final String? errorMsg}) = _$TransferLoaded;
 
   TokenEntity get currentToken;
+  TokenEntity get nativeCurrency;
   TokenEntity get backupToken;
   bool get isToSpending;
   List<TokenEntity> get spendingTokens;

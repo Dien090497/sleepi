@@ -187,6 +187,9 @@ class SpendingImplementation extends ISpendingRepository {
         gasPrice: gasPrice,
         functionName: params.functionName,
         data: params.data,
+        value: params.tokenAddress == Const.deadAddress
+            ? EtherAmount.inWei(params.data[1])
+            : null,
       );
       return Right(gasFee);
     } catch (e) {

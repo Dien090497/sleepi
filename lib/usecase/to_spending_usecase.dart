@@ -17,13 +17,17 @@ class ToSpendingUseCase extends UseCase<String, ToSpendingParams> {
       Left.new,
       (r) async {
         final result = await _iSpendingRepository.depositToken(
-          amount: params.amount,
-          owner: r.credentials,
-          addressContract: params.addressContract,
-          userId: params.userId,
-          type: params.type
+            amount: params.amount,
+            owner: r.credentials,
+            addressContract: params.addressContract,
+            userId: params.userId,
+            type: params.type);
+        return result.fold(
+          (l) {
+            return Left(l);
+          },
+          Right.new,
         );
-        return result;
       },
     );
   }

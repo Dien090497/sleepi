@@ -1,8 +1,8 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -117,11 +117,11 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                               // if(value != null) {
                               //   valueInEther = (value.getInWei / BigInt.from(pow(10, 18)));
                               // }
+                              final model = transactionList[index];
                               return SFCard(
                                 onTap: () async {
                                   cubit.getCurrentNetworkExplorer(
-                                      transactionList[index].transactionHash ??
-                                          '');
+                                      model.transactionHash ?? '');
                                 },
                                 radius: 8,
                                 margin: EdgeInsets.only(
@@ -146,22 +146,17 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           SFText(
-                                            keyText:
-                                                transactionList[index].status ==
-                                                        1
-                                                    ? "Success"
-                                                    : "Failed",
-                                            style:
-                                                transactionList[index].status ==
-                                                        1
-                                                    ? TextStyles.bold16Blue
-                                                    : TextStyles.red16Italic,
+                                            keyText: model.status == 1
+                                                ? "Success"
+                                                : "Failed",
+                                            style: model.status == 1
+                                                ? TextStyles.bold16Blue
+                                                : TextStyles.red16Italic,
                                           ),
                                           const SizedBox(height: 4.0),
                                           SFText(
-                                            keyText: dateUtils.ddMMyyyyHHmm(
-                                                transactionList[index]
-                                                    .timeStamp),
+                                            keyText: dateUtils
+                                                .ddMMyyyyHHmm(model.timeStamp),
                                             style: TextStyles.lightGrey14,
                                           ),
                                         ],
@@ -173,17 +168,16 @@ class _TransactionDetailListState extends State<TransactionDetailList> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         SFText(
-                                          keyText:
-                                              "${transactionList[index].valueInEther! >= 0.000001 ? transactionList[index].valueInEther!.formatBalanceToken : 0}",
+                                          keyText: Decimal.parse(
+                                                  '${model.valueInEther!}')
+                                              .floor(scale: 6)
+                                              .toString(),
                                           style: TextStyles.bold16Blue,
                                         ),
-                                        const SizedBox(
-                                          height: 4.0,
-                                        ),
+                                        const SizedBox(height: 4.0),
                                         SFText(
-                                          keyText:
-                                              "${transactionList[index].addressTo}"
-                                                  .formatAddress,
+                                          keyText: "${model.addressTo}"
+                                              .formatAddress,
                                           style: TextStyles.lightGrey14,
                                         ),
                                       ],

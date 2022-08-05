@@ -11,9 +11,9 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 class PopUpConfirmTransfer extends StatelessWidget {
   const PopUpConfirmTransfer({
     Key? key,
+    this.fee,
     required this.userId,
     required this.amount,
-    required this.fee,
     required this.symbol,
     required this.tokenAddress,
     required this.ownerAddress,
@@ -24,7 +24,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
 
   final int userId;
   final double amount;
-  final String fee;
+  final String? fee;
   final String symbol;
   final String tokenAddress;
   final String ownerAddress;
@@ -87,27 +87,29 @@ class PopUpConfirmTransfer extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SFText(
-                keyText: LocaleKeys.fee,
-                style: TextStyles.lightGrey14,
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.centerRight,
-                  child: SFText(
-                      keyText: "$fee AVAX",
-                      style: TextStyles.lightWhite16,
-                      textAlign: TextAlign.end),
+          if (fee?.isNotEmpty ?? false) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SFText(
+                  keyText: LocaleKeys.fee,
+                  style: TextStyles.lightGrey14,
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8.0),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerRight,
+                    child: SFText(
+                        keyText: "$fee AVAX",
+                        style: TextStyles.lightWhite16,
+                        textAlign: TextAlign.end),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+          ],
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

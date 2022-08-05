@@ -8,14 +8,15 @@ class TransferState with _$TransferState {
   const factory TransferState.initial({
     required String address,
     required bool isToSpending,
-}) = TransferInitial;
+  }) = TransferInitial;
 
-  const factory TransferState.success() = TransferSuccess;
+  const factory TransferState.success(String txHash) = TransferSuccess;
 
   const factory TransferState.failed(String msg) = TransferFailed;
 
   const factory TransferState.loaded({
     required TokenEntity currentToken,
+    required TokenEntity nativeCurrency,
     required TokenEntity backupToken,
     required bool isToSpending,
     required List<TokenEntity> spendingTokens,

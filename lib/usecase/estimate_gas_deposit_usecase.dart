@@ -16,8 +16,13 @@ class EstimateGasDepositUseCase
 }
 
 class EstimateGasDepositParam {
+  final String tokenAddress;
   final String functionName;
   final List<dynamic> data;
 
-  EstimateGasDepositParam({required this.functionName, required this.data,});
+  EstimateGasDepositParam({
+    required this.functionName,
+    required this.data,
+    required this.tokenAddress,
+  });
 }

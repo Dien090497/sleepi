@@ -46,6 +46,11 @@ class TransactionDetail extends StatelessWidget {
         as TransactionDetailArguments;
     return BlocBuilder<WalletCubit, WalletState>(
       builder: (context, state) {
+        final token = state is WalletStateLoaded
+            ? state.tokenList.firstWhere((e) =>
+                e.address.toLowerCase() ==
+                args.tokenEntity.address.toLowerCase())
+            : args.tokenEntity;
         return BackgroundWidget(
             appBar: AppBar(
                 toolbarHeight: 80,
@@ -90,7 +95,7 @@ class TransactionDetail extends StatelessWidget {
                   const SizedBox(height: 16.0),
                   SFText(
                       keyText:
-                          "${Decimal.parse('${args.tokenEntity.balance}').floor(scale: 6)} ${args.title}",
+                          "${Decimal.parse('${token.balance}').floor(scale: 6)} ${args.title}",
                       style: TextStyles.bold30White,
                       textAlign: TextAlign.center,
                       stringCase: StringCase.upperCase),
@@ -120,9 +125,7 @@ class TransactionDetail extends StatelessWidget {
                               assetImage: Ics.icDownload,
                             ),
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
+                          const SizedBox(width: 10),
                           args.tokenEntity.symbol != 'USDC'
                               ? Expanded(
                                   child: BoxButtonWidget(
@@ -138,9 +141,7 @@ class TransactionDetail extends StatelessWidget {
                                 )
                               : const SizedBox(),
                           args.tokenEntity.symbol != 'USDC'
-                              ? const SizedBox(
-                                  width: 10,
-                                )
+                              ? const SizedBox(width: 10)
                               : const SizedBox(),
                           Expanded(
                             child: BoxButtonWidget(
@@ -169,8 +170,7 @@ class TransactionDetail extends StatelessWidget {
                                   context,
                                   R.trade,
                                   arguments: TradeArguments(
-                                      symbolFrom:
-                                          args.tokenEntity.symbol),
+                                      symbolFrom: args.tokenEntity.symbol),
                                 );
                               },
                               text: LocaleKeys.trade

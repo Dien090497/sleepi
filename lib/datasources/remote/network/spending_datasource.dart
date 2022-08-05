@@ -59,6 +59,7 @@ class SpendingDataSource {
     required String spendingAddress,
     required EthereumAddress ownerAddress,
     required EtherAmount gasPrice,
+    required EtherAmount? value,
     required String functionName,
     required List<dynamic> data,
   }) async {
@@ -67,11 +68,14 @@ class SpendingDataSource {
     final gasFee = await _web3provider.web3client.estimateGas(
       sender: ownerAddress,
       to: spending.self.address,
-      value: EtherAmount.inWei(data[1]),
+      value: value,
       gasPrice: gasPrice,
       data: depositTokenFunc.encodeCall(data),
     );
-    return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
+    final fee = gasFee * gasPrice.getInWei;
+    return BigInt.from(
+            fee.toDouble() + fee * BigInt.from(5) / BigInt.from(100)) /
+        BigInt.from(pow(10, 18));
   }
 
   Future<EtherAmount> getGasPrice() => _web3provider.web3client.getGasPrice();

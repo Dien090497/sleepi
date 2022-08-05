@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:decimal/decimal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
@@ -11,7 +12,6 @@ import 'package:slee_fi/usecase/approve_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_deposit_usecase.dart';
 import 'package:slee_fi/usecase/estimate_gas_withdraw.dart';
 import 'package:slee_fi/usecase/is_token_approved_enough_usecase.dart';
-import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/to_spending_usecase.dart';
 import 'package:slee_fi/usecase/transfer_token_to_main_wallet_usecase.dart';
 import 'package:web3dart/web3dart.dart';
@@ -47,6 +47,11 @@ class TransferCubit extends Cubit<TransferState> {
 
       /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
       final currentToken = isToSpending ? walletToken : spendingToken;
+      final nativeCurrency = isToSpending
+          ? walletTokens
+              .firstWhere((e) => e.address.toLowerCase() == Const.deadAddress)
+          : spendingTokens
+              .firstWhere((e) => e.address.toLowerCase() == Const.deadAddress);
 
       /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
       final backupToken = isToSpending ? spendingToken : walletToken;
@@ -58,6 +63,7 @@ class TransferCubit extends Cubit<TransferState> {
         walletTokens: baseWalletTokens,
         userId: userId,
         ownerAddress: ownerAddress,
+        nativeCurrency: nativeCurrency,
       ));
       _getFee();
     }
@@ -83,34 +89,6 @@ class TransferCubit extends Cubit<TransferState> {
         spendingTokens: spendingTokens,
         walletTokens: walletTokens,
       ));
-    }
-  }
-
-  Future<void> getFee({double? amount}) async {
-    final currentState = state;
-    if (currentState is TransferLoaded) {
-      emit(currentState.copyWith(fee: null, isLoading: true));
-      final String? fee;
-
-      if (!currentState.isToSpending) {
-        final feeRes = await _estGasWithdraw.call(EstimateGasWithdrawParam(
-            type: 'token', contractAddress: currentState.currentToken.address));
-        fee = feeRes.foldRight(null, (r, previous) => r);
-        emit(currentState.copyWith(fee: null, isLoading: false));
-      } else {
-        if (currentState.currentToken.symbol == 'AVAX') {
-          final feeRes = await getIt<SendToExternalUseCase>()
-              .calculatorFee(SendToExternalParams(
-            contractAddressTo: '',
-            valueInEther: 0,
-            tokenSymbol: currentState.currentToken.symbol,
-          ));
-          fee = feeRes.foldRight(null, (r, previous) => r);
-          emit(currentState.copyWith(fee: fee, isLoading: false));
-        } else {
-          //
-        }
-      }
     }
   }
 
@@ -229,7 +207,6 @@ class TransferCubit extends Cubit<TransferState> {
           await _approveUseCase.call(currentState.currentToken.address);
       return result.fold(
         (l) {
-          // emit(TransferState.failed('$l'));
           emit(currentState.copyWith(isLoading: false));
           return '';
         },
@@ -242,9 +219,7 @@ class TransferCubit extends Cubit<TransferState> {
     return '';
   }
 
-  Future<void> transfer({
-    required int userId,
-  }) async {
+  Future<void> transfer({required int userId}) async {
     final currentState = state;
     if (currentState is TransferLoaded) {
       if (currentState.isLoading) return;
@@ -258,11 +233,22 @@ class TransferCubit extends Cubit<TransferState> {
             userId: userId));
         result.fold(
           (l) {
-            emit(currentState.copyWith(
-                isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
+            if (l.toString().contains('transferFrom failed')) {
+              emit(currentState.copyWith(
+                  isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
+            } else if (l
+                .toString()
+                .contains('insufficient funds for transfer')) {
+              emit(currentState.copyWith(
+                  isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
+            } else {
+              emit(const TransferState.failed(
+                  LocaleKeys.not_enough_to_pay_the_fee));
+              emit(currentState.copyWith(isLoading: false));
+            }
           },
-          (result) {
-            emit(const TransferState.success());
+          (txHash) {
+            emit(TransferState.success(txHash));
           },
         );
       } else {
@@ -272,10 +258,11 @@ class TransferCubit extends Cubit<TransferState> {
             tokenAddress: token.address));
         result.fold(
           (l) {
-            emit(currentState.copyWith(isLoading: false, errorMsg: '$l'));
+            emit(const TransferState.failed(LocaleKeys.insufficient_avax));
+            emit(currentState.copyWith(isLoading: false));
           },
           (r) {
-            emit(const TransferState.success());
+            emit(TransferState.success(r.txHash ?? ''));
           },
         );
       }
@@ -331,7 +318,7 @@ class TransferCubit extends Cubit<TransferState> {
     }
   }
 
-  Future<String> _getFeeDepositToken({
+  Future<String?> _getFeeDepositToken({
     required String tokenAddress,
     required double amount,
     required int userId,
@@ -347,17 +334,21 @@ class TransferCubit extends Cubit<TransferState> {
         valueSend,
         BigInt.from(userId),
       ],
+      tokenAddress: tokenAddress,
     ));
-    return result.fold((l) {
-      return '0';
-    }, (r) => '$r');
+    return result.fold(
+      (l) {
+        return null;
+      },
+      (r) => '$r',
+    );
   }
 
-  Future<String> _getWithdrawFee({required String tokenAddress}) async {
+  Future<String?> _getWithdrawFee({required String tokenAddress}) async {
     final feeRes = await _estGasWithdraw.call(
         EstimateGasWithdrawParam(type: 'token', contractAddress: tokenAddress));
     return feeRes.fold((l) {
-      return '0';
+      return null;
     }, (r) => r);
   }
 }

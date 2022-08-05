@@ -238,9 +238,11 @@ class WalletImplementation extends IWalletRepository {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
       Credentials credentials = EthPrivateKey.fromHex(wallet!.privateKey);
-      String txh = await _web3DataSource.approveToken(wallet.address, contractAddress, credentials);
-      if(txh == LocaleKeys.not_enough_to_pay_the_fee) {
-        return Left(FailureMessage.fromException(LocaleKeys.not_enough_to_pay_the_fee));
+      String txh = await _web3DataSource.approveToken(
+          wallet.address, contractAddress, credentials);
+      if (txh == LocaleKeys.not_enough_to_pay_the_fee) {
+        return Left(
+            FailureMessage.fromException(LocaleKeys.not_enough_to_pay_the_fee));
       }
       return Right(txh);
     } catch (e) {
@@ -360,7 +362,6 @@ class WalletImplementation extends IWalletRepository {
   @override
   Future<Either<Failure, double>> getAmountOutMin(double value,
       String contractAddressFrom, String contractAddressTo) async {
-
     final walletId = _getStorageDataSource.getCurrentWalletId();
     final wallet = await _isarDataSource.getWalletAt(walletId);
     double amount = await _web3DataSource.getAmountOutMin(

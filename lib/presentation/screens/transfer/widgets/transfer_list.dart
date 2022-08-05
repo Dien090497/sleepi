@@ -109,6 +109,7 @@ class _TransferListState extends State<TransferList> {
               showCustomAlertDialog(
                 context,
                 showClosed: false,
+                barrierDismissible: false,
                 children: PopUpConfirmTransfer(
                   onConfirm: () {
                     isLoadingNotifier.value = true;
@@ -121,7 +122,7 @@ class _TransferListState extends State<TransferList> {
                   },
                   isToSpending: state.isToSpending,
                   amount: state.amount!,
-                  fee: state.fee ?? '0',
+                  fee: state.fee,
                   symbol: state.currentToken.symbol,
                   tokenAddress: state.currentToken.address,
                   isLoadingNotifier: isLoadingNotifier,
@@ -137,7 +138,7 @@ class _TransferListState extends State<TransferList> {
         if (state is TransferSuccess) {
           showSuccessfulDialog(
             context,
-            null,
+            LocaleKeys.transaction_submitted,
             barrierDismissible: false,
             onBackPress: () {
               Navigator.popUntil(
@@ -148,6 +149,9 @@ class _TransferListState extends State<TransferList> {
             },
           );
           isLoadingNotifier.value = false;
+        }
+        if (state is TransferFailed) {
+          showMessageDialog(context, state.msg);
         }
       },
       buildWhen: (prev, cur) => cur is TransferLoaded,
@@ -208,7 +212,7 @@ class _TransferListState extends State<TransferList> {
                                     'avax';
                             final amount = isAvax
                                 ? (Decimal.parse('${currentToken.balance}') -
-                                        Decimal.parse('${state.fee}'))
+                                        Decimal.parse(state.fee ?? '0'))
                                     .floor(scale: 6)
                                 : Decimal.parse('${currentToken.balance}')
                                     .floor(scale: 6);
