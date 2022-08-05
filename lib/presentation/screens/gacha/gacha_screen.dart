@@ -156,7 +156,7 @@ class _GachaScreenState extends State<GachaScreen> {
                           ),
                         ],
                       ),
-                      if (state is GachaSpinLoading) const LoadingScreen(),
+                      if (state is GachaDataLoading) const LoadingScreen(),
                     ],
                   ),
                 );

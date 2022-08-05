@@ -43,6 +43,7 @@ class GachaRollSelections extends StatefulWidget {
 
 class _GachaRollSelectionsState extends State<GachaRollSelections> {
   bool enableButton = true;
+  bool isConnectedNetwork = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,21 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
       create: (context) => GachaSpinCubit(),
       child: BlocConsumer<GachaSpinCubit, GachaSpinState>(
         listener: (context, state) {
+          if (state is GachaCheckConnection) {
+            Navigator.pop(context, true);
+            showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+            setState(() {
+             enableButton = true;
+             isConnectedNetwork = false;
+            });
+          }
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
             showMessageDialog(context, LocaleKeys.you_dont_have_enough_money)
-                .then((value) {
-              final cubit = context.read<GachaSpinCubit>();
-              cubit.init();
-              setState(() => enableButton = true);
+                .then((value) => widget.onPressed());
+            setState(() {
+              enableButton = true;
+              isConnectedNetwork = true;
             });
           }
           if (state is GachaSpinSuccess) {
@@ -71,7 +80,10 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                       ? Const.normalGachaAudio
                       : Const.specialGachaAudio,
                 )).then((value) => widget.onPressed());
-            setState(() => enableButton = true);
+            setState(() {
+              enableButton = true;
+              isConnectedNetwork = true;
+            });
           }
         },
         builder: (context, state) {
@@ -89,14 +101,19 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                           priceSpin: widget.costSingle,
                           quantity: 1,
                           onConfirmTap: () {
-                            enableButton
-                                ? cubit.gachaSpin(GachaSpinSchema(
-                                    probability: widget.singleProbability))
-                                : null;
-                            setState(() => enableButton = false);
-                            Navigator.pop(context, true);
-                            showLoadingDialog(context,
-                                barrierDismissible: false);
+                            if(isConnectedNetwork == true){
+                              enableButton
+                                  ? cubit.gachaSpin(GachaSpinSchema(
+                                  probability: widget.singleProbability))
+                                  : null;
+                              setState(() => enableButton = false);
+                              Navigator.pop(context, true);
+                              showLoadingDialog(context,
+                                  barrierDismissible: false);
+                            }else{
+                              Navigator.pop(context, true);
+                              showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+                            }
                           },
                         ));
                   },
@@ -132,15 +149,22 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
                             priceSpin: widget.costMultiple,
                             quantity: 10,
                             onConfirmTap: () {
-                              enableButton
-                                  ? cubit.gachaSpin(GachaSpinSchema(
-                                      probability: widget.timesProbability))
-                                  : null;
-                              setState(() => enableButton = false);
-                              Navigator.pop(context, true);
-                              showLoadingDialog(context,
-                                  barrierDismissible: false);
-                            }));
+                              if(isConnectedNetwork){
+                                enableButton
+                                    ? cubit.gachaSpin(GachaSpinSchema(
+                                    probability: widget.timesProbability))
+                                    : null;
+                                setState(() => enableButton = false);
+                                Navigator.pop(context, true);
+                                showLoadingDialog(context,
+                                    barrierDismissible: false);
+                              }else{
+                                Navigator.pop(context, true);
+                                showMessageDialog(context, LocaleKeys.you_need_to_connect_wifi_or_mobile_data);
+                              }
+                            }
+                            )
+                    );
                   },
                   child: Stack(children: [
                     SFIcon(widget.timesGachaImages, fit: BoxFit.fill),

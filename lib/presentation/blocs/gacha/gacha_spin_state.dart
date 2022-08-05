@@ -17,6 +17,9 @@ class GachaSpinState with _$GachaSpinState {
 
   const factory GachaSpinState.loading() = GachaSpinLoading;
 
+  const factory GachaSpinState.dataLoading() = GachaDataLoading;
+
+  const factory GachaSpinState.checkConnection() = GachaCheckConnection;
 
   const factory GachaSpinState.success(GachaSpinResponse gachaSpinResponse) = GachaSpinSuccess;
 

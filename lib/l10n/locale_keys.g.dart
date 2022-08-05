@@ -513,5 +513,6 @@ abstract class  LocaleKeys {
   static const not_enough_to_pay_the_fee = 'not_enough_to_pay_the_fee';
   static const transaction_submitted = 'transaction_submitted';
   static const input_value_so_small = 'input_value_so_small';
+  static const you_need_to_connect_wifi_or_mobile_data = 'you_need_to_connect_wifi_or_mobile_data';
 
 }
