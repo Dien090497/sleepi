@@ -7,6 +7,7 @@ abstract class ReleaseInjection {
   @Environment('stg')
   @Named('baseUrl')
   String get baseUrl => 'https://staging.sleefi.com/api/v1';
+  // String get baseUrl => 'https://test.sleefi.com/api/v1';
 
   @Environment('stg')
   @Named('tokens')

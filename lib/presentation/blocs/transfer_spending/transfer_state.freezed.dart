@@ -18,9 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String msg) failed,
-    required TResult Function(double depositTokenGas) getEstimateGasFee,
+    required TResult Function(String address, bool isToSpending) initial,
     required TResult Function() success,
+    required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -28,6 +28,7 @@ mixin _$TransferState {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -38,9 +39,9 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function(String address, bool isToSpending)? initial,
     TResult Function()? success,
+    TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -48,6 +49,7 @@ mixin _$TransferState {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -58,9 +60,9 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function(String address, bool isToSpending)? initial,
     TResult Function()? success,
+    TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -68,6 +70,7 @@ mixin _$TransferState {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -79,26 +82,25 @@ mixin _$TransferState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferFailed value) failed,
-    required TResult Function(TransferEstimateGasFeeSuccess value)
-        getEstimateGasFee,
+    required TResult Function(TransferInitial value) initial,
     required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferFailed value) failed,
     required TResult Function(TransferLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferInitial value)? initial,
     TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
     TResult Function(TransferLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferInitial value)? initial,
     TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
   }) =>
@@ -120,6 +122,361 @@ class _$TransferStateCopyWithImpl<$Res>
   final TransferState _value;
   // ignore: unused_field
   final $Res Function(TransferState) _then;
+}
+
+/// @nodoc
+abstract class _$$TransferInitialCopyWith<$Res> {
+  factory _$$TransferInitialCopyWith(
+          _$TransferInitial value, $Res Function(_$TransferInitial) then) =
+      __$$TransferInitialCopyWithImpl<$Res>;
+  $Res call({String address, bool isToSpending});
+}
+
+/// @nodoc
+class __$$TransferInitialCopyWithImpl<$Res>
+    extends _$TransferStateCopyWithImpl<$Res>
+    implements _$$TransferInitialCopyWith<$Res> {
+  __$$TransferInitialCopyWithImpl(
+      _$TransferInitial _value, $Res Function(_$TransferInitial) _then)
+      : super(_value, (v) => _then(v as _$TransferInitial));
+
+  @override
+  _$TransferInitial get _value => super._value as _$TransferInitial;
+
+  @override
+  $Res call({
+    Object? address = freezed,
+    Object? isToSpending = freezed,
+  }) {
+    return _then(_$TransferInitial(
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
+      isToSpending: isToSpending == freezed
+          ? _value.isToSpending
+          : isToSpending // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TransferInitial implements TransferInitial {
+  const _$TransferInitial({required this.address, required this.isToSpending});
+
+  @override
+  final String address;
+  @override
+  final bool isToSpending;
+
+  @override
+  String toString() {
+    return 'TransferState.initial(address: $address, isToSpending: $isToSpending)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransferInitial &&
+            const DeepCollectionEquality().equals(other.address, address) &&
+            const DeepCollectionEquality()
+                .equals(other.isToSpending, isToSpending));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(address),
+      const DeepCollectionEquality().hash(isToSpending));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$TransferInitialCopyWith<_$TransferInitial> get copyWith =>
+      __$$TransferInitialCopyWithImpl<_$TransferInitial>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String address, bool isToSpending) initial,
+    required TResult Function() success,
+    required TResult Function(String msg) failed,
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            List<TokenEntity> spendingTokens,
+            List<TokenEntity> walletTokens,
+            int userId,
+            String ownerAddress,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg)
+        loaded,
+  }) {
+    return initial(address, isToSpending);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String address, bool isToSpending)? initial,
+    TResult Function()? success,
+    TResult Function(String msg)? failed,
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            List<TokenEntity> spendingTokens,
+            List<TokenEntity> walletTokens,
+            int userId,
+            String ownerAddress,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg)?
+        loaded,
+  }) {
+    return initial?.call(address, isToSpending);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String address, bool isToSpending)? initial,
+    TResult Function()? success,
+    TResult Function(String msg)? failed,
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            List<TokenEntity> spendingTokens,
+            List<TokenEntity> walletTokens,
+            int userId,
+            String ownerAddress,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(address, isToSpending);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TransferInitial value) initial,
+    required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferLoaded value) loaded,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferInitial value)? initial,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferLoaded value)? loaded,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferInitial value)? initial,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferLoaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransferInitial implements TransferState {
+  const factory TransferInitial(
+      {required final String address,
+      required final bool isToSpending}) = _$TransferInitial;
+
+  String get address;
+  bool get isToSpending;
+  @JsonKey(ignore: true)
+  _$$TransferInitialCopyWith<_$TransferInitial> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TransferSuccessCopyWith<$Res> {
+  factory _$$TransferSuccessCopyWith(
+          _$TransferSuccess value, $Res Function(_$TransferSuccess) then) =
+      __$$TransferSuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TransferSuccessCopyWithImpl<$Res>
+    extends _$TransferStateCopyWithImpl<$Res>
+    implements _$$TransferSuccessCopyWith<$Res> {
+  __$$TransferSuccessCopyWithImpl(
+      _$TransferSuccess _value, $Res Function(_$TransferSuccess) _then)
+      : super(_value, (v) => _then(v as _$TransferSuccess));
+
+  @override
+  _$TransferSuccess get _value => super._value as _$TransferSuccess;
+}
+
+/// @nodoc
+
+class _$TransferSuccess implements TransferSuccess {
+  const _$TransferSuccess();
+
+  @override
+  String toString() {
+    return 'TransferState.success()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TransferSuccess);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String address, bool isToSpending) initial,
+    required TResult Function() success,
+    required TResult Function(String msg) failed,
+    required TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            List<TokenEntity> spendingTokens,
+            List<TokenEntity> walletTokens,
+            int userId,
+            String ownerAddress,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg)
+        loaded,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String address, bool isToSpending)? initial,
+    TResult Function()? success,
+    TResult Function(String msg)? failed,
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            List<TokenEntity> spendingTokens,
+            List<TokenEntity> walletTokens,
+            int userId,
+            String ownerAddress,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg)?
+        loaded,
+  }) {
+    return success?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String address, bool isToSpending)? initial,
+    TResult Function()? success,
+    TResult Function(String msg)? failed,
+    TResult Function(
+            TokenEntity currentToken,
+            TokenEntity backupToken,
+            bool isToSpending,
+            List<TokenEntity> spendingTokens,
+            List<TokenEntity> walletTokens,
+            int userId,
+            String ownerAddress,
+            bool isLoading,
+            double? amount,
+            String? fee,
+            bool? isAllowance,
+            String? errorMsg)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TransferInitial value) initial,
+    required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferFailed value) failed,
+    required TResult Function(TransferLoaded value) loaded,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(TransferInitial value)? initial,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferLoaded value)? loaded,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TransferInitial value)? initial,
+    TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
+    TResult Function(TransferLoaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TransferSuccess implements TransferState {
+  const factory TransferSuccess() = _$TransferSuccess;
 }
 
 /// @nodoc
@@ -187,9 +544,9 @@ class _$TransferFailed implements TransferFailed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String msg) failed,
-    required TResult Function(double depositTokenGas) getEstimateGasFee,
+    required TResult Function(String address, bool isToSpending) initial,
     required TResult Function() success,
+    required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -197,6 +554,7 @@ class _$TransferFailed implements TransferFailed {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -210,9 +568,9 @@ class _$TransferFailed implements TransferFailed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function(String address, bool isToSpending)? initial,
     TResult Function()? success,
+    TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -220,6 +578,7 @@ class _$TransferFailed implements TransferFailed {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -233,9 +592,9 @@ class _$TransferFailed implements TransferFailed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function(String address, bool isToSpending)? initial,
     TResult Function()? success,
+    TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -243,6 +602,7 @@ class _$TransferFailed implements TransferFailed {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -260,10 +620,9 @@ class _$TransferFailed implements TransferFailed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferFailed value) failed,
-    required TResult Function(TransferEstimateGasFeeSuccess value)
-        getEstimateGasFee,
+    required TResult Function(TransferInitial value) initial,
     required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferFailed value) failed,
     required TResult Function(TransferLoaded value) loaded,
   }) {
     return failed(this);
@@ -272,9 +631,9 @@ class _$TransferFailed implements TransferFailed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferInitial value)? initial,
     TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
     TResult Function(TransferLoaded value)? loaded,
   }) {
     return failed?.call(this);
@@ -283,9 +642,9 @@ class _$TransferFailed implements TransferFailed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferInitial value)? initial,
     TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -306,349 +665,6 @@ abstract class TransferFailed implements TransferState {
 }
 
 /// @nodoc
-abstract class _$$TransferEstimateGasFeeSuccessCopyWith<$Res> {
-  factory _$$TransferEstimateGasFeeSuccessCopyWith(
-          _$TransferEstimateGasFeeSuccess value,
-          $Res Function(_$TransferEstimateGasFeeSuccess) then) =
-      __$$TransferEstimateGasFeeSuccessCopyWithImpl<$Res>;
-  $Res call({double depositTokenGas});
-}
-
-/// @nodoc
-class __$$TransferEstimateGasFeeSuccessCopyWithImpl<$Res>
-    extends _$TransferStateCopyWithImpl<$Res>
-    implements _$$TransferEstimateGasFeeSuccessCopyWith<$Res> {
-  __$$TransferEstimateGasFeeSuccessCopyWithImpl(
-      _$TransferEstimateGasFeeSuccess _value,
-      $Res Function(_$TransferEstimateGasFeeSuccess) _then)
-      : super(_value, (v) => _then(v as _$TransferEstimateGasFeeSuccess));
-
-  @override
-  _$TransferEstimateGasFeeSuccess get _value =>
-      super._value as _$TransferEstimateGasFeeSuccess;
-
-  @override
-  $Res call({
-    Object? depositTokenGas = freezed,
-  }) {
-    return _then(_$TransferEstimateGasFeeSuccess(
-      depositTokenGas == freezed
-          ? _value.depositTokenGas
-          : depositTokenGas // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TransferEstimateGasFeeSuccess implements TransferEstimateGasFeeSuccess {
-  const _$TransferEstimateGasFeeSuccess(this.depositTokenGas);
-
-  @override
-  final double depositTokenGas;
-
-  @override
-  String toString() {
-    return 'TransferState.getEstimateGasFee(depositTokenGas: $depositTokenGas)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TransferEstimateGasFeeSuccess &&
-            const DeepCollectionEquality()
-                .equals(other.depositTokenGas, depositTokenGas));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(depositTokenGas));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$TransferEstimateGasFeeSuccessCopyWith<_$TransferEstimateGasFeeSuccess>
-      get copyWith => __$$TransferEstimateGasFeeSuccessCopyWithImpl<
-          _$TransferEstimateGasFeeSuccess>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String msg) failed,
-    required TResult Function(double depositTokenGas) getEstimateGasFee,
-    required TResult Function() success,
-    required TResult Function(
-            TokenEntity currentToken,
-            TokenEntity backupToken,
-            bool isToSpending,
-            List<TokenEntity> spendingTokens,
-            List<TokenEntity> walletTokens,
-            int userId,
-            bool isLoading,
-            double? amount,
-            String? fee,
-            bool? isAllowance,
-            String? errorMsg)
-        loaded,
-  }) {
-    return getEstimateGasFee(depositTokenGas);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
-    TResult Function()? success,
-    TResult Function(
-            TokenEntity currentToken,
-            TokenEntity backupToken,
-            bool isToSpending,
-            List<TokenEntity> spendingTokens,
-            List<TokenEntity> walletTokens,
-            int userId,
-            bool isLoading,
-            double? amount,
-            String? fee,
-            bool? isAllowance,
-            String? errorMsg)?
-        loaded,
-  }) {
-    return getEstimateGasFee?.call(depositTokenGas);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
-    TResult Function()? success,
-    TResult Function(
-            TokenEntity currentToken,
-            TokenEntity backupToken,
-            bool isToSpending,
-            List<TokenEntity> spendingTokens,
-            List<TokenEntity> walletTokens,
-            int userId,
-            bool isLoading,
-            double? amount,
-            String? fee,
-            bool? isAllowance,
-            String? errorMsg)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (getEstimateGasFee != null) {
-      return getEstimateGasFee(depositTokenGas);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TransferFailed value) failed,
-    required TResult Function(TransferEstimateGasFeeSuccess value)
-        getEstimateGasFee,
-    required TResult Function(TransferSuccess value) success,
-    required TResult Function(TransferLoaded value) loaded,
-  }) {
-    return getEstimateGasFee(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
-    TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferLoaded value)? loaded,
-  }) {
-    return getEstimateGasFee?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
-    TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferLoaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (getEstimateGasFee != null) {
-      return getEstimateGasFee(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TransferEstimateGasFeeSuccess implements TransferState {
-  const factory TransferEstimateGasFeeSuccess(final double depositTokenGas) =
-      _$TransferEstimateGasFeeSuccess;
-
-  double get depositTokenGas;
-  @JsonKey(ignore: true)
-  _$$TransferEstimateGasFeeSuccessCopyWith<_$TransferEstimateGasFeeSuccess>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TransferSuccessCopyWith<$Res> {
-  factory _$$TransferSuccessCopyWith(
-          _$TransferSuccess value, $Res Function(_$TransferSuccess) then) =
-      __$$TransferSuccessCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TransferSuccessCopyWithImpl<$Res>
-    extends _$TransferStateCopyWithImpl<$Res>
-    implements _$$TransferSuccessCopyWith<$Res> {
-  __$$TransferSuccessCopyWithImpl(
-      _$TransferSuccess _value, $Res Function(_$TransferSuccess) _then)
-      : super(_value, (v) => _then(v as _$TransferSuccess));
-
-  @override
-  _$TransferSuccess get _value => super._value as _$TransferSuccess;
-}
-
-/// @nodoc
-
-class _$TransferSuccess implements TransferSuccess {
-  const _$TransferSuccess();
-
-  @override
-  String toString() {
-    return 'TransferState.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TransferSuccess);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String msg) failed,
-    required TResult Function(double depositTokenGas) getEstimateGasFee,
-    required TResult Function() success,
-    required TResult Function(
-            TokenEntity currentToken,
-            TokenEntity backupToken,
-            bool isToSpending,
-            List<TokenEntity> spendingTokens,
-            List<TokenEntity> walletTokens,
-            int userId,
-            bool isLoading,
-            double? amount,
-            String? fee,
-            bool? isAllowance,
-            String? errorMsg)
-        loaded,
-  }) {
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
-    TResult Function()? success,
-    TResult Function(
-            TokenEntity currentToken,
-            TokenEntity backupToken,
-            bool isToSpending,
-            List<TokenEntity> spendingTokens,
-            List<TokenEntity> walletTokens,
-            int userId,
-            bool isLoading,
-            double? amount,
-            String? fee,
-            bool? isAllowance,
-            String? errorMsg)?
-        loaded,
-  }) {
-    return success?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
-    TResult Function()? success,
-    TResult Function(
-            TokenEntity currentToken,
-            TokenEntity backupToken,
-            bool isToSpending,
-            List<TokenEntity> spendingTokens,
-            List<TokenEntity> walletTokens,
-            int userId,
-            bool isLoading,
-            double? amount,
-            String? fee,
-            bool? isAllowance,
-            String? errorMsg)?
-        loaded,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TransferFailed value) failed,
-    required TResult Function(TransferEstimateGasFeeSuccess value)
-        getEstimateGasFee,
-    required TResult Function(TransferSuccess value) success,
-    required TResult Function(TransferLoaded value) loaded,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
-    TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferLoaded value)? loaded,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
-    TResult Function(TransferSuccess value)? success,
-    TResult Function(TransferLoaded value)? loaded,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TransferSuccess implements TransferState {
-  const factory TransferSuccess() = _$TransferSuccess;
-}
-
-/// @nodoc
 abstract class _$$TransferLoadedCopyWith<$Res> {
   factory _$$TransferLoadedCopyWith(
           _$TransferLoaded value, $Res Function(_$TransferLoaded) then) =
@@ -660,6 +676,7 @@ abstract class _$$TransferLoadedCopyWith<$Res> {
       List<TokenEntity> spendingTokens,
       List<TokenEntity> walletTokens,
       int userId,
+      String ownerAddress,
       bool isLoading,
       double? amount,
       String? fee,
@@ -689,6 +706,7 @@ class __$$TransferLoadedCopyWithImpl<$Res>
     Object? spendingTokens = freezed,
     Object? walletTokens = freezed,
     Object? userId = freezed,
+    Object? ownerAddress = freezed,
     Object? isLoading = freezed,
     Object? amount = freezed,
     Object? fee = freezed,
@@ -720,6 +738,10 @@ class __$$TransferLoadedCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int,
+      ownerAddress: ownerAddress == freezed
+          ? _value.ownerAddress
+          : ownerAddress // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: isLoading == freezed
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -768,6 +790,7 @@ class _$TransferLoaded implements TransferLoaded {
       required final List<TokenEntity> spendingTokens,
       required final List<TokenEntity> walletTokens,
       required this.userId,
+      required this.ownerAddress,
       this.isLoading = false,
       this.amount,
       this.fee,
@@ -799,6 +822,8 @@ class _$TransferLoaded implements TransferLoaded {
   @override
   final int userId;
   @override
+  final String ownerAddress;
+  @override
   @JsonKey()
   final bool isLoading;
   @override
@@ -812,7 +837,7 @@ class _$TransferLoaded implements TransferLoaded {
 
   @override
   String toString() {
-    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, spendingTokens: $spendingTokens, walletTokens: $walletTokens, userId: $userId, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
+    return 'TransferState.loaded(currentToken: $currentToken, backupToken: $backupToken, isToSpending: $isToSpending, spendingTokens: $spendingTokens, walletTokens: $walletTokens, userId: $userId, ownerAddress: $ownerAddress, isLoading: $isLoading, amount: $amount, fee: $fee, isAllowance: $isAllowance, errorMsg: $errorMsg)';
   }
 
   @override
@@ -831,6 +856,8 @@ class _$TransferLoaded implements TransferLoaded {
             const DeepCollectionEquality()
                 .equals(other._walletTokens, _walletTokens) &&
             const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.ownerAddress, ownerAddress) &&
             const DeepCollectionEquality().equals(other.isLoading, isLoading) &&
             const DeepCollectionEquality().equals(other.amount, amount) &&
             const DeepCollectionEquality().equals(other.fee, fee) &&
@@ -848,6 +875,7 @@ class _$TransferLoaded implements TransferLoaded {
       const DeepCollectionEquality().hash(_spendingTokens),
       const DeepCollectionEquality().hash(_walletTokens),
       const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(ownerAddress),
       const DeepCollectionEquality().hash(isLoading),
       const DeepCollectionEquality().hash(amount),
       const DeepCollectionEquality().hash(fee),
@@ -862,9 +890,9 @@ class _$TransferLoaded implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String msg) failed,
-    required TResult Function(double depositTokenGas) getEstimateGasFee,
+    required TResult Function(String address, bool isToSpending) initial,
     required TResult Function() success,
+    required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -872,6 +900,7 @@ class _$TransferLoaded implements TransferLoaded {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -879,16 +908,27 @@ class _$TransferLoaded implements TransferLoaded {
             String? errorMsg)
         loaded,
   }) {
-    return loaded(currentToken, backupToken, isToSpending, spendingTokens,
-        walletTokens, userId, isLoading, amount, fee, isAllowance, errorMsg);
+    return loaded(
+        currentToken,
+        backupToken,
+        isToSpending,
+        spendingTokens,
+        walletTokens,
+        userId,
+        ownerAddress,
+        isLoading,
+        amount,
+        fee,
+        isAllowance,
+        errorMsg);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function(String address, bool isToSpending)? initial,
     TResult Function()? success,
+    TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -896,6 +936,7 @@ class _$TransferLoaded implements TransferLoaded {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -903,16 +944,27 @@ class _$TransferLoaded implements TransferLoaded {
             String? errorMsg)?
         loaded,
   }) {
-    return loaded?.call(currentToken, backupToken, isToSpending, spendingTokens,
-        walletTokens, userId, isLoading, amount, fee, isAllowance, errorMsg);
+    return loaded?.call(
+        currentToken,
+        backupToken,
+        isToSpending,
+        spendingTokens,
+        walletTokens,
+        userId,
+        ownerAddress,
+        isLoading,
+        amount,
+        fee,
+        isAllowance,
+        errorMsg);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String msg)? failed,
-    TResult Function(double depositTokenGas)? getEstimateGasFee,
+    TResult Function(String address, bool isToSpending)? initial,
     TResult Function()? success,
+    TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
             TokenEntity backupToken,
@@ -920,6 +972,7 @@ class _$TransferLoaded implements TransferLoaded {
             List<TokenEntity> spendingTokens,
             List<TokenEntity> walletTokens,
             int userId,
+            String ownerAddress,
             bool isLoading,
             double? amount,
             String? fee,
@@ -929,8 +982,19 @@ class _$TransferLoaded implements TransferLoaded {
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(currentToken, backupToken, isToSpending, spendingTokens,
-          walletTokens, userId, isLoading, amount, fee, isAllowance, errorMsg);
+      return loaded(
+          currentToken,
+          backupToken,
+          isToSpending,
+          spendingTokens,
+          walletTokens,
+          userId,
+          ownerAddress,
+          isLoading,
+          amount,
+          fee,
+          isAllowance,
+          errorMsg);
     }
     return orElse();
   }
@@ -938,10 +1002,9 @@ class _$TransferLoaded implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TransferFailed value) failed,
-    required TResult Function(TransferEstimateGasFeeSuccess value)
-        getEstimateGasFee,
+    required TResult Function(TransferInitial value) initial,
     required TResult Function(TransferSuccess value) success,
+    required TResult Function(TransferFailed value) failed,
     required TResult Function(TransferLoaded value) loaded,
   }) {
     return loaded(this);
@@ -950,9 +1013,9 @@ class _$TransferLoaded implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferInitial value)? initial,
     TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
     TResult Function(TransferLoaded value)? loaded,
   }) {
     return loaded?.call(this);
@@ -961,9 +1024,9 @@ class _$TransferLoaded implements TransferLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TransferFailed value)? failed,
-    TResult Function(TransferEstimateGasFeeSuccess value)? getEstimateGasFee,
+    TResult Function(TransferInitial value)? initial,
     TResult Function(TransferSuccess value)? success,
+    TResult Function(TransferFailed value)? failed,
     TResult Function(TransferLoaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -982,6 +1045,7 @@ abstract class TransferLoaded implements TransferState {
       required final List<TokenEntity> spendingTokens,
       required final List<TokenEntity> walletTokens,
       required final int userId,
+      required final String ownerAddress,
       final bool isLoading,
       final double? amount,
       final String? fee,
@@ -994,6 +1058,7 @@ abstract class TransferLoaded implements TransferState {
   List<TokenEntity> get spendingTokens;
   List<TokenEntity> get walletTokens;
   int get userId;
+  String get ownerAddress;
   bool get isLoading;
   double? get amount;
   String? get fee;

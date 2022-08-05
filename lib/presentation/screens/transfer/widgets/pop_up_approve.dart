@@ -13,10 +13,12 @@ class PopUpConfirmApprove extends StatelessWidget {
     required this.tokenName,
     required this.onConfirm,
     required this.isLoadingNotifier,
+    this.fee,
   }) : super(key: key);
 
   final VoidCallback onConfirm;
   final String tokenName;
+  final String? fee;
   final ValueNotifier<bool> isLoadingNotifier;
 
   @override
@@ -73,9 +75,21 @@ class PopUpConfirmApprove extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 12.0,
-          ),
+          if (fee != null) ...[
+            const SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SFText(keyText: LocaleKeys.fee, style: TextStyles.lightGrey14),
+                Expanded(
+                    child: SFText(
+                        keyText: '$fee AVAX',
+                        style: TextStyles.lightWhite16,
+                        textAlign: TextAlign.end)),
+              ],
+            ),
+          ],
+          const SizedBox(height: 12.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -90,9 +104,7 @@ class PopUpConfirmApprove extends StatelessWidget {
                       textAlign: TextAlign.end)),
             ],
           ),
-          const SizedBox(
-            height: 32.0,
-          ),
+          const SizedBox(height: 32.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -5,11 +5,14 @@ part 'transfer_state.freezed.dart';
 
 @freezed
 class TransferState with _$TransferState {
-  const factory TransferState.failed(String msg) = TransferFailed;
-
-  const factory TransferState.getEstimateGasFee(double depositTokenGas) = TransferEstimateGasFeeSuccess;
+  const factory TransferState.initial({
+    required String address,
+    required bool isToSpending,
+}) = TransferInitial;
 
   const factory TransferState.success() = TransferSuccess;
+
+  const factory TransferState.failed(String msg) = TransferFailed;
 
   const factory TransferState.loaded({
     required TokenEntity currentToken,
@@ -18,6 +21,7 @@ class TransferState with _$TransferState {
     required List<TokenEntity> spendingTokens,
     required List<TokenEntity> walletTokens,
     required int userId,
+    required String ownerAddress,
     @Default(false) bool isLoading,
     double? amount,
     String? fee,

@@ -8,6 +8,7 @@ import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -45,6 +46,27 @@ class _TransferListState extends State<TransferList> {
 
   @override
   Widget build(BuildContext context) {
+    final spendingState = context.watch<UserBloc>().state;
+    final walletState = context.watch<WalletCubit>().state;
+
+    if (spendingState is UserLoaded && walletState is WalletStateLoaded) {
+      final transferCubit = context.watch<TransferCubit>();
+      final transferState = transferCubit.state;
+      final spendingTokens = spendingState.listTokens;
+      final walletTokens = walletState.tokenList;
+      if (transferState is TransferInitial) {
+        transferCubit.init(
+          baseSpendingTokens: spendingTokens,
+          baseWalletTokens: walletTokens,
+          userId: spendingState.userInfoEntity.id,
+          ownerAddress: walletState.walletInfoEntity.address,
+        );
+      } else if (transferState is TransferLoaded) {
+        transferCubit.refresh(
+            baseSpendingTokens: spendingTokens, baseWalletTokens: walletTokens);
+      }
+    }
+
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) async {
         if (state is TransferLoaded) {
@@ -72,6 +94,7 @@ class _TransferListState extends State<TransferList> {
                 },
                 tokenName: state.currentToken.symbol.toUpperCase(),
                 isLoadingNotifier: isLoadingNotifier,
+                fee: state.fee,
               ),
             );
           } else if (isAllowance == true) {
@@ -91,7 +114,7 @@ class _TransferListState extends State<TransferList> {
                   },
                   isToSpending: state.isToSpending,
                   amount: state.amount!,
-                  fee: state.fee!,
+                  fee: state.fee ?? '0',
                   symbol: state.currentToken.symbol,
                   tokenAddress: state.currentToken.address,
                   isLoadingNotifier: isLoadingNotifier,
@@ -142,8 +165,11 @@ class _TransferListState extends State<TransferList> {
                   child: SmartRefresher(
                     controller: refreshController,
                     onRefresh: () {
+                      context.read<WalletCubit>().refresh();
                       context.read<UserBloc>().add(const RefreshBalanceToken());
-                      refreshController.refreshCompleted();
+                      Future.delayed(const Duration(seconds: 1), () {
+                        refreshController.refreshCompleted();
+                      });
                     },
                     child: ListView(
                       children: [
@@ -213,20 +239,14 @@ class _TransferListState extends State<TransferList> {
                   gradient: AppColors.gradientBlueButton,
                   disabled: state.fee == null && state.errorMsg != null,
                   onPressed: () {
-                    final walletState = context.read<WalletCubit>().state;
-                    if (walletState is WalletStateLoaded) {
-                      cubit.checkAllowance(
-                        ownerAddress: walletState.walletInfoEntity.address,
-                        valueStr: valueController.text,
-                      );
-                    }
+                    cubit.checkAllowance(valueStr: valueController.text);
                   },
                 ),
               ],
             ),
           );
         }
-        return const SizedBox();
+        return const LoadingIcon();
       },
     );
   }

@@ -21,18 +21,22 @@ class TransferWidget extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.w),
       padding: EdgeInsets.all(16.w),
       child: BlocBuilder<TransferCubit, TransferState>(
-        buildWhen: (prev, cur) => cur is TransferLoaded,
+        buildWhen: (prev, cur) =>
+            cur is TransferLoaded || cur is TransferInitial,
         builder: (context, state) {
           String from = '';
           String to = '';
-          if (state is TransferLoaded) {
-            if (state.isToSpending) {
-              from = LocaleKeys.wallet;
-              to = LocaleKeys.spending;
-            } else {
-              from = LocaleKeys.spending;
-              to = LocaleKeys.wallet;
-            }
+          final isToSpending = state is TransferLoaded
+              ? state.isToSpending
+              : state is TransferInitial
+                  ? state.isToSpending
+                  : null;
+          if (isToSpending == true) {
+            from = LocaleKeys.wallet;
+            to = LocaleKeys.spending;
+          } else if (isToSpending == false) {
+            from = LocaleKeys.spending;
+            to = LocaleKeys.wallet;
           }
           return Column(
             children: [

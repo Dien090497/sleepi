@@ -63,12 +63,13 @@ class SpendingDataSource {
     required List<dynamic> data,
   }) async {
     final Spending spending = spendingContract(spendingAddress);
-    final transferFromFunc = spending.self.function(functionName);
+    final depositTokenFunc = spending.self.function(functionName);
     final gasFee = await _web3provider.web3client.estimateGas(
       sender: ownerAddress,
       to: spending.self.address,
+      value: EtherAmount.inWei(data[1]),
       gasPrice: gasPrice,
-      data: transferFromFunc.encodeCall(data),
+      data: depositTokenFunc.encodeCall(data),
     );
     return gasFee * gasPrice.getInWei / BigInt.from(pow(10, 18));
   }

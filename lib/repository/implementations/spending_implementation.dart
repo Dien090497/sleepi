@@ -29,8 +29,13 @@ class SpendingImplementation extends ISpendingRepository {
   final HistoryDataSource _historyDataSource;
   final IsarDataSource _isarDataSource;
 
-  SpendingImplementation(this._spendingDataSource, this._authDataSource,
-      this._secureStorage, this._getStorageDataSource, this._historyDataSource, this._isarDataSource);
+  SpendingImplementation(
+      this._spendingDataSource,
+      this._authDataSource,
+      this._secureStorage,
+      this._getStorageDataSource,
+      this._historyDataSource,
+      this._isarDataSource);
 
   @override
   Future<Either<Failure, String>> depositToken({
@@ -92,8 +97,7 @@ class SpendingImplementation extends ISpendingRepository {
       {required Credentials owner, required String addressContract}) async {
     try {
       final token = _spendingDataSource.token(addressContract);
-      final result = BigInt.parse(
-          "999999999999999999999999999999999999999");
+      final result = BigInt.parse("999999999999999999999999999999999999999");
       final spendingAddress = await _secureStorage.readAddressContract() ?? '';
       final txHash = await _spendingDataSource.approve(
           spendingAddress, owner, result, token);
@@ -169,7 +173,8 @@ class SpendingImplementation extends ISpendingRepository {
   }
 
   @override
-  Future<Either<FailureMessage, double>> estimateGas({required EstimateGasDepositParam params}) async {
+  Future<Either<FailureMessage, double>> estimateGas(
+      {required EstimateGasDepositParam params}) async {
     try {
       final walletId = _getStorageDataSource.getCurrentWalletId();
       final wallet = await _isarDataSource.getWalletAt(walletId);
