@@ -13,7 +13,6 @@ class EstimateSleepResponse {
   EstimateSleepResponse(this.todayEarn, this.maxEarnPerDay);
 
   factory EstimateSleepResponse.fromJson(Map<String, dynamic> json) {
-    print('EstimateSleepResponse  is    ${jsonEncode(json)}');
     return _$EstimateSleepResponseFromJson(json);
   }
 

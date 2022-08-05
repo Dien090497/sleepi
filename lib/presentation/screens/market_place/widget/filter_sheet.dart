@@ -8,8 +8,7 @@ import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
-import 'package:syncfusion_flutter_core/theme.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:slee_fi/presentation/screens/market_place/custom_thumb_range_slide.dart';
 
 class FilterSheet extends StatefulWidget {
   const FilterSheet(
@@ -29,7 +28,7 @@ class FilterSheet extends StatefulWidget {
 
 class _FilterSheetState extends State<FilterSheet> {
   late Map<String, List<String>> selectedSections = {};
-  late Map<String, SfRangeValues> selectedSliders = {};
+  late Map<String, RangeValues> selectedSliders = {};
   final Map<String, GlobalKey<_SliderState>> _key = {};
 
   @override
@@ -52,11 +51,11 @@ class _FilterSheetState extends State<FilterSheet> {
     });
     widget.sliders.forEach((key, value) {
       if (key == LocaleKeys.level.tr()) {
-        selectedSliders[key] = SfRangeValues(
+        selectedSliders[key] = RangeValues(
             widget.cubit.params.minLevel, widget.cubit.params.maxLevel);
       }
       if (key == LocaleKeys.mint.tr()) {
-        selectedSliders[key] = SfRangeValues(
+        selectedSliders[key] = RangeValues(
             widget.cubit.params.minBedMint, widget.cubit.params.maxBedMint);
       }
       _key[key] = GlobalKey();
@@ -70,7 +69,7 @@ class _FilterSheetState extends State<FilterSheet> {
       selectedSections[key] = [];
     });
     widget.sliders.forEach((key, value) {
-      selectedSliders[key] = SfRangeValues(value.min, value.max);
+      selectedSliders[key] = RangeValues(value.min, value.max);
     });
     _key.forEach((key, value) {
       _key[key]?.currentState?.sfRangeValues = selectedSliders[key]!;
@@ -138,7 +137,7 @@ class _FilterSheetState extends State<FilterSheet> {
                     sliders: widget.sliders.values.elementAt(i),
                     // value:
                     //     selectedSliders[widget.sliders.keys.elementAt(i)] ?? 0,
-                    onSelect: (SfRangeValues v) {
+                    onSelect: (RangeValues v) {
                       selectedSliders[widget.sliders.keys.elementAt(i)] = v;
                       // setState(() {});
                     },
@@ -179,7 +178,7 @@ class _Slider extends StatefulWidget {
   final FilterSliderValues sliders;
 
   // final double value;
-  final ValueChanged<SfRangeValues> onSelect;
+  final ValueChanged<RangeValues> onSelect;
 
   @override
   State<_Slider> createState() => _SliderState();
@@ -187,8 +186,7 @@ class _Slider extends StatefulWidget {
 
 class _SliderState extends State<_Slider> {
   late FilterSliderValues slider = widget.sliders;
-
-  late SfRangeValues sfRangeValues = widget.sliders.value;
+  late RangeValues sfRangeValues = widget.sliders.value;
 
   @override
   Widget build(BuildContext context) {
@@ -200,26 +198,70 @@ class _SliderState extends State<_Slider> {
           padding: const EdgeInsets.only(left: 28),
           child: SFText(keyText: widget.label, style: TextStyles.lightGrey14),
         ),
-        SfRangeSliderTheme(
-          data: SfRangeSliderThemeData(
-              activeLabelStyle: TextStyles.lightGrey12W500,
-              inactiveLabelStyle: TextStyles.lightGrey12W500,
-              inactiveTickColor: AppColors.lightGrey),
-          child: SfRangeSlider(
-              min: widget.sliders.min,
-              max: widget.sliders.max,
-              showTicks: true,
-              showLabels: true,
-              stepSize: 1,
-              minorTicksPerInterval: 1,
-              endThumbIcon: const ThumbIcon(),
-              startThumbIcon: const ThumbIcon(),
-              enableTooltip: true,
-              values: sfRangeValues,
-              onChanged: (SfRangeValues value) {
-                setState(() => sfRangeValues = value);
-                widget.onSelect(value);
-              }),
+        // SfRangeSliderTheme(
+        //   data: SfRangeSliderThemeData(
+        //       activeLabelStyle: TextStyles.lightGrey12W500,
+        //       inactiveLabelStyle: TextStyles.lightGrey12W500,
+        //       inactiveTickColor: AppColors.lightGrey),
+        //   child: SfRangeSlider(
+        //       min: widget.sliders.min,
+        //       max: widget.sliders.max,
+        //       showTicks: true,
+        //       showLabels: true,
+        //       stepSize: 1,
+        //       minorTicksPerInterval: 1,
+        //       endThumbIcon: const ThumbIcon(),
+        //       startThumbIcon: const ThumbIcon(),
+        //       enableTooltip: true,
+        //       values: sfRangeValues,
+        //       onChanged: (SfRangeValues value) {
+        //         setState(() => sfRangeValues = value);
+        //         widget.onSelect(value);
+        //       }),
+        // ),
+        Stack(
+          children: [
+            SliderTheme(
+                data: const SliderThemeData(
+                    thumbColor: AppColors.blue,
+                    rangeThumbShape:
+                        CustomThumbColor(enabledThumbRadius: 6, wrapSize: 10),
+                    activeTickMarkColor: Colors.transparent,
+                    inactiveTickMarkColor: Colors.transparent,
+                    disabledActiveTickMarkColor: Colors.transparent),
+                child: RangeSlider(
+                  values: sfRangeValues,
+                  min: widget.sliders.min,
+                  max: widget.sliders.max,
+                  divisions: widget.sliders.max.toInt(),
+                  labels: RangeLabels(
+                    sfRangeValues.start.round().toString(),
+                    sfRangeValues.end.round().toString(),
+                  ),
+                  onChanged: (RangeValues values) {
+                    setState(() {
+                      sfRangeValues = values;
+                    });
+                    widget.onSelect(sfRangeValues);
+                  },
+                )),
+            Positioned(
+              bottom: 0,
+              left: 25,
+              child: Text(
+                widget.sliders.min.toInt().toString(),
+                style: TextStyles.lightGrey12W500,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 25,
+              child: Text(
+                widget.sliders.max.toInt().toString(),
+                style: TextStyles.lightGrey12W500,
+              ),
+            ),
+          ],
         )
       ],
     );
@@ -377,7 +419,7 @@ class _Container extends StatelessWidget {
 class FilterSliderValues extends Equatable {
   final double min;
   final double max;
-  final SfRangeValues value;
+  final RangeValues value;
 
   const FilterSliderValues(
       {required this.min, required this.max, required this.value});
