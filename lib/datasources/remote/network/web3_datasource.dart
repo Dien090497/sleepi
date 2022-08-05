@@ -127,7 +127,6 @@ class Web3DataSource {
       );
       return gasFee;
     } catch (e) {
-      print('=-==--=$e');
       return BigInt.from(0);
     }
   }
@@ -311,7 +310,6 @@ class Web3DataSource {
           deadline,
         ]),
       );
-      print('=-==--=gasFee$gasFee');
       if ((gasFee *
               (await _web3provider.web3client.getGasPrice()).getInWei /
               BigInt.from(pow(10, 18))) <
