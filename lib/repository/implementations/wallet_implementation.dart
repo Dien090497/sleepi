@@ -469,9 +469,11 @@ class WalletImplementation extends IWalletRepository {
         },
       );
       if (transactionHistoryList.isNotEmpty) {
-        final erc20 = _web3DataSource.token(transactionHistoryList.first.contractAddress);
-        final decimalToken = await erc20.decimals();
-        decimal = decimalToken.toInt();
+        if (transactionHistoryList.first.tokenName != null) {
+          final erc20 = _web3DataSource.token(transactionHistoryList.first.contractAddress);
+          final decimalToken = await erc20.decimals();
+          decimal = decimalToken.toInt();
+        }
       }
       List<TransactionIsarModel> transactionList = [];
       for (int i = 0; i < transactionHistoryList.length; i++) {
