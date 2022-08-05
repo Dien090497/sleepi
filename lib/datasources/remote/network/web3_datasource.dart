@@ -108,7 +108,7 @@ class Web3DataSource {
       EthereumAddress to = EthereumAddress.fromHex(usdc);
       final List<EthereumAddress> pairAddress = [from, to];
       final List<BigInt> amounts = await contract.getAmountsOut(
-          BigInt.from(0.00001.etherToWei), pairAddress);
+          BigInt.from(0.0001.etherToWei), pairAddress);
       BigInt amountOutMin = amounts[1] -
           BigInt.from((amounts[1].toInt() * 0.01) / 100); //slippage set here
       BigInt deadline = BigInt.from(
@@ -117,8 +117,7 @@ class Web3DataSource {
       final gasFee = await _web3provider.web3client.estimateGas(
         sender: sender,
         to: contract.self.address,
-        value: 0.00001.etherToWei.toWeiEtherAmount,
-        gasPrice: gasPrice,
+        value: 0.0001.etherToWei.toWeiEtherAmount,
         data: tradeFromFunc.encodeCall([
           amountOutMin,
           pairAddress,
