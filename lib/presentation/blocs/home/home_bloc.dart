@@ -25,7 +25,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RemoveItem>(_removeItem);
     on<ChangeBed>(_changeBed);
     on<RefreshBed>(_onRefresh);
-    on<RefreshStartButton>(_onRefreshStartButton);
     on<LoadMoreBed>(_onLoadMoreBed);
     on<ChangeInsurance>(_changeInsurance);
     on<ChangeStatusAlarm>(_changeStatusAlarm);
@@ -169,64 +168,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  void _onRefreshStartButton(
-      RefreshStartButton event, Emitter<HomeState> emit) async {
-    final currentState = state;
-    if (currentState is HomeLoaded) {
-      if (currentState.loading) return;
-      emit(currentState.copyWith(loading: true));
-    }
-    final result = await _fetchListBedUC
-        .call(FetchHomeBedParam(_currentPageBed, _limitItemPage));
-    await result.fold(
-      (l) async {
-        if (currentState is HomeLoaded) {
-          emit(currentState.copyWith(loading: false, errorMessage: ''));
-        } else {
-          emit(const HomeState.loaded(bedList: [], selectedBed: null));
-        }
-      },
-      (r) async {
-        _currentPageBed++;
-        EstimateSleepResponse? amount;
-        if (currentState is HomeLoaded) {
-          if (r.isNotEmpty) {
-            amount = await _estimateTracking(
-              r.first,
-              currentState.enableInsurance,
-              currentState.selectedItem,
-            );
-          }
-
-          emit(currentState.copyWith(
-            loading: false,
-            errorMessage: '',
-            bedList: r,
-            loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: r.isNotEmpty ? amount : null,
-            userStatusTracking: await _getStatusTracking(),
-          ));
-        } else {
-          final bed = r.isNotEmpty ? r.first : null;
-          final now = DateTime.now();
-          selectedH = now.hour;
-          selectedH = now.minute;
-          emit(HomeState.loaded(
-            errorMessage: '',
-            loading: false,
-            bedList: r,
-            selectedBed: bed,
-            loadMoreBed: r.length >= _limitItemPage,
-            tokenEarn: bed != null
-                ? await _estimateTracking(r.first, true, null)
-                : null,
-            userStatusTracking: await _getStatusTracking(),
-          ));
-        }
-      },
-    );
-  }
-
   void _changeBed(ChangeBed event, Emitter<HomeState> emit) async {
     final currentState = state;
     if (currentState is HomeLoaded) {
@@ -323,13 +264,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           tempList.insert(index, r);
 
           emit(currentState.copyWith(
-              selectedBed: r,
-              bedList: tempList,
-              tokenEarn: await _estimateTracking(
-                r,
-                currentState.enableInsurance,
-                currentState.selectedItem,
-              )));
+            selectedBed: r,
+            bedList: tempList,
+            tokenEarn: await _estimateTracking(
+              r,
+              currentState.enableInsurance,
+              currentState.selectedItem,
+            ),
+            userStatusTracking: await _getStatusTracking(),
+          ));
         },
       );
     }

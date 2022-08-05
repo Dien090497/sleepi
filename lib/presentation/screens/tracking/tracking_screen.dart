@@ -56,6 +56,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   // late int time = 0;
   late double earn = 0.toDouble();
   late DateTime timeStart = DateTime.now();
+  GlobalKey<AnalogClockState> globalKey = GlobalKey();
 
   @override
   void initState() {
@@ -78,7 +79,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
       _timer = Timer.periodic(
         const Duration(seconds: 1),
         (Timer timer) async {
-          if (!mounted) return;
           if (DateTime.now().isAfter(wakeUp)) {
             SharedPreferences preferences = await SharedPreferences.getInstance();
             final int sound = preferences.getInt(Const.sound) ?? 0;
@@ -93,7 +93,6 @@ class _TrackingScreenState extends State<TrackingScreen> {
           }
         },
       );
-      if (!mounted) return;
       setState(() {});
     });
   }
@@ -135,6 +134,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
             return FocusDetector(
               onFocusGained: () async {
+                globalKey.currentState?.updateDateTime();
                 if(!_timer.isActive) {
                   init();
                 }
@@ -174,14 +174,16 @@ class _TrackingScreenState extends State<TrackingScreen> {
                                   color: AppColors.white.withOpacity(0.07),
                                 ),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 230,
                                 height: 230,
                                 child: AnalogClock(
+                                  key: globalKey,
                                   isLive: true,
                                   hourHandColor: Colors.white,
                                   minuteHandColor: Colors.white,
                                   showSecondHand: true,
+                                  useMilitaryTime: true,
                                   secondHandColor: AppColors.blue,
                                   numberColor: AppColors.lightWhite,
                                   showNumbers: true,
