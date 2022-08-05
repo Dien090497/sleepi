@@ -69,7 +69,7 @@ class SpendingDataSource {
       sender: ownerAddress,
       to: spending.self.address,
       value: value,
-      gasPrice: gasPrice,
+      // gasPrice: gasPrice,
       data: depositTokenFunc.encodeCall(data),
     );
     final fee = gasFee * gasPrice.getInWei;

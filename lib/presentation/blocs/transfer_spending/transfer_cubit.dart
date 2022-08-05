@@ -233,12 +233,10 @@ class TransferCubit extends Cubit<TransferState> {
             userId: userId));
         result.fold(
           (l) {
-            if (l.toString().contains('transferFrom failed')) {
+            if ('$l'.contains('transferFrom failed')) {
               emit(currentState.copyWith(
                   isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
-            } else if (l
-                .toString()
-                .contains('insufficient funds for transfer')) {
+            } else if ('$l'.contains('insufficient funds for transfer')) {
               emit(currentState.copyWith(
                   isLoading: false, errorMsg: LocaleKeys.insufficient_balance));
             } else {
