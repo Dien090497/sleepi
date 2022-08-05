@@ -75,20 +75,20 @@ class PopUpConfirmApprove extends StatelessWidget {
               ],
             ),
           ),
-          if (fee != null) ...[
-            const SizedBox(height: 12.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SFText(keyText: LocaleKeys.fee, style: TextStyles.lightGrey14),
-                Expanded(
-                    child: SFText(
-                        keyText: '$fee AVAX',
-                        style: TextStyles.lightWhite16,
-                        textAlign: TextAlign.end)),
-              ],
-            ),
-          ],
+          // if (fee != null) ...[
+          //   const SizedBox(height: 12.0),
+          //   Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       SFText(keyText: LocaleKeys.fee, style: TextStyles.lightGrey14),
+          //       Expanded(
+          //           child: SFText(
+          //               keyText: '$fee AVAX',
+          //               style: TextStyles.lightWhite16,
+          //               textAlign: TextAlign.end)),
+          //     ],
+          //   ),
+          // ],
           const SizedBox(height: 12.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

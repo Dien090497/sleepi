@@ -17,11 +17,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UpdateUserOrListToken>(_onUpdateUser);
     on<RefreshUser>(_onRefreshUser);
     on<RefreshBalanceToken>(_onRefreshBalance);
-
   }
 
   final _fetchBalanceSpendingUC = getIt<FetchBalanceSpendingUseCase>();
   final _getUserUC = getIt<GetUserUseCase>();
+  bool refreshing = false;
 
   final _defaultTokens = [
     const TokenEntity(
@@ -64,14 +64,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   void _onRefreshBalance(RefreshBalanceToken event, emit) async {
     final currentState = state;
     if (currentState is UserLoaded) {
+      if (refreshing) return;
+      refreshing = true;
       final balanceUC = await _fetchBalanceSpendingUC
           .call('${currentState.userInfoEntity.id}');
-
       balanceUC.fold((l) {}, (r) {
         if (r.isNotEmpty) {
           emit(currentState.copyWith(listTokens: _convertSpendingToEntity(r)));
         }
       });
+      refreshing = false;
     }
   }
 

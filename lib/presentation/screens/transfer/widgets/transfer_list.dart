@@ -70,10 +70,13 @@ class _TransferListState extends State<TransferList> {
     return BlocConsumer<TransferCubit, TransferState>(
       listener: (context, state) async {
         if (state is TransferLoaded) {
+          if (state.errorMsg?.isNotEmpty ?? false) {
+            context.read<WalletCubit>().refresh();
+            context.read<UserBloc>().add(const RefreshBalanceToken());
+          }
           if (state.amount == null) {
             valueController.clear();
           }
-          isLoadingNotifier.value = state.isLoading;
           final cubit = context.read<TransferCubit>();
           final isAllowance = state.isAllowance;
           if (isAllowance == false) {
@@ -82,14 +85,16 @@ class _TransferListState extends State<TransferList> {
               showClosed: false,
               children: PopUpConfirmApprove(
                 onConfirm: () {
+                  isLoadingNotifier.value = true;
                   cubit.approve().then((str) {
                     Navigator.pop(context);
                     if (str.isNotEmpty) {
                       showApproveSuccessfulDialog(context, txHash: str);
                     } else {
                       showMessageDialog(
-                          context, LocaleKeys.insufficient_balance.tr());
+                          context, LocaleKeys.not_enough_to_pay_the_fee.tr());
                     }
+                    isLoadingNotifier.value = false;
                   });
                 },
                 tokenName: state.currentToken.symbol.toUpperCase(),
@@ -106,10 +111,12 @@ class _TransferListState extends State<TransferList> {
                 showClosed: false,
                 children: PopUpConfirmTransfer(
                   onConfirm: () {
+                    isLoadingNotifier.value = true;
                     cubit
                         .transfer(userId: userState.userInfoEntity.id)
                         .then((_) {
                       Navigator.pop(context);
+                      isLoadingNotifier.value = false;
                     });
                   },
                   isToSpending: state.isToSpending,
@@ -127,15 +134,12 @@ class _TransferListState extends State<TransferList> {
             }
           }
         }
-
         if (state is TransferSuccess) {
-          isLoadingNotifier.value = false;
           showSuccessfulDialog(
             context,
             null,
             barrierDismissible: false,
             onBackPress: () {
-              isLoadingNotifier.value = false;
               Navigator.popUntil(
                   context,
                   (r) =>
@@ -143,6 +147,7 @@ class _TransferListState extends State<TransferList> {
                       r.settings.name == R.bottomNavigation);
             },
           );
+          isLoadingNotifier.value = false;
         }
       },
       buildWhen: (prev, cur) => cur is TransferLoaded,
@@ -194,6 +199,10 @@ class _TransferListState extends State<TransferList> {
                             cubit.setAmount(v);
                           },
                           onPressed: () {
+                            context.read<WalletCubit>().refresh();
+                            context
+                                .read<UserBloc>()
+                                .add(const RefreshBalanceToken());
                             final isAvax =
                                 state.currentToken.symbol.toLowerCase() ==
                                     'avax';
