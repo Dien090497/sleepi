@@ -168,23 +168,21 @@ class _TransferListState extends State<TransferList> {
                             cubit.setAmount(v);
                           },
                           onPressed: () {
-                            if (state.fee != null) {
-                              final isAvax =
-                                  state.currentToken.symbol.toLowerCase() ==
-                                      'avax';
-                              final amount = isAvax
-                                  ? (Decimal.parse('${currentToken.balance}') -
-                                          Decimal.parse('${state.fee}'))
-                                      .floor(scale: 6)
-                                  : Decimal.parse('${currentToken.balance}')
-                                      .floor(scale: 6);
-                              if (amount >= Decimal.zero) {
-                                valueController.text = amount.toString();
-                              } else {
-                                valueController.text = '0';
-                              }
-                              cubit.setAmount(amount.toString());
+                            final isAvax =
+                                state.currentToken.symbol.toLowerCase() ==
+                                    'avax';
+                            final amount = isAvax
+                                ? (Decimal.parse('${currentToken.balance}') -
+                                        Decimal.parse('${state.fee}'))
+                                    .floor(scale: 6)
+                                : Decimal.parse('${currentToken.balance}')
+                                    .floor(scale: 6);
+                            if (amount >= Decimal.zero) {
+                              valueController.text = amount.toString();
+                            } else {
+                              valueController.text = '0';
                             }
+                            cubit.setAmount(amount.toString());
                           },
                         ),
                         if (state.errorMsg != null)

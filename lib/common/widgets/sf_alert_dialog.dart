@@ -3,16 +3,16 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/widgets/dismiss_keyboard_widget.dart';
 
 Future<T?> showCustomAlertDialog<T>(
-  BuildContext context, {
-  required Widget? children,
-  Color? backgroundColor,
-  CrossAxisAlignment? crossAxisAlignment,
-  EdgeInsets? padding,
-  bool barrierDismissible = true,
-  double? width,
-  double? height,
-  bool showClosed = true,
-}) async {
+    BuildContext context, {
+      required Widget? children,
+      Color? backgroundColor,
+      CrossAxisAlignment? crossAxisAlignment,
+      EdgeInsets? padding,
+      bool barrierDismissible = true,
+      double? width,
+      double? height,
+      bool showClosed = true,
+    }) async {
   return showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
@@ -32,12 +32,12 @@ Future<T?> showCustomAlertDialog<T>(
 class SFAlertDialog extends StatelessWidget {
   const SFAlertDialog(
       {required this.children,
-      Key? key,
-      this.backgroundColor,
-      this.padding,
-      this.height,
-      this.showClose = true,
-      this.width})
+        Key? key,
+        this.backgroundColor,
+        this.padding,
+        this.height,
+        this.showClose = true,
+        this.width})
       : super(key: key);
 
   final Widget? children;
@@ -65,21 +65,25 @@ class SFAlertDialog extends StatelessWidget {
             height: height,
             width: width ?? sizeWidth * 0.95,
             padding: padding ?? const EdgeInsets.all(8),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  showClose
-                      ? Align(
-                          alignment: Alignment.topRight,
-                          child: GestureDetector(
-                              onTap: () => Navigator.maybePop(context),
-                              child: const Icon(
-                                Icons.close,
-                                color: AppColors.lightGrey,
-                              )))
-                      : const SizedBox(),
-                  children!,
-                ],
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    showClose
+                        ? Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        onPressed: () => Navigator.maybePop(context),
+                        icon: const Icon(
+                          Icons.close,
+                          color: AppColors.lightGrey,
+                        ),
+                      ),
+                    )
+                        : const SizedBox(),
+                    children!,
+                  ],
+                ),
               ),
             )),
       ),

@@ -225,8 +225,8 @@
   "free": "無料",
   "inventory": "インベントリー",
   "wallet": "ウォレット",
-  "common_bed": "コモン",
-  "uncommon_bed": "アンコモン",
+  "common_bed": "コモンベッド",
+  "uncommon_bed": "アンコモンベッド",
   "rare_bed": "レア",
   "epic_bed": "エピック",
   "legendary_bed": "レジェンダリー",
@@ -514,5 +514,6 @@
   "nft_can_not_sell": "Cannot sell the NFT",
   "not_enough_to_pay_the_fee": "The amount AVAX in your wallet is not enough to pay the fee",
   "transaction_submitted" : "Transaction Submitted",
-  "input_value_so_small": "The amount is too small to trade"
+  "input_value_so_small": "The amount is too small to trade",
+  "you_need_to_connect_wifi_or_mobile_data" : "You need to connect Wifi or Mobile Data"
 }

@@ -69,7 +69,7 @@ class ItemsProbability extends StatelessWidget {
           //   ],
           // ),
           ListView.builder(
-             shrinkWrap: true,
+              shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: configInfo?.length,
               itemBuilder: (BuildContext context,int index){
