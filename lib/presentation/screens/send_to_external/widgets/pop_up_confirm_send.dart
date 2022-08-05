@@ -36,11 +36,13 @@ class PopUpConfirmSend extends StatelessWidget {
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
           if (state is sendToExternalSuccess) {
-            showSuccessfulDialog(context, null, onBackPress: () {
+            showSuccessfulDialog(context, LocaleKeys.transaction_submitted, onBackPress: () {
               Navigator.popUntil(context, (r) {
                 return r.settings.name == R.wallet;
               });
-            });
+            },
+                barrierDismissible: false
+            );
           }
         },
         builder: (context, state) {

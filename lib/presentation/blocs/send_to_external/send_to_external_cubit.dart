@@ -89,6 +89,10 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
           LocaleKeys.this_field_is_required.tr()));
       return;
     }
+    if (amount < fee) {
+      emit(const SendToExternalState.fail(LocaleKeys.not_enough_to_pay_the_fee, isShowPopUp: true));
+      return;
+    }
     emit(const SendToExternalState.validatorSuccess());
     emit(SendToExternalState.checkedValidator(fee: fee));
   }

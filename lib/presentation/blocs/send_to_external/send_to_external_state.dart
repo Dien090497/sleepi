@@ -20,7 +20,9 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.success() = sendToExternalSuccess;
 
-  const factory SendToExternalState.fail(String msg) = SendToExternalFailed;
+  const factory SendToExternalState.fail(
+      String msg,
+      {@Default(false) bool isShowPopUp}) = SendToExternalFailed;
 
   const factory SendToExternalState.calculatorFee(double? fee) = SendToExternalCalculatorFee;
 

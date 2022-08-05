@@ -23,7 +23,7 @@ mixin _$SendToExternalState {
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -39,7 +39,7 @@ mixin _$SendToExternalState {
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -55,7 +55,7 @@ mixin _$SendToExternalState {
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -226,7 +226,7 @@ class _$sendToExternalStateInitial
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -245,7 +245,7 @@ class _$sendToExternalStateInitial
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -264,7 +264,7 @@ class _$sendToExternalStateInitial
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -448,7 +448,7 @@ class _$sendToExternalDone
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -467,7 +467,7 @@ class _$sendToExternalDone
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -486,7 +486,7 @@ class _$sendToExternalDone
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -634,7 +634,7 @@ class _$SendToExternalLoading
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -653,7 +653,7 @@ class _$SendToExternalLoading
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -672,7 +672,7 @@ class _$SendToExternalLoading
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -853,7 +853,7 @@ class _$GetTokenBalanceSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -872,7 +872,7 @@ class _$GetTokenBalanceSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -891,7 +891,7 @@ class _$GetTokenBalanceSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1041,7 +1041,7 @@ class _$sendToExternalSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -1060,7 +1060,7 @@ class _$sendToExternalSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1079,7 +1079,7 @@ class _$sendToExternalSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1172,7 +1172,7 @@ abstract class _$$SendToExternalFailedCopyWith<$Res> {
   factory _$$SendToExternalFailedCopyWith(_$SendToExternalFailed value,
           $Res Function(_$SendToExternalFailed) then) =
       __$$SendToExternalFailedCopyWithImpl<$Res>;
-  $Res call({String msg});
+  $Res call({String msg, bool isShowPopUp});
 }
 
 /// @nodoc
@@ -1189,12 +1189,17 @@ class __$$SendToExternalFailedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? msg = freezed,
+    Object? isShowPopUp = freezed,
   }) {
     return _then(_$SendToExternalFailed(
       msg == freezed
           ? _value.msg
           : msg // ignore: cast_nullable_to_non_nullable
               as String,
+      isShowPopUp: isShowPopUp == freezed
+          ? _value.isShowPopUp
+          : isShowPopUp // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1204,14 +1209,17 @@ class __$$SendToExternalFailedCopyWithImpl<$Res>
 class _$SendToExternalFailed
     with DiagnosticableTreeMixin
     implements SendToExternalFailed {
-  const _$SendToExternalFailed(this.msg);
+  const _$SendToExternalFailed(this.msg, {this.isShowPopUp = false});
 
   @override
   final String msg;
+  @override
+  @JsonKey()
+  final bool isShowPopUp;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SendToExternalState.fail(msg: $msg)';
+    return 'SendToExternalState.fail(msg: $msg, isShowPopUp: $isShowPopUp)';
   }
 
   @override
@@ -1219,7 +1227,8 @@ class _$SendToExternalFailed
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'SendToExternalState.fail'))
-      ..add(DiagnosticsProperty('msg', msg));
+      ..add(DiagnosticsProperty('msg', msg))
+      ..add(DiagnosticsProperty('isShowPopUp', isShowPopUp));
   }
 
   @override
@@ -1227,12 +1236,16 @@ class _$SendToExternalFailed
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SendToExternalFailed &&
-            const DeepCollectionEquality().equals(other.msg, msg));
+            const DeepCollectionEquality().equals(other.msg, msg) &&
+            const DeepCollectionEquality()
+                .equals(other.isShowPopUp, isShowPopUp));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(msg),
+      const DeepCollectionEquality().hash(isShowPopUp));
 
   @JsonKey(ignore: true)
   @override
@@ -1248,7 +1261,7 @@ class _$SendToExternalFailed
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -1256,7 +1269,7 @@ class _$SendToExternalFailed
     required TResult Function(double fee) checkedValidator,
     required TResult Function() validatorSuccess,
   }) {
-    return fail(msg);
+    return fail(msg, isShowPopUp);
   }
 
   @override
@@ -1267,7 +1280,7 @@ class _$SendToExternalFailed
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1275,7 +1288,7 @@ class _$SendToExternalFailed
     TResult Function(double fee)? checkedValidator,
     TResult Function()? validatorSuccess,
   }) {
-    return fail?.call(msg);
+    return fail?.call(msg, isShowPopUp);
   }
 
   @override
@@ -1286,7 +1299,7 @@ class _$SendToExternalFailed
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1296,7 +1309,7 @@ class _$SendToExternalFailed
     required TResult orElse(),
   }) {
     if (fail != null) {
-      return fail(msg);
+      return fail(msg, isShowPopUp);
     }
     return orElse();
   }
@@ -1371,9 +1384,11 @@ class _$SendToExternalFailed
 }
 
 abstract class SendToExternalFailed implements SendToExternalState {
-  const factory SendToExternalFailed(final String msg) = _$SendToExternalFailed;
+  const factory SendToExternalFailed(final String msg,
+      {final bool isShowPopUp}) = _$SendToExternalFailed;
 
   String get msg;
+  bool get isShowPopUp;
   @JsonKey(ignore: true)
   _$$SendToExternalFailedCopyWith<_$SendToExternalFailed> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1463,7 +1478,7 @@ class _$SendToExternalCalculatorFee
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -1482,7 +1497,7 @@ class _$SendToExternalCalculatorFee
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1501,7 +1516,7 @@ class _$SendToExternalCalculatorFee
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1654,7 +1669,7 @@ class _$SendToExternalCalculatorFeeSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -1673,7 +1688,7 @@ class _$SendToExternalCalculatorFeeSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1692,7 +1707,7 @@ class _$SendToExternalCalculatorFeeSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1866,7 +1881,7 @@ class _$SendToExternalErrorToAddress
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -1885,7 +1900,7 @@ class _$SendToExternalErrorToAddress
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -1904,7 +1919,7 @@ class _$SendToExternalErrorToAddress
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -2083,7 +2098,7 @@ class _$SendToExternalErrorValueInEther
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -2102,7 +2117,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -2121,7 +2136,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -2299,7 +2314,7 @@ class _$SendToExternalCheckedValidator
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -2318,7 +2333,7 @@ class _$SendToExternalCheckedValidator
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -2337,7 +2352,7 @@ class _$SendToExternalCheckedValidator
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -2490,7 +2505,7 @@ class _$SendToExternalValidatorSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee) getBalance,
     required TResult Function() success,
-    required TResult Function(String msg) fail,
+    required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
     required TResult Function(String msg) errorToAddress,
@@ -2509,7 +2524,7 @@ class _$SendToExternalValidatorSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,
@@ -2528,7 +2543,7 @@ class _$SendToExternalValidatorSuccess
     TResult Function()? loading,
     TResult Function(double balance, double fee)? getBalance,
     TResult Function()? success,
-    TResult Function(String msg)? fail,
+    TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
     TResult Function(String msg)? errorToAddress,

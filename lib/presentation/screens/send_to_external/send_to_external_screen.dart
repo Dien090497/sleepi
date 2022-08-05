@@ -14,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -73,6 +74,11 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                   arg: args,
                   fee: state.fee,
                 ));
+          }
+          if (state is SendToExternalFailed) {
+            if (state.isShowPopUp) {
+              showMessageDialog(context, state.msg);
+            }
           }
         },
         builder: (context, state) {
@@ -154,13 +160,17 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                               textStyle: TextStyles.blue12,
                                               onPressed: () {
                                                 getBalance(cubit: cubit, args: args);
-                                                if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
-                                                    final result = (Decimal.parse('${balance}') -
-                                                        Decimal.parse('${fee}'))
+                                                if ( balance < fee) {
+                                                  controllerAmount.text = '0';
+                                                } else {
+                                                  if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
+                                                    final result = (Decimal.parse('$balance') -
+                                                        Decimal.parse('$fee'))
                                                         .floor(scale: 6);
                                                     controllerAmount.text = result.toString();
-                                                } else {
-                                                  controllerAmount.text = balance.toString();
+                                                  } else {
+                                                      controllerAmount.text = balance.toString();
+                                                  }
                                                 }
                                               },
                                               // color: Colors.transparent,
