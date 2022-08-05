@@ -32,16 +32,16 @@ class _ResultScreenState extends State<ResultScreen>
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      final args =
-          ModalRoute.of(context)?.settings.arguments as PreResultParams;
-      if (double.parse(args.slftPrice!).toInt() == 0) {
-        showMessageDialog(
-          context,
-          LocaleKeys.sleep_time_too_short,
-        );
-      }
-    });
+    // Future.delayed(Duration.zero, () {
+    //   final args =
+    //       ModalRoute.of(context)?.settings.arguments as PreResultParams;
+    //   if (double.parse(args.slftPrice!).toInt() == 0) {
+    //     showMessageDialog(
+    //       context,
+    //       LocaleKeys.sleep_time_too_short,
+    //     );
+    //   }
+    // });
     animationController = AnimationController(vsync: this);
     animationController.addStatusListener((status) async {
       if (animationController.isCompleted) {

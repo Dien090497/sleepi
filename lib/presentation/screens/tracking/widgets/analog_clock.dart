@@ -131,7 +131,7 @@ class AnalogClockState extends State<AnalogClock> {
   void update(Timer timer) {
     if (mounted) {
       // update is only called on live clocks. So, it's safe to update datetime.
-      datetime = initialDatetime.add(updateDuration * timer.tick);
+      datetime = DateTime.now();
       setState(() {});
     }
   }

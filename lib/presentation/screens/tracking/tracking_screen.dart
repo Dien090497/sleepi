@@ -100,7 +100,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   @override
   void dispose() {
     audioPlayer.dispose();
-    _timer.cancel();
+    // _timer.cancel();
     super.dispose();
   }
 
