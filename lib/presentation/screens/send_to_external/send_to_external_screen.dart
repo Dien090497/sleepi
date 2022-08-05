@@ -14,6 +14,7 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -49,6 +50,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
 
   TextEditingController controllerAmount = TextEditingController();
   double balance = 0;
+  double balanceAvax = 0;
   @override
   Widget build(BuildContext context) {
     final args =
@@ -61,6 +63,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
             setState(() {
               balance = state.balance;
               fee = state.fee;
+              balanceAvax = state.feeAvax;
             });
           }
           if (state is SendToExternalCheckedValidator) {
@@ -72,6 +75,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                   transferToken: args != null ? true : false,
                   arg: args,
                   fee: state.fee,
+                  balanceAvax: balanceAvax,
                 ));
           }
         },
@@ -154,13 +158,21 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                               textStyle: TextStyles.blue12,
                                               onPressed: () {
                                                 getBalance(cubit: cubit, args: args);
-                                                if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
-                                                    final result = (Decimal.parse('${balance}') -
-                                                        Decimal.parse('${fee}'))
+                                                if (balanceAvax < fee) {
+                                                  if (args?.symbol == 'AVAX') {
+                                                    controllerAmount.text = '0';
+                                                  } else {
+                                                    controllerAmount.text = balance.formatBalanceToken;
+                                                  }
+                                                } else {
+                                                  if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
+                                                    final result = (Decimal.parse('$balance') -
+                                                        Decimal.parse('$fee'))
                                                         .floor(scale: 6);
                                                     controllerAmount.text = result.toString();
-                                                } else {
-                                                  controllerAmount.text = balance.toString();
+                                                  } else {
+                                                      controllerAmount.text = balance.formatBalanceToken;
+                                                  }
                                                 }
                                               },
                                               // color: Colors.transparent,
@@ -257,12 +269,12 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       balanceCurrent: balance,
                                       amount: double.parse(controllerAmount.text
                                           .replaceAll(',', '.')),
-                                      fee: fee);
+                                      fee: fee, balanceAvax: balanceAvax);
                                 } else {
                                   cubit.validator(
                                       contractAddressTo: contractAddressTo,
                                       balanceCurrent: balance,
-                                      amount: -1, fee: fee);
+                                      amount: -1, fee: fee, balanceAvax: balanceAvax);
                                 }
                               } else {
                                 if (controllerAmount.text.isNotEmpty) {
@@ -270,12 +282,12 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       contractAddressTo: contractAddressTo,
                                       balanceCurrent: balance,
                                       amount: double.parse(controllerAmount.text
-                                          .replaceAll(',', '.')), fee: fee);
+                                          .replaceAll(',', '.')), fee: fee, balanceAvax: balanceAvax);
                                 } else {
                                   cubit.validator(
                                       contractAddressTo: contractAddressTo,
                                       balanceCurrent: balance,
-                                      amount: -1, fee: fee);
+                                      amount: -1, fee: fee, balanceAvax: balanceAvax);
                                 }
                               }
                             }

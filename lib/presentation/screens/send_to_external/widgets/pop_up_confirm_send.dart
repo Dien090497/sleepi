@@ -21,6 +21,7 @@ class PopUpConfirmSend extends StatelessWidget {
     this.arg,
     Key? key,
     required this.fee,
+    required this.balanceAvax,
   }) : super(key: key);
 
   final String toAddress;
@@ -28,6 +29,7 @@ class PopUpConfirmSend extends StatelessWidget {
   final bool transferToken;
   final SendToExternalArguments? arg;
   final double fee;
+  final double balanceAvax;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,30 @@ class PopUpConfirmSend extends StatelessWidget {
       create: (context) => SendToExternalCubit()..init(),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
         listener: (context, state) {
+          final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalSuccess) {
-            showSuccessfulDialog(context, null, onBackPress: () {
+            showSuccessfulDialog(context, LocaleKeys.transaction_submitted, onBackPress: () {
               Navigator.popUntil(context, (r) {
                 return r.settings.name == R.wallet;
               });
-            });
+            },
+                barrierDismissible: false
+            );
+          }
+          if (state is SendToExternalValidatorSuccess) {
+            if (transferToken && arg?.symbol != "AVAX" ) {
+              cubit.sendTokenExternal(toAddress,
+                  valueInEther, arg);
+            } else {
+              cubit.sendToExternal(toAddress,
+                  valueInEther, "AVAX");
+            }
+          }
+          if (state is SendToExternalFailed) {
+            if (state.isShowPopUp) {
+              Navigator.pop(context);
+              showMessageDialog(context, state.msg);
+            }
           }
         },
         builder: (context, state) {
@@ -136,13 +156,7 @@ class PopUpConfirmSend extends StatelessWidget {
                               color: AppColors.blue,
                               width: double.infinity,
                               onPressed: () {
-                                if (transferToken && arg?.symbol != "AVAX" ) {
-                                  cubit.sendTokenExternal(toAddress,
-                                      valueInEther, arg);
-                                } else {
-                                  cubit.sendToExternal(toAddress,
-                                      valueInEther, "AVAX");
-                                }
+                                cubit.validateFee(fee: fee, balanceAvax: balanceAvax);
                               }),
                         ),
                       ],

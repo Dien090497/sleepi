@@ -43,16 +43,22 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
         emit(SendToExternalState.fail('$l'));
       },
           (balance) async {
-        final feeRes = await getIt<SendToExternalUseCase>()
-            .calculatorFee(const SendToExternalParams(
-          contractAddressTo: '',
-          valueInEther: 0,
-        ));
-        feeRes.fold((l) {
-          emit(SendToExternalState.fail('$l'));
-        }, (fee) {
-          emit(SendToExternalState.getBalance(balance: balance, fee: double.parse(fee)));
-        });
+              const paramBalanceAvax = SendToExternalParams(contractAddressTo: '', tokenSymbol: 'AVAX');
+              final resultBalanceAvax = await _sendToExternalUC.getTokenBalance(paramBalanceAvax);
+              resultBalanceAvax.fold((l) {
+                emit(SendToExternalState.fail('$l'));
+              }, (feeAvax) async {
+                final feeRes = await getIt<SendToExternalUseCase>()
+                    .calculatorFee(const SendToExternalParams(
+                  contractAddressTo: '',
+                  valueInEther: 0,
+                ));
+                feeRes.fold((l) {
+                  emit(SendToExternalState.fail('$l'));
+                }, (fee) {
+                  emit(SendToExternalState.getBalance(balance: balance, fee: double.parse(fee), feeAvax: feeAvax));
+                });
+              });
       },
     );
   }
@@ -62,6 +68,7 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
         required double balanceCurrent,
         required double amount,
         required double fee,
+        required balanceAvax,
       }) async {
     emit(const SendToExternalState.loading());
     if (contractAddressTo.isEmpty) {
@@ -106,6 +113,15 @@ class SendToExternalCubit extends Cubit<SendToExternalState> {
     }, (success) {
       emit(const SendToExternalState.success());
     });
+  }
+
+  Future<void> validateFee ({required double fee, required double balanceAvax}) async {
+    if (balanceAvax < fee) {
+      emit(const SendToExternalState.fail(LocaleKeys.not_enough_to_pay_the_fee, isShowPopUp: true));
+      return;
+    } else {
+      emit(const SendToExternalState.validatorSuccess());
+    }
   }
 
 }
