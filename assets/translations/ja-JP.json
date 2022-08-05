@@ -517,5 +517,5 @@
   "input_value_so_small": "The amount is too small to trade",
   "you_need_to_connect_wifi_or_mobile_data" : "You need to connect Wifi or Mobile Data",
   "gacha_confirm": "確認",
-  "": "Balance is insufficient"
+  "balance_is_insufficient": "Balance is insufficient"
 }
