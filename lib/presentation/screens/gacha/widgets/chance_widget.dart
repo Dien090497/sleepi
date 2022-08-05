@@ -28,9 +28,13 @@ class ChanceWidget extends StatelessWidget {
       create: (context) => GachaSpinCubit(),
       child: BlocConsumer<GachaSpinCubit, GachaSpinState>(
         listener: (context, state) {
+          if (state is GachaCheckConnection) {
+            Navigator.pop(context, true);
+            showMessageDialog(context, LocaleKeys.balance_is_insufficient);
+          }
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
-            showMessageDialog(context, "You don't have enough money");
+            showMessageDialog(context, LocaleKeys.you_dont_have_enough_money);
           }
           if(state is GachaGetSuccess){
             Navigator.pop(context, true);

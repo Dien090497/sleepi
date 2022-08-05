@@ -511,5 +511,7 @@
   "not_enough_to_pay_the_fee": "The amount AVAX in your wallet is not enough to pay the fee",
   "transaction_submitted": "Transaction Submitted",
   "input_value_so_small": "The amount is too small to trade",
-  "you_need_to_connect_wifi_or_mobile_data" : "You need to connect Wifi or Mobile Data"
+  "you_need_to_connect_wifi_or_mobile_data" : "You need to connect Wifi or Mobile Data",
+  "gacha_confirm": "Confirm",
+  "balance_is_insufficient": "Balance is insufficient"
 }
