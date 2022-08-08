@@ -100,7 +100,7 @@ class _TradeScreenState extends State<TradeScreen> {
       } else {
         error = '';
       }
-    }else{
+    } else {
       error = LocaleKeys.field_required;
     }
   }
@@ -222,9 +222,10 @@ class _TradeScreenState extends State<TradeScreen> {
                 }
 
                 if (state is swapTokenSuccess) {
-                  showSuccessfulDialog(
-                          context, LocaleKeys.transaction_submitted)
-                      .then((value) {
+                  showApproveSuccessfulDialog(
+                    context,
+                    txHash: state.txh,
+                  ).then((value) {
                     setState(() {
                       valueController.text = '';
                       amountOutMin = 0;
@@ -425,7 +426,8 @@ class _TradeScreenState extends State<TradeScreen> {
                                                                           .blue,
                                                                   onPressed:
                                                                       () {
-                                                                    if (balance >= 0.000001) {
+                                                                    if (balance >=
+                                                                        0.000001) {
                                                                       valueController
                                                                           .text = (indexFrom == 0
                                                                               ? (balance - estimate) > 0
