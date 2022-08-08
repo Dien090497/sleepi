@@ -254,7 +254,9 @@ class AlarmBell extends StatelessWidget {
                             fromRoute: R.bottomNavigation,
                             imageBed: bedImage,
                             enableAlarm: state.enableAlarm),
-                      );
+                      ).then((value) {
+                        context.read<HomeBloc>().add(const FetchBedDetail());
+                      });
                     },
                   );
                 }
