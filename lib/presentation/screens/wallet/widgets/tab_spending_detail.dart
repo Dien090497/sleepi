@@ -42,16 +42,16 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SmartRefresher(
-        controller: refreshController,
-        enablePullDown: true,
-        onRefresh: () {
-          context.read<UserBloc>().add(const RefreshBalanceToken());
-          refreshController.refreshCompleted();
-        },
-        child: Column(
-          children: [
-            Expanded(
+      child: Column(
+        children: [
+          Expanded(
+            child: SmartRefresher(
+              controller: refreshController,
+              enablePullDown: true,
+              onRefresh: () {
+                context.read<UserBloc>().add(const RefreshBalanceToken());
+                refreshController.refreshCompleted();
+              },
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -138,27 +138,27 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SizedBox(
-                  height: 48,
-                  child: SFButtonOutLined(
-                    title: LocaleKeys.transfer,
-                    textStyle: TextStyles.bold16Blue,
-                    borderColor: AppColors.blue,
-                    onPressed: () {
-                      for (final token in tokenList) {
-                        if (token.symbol == 'avax') {
-                          openTransfer(
-                              token, context.read<WalletCubit>().state);
-                          return;
-                        }
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SizedBox(
+                height: 48,
+                child: SFButtonOutLined(
+                  title: LocaleKeys.transfer,
+                  textStyle: TextStyles.bold16Blue,
+                  borderColor: AppColors.blue,
+                  onPressed: () {
+                    for (final token in tokenList) {
+                      if (token.symbol == 'avax') {
+                        openTransfer(
+                            token, context.read<WalletCubit>().state);
+                        return;
                       }
-                    },
-                  )),
-            ),
-          ],
-        ),
+                    }
+                  },
+                )),
+          ),
+        ],
       ),
     );
   }
