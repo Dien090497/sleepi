@@ -216,7 +216,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
                   BlocBuilder<WalletCubit, WalletState>(
                     builder: (context, walletState) {
                       return itemBottomBar(
-                          5, context, Ics.transfer, LocaleKeys.transfer,
+                          5, context, Ics.transfer, LocaleKeys.bed_detail_transfer,
                           () async {
                         index = 5;
                         showComingSoonDialog(context);
