@@ -123,19 +123,21 @@ class AlarmBell extends StatelessWidget {
                     _correctTime(startRange!, endRange!, selectedTime),
                 availableAt: availableAt,
                 onStartTracking: () async {
-                  isLoading = true;
-                  startRange = _getRange(startTime);
-                  endRange = _getRange(endTime);
-                  setState(() {});
-                  final isValidTime =
-                      _correctTime(startRange!, endRange!, selectedTime);
-                  if (isValidTime) {
-                    _startPress(context, selectedTime).then((_) {
-                      isLoading = false;
-                      setState(() {});
-                    });
-                  } else {
-                    showMessageDialog(context, 'Invalid Time');
+                  if (!isLoading) {
+                    isLoading = true;
+                    startRange = _getRange(startTime);
+                    endRange = _getRange(endTime);
+                    setState(() {});
+                    final isValidTime =
+                        _correctTime(startRange!, endRange!, selectedTime);
+                    if (isValidTime) {
+                      _startPress(context, selectedTime).then((_) {
+                        isLoading = false;
+                        setState(() {});
+                      });
+                    } else {
+                      showMessageDialog(context, 'Invalid Time');
+                    }
                   }
                 },
               ),
