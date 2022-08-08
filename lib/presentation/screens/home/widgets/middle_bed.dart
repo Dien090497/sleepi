@@ -130,7 +130,8 @@ class _BuildBedItem extends StatelessWidget {
               final result = await Navigator.pushNamed(context, R.nftInfo,
                   arguments: InfoIndividualParams(buy: true, bed: bedEntity));
               if (result != null && result is BedEntity) {
-                context.read<HomeBloc>().add(ChangeBed(bed: result));
+                // context.read<HomeBloc>().add(ChangeBed(bed: result));
+                context.read<HomeBloc>().add(const FetchBedDetail());
               }
             },
             child: CachedImage(image: bedEntity.image, height: 180.h),
