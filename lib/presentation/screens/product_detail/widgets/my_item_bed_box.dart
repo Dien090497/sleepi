@@ -24,6 +24,7 @@ class MyItemBedBox extends StatelessWidget {
     final qualityColor = bed.quality != null
         ? bed.quality!.qualityBedColor
         : AppColors.commonBed;
+     bool checkSelling =  (bed.isLock == 1 && bed.statusNftSale =='ON_SALE') ? true : false;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -43,6 +44,27 @@ class MyItemBedBox extends StatelessWidget {
                 textColor: qualityColor,
               ),
             ),
+            checkSelling
+                ? Positioned(
+                top: 14,
+                right: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius:
+                    BorderRadius
+                        .circular(10),
+                    color: AppColors.yellow,
+                  ),
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  child: SFText(
+                    keyText:
+                    LocaleKeys.selling,
+                    style:
+                    TextStyles.white10,
+                  ),
+                ))
+                : const SizedBox(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(

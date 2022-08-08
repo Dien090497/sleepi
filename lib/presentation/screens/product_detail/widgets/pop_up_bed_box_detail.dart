@@ -13,10 +13,10 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 class PopUpBedBoxDetail extends StatelessWidget {
   const PopUpBedBoxDetail(
       {Key? key,
-      required this.bedEntity,
-      required this.onSell,
-      required this.onTransfer,
-      required this.onOpen})
+        required this.bedEntity,
+        required this.onSell,
+        required this.onTransfer,
+        required this.onOpen})
       : super(key: key);
   final BedEntity bedEntity;
   final Function() onSell;
@@ -27,7 +27,7 @@ class PopUpBedBoxDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     final qualityColor =
         bedEntity.quality?.qualityBedColor ?? AppColors.commonBed;
-
+    bool checkSelling =  (bedEntity.isLock == 1 && bedEntity.statusNftSale =='ON_SALE') ? true : false;
     return Stack(
       children: [
         Positioned(
@@ -99,27 +99,28 @@ class PopUpBedBoxDetail extends StatelessWidget {
               children: [
                 Expanded(
                     child: SFButton(
-                  text: LocaleKeys.sell,
-                  onPressed: () {
-                    Navigator.pop(context);
-                    onSell();
-                  },
-                  textStyle: TextStyles.lightGrey16,
-                  color: AppColors.whiteOpacity5,
-                  width: double.infinity,
-                )),
+                      text: LocaleKeys.sell,
+                      onPressed: () {
+                        Navigator.pop(context);
+                        onSell();
+                      },
+                      textStyle: TextStyles.lightGrey16,
+                      color: AppColors.whiteOpacity5,
+                      width: double.infinity,
+                    )),
                 const SizedBox(width: 12),
                 Expanded(
                     child: SFButton(
-                  text: LocaleKeys.transfer,
-                  onPressed: () {
-                    Navigator.pop(context);
-                    onTransfer();
-                  },
-                  textStyle: TextStyles.white16,
-                  gradient: AppColors.blueGradient,
-                  width: double.infinity,
-                )),
+                      text: LocaleKeys.transfer,
+                      disabled: checkSelling,
+                      onPressed: () {
+                        Navigator.pop(context);
+                        onTransfer();
+                      },
+                      textStyle: TextStyles.white16,
+                      gradient: AppColors.blueGradient,
+                      width: double.infinity,
+                    )),
               ],
             ),
             const SizedBox(height: 12),
@@ -127,6 +128,7 @@ class PopUpBedBoxDetail extends StatelessWidget {
               width: 120,
               child: SFButton(
                 text: LocaleKeys.open,
+                disabled: checkSelling,
                 onPressed: () {
                   Navigator.pop(context);
                   onOpen();
