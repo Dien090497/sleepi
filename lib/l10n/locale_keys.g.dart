@@ -516,5 +516,6 @@ abstract class  LocaleKeys {
   static const you_need_to_connect_wifi_or_mobile_data = 'you_need_to_connect_wifi_or_mobile_data';
   static const gacha_confirm = 'gacha_confirm';
   static const balance_is_insufficient = 'balance_is_insufficient';
+  static const passcode_dose_not_match = 'passcode_dose_not_match';
 
 }

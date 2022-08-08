@@ -76,13 +76,12 @@ extension StringX on String {
   }
 
   String get validateEmail {
-    if (isEmpty) {
+    if (trim().isEmpty) {
       return LocaleKeys.this_field_is_required.tr();
     }
 
-    bool result = RegExp(
-            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(this);
+    bool result = RegExp(r"^[\w-\!#$%&'*+-/=?^_`{|}~]+@([\w-]+\.)+[\w-]{1,10}$")
+        .hasMatch(trim());
     if (!result) {
       return LocaleKeys.incorrect_email.tr();
     }

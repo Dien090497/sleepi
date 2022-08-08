@@ -40,12 +40,17 @@ class SettingWalletScreen extends StatelessWidget {
               title: LocaleKeys.reset_with_passcode,
               info: LocaleKeys.keep_your_assets_safe,
               onTap: () {
-                Navigator.pushNamed(context, R.createPasscode).then((value) {
+                Navigator.pushNamed(context, R.passcode).then((value) {
                   if (value == true) {
-                    showSuccessfulDialog(
-                        context, LocaleKeys.reset_passcode_successfully,
-                        padding: const EdgeInsets.all(10),
-                        style: TextStyles.bold14White);
+                    Navigator.pushNamed(context, R.createPasscode)
+                        .then((value) {
+                      if (value == true) {
+                        showSuccessfulDialog(
+                            context, LocaleKeys.reset_passcode_successfully,
+                            padding: const EdgeInsets.all(10),
+                            style: TextStyles.bold14White);
+                      }
+                    });
                   }
                 });
               },
