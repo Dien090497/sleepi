@@ -136,9 +136,9 @@ class _TransferListState extends State<TransferList> {
           }
         }
         if (state is TransferSuccess) {
-          showSuccessfulDialog(
+          showApproveSuccessfulDialog(
             context,
-            LocaleKeys.transaction_submitted,
+            txHash: state.txHash,
             barrierDismissible: false,
             onBackPress: () {
               Navigator.popUntil(
