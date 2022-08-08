@@ -47,9 +47,16 @@ class AuthImplementation extends IAuthRepository {
     try {
       final result = await _authDataSource.signIn(signInSchema);
 
-      final user = await _secureStorage.lastUserSignIn();
+      final localUserEmail = await _secureStorage.lastUserSignIn();
+      final currentWalletId = _getStorageDataSource.getCurrentWalletId();
+      final wallet = await _isarDataSource.getWalletAt(currentWalletId);
+      final userWalletAddress = result.data.user.wallet;
 
-      if (user != signInSchema.email) {
+
+      if (localUserEmail != signInSchema.email ||
+          (wallet != null &&
+              userWalletAddress != null &&
+              wallet.address != userWalletAddress)) {
         await Future.wait([
           _isarDataSource.clearAll(),
           _secureStorage.clearStorage(),
