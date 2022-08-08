@@ -460,7 +460,7 @@
   "coming_soon": "Coming soon",
   "please_visit_settings_to_check_your_seed_phrase": "設定でシードフレーズを確認してください",
   "click_here_to_check_seed_phrase": "ここをクリックしてシードフレーズを確認する",
-  "password_must_be_at_least_6": "英大文字、数字で1つ以上の組み合わせ6～20字で入力してください",
+  "password_must_be_at_least_6": "英大文字・英小文字・数字それぞれを最低1文字ずつ含む、６～２０文字で入力してください。",
   "staking_bonus": "ステーキングボーナス",
   "loading": "ローディング中",
   "levelUp_balance_not_enough": "Your balance is not enough to level up",

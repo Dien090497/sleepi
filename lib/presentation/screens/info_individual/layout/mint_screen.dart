@@ -298,7 +298,6 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                                 : true,
                             onPressed: () {
                               animationController.forward();
-                              // cubit.mint();
                             },
                           ),
                         ),

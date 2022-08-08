@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -159,9 +160,8 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
                           final data = snapshot.data!
                               .getOrElse(() => NftLevelUp(cost: null));
                           speedUpCost = data.costSpeedUp;
-                          return SFText(
-                            keyText:
-                                '${speedUpCost == null ? 0 : (speedUpCost! * pow(10, 6)).toInt() / pow(10, 6)} SLFT',
+                          return Text(
+                            '${speedUpCost == null ? 0 : _speedUpCost(speedUpCost!).formatBalanceToken} SLFT',
                             style: TextStyles.textColorSize16,
                           );
                         }
@@ -250,6 +250,8 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
     );
   }
 
+  /// TODO: when  time complete change ui if isSpeedUp
+
   double _percentTime() {
     if (_remainTime.isEmpty) {
       return 1;
@@ -259,5 +261,14 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
     final currentTime = DateTime.now().millisecondsSinceEpoch - levelUpTime;
     if (currentTime < 0) return 0;
     return currentTime / totalTime;
+  }
+
+  double _speedUpCost(double costPerMinute) {
+    final time =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(widget.remainTime));
+    final duration = time.difference(DateTime.now());
+    final second = duration.inSeconds.remainder(60);
+    print('minute left is   ${duration.inMinutes}    ${second / 60.0}');
+    return (duration.inMinutes + (second / 60.0)) * costPerMinute;
   }
 }
