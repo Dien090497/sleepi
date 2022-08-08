@@ -69,7 +69,7 @@ class ConfirmCreatePasscodeScreen extends StatelessWidget {
                         height: 30,
                         child: wrongPassword
                             ? SFText(
-                                keyText: LocaleKeys.incorrect_passcode,
+                                keyText: LocaleKeys.passcode_dose_not_match,
                                 style: TextStyles.red14)
                             : const SizedBox(),
                       ),

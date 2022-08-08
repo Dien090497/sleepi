@@ -163,7 +163,7 @@ class SecureStorage {
       _secureStorage.delete(key: StorageKeys.accessTokenKey),
       _secureStorage.delete(key: StorageKeys.refreshToken),
       _secureStorage.delete(key: StorageKeys.userKey),
-      _secureStorage.delete(key: StorageKeys.passCodeKey),
+      // _secureStorage.delete(key: StorageKeys.passCodeKey),
     ]);
   }
 
