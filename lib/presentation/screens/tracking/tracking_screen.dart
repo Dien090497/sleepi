@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +54,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
   late String timeAlarm = '';
   late double totalEarn = 0;
-  late int time = 0;
+  // late int time = 0;
   late double earn = 0.toDouble();
   late DateTime timeStart = DateTime.now();
   GlobalKey<AnalogClockState> globalKey = GlobalKey();
@@ -70,27 +71,44 @@ class _TrackingScreenState extends State<TrackingScreen> {
       totalEarn = args.tokenEarn;
       DateTime wakeUp = DateTime.fromMillisecondsSinceEpoch(args.timeWakeUp);
       timeStart = DateTime.fromMillisecondsSinceEpoch(args.timeStart);
-      time = wakeUp.difference(DateTime.now()).inSeconds;
+      // time = wakeUp.difference(timeStart).inMinutes;
       // earn =
       //     (DateTime.now().difference(timeStart).inMinutes) * (totalEarn / time);
       timeAlarm =
           '${wakeUp.hour < 10 ? '0${wakeUp.hour}' : wakeUp.hour}:${wakeUp.minute < 10 ? '0${wakeUp.minute}' : wakeUp.minute}';
       // double x = totalEarn / time;
-      _timer = Timer(
-        Duration(seconds: time),
-        () async {
+      _timer = Timer.periodic(
+        const Duration(seconds: 5),
+        (Timer timer) async {
+          // print('DateTime : ${DateTime.now().toString()}');
           SharedPreferences preferences = await SharedPreferences.getInstance();
           final int sound = preferences.getInt(Const.sound) ?? 0;
-          if (!audioPlayer.playing) {
-            await audioPlayer
-                .setAsset(Const.soundAlarm[sound])
-                .then((value) async {
+          if(Platform.isAndroid) {
+            if (DateTime.now().isAfter(wakeUp)) {
+              if (!audioPlayer.playing) {
+                await audioPlayer.setAsset(Const.soundAlarm[sound]).then((
+                    value) async {
+                  await audioPlayer.setVolume(1);
+                  await audioPlayer.setLoopMode(LoopMode.all);
+                  await audioPlayer.play();
+                });
+                _timer.cancel();
+              }
+            }
+          }else{
+            if (!audioPlayer.playing) {
+              await audioPlayer.setAsset(Const.soundAlarm[sound]).then((
+                  value) async {
+                await audioPlayer.setVolume(0);
+                await audioPlayer.setLoopMode(LoopMode.all);
+                await audioPlayer.play();
+              });
+            }
+            if (DateTime.now().isAfter(wakeUp)) {
               await audioPlayer.setVolume(1);
-              await audioPlayer.setLoopMode(LoopMode.all);
-              await audioPlayer.play();
-            });
+              _timer.cancel();
+            }
           }
-          _timer.cancel();
         },
       );
       setState(() {});
