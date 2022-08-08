@@ -344,13 +344,13 @@ class TabBedsDetail extends StatelessWidget {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
                     Navigator.pop(context);
-                    // showSuccessfulDialog(context, null, onBackPress: () {
-                    //   Navigator.pushNamedAndRemoveUntil(
-                    //     context,
-                    //     R.bottomNavigation,
-                    //     (r) => false,
-                    //   );
-                    // });
+                    showSuccessfulDialog(context, null, onBackPress: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        R.bottomNavigation,
+                        (r) => false,
+                      );
+                    });
                   }
                 }
               },
@@ -382,13 +382,13 @@ class TabBedsDetail extends StatelessWidget {
             }
             if (state is BottomBarInfoIndividualLoaded) {
               if (state.successTransfer) {
-                // showSuccessfulDialog(context, null, onBackPress: () {
-                //   Navigator.pushNamedAndRemoveUntil(
-                //     context,
-                //     R.bottomNavigation,
-                //     (r) => false,
-                //   );
-                // });
+                showSuccessfulDialog(context, null, onBackPress: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    R.bottomNavigation,
+                    (r) => false,
+                  );
+                });
               }
             }
           },

@@ -31,29 +31,24 @@ class _ButtonStartState extends State<ButtonStart> {
 
   @override
   Widget build(BuildContext context) {
-    return FocusDetector(
-      onFocusGained: () {
-        context.read<HomeBloc>().add(const FetchBedDetail());
+    return HomeStartButton(
+      radius: 100,
+      gradient: widget.enableStart && countDownEnded
+          ? AppColors.gradientBlueButton
+          : null,
+      color: AppColors.lightDark,
+      height: 40,
+      disabled: !(widget.enableStart && countDownEnded),
+      width: double.infinity,
+      onPressed: () async {
+        widget.onStartTracking();
       },
-      child: HomeStartButton(
-        radius: 100,
-        gradient: widget.enableStart && countDownEnded
-            ? AppColors.gradientBlueButton
-            : null,
-        color: AppColors.lightDark,
-        height: 40,
-        disabled: !(widget.enableStart && countDownEnded),
-        width: double.infinity,
-        onPressed: () async {
-          widget.onStartTracking();
+      child: _CountDownText(
+        onEnd: () {
+          countDownEnded = true;
+          setState(() {});
         },
-        child: _CountDownText(
-          onEnd: () {
-            countDownEnded = true;
-            setState(() {});
-          },
-          availableAt: widget.availableAt,
-        ),
+        availableAt: widget.availableAt,
       ),
     );
   }

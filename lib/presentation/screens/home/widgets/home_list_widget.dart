@@ -34,8 +34,8 @@ class _HomeListWidgetState extends State<HomeListWidget> {
   @override
   Widget build(BuildContext context) {
     return FocusDetector(
-      onFocusGained: (){
-        context.read<HomeBloc>().add(const FetchBedDetail());
+      onFocusGained: () {
+        context.read<HomeBloc>().add(const RefreshBed());
       },
       child: SmartRefresher(
         controller: refreshController,
