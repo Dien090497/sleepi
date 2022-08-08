@@ -514,5 +514,6 @@
   "you_need_to_connect_wifi_or_mobile_data" : "You need to connect Wifi or Mobile Data",
   "gacha_confirm": "Confirm",
   "balance_is_insufficient": "Balance is insufficient",
-  "passcode_dose_not_match" : "Passcode does not match"
+  "passcode_dose_not_match" : "Passcode does not match",
+  "bed_detail_transfer" : "Transfer"
 }
