@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -30,11 +31,15 @@ class _ConnectBedWidgetState extends State<ConnectBedWidget> with TickerProvider
     super.initState();
 
     widget.controller.addStatusListener((status) async {
-
+      if (widget.controller.isCompleted) {
+        widget.controller.repeat();
+      }
+      if(widget.controller.isDismissed){
+        widget.controller.forward();
+      }
       if (status == AnimationStatus.completed) {
         final cubit = context.read<MintCubit>();
         cubit.mint();
-        widget.controller.reset();
       }
     });
   }
@@ -55,80 +60,80 @@ class _ConnectBedWidgetState extends State<ConnectBedWidget> with TickerProvider
           return Column(
             children: [
               Stack(
-                children: [
-                  SizedBox(
-                    height: sizeScreen.height * 0.1,
-                    child: OverflowBox(
-                      minHeight: sizeScreen.height * 0.48,
-                      maxHeight: sizeScreen.height * 0.48,
-                      minWidth: sizeScreen.width,
-                      maxWidth: sizeScreen.width,
-                      child: Lottie.asset('assets/json/bed_minting.json',
-                        controller: widget.controller,
-                        fit: BoxFit.cover,
-                        repeat: false,
-                        onLoaded: (composition) {
-                          // Configure the AnimationController with the duration of the
-                          // Lottie file and start the animation.
-                          widget.controller
-                              .duration = composition.duration;
-                        },
+                  children: [
+                    SizedBox(
+                      height: sizeScreen.height * 0.1,
+                      child: OverflowBox(
+                        minHeight: sizeScreen.height * 0.48,
+                        maxHeight: sizeScreen.height * 0.48,
+                        minWidth: sizeScreen.width,
+                        maxWidth: sizeScreen.width,
+                        child: Lottie.asset(Const.bedMintingAnimation,
+                          controller: widget.controller,
+                          fit: BoxFit.cover,
+                          repeat: false,
+                          onLoaded: (composition) {
+                            // Configure the AnimationController with the duration of the
+                            // Lottie file and start the animation.
+                            widget.controller
+                                .duration = composition.duration;
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            child: CachedImage(
-                              image: widget.bedParent1.image,
-                              height: 80,
-                              width: 80,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              child: CachedImage(
+                                image: widget.bedParent1.image,
+                                height: 80,
+                                width: 80,
+                              ),
+                              onTap: () {},
                             ),
-                            onTap: () {},
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () {
-                              if (state is MintStateLoaded) {
-                                if (state.listBed.isEmpty) {
-                                  showCustomDialog(context, children: [
-                                    const PopupNoShoes(),
-                                  ]);
-                                } else {
-                                  SFModalBottomSheet.show(
-                                    context,
-                                    0.8,
-                                    PopUpSelectBed(
-                                      cubit: cubit,
-                                    ),
-                                  );
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (state is MintStateLoaded) {
+                                  if (state.listBed.isEmpty) {
+                                    showCustomDialog(context, children: [
+                                      const PopupNoShoes(),
+                                    ]);
+                                  } else {
+                                    SFModalBottomSheet.show(
+                                      context,
+                                      0.8,
+                                      PopUpSelectBed(
+                                        cubit: cubit,
+                                      ),
+                                    );
+                                  }
                                 }
-                              }
-                            },
-                            child: state is MintStateLoaded
-                                ? state.indexSelected == -1
-                                ? const SFIcon(Ics.addBed)
-                                : CachedImage(
-                              image: state
-                                  .listBed[state.indexSelected].image,
-                              height: 80,
-                              width: 80,
-                            )
-                                : const SFIcon(Ics.addBed),
+                              },
+                              child: state is MintStateLoaded
+                                  ? state.indexSelected == -1
+                                  ? const SFIcon(Ics.addBed)
+                                  : CachedImage(
+                                image: state
+                                    .listBed[state.indexSelected].image,
+                                height: 80,
+                                width: 80,
+                              )
+                                  : const SFIcon(Ics.addBed),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ]
+                      ],
+                    ),
+                  ]
               ),
               // const SFIcon(Imgs.connectBorder),
             ],
