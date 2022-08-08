@@ -134,9 +134,7 @@ class TabBedsDetail extends StatelessWidget {
                                                                 .circular(10),
                                                         color: AppColors.yellow,
                                                       ),
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              2),
+                                                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                                                       child: SFText(
                                                         keyText:
                                                             LocaleKeys.selling,
