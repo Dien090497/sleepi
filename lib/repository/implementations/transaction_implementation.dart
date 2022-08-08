@@ -11,7 +11,6 @@ import 'package:slee_fi/datasources/remote/network/web3_datasource.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/isar_models/history_isar/history_isar_model.dart';
 import 'package:slee_fi/models/isar_models/network_isar/network_isar_model.dart';
-import 'package:slee_fi/models/isar_models/token_isar/token_isar_model.dart';
 import 'package:slee_fi/repository/transaction_repository.dart';
 import 'package:slee_fi/usecase/send_to_external_usecase.dart';
 import 'package:slee_fi/usecase/send_token_to_external.dart';
@@ -34,7 +33,7 @@ class TransactionImplementation extends ITransactionRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> sendToExternal(
+  Future<Either<Failure, String>> sendToExternal(
       SendToExternalParams params) async {
     try {
       final chainId = _getStorageDataSource.getCurrentChainId();
@@ -53,21 +52,21 @@ class TransactionImplementation extends ITransactionRepository {
       final addressTo = params.contractAddressTo.isEmpty
           ? await _secureStorage.readAddressContract() ?? ''
           : params.contractAddressTo;
-      final result = await _web3DataSource.sendCoinTxn(
+      final txHash = await _web3DataSource.sendCoinTxn(
           credentials: credentials,
           to: addressTo,
           valueInEther: params.valueInEther ?? 0.0,
           chainId: chainId);
 
-      if (result.isNotEmpty) {
+      if (txHash.isNotEmpty) {
         final model = HistoryIsarModel(
-            transactionHash: result,
+            transactionHash: txHash,
             chainId: chainId!,
             addressTo: addressTo,
             tokenSymbol: params.tokenSymbol!);
         await _historyDataSource.putHistory(model);
       }
-      return const Right(true);
+      return Right(txHash);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
@@ -102,7 +101,8 @@ class TransactionImplementation extends ITransactionRepository {
   }
 
   @override
-  Future<Either<Failure, double>> getTokenBalance(SendToExternalParams params) async {
+  Future<Either<Failure, double>> getTokenBalance(
+      SendToExternalParams params) async {
     try {
       double balance = 0;
       final walletId = _getStorageDataSource.getCurrentWalletId();
@@ -113,19 +113,19 @@ class TransactionImplementation extends ITransactionRepository {
         return Right(balance);
       } else {
         final balanceOfToken = (await _web3DataSource.getBalanceOf(
-          wallet!.address, params.contractAddressTo));
-        final decimals = await _web3DataSource.getDecimals(params.contractAddressTo);
-        balance =  balanceOfToken / BigInt.from(pow(10, decimals.toInt()));
+            wallet!.address, params.contractAddressTo));
+        final decimals =
+            await _web3DataSource.getDecimals(params.contractAddressTo);
+        balance = balanceOfToken / BigInt.from(pow(10, decimals.toInt()));
         return Right(balance);
       }
-
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
   }
 
   @override
-  Future<Either<FailureMessage, bool>> transferTokenErc20(
+  Future<Either<FailureMessage, String>> transferTokenErc20(
       SendTokenExternalParams params) async {
     try {
       final chainId = _getStorageDataSource.getCurrentChainId();
@@ -142,21 +142,22 @@ class TransactionImplementation extends ITransactionRepository {
       final erc20 = _web3DataSource.token(params.tokenEntity?.address ?? '');
       final recipient = EthereumAddress.fromHex(params.toAddress);
       final decimal = await erc20.decimals();
-      final amount = Decimal.parse('${params.valueInEther}') * Decimal.fromBigInt(BigInt.from(pow(10, decimal.toInt())));
-      final result = await erc20.transfer(
+      final amount = Decimal.parse('${params.valueInEther}') *
+          Decimal.fromBigInt(BigInt.from(pow(10, decimal.toInt())));
+      final txHash = await erc20.transfer(
         recipient,
         Decimal.parse(amount.toString()).toBigInt(),
         credentials: credentials,
       );
-      if (result.isNotEmpty) {
+      if (txHash.isNotEmpty) {
         final model = HistoryIsarModel(
-            transactionHash: result,
+            transactionHash: txHash,
             chainId: chainId!,
             addressTo: params.toAddress,
             tokenSymbol: params.tokenEntity!.symbol);
         await _historyDataSource.putHistory(model);
       }
-      return const Right(true);
+      return Right(txHash);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }

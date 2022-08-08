@@ -23,7 +23,7 @@ mixin _$SendToExternalState {
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -39,7 +39,7 @@ mixin _$SendToExternalState {
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -55,7 +55,7 @@ mixin _$SendToExternalState {
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -227,7 +227,7 @@ class _$sendToExternalStateInitial
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -246,7 +246,7 @@ class _$sendToExternalStateInitial
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -265,7 +265,7 @@ class _$sendToExternalStateInitial
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -450,7 +450,7 @@ class _$sendToExternalDone
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -469,7 +469,7 @@ class _$sendToExternalDone
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -488,7 +488,7 @@ class _$sendToExternalDone
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -637,7 +637,7 @@ class _$SendToExternalLoading
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -656,7 +656,7 @@ class _$SendToExternalLoading
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -675,7 +675,7 @@ class _$SendToExternalLoading
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -868,7 +868,7 @@ class _$GetTokenBalanceSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -887,7 +887,7 @@ class _$GetTokenBalanceSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -906,7 +906,7 @@ class _$GetTokenBalanceSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1010,6 +1010,7 @@ abstract class _$$sendToExternalSuccessCopyWith<$Res> {
   factory _$$sendToExternalSuccessCopyWith(_$sendToExternalSuccess value,
           $Res Function(_$sendToExternalSuccess) then) =
       __$$sendToExternalSuccessCopyWithImpl<$Res>;
+  $Res call({String txHash});
 }
 
 /// @nodoc
@@ -1022,6 +1023,18 @@ class __$$sendToExternalSuccessCopyWithImpl<$Res>
 
   @override
   _$sendToExternalSuccess get _value => super._value as _$sendToExternalSuccess;
+
+  @override
+  $Res call({
+    Object? txHash = freezed,
+  }) {
+    return _then(_$sendToExternalSuccess(
+      txHash == freezed
+          ? _value.txHash
+          : txHash // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
@@ -1029,27 +1042,41 @@ class __$$sendToExternalSuccessCopyWithImpl<$Res>
 class _$sendToExternalSuccess
     with DiagnosticableTreeMixin
     implements sendToExternalSuccess {
-  const _$sendToExternalSuccess();
+  const _$sendToExternalSuccess(this.txHash);
+
+  @override
+  final String txHash;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SendToExternalState.success()';
+    return 'SendToExternalState.success(txHash: $txHash)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'SendToExternalState.success'));
+    properties
+      ..add(DiagnosticsProperty('type', 'SendToExternalState.success'))
+      ..add(DiagnosticsProperty('txHash', txHash));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$sendToExternalSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _$sendToExternalSuccess &&
+            const DeepCollectionEquality().equals(other.txHash, txHash));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(txHash));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$sendToExternalSuccessCopyWith<_$sendToExternalSuccess> get copyWith =>
+      __$$sendToExternalSuccessCopyWithImpl<_$sendToExternalSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1059,7 +1086,7 @@ class _$sendToExternalSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -1068,7 +1095,7 @@ class _$sendToExternalSuccess
     required TResult Function(double fee) checkedValidator,
     required TResult Function() validatorSuccess,
   }) {
-    return success();
+    return success(txHash);
   }
 
   @override
@@ -1078,7 +1105,7 @@ class _$sendToExternalSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1087,7 +1114,7 @@ class _$sendToExternalSuccess
     TResult Function(double fee)? checkedValidator,
     TResult Function()? validatorSuccess,
   }) {
-    return success?.call();
+    return success?.call(txHash);
   }
 
   @override
@@ -1097,7 +1124,7 @@ class _$sendToExternalSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1108,7 +1135,7 @@ class _$sendToExternalSuccess
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(txHash);
     }
     return orElse();
   }
@@ -1183,7 +1210,13 @@ class _$sendToExternalSuccess
 }
 
 abstract class sendToExternalSuccess implements SendToExternalState {
-  const factory sendToExternalSuccess() = _$sendToExternalSuccess;
+  const factory sendToExternalSuccess(final String txHash) =
+      _$sendToExternalSuccess;
+
+  String get txHash;
+  @JsonKey(ignore: true)
+  _$$sendToExternalSuccessCopyWith<_$sendToExternalSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1280,7 +1313,7 @@ class _$SendToExternalFailed
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -1299,7 +1332,7 @@ class _$SendToExternalFailed
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1318,7 +1351,7 @@ class _$SendToExternalFailed
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1498,7 +1531,7 @@ class _$SendToExternalCalculatorFee
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -1517,7 +1550,7 @@ class _$SendToExternalCalculatorFee
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1536,7 +1569,7 @@ class _$SendToExternalCalculatorFee
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1690,7 +1723,7 @@ class _$SendToExternalCalculatorFeeSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -1709,7 +1742,7 @@ class _$SendToExternalCalculatorFeeSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1728,7 +1761,7 @@ class _$SendToExternalCalculatorFeeSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1903,7 +1936,7 @@ class _$SendToExternalErrorToAddress
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -1922,7 +1955,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -1941,7 +1974,7 @@ class _$SendToExternalErrorToAddress
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -2121,7 +2154,7 @@ class _$SendToExternalErrorValueInEther
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -2140,7 +2173,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -2159,7 +2192,7 @@ class _$SendToExternalErrorValueInEther
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -2338,7 +2371,7 @@ class _$SendToExternalCheckedValidator
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -2357,7 +2390,7 @@ class _$SendToExternalCheckedValidator
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -2376,7 +2409,7 @@ class _$SendToExternalCheckedValidator
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -2530,7 +2563,7 @@ class _$SendToExternalValidatorSuccess
     required TResult Function() loading,
     required TResult Function(double balance, double fee, double feeAvax)
         getBalance,
-    required TResult Function() success,
+    required TResult Function(String txHash) success,
     required TResult Function(String msg, bool isShowPopUp) fail,
     required TResult Function(double? fee) calculatorFee,
     required TResult Function() calculatorFeeSuccess,
@@ -2549,7 +2582,7 @@ class _$SendToExternalValidatorSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,
@@ -2568,7 +2601,7 @@ class _$SendToExternalValidatorSuccess
     TResult Function(SendToExternalEntity entity)? done,
     TResult Function()? loading,
     TResult Function(double balance, double fee, double feeAvax)? getBalance,
-    TResult Function()? success,
+    TResult Function(String txHash)? success,
     TResult Function(String msg, bool isShowPopUp)? fail,
     TResult Function(double? fee)? calculatorFee,
     TResult Function()? calculatorFeeSuccess,

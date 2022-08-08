@@ -18,7 +18,7 @@ class SendToExternalState with _$SendToExternalState {
 
   const factory SendToExternalState.getBalance({required double balance, required double fee, required double feeAvax}) = GetTokenBalanceSuccess;
 
-  const factory SendToExternalState.success() = sendToExternalSuccess;
+  const factory SendToExternalState.success(String txHash) = sendToExternalSuccess;
 
   const factory SendToExternalState.fail(
       String msg,

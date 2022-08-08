@@ -39,21 +39,22 @@ class PopUpConfirmSend extends StatelessWidget {
         listener: (context, state) {
           final cubit = context.read<SendToExternalCubit>();
           if (state is sendToExternalSuccess) {
-            showSuccessfulDialog(context, LocaleKeys.transaction_submitted, onBackPress: () {
-              Navigator.popUntil(context, (r) {
-                return r.settings.name == R.wallet;
-              });
-            },
-                barrierDismissible: false
+            showApproveSuccessfulDialog(
+              context,
+              txHash: state.txHash,
+              onBackPress: () {
+                Navigator.popUntil(context, (r) {
+                  return r.settings.name == R.wallet;
+                });
+              },
+              barrierDismissible: false,
             );
           }
           if (state is SendToExternalValidatorSuccess) {
-            if (transferToken && arg?.symbol != "AVAX" ) {
-              cubit.sendTokenExternal(toAddress,
-                  valueInEther, arg);
+            if (transferToken && arg?.symbol != "AVAX") {
+              cubit.sendTokenExternal(toAddress, valueInEther, arg);
             } else {
-              cubit.sendToExternal(toAddress,
-                  valueInEther, "AVAX");
+              cubit.sendToExternal(toAddress, valueInEther, "AVAX");
             }
           }
           if (state is SendToExternalFailed) {
@@ -72,98 +73,98 @@ class PopUpConfirmSend extends StatelessWidget {
           }
           return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
+              child: Column(children: [
+                SFText(
+                  keyText: LocaleKeys.send,
+                  style: TextStyles.bold18LightWhite,
+                ),
+                const SizedBox(height: 32),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SFText(
-                      keyText: LocaleKeys.send,
-                      style: TextStyles.bold18LightWhite,
+                      keyText: LocaleKeys.fee,
+                      style: TextStyles.lightGrey14,
                     ),
-                    const SizedBox(height: 32),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SFText(
-                          keyText: LocaleKeys.fee,
-                          style: TextStyles.lightGrey14,
-                        ),
-                        SFText(
-                          keyText: '${fee.toString()} AVAX',
-                          textAlign: TextAlign.right,
-                          style: TextStyles.lightWhite16,
-                        ),
-                      ],
+                    SFText(
+                      keyText: '${fee.toString()} AVAX',
+                      textAlign: TextAlign.right,
+                      style: TextStyles.lightWhite16,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 32.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SFText(
+                      keyText: LocaleKeys.you_will_send,
+                      style: TextStyles.lightGrey14,
+                    ),
+                    Expanded(
+                        child: SFText(
+                      keyText:
+                          "$valueInEther ${transferToken ? arg?.symbol : 'AVAX'}",
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end,
+                    )),
+                  ],
+                ),
+                const SizedBox(height: 32.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: SFText(
+                        keyText: LocaleKeys.send_address,
+                        style: TextStyles.lightGrey14,
+                      ),
+                    ),
+                    Expanded(
+                        child: SFText(
+                      keyText: toAddress,
+                      style: TextStyles.lightWhite16,
+                      textAlign: TextAlign.end,
+                    )),
+                  ],
+                ),
+                const SizedBox(
+                  height: 44.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: SFButton(
+                        text: LocaleKeys.cancel,
+                        textStyle: TextStyles.w600LightGreySize16,
+                        color: AppColors.light4,
+                        width: double.infinity,
+                        onPressed: () => Navigator.maybePop(context),
+                      ),
                     ),
                     const SizedBox(
-                      height: 32.0,
+                      width: 16.0,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SFText(
-                          keyText: LocaleKeys.you_will_send,
-                          style: TextStyles.lightGrey14,
-                        ),
-                        Expanded(
-                            child: SFText(
-                              keyText:
-                              "$valueInEther ${transferToken ? arg?.symbol : 'AVAX'}",
-                              style: TextStyles.lightWhite16,
-                              textAlign: TextAlign.end,
-                            )),
-                      ],
-                    ),
-                    const SizedBox(height: 32.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: SFText(
-                            keyText: LocaleKeys.send_address,
-                            style: TextStyles.lightGrey14,
-                          ),
-                        ),
-                        Expanded(
-                            child: SFText(
-                              keyText: toAddress,
-                              style: TextStyles.lightWhite16,
-                              textAlign: TextAlign.end,
-                            )),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 44.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          child: SFButton(
-                            text: LocaleKeys.cancel,
-                            textStyle: TextStyles.w600LightGreySize16,
-                            color: AppColors.light4,
-                            width: double.infinity,
-                            onPressed: () => Navigator.maybePop(context),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16.0,
-                        ),
-                        Expanded(
-                          child: state is SendToExternalLoading ? const LoadingIcon() : SFButton(
+                    Expanded(
+                      child: state is SendToExternalLoading
+                          ? const LoadingIcon()
+                          : SFButton(
                               disabled: state is SendToExternalLoading,
                               text: LocaleKeys.confirm,
                               textStyle: TextStyles.bold14LightWhite,
                               color: AppColors.blue,
                               width: double.infinity,
                               onPressed: () {
-                                cubit.validateFee(fee: fee, balanceAvax: balanceAvax);
+                                cubit.validateFee(
+                                    fee: fee, balanceAvax: balanceAvax);
                               }),
-                        ),
-                      ],
                     ),
-                  ]
-              )
-          );
+                  ],
+                ),
+              ]));
         },
       ),
     );

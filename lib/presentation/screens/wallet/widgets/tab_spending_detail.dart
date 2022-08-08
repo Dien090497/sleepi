@@ -33,6 +33,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
   final RefreshController refreshController = RefreshController();
 
   List<TokenEntity> tokenList = [];
+
   @override
   void dispose() {
     refreshController.dispose();
@@ -60,13 +61,14 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                     const SizedBox(height: 12.0),
                     FocusDetector(
                       onFocusGained: () {
-                        context.read<UserBloc>().add(const RefreshBalanceToken());
+                        context
+                            .read<UserBloc>()
+                            .add(const RefreshBalanceToken());
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: BlocBuilder<UserBloc, UserState>(
                           builder: (context, state) {
-
                             if (state is UserLoaded) {
                               tokenList = state.listTokens;
                             } else {
@@ -75,25 +77,30 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                             return Column(
                               children: tokenList
                                   .map((e) => SFCard(
-                                        onTap: () => openTransfer(
-                                            e, context.read<WalletCubit>().state),
+                                        onTap: () => openTransfer(e,
+                                            context.read<WalletCubit>().state),
                                         margin: const EdgeInsets.only(top: 8),
                                         padding: const EdgeInsets.all(14),
                                         child: Row(
                                           children: [
                                             Padding(
-                                                padding: e.symbol.contains('avax')
-                                                    ? const EdgeInsets.only(
-                                                        left: 5, top: 7, bottom: 7)
-                                                    : EdgeInsets.zero,
+                                                padding:
+                                                    e.symbol.contains('avax')
+                                                        ? const EdgeInsets.only(
+                                                            left: 5,
+                                                            top: 7,
+                                                            bottom: 7)
+                                                        : EdgeInsets.zero,
                                                 child: SFIcon(
                                                   e.icon,
-                                                  width: e.symbol.contains('avax')
-                                                      ? 30
-                                                      : 40,
-                                                  height: e.symbol.contains('avax')
-                                                      ? 30
-                                                      : 40,
+                                                  width:
+                                                      e.symbol.contains('avax')
+                                                          ? 30
+                                                          : 40,
+                                                  height:
+                                                      e.symbol.contains('avax')
+                                                          ? 30
+                                                          : 40,
                                                 )),
                                             const SizedBox(width: 12),
                                             Text(
@@ -150,8 +157,7 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                   onPressed: () {
                     for (final token in tokenList) {
                       if (token.symbol == 'avax') {
-                        openTransfer(
-                            token, context.read<WalletCubit>().state);
+                        openTransfer(token, context.read<WalletCubit>().state);
                         return;
                       }
                     }
