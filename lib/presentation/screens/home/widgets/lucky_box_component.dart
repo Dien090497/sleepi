@@ -83,8 +83,8 @@ class _ViewGif extends StatelessWidget {
         Text(_timeLeft(), style: const TextStyle(fontSize: 10)),
         const SizedBox(height: 5),
         GestureDetector(
-          // onTap: () => _onTap(context),
-          onTap: () => showComingSoonDialog(context),
+          onTap: () => _onTap(context),
+          // onTap: () => showComingSoonDialog(context),
           child: Container(
             width: 48,
             height: 48,
