@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:decimal/decimal.dart';
+import 'package:intl/intl.dart';
+import 'package:slee_fi/common/const/const.dart';
 import 'package:web3dart/web3dart.dart';
 
 extension NumX on num {
@@ -47,7 +49,7 @@ extension NumX on num {
   String get formatBalanceToken {
     if (this == 0) {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
-    } else if(this >= 0.000001){
+    } else if (this >= 0.000001) {
       final balance = toDouble();
       int index = balance.toString().indexOf('.');
       if (balance.toString().length - index > 7) {
@@ -56,7 +58,40 @@ extension NumX on num {
         index = balance.toString().length;
       }
       return balance.toString().substring(0, index);
-    }else{
+    } else {
+      return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+    }
+  }
+
+  String get formatCurrency {
+    if (this == 0) {
+      return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+    } else if (this >= 0.000001) {
+      if (this % 1 == 0) {
+        return NumberFormat("#,##0").format(this);
+      }
+
+      final balance = toDouble();
+      int decimalIndex = balance.toString().indexOf('.');
+
+      final decimalLength = math.min(
+          balance.toString().length - decimalIndex, Const.decimalMaxLength);
+
+      if (balance.toString().length - decimalIndex > Const.decimalMaxLength) {
+        decimalIndex += Const.decimalMaxLength;
+      } else {
+        decimalIndex = balance.toString().length;
+      }
+      final newValue = balance
+          .toString()
+          .substring(0, decimalIndex)
+          .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
+      const temp = '00000000000000';
+      final oCcy =
+          NumberFormat("#,##0.${temp.substring(0, decimalLength - 1)}");
+
+      return oCcy.format(double.parse(newValue));
+    } else {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
     }
   }

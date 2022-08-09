@@ -113,13 +113,9 @@ class WalletDetailList extends StatelessWidget {
                               child: Text(
                                 tokenList[index].balance <= 0.000001
                                     ? '0'
-                                    : (tokenList[index].symbol == 'AVAX'
-                                        ? tokenList[index]
-                                            .balance
-                                            .formatBalanceToken
-                                        : tokenList[index]
-                                            .balance
-                                            .formatBalanceToken),
+                                    : tokenList[index]
+                                        .balance
+                                        .formatCurrency,
                                 style: TextStyles.lightWhite16,
                                 textAlign: TextAlign.end,
                               ),
