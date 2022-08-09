@@ -7,6 +7,7 @@ import 'package:slee_fi/datasources/remote/auth_datasource/queue_interceptor.dar
 import 'package:slee_fi/models/bed_model/beb_model.dart';
 import 'package:slee_fi/models/list_nft_data_model/list_nft_data_model.dart';
 import 'package:slee_fi/models/minting/info_minting_model.dart';
+import 'package:slee_fi/models/minting/minting_model.dart';
 import 'package:slee_fi/models/nft_family/nft_family_model.dart';
 import 'package:slee_fi/models/nft_level_up_response/nft_level_up_response.dart';
 import 'package:slee_fi/schema/level_up/level_up_schema.dart';
@@ -53,5 +54,5 @@ abstract class NftApi {
       @Path('bedIdParent2') int bedIdParent2);
 
   @POST('/minting')
-  Future<dynamic> minting(@Body() MintingSchema body);
+  Future<MintingModel> minting(@Body() MintingSchema body);
 }

@@ -104,10 +104,10 @@ class MintCubit extends Cubit<MintState> {
         result.fold((l) {
           emit(MintState.error('$l'));
         }, (r) {
-          if (r['status']) {
-            emit(currentState.copyWith(statusMint: true));
+          if (r.status == true) {
+            emit(currentState.copyWith(statusMint: true, nftAttributeMinting:  r.nftAttribute));
           } else {
-            emit(MintState.error(r['msg'].toString()));
+            emit(MintState.mintingError(r.msg.toString()));
           }
         });
       }

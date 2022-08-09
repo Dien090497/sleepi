@@ -25,9 +25,11 @@ mixin _$MintState {
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(String msg) mintingError,
     required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,9 +42,11 @@ mixin _$MintState {
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,9 +59,11 @@ mixin _$MintState {
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) =>
@@ -67,6 +73,7 @@ mixin _$MintState {
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateMintingError value) mintingError,
     required TResult Function(MintStateGetInfo value) getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,6 +82,7 @@ mixin _$MintState {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,6 +91,7 @@ mixin _$MintState {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) =>
@@ -160,9 +169,11 @@ class _$MintStateInitial
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(String msg) mintingError,
     required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return initial();
@@ -178,9 +189,11 @@ class _$MintStateInitial
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return initial?.call();
@@ -196,9 +209,11 @@ class _$MintStateInitial
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
@@ -214,6 +229,7 @@ class _$MintStateInitial
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateMintingError value) mintingError,
     required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return initial(this);
@@ -225,6 +241,7 @@ class _$MintStateInitial
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return initial?.call(this);
@@ -236,6 +253,7 @@ class _$MintStateInitial
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {
@@ -261,7 +279,8 @@ abstract class _$$MintStateLoadedCopyWith<$Res> {
       bool isLoadMore,
       bool enableInsurance,
       bool statusMint,
-      InfoMintingModel? infoMinting});
+      InfoMintingModel? infoMinting,
+      NftAttributeMinting? nftAttributeMinting});
 }
 
 /// @nodoc
@@ -283,6 +302,7 @@ class __$$MintStateLoadedCopyWithImpl<$Res>
     Object? enableInsurance = freezed,
     Object? statusMint = freezed,
     Object? infoMinting = freezed,
+    Object? nftAttributeMinting = freezed,
   }) {
     return _then(_$MintStateLoaded(
       indexSelected: indexSelected == freezed
@@ -309,6 +329,10 @@ class __$$MintStateLoadedCopyWithImpl<$Res>
           ? _value.infoMinting
           : infoMinting // ignore: cast_nullable_to_non_nullable
               as InfoMintingModel?,
+      nftAttributeMinting: nftAttributeMinting == freezed
+          ? _value.nftAttributeMinting
+          : nftAttributeMinting // ignore: cast_nullable_to_non_nullable
+              as NftAttributeMinting?,
     ));
   }
 }
@@ -324,7 +348,8 @@ class _$MintStateLoaded
       this.isLoadMore = false,
       this.enableInsurance = true,
       this.statusMint = false,
-      this.infoMinting})
+      this.infoMinting,
+      this.nftAttributeMinting})
       : _listBed = listBed;
 
   @override
@@ -348,10 +373,12 @@ class _$MintStateLoaded
   final bool statusMint;
   @override
   final InfoMintingModel? infoMinting;
+  @override
+  final NftAttributeMinting? nftAttributeMinting;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'MintState.loaded(indexSelected: $indexSelected, listBed: $listBed, isLoadMore: $isLoadMore, enableInsurance: $enableInsurance, statusMint: $statusMint, infoMinting: $infoMinting)';
+    return 'MintState.loaded(indexSelected: $indexSelected, listBed: $listBed, isLoadMore: $isLoadMore, enableInsurance: $enableInsurance, statusMint: $statusMint, infoMinting: $infoMinting, nftAttributeMinting: $nftAttributeMinting)';
   }
 
   @override
@@ -364,7 +391,8 @@ class _$MintStateLoaded
       ..add(DiagnosticsProperty('isLoadMore', isLoadMore))
       ..add(DiagnosticsProperty('enableInsurance', enableInsurance))
       ..add(DiagnosticsProperty('statusMint', statusMint))
-      ..add(DiagnosticsProperty('infoMinting', infoMinting));
+      ..add(DiagnosticsProperty('infoMinting', infoMinting))
+      ..add(DiagnosticsProperty('nftAttributeMinting', nftAttributeMinting));
   }
 
   @override
@@ -382,7 +410,9 @@ class _$MintStateLoaded
             const DeepCollectionEquality()
                 .equals(other.statusMint, statusMint) &&
             const DeepCollectionEquality()
-                .equals(other.infoMinting, infoMinting));
+                .equals(other.infoMinting, infoMinting) &&
+            const DeepCollectionEquality()
+                .equals(other.nftAttributeMinting, nftAttributeMinting));
   }
 
   @override
@@ -393,7 +423,8 @@ class _$MintStateLoaded
       const DeepCollectionEquality().hash(isLoadMore),
       const DeepCollectionEquality().hash(enableInsurance),
       const DeepCollectionEquality().hash(statusMint),
-      const DeepCollectionEquality().hash(infoMinting));
+      const DeepCollectionEquality().hash(infoMinting),
+      const DeepCollectionEquality().hash(nftAttributeMinting));
 
   @JsonKey(ignore: true)
   @override
@@ -410,13 +441,15 @@ class _$MintStateLoaded
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(String msg) mintingError,
     required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return loaded(indexSelected, listBed, isLoadMore, enableInsurance,
-        statusMint, infoMinting);
+        statusMint, infoMinting, nftAttributeMinting);
   }
 
   @override
@@ -429,13 +462,15 @@ class _$MintStateLoaded
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return loaded?.call(indexSelected, listBed, isLoadMore, enableInsurance,
-        statusMint, infoMinting);
+        statusMint, infoMinting, nftAttributeMinting);
   }
 
   @override
@@ -448,15 +483,17 @@ class _$MintStateLoaded
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
     if (loaded != null) {
       return loaded(indexSelected, listBed, isLoadMore, enableInsurance,
-          statusMint, infoMinting);
+          statusMint, infoMinting, nftAttributeMinting);
     }
     return orElse();
   }
@@ -467,6 +504,7 @@ class _$MintStateLoaded
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateMintingError value) mintingError,
     required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return loaded(this);
@@ -478,6 +516,7 @@ class _$MintStateLoaded
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return loaded?.call(this);
@@ -489,6 +528,7 @@ class _$MintStateLoaded
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {
@@ -506,7 +546,8 @@ abstract class MintStateLoaded implements MintState {
       final bool isLoadMore,
       final bool enableInsurance,
       final bool statusMint,
-      final InfoMintingModel? infoMinting}) = _$MintStateLoaded;
+      final InfoMintingModel? infoMinting,
+      final NftAttributeMinting? nftAttributeMinting}) = _$MintStateLoaded;
 
   int get indexSelected;
   List<BedEntity> get listBed;
@@ -514,6 +555,7 @@ abstract class MintStateLoaded implements MintState {
   bool get enableInsurance;
   bool get statusMint;
   InfoMintingModel? get infoMinting;
+  NftAttributeMinting? get nftAttributeMinting;
   @JsonKey(ignore: true)
   _$$MintStateLoadedCopyWith<_$MintStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -598,9 +640,11 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(String msg) mintingError,
     required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return error(msg);
@@ -616,9 +660,11 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return error?.call(msg);
@@ -634,9 +680,11 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
@@ -652,6 +700,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateMintingError value) mintingError,
     required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return error(this);
@@ -663,6 +712,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return error?.call(this);
@@ -674,6 +724,7 @@ class _$MintStateError with DiagnosticableTreeMixin implements MintStateError {
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {
@@ -690,6 +741,194 @@ abstract class MintStateError implements MintState {
   String get msg;
   @JsonKey(ignore: true)
   _$$MintStateErrorCopyWith<_$MintStateError> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$MintStateMintingErrorCopyWith<$Res> {
+  factory _$$MintStateMintingErrorCopyWith(_$MintStateMintingError value,
+          $Res Function(_$MintStateMintingError) then) =
+      __$$MintStateMintingErrorCopyWithImpl<$Res>;
+  $Res call({String msg});
+}
+
+/// @nodoc
+class __$$MintStateMintingErrorCopyWithImpl<$Res>
+    extends _$MintStateCopyWithImpl<$Res>
+    implements _$$MintStateMintingErrorCopyWith<$Res> {
+  __$$MintStateMintingErrorCopyWithImpl(_$MintStateMintingError _value,
+      $Res Function(_$MintStateMintingError) _then)
+      : super(_value, (v) => _then(v as _$MintStateMintingError));
+
+  @override
+  _$MintStateMintingError get _value => super._value as _$MintStateMintingError;
+
+  @override
+  $Res call({
+    Object? msg = freezed,
+  }) {
+    return _then(_$MintStateMintingError(
+      msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$MintStateMintingError
+    with DiagnosticableTreeMixin
+    implements MintStateMintingError {
+  const _$MintStateMintingError(this.msg);
+
+  @override
+  final String msg;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MintState.mintingError(msg: $msg)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MintState.mintingError'))
+      ..add(DiagnosticsProperty('msg', msg));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MintStateMintingError &&
+            const DeepCollectionEquality().equals(other.msg, msg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$MintStateMintingErrorCopyWith<_$MintStateMintingError> get copyWith =>
+      __$$MintStateMintingErrorCopyWithImpl<_$MintStateMintingError>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(
+            int indexSelected,
+            List<BedEntity> listBed,
+            bool isLoadMore,
+            bool enableInsurance,
+            bool statusMint,
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)
+        loaded,
+    required TResult Function(String msg) error,
+    required TResult Function(String msg) mintingError,
+    required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
+  }) {
+    return mintingError(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            int indexSelected,
+            List<BedEntity> listBed,
+            bool isLoadMore,
+            bool enableInsurance,
+            bool statusMint,
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
+        loaded,
+    TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
+  }) {
+    return mintingError?.call(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(
+            int indexSelected,
+            List<BedEntity> listBed,
+            bool isLoadMore,
+            bool enableInsurance,
+            bool statusMint,
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
+        loaded,
+    TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
+    TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
+    required TResult orElse(),
+  }) {
+    if (mintingError != null) {
+      return mintingError(msg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MintStateInitial value) initial,
+    required TResult Function(MintStateLoaded value) loaded,
+    required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateMintingError value) mintingError,
+    required TResult Function(MintStateGetInfo value) getInfoMint,
+  }) {
+    return mintingError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(MintStateInitial value)? initial,
+    TResult Function(MintStateLoaded value)? loaded,
+    TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
+  }) {
+    return mintingError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MintStateInitial value)? initial,
+    TResult Function(MintStateLoaded value)? loaded,
+    TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
+    TResult Function(MintStateGetInfo value)? getInfoMint,
+    required TResult orElse(),
+  }) {
+    if (mintingError != null) {
+      return mintingError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MintStateMintingError implements MintState {
+  const factory MintStateMintingError(final String msg) =
+      _$MintStateMintingError;
+
+  String get msg;
+  @JsonKey(ignore: true)
+  _$$MintStateMintingErrorCopyWith<_$MintStateMintingError> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -776,9 +1015,11 @@ class _$MintStateGetInfo
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)
         loaded,
     required TResult Function(String msg) error,
+    required TResult Function(String msg) mintingError,
     required TResult Function(InfoMintingModel infoMintingModel) getInfoMint,
   }) {
     return getInfoMint(infoMintingModel);
@@ -794,9 +1035,11 @@ class _$MintStateGetInfo
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
   }) {
     return getInfoMint?.call(infoMintingModel);
@@ -812,9 +1055,11 @@ class _$MintStateGetInfo
             bool isLoadMore,
             bool enableInsurance,
             bool statusMint,
-            InfoMintingModel? infoMinting)?
+            InfoMintingModel? infoMinting,
+            NftAttributeMinting? nftAttributeMinting)?
         loaded,
     TResult Function(String msg)? error,
+    TResult Function(String msg)? mintingError,
     TResult Function(InfoMintingModel infoMintingModel)? getInfoMint,
     required TResult orElse(),
   }) {
@@ -830,6 +1075,7 @@ class _$MintStateGetInfo
     required TResult Function(MintStateInitial value) initial,
     required TResult Function(MintStateLoaded value) loaded,
     required TResult Function(MintStateError value) error,
+    required TResult Function(MintStateMintingError value) mintingError,
     required TResult Function(MintStateGetInfo value) getInfoMint,
   }) {
     return getInfoMint(this);
@@ -841,6 +1087,7 @@ class _$MintStateGetInfo
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
   }) {
     return getInfoMint?.call(this);
@@ -852,6 +1099,7 @@ class _$MintStateGetInfo
     TResult Function(MintStateInitial value)? initial,
     TResult Function(MintStateLoaded value)? loaded,
     TResult Function(MintStateError value)? error,
+    TResult Function(MintStateMintingError value)? mintingError,
     TResult Function(MintStateGetInfo value)? getInfoMint,
     required TResult orElse(),
   }) {

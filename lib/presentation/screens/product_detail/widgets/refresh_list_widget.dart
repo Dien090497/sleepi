@@ -55,6 +55,7 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
           }
 
           if (state.openBedBoxSuccess != null && !widget.isBed) {
+            Navigator.pop(context, true);
             showSuccessfulDialog(context, null).then((value) =>
                 Navigator.pushNamed(
                     context, R.nftInfo,

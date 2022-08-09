@@ -4,11 +4,10 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 
 class OpenBedBoxAnimation extends StatefulWidget {
   const OpenBedBoxAnimation(
-      {Key? key, required this.bedBoxType, required this.isCompletedAnimation})
+      {Key? key, required this.bedBoxType})
       : super(key: key);
 
   final String bedBoxType;
-  final Function(bool) isCompletedAnimation;
 
   @override
   State<OpenBedBoxAnimation> createState() => _OpenBedBoxAnimationState();
@@ -24,12 +23,11 @@ class _OpenBedBoxAnimationState extends State<OpenBedBoxAnimation> with TickerPr
     animationController = AnimationController(vsync: this);
     animationController.addStatusListener((status) async {
       if (animationController.isCompleted) {
-        Navigator.pop(context, true);
-        widget.isCompletedAnimation(true);
+        animationController.reverse();
       }
-      // if(animationController.isDismissed){
-      //   animationController.forward();
-      // }
+      if(animationController.isDismissed){
+        animationController.forward();
+      }
 
     });
   }
