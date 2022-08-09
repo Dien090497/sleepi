@@ -160,7 +160,6 @@ class _TransferListState extends State<TransferList> {
 
         if (state is TransferLoaded) {
           final currentToken = state.currentToken;
-print('current balance   ${currentToken.balance}');
           return Container(
             decoration: const BoxDecoration(
               color: AppColors.dark,

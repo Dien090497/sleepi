@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:dartz/dartz.dart' as dartz;
 import 'package:flutter/material.dart';
@@ -268,7 +267,6 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
         DateTime.fromMillisecondsSinceEpoch(int.parse(widget.remainTime));
     final duration = time.difference(DateTime.now());
     final second = duration.inSeconds.remainder(60);
-    print('minute left is   ${duration.inMinutes}    ${second / 60.0}');
     return (duration.inMinutes + (second / 60.0)) * costPerMinute;
   }
 }
