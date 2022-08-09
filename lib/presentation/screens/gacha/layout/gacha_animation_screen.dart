@@ -3,6 +3,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
+import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/utils/random_utils.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/models/gacha_spin_response/gacha_attributes_item.dart';
@@ -40,6 +41,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
   final randomUtils = getIt<RandomUtils>();
   String image = '';
   bool isShowResult = false;
+  bool skipAnimation  = false;
 
   Future setAudio() async {
     final args =
@@ -62,7 +64,7 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
     animationController.addStatusListener((status) async {
       final args = ModalRoute.of(context)?.settings.arguments
           as GachaAnimationArguments?;
-      if (status == AnimationStatus.completed) {
+      if (status == AnimationStatus.completed || skipAnimation == true) {
         if (args != null && args.spinInfo != null) {
           if (args.spinInfo!.gift.length == Const.one) {
             if(args.spinInfo!.gift.first['type'] == 'slft'){
@@ -155,6 +157,23 @@ class _GachaAnimationScreenState extends State<GachaAnimationScreen>
               },
             ),
           ),
+          Positioned(
+            bottom: 25,
+            right: 20,
+            child:   ElevatedButton(
+              onPressed: () {
+                setState(() => skipAnimation = true);
+                animationController.reset();
+              },
+              style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(12),
+                  primary: AppColors.white,
+                  shape: const CircleBorder(),
+            ),
+              child: const Icon(Icons.skip_next, color: AppColors.red, size: 32,),
+          )
+          )
+
           // isShowResult ?  Scaffold(
           //   backgroundColor: AppColors.transparent,
           //   body: Center(
