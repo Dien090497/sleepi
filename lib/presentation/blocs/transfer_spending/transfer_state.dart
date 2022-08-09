@@ -10,7 +10,7 @@ class TransferState with _$TransferState {
     required bool isToSpending,
   }) = TransferInitial;
 
-  const factory TransferState.success(String txHash) = TransferSuccess;
+  const factory TransferState.success(String? txHash) = TransferSuccess;
 
   const factory TransferState.failed(String msg) = TransferFailed;
 

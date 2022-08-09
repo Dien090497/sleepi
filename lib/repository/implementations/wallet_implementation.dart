@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'dart:math';
 
 import 'package:dartz/dartz.dart';
@@ -6,6 +5,7 @@ import 'package:decimal/decimal.dart';
 import 'package:injectable/injectable.dart';
 import 'package:slee_fi/common/const/const.dart';
 import 'package:slee_fi/common/enum/enum.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/datasources/local/get_storage_datasource.dart';
 import 'package:slee_fi/datasources/local/isar/isar_datasource.dart';
 import 'package:slee_fi/datasources/local/secure_storage.dart';
@@ -217,14 +217,13 @@ class WalletImplementation extends IWalletRepository {
         if (params.addressContract[i] == Const.deadAddress) {
           final balance =
               await _web3DataSource.getBalance(params.walletInfoEntity.address);
-          values.add(balance / BigInt.from(pow(10, 18)));
+          values.add(balance.toEther());
         } else {
           final erc20 = _web3DataSource.token(params.addressContract[i]);
           final value = await erc20.balanceOf(
               EthereumAddress.fromHex(params.walletInfoEntity.address));
           final decimals = await erc20.decimals();
-          final result = value / BigInt.from(math.pow(10, decimals.toInt()));
-          values.add(result);
+          values.add(value.toEther(decimals: decimals));
         }
       }
       return Right(values);
@@ -470,7 +469,8 @@ class WalletImplementation extends IWalletRepository {
       );
       if (transactionHistoryList.isNotEmpty) {
         if (transactionHistoryList.first.tokenName != null) {
-          final erc20 = _web3DataSource.token(transactionHistoryList.first.contractAddress);
+          final erc20 = _web3DataSource
+              .token(transactionHistoryList.first.contractAddress);
           final decimalToken = await erc20.decimals();
           decimal = decimalToken.toInt();
         }
@@ -483,8 +483,10 @@ class WalletImplementation extends IWalletRepository {
 
         final model = TransactionIsarModel(
             transactionHash: transactionHistoryList.elementAt(i).hash,
-            valueInEther: (Decimal.parse(transactionHistoryList.elementAt(i).value) / Decimal.fromBigInt(BigInt.from(pow(10, decimal)))).toDouble(),
-
+            valueInEther:
+                (Decimal.parse(transactionHistoryList.elementAt(i).value) /
+                        Decimal.fromBigInt(BigInt.from(pow(10, decimal))))
+                    .toDouble(),
             timeStamp: DateTime.fromMillisecondsSinceEpoch(
                 int.parse(transactionHistoryList.elementAt(i).timeStamp) *
                     1000),

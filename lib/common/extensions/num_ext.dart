@@ -47,7 +47,7 @@ extension NumX on num {
   String get formatBalanceToken {
     if (this == 0) {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
-    } else if(this >= 0.000001){
+    } else if (this >= 0.000001) {
       final balance = toDouble();
       int index = balance.toString().indexOf('.');
       if (balance.toString().length - index > 7) {
@@ -56,8 +56,14 @@ extension NumX on num {
         index = balance.toString().length;
       }
       return balance.toString().substring(0, index);
-    }else{
+    } else {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
     }
   }
+}
+
+extension BigIntX on BigInt {
+  double toEther({BigInt? decimals}) => (Decimal.parse('$this') /
+          Decimal.parse('${math.pow(10, decimals?.toInt() ?? 18)}'))
+      .toDouble();
 }
