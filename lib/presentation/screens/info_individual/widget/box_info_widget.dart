@@ -34,10 +34,11 @@ class BoxInfoWidget extends StatelessWidget {
               textStyle: TextStyles.lightWhite14,
             ),
             const SizedBox(height: 16),
-            Text(
-              '${LocaleKeys.time.tr()}: ${bed.startTime!.formatBalanceToken}h - ${bed.endTime!.formatBalanceToken}h',
-              style: TextStyles.lightGrey14,
-            ),
+            if (bed.startTime != null)
+              Text(
+                '${LocaleKeys.time.tr()}: ${bed.startTime!.formatBalanceToken}h - ${bed.endTime!.formatBalanceToken}h',
+                style: TextStyles.lightGrey14,
+              ),
             const SizedBox(height: 24),
           ],
         ),

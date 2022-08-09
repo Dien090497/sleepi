@@ -66,7 +66,7 @@ class TabBedsBuy extends StatelessWidget {
                 cubit: cubit,
                 tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                 onFilterTap: () {
-                  showFilterModalBottomSheet(
+                  showFilterBedModalBottomSheet(
                     cubit: cubit,
                     context,
                     sections: {
