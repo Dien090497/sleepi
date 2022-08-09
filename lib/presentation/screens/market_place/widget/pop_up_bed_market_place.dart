@@ -99,7 +99,28 @@ class PopUpBedMarketPlace extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-        _Detail(bed: bed),
+        bed.type == 'bedbox'
+            ? SFCard(
+                radius: 8,
+                margin: EdgeInsets.zero,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SFText(
+                      keyText: LocaleKeys.quality,
+                      style: TextStyles.lightGrey16,
+                    ),
+                    SFText(
+                      keyText: bed.quality ?? '',
+                      style: TextStyles.blue16,
+                      textAlign: TextAlign.right,
+                    )
+                  ],
+                ),
+              )
+            : _Detail(bed: bed),
         const SizedBox(height: 16),
         Row(
           children: [

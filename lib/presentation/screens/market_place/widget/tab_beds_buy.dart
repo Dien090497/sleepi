@@ -128,6 +128,10 @@ class TabBedsBuy extends StatelessWidget {
                                       _showBedDialog(context, bed);
                                     },
                                     onBedTap: (bed) {
+                                      if (bed.type == 'bedbox') {
+                                        _showBedDialog(context, bed);
+                                        return;
+                                      }
                                       final userState =
                                           context.read<UserBloc>().state;
                                       if (userState is UserLoaded) {
@@ -187,6 +191,32 @@ class TabBedsBuy extends StatelessWidget {
               ),
             ],
           );
+        },
+      ),
+    );
+  }
+
+  void _showPopUpBuyBedBox(MarketPlaceModel bed, BuildContext context) {
+    bool isBuying = false;
+    showCustomAlertDialog(
+      context,
+      padding: const EdgeInsets.all(24),
+      children: PopUpBedMarketPlace(
+        bed: bed,
+        cubit: cubit,
+        onConfirmTap: () async {
+          if (isBuying) return;
+          isBuying = true;
+          final msg = await cubit.buyNFT(bed.nftId);
+          Navigator.pop(context, true);
+          cubit.refresh();
+          if (msg.isEmpty) {
+            context.read<UserBloc>().add(const RefreshBalanceToken());
+            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+          } else {
+            showMessageDialog(context, msg);
+          }
+          isBuying = false;
         },
       ),
     );
