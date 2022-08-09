@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -70,7 +70,7 @@ class TrackingCubit extends Cubit<TrackingState> {
         List<DataHealth> healthDataList = [];
         List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
             now.subtract(const Duration(days: 1)), now, types);
-        log('health data: ${healthData.toString()}');
+        // log('health data: ${healthData.toString()}');
         healthData = HealthFactory.removeDuplicates(healthData);
         for (var element in healthData) {
           if(timeStart.isBefore(element.dateTo)) {
@@ -81,7 +81,7 @@ class TrackingCubit extends Cubit<TrackingState> {
           datas: healthDataList,
         ));
       } catch (e) {
-        log('health data error: $e');
+        // log('health data error: $e');
         emit(TrackingState.error('$e'));
       }
     } else {
