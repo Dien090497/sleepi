@@ -34,19 +34,19 @@ class TabItemsBuy extends StatelessWidget {
         item: item,
         cubit: cubit,
         onConfirmTap: () async {
-          if (isBuying) return;
-          isBuying = true;
-          Navigator.pop(context);
-          cubit.buyNFT(item.nftId);
-          final msg = await cubit.buyNFT(item.nftId);
-          cubit.refresh();
-          if (msg.isEmpty) {
-            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-            context.read<UserBloc>().add(const RefreshBalanceToken());
-          } else {
-            showMessageDialog(context, msg);
+          if (!isBuying) {
+            isBuying = true;
+            Navigator.pop(context);
+            final msg = await cubit.buyNFT(item.nftId);
+            cubit.refresh();
+            if (msg.isEmpty) {
+              showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
+              context.read<UserBloc>().add(const RefreshBalanceToken());
+            } else {
+              showMessageDialog(context, msg);
+            }
+            isBuying = false;
           }
-          isBuying = false;
         },
       ),
     );
