@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:slee_fi/common/const/const.dart';
@@ -6,6 +5,7 @@ import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/cached_image.dart';
+import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/minting/nft_attribute_minting.dart';
@@ -92,13 +92,13 @@ class _PopUpMintSuccessState extends State<PopUpMintSuccess> with TickerProvider
             style: TextStyles.blue14,
           ),
         ),
-        const SizedBox(height: 12),
-        SizedBox(
-            width: MediaQuery.of(context).size.width / 2.5,
-            child: GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: SFText(keyText:LocaleKeys.click_to_collect.tr().toUpperCase(), style: TextStyles.white16,),
-            )
+         SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+        SFButton(
+          text: LocaleKeys.click_to_collect,
+          width: double.infinity,
+          textStyle: TextStyles.bold14LightWhite,
+          color: AppColors.blue,
+          onPressed: () => Navigator.pop(context),
         ),
       ],
     );

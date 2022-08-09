@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
