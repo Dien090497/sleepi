@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/enum/enum.dart';
 import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -12,6 +13,8 @@ import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/entities/token/token_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
+import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
@@ -33,6 +36,9 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
   final RefreshController refreshController = RefreshController();
 
   List<TokenEntity> tokenList = [];
+  final PendingBloc _pendingBloc = PendingBloc();
+  final PendingBloc _historyBloc = PendingBloc();
+  late final userState = context.read<UserBloc>().state;
 
   @override
   void dispose() {
@@ -42,30 +48,38 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: SmartRefresher(
-              controller: refreshController,
-              enablePullDown: true,
-              onRefresh: () {
-                context.read<UserBloc>().add(const RefreshBalanceToken());
-                refreshController.refreshCompleted();
-              },
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 19.0),
-                    const PopupInfoSpending(),
-                    const SizedBox(height: 12.0),
-                    FocusDetector(
-                      onFocusGained: () {
-                        context
-                            .read<UserBloc>()
-                            .add(const RefreshBalanceToken());
-                      },
-                      child: Padding(
+    return FocusDetector(
+      onFocusGained: () {
+        context.read<UserBloc>().add(const RefreshBalanceToken());
+        _pendingBloc.add(PendingInit(
+            userState is UserLoaded
+                ? (userState as UserLoaded).userInfoEntity.id
+                : 0,
+            AttributeWithdraw.pending));
+        _historyBloc.add(PendingInit(
+            userState is UserLoaded
+                ? (userState as UserLoaded).userInfoEntity.id
+                : 0,
+            AttributeWithdraw.history));
+      },
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SmartRefresher(
+                controller: refreshController,
+                enablePullDown: true,
+                onRefresh: () {
+                  context.read<UserBloc>().add(const RefreshBalanceToken());
+                  refreshController.refreshCompleted();
+                },
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 19.0),
+                      const PopupInfoSpending(),
+                      const SizedBox(height: 12.0),
+                      Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
                         child: BlocBuilder<UserBloc, UserState>(
                           builder: (context, state) {
@@ -124,47 +138,56 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                           },
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 18.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: SizedBox(
-                          height: 48,
-                          child: SFButtonOutLined(
-                            title: LocaleKeys.stake,
-                            textStyle: TextStyles.bold16Blue,
-                            borderColor: AppColors.blue,
-                            onPressed: () {
-                              Navigator.pushNamed(context, R.staking);
-                            },
+                      const SizedBox(height: 18.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: SizedBox(
+                            height: 48,
+                            child: SFButtonOutLined(
+                              title: LocaleKeys.stake,
+                              textStyle: TextStyles.bold16Blue,
+                              borderColor: AppColors.blue,
+                              onPressed: () {
+                                Navigator.pushNamed(context, R.staking);
+                              },
+                            )),
+                      ),
+                      const SizedBox(height: 25),
+                      MultiBlocProvider(
+                          providers: [
+                            BlocProvider(create: (context) => _historyBloc),
+                            BlocProvider(create: (context) => _pendingBloc),
+                          ],
+                          child: SpendingDetailList(
+                            historyBloc: _historyBloc,
+                            pendingBloc: _pendingBloc,
                           )),
-                    ),
-                    const SizedBox(height: 25),
-                    const SpendingDetailList(),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: SizedBox(
-                height: 48,
-                child: SFButtonOutLined(
-                  title: LocaleKeys.transfer,
-                  textStyle: TextStyles.bold16Blue,
-                  borderColor: AppColors.blue,
-                  onPressed: () {
-                    for (final token in tokenList) {
-                      if (token.symbol == 'avax') {
-                        openTransfer(token, context.read<WalletCubit>().state);
-                        return;
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                  height: 48,
+                  child: SFButtonOutLined(
+                    title: LocaleKeys.transfer,
+                    textStyle: TextStyles.bold16Blue,
+                    borderColor: AppColors.blue,
+                    onPressed: () {
+                      for (final token in tokenList) {
+                        if (token.symbol == 'avax') {
+                          openTransfer(
+                              token, context.read<WalletCubit>().state);
+                          return;
+                        }
                       }
-                    }
-                  },
-                )),
-          ),
-        ],
+                    },
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -331,13 +331,7 @@ class TabBedsDetail extends StatelessWidget {
                   if (state.successTransfer) {
                     Navigator.pop(context);
                     nftListCubit.refreshBedBox();
-                    // showSuccessfulDialog(context, null, onBackPress: () {
-                    //   Navigator.pushNamedAndRemoveUntil(
-                    //     context,
-                    //     R.bottomNavigation,
-                    //     (r) => false,
-                    //   );
-                    // });
+                    showSuccessfulDialog(context, null);
                   }
                 }
               },
@@ -371,14 +365,7 @@ class TabBedsDetail extends StatelessWidget {
               if (state.successTransfer) {
                 Navigator.pop(context);
                 nftListCubit.refreshBedBox();
-
-                // showSuccessfulDialog(context, null, onBackPress: () {
-                //   Navigator.pushNamedAndRemoveUntil(
-                //     context,
-                //     R.bottomNavigation,
-                //     (r) => false,
-                //   );
-                // });
+                showSuccessfulDialog(context, null);
               }
             }
           },

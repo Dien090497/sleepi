@@ -150,13 +150,15 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
                           Expanded(
                             child: BoxButtonWidget(
                               onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  R.trade,
-                                  arguments: TradeArguments(
-                                    symbolFrom: StorageKeys.avax,
-                                  ),
-                                );
+                                Navigator.of(context)
+                                    .push(CustomMaterialPageRoute(
+                                        builder: (_) => const TradeScreen(),
+                                        settings: RouteSettings(
+                                          name: R.trade,
+                                          arguments: TradeArguments(
+                                            symbolFrom: StorageKeys.avax,
+                                          ),
+                                        )));
                               },
                               text: LocaleKeys.trade
                                   .tr()
@@ -237,4 +239,23 @@ class _TabWalletDetailState extends State<TabWalletDetail> {
 
     ToastUtils.showToast(LocaleKeys.successfully_copied);
   }
+}
+
+class CustomMaterialPageRoute extends MaterialPageRoute {
+  @protected
+  bool get hasScopedWillPopCallback {
+    return false;
+  }
+
+  CustomMaterialPageRoute({
+    required WidgetBuilder builder,
+    required RouteSettings settings,
+    bool maintainState = true,
+    bool fullscreenDialog = false,
+  }) : super(
+          builder: builder,
+          settings: settings,
+          maintainState: maintainState,
+          fullscreenDialog: fullscreenDialog,
+        );
 }

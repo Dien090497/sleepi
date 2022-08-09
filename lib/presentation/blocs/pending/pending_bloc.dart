@@ -32,7 +32,7 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
   _onInit(PendingInit event, Emitter<PendingState> emit) async {
     userId = event.userId;
     attributeWithdraw = event.attributeWithdraw;
-    add(const PendingFetched());
+    add(PendingRefresh());
     var networkUc = await _getCurrentNetworkUseCase.call(null);
     networkUc.fold((l) => explorers = Const.avascanUrl, (r) {
       explorers = r.explorers.first.url;

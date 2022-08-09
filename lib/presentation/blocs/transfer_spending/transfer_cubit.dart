@@ -36,36 +36,40 @@ class TransferCubit extends Cubit<TransferState> {
   }) async {
     final currentState = state;
     if (currentState is TransferInitial) {
-      final spendingTokens = baseSpendingTokens.take(3).toList();
-      final walletTokens = baseWalletTokens.take(3).toList();
-      final addr = currentState.address;
-      final spendingToken = spendingTokens
-          .firstWhere((e) => e.address.toLowerCase() == addr.toLowerCase());
-      final walletToken = walletTokens
-          .firstWhere((e) => e.address.toLowerCase() == addr.toLowerCase());
-      final isToSpending = currentState.isToSpending;
+      try {
+        final spendingTokens = baseSpendingTokens.take(3).toList();
+        final walletTokens = baseWalletTokens.take(3).toList();
+        final addr = currentState.address;
+        final spendingToken = spendingTokens
+            .firstWhere((e) => e.address.toLowerCase() == addr.toLowerCase());
+        final walletToken = walletTokens
+            .firstWhere((e) => e.address.toLowerCase() == addr.toLowerCase());
+        final isToSpending = currentState.isToSpending;
 
-      /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
-      final currentToken = isToSpending ? walletToken : spendingToken;
-      final nativeCurrency = isToSpending
-          ? walletTokens
-              .firstWhere((e) => e.address.toLowerCase() == Const.deadAddress)
-          : spendingTokens
-              .firstWhere((e) => e.address.toLowerCase() == Const.deadAddress);
+        /// nếu wallet -> spending thì currentToken sẽ lấy từ spendingState
+        final currentToken = isToSpending ? walletToken : spendingToken;
+        final nativeCurrency = isToSpending
+            ? walletTokens
+                .firstWhere((e) => e.address.toLowerCase() == Const.deadAddress)
+            : spendingTokens.firstWhere(
+                (e) => e.address.toLowerCase() == Const.deadAddress);
 
-      /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
-      final backupToken = isToSpending ? spendingToken : walletToken;
-      emit(TransferLoaded(
-        currentToken: currentToken,
-        backupToken: backupToken,
-        isToSpending: isToSpending,
-        spendingTokens: baseSpendingTokens,
-        walletTokens: baseWalletTokens,
-        userId: userId,
-        ownerAddress: ownerAddress,
-        nativeCurrency: nativeCurrency,
-      ));
-      _getFee();
+        /// nếu wallet -> spending thì backupToken sẽ lấy từ walletState
+        final backupToken = isToSpending ? spendingToken : walletToken;
+        emit(TransferLoaded(
+          currentToken: currentToken,
+          backupToken: backupToken,
+          isToSpending: isToSpending,
+          spendingTokens: baseSpendingTokens,
+          walletTokens: baseWalletTokens,
+          userId: userId,
+          ownerAddress: ownerAddress,
+          nativeCurrency: nativeCurrency,
+        ));
+        _getFee();
+      } catch (e) {
+        emit(TransferState.failed('$e'));
+      }
     }
   }
 

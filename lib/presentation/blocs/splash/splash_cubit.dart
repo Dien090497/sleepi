@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:safe_device/safe_device.dart';
 // import 'package:safe_device/safe_device.dart';
 import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/presentation/blocs/splash/splash_state.dart';
@@ -18,16 +19,20 @@ class SplashCubit extends Cubit<SplashState> {
   final _getUserStatusTrackingUC = getIt<GetUserStatusTrackingUseCase>();
 
   void init() async {
-    // final isJailBroken = await SafeDevice.isJailBroken;
-    // final isRealDevice = await SafeDevice.isRealDevice;
-    // final isSafeDevice = !isJailBroken && isRealDevice;
+    final isJailBroken = await SafeDevice.isJailBroken;
+    final isRealDevice = await SafeDevice.isRealDevice;
+    final isSafeDevice = !isJailBroken && isRealDevice;
     final result = await _getGlobalConfigUseCase.call(NoParams());
+    if (isSafeDevice) {
+    } else {
+      emit(const SplashState.notSafeDevice());
+    }
     await result.fold((l) async {
       emit(SplashState.error('$l'));
     }, (r) async {
       final userRes = await _getUserUC.call(NoParams());
       await userRes.fold(
-            (l) async {
+        (l) async {
           emit(const SplashState.done(
             isSafeDevice: kDebugMode ? true : true,
             userInfoEntity: null,
@@ -35,9 +40,9 @@ class SplashCubit extends Cubit<SplashState> {
             userStatusTrackingModel: null,
           ));
         },
-            (userInfo) async {
+        (userInfo) async {
           final balanceRes =
-          await _fetchBalanceSpendingUC.call('${userInfo.id}');
+              await _fetchBalanceSpendingUC.call('${userInfo.id}');
           balanceRes.fold((l) {
             emit(SplashState.error('$l'));
           }, (tokensSpending) async {
@@ -56,10 +61,5 @@ class SplashCubit extends Cubit<SplashState> {
         },
       );
     });
-    // if (isSafeDevice) {
-    //
-    // } else {
-    //   emit(const SplashState.notSafeDevice());
-    // }
   }
 }
