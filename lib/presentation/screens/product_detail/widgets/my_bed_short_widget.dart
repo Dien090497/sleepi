@@ -35,21 +35,13 @@ class MyBedShortWidget extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
-          Positioned(
-            top: 18,
-            left: -30,
-            child: TopLeftBanner(
-              text: '$type',
-              textColor: AppColors.green,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 const Spacer(),
-                SFIcon(image ?? ''),
-                SizedBox(height: 24.h),
+                SFIcon(image ?? '', height: 100.w),
+                SizedBox(height: 12.h),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
@@ -77,6 +69,14 @@ class MyBedShortWidget extends StatelessWidget {
                 const SFPercentBorderGradient(valueActive: 70, totalValue: 100),
                 const Spacer(),
               ],
+            ),
+          ),
+          Positioned(
+            top: 18,
+            left: -30,
+            child: TopLeftBanner(
+              text: '$type',
+              textColor: AppColors.green,
             ),
           ),
         ],

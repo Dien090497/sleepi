@@ -14,7 +14,6 @@ import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/common/widgets/sf_textfield.dart';
@@ -51,10 +50,11 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
   TextEditingController controllerAmount = TextEditingController();
   double balance = 0;
   double balanceAvax = 0;
+
   @override
   Widget build(BuildContext context) {
     final args =
-    ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
+        ModalRoute.of(context)?.settings.arguments as SendToExternalArguments?;
     return BlocProvider(
       create: (context) => SendToExternalCubit()..init(isLoadBalance: true),
       child: BlocConsumer<SendToExternalCubit, SendToExternalState>(
@@ -71,7 +71,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                 children: PopUpConfirmSend(
                   toAddress: contractAddressTo,
                   valueInEther:
-                  double.parse(controllerAmount.text.replaceAll(',', '.')),
+                      double.parse(controllerAmount.text.replaceAll(',', '.')),
                   transferToken: args != null ? true : false,
                   arg: args,
                   fee: state.fee,
@@ -105,10 +105,10 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                           children: [
                             args != null
                                 ? SFIcon(
-                              args.icon,
-                              width: 60,
-                              height: 60,
-                            )
+                                    args.icon,
+                                    width: 60,
+                                    height: 60,
+                                  )
                                 : Image.asset(Imgs.sendToExternal),
                             SizedBox(
                               height: args != null ? 32 : 0,
@@ -143,35 +143,49 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           RegExp(r'^\d{1,}[.,]?\d{0,6}')),
                                     ],
                                     textInputType:
-                                    const TextInputType.numberWithOptions(
-                                        decimal: true),
+                                        const TextInputType.numberWithOptions(
+                                            decimal: true),
                                     suffixIcon: Padding(
                                         padding:
-                                        const EdgeInsets.only(right: 8),
+                                            const EdgeInsets.only(right: 8),
                                         child: Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.end,
+                                              MainAxisAlignment.end,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             SFTextButton(
                                               text: LocaleKeys.all,
                                               textStyle: TextStyles.blue12,
                                               onPressed: () {
-                                                getBalance(cubit: cubit, args: args);
+                                                getBalance(
+                                                    cubit: cubit, args: args);
                                                 if (balanceAvax < fee) {
                                                   if (args?.symbol == 'AVAX') {
                                                     controllerAmount.text = '0';
                                                   } else {
-                                                    controllerAmount.text = balance.formatBalanceToken;
+                                                    controllerAmount.text =
+                                                        balance
+                                                            .formatBalanceToken;
                                                   }
                                                 } else {
-                                                  if (args?.tokenEntity?.symbol == 'AVAX' || args?.tokenEntity?.symbol == null) {
-                                                    final result = (Decimal.parse('$balance') -
-                                                        Decimal.parse('$fee'))
-                                                        .floor(scale: 6);
-                                                    controllerAmount.text = result.toString();
+                                                  if (args?.tokenEntity
+                                                              ?.symbol ==
+                                                          'AVAX' ||
+                                                      args?.tokenEntity
+                                                              ?.symbol ==
+                                                          null) {
+                                                    final result =
+                                                        (Decimal.parse(
+                                                                    '$balance') -
+                                                                Decimal.parse(
+                                                                    '$fee'))
+                                                            .floor(scale: 6);
+                                                    controllerAmount.text =
+                                                        result.toString();
                                                   } else {
-                                                      controllerAmount.text = balance.formatBalanceToken;
+                                                    controllerAmount.text =
+                                                        balance
+                                                            .formatBalanceToken;
                                                   }
                                                 }
                                               },
@@ -196,7 +210,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                       keyText: LocaleKeys.balance,
                                       style: TextStyles.w400lightGrey12,
                                       suffix:
-                                      ': ${balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
+                                          ': ${balance.formatBalanceToken} ${args != null ? args.symbol : "AVAX"}'),
                                 ],
                               ),
                             ),
@@ -236,7 +250,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           .the_network_you_have_selected_5
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                          Const.localeJA.languageCode
+                                              Const.localeJA.languageCode
                                           ? null
                                           : TextStyles.w400Red12),
                                   const TextSpan(text: ' '),
@@ -245,7 +259,7 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                                           .the_network_you_have_selected_6
                                           .tr(),
                                       style: context.locale.languageCode ==
-                                          Const.localeJA.languageCode
+                                              Const.localeJA.languageCode
                                           ? TextStyles.w400Red12
                                           : null),
                                 ],
@@ -261,36 +275,43 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
                         gradient: AppColors.gradientBlueButton,
                         // disabled: isDisabled,
                         onPressed: () {
-                            if (fee != 0) {
-                              if (args != null) {
-                                if (controllerAmount.text.isNotEmpty) {
-                                  cubit.validator(
-                                      contractAddressTo: contractAddressTo,
-                                      balanceCurrent: balance,
-                                      amount: double.parse(controllerAmount.text
-                                          .replaceAll(',', '.')),
-                                      fee: fee, balanceAvax: balanceAvax);
-                                } else {
-                                  cubit.validator(
-                                      contractAddressTo: contractAddressTo,
-                                      balanceCurrent: balance,
-                                      amount: -1, fee: fee, balanceAvax: balanceAvax);
-                                }
+                          if (fee != 0) {
+                            if (args != null) {
+                              if (controllerAmount.text.isNotEmpty) {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent: balance,
+                                    amount: double.parse(controllerAmount.text
+                                        .replaceAll(',', '.')),
+                                    fee: fee,
+                                    balanceAvax: balanceAvax);
                               } else {
-                                if (controllerAmount.text.isNotEmpty) {
-                                  cubit.validator(
-                                      contractAddressTo: contractAddressTo,
-                                      balanceCurrent: balance,
-                                      amount: double.parse(controllerAmount.text
-                                          .replaceAll(',', '.')), fee: fee, balanceAvax: balanceAvax);
-                                } else {
-                                  cubit.validator(
-                                      contractAddressTo: contractAddressTo,
-                                      balanceCurrent: balance,
-                                      amount: -1, fee: fee, balanceAvax: balanceAvax);
-                                }
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent: balance,
+                                    amount: -1,
+                                    fee: fee,
+                                    balanceAvax: balanceAvax);
+                              }
+                            } else {
+                              if (controllerAmount.text.isNotEmpty) {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent: balance,
+                                    amount: double.parse(controllerAmount.text
+                                        .replaceAll(',', '.')),
+                                    fee: fee,
+                                    balanceAvax: balanceAvax);
+                              } else {
+                                cubit.validator(
+                                    contractAddressTo: contractAddressTo,
+                                    balanceCurrent: balance,
+                                    amount: -1,
+                                    fee: fee,
+                                    balanceAvax: balanceAvax);
                               }
                             }
+                          }
                         },
                       ),
                       const SizedBox(
@@ -306,9 +327,13 @@ class _SendToExternalScreenState extends State<SendToExternalScreen> {
       ),
     );
   }
-  void getBalance ({SendToExternalArguments? args, required SendToExternalCubit cubit}) {
+
+  void getBalance(
+      {SendToExternalArguments? args, required SendToExternalCubit cubit}) {
     if (args != null) {
-      cubit.getTokenBalance(contractAddress: args.tokenEntity?.address ?? 'token', tokenSymbol: args.symbol);
+      cubit.getTokenBalance(
+          contractAddress: args.tokenEntity?.address ?? 'token',
+          tokenSymbol: args.symbol);
     } else {
       cubit.getTokenBalance(contractAddress: '', tokenSymbol: 'AVAX');
     }
