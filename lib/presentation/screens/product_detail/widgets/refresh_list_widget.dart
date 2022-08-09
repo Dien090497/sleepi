@@ -56,11 +56,10 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
 
           if (state.openBedBoxSuccess != null && !widget.isBed) {
             Navigator.pop(context, true);
-            showSuccessfulDialog(context, null).then((value) =>
-                Navigator.pushNamed(
-                    context, R.nftInfo,
-                    arguments: InfoIndividualParams(
-                        bed: state.openBedBoxSuccess!, buy: false)));
+            Navigator.pushNamed(
+                context, R.nftInfo,
+                arguments: InfoIndividualParams(
+                    bed: state.openBedBoxSuccess!, buy: false));
             cubit.clearOpenSuccess();
           }
         }
