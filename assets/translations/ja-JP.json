@@ -519,5 +519,6 @@
   "gacha_confirm": "確認",
   "balance_is_insufficient": "残高が不足しています",
   "passcode_dose_not_match": "Passcode does not match",
-  "bed_detail_transfer" : "転送"
+  "bed_detail_transfer" : "転送",
+  "click_to_collect": "Click to collect"
 }

@@ -6,6 +6,7 @@ import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
 import 'package:slee_fi/common/widgets/background_widget.dart';
+import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_app_bar.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
@@ -19,6 +20,8 @@ import 'package:slee_fi/models/minting/percent_minting.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/blocs/mint/mint_state.dart';
 import 'package:slee_fi/presentation/screens/info_individual/widget/connect_bed_widget.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/minting_broken_dialog.dart';
+import 'package:slee_fi/presentation/screens/info_individual/widget/pop_up_mint_success.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class MintScreen extends StatefulWidget {
@@ -37,16 +40,15 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
   final cubit = MintCubit();
 
   @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this);
   }
 
   @override
-  void initState() {
-    super.initState();
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2));
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,12 +61,34 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
         listener: (context, state) {
           final cubit = context.read<MintCubit>();
           if (state is MintStateLoaded && state.statusMint) {
-            showSuccessfulDialog(context, null)
-                .then((value) => Navigator.pop(context, true));
+            showCustomDialog(
+              context,
+              padding: const EdgeInsets.all(24),
+              backgroundColor: AppColors.transparent,
+              children: [
+                PopUpMintSuccess(
+                  nftAttributeMinting: state.nftAttributeMinting,
+                ),
+              ],
+            ).then((value) => Navigator.pop(context, true));
+          }
+          if (state is MintStateMintingError) {
+            Navigator.pop(context, true);
+            showCustomDialog(
+              context,
+              padding: const EdgeInsets.all(24),
+              backgroundColor: AppColors.transparent,
+              children: [
+              const MintingBrokenDialog(),
+              ],
+            ).then((value) {
+              animationController.reset();
+              cubit.refresh();
+              Navigator.pop(context, true);
+            });
           }
           if (state is MintStateError) {
             showMessageDialog(context, state.msg).then((value) {
-              animationController.reset();
               cubit.refresh();
               Navigator.pop(context, true);
             });
@@ -117,7 +141,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                                 label:
                                 LocaleKeys.token_consumptions,
                                 value: _infoMintingModel != null
-                                    ? '${state.enableInsurance ? _infoMintingModel!.fee + _infoMintingModel!.brokenRate.fee : _infoMintingModel!.fee} SLFT'
+                                    ? '${state.enableInsurance ? _infoMintingModel!.fee + (_infoMintingModel!.fee*(_infoMintingModel!.brokenRate.fee/100)) : _infoMintingModel!.fee} SLFT'
                                     : '',
                                 styleValue: TextStyles.lightWhite14,
                                 styleLabel: TextStyles.lightWhite14,
@@ -273,9 +297,7 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                         )
                       ],
                     )
-                        : const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                        : const LoadingScreen(),
                   ),
                   Positioned(
                     bottom: 0,

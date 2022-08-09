@@ -518,5 +518,6 @@ abstract class  LocaleKeys {
   static const balance_is_insufficient = 'balance_is_insufficient';
   static const passcode_dose_not_match = 'passcode_dose_not_match';
   static const bed_detail_transfer = 'bed_detail_transfer';
+  static const click_to_collect = 'click_to_collect';
 
 }
