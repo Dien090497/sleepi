@@ -17,13 +17,13 @@ import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_bloc.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_event.dart';
 import 'package:slee_fi/presentation/blocs/pending/pending_state.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
-import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 
 class TabPendingDetail extends StatefulWidget {
-  const TabPendingDetail({Key? key, required this.attributeWithdraw})
+  const TabPendingDetail(
+      {Key? key, required this.attributeWithdraw, required this.pendingBloc})
       : super(key: key);
+  final PendingBloc pendingBloc;
 
   final AttributeWithdraw attributeWithdraw;
 
@@ -44,15 +44,16 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final userState = context.read<UserBloc>().state;
-    BlocProvider.of<PendingBloc>(context).add(PendingInit(
-        userState is UserLoaded ? userState.userInfoEntity.id : 0,
-        widget.attributeWithdraw));
+    // final userState = context.read<UserBloc>().state;
+
+    // widget.pendingBloc.add(PendingInit(
+    //     userState is UserLoaded ? userState.userInfoEntity.id : 0,
+    //     widget.attributeWithdraw));
   }
 
   void _onScroll() {
     if (_isBottom) {
-      BlocProvider.of<PendingBloc>(context).add(const PendingFetched());
+      widget.pendingBloc.add(const PendingFetched());
     }
   }
 
@@ -65,12 +66,11 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final pendingBloc = context.read<PendingBloc>();
-
     return Column(
       children: [
         Expanded(
           child: BlocBuilder<PendingBloc, PendingState>(
+            bloc: widget.pendingBloc,
             builder: (context, state) {
               if (state.status == PendingStatus.initial) {
                 return const Center(child: CircularProgressIndicator());
@@ -101,7 +101,7 @@ class _TabPendingDetailState extends State<TabPendingDetail> {
                 controller: refreshController,
                 enablePullDown: true,
                 onRefresh: () async {
-                  pendingBloc.add(PendingRefresh());
+                  widget.pendingBloc.add(PendingRefresh());
                   await Future.delayed(const Duration(milliseconds: 1000));
                   refreshController.loadComplete();
                 },
