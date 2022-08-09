@@ -195,30 +195,4 @@ class TabBedsBuy extends StatelessWidget {
       ),
     );
   }
-
-  void _showPopUpBuyBedBox(MarketPlaceModel bed, BuildContext context) {
-    bool isBuying = false;
-    showCustomAlertDialog(
-      context,
-      padding: const EdgeInsets.all(24),
-      children: PopUpBedMarketPlace(
-        bed: bed,
-        cubit: cubit,
-        onConfirmTap: () async {
-          if (isBuying) return;
-          isBuying = true;
-          final msg = await cubit.buyNFT(bed.nftId);
-          Navigator.pop(context, true);
-          cubit.refresh();
-          if (msg.isEmpty) {
-            context.read<UserBloc>().add(const RefreshBalanceToken());
-            showSuccessfulDialog(context, LocaleKeys.purchased_successfully);
-          } else {
-            showMessageDialog(context, msg);
-          }
-          isBuying = false;
-        },
-      ),
-    );
-  }
 }
