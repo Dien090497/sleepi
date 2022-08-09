@@ -445,24 +445,26 @@ Future<T?> showApproveSuccessfulDialog<T>(
               textAlign: TextAlign.center,
               keyText: message ?? LocaleKeys.transaction_submitted,
               style: style ?? TextStyles.bold18White),
-          const SizedBox(height: 15),
-          GestureDetector(
-            onTap: () async {
-              if (explorer.isNotEmpty) {
-                final uri = Uri.parse('$explorer/tx/$txHash');
-                if (await canLaunchUrl(uri)) {
-                  launchUrl(uri);
+          if (txHash.isNotEmpty) ...[
+            const SizedBox(height: 15),
+            GestureDetector(
+              onTap: () async {
+                if (explorer.isNotEmpty) {
+                  final uri = Uri.parse('$explorer/tx/$txHash');
+                  if (await canLaunchUrl(uri)) {
+                    launchUrl(uri);
+                  }
                 }
-              }
-            },
-            child: SFText(
-              keyText: 'TXID: ${txHash.formatAddress}',
-              style: const TextStyle(
-                color: AppColors.blue,
-                decoration: TextDecoration.underline,
+              },
+              child: SFText(
+                keyText: 'TXID: ${txHash.formatAddress}',
+                style: const TextStyle(
+                  color: AppColors.blue,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
-          ),
+          ],
           const SizedBox(height: 40),
         ],
       );

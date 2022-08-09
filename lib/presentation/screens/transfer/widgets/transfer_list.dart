@@ -138,7 +138,7 @@ class _TransferListState extends State<TransferList> {
         if (state is TransferSuccess) {
           showApproveSuccessfulDialog(
             context,
-            txHash: state.txHash,
+            txHash: state.txHash ?? '',
             barrierDismissible: false,
             onBackPress: () {
               Navigator.popUntil(

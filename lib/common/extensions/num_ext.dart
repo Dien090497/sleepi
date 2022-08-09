@@ -88,11 +88,17 @@ extension NumX on num {
           .replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
       const temp = '00000000000000';
       final oCcy =
-          NumberFormat("#,##0.${temp.substring(0, decimalLength - 1)}");
+      NumberFormat("#,##0.${temp.substring(0, decimalLength - 1)}");
 
       return oCcy.format(double.parse(newValue));
     } else {
       return 0.toStringAsFixed(2).replaceAll(RegExp(r"([.]*0+)(?!.*\d)"), '');
     }
   }
+}
+
+extension BigIntX on BigInt {
+  double toEther({BigInt? decimals}) => (Decimal.parse('$this') /
+          Decimal.parse('${math.pow(10, decimals?.toInt() ?? 18)}'))
+      .toDouble();
 }

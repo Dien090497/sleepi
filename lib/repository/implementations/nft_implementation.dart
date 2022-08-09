@@ -285,7 +285,15 @@ class NFTImplementation extends INFTRepository {
   @override
   Future<Either<Failure, List<String>>> getNftAddresses() async {
     try {
-      return Right(await _secureStorage.getNftAddress() ?? []);
+      final addresses = await _secureStorage.getNftAddress() ?? [];
+      return Right(addresses.isNotEmpty
+          ? [
+              addresses[0],
+              addresses[2],
+              addresses[1],
+              addresses[3],
+            ]
+          : []);
     } catch (e) {
       return Left(FailureMessage.fromException(e));
     }
