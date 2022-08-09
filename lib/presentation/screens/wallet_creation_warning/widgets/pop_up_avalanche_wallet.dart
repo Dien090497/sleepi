@@ -17,7 +17,10 @@ import 'package:slee_fi/usecase/create_new_mnemonic_usecase.dart';
 import 'package:slee_fi/usecase/usecase.dart';
 
 class PopUpAvalancheWallet extends StatelessWidget {
-  const PopUpAvalancheWallet({Key? key}) : super(key: key);
+  const PopUpAvalancheWallet({Key? key, this.navigateFromList = false})
+      : super(key: key);
+
+  final bool navigateFromList;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,9 @@ class PopUpAvalancheWallet extends StatelessWidget {
                                     arguments: CreatePasscodeArguments(
                                         mnemonic: r, showSeedPhrasePopUp: true))
                                 .then((value) {
-                              Navigator.pop(context);
+                              if (!navigateFromList) {
+                                Navigator.pop(context);
+                              }
                               Navigator.pop(context, value);
                             });
                           },
@@ -75,7 +80,9 @@ class PopUpAvalancheWallet extends StatelessWidget {
               color: AppColors.blue,
               onPressed: () {
                 Navigator.pushNamed(context, R.importWallet).then((value) {
-                  Navigator.pop(context);
+                  if (!navigateFromList) {
+                    Navigator.pop(context);
+                  }
                   Navigator.pop(context, value);
                 });
               },
