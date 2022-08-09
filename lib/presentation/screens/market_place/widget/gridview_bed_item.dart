@@ -100,21 +100,25 @@ class GridViewBedItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SFText(
-                              keyText: '${LocaleKeys.mint.tr()} ${bed.bedMint}',
-                              style: TextStyles.lightGrey11W500),
-                          SFText(
-                              keyText: '${LocaleKeys.level.tr()} ${bed.level}',
-                              style: TextStyles.lightGrey11W500),
-                        ],
-                      ),
+                      if (bed.type != 'bedbox')
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SFText(
+                                keyText:
+                                    '${LocaleKeys.mint.tr()} ${bed.bedMint}',
+                                style: TextStyles.lightGrey11W500),
+                            SFText(
+                                keyText:
+                                    '${LocaleKeys.level.tr()} ${bed.level}',
+                                style: TextStyles.lightGrey11W500),
+                          ],
+                        ),
                       SizedBox(height: 4.h),
-                      SFPercentBorderGradient(
-                          valueActive: bed.bedMint.toDouble(),
-                          totalValue: Const.bedMintMax),
+                      if (bed.type != 'bedbox')
+                        SFPercentBorderGradient(
+                            valueActive: bed.bedMint.toDouble(),
+                            totalValue: Const.bedMintMax),
                       if (bed.price.isNotEmpty)
                         SizedBox(
                           height: 50,
@@ -157,7 +161,11 @@ class GridViewBedItem extends StatelessWidget {
                   left: -30,
                   child: TopLeftBanner(
                     backgroundColor: topLeftColor.withOpacity(0.8),
-                    text: bed.classNft == null ? bed.type : bed.classNft!,
+                    text: bed.type == 'bedbox'
+                        ? 'Level ${bed.level}'
+                        : bed.classNft == null || bed.classNft?.isEmpty == true
+                            ? bed.type
+                            : bed.classNft!,
                     textColor: qualityColor,
                   ),
                 ),

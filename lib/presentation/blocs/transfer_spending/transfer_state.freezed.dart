@@ -19,7 +19,7 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function(String txHash) success,
+    required TResult Function(String? txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
@@ -41,7 +41,7 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -63,7 +63,7 @@ mixin _$TransferState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -204,7 +204,7 @@ class _$TransferInitial implements TransferInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function(String txHash) success,
+    required TResult Function(String? txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
@@ -229,7 +229,7 @@ class _$TransferInitial implements TransferInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -254,7 +254,7 @@ class _$TransferInitial implements TransferInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -334,7 +334,7 @@ abstract class _$$TransferSuccessCopyWith<$Res> {
   factory _$$TransferSuccessCopyWith(
           _$TransferSuccess value, $Res Function(_$TransferSuccess) then) =
       __$$TransferSuccessCopyWithImpl<$Res>;
-  $Res call({String txHash});
+  $Res call({String? txHash});
 }
 
 /// @nodoc
@@ -356,7 +356,7 @@ class __$$TransferSuccessCopyWithImpl<$Res>
       txHash == freezed
           ? _value.txHash
           : txHash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -367,7 +367,7 @@ class _$TransferSuccess implements TransferSuccess {
   const _$TransferSuccess(this.txHash);
 
   @override
-  final String txHash;
+  final String? txHash;
 
   @override
   String toString() {
@@ -395,7 +395,7 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function(String txHash) success,
+    required TResult Function(String? txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
@@ -420,7 +420,7 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -445,7 +445,7 @@ class _$TransferSuccess implements TransferSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -509,9 +509,9 @@ class _$TransferSuccess implements TransferSuccess {
 }
 
 abstract class TransferSuccess implements TransferState {
-  const factory TransferSuccess(final String txHash) = _$TransferSuccess;
+  const factory TransferSuccess(final String? txHash) = _$TransferSuccess;
 
-  String get txHash;
+  String? get txHash;
   @JsonKey(ignore: true)
   _$$TransferSuccessCopyWith<_$TransferSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -583,7 +583,7 @@ class _$TransferFailed implements TransferFailed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function(String txHash) success,
+    required TResult Function(String? txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
@@ -608,7 +608,7 @@ class _$TransferFailed implements TransferFailed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -633,7 +633,7 @@ class _$TransferFailed implements TransferFailed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -952,7 +952,7 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String address, bool isToSpending) initial,
-    required TResult Function(String txHash) success,
+    required TResult Function(String? txHash) success,
     required TResult Function(String msg) failed,
     required TResult Function(
             TokenEntity currentToken,
@@ -990,7 +990,7 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,
@@ -1028,7 +1028,7 @@ class _$TransferLoaded implements TransferLoaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String address, bool isToSpending)? initial,
-    TResult Function(String txHash)? success,
+    TResult Function(String? txHash)? success,
     TResult Function(String msg)? failed,
     TResult Function(
             TokenEntity currentToken,

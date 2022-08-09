@@ -134,7 +134,10 @@ class TabBedsDetail extends StatelessWidget {
                                                                 .circular(10),
                                                         color: AppColors.yellow,
                                                       ),
-                                                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 4,
+                                                          vertical: 2),
                                                       child: SFText(
                                                         keyText:
                                                             LocaleKeys.selling,
@@ -327,13 +330,14 @@ class TabBedsDetail extends StatelessWidget {
                 if (state is BottomBarInfoIndividualLoaded) {
                   if (state.successTransfer) {
                     Navigator.pop(context);
-                    showSuccessfulDialog(context, null, onBackPress: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        R.bottomNavigation,
-                        (r) => false,
-                      );
-                    });
+                    nftListCubit.refreshBedBox();
+                    // showSuccessfulDialog(context, null, onBackPress: () {
+                    //   Navigator.pushNamedAndRemoveUntil(
+                    //     context,
+                    //     R.bottomNavigation,
+                    //     (r) => false,
+                    //   );
+                    // });
                   }
                 }
               },
@@ -352,7 +356,7 @@ class TabBedsDetail extends StatelessWidget {
   }
 
   void _onSellBedBox(BuildContext context, List<BedEntity> listBeds, int index,
-      NFTListCubit cubit) {
+      NFTListCubit nftListCubit) {
     final cubit = BottomBarInfoIndividualCubit()..init();
     showCustomDialog(context, children: [
       BlocProvider(
@@ -365,13 +369,16 @@ class TabBedsDetail extends StatelessWidget {
             }
             if (state is BottomBarInfoIndividualLoaded) {
               if (state.successTransfer) {
-                showSuccessfulDialog(context, null, onBackPress: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    R.bottomNavigation,
-                    (r) => false,
-                  );
-                });
+                Navigator.pop(context);
+                nftListCubit.refreshBedBox();
+
+                // showSuccessfulDialog(context, null, onBackPress: () {
+                //   Navigator.pushNamedAndRemoveUntil(
+                //     context,
+                //     R.bottomNavigation,
+                //     (r) => false,
+                //   );
+                // });
               }
             }
           },
@@ -399,7 +406,7 @@ class TabBedsDetail extends StatelessWidget {
     return showCustomAlertDialog(
       context,
       barrierDismissible: false,
-      children: const PopUpAvalancheWallet(),
+      children: const PopUpAvalancheWallet(navigateFromList: true),
     );
   }
 }

@@ -61,7 +61,7 @@ class PopUpConfirmTrade extends StatelessWidget {
                         height: 12.0,
                       ),
                       SFText(
-                        keyText: "$value $symbolFrom",
+                        keyText: "${value.formatCurrency} $symbolFrom",
                         style: TextStyles.bold18White,
                       ),
                     ],
@@ -100,9 +100,8 @@ class PopUpConfirmTrade extends StatelessWidget {
                 style: TextStyles.lightGrey14,
               ),
               Expanded(
-                  child: SFText(
-                      keyText:
-                          "${amountOutMin <= 0.000001 ? Decimal.parse(amountOutMin.toString()) : amountOutMin.formatBalanceToken} $symbolTo",
+                  child: Text(
+                      "${amountOutMin <= 0.000001 ? Decimal.parse(amountOutMin.toString()) : amountOutMin.formatCurrency} $symbolTo",
                       style: TextStyles.lightWhite16,
                       textAlign: TextAlign.end)),
             ],

@@ -66,7 +66,7 @@ class TabBedsBuy extends StatelessWidget {
                 cubit: cubit,
                 tabTexts: const [LocaleKeys.buy, LocaleKeys.rent],
                 onFilterTap: () {
-                  showFilterModalBottomSheet(
+                  showFilterBedModalBottomSheet(
                     cubit: cubit,
                     context,
                     sections: {
@@ -128,6 +128,10 @@ class TabBedsBuy extends StatelessWidget {
                                       _showBedDialog(context, bed);
                                     },
                                     onBedTap: (bed) {
+                                      if (bed.type == 'bedbox') {
+                                        _showBedDialog(context, bed);
+                                        return;
+                                      }
                                       final userState =
                                           context.read<UserBloc>().state;
                                       if (userState is UserLoaded) {

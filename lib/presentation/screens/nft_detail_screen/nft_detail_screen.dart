@@ -10,7 +10,6 @@ import 'package:slee_fi/common/widgets/background_widget.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_back_button.dart';
 import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
-import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_gridview.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -26,6 +25,7 @@ import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/nft_detail
 import 'package:slee_fi/presentation/screens/nft_detail_screen/widget/transfer_nft_widget.dart';
 import 'package:slee_fi/presentation/screens/product_detail/widgets/my_bed_short_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/box_button_widget.dart';
+import 'package:slee_fi/presentation/screens/wallet/widgets/modal_receive_wallet.dart';
 import 'package:slee_fi/resources/resources.dart';
 
 class NFTDetailArguments {
@@ -113,17 +113,16 @@ class NFTDetailScreen extends StatelessWidget {
                               child: BoxButtonWidget(
                                 onTap: walletState is WalletStateLoaded
                                     ? () {
-                                        showComingSoonDialog(context);
-                                        // SFModalBottomSheet.show(
-                                        //   context,
-                                        //   0.7,
-                                        //   ModalReceiveWallet(
-                                        //     address: walletState
-                                        //         .walletInfoEntity.address,
-                                        //     networkName: walletState
-                                        //         .walletInfoEntity.networkName,
-                                        //   ),
-                                        // );
+                                        SFModalBottomSheet.show(
+                                          context,
+                                          0.7,
+                                          ModalReceiveWallet(
+                                            address: walletState
+                                                .walletInfoEntity.address,
+                                            networkName: walletState
+                                                .walletInfoEntity.networkName,
+                                          ),
+                                        );
                                       }
                                     : null,
                                 text: LocaleKeys.receive,

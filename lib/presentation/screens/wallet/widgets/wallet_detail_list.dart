@@ -44,28 +44,29 @@ class WalletDetailList extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: 24.0, vertical: 12.0),
                 itemBuilder: (BuildContext context, int index) {
+                  final token = tokenList[index];
                   return SFCard(
                     padding: EdgeInsets.zero,
                     onTap: () {
                       if (index < 4) {
                         Navigator.pushNamed(context, R.transactionDetail,
                             arguments: TransactionDetailArguments(
-                                title: tokenList[index].displayName,
-                                img: tokenList[index].icon,
-                                tokenEntity: tokenList[index],
+                                title: token.displayName,
+                                img: token.icon,
+                                tokenEntity: token,
                                 typeHistory: HistoryTransactionParams(
                                     typeHistory: index == 2
                                         ? Const.listTypeHistory.elementAt(0)
                                         : Const.listTypeHistory.elementAt(1),
-                                    tokenSymbol: tokenList[index].symbol,
+                                    tokenSymbol: token.symbol,
                                     page: 1)));
                       } else {
-                        if (tokenList[index].balance > 0) {
+                        if (token.balance > 0) {
                           Navigator.pushNamed(
                             context,
                             R.nftDetail,
                             arguments: NFTDetailArguments(
-                              tokenList[index],
+                              token,
                               [
                                 NftType.bed,
                                 NftType.jewel,
@@ -82,18 +83,18 @@ class WalletDetailList extends StatelessWidget {
                     child: ListTile(
                       leading: Padding(
                         padding: EdgeInsets.only(
-                            left: tokenList[index].icon == Ics.icAvax ||
-                                    tokenList[index].icon == Ics.icUsdc
+                            left: token.icon == Ics.icAvax ||
+                                    token.icon == Ics.icUsdc
                                 ? 4
                                 : 0),
                         child: SFIcon(
-                          tokenList[index].icon,
-                          width: tokenList[index].icon == Ics.icAvax ||
-                                  tokenList[index].icon == Ics.icUsdc
+                          token.icon,
+                          width: token.icon == Ics.icAvax ||
+                                  token.icon == Ics.icUsdc
                               ? 32
                               : 40,
-                          height: tokenList[index].icon == Ics.icAvax ||
-                                  tokenList[index].icon == Ics.icUsdc
+                          height: token.icon == Ics.icAvax ||
+                                  token.icon == Ics.icUsdc
                               ? 32
                               : 40,
                         ),
@@ -103,8 +104,8 @@ class WalletDetailList extends StatelessWidget {
                         children: [
                           SFText(
                               keyText: index < 4
-                                  ? tokenList[index].displayName.toUpperCase()
-                                  : tokenList[index].displayName,
+                                  ? token.displayName.toUpperCase()
+                                  : token.displayName,
                               style: TextStyles.lightWhite16),
                           Expanded(
                             child: FittedBox(
@@ -113,13 +114,9 @@ class WalletDetailList extends StatelessWidget {
                               child: Text(
                                 tokenList[index].balance <= 0.000001
                                     ? '0'
-                                    : (tokenList[index].symbol == 'AVAX'
-                                        ? tokenList[index]
-                                            .balance
-                                            .formatBalanceToken
-                                        : tokenList[index]
-                                            .balance
-                                            .formatBalanceToken),
+                                    : tokenList[index]
+                                        .balance
+                                        .formatCurrency,
                                 style: TextStyles.lightWhite16,
                                 textAlign: TextAlign.end,
                               ),

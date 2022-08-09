@@ -119,7 +119,7 @@ class PopUpConfirmTransfer extends StatelessWidget {
               ),
               Expanded(
                   child: SFText(
-                keyText: "${amount.formatBalanceToken} ${symbol.toUpperCase()}",
+                keyText: "${amount.formatCurrency} ${symbol.toUpperCase()}",
                 style: TextStyles.lightWhite16,
                 textAlign: TextAlign.end,
               )),

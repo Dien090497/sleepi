@@ -261,7 +261,7 @@ class TransferCubit extends Cubit<TransferState> {
             emit(currentState.copyWith(isLoading: false));
           },
           (r) {
-            emit(TransferState.success(r.txHash ?? ''));
+            emit(TransferState.success(r.txHash));
           },
         );
       }
@@ -287,14 +287,15 @@ class TransferCubit extends Cubit<TransferState> {
     if (currentState is TransferLoaded) {
       final isToSpending = currentState.isToSpending;
       final backupToken = isToSpending
-          ? currentState.walletTokens
-              .firstWhere((e) => e.address == token.address)
-          : currentState.spendingTokens
-              .firstWhere((e) => e.address == token.address);
+          ? currentState.walletTokens.firstWhere(
+              (e) => e.address.toLowerCase() == token.address.toLowerCase())
+          : currentState.spendingTokens.firstWhere(
+              (e) => e.address.toLowerCase() == token.address.toLowerCase());
       emit(currentState.copyWith(
         currentToken: token,
         backupToken: backupToken,
         amount: null,
+        fee: null,
       ));
       _getFee();
     }

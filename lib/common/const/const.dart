@@ -12,7 +12,9 @@ class Const {
   static const int passcodeLength = 6;
 
   static const double bedMintMax = 7;
-  static const double bedLevelMax = 30;
+  static const double bedLevelMax = 50;
+
+  static const int decimalMaxLength = 7;
 
   static const double tokenEarnMaxPerDay = 800;
 
