@@ -187,8 +187,8 @@ class _BuildItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 4.0),
                 Text(
-                  dateTimeUtils
-                      .ddMMyyyyHHmm(DateTime.parse(withdrawEntity.time).toLocal()),
+                  dateTimeUtils.ddMMyyyyHHmm(
+                      DateTime.parse(withdrawEntity.time).toLocal()),
                   style: TextStyles.lightGrey14,
                 ),
               ],
@@ -199,8 +199,7 @@ class _BuildItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 SFText(
-                  keyText:
-                      double.parse(withdrawEntity.amount).formatBalanceToken,
+                  keyText: double.parse(withdrawEntity.amount).formatCurrency,
                   style: TextStyles.bold16Blue,
                 ),
                 const SizedBox(height: 4.0),

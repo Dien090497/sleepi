@@ -53,14 +53,19 @@ class TabBarFilter extends StatelessWidget {
             isScrollable: false,
           )),
           const SizedBox(width: 4),
-          const SFIcon(Ics.filter, color: AppColors.blue),
-          TextButton(
-            onPressed: onFilterTap,
-            child: SFText(
-              keyText: LocaleKeys.filter,
-              style: TextStyles.blue16W700,
-            ),
-          ),
+          GestureDetector(
+            onTap: onFilterTap,
+            child: const Padding(
+                padding: EdgeInsets.fromLTRB(5, 2, 10, 2),
+                child: SFIcon(Ics.filter, color: AppColors.blue)),
+          )
+          // TextButton(
+          //   onPressed: onFilterTap,
+          //   child: SFText(
+          //     keyText: LocaleKeys.filter,
+          //     style: TextStyles.blue16W700,
+          //   ),
+          // ),
         ],
       ),
     );

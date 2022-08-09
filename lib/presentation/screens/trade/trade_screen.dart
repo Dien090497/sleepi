@@ -329,7 +329,7 @@ class _TradeScreenState extends State<TradeScreen> {
                                                       TextStyles.lightGrey12),
                                               SFText(
                                                 keyText:
-                                                    ': ${balance >= 0.000001 ? balance.formatBalanceToken : 0}',
+                                                    ': ${balance >= 0.000001 ? balance.formatCurrency : 0}',
                                                 style: TextStyles.lightGrey12,
                                               ),
                                             ],

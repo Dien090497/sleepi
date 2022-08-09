@@ -160,7 +160,7 @@ class _TransferListState extends State<TransferList> {
 
         if (state is TransferLoaded) {
           final currentToken = state.currentToken;
-
+print('current balance   ${currentToken.balance}');
           return Container(
             decoration: const BoxDecoration(
               color: AppColors.dark,
@@ -237,7 +237,7 @@ class _TransferListState extends State<TransferList> {
                         const SizedBox(height: 8.0),
                         SFText(
                           keyText:
-                              "${LocaleKeys.available.tr()} : ${currentToken.balance.formatBalanceToken} ${currentToken.name.toUpperCase()}",
+                              "${LocaleKeys.available.tr()} : ${currentToken.balance.formatCurrency} ${currentToken.name.toUpperCase()}",
                           style: TextStyles.lightGrey14,
                         ),
                         const SizedBox(height: 32.0),
