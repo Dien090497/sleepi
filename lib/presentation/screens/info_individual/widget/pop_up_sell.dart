@@ -103,13 +103,15 @@ class _PopUpSellState extends State<PopUpSell> {
                     ),
                   if (step < 2) const SizedBox(height: 32),
                   if (step == 0)
-                    _Detail(
-                      className: widget.bedEntity.nftClass,
-                      level: widget.bedEntity.level.toString(),
-                      durability:
-                          widget.bedEntity.durability.toInt().toString(),
-                      bedMint: widget.bedEntity.bedMint.toString(),
-                    )
+                    widget.bedEntity.type == 'bedbox'
+                        ? const SizedBox()
+                        : _Detail(
+                            className: widget.bedEntity.nftClass,
+                            level: widget.bedEntity.level.toString(),
+                            durability:
+                                widget.bedEntity.durability.toInt().toString(),
+                            bedMint: widget.bedEntity.bedMint.toString(),
+                          )
                   else if (step == 1) ...[
                     Align(
                       alignment: Alignment.centerLeft,
