@@ -70,15 +70,13 @@ class TrackingCubit extends Cubit<TrackingState> {
         List<DataHealth> healthDataList = [];
         List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
             now.subtract(const Duration(days: 1)), now, types);
+        log('health data: ${healthData.toString()}');
         healthData = HealthFactory.removeDuplicates(healthData);
         for (var element in healthData) {
           if(timeStart.isBefore(element.dateTo)) {
             healthDataList.add(convertDataToSchema(element));
           }
         }
-        log('health data: ${DataHealthSchema(
-          datas: healthDataList,
-        ).toJson()}');
         wakeUp(DataHealthSchema(
           datas: healthDataList,
         ));

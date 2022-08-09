@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
@@ -59,10 +60,14 @@ class NotificationPermissionScreen extends StatelessWidget {
                     color: AppColors.blue,
                     text: LocaleKeys.allow,
                     textStyle: TextStyles.w600WhiteSize16,
-                    onPressed: () {
+                    onPressed: () async {
                       if (arg?.isSignUp == true) {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, R.bottomNavigation, (_) => false);
+                        await [
+                          Permission.notification,
+                        ].request().then((value) {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, R.bottomNavigation, (_) => false);
+                        });
                         return;
                       }
                       Navigator.popUntil(
