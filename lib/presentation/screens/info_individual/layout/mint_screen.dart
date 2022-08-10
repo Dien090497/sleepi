@@ -53,8 +53,22 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
 
+      return BackgroundWidget(
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: SFAppBar(
+              context: context,
+              title: LocaleKeys.bed_mint,
+              textStyle: TextStyles.boldWhite18,
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.3),
+              child: const Center(child: SFIcon(Ics.commingSoon)),
+            )));
+    /**** DO NOT CLEAR  THIS COMMENT
+     * final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
     return BlocProvider(
       create: (_) => cubit..init(args.nftId),
       child: BlocConsumer<MintCubit, MintState>(
@@ -332,6 +346,6 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
           );
         },
       ),
-    );
+    );*/
   }
 }
