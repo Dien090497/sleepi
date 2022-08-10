@@ -270,7 +270,7 @@ class BottomBarWidgetState extends State<BottomBarWidget> {
       index = 0;
       if (bedEntity.levelUpTime != null &&
           bedEntity.remainTime != null &&
-          bedEntity.remainTime!.remainingTime.isNotEmpty) {
+          bedEntity.remainTime!.remainingTime(bedEntity.levelUpTime!).isNotEmpty) {
         showCustomAlertDialog(
           context,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),

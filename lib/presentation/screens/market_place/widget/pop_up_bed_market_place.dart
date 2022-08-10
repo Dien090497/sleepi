@@ -9,15 +9,21 @@ import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_buttons.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
+import 'package:slee_fi/common/widgets/sf_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/entities/bed_entity/bed_entity.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/models/market_place/market_place_model.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_info_individual/bottom_bar_info_individual_cubit.dart';
+import 'package:slee_fi/presentation/blocs/bottom_bar_info_individual/bottom_bar_info_individual_state.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
+import 'package:slee_fi/presentation/blocs/nft_list/nft_list_cubit.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_bloc.dart';
 import 'package:slee_fi/presentation/blocs/user_bloc/user_state.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_cubit.dart';
 import 'package:slee_fi/presentation/blocs/wallet/wallet_state.dart';
+import 'package:slee_fi/presentation/screens/home/widgets/pop_up_cancel_sell.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_confirm.dart';
 import 'package:slee_fi/presentation/screens/market_place/widget/pop_up_insufficient.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
@@ -61,6 +67,36 @@ class PopUpBedMarketPlace extends StatelessWidget {
       barrierDismissible: false,
       children: const PopUpAvalancheWallet(),
     );
+  }
+
+  void _onSellBedBox(BuildContext context, BedEntity bedEntity) {
+    final cubit = BottomBarInfoIndividualCubit()..init();
+    showCustomDialog(context, children: [
+      BlocProvider(
+        create: (context) => cubit,
+        child: BlocConsumer<BottomBarInfoIndividualCubit,
+            BottomBarInfoIndividualState>(
+          listener: (context, state) {
+            if (state is BottomBarInfoIndividualError) {
+              showMessageDialog(context, state.message);
+            }
+            if (state is BottomBarInfoIndividualLoaded) {
+              if (state.successTransfer) {
+                this.cubit.refresh();
+                Navigator.pop(context);
+                showSuccessfulDialog(context, null);
+              }
+            }
+          },
+          builder: (context, state) {
+            return CancelSell(
+              bedEntity: bedEntity,
+              cubit: cubit,
+            );
+          },
+        ),
+      ),
+    ]);
   }
 
   @override
@@ -154,7 +190,11 @@ class PopUpBedMarketPlace extends StatelessWidget {
               child: BlocBuilder<UserBloc, UserState>(
                   builder: (context, userState) {
                 return SFButton(
-                  text: LocaleKeys.confirm,
+                  text: bed.type == 'bedbox' &&
+                          userState is UserLoaded &&
+                          userState.userInfoEntity.wallet == bed.owner
+                      ? LocaleKeys.cancel_sell
+                      : LocaleKeys.confirm,
                   onPressed: () {
                     final walletState = context.read<WalletCubit>().state;
 
@@ -170,7 +210,13 @@ class PopUpBedMarketPlace extends StatelessWidget {
                             }
                           } else {
                             Navigator.pop(context);
-                            _showConfirmDialog(context, bed);
+
+                            if (bed.type == 'bedbox' &&
+                                userState.userInfoEntity.wallet == bed.owner) {
+                              _onSellBedBox(context, bed.toBedEntity());
+                            } else {
+                              _showConfirmDialog(context, bed);
+                            }
                           }
                         }
                       }
