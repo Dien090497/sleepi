@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:slee_fi/common/extensions/string_x.dart';
 import 'package:slee_fi/common/routes/app_routes.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
@@ -8,6 +9,7 @@ import 'package:slee_fi/common/widgets/sf_bottom_sheet.dart';
 import 'package:slee_fi/common/widgets/sf_card.dart';
 import 'package:slee_fi/common/widgets/sf_list_tile.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
+import 'package:slee_fi/di/injector.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_multi_chain_switch.dart';
 import 'package:slee_fi/presentation/screens/setting/widgets/modal_pop_up_language.dart';
@@ -68,8 +70,13 @@ class GeneralWidget extends StatelessWidget {
               divider,
               SFListTile(
                 text: LocaleKeys.version,
-                trailing:
-                    SFText(keyText: "0.01", style: TextStyles.lightGrey14),
+                trailing: Builder(builder: (context) {
+                  String version = getIt<PackageInfo>().version;
+                  String buildNumber = getIt<PackageInfo>().buildNumber;
+                  return SFText(
+                      keyText: '$version + $buildNumber',
+                      style: TextStyles.lightGrey14);
+                }),
               ),
             ],
           ),
