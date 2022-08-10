@@ -49,13 +49,26 @@ class AllResultScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 50),
                           itemBuilder: (BuildContext context,int index){
                             bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index)['type'] == "slft");
+                            String? frameColor = args?.gachaSpinInfo!.gift.elementAt(index)['frame_colour'];
+                            Color? borderColor;
+                            switch (frameColor) {
+                              case 'Gold':
+                                borderColor = AppColors.yellow;
+                                break;
+                              case 'Rainbow':
+                                borderColor = AppColors.purple;
+                                break;
+                              default :
+                                borderColor = AppColors.lightGrey;
+                                break;
+                            }
                             return SFCard(
                               width: 100,
                               height: 100,
                               margin: const EdgeInsets.all(6),
                                 padding: const EdgeInsets.symmetric(horizontal: 18.0),
                               radius: 8,
-                              border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                              border: Border.all(color: borderColor),
                               child: isSlft
                                   ?
                               Column(
@@ -98,13 +111,26 @@ class AllResultScreen extends StatelessWidget {
                           itemBuilder: (BuildContext context,int index){
                             int at = 3;
                             bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "slft");
+                            String? frameColor = args?.gachaSpinInfo!.gift.elementAt(index + at)['frame_colour'];
+                            Color? borderColor;
+                            switch (frameColor) {
+                              case 'Gold':
+                                borderColor = AppColors.yellow;
+                                break;
+                              case 'Rainbow':
+                                borderColor = AppColors.purple;
+                                break;
+                              default :
+                                borderColor = AppColors.lightGrey;
+                                break;
+                            }
                             return SFCard(
                                 width: 100,
                                 height: 100,
                                 margin: const EdgeInsets.all(6),
                                 padding: const EdgeInsets.symmetric(horizontal: 6.0),
                                 radius: 8,
-                                border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                                border: Border.all(color: borderColor),
                                 child: isSlft
                                     ?
                                 Column(
@@ -148,14 +174,26 @@ class AllResultScreen extends StatelessWidget {
                             itemBuilder: (BuildContext context,int index){
                               int at = 7;
                               bool isSlft = (args?.gachaSpinInfo!.gift.elementAt(index + at)['type'] == "slft");
-
+                              String? frameColor = args?.gachaSpinInfo!.gift.elementAt(index + at)['frame_colour'];
+                              Color? borderColor;
+                              switch (frameColor) {
+                                case 'Gold':
+                                  borderColor = AppColors.yellow;
+                                  break;
+                                case 'Rainbow':
+                                  borderColor = AppColors.purple;
+                                  break;
+                                default :
+                                  borderColor = AppColors.lightGrey;
+                                  break;
+                              }
                               return SFCard(
                                   width: 100,
                                   height: 100,
                                   margin: const EdgeInsets.all(6),
                                   padding: const EdgeInsets.symmetric(horizontal: 18.0),
                                   radius: 8,
-                                  border: Border.all(color: AppColors.white.withOpacity(0.1)),
+                                  border: Border.all(color: borderColor),
                                   child: isSlft
                                       ?
                                     Column(

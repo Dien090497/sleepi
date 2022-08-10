@@ -27,6 +27,8 @@ class GachaAttributesItem{
   final String? jewelType;
   final String classNft;
   final String quality;
+  @JsonKey(name : 'frame_colour')
+  final String frameColor;
 
   GachaAttributesItem({
     required this.image,
@@ -51,6 +53,7 @@ class GachaAttributesItem{
     required this.tokenId,
     required this.special,
     required this.resilience,
+    required this.frameColor
 
   });
   factory GachaAttributesItem.fromJson(Map<String, dynamic> json) => _$GachaAttributesItemFromJson(json);
