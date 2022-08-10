@@ -61,7 +61,7 @@ class _GachaRollSelectionsState extends State<GachaRollSelections> {
           }
           if (state is GachaSpinFailed) {
             Navigator.pop(context, true);
-            showMessageDialog(context, LocaleKeys.you_dont_have_enough_money)
+            showMessageDialog(context, LocaleKeys.balance_is_insufficient)
                 .then((value) => widget.onPressed());
             setState(() {
               enableButton = true;

@@ -517,5 +517,6 @@
   "passcode_dose_not_match" : "Passcode does not match",
   "bed_detail_transfer" : "Transfer",
   "click_to_collect": "Click to collect",
+  "withdraw_will_be_activated_after": "You have only been staking for less than 2 weeks. If you withdraw now, you will forfeited 2% of principal and the SLFT (interest) you earned.",
   "nft_has_been_sold": "This NFT has been sold"
 }

@@ -30,6 +30,7 @@ GachaAttributesItem _$GachaAttributesItemFromJson(Map<String, dynamic> json) =>
       tokenId: (json['tokenId'] as num).toDouble(),
       special: (json['special'] as num).toDouble(),
       resilience: (json['resilience'] as num).toDouble(),
+      frameColor: json['frame_colour'] as String?,
     );
 
 Map<String, dynamic> _$GachaAttributesItemToJson(
@@ -57,4 +58,5 @@ Map<String, dynamic> _$GachaAttributesItemToJson(
       'jewelType': instance.jewelType,
       'classNft': instance.classNft,
       'quality': instance.quality,
+      'frame_colour': instance.frameColor,
     };
