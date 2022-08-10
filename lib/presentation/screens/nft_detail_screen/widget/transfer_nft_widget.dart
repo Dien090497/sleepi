@@ -104,7 +104,10 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                                   walletState.walletInfoEntity.credentials,
                             ));
                             isApproveNftRes.fold(
-                              (l) {},
+                              (l) {
+                                showMessageDialog(context,
+                                    LocaleKeys.not_enough_to_pay_the_fee);
+                              },
                               (isApproved) {
                                 if (isApproved) {
                                   _showTransferDialog(
