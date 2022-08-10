@@ -375,7 +375,17 @@ class _StakingListState extends State<StakingList> {
                                 onPressed: () {
                                   if (stakingInfo != null &&
                                       stakingInfo!.stake.totalStake != null) {
-                                    if (double.parse(
+                                    if(stakingInfo?.isCompound == false){
+                                      showCustomAlertDialog(context,
+                                          width:
+                                          MediaQuery.of(context).size.width * 0.7,
+                                          children: PopUpStaking(
+                                            message: LocaleKeys
+                                                .withdraw_will_be_activated_after
+                                                .tr(),
+                                            isShowButton: false,
+                                          ));
+                                    }else if (double.parse(
                                             stakingInfo!.stake.totalStake!) >
                                         0) {
                                       showCustomDialog(context, children: [

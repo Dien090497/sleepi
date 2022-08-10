@@ -18,7 +18,6 @@ class _MintingBrokenDialogState extends State<MintingBrokenDialog> with TickerPr
   @override
   void initState() {
     super.initState();
-
     animationController = AnimationController(vsync: this);
     animationController.addStatusListener((status) async {
       if (animationController.isCompleted) {

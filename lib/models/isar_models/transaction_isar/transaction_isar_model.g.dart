@@ -134,6 +134,7 @@ class _$TransactionIsarModelCWProxyImpl
 
 extension $TransactionIsarModelCopyWith on TransactionIsarModel {
   /// Returns a callable class that can be used as follows: `instanceOfTransactionIsarModel.copyWith(...)` or like so:`instanceOfTransactionIsarModel.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$TransactionIsarModelCWProxy get copyWith =>
       _$TransactionIsarModelCWProxyImpl(this);
 }

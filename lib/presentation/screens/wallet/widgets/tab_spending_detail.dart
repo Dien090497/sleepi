@@ -125,7 +125,8 @@ class _TabSpendingDetailState extends State<TabSpendingDetail> {
                                             Expanded(
                                               child: Text(
                                                 textAlign: TextAlign.right,
-                                                e.balance.formatCurrency,
+                                                e.availableBalance
+                                                    .formatCurrency,
                                                 maxLines: 2,
                                                 style: TextStyles.lightWhite16,
                                               ),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_icon.dart';
@@ -10,9 +11,17 @@ import 'package:slee_fi/presentation/screens/result/layout/pre_result_screen.dar
 import 'package:slee_fi/resources/resources.dart';
 
 class CategoryHeaderShare extends StatelessWidget {
-  const CategoryHeaderShare({Key? key, required this.preResultParams}) : super(key: key);
+  const CategoryHeaderShare({Key? key, required this.preResultParams})
+      : super(key: key);
 
   final PreResultParams preResultParams;
+
+  convertTime(String time) {
+    int minuteDuration = double.parse(time).toInt();
+    int hour = minuteDuration ~/ 60;
+    int minute = minuteDuration - hour * 60;
+    return '${hour}h${minute}min';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +46,16 @@ class CategoryHeaderShare extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                   const SFIcon(
+                    const SFIcon(
                       Ics.icSlft,
                     ),
                     const SizedBox(
                       width: 4,
                     ),
                     SFText(
-                      keyText: '${preResultParams.resultModel.actualEarn}',
+                      keyText:
+                          double.parse(preResultParams.resultModel.actualEarn!)
+                              .formatBalance2Digits,
                       style: const TextStyle(
                           fontSize: 16,
                           color: AppColors.blue,
@@ -78,7 +89,7 @@ class CategoryHeaderShare extends StatelessWidget {
                   style: TextStyles.lightGrey11,
                 ),
                 SFText(
-                  keyText: '${preResultParams.resultModel.sleepDurationTime}',
+                  keyText: convertTime(preResultParams.resultModel.sleepDurationTime ?? '0'),
                   style: const TextStyle(
                       fontSize: 16,
                       color: AppColors.blue,

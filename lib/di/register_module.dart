@@ -8,6 +8,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:slee_fi/models/isar_models/ens_isar/ens_isar_model.dart';
@@ -61,4 +62,7 @@ abstract class RegisterModule {
   Connectivity get connectivity => Connectivity();
 
   DeviceInfoPlugin get deviceInfoPlugin => DeviceInfoPlugin();
+
+  @preResolve
+  Future<PackageInfo> get packageInfo => PackageInfo.fromPlatform();
 }

@@ -23,6 +23,7 @@ mixin _$TokenEntity {
   String get symbol => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
   double get balance => throw _privateConstructorUsedError;
+  double get availableBalance => throw _privateConstructorUsedError;
   List<String> get txns => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -43,6 +44,7 @@ abstract class $TokenEntityCopyWith<$Res> {
       String symbol,
       String icon,
       double balance,
+      double availableBalance,
       List<String> txns});
 }
 
@@ -63,6 +65,7 @@ class _$TokenEntityCopyWithImpl<$Res> implements $TokenEntityCopyWith<$Res> {
     Object? symbol = freezed,
     Object? icon = freezed,
     Object? balance = freezed,
+    Object? availableBalance = freezed,
     Object? txns = freezed,
   }) {
     return _then(_value.copyWith(
@@ -94,6 +97,10 @@ class _$TokenEntityCopyWithImpl<$Res> implements $TokenEntityCopyWith<$Res> {
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
               as double,
+      availableBalance: availableBalance == freezed
+          ? _value.availableBalance
+          : availableBalance // ignore: cast_nullable_to_non_nullable
+              as double,
       txns: txns == freezed
           ? _value.txns
           : txns // ignore: cast_nullable_to_non_nullable
@@ -117,6 +124,7 @@ abstract class _$$_TokenEntityCopyWith<$Res>
       String symbol,
       String icon,
       double balance,
+      double availableBalance,
       List<String> txns});
 }
 
@@ -139,6 +147,7 @@ class __$$_TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
     Object? symbol = freezed,
     Object? icon = freezed,
     Object? balance = freezed,
+    Object? availableBalance = freezed,
     Object? txns = freezed,
   }) {
     return _then(_$_TokenEntity(
@@ -170,6 +179,10 @@ class __$$_TokenEntityCopyWithImpl<$Res> extends _$TokenEntityCopyWithImpl<$Res>
           ? _value.balance
           : balance // ignore: cast_nullable_to_non_nullable
               as double,
+      availableBalance: availableBalance == freezed
+          ? _value.availableBalance
+          : availableBalance // ignore: cast_nullable_to_non_nullable
+              as double,
       txns: txns == freezed
           ? _value._txns
           : txns // ignore: cast_nullable_to_non_nullable
@@ -189,6 +202,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
       required this.symbol,
       required this.icon,
       required this.balance,
+      required this.availableBalance,
       final List<String> txns = const []})
       : _txns = txns;
 
@@ -206,6 +220,8 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
   final String icon;
   @override
   final double balance;
+  @override
+  final double availableBalance;
   final List<String> _txns;
   @override
   @JsonKey()
@@ -216,7 +232,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TokenEntity(id: $id, address: $address, displayName: $displayName, name: $name, symbol: $symbol, icon: $icon, balance: $balance, txns: $txns)';
+    return 'TokenEntity(id: $id, address: $address, displayName: $displayName, name: $name, symbol: $symbol, icon: $icon, balance: $balance, availableBalance: $availableBalance, txns: $txns)';
   }
 
   @override
@@ -231,6 +247,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
       ..add(DiagnosticsProperty('symbol', symbol))
       ..add(DiagnosticsProperty('icon', icon))
       ..add(DiagnosticsProperty('balance', balance))
+      ..add(DiagnosticsProperty('availableBalance', availableBalance))
       ..add(DiagnosticsProperty('txns', txns));
   }
 
@@ -247,6 +264,8 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
             const DeepCollectionEquality().equals(other.symbol, symbol) &&
             const DeepCollectionEquality().equals(other.icon, icon) &&
             const DeepCollectionEquality().equals(other.balance, balance) &&
+            const DeepCollectionEquality()
+                .equals(other.availableBalance, availableBalance) &&
             const DeepCollectionEquality().equals(other._txns, _txns));
   }
 
@@ -260,6 +279,7 @@ class _$_TokenEntity with DiagnosticableTreeMixin implements _TokenEntity {
       const DeepCollectionEquality().hash(symbol),
       const DeepCollectionEquality().hash(icon),
       const DeepCollectionEquality().hash(balance),
+      const DeepCollectionEquality().hash(availableBalance),
       const DeepCollectionEquality().hash(_txns));
 
   @JsonKey(ignore: true)
@@ -277,6 +297,7 @@ abstract class _TokenEntity implements TokenEntity {
       required final String symbol,
       required final String icon,
       required final double balance,
+      required final double availableBalance,
       final List<String> txns}) = _$_TokenEntity;
 
   @override
@@ -293,6 +314,8 @@ abstract class _TokenEntity implements TokenEntity {
   String get icon;
   @override
   double get balance;
+  @override
+  double get availableBalance;
   @override
   List<String> get txns;
   @override

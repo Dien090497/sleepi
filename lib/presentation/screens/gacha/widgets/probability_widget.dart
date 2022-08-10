@@ -17,7 +17,7 @@ class ProbabilityWidget extends StatelessWidget {
         onTap: () {
           // Navigator.pushNamed(context, R.probability);
           showCustomAlertDialog(context,
-              height: MediaQuery.of(context).size.height * (normalGacha ? 0.64 : 0.8),
+              height: MediaQuery.of(context).size.height * 0.85,
               width: MediaQuery.of(context).size.width * 0.9,
               children:  ProbabilityDialog(normalGacha: normalGacha, dialogData: dialogData));
         },

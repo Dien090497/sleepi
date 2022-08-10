@@ -142,6 +142,7 @@ class _$WalletIsarModelCWProxyImpl implements _$WalletIsarModelCWProxy {
 
 extension $WalletIsarModelCopyWith on WalletIsarModel {
   /// Returns a callable class that can be used as follows: `instanceOfWalletIsarModel.copyWith(...)` or like so:`instanceOfWalletIsarModel.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
   _$WalletIsarModelCWProxy get copyWith => _$WalletIsarModelCWProxyImpl(this);
 }
 

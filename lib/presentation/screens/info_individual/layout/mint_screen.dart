@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slee_fi/common/extensions/num_ext.dart';
 import 'package:slee_fi/common/style/app_colors.dart';
 import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/utils/launch_url_utils.dart';
@@ -54,8 +53,22 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
 
+      return BackgroundWidget(
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: SFAppBar(
+              context: context,
+              title: LocaleKeys.bed_mint,
+              textStyle: TextStyles.boldWhite18,
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.3),
+              child: const Center(child: SFIcon(Ics.commingSoon)),
+            )));
+    /**** DO NOT CLEAR  THIS COMMENT
+     * final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
     return BlocProvider(
       create: (_) => cubit..init(args.nftId),
       child: BlocConsumer<MintCubit, MintState>(
@@ -74,7 +87,6 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
             ).then((value) => Navigator.pop(context, true));
           }
           if (state is MintStateMintingError) {
-            Navigator.pop(context, true);
             showCustomDialog(
               context,
               padding: const EdgeInsets.all(24),
@@ -83,9 +95,10 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
               const MintingBrokenDialog(),
               ],
             ).then((value) {
-              animationController.reset();
-              cubit.refresh();
+              int count = 0;
+              Navigator.of(context).popUntil((_) => count++ >= 1);
               Navigator.pop(context, true);
+              cubit.refresh();
             });
           }
           if (state is MintStateError) {
@@ -333,6 +346,6 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
           );
         },
       ),
-    );
+    );*/
   }
 }

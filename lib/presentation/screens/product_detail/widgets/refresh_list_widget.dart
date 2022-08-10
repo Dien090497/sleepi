@@ -56,11 +56,10 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
 
           if (state.openBedBoxSuccess != null && !widget.isBed) {
             Navigator.pop(context, true);
-            showSuccessfulDialog(context, null).then((value) =>
-                Navigator.pushNamed(
-                    context, R.nftInfo,
-                    arguments: InfoIndividualParams(
-                        bed: state.openBedBoxSuccess!, buy: false)));
+            Navigator.pushNamed(
+                context, R.nftInfo,
+                arguments: InfoIndividualParams(
+                    bed: state.openBedBoxSuccess!, buy: false));
             cubit.clearOpenSuccess();
           }
         }
@@ -103,10 +102,11 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
                 style: TextStyles.lightWhite16,
               );
             } else if (mode == LoadStatus.canLoading) {
-              body = SFText(
-                keyText: LocaleKeys.release_to_load_more,
-                style: TextStyles.lightWhite16,
-              );
+              // body = SFText(
+              //   keyText: LocaleKeys.release_to_load_more,
+              //   style: TextStyles.lightWhite16,
+              // );
+              body = const CupertinoActivityIndicator();
             } else {
               body = SFText(
                 keyText: LocaleKeys.no_more_data,

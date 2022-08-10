@@ -180,6 +180,8 @@ class _TransferListState extends State<TransferList> {
                       });
                     },
                     child: ListView(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
                       children: [
                         SFText(
                           keyText: LocaleKeys.asset,

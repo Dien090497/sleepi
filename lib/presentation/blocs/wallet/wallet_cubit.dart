@@ -140,6 +140,7 @@ class WalletCubit extends Cubit<WalletState> {
         symbol: keyList[i],
         icon: icons[i],
         balance: values[i],
+        availableBalance: values[i],
       );
       tokenList.add(tokenEntity);
     }
@@ -151,6 +152,7 @@ class WalletCubit extends Cubit<WalletState> {
         symbol: nftNames[i],
         icon: nftIcons[i],
         balance: nfts[i].toDouble(),
+        availableBalance: nfts[i].toDouble(),
       );
       tokenList.add(tokenEntity);
     }
@@ -203,6 +205,7 @@ class WalletCubit extends Cubit<WalletState> {
         symbol: keyList[i],
         icon: icons[i],
         balance: values[i],
+        availableBalance: values[i],
       );
       tokenList.add(tokenEntity);
     }
@@ -214,6 +217,7 @@ class WalletCubit extends Cubit<WalletState> {
         symbol: nftNames[i],
         icon: nftIcons[i],
         balance: nfts[i].toDouble(),
+        availableBalance: nfts[i].toDouble(),
       );
       tokenList.add(tokenEntity);
     }

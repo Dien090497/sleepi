@@ -87,6 +87,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             name: '',
             symbol: 'SLFT',
             icon: Ics.icSlft,
+            availableBalance: 0,
             balance: 0),
         TokenEntity(
             address: addrs.elementAt(1),
@@ -94,6 +95,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             name: '',
             symbol: 'SLGT',
             icon: Ics.icSlgt,
+            availableBalance: 0,
             balance: 0),
         TokenEntity(
             address: addrs.elementAt(2),
@@ -101,6 +103,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
             name: '',
             symbol: 'AVAX',
             icon: Ics.icAvax,
+            availableBalance: 0,
             balance: 0),
       ];
     }
@@ -112,6 +115,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
               name: e.symbol,
               symbol: e.symbol,
               icon: _catchIcon(e.symbol),
+              availableBalance: double.parse(e.availableAmount),
               balance: double.parse(e.amount));
         })
         .toList()

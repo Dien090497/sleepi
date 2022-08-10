@@ -103,6 +103,7 @@ class PopupInsufficient extends StatelessWidget {
                       name: '',
                       symbol: 'AVAX',
                       icon: Ics.icAvax,
+                      availableBalance: 0,
                       balance: 0);
                   if (walletState is WalletStateLoaded) {
                     for (final element in walletState.tokenList) {

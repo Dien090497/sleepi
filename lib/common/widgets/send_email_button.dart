@@ -74,7 +74,7 @@ class _OtpCountdownTimerState extends State<SendEmailButton> {
                 ? '${widget.duration - _timer!.tick}s'
                 : LocaleKeys.send_code,
             textStyle: TextStyles.blue12,
-            onPressed: _senOtp,
+            onPressed: _timer?.isActive == true ? (){} : _senOtp,
           );
   }
 
