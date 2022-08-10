@@ -13,6 +13,7 @@ class TokenEntity with _$TokenEntity {
     required String symbol,
     required String icon,
     required double balance,
+    required double availableBalance,
     @Default([]) List<String> txns,
   }) = _TokenEntity;
 }

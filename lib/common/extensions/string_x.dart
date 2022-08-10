@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:math' as math;
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eip55/eip55.dart';
 import 'package:path/path.dart';
@@ -237,12 +237,16 @@ extension StringX on String {
     return AppColors.commonBed;
   }
 
-  String get remainingTime {
+  String remainingTime(String levelUpTime) {
     final timeOpen = DateTime.fromMillisecondsSinceEpoch(int.parse(this));
     if (timeOpen.isBefore(DateTime.now())) {
       return '';
     }
-    final duration = timeOpen.difference(DateTime.now());
+    final startTime =
+        math.max(int.parse(levelUpTime), DateTime.now().millisecondsSinceEpoch);
+
+    final duration =
+        timeOpen.difference(DateTime.fromMillisecondsSinceEpoch(startTime));
     final hour = (duration.inHours).toString().padLeft(2, '0');
     final minute = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final second = duration.inSeconds.remainder(60).toString().padLeft(2, '0');

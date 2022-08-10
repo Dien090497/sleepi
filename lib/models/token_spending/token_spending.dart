@@ -24,6 +24,4 @@ class TokenSpending {
       _$TokenSpendingFromJson(json);
 
   Map<String, dynamic> toJson() => _$TokenSpendingToJson(this);
-
-
 }

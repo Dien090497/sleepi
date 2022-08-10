@@ -45,7 +45,7 @@ class PopUpRemainingTimeLevelUp extends StatefulWidget {
 class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
   late final Timer _time;
 
-  late String _remainTime = widget.remainTime.remainingTime;
+  late String _remainTime = widget.remainTime.remainingTime(widget.levelUpTime);
   bool isSpeedUp = false;
   final _getLevelUpUC = getIt<GetLevelUpUseCase>();
   double? speedUpCost;
@@ -54,7 +54,7 @@ class _PopUpRemainingTimeLevelUpState extends State<PopUpRemainingTimeLevelUp> {
   void initState() {
     _time = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        _remainTime = widget.remainTime.remainingTime;
+        _remainTime = widget.remainTime.remainingTime(widget.levelUpTime);
       });
       if (_remainTime.isEmpty) {
         _time.cancel();

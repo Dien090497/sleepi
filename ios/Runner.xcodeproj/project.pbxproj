@@ -1041,7 +1041,7 @@
 				FLUTTER_BUILD_NUMBER = 1;
 				FLUTTER_TARGET = lib/main_dev.dart;
 				MARKETING_VERSION = "$(FLUTTER_BUILD_NAME)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.sotatek.slee-fi";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sotatek.slee-fi.dev";
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-dev";

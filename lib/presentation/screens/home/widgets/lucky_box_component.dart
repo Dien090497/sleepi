@@ -45,13 +45,23 @@ class _LuckyBoxState extends State<LuckyBox> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LuckyBoxCubit, LuckyBoxState>(
-      builder: (context, state) => Row(
+      builder: (context, state) =>
+          // state.luckyBoxes.length > 6 ? ListView.builder(
+          //         scrollDirection: Axis.horizontal,
+          //         itemCount: state.luckyBoxes.length,
+          //         itemBuilder: (context, index) => _ViewGif(
+          //           index: index,
+          //           entity: state.luckyBoxes[index],
+          //           cubit: context.read<LuckyBoxCubit>(),
+          //         ),
+          //       ) :
+          Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
           6,
           (index) => _ViewGif(
             index: index,
-            entity: _boxWithIndex(state, index),
+            entity: null,
             cubit: context.read<LuckyBoxCubit>(),
           ),
         ),
@@ -78,29 +88,32 @@ class _ViewGif extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(_timeLeft(), style: const TextStyle(fontSize: 10)),
-        const SizedBox(height: 5),
-        GestureDetector(
-          onTap: () => _onTap(context),
-          // onTap: () => showComingSoonDialog(context),
-          child: Container(
-            width: 48,
-            height: 48,
-            padding: EdgeInsets.all(entity != null ? 0 : 12),
-            decoration: BoxDecoration(
-              color: AppColors.darkColor,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.borderDarkColor, width: 1),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Column(
+        children: [
+          Text(_timeLeft(), style: const TextStyle(fontSize: 10)),
+          const SizedBox(height: 5),
+          GestureDetector(
+            onTap: () => _onTap(context),
+            // onTap: () => showComingSoonDialog(context),
+            child: Container(
+              width: 48,
+              height: 48,
+              padding: EdgeInsets.all(entity != null ? 0 : 12),
+              decoration: BoxDecoration(
+                color: AppColors.darkColor,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: AppColors.borderDarkColor, width: 1),
+              ),
+              child: SFIcon(
+                entity != null ? entity!.image : Ics.gift,
+                color: entity != null ? null : AppColors.borderDarkColor,
+              ),
             ),
-            child: SFIcon(
-              entity != null ? entity!.image : Ics.gift,
-              color: entity != null ? null : AppColors.borderDarkColor,
-            ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
@@ -189,7 +202,7 @@ class _ViewGif extends StatelessWidget {
           onConfirm: () async {
             final message =
                 await context.read<LuckyBoxCubit>().speedUpLuckyBox(index);
-            showMessageDialog(context, message);
+            showSuccessfulDialog(context, message);
           },
         ));
   }

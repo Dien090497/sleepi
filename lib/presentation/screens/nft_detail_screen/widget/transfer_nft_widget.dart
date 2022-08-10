@@ -139,8 +139,11 @@ class _ListTransferNftWidgetState extends State<ListTransferNftWidget> {
                                         ));
                                         approveRes.fold(
                                           (l) {
-                                            showMessageDialog(context, '$l');
                                             Navigator.pop(context);
+                                            showMessageDialog(
+                                                context,
+                                                LocaleKeys
+                                                    .not_enough_to_pay_the_fee);
                                           },
                                           (r) {
                                             Navigator.pop(context);

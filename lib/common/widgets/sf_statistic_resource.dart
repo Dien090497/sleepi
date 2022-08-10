@@ -28,7 +28,7 @@ class SFStatisticResource extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: listTokens
                   .map<Widget>((e) => ItemResource(
-                        value: formatToken(e.balance),
+                        value: formatToken(e.availableBalance),
                         url: e.icon,
                       ))
                   .toList()

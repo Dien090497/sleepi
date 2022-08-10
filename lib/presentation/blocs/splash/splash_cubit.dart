@@ -22,44 +22,44 @@ class SplashCubit extends Cubit<SplashState> {
     final isJailBroken = await SafeDevice.isJailBroken;
     final isRealDevice = await SafeDevice.isRealDevice;
     final isSafeDevice = !isJailBroken && isRealDevice;
-    final result = await _getGlobalConfigUseCase.call(NoParams());
-    if (isSafeDevice) {
+    if (isSafeDevice || kDebugMode) {
+      final result = await _getGlobalConfigUseCase.call(NoParams());
+      await result.fold((l) async {
+        emit(SplashState.error('$l'));
+      }, (r) async {
+        final userRes = await _getUserUC.call(NoParams());
+        await userRes.fold(
+          (l) async {
+            emit(const SplashState.done(
+              isSafeDevice: kDebugMode ? true : true,
+              userInfoEntity: null,
+              listTokens: [],
+              userStatusTrackingModel: null,
+            ));
+          },
+          (userInfo) async {
+            final balanceRes =
+                await _fetchBalanceSpendingUC.call('${userInfo.id}');
+            balanceRes.fold((l) {
+              emit(SplashState.error('$l'));
+            }, (tokensSpending) async {
+              final tracking = await _getUserStatusTrackingUC.call(NoParams());
+              tracking.fold((l) {
+                emit(SplashState.error('$l'));
+              }, (r) {
+                emit(SplashState.done(
+                  isSafeDevice: kDebugMode ? true : true,
+                  userInfoEntity: userInfo,
+                  listTokens: tokensSpending,
+                  userStatusTrackingModel: r,
+                ));
+              });
+            });
+          },
+        );
+      });
     } else {
       emit(const SplashState.notSafeDevice());
     }
-    await result.fold((l) async {
-      emit(SplashState.error('$l'));
-    }, (r) async {
-      final userRes = await _getUserUC.call(NoParams());
-      await userRes.fold(
-        (l) async {
-          emit(const SplashState.done(
-            isSafeDevice: kDebugMode ? true : true,
-            userInfoEntity: null,
-            listTokens: [],
-            userStatusTrackingModel: null,
-          ));
-        },
-        (userInfo) async {
-          final balanceRes =
-              await _fetchBalanceSpendingUC.call('${userInfo.id}');
-          balanceRes.fold((l) {
-            emit(SplashState.error('$l'));
-          }, (tokensSpending) async {
-            final tracking = await _getUserStatusTrackingUC.call(NoParams());
-            tracking.fold((l) {
-              emit(SplashState.error('$l'));
-            }, (r) {
-              emit(SplashState.done(
-                isSafeDevice: kDebugMode ? true : true,
-                userInfoEntity: userInfo,
-                listTokens: tokensSpending,
-                userStatusTrackingModel: r,
-              ));
-            });
-          });
-        },
-      );
-    });
   }
 }

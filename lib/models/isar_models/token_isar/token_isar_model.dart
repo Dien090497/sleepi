@@ -84,6 +84,7 @@ class TokenIsarModel {
       balance: balance ?? this.balance,
       displayName: displayName ?? this.displayName,
       txns: txns,
+      availableBalance: this.balance,
     );
   }
 }

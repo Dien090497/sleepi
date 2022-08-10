@@ -200,7 +200,7 @@ class AlarmBell extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 29),
-            const LuckyBox(),
+            const SizedBox(height: 80, child: LuckyBox()),
             const SizedBox(height: 20),
           ],
         );
