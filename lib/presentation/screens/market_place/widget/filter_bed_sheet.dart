@@ -42,17 +42,14 @@ class _FilterBedSheetState extends State<FilterBedSheet> {
 
   void init() {
     sections = {LocaleKeys.type.tr(): widget.sections[LocaleKeys.type.tr()]!};
-    if (selectedSections[LocaleKeys.type.tr()] != null) {
-      if (selectedSections[LocaleKeys.type.tr()]!.contains(LocaleKeys.bed)) {
-        sections = widget.sections;
-      } else if (selectedSections[LocaleKeys.type.tr()]!
-              .contains(LocaleKeys.bedbox) ||
-          selectedSections[LocaleKeys.type.tr()]!
-              .contains(LocaleKeys.genesis_beds)) {
-        sections[LocaleKeys.quality.tr()] =
-            widget.sections[LocaleKeys.quality.tr()]!;
-      }
+    if (widget.cubit.params.type!.contains(LocaleKeys.bed)) {
+      sections = widget.sections;
+    } else if (widget.cubit.params.type!.contains(LocaleKeys.bedbox) ||
+        widget.cubit.params.type!.contains(LocaleKeys.genesis_beds)) {
+      sections[LocaleKeys.quality.tr()] =
+          widget.sections[LocaleKeys.quality.tr()]!;
     }
+
     sections.forEach((key, value) {
       if (key == LocaleKeys.type.tr()) {
         selectedSections[key] = widget.cubit.params.type!;
@@ -64,7 +61,6 @@ class _FilterBedSheetState extends State<FilterBedSheet> {
         selectedSections[key] = widget.cubit.params.quality!;
       }
     });
-
     widget.sliders.forEach((key, value) {
       if (key == LocaleKeys.level.tr()) {
         selectedSliders[key] = SfRangeValues(
@@ -78,11 +74,39 @@ class _FilterBedSheetState extends State<FilterBedSheet> {
     });
   }
 
+  void changeType() {
+    sections = {LocaleKeys.type.tr(): widget.sections[LocaleKeys.type.tr()]!};
+    if (selectedSections[LocaleKeys.type.tr()] != null &&
+        selectedSections[LocaleKeys.type.tr()]!.contains(LocaleKeys.bed)) {
+      sections = widget.sections;
+    } else if (selectedSections[LocaleKeys.type.tr()] != null &&
+        (selectedSections[LocaleKeys.type.tr()]!.contains(LocaleKeys.bedbox) ||
+            selectedSections[LocaleKeys.type.tr()]!
+                .contains(LocaleKeys.genesis_beds))) {
+      sections[LocaleKeys.quality.tr()] =
+          widget.sections[LocaleKeys.quality.tr()]!;
+    }
+
+    sections.forEach((key, value) {
+      if (selectedSections[LocaleKeys.type.tr()] == null) {
+        if (key == LocaleKeys.type.tr()) {
+          selectedSections[key] = widget.cubit.params.type!;
+        }
+        if (key == LocaleKeys.class_.tr()) {
+          selectedSections[key] = widget.cubit.params.classNft!;
+        }
+        if (key == LocaleKeys.quality.tr()) {
+          selectedSections[key] = widget.cubit.params.quality!;
+        }
+      }
+    });
+  }
+
   void clear() {
     selectedSections.clear();
     selectedSliders.clear();
     sections = {LocaleKeys.type.tr(): widget.sections[LocaleKeys.type.tr()]!};
-    sections.forEach((key, value) {
+    widget.sections.forEach((key, value) {
       selectedSections[key] = [];
     });
     widget.sliders.forEach((key, value) {
@@ -139,8 +163,11 @@ class _FilterBedSheetState extends State<FilterBedSheet> {
                     listSelected:
                         selectedSections[sections.keys.elementAt(i)] ?? [],
                     onSelect: (List<String> value) {
+                      if (sections.keys.elementAt(i) == LocaleKeys.type.tr()) {
+                        clear();
+                      }
                       selectedSections[sections.keys.elementAt(i)] = value;
-                      init();
+                      changeType();
                       setState(() {});
                     },
                   ),
@@ -309,8 +336,7 @@ class TypeSelectionWidget extends StatelessWidget {
                   children: [
                     Expanded(
                         child: _Container(
-                      qualitySelect:
-                          name == LocaleKeys.quality.tr(),
+                      qualitySelect: name == LocaleKeys.quality.tr(),
                       text: types[firstIdx],
                       isSelected:
                           listSelected.contains(types[firstIdx].toLowerCase()),
@@ -322,8 +348,7 @@ class TypeSelectionWidget extends StatelessWidget {
                     Expanded(
                         child: (secondIdx < types.length)
                             ? _Container(
-                                qualitySelect:
-                                    name == LocaleKeys.quality.tr(),
+                                qualitySelect: name == LocaleKeys.quality.tr(),
                                 text: types[secondIdx],
                                 isSelected: listSelected
                                     .contains(types[secondIdx].toLowerCase()),
