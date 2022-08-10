@@ -15,14 +15,18 @@ class SetNftApprovalForAllUseCase
   @override
   Future<Either<Failure, String>> call(
       SetNftApprovalForAllParams params) async {
-    final operatorAddr = params.operatorAddress.isEmpty
-        ? await _secureStorage.readAddressContract() ?? ''
-        : params.operatorAddress;
-    return _inftRepository.setApprovalForAll(
-      nftAddress: params.nftAddress,
-      operatorAddress: operatorAddr,
-      credentials: params.credentials,
-    );
+    try {
+      final operatorAddr = params.operatorAddress.isEmpty
+          ? await _secureStorage.readAddressContract() ?? ''
+          : params.operatorAddress;
+      return _inftRepository.setApprovalForAll(
+        nftAddress: params.nftAddress,
+        operatorAddress: operatorAddr,
+        credentials: params.credentials,
+      );
+    } catch (e) {
+      return Left(FailureMessage('$e'));
+    }
   }
 }
 

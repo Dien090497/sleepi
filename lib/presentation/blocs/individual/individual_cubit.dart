@@ -76,6 +76,7 @@ class IndividualCubit extends Cubit<IndividualState> {
                           bed.resilience,
                         ]),
                   );
+        fetchFamily();
       },
     );
   }

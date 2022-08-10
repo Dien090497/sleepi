@@ -285,26 +285,11 @@ class TabBedsDetail extends StatelessWidget {
                                                     AppColors.transparent,
                                                 children: [
                                                   OpenBedBoxAnimation(
-                                                    bedBoxType: listBeds[index]
-                                                                .bedBoxType !=
-                                                            null
-                                                        ? listBeds[index]
-                                                            .bedBoxType!
-                                                        : '1',
-                                                    isCompletedAnimation:
-                                                        (value) {
-                                                      if (value == true) {
-                                                        context
-                                                            .read<
-                                                                NFTListCubit>()
-                                                            .openBedBox(
-                                                                listBeds[
-                                                                    index]);
-                                                      }
-                                                    },
+                                                    bedBoxType: listBeds[index].bedBoxType != null ? listBeds[index].bedBoxType! : '1',
                                                   ),
                                                 ],
                                               );
+                                              context.read<NFTListCubit>().openBedBox(listBeds[index]);
                                             },
                                             onSell: () => _onSellBedBox(
                                               context,

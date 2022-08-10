@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:slee_fi/datasources/remote/nft_api/nft_api.dart';
 import 'package:slee_fi/failures/failure.dart';
 import 'package:slee_fi/models/minting/info_minting_model.dart';
+import 'package:slee_fi/models/minting/minting_model.dart';
 import 'package:slee_fi/repository/mint_repository.dart';
 import 'package:slee_fi/schema/minting/minting_schema.dart';
 
@@ -24,7 +25,7 @@ class MintImplementation extends MintRepository {
   }
 
   @override
-  Future<Either<FailureMessage, dynamic>> mint(MintingSchema schema) async {
+  Future<Either<FailureMessage, MintingModel>> mint(MintingSchema schema) async {
     try {
       final result = await nftApi.minting(schema);
       return Right(result);

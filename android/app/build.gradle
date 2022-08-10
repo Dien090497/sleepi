@@ -79,7 +79,7 @@ android {
         applicationId "com.sotatek.slee_fi"
         minSdkVersion 28
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 6
+        versionCode 7
         versionName flutterVersionName
         multiDexEnabled true
         ndk {

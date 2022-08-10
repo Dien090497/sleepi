@@ -258,6 +258,9 @@ class _TransferListState extends State<TransferList> {
             ),
           );
         }
+        if (state is TransferFailed) {
+          return ErrorWidget(state.msg);
+        }
         return const LoadingIcon();
       },
     );
