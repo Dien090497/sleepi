@@ -102,10 +102,11 @@ class _RefreshListWidgetState extends State<RefreshListWidget> {
                 style: TextStyles.lightWhite16,
               );
             } else if (mode == LoadStatus.canLoading) {
-              body = SFText(
-                keyText: LocaleKeys.release_to_load_more,
-                style: TextStyles.lightWhite16,
-              );
+              // body = SFText(
+              //   keyText: LocaleKeys.release_to_load_more,
+              //   style: TextStyles.lightWhite16,
+              // );
+              body = const CupertinoActivityIndicator();
             } else {
               body = SFText(
                 keyText: LocaleKeys.no_more_data,

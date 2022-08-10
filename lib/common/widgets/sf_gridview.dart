@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:slee_fi/common/style/text_styles.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
 import 'package:slee_fi/l10n/locale_keys.g.dart';
 import 'package:slee_fi/presentation/blocs/market_place/market_place_cubit.dart';
@@ -7,7 +8,7 @@ import 'package:slee_fi/presentation/blocs/mint/mint_cubit.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 
 class SFGridView extends StatefulWidget {
-  const   SFGridView({
+  const SFGridView({
     required this.itemBuilder,
     required this.count,
     this.childAspectRatio = 9 / 10,
@@ -80,26 +81,31 @@ class _SFGridViewState extends State<SFGridView> {
         enablePullUp: widget.isLoadMore,
         header: const WaterDropHeader(),
         footer: CustomFooter(
-          builder: (BuildContext context,LoadStatus? mode) {
+          builder: (BuildContext context, LoadStatus? mode) {
             Widget body;
-            if(mode==LoadStatus.idle){
-              body = SFText(keyText: LocaleKeys.pull_up_load,);
-            }
-            else if(mode==LoadStatus.loading){
-              body =  const CupertinoActivityIndicator();
-            }
-            else if(mode == LoadStatus.failed){
-              body = SFText( keyText: LocaleKeys.load_fail_retry,);
-            }
-            else if(mode == LoadStatus.canLoading){
-              body = SFText( keyText: LocaleKeys.release_to_load_more,);
-            }
-            else{
-              body = SFText( keyText: LocaleKeys.no_more_data,);
+            if (mode == LoadStatus.idle) {
+              body = SFText(
+                keyText: LocaleKeys.pull_up_load,
+                style: TextStyles.lightWhite16,
+              );
+            } else if (mode == LoadStatus.loading) {
+              body = const CupertinoActivityIndicator();
+            } else if (mode == LoadStatus.failed) {
+              body = SFText(
+                keyText: LocaleKeys.load_fail_retry,
+                style: TextStyles.lightWhite16,
+              );
+            } else if (mode == LoadStatus.canLoading) {
+              body = const CupertinoActivityIndicator();
+            } else {
+              body = SFText(
+                keyText: LocaleKeys.no_more_data,
+                style: TextStyles.lightWhite16,
+              );
             }
             return SizedBox(
               height: 55.0,
-              child: Center(child:body),
+              child: Center(child: body),
             );
           },
         ),
