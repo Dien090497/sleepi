@@ -381,7 +381,7 @@ class _StakingListState extends State<StakingList> {
                                           MediaQuery.of(context).size.width * 0.7,
                                           children: PopUpStaking(
                                             message: LocaleKeys
-                                                .compound_will_be_activated_after
+                                                .withdraw_will_be_activated_after
                                                 .tr(),
                                             isShowButton: false,
                                           ));

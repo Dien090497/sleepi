@@ -516,5 +516,6 @@
   "balance_is_insufficient": "Balance is insufficient",
   "passcode_dose_not_match" : "Passcode does not match",
   "bed_detail_transfer" : "Transfer",
-  "click_to_collect": "Click to collect"
+  "click_to_collect": "Click to collect",
+  "withdraw_will_be_activated_after": "Withdraw will be activated after 14 days."
 }
