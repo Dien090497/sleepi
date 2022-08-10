@@ -257,7 +257,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           final List<BedEntity> tempList = List.from(currentState.bedList);
 
           if (r.levelUpTime != null || r.remainTime != null) {
-            tempList.removeWhere((element) => element.id == r.id);
+            tempList.removeWhere((element) => element.name == r.name);
+
             emit(currentState.copyWith(
               bedList: tempList,
               selectedBed: tempList.isEmpty ? null : tempList.first,
@@ -268,6 +269,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ),
               userStatusTracking: await _getStatusTracking(),
             ));
+            return;
           }
 
           var index = tempList.indexWhere((element) => element.id == r.id);
