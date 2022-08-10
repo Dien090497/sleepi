@@ -35,7 +35,10 @@ class LuckyBoxCubit extends Cubit<LuckyBoxState> {
     result.fold((l) {
       emit(state.copyWith(luckyBoxes: []));
     }, (r) {
-      emit(state.copyWith(luckyBoxes: r.map((e) => e.toEntity()).toList()));
+
+      emit(state.copyWith(luckyBoxes: r.map((e) {
+        return  e.toEntity();
+      }).toList()));
     });
   }
 
