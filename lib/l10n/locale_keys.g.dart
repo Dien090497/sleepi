@@ -519,5 +519,6 @@ abstract class  LocaleKeys {
   static const passcode_dose_not_match = 'passcode_dose_not_match';
   static const bed_detail_transfer = 'bed_detail_transfer';
   static const click_to_collect = 'click_to_collect';
+  static const nft_has_been_sold = 'nft_has_been_sold';
 
 }

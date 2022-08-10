@@ -16,6 +16,13 @@ class CategoryHeaderShare extends StatelessWidget {
 
   final PreResultParams preResultParams;
 
+  convertTime(String time) {
+    int minuteDuration = double.parse(time).toInt();
+    int hour = minuteDuration ~/ 60;
+    int minute = minuteDuration - hour * 60;
+    return '${hour}h${minute}min';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -82,7 +89,7 @@ class CategoryHeaderShare extends StatelessWidget {
                   style: TextStyles.lightGrey11,
                 ),
                 SFText(
-                  keyText: '${preResultParams.resultModel.sleepDurationTime}',
+                  keyText: convertTime(preResultParams.resultModel.sleepDurationTime ?? '0'),
                   style: const TextStyle(
                       fontSize: 16,
                       color: AppColors.blue,
