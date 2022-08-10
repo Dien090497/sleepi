@@ -135,55 +135,6 @@ import '../usecase/is_nft_approve_for_all_usecase.dart' as _i66;
 import '../usecase/is_passcode_created_usecase.dart' as _i67;
 import '../usecase/is_token_approved_enough_usecase.dart' as _i68;
 import '../usecase/is_valid_wallet_address_usecase.dart' as _i14;
-import '../usecase/login_usecase.dart' as _i70;
-import '../usecase/logout_usecase.dart' as _i71;
-import '../usecase/make_first_open_app_usecase.dart' as _i72;
-import '../usecase/minting_usecase.dart' as _i76;
-import '../usecase/nft_repair_usecase.dart' as _i78;
-import '../usecase/nft_sell_usecase.dart' as _i79;
-import '../usecase/on_connection_changed_usecase.dart' as _i27;
-import '../usecase/open_bed_box_usecase.dart' as _i80;
-import '../usecase/open_lucky_box_usecase.dart' as _i81;
-import '../usecase/open_socket_usecase.dart' as _i82;
-import '../usecase/post_health_data_usecase.dart' as _i83;
-import '../usecase/post_level_up_usecase.dart' as _i84;
-import '../usecase/remove_item_from_bed_usecase.dart' as _i85;
-import '../usecase/remove_jewel_usecase.dart' as _i86;
-import '../usecase/run_app_init_usecase.dart' as _i28;
-import '../usecase/send_nft_to_spending_usecase.dart' as _i87;
-import '../usecase/send_otp_mail_usecase.dart' as _i88;
-import '../usecase/send_to_external_usecase.dart' as _i39;
-import '../usecase/send_token_to_external.dart' as _i40;
-import '../usecase/set_nft_approval_for_all_usecase.dart' as _i89;
-import '../usecase/setting_active_code_usecase.dart' as _i90;
-import '../usecase/sign_up_usecase.dart' as _i91;
-import '../usecase/speed_up_lucky_box_usecase.dart' as _i92;
-import '../usecase/staking_info_usecase.dart' as _i93;
-import '../usecase/staking_usecase.dart' as _i94;
-import '../usecase/start_sleep_tracking_usecase.dart' as _i95;
-import '../usecase/swap_token_usecase.dart' as _i96;
-import '../usecase/to_spending_usecase.dart' as _i97;
-import '../usecase/transfer_nft_usecase.dart' as _i98;
-import '../usecase/transfer_token_to_main_wallet_usecase.dart' as _i99;
-import '../usecase/unstaking_usecase.dart' as _i100;
-import '../usecase/update_attribute_usecase.dart' as _i101;
-import '../usecase/upgrade_info_usecase.dart' as _i102;
-import '../usecase/upgrade_jewel_usecase.dart' as _i103;
-import '../usecase/validate_mnemonic.dart' as _i104;
-import '../usecase/validate_passcode_usecase.dart' as _i105;
-import '../usecase/verify_otp_usecase.dart' as _i106;
-import '../usecase/wake_up_usecase.dart' as _i107;
-import '../usecase/wallet/create_wallet_usecase.dart' as _i125;
-import '../usecase/wallet/current_wallet_usecase.dart' as _i127;
-import '../usecase/wallet/first_open_wallet_session_usecase.dart' as _i120;
-import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i149;
-import '../usecase/wallet/import_wallet_usecase.dart' as _i63;
-import '../usecase/withdraw_history_usecase.dart' as _i108;
-import '../usecase/withdraw_nft_usecase.dart' as _i109;
-import 'dev_injection.dart' as _i173;
-import 'prod_injection.dart' as _i172;
-import 'register_module.dart' as _i170;
-import 'stg_injection.dart' as _i171;
 import '../usecase/login_usecase.dart' as _i71;
 import '../usecase/logout_usecase.dart' as _i72;
 import '../usecase/make_first_open_app_usecase.dart' as _i73;
@@ -229,12 +180,11 @@ import '../usecase/wallet/get_current_mnemonic_usecasse.dart' as _i150;
 import '../usecase/wallet/import_wallet_usecase.dart' as _i64;
 import '../usecase/withdraw_history_usecase.dart' as _i109;
 import '../usecase/withdraw_nft_usecase.dart' as _i110;
-import 'dev_injection.dart' as _i172;
-import 'prod_injection.dart' as _i174;
+import 'dev_injection.dart' as _i174;
+import 'prod_injection.dart' as _i173;
 import 'register_module.dart' as _i171;
-import 'stg_injection.dart' as _i173;
+import 'stg_injection.dart' as _i172;
 
-const String _dev = 'dev';
 const String _stg = 'stg';
 const String _prod = 'prod';
 const String _dev = 'dev';
@@ -246,7 +196,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final rPCModule = _$RPCModule();
   final registerModule = _$RegisterModule();
-  final devInjection = _$DevInjection();
   final releaseInjection = _$ReleaseInjection();
   final prodInjection = _$ProdInjection();
   final devInjection = _$DevInjection();
@@ -270,8 +219,6 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       () => registerModule.isar(get<_i9.Directory>()),
       preResolve: true);
   gh.singleton<_i16.IsarDataSource>(_i16.IsarDataSource(get<_i15.Isar>()));
-  gh.factory<List<dynamic>>(() => devInjection.tokens,
-      instanceName: 'tokens', registerFor: {_dev});
   gh.factory<List<dynamic>>(() => releaseInjection.tokens,
       instanceName: 'tokens', registerFor: {_stg});
   gh.factory<List<dynamic>>(() => prodInjection.tokens,
@@ -288,22 +235,16 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i21.SharedPreferences>(() => registerModule.sharedPref,
       preResolve: true);
   gh.factory<_i13.StorageKeys>(() => _i13.StorageKeys());
-  gh.factory<String>(() => devInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_dev});
-  gh.factory<String>(() => prodInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_prod});
-  gh.factory<String>(() => devInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => prodInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_prod});
-  gh.factory<String>(() => devInjection.baseUrl,
-      instanceName: 'baseUrl', registerFor: {_dev});
-  gh.factory<String>(() => prodInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_prod});
-  gh.factory<String>(() => devInjection.contractRouterDev,
-      instanceName: 'contractRouter', registerFor: {_dev});
   gh.factory<String>(() => releaseInjection.baseUrl,
       instanceName: 'baseUrl', registerFor: {_stg});
+  gh.factory<String>(() => prodInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_prod});
+  gh.factory<String>(() => devInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_dev});
+  gh.factory<String>(() => devInjection.baseUrl,
+      instanceName: 'baseUrl', registerFor: {_dev});
+  gh.factory<String>(() => prodInjection.contractRouterDev,
+      instanceName: 'contractRouter', registerFor: {_prod});
   gh.factory<String>(() => releaseInjection.contractRouterDev,
       instanceName: 'contractRouter', registerFor: {_stg});
   gh.factory<_i22.ToastUtils>(() => _i22.ToastUtils());
@@ -632,8 +573,8 @@ class _$RPCModule extends _i34.RPCModule {}
 
 class _$RegisterModule extends _i171.RegisterModule {}
 
-class _$ProdInjection extends _i172.ProdInjection {}
+class _$ReleaseInjection extends _i172.ReleaseInjection {}
 
-class _$DevInjection extends _i173.DevInjection {}
-class _$ReleaseInjection extends _i173.ReleaseInjection {}
-class _$ProdInjection extends _i174.ProdInjection {}
+class _$ProdInjection extends _i173.ProdInjection {}
+
+class _$DevInjection extends _i174.DevInjection {}
