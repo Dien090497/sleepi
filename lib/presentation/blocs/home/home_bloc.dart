@@ -255,6 +255,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (l) async {},
         (r) async {
           final List<BedEntity> tempList = List.from(currentState.bedList);
+
+          if (r.levelUpTime != null || r.remainTime != null) {
+            tempList.removeWhere((element) => element.name == r.name);
+
+            emit(currentState.copyWith(
+              bedList: tempList,
+              selectedBed: tempList.isEmpty ? null : tempList.first,
+              tokenEarn: await _estimateTracking(
+                r,
+                currentState.enableInsurance,
+                currentState.selectedItem,
+              ),
+              userStatusTracking: await _getStatusTracking(),
+            ));
+            return;
+          }
+
           var index = tempList.indexWhere((element) => element.id == r.id);
           if (index == -1) {
             return;
