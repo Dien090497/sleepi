@@ -246,7 +246,7 @@ extension StringX on String {
         math.max(int.parse(levelUpTime), DateTime.now().millisecondsSinceEpoch);
 
     final duration =
-        timeOpen.difference(DateTime.fromMicrosecondsSinceEpoch(startTime));
+        timeOpen.difference(DateTime.fromMillisecondsSinceEpoch(startTime));
     final hour = (duration.inHours).toString().padLeft(2, '0');
     final minute = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final second = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
