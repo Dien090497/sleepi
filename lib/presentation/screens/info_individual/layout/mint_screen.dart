@@ -52,6 +52,20 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    return BackgroundWidget(
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: SFAppBar(
+              context: context,
+              title: LocaleKeys.bed_mint,
+              textStyle: TextStyles.boldWhite18,
+            ),
+            body: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.3),
+              child: const Center(child: SFIcon(Ics.commingSoon)),
+            )));
+/*** DO NOT CLEAR THIS COMMENT
     final args = ModalRoute.of(context)?.settings.arguments as BedEntity;
 
     return BlocProvider(
@@ -96,187 +110,178 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
                     top: false,
                     child: state is MintStateLoaded
                         ? Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24.0),
-                          child: Column(
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                height: 42,
-                              ),
-                              ConnectBedWidget(
-                                bedParent1: args,
-                                controller: animationController,
-                              ),
-                              const SizedBox(
-                                height: 120,
-                              ),
-                              SFLabelValue(
-                                label:
-                                LocaleKeys.token_consumptions,
-                                value: _infoMintingModel != null
-                                    ? '${state.enableInsurance ? (_infoMintingModel!.fee + _infoMintingModel!.brokenRate.fee).formatCurrency : _infoMintingModel!.fee} SLFT'
-                                    : '',
-                                styleValue: TextStyles.lightWhite14,
-                                styleLabel: TextStyles.lightWhite14,
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    '${LocaleKeys.insurance.tr()}: ${_infoMintingModel != null ? _infoMintingModel!.brokenRate.fee : 0}%',
-                                    style:
-                                    TextStyles.bold16LightWhite,
-                                  ),
-                                  SizedBox(
-                                    height: 24,
-                                    child: CupertinoSwitch(
-                                      activeColor: AppColors.green,
-                                      value: state.enableInsurance,
-                                      onChanged: (value) {
-                                        cubit.changeEnableInsurance(
-                                            value);
-                                        setState(() {});
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  launchInsurance(context);
-                                },
-                                child: Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.center,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 24.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SFText(
-                                      keyText: LocaleKeys
-                                          .what_is_insurance,
-                                      style: TextStyles.lightGrey12,
+                                    const SizedBox(
+                                      height: 42,
+                                    ),
+                                    ConnectBedWidget(
+                                      bedParent1: args,
+                                      controller: animationController,
                                     ),
                                     const SizedBox(
-                                      width: 8,
+                                      height: 120,
                                     ),
-                                    const SFIcon(
-                                        Ics.icCircleQuestion),
+                                    SFLabelValue(
+                                      label: LocaleKeys.token_consumptions,
+                                      value: _infoMintingModel != null
+                                          ? '${state.enableInsurance ? (_infoMintingModel!.fee + _infoMintingModel!.brokenRate.fee).formatCurrency : _infoMintingModel!.fee} SLFT'
+                                          : '',
+                                      styleValue: TextStyles.lightWhite14,
+                                      styleLabel: TextStyles.lightWhite14,
+                                    ),
+                                    const SizedBox(
+                                      height: 24,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${LocaleKeys.insurance.tr()}: ${_infoMintingModel != null ? _infoMintingModel!.brokenRate.fee : 0}%',
+                                          style: TextStyles.bold16LightWhite,
+                                        ),
+                                        SizedBox(
+                                          height: 24,
+                                          child: CupertinoSwitch(
+                                            activeColor: AppColors.green,
+                                            value: state.enableInsurance,
+                                            onChanged: (value) {
+                                              cubit
+                                                  .changeEnableInsurance(value);
+                                              setState(() {});
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 2,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        launchInsurance(context);
+                                      },
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SFText(
+                                            keyText:
+                                                LocaleKeys.what_is_insurance,
+                                            style: TextStyles.lightGrey12,
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          const SFIcon(Ics.icCircleQuestion),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 24,
+                                    ),
                                   ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                    vertical: 20,
+                                  ),
+                                  decoration: const BoxDecoration(
+                                    color: AppColors.dark,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(40),
+                                      topLeft: Radius.circular(40),
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    physics: const ScrollPhysics(),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SFText(
+                                          keyText:
+                                              LocaleKeys.without_insurance_case,
+                                          style: TextStyles.lightGrey14,
+                                        ),
+                                        const SizedBox(height: 12),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: AppColors.white
+                                                .withOpacity(0.05),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              SFLabelValue(
+                                                label:
+                                                    LocaleKeys.common_bed_box,
+                                                styleLabel:
+                                                    TextStyles.lightWhite14,
+                                                value: (_infoMintingModel !=
+                                                            null &&
+                                                        _percentMinting != null)
+                                                    ? '${percentBedBox - _infoMintingModel!.brokenRate.brokenRate}%'
+                                                    : '0%',
+                                                colorBorder: Colors.transparent,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16.0),
+                                                child: Divider(
+                                                  height: 1,
+                                                  color: Colors.white
+                                                      .withOpacity(0.05),
+                                                ),
+                                              ),
+                                              SFLabelValue(
+                                                label: LocaleKeys
+                                                    .bed_will_be_burned,
+                                                styleLabel:
+                                                    TextStyles.lightWhite14,
+                                                value: _infoMintingModel != null
+                                                    ? '${_infoMintingModel!.brokenRate.brokenRate}%'
+                                                    : '0%',
+                                                colorBorder: Colors.transparent,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 24),
+                                        SFText(
+                                          keyText:
+                                              LocaleKeys.with_insurance_case,
+                                          style: TextStyles.lightGrey14,
+                                        ),
+                                        const SizedBox(height: 17),
+                                        SFLabelValue(
+                                            label: LocaleKeys.bedbox,
+                                            styleLabel: TextStyles.lightWhite14,
+                                            value: "$percentBedBox%"),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                               const SizedBox(
                                 height: 24,
-                              ),
+                              )
                             ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24,
-                              vertical: 20,
-                            ),
-                            decoration: const BoxDecoration(
-                              color: AppColors.dark,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(40),
-                                topLeft: Radius.circular(40),
-                              ),
-                            ),
-                            child: SingleChildScrollView(
-                              physics: const ScrollPhysics(),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  SFText(
-                                    keyText: LocaleKeys
-                                        .without_insurance_case,
-                                    style: TextStyles.lightGrey14,
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.white
-                                          .withOpacity(0.05),
-                                      borderRadius:
-                                      BorderRadius.circular(16),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        SFLabelValue(
-                                          label: LocaleKeys
-                                              .common_bed_box,
-                                          styleLabel:
-                                          TextStyles.lightWhite14,
-                                          value: (_infoMintingModel !=
-                                              null &&
-                                              _percentMinting !=
-                                                  null)
-                                              ? '${percentBedBox - _infoMintingModel!.brokenRate.brokenRate}%'
-                                              : '0%',
-                                          colorBorder:
-                                          Colors.transparent,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets
-                                              .symmetric(
-                                              horizontal: 16.0),
-                                          child: Divider(
-                                            height: 1,
-                                            color: Colors.white
-                                                .withOpacity(0.05),
-                                          ),
-                                        ),
-                                        SFLabelValue(
-                                          label: LocaleKeys
-                                              .bed_will_be_burned,
-                                          styleLabel:
-                                          TextStyles.lightWhite14,
-                                          value: _infoMintingModel !=
-                                              null
-                                              ? '${_infoMintingModel!.brokenRate.brokenRate}%'
-                                              : '0%',
-                                          colorBorder:
-                                          Colors.transparent,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  SFText(
-                                    keyText: LocaleKeys
-                                        .with_insurance_case,
-                                    style: TextStyles.lightGrey14,
-                                  ),
-                                  const SizedBox(height: 17),
-                                  SFLabelValue(
-                                      label: LocaleKeys.bedbox,
-                                      styleLabel:
-                                      TextStyles.lightWhite14,
-                                      value: "$percentBedBox%"),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        )
-                      ],
-                    )
+                          )
                         : const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                            child: CircularProgressIndicator(),
+                          ),
                   ),
                   Positioned(
                     bottom: 0,
@@ -311,6 +316,6 @@ class _MintScreenState extends State<MintScreen> with TickerProviderStateMixin {
           );
         },
       ),
-    );
+    );***/
   }
 }

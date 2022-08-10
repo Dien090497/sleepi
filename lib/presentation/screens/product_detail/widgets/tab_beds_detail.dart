@@ -11,6 +11,7 @@ import 'package:slee_fi/common/widgets/cached_image.dart';
 import 'package:slee_fi/common/widgets/loading_screen.dart';
 import 'package:slee_fi/common/widgets/sf_alert_dialog.dart';
 import 'package:slee_fi/common/widgets/sf_dialog.dart';
+import 'package:slee_fi/common/widgets/sf_icon.dart';
 import 'package:slee_fi/common/widgets/sf_percent_border.dart';
 import 'package:slee_fi/common/widgets/sf_sub_tab_bar.dart';
 import 'package:slee_fi/common/widgets/sf_text.dart';
@@ -34,6 +35,7 @@ import 'package:slee_fi/presentation/screens/product_detail/widgets/refresh_list
 import 'package:slee_fi/presentation/screens/product_detail/widgets/top_left_banner.dart';
 import 'package:slee_fi/presentation/screens/wallet/widgets/no_result_widget.dart';
 import 'package:slee_fi/presentation/screens/wallet_creation_warning/widgets/pop_up_avalanche_wallet.dart';
+import 'package:slee_fi/resources/resources.dart';
 import 'package:slee_fi/usecase/fetch_bed_usecase.dart';
 
 class TabBedsDetail extends StatelessWidget {
@@ -225,7 +227,12 @@ class TabBedsDetail extends StatelessWidget {
                         );
                       },
                     ),
-                    BlocBuilder<NFTListCubit, NftListState>(
+                    Padding(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.3),
+                      child: const Center(child: SFIcon(Ics.commingSoon)),
+                    )
+                    /****   DO NOT CLEAR THIS COMMENT
+                     *  BlocBuilder<NFTListCubit, NftListState>(
                       builder: (context, state) {
                         if (state is NftListLoading ||
                             state is NftListInitial ||
@@ -313,7 +320,7 @@ class TabBedsDetail extends StatelessWidget {
                                 ),
                         );
                       },
-                    ),
+                    ),****/
                   ],
                 ),
               ),
