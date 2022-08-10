@@ -45,27 +45,27 @@ class _LuckyBoxState extends State<LuckyBox> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LuckyBoxCubit, LuckyBoxState>(
-      builder: (context, state) => state.luckyBoxes.length > 6
-          ? ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: state.luckyBoxes.length,
-              itemBuilder: (context, index) => _ViewGif(
-                index: index,
-                entity: state.luckyBoxes[index],
-                cubit: context.read<LuckyBoxCubit>(),
-              ),
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                6,
-                (index) => _ViewGif(
-                  index: index,
-                  entity: _boxWithIndex(state, index),
-                  cubit: context.read<LuckyBoxCubit>(),
-                ),
-              ),
-            ),
+      builder: (context, state) =>
+          // state.luckyBoxes.length > 6 ? ListView.builder(
+          //         scrollDirection: Axis.horizontal,
+          //         itemCount: state.luckyBoxes.length,
+          //         itemBuilder: (context, index) => _ViewGif(
+          //           index: index,
+          //           entity: state.luckyBoxes[index],
+          //           cubit: context.read<LuckyBoxCubit>(),
+          //         ),
+          //       ) :
+          Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(
+          6,
+          (index) => _ViewGif(
+            index: index,
+            entity: null,
+            cubit: context.read<LuckyBoxCubit>(),
+          ),
+        ),
+      ),
     );
   }
 
